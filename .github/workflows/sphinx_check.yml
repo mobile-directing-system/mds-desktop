@@ -1,0 +1,19 @@
+# Taken from https://github.com/marketplace/actions/sphinx-build.
+
+name: "Docs Check"
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: ammaraskar/sphinx-action@master
+        with:
+          pre-build-command: "pip install furo"
+          build-command: "sphinx-build -b html -W . _build"
+          docs-folder: "docs/"

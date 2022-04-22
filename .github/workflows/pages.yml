@@ -1,0 +1,26 @@
+# Taken from https://github.com/marketplace/actions/sphinx-build.
+
+name: "Pages"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: ammaraskar/sphinx-action@master
+        with:
+          pre-build-command: "pip install furo"
+          build-command: "sphinx-build -b html -W . _build"
+          docs-folder: "docs/"
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: "./docs/_build"
