@@ -69,6 +69,8 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
+      - run: npm i
+      - run: npm build
       - run: npm ci
       - run: npx playwright install --with-deps
       - run: xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- npm run test:e2e
