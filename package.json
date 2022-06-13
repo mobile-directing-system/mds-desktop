@@ -1,15 +1,10 @@
 {
-  "name": "vite-electron-builder",
-  "description": "Secure boilerplate for Electron app based on Vite",
+  "name": "mds-desktop",
+  "description": "Mobile Directing System Desktop Application",
   "private": true,
   "engines": {
     "node": ">=v16.13",
     "npm": ">=8.1"
-  },
-  "author": {
-    "email": "kozackunisoft@gmail.com",
-    "name": "Alex Kozack",
-    "url": "https://kozack.me"
   },
   "main": "packages/main/dist/index.cjs",
   "scripts": {
