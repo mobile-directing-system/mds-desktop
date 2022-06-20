@@ -11,5 +11,13 @@
     "parser": "@typescript-eslint/parser",
     "ecmaVersion": 12,
     "sourceType": "module"
-  }
+  },
+  "overrides" : [
+    {
+      "files": ["tailwind.config.js","postcss.config.js"],
+      "env": {
+        "node": true
+      }
+    }
+  ]
 }
