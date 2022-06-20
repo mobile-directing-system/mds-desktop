@@ -1,6 +1,7 @@
-import {app} from 'electron';
+import {app, ipcMain} from 'electron';
 import './security-restrictions';
 import {restoreOrCreateWindow} from '/@/mainWindow';
+import { loginCall } from '/@/backendCalls';
 
 
 /**
@@ -41,6 +42,19 @@ app.whenReady()
   .then(restoreOrCreateWindow)
   .catch((e) => console.error('Failed create window:', e));
 
+
+/**
+ * Register ipc handlers
+ */
+
+app.whenReady().then(() => {
+  ipcMain.handle('login', login);
+});
+
+function login(_: any, username: string, password: string):Promise<boolean> {
+  //return username === "bla" && password === "blub";
+  return loginCall(username, password);
+}
 
 /**
  * Install Vue.js or some other devtools in development mode only
