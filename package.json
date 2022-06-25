@@ -19,7 +19,7 @@
     "test:preload": "vitest run -r packages/preload --passWithNoTests",
     "test:renderer": "vitest run -r packages/renderer --passWithNoTests",
     "watch": "node scripts/watch.js",
-    "run:prod": "cross-env MODE=production npm run build && electron .",
+    "prod": "cross-env MODE=production npm run build && electron .",
     "lint": "eslint . --ext js,ts,vue",
     "typecheck:main": "tsc --noEmit -p packages/main/tsconfig.json",
     "typecheck:preload": "tsc --noEmit -p packages/preload/tsconfig.json",
@@ -52,8 +52,11 @@
     "vue-tsc": "0.37.3"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "electron-updater": "5.0.1",
     "vue": "3.2.37",
-    "vue-router": "^4.0.16"
+    "vue-router": "^4.0.16",
+    "vuex": "^4.0.2",
+    "vuex-smart-module": "^1.0.0"
   }
 }
