@@ -5,7 +5,7 @@ import MainApplication from '../views/MainApplication.vue';
 
 const routes:RouteRecordRaw[] = [
     {
-        path: '/',
+        path: '/login',
         name: 'Login',
         component: LoginPage,
     },

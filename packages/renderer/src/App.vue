@@ -17,5 +17,7 @@
   const loggedIn = computed(() => loginInfo.getters.getLoggedIn);
   if(loggedIn.value()) {
     router.push('/main');
-  } 
+  }  else {
+    router.push('/login');
+  }
 </script>
