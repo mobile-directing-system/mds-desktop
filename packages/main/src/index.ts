@@ -1,7 +1,7 @@
 import { app, ipcMain } from 'electron';
 import type { IpcMainInvokeEvent } from 'electron';
-import './security-restrictions';
-import { restoreOrCreateWindow } from '/@/mainWindow';
+import '/@/security-restrictions';
+import { restoreOrCreateWindow } from '/@/windows/mainWindow';
 import { loginCall } from '/@/backend/networkCalls';
 
 
