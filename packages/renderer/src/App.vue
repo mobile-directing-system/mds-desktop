@@ -18,6 +18,6 @@
   if(loggedIn.value()) {
     router.push('/main');
   }  else {
-    router.push('/login');
+    router.push('/');
   }
 </script>
