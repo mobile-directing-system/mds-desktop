@@ -1,11 +1,12 @@
 import axios from 'axios';
 import type { AxiosError, AxiosRequestConfig } from 'axios';
+import config from '/@/config';
 
 /**
  * cache the received credential on login
  */
 const instanceData:AxiosRequestConfig = {
-    baseURL: 'http://localhost:30080',
+    baseURL: `http://${config.baseURL}:30080`,
     timeout: 2000,
 };
 let backendInstance = axios.create(instanceData);
