@@ -1,6 +1,7 @@
 import axios from 'axios';
 import type { AxiosError, AxiosRequestConfig } from 'axios';
 import config from '/@/config';
+import { loginInfo } from '/@/cache';
 
 /**
  * cache the received credential on login
@@ -20,9 +21,11 @@ let backendInstance = axios.create(instanceData);
 export async function loginCall(username: string, password: string): Promise<boolean> {
     try {
         const response = await backendInstance.post('/login', {username: username, pass: password});
+        loginInfo.tokenType = response.data.token_type;
+        loginInfo.token = response.data.access_token;
         backendInstance = axios.create({
             ...instanceData,
-            headers: {'Authorization': `${response.data.token_type} ${response.data.access_token}`},
+            headers: {'Authorization': `${loginInfo.token} ${loginInfo.tokenType}`},
         });
         return true;
     } catch(error) {
