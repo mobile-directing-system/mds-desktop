@@ -18,7 +18,7 @@ let backendInstance = axios.create(instanceData);
  * @param password password to send to the backend
  * @returns boolean indicating if login was successful or not
  */
-export async function loginCall(username: string, password: string): Promise<boolean> {
+export async function login(username: string, password: string): Promise<boolean> {
     try {
         const response = await backendInstance.post('/login', {username: username, pass: password});
         loginInfo.tokenType = response.data.token_type;
