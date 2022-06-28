@@ -25,7 +25,7 @@ export async function login(username: string, password: string): Promise<boolean
         loginInfo.token = response.data.access_token;
         backendInstance = axios.create({
             ...instanceData,
-            headers: {'Authorization': `${loginInfo.token} ${loginInfo.tokenType}`},
+            headers: {'Authorization': `${loginInfo.tokenType} ${loginInfo.token}`},
         });
         return true;
     } catch(error) {
