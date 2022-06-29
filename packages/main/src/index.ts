@@ -1,7 +1,6 @@
 import {app, ipcMain} from 'electron';
 import './security-restrictions';
 import {restoreOrCreateWindow} from '/@/mainWindow';
-import { loginCall } from '/@/backendCalls';
 
 
 /**
@@ -51,9 +50,9 @@ app.whenReady().then(() => {
   ipcMain.handle('login', login);
 });
 
-function login(_: any, username: string, password: string):Promise<boolean> {
-  //return username === "bla" && password === "blub";
-  return loginCall(username, password);
+async function login(_: any, username: string, password: string):Promise<boolean> {
+  return username === 'bla' && password === 'blub';
+  //return loginCall(username, password);
 }
 
 /**

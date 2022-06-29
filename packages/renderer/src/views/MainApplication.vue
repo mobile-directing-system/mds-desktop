@@ -1,10 +1,12 @@
 <template>
-  <h3>Main Application Goes Here</h3>
-  <router-link to="/">
-    Go Back
-  </router-link>
+  <Topnavbar />
+  <Sidebar />
 </template>
 
 <script lang="ts" setup>
+  
+  import  Sidebar from '../components/SideBarMenu.vue';
+  import Topnavbar from '../components/TopNavbar.vue';
+
 
 </script>
