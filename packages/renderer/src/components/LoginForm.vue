@@ -55,13 +55,13 @@
   import NormalButton from './BasicComponents/NormalButton.vue';
   import { ref, computed } from 'vue';
   import { useRouter } from 'vue-router';
-  import { useLoginInfo } from '../store';
+  import { useLoginState } from '../store';
 
   const router = useRouter();
-  const loginInfo = useLoginInfo();
+  const loginState = useLoginState();
   const username = ref('');
   const password = ref('');
-  const loggedIn = computed(() => loginInfo.getters.getLoggedIn);
+  const loggedIn = computed(() => loginState.getters.getLoggedIn);
   const loginFailed = ref(false);
 
   /** 
@@ -73,9 +73,9 @@
    */ 
 
   async function onSubmit() {
-    await loginInfo.dispatch('setLoggingIn', true);
-    await loginInfo.dispatch('login', {username: username.value, password: password.value});
-    loginInfo.dispatch('setLoggingIn', false);
+    await loginState.dispatch('setLoggingIn', true);
+    await loginState.dispatch('login', {username: username.value, password: password.value});
+    loginState.dispatch('setLoggingIn', false);
     if(loggedIn.value()) {
       router.push('/main');
     } else  {

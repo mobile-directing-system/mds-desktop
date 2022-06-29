@@ -14,9 +14,9 @@
 
 <script lang="ts" setup>
   import LoginForm from './../components/LoginForm.vue';
-  import { useLoginInfo } from '../store';
+  import { useLoginState } from '../store';
   import { computed } from 'vue';
 
-  const loginInfo = useLoginInfo();
-  const loggingIn = computed(() => loginInfo.getters.getLoggingIn);
+  const loginState = useLoginState();
+  const loggingIn = computed(() => loginState.getters.getLoggingIn);
 </script>

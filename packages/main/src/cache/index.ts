@@ -1,3 +1,3 @@
-import loginInfo from './LoginInfo';
+import loginCache from './LoginCache';
 
-export { loginInfo };
+export { loginCache };

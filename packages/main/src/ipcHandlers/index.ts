@@ -1,3 +1,5 @@
-import { loginHandler } from './loginHandlers';
+//import { loginHandler, logoutHandler } from './loginHandlers';
+//import { createUserHandler, deleteUserHandler, retrieveUserHandler, retrieveUsersHandler, updateUserHandler, updateUserPasswordHandler } from './userHandlers';
 
-export { loginHandler };
+export { loginHandler, logoutHandler } from './loginHandlers';
+export { createUserHandler, deleteUserHandler, retrieveUserHandler, retrieveUsersHandler, updateUserHandler, updateUserPasswordHandler } from './userHandlers';

@@ -1,9 +1,7 @@
 import { app, ipcMain } from 'electron';
 import '/@/security-restrictions';
 import { restoreOrCreateWindow } from '/@/windows/mainWindow';
-import { loginHandler } from '/@/ipcHandlers';
-
-
+import { loginHandler, logoutHandler, createUserHandler, deleteUserHandler, retrieveUserHandler, retrieveUsersHandler, updateUserHandler, updateUserPasswordHandler } from '/@/ipcHandlers';
 /**
  * Prevent multiple instances
  */
@@ -49,6 +47,13 @@ app.whenReady()
 
 app.whenReady().then(() => {
   ipcMain.handle('login', loginHandler);
+  ipcMain.handle('logout', logoutHandler);
+  ipcMain.handle('createUser', createUserHandler);
+  ipcMain.handle('updateUser', updateUserHandler);
+  ipcMain.handle('updateUserPassword', updateUserPasswordHandler);
+  ipcMain.handle('deleteUser', deleteUserHandler);
+  ipcMain.handle('retrieveUsers', retrieveUsersHandler);
+  ipcMain.handle('retrieveUser', retrieveUserHandler);
 });
 
 /**

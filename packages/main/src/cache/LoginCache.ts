@@ -1,4 +1,4 @@
-class LoginInfo  {
+class LoginCache  {
   _tokenType= '';
   _token = '';
 
@@ -20,4 +20,4 @@ class LoginInfo  {
 
 }
 
-export default new LoginInfo;
+export default new LoginCache();
