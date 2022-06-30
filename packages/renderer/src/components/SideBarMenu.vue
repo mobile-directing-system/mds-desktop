@@ -60,7 +60,11 @@
             All Users
           </router-link>
         </div>
-        <div class="block w-full  items-center pt-5">
+        <button
+          class="block w-full  items-center pt-5"
+
+          @click="showOperationOption = !showOperationOption"
+        >
           <div class="flex items-center hover:bg-blue-700 hover:text-white hover:rounded-md hover:shadow-xl">
             <svg
               class="px-3 w-12 h-auto"
@@ -75,9 +79,44 @@
               d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
             /></svg>
             <span class="text-2xl"> Operations </span>
+            <svg
+              class="lg:right-5 w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            ><path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            /></svg>
           </div>
+        </button>
+        <!-- Dropdown -->
+        <div
+          v-show="showOperationOption"
+          class="box ml-12 mr-3 rounded-md py-2 mt-2 bg-white  shadow-xl  lg:right-0 border-l-2 border-blue-700"
+        >
+          <router-link
+            to="/main"
+            class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
+          >
+            Add Operation
+          </router-link>
+          <router-link
+            to="/main"
+            class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
+          >
+            Remove Operation
+          </router-link>
+          <router-link
+            to="/main"
+            class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
+          >
+            All Operations
+          </router-link>
         </div>
-
         <button
           class="block w-full  items-center pt-5"
           @click="showGroupOption = !showGroupOption"
@@ -141,6 +180,8 @@
 
 <script lang="ts" setup>
     import { ref } from 'vue';
+
+    const showOperationOption = ref(false);
 
     const showUserOption = ref(false);
     const showGroupOption = ref(false);
