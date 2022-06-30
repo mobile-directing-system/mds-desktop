@@ -1,10 +1,7 @@
 import { app, ipcMain } from 'electron';
-import type { IpcMainInvokeEvent } from 'electron';
-import './security-restrictions';
-import { restoreOrCreateWindow } from '/@/mainWindow';
-import { loginCall } from '/@/backend/networkCalls';
-
-
+import '/@/security-restrictions';
+import { restoreOrCreateWindow } from '/@/windows/mainWindow';
+import { loginHandler, logoutHandler, createUserHandler, deleteUserHandler, retrieveUserHandler, retrieveUsersHandler, updateUserHandler, updateUserPasswordHandler } from '/@/ipcHandlers';
 /**
  * Prevent multiple instances
  */
@@ -49,19 +46,15 @@ app.whenReady()
  */
 
 app.whenReady().then(() => {
-  ipcMain.handle('login', login);
+  ipcMain.handle('login', loginHandler);
+  ipcMain.handle('logout', logoutHandler);
+  ipcMain.handle('createUser', createUserHandler);
+  ipcMain.handle('updateUser', updateUserHandler);
+  ipcMain.handle('updateUserPassword', updateUserPasswordHandler);
+  ipcMain.handle('deleteUser', deleteUserHandler);
+  ipcMain.handle('retrieveUsers', retrieveUsersHandler);
+  ipcMain.handle('retrieveUser', retrieveUserHandler);
 });
-
-/**
- * handler function to call backend interface
- * @param _ event not used
- * @param username username to pass to the backend for logging in
- * @param password password to pass to the backend for logging in
- * @returns boolean indicating if login was successful
- */
-async function login(_:IpcMainInvokeEvent, username: string, password: string):Promise<boolean> {
-  return loginCall(username, password);
-}
 
 /**
  * Install Vue.js or some other devtools in development mode only

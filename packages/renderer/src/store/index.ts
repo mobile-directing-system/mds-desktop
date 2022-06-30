@@ -1,6 +1,6 @@
 import { Module, createStore } from 'vuex-smart-module';
-import { loginInfo } from './Modules/LoginInfo';
-import { useLoginInfo } from './Modules/LoginInfo';
+import { loginState, useLoginState } from './Modules/LoginState';
+import { userState, useUserState } from './Modules/UserState';
 
 /**
  * define empty root state for the store to contain
@@ -8,7 +8,8 @@ import { useLoginInfo } from './Modules/LoginInfo';
  */
 const root = new Module({
   modules: {
-    loginInfo,
+    loginState,
+    userState,
   },
 });
 
@@ -23,4 +24,4 @@ export const modulesStore = createStore(
  * re-export useLoginInfo function from ./Modules/LoginInfo
  * to simplify the importation in .vue files
  */
-export { useLoginInfo };
+export { useLoginState, useUserState };
