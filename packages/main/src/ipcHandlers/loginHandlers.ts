@@ -2,7 +2,7 @@ import type { IpcMainInvokeEvent } from 'electron';
 import { login, logout } from '/@/backend';
 
 /**
- * handler function to call backend interface
+ * handler function to call login backend function
  * @param _ event not used
  * @param username username to pass to the backend for logging in
  * @param password password to pass to the backend for logging in
@@ -13,9 +13,12 @@ export async function loginHandler(_:IpcMainInvokeEvent, username: string, passw
   return login(username, password);
 }
 
-// eslint-disable-next-line no-unused-vars
 /* _:IpcMainInvokeEvent not needed when no other parameters are specified. Also does not work
 with eslint-disable-next-line no-unused-vars*/
+/**
+ * handler function to call logout backend function
+ * @returns boolean indicating if the logout was successful
+ */
 export async function logoutHandler():Promise<boolean> {
   return logout();
 }

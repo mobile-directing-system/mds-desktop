@@ -2,7 +2,7 @@
 interface CachedResult<T> {
   res?: T,
   cached: boolean,
-  success: boolean
+  error: boolean,
   errorMsg?: string,
 }
 

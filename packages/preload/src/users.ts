@@ -10,15 +10,15 @@ export async function createUser(user: User):Promise<CachedResult<User>> {
     return ipcRenderer.invoke('createUser', user); 
 }
 
-export async function updateUser(user: User):Promise<CachedResult<User>> {
+export async function updateUser(user: User):Promise<CachedResult<boolean>> {
   return ipcRenderer.invoke('updateUser', user);
 }
 
-export async function updateUserPassword(userId: string, newPass:string):Promise<CachedResult<User>> {
+export async function updateUserPassword(userId: string, newPass:string):Promise<CachedResult<boolean>> {
   return ipcRenderer.invoke('updateUserPassword', userId, newPass);
 }
 
-export async function deleteUser(userId: string):Promise<CachedResult<User>> {
+export async function deleteUser(userId: string):Promise<CachedResult<boolean>> {
   return ipcRenderer.invoke('deleteUser', userId);
 }
 

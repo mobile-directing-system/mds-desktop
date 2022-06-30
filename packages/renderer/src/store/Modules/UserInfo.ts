@@ -27,6 +27,22 @@ class UserStateGetters extends Getters<UserState> {
       return this.state.cachedUsers;
     };
   }
+  get error() {
+    return () => {
+      return this.state.error;
+    };
+  }
+  get errorMsg() {
+    return () => {
+      if(this.state.errorMsg !== '') {
+        return this.state.errorMsg;
+      } else if (this.state.error) {
+        return 'There was an error during a call to the /users endpoint.';
+      } else {
+        return '';
+      }
+    };
+  }
 }
 
 /**
@@ -76,13 +92,11 @@ class UserStateMutations extends Mutations<UserState> {
 
 /**
  * define actions for functions which change the state as a side effect.
- * setLoggingIn function only changes the loggingIn state to the passed
- * boolean. login function calls the login glue code of the preload script.
  */
 class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMutations, UserStateActions> {
   async createUser(user: User) {
     const createdUser:CachedResult<User> = await createUser(user);
-    if(createdUser.success && createdUser.res) {
+    if(createdUser.res && !createdUser.error) {
       this.commit('addUser', {user: createdUser.res, cached: createdUser.cached});
     } else {
         this.commit('setError', true);
@@ -92,30 +106,30 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     }
   }
   async updateUser(user: User) {
-    const updatedUser:CachedResult<User> = await updateUser(user);
-    if(updatedUser.success && updatedUser.res) {
-      this.commit('updateUser', {user: updatedUser.res, cached: updatedUser.cached});
+    const userUpdated:CachedResult<boolean> = await updateUser(user);
+    if(userUpdated.res && !userUpdated.error) {
+      this.commit('updateUser', {user, cached: userUpdated.cached});
     } else {
       this.commit('setError', true);
-      if(updatedUser.errorMsg) {
-        this.commit('setErrorMsg', updatedUser.errorMsg);
+      if(userUpdated.errorMsg) {
+        this.commit('setErrorMsg', userUpdated.errorMsg);
       }
     }
   }
   async deleteUserById(userId: string) {
-    const deletedUser: CachedResult<User> = await deleteUser(userId);
-    if(deletedUser.success) {
+    const userDeleted: CachedResult<boolean> = await deleteUser(userId);
+    if(userDeleted.res && !userDeleted.error) {
       this.commit('deleteUserById', userId);
     } else {
       this.commit('setError', true);
-      if(deletedUser.errorMsg) {
-        this.commit('setErrorMsg', deletedUser.errorMsg);
+      if(userDeleted.errorMsg) {
+        this.commit('setErrorMsg', userDeleted.errorMsg);
       }
     }
   }
   async retreiveUsers({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
     const retrievedUsers: CachedResult<User[]> = await retrieveUsers(amount, offset, orderBy, orderDir);
-    if(retrievedUsers.success && retrievedUsers.res) {
+    if(retrievedUsers.res && !retrievedUsers.error) {
       this.commit('setUsers', retrievedUsers.res);
     } else {
       this.commit('setError', true);
@@ -126,7 +140,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
   }
   async retreiveUserById(userId: string) {
     const retrievedUser: CachedResult<User> = await retrieveUser(userId);
-    if(retrievedUser.success !== false && retrievedUser.res) {
+    if(retrievedUser.res && !retrievedUser.error) {
       this.commit('addOrUpdateUser', {user: retrievedUser.res, cached: retrievedUser.cached});
     } else {
       this.commit('setError', true);
