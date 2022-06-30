@@ -32,6 +32,13 @@ class UserStateGetters extends Getters<UserState> {
       return this.state.error;
     };
   }
+  /**
+   * errorMsg getter returns error messages depending on the
+   * state. If there is a errorMsg it is returned. If there is
+   * none and there is no error an empty string is returned. If
+   * there is none and there was an error a default error message
+   * for the /users endpoint is returned.
+   */
   get errorMsg() {
     return () => {
       if(this.state.errorMsg !== '') {
@@ -91,7 +98,9 @@ class UserStateMutations extends Mutations<UserState> {
 }
 
 /**
- * define actions for functions which change the state as a side effect.
+ * define actions for functions which change the state as a side effect. The
+ * funciton here call the user related IPC functions in preload. They handle
+ * errors and extract possible results from the CachedResult containers.
  */
 class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMutations, UserStateActions> {
   async createUser(user: User) {

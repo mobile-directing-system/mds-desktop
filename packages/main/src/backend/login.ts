@@ -12,9 +12,7 @@ import { printAxiosError } from './backendInstance';
 export async function login(username: string, pass: string): Promise<boolean> {
     try {
         const response = await Backend.instance.post('/login', {username, pass});
-        /**
-        * cache the received credential on login
-        */
+        //cache the received credential on login
         Backend.setAuthorizationHeader(response.data.access_token, response.data.token_type);
         return true;
     } catch(error) {

@@ -85,6 +85,14 @@ export async function deleteUser(user_id: string):Promise<CachedResult<boolean>>
   }
 }
 
+/**
+ * call to the /users endpoint to retrieve a collection of users
+ * @param amount optional number indicating the maxmimal amount of users to return
+ * @param offset optional number indicating the offset starting from which users should be return
+ * @param order_by optional string indicating by which field the users should be sorted
+ * @param order_dir optional string (either 'desc' or 'asc') indicating if the sorting should be descending or ascending
+ * @returns received collection of users in a cached result container
+ */
 export async function retrieveUsers(amount?: number, offset?: number, order_by?: string, order_dir?: string):Promise<CachedResult<User[]>> {
   try {
     //explicit use of != instead of !== as a != null is equivalent to a !== null | a !== undefined
@@ -97,6 +105,11 @@ export async function retrieveUsers(amount?: number, offset?: number, order_by?:
   }
 }
 
+/**
+ * call to the /users endpoint to retrieve a user
+ * @param user_id id of the user to be retrieved
+ * @returns received user in a cached result container
+ */
 export async function retrieveUser(user_id: string):Promise<CachedResult<User>> {
   try {
     const response = await Backend.instance.get(`${endpoint}/${user_id}`);
