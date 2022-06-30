@@ -1,6 +1,6 @@
 import { Module, createStore } from 'vuex-smart-module';
-import { loginState, useLoginState } from './Modules/LoginInfo';
-import { userState, useUserState } from './Modules/UserInfo';
+import { loginState, useLoginState } from './Modules/LoginState';
+import { userState, useUserState } from './Modules/UserState';
 
 /**
  * define empty root state for the store to contain
