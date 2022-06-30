@@ -10,6 +10,7 @@ class UserState {
   users: User[] = [];
   cachedUsers: Map<string, boolean> = new Map();
   error = false;
+  errorMsg = '';
 }
 
 /**
@@ -68,6 +69,9 @@ class UserStateMutations extends Mutations<UserState> {
   setError(error: boolean) {
     this.state.error = error;
   }
+  setErrorMsg(errorMsg: string) {
+    this.state.errorMsg = errorMsg;
+  }
 }
 
 /**
@@ -81,9 +85,10 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     if(createdUser.success && createdUser.res) {
       this.commit('addUser', {user: createdUser.res, cached: createdUser.cached});
     } else {
-      if(createdUser) {
         this.commit('setError', true);
-      }
+        if(createdUser.errorMsg) {
+          this.commit('setErrorMsg', createdUser.errorMsg);
+        }
     }
   }
   async updateUser(user: User) {
@@ -92,6 +97,9 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
       this.commit('updateUser', {user: updatedUser.res, cached: updatedUser.cached});
     } else {
       this.commit('setError', true);
+      if(updatedUser.errorMsg) {
+        this.commit('setErrorMsg', updatedUser.errorMsg);
+      }
     }
   }
   async deleteUserById(userId: string) {
@@ -100,6 +108,9 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
       this.commit('deleteUserById', userId);
     } else {
       this.commit('setError', true);
+      if(deletedUser.errorMsg) {
+        this.commit('setErrorMsg', deletedUser.errorMsg);
+      }
     }
   }
   async retreiveUsers({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
@@ -108,6 +119,9 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
       this.commit('setUsers', retrievedUsers.res);
     } else {
       this.commit('setError', true);
+      if(retrievedUsers.errorMsg) {
+        this.commit('setErrorMsg', retrievedUsers.errorMsg);
+      }
     }
   }
   async retreiveUserById(userId: string) {
@@ -116,6 +130,9 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
       this.commit('addOrUpdateUser', {user: retrievedUser.res, cached: retrievedUser.cached});
     } else {
       this.commit('setError', true);
+      if(retrievedUser.errorMsg) {
+        this.commit('setErrorMsg', retrievedUser.errorMsg);
+      }
     }
   }
 }

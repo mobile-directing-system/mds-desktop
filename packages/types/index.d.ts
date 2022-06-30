@@ -3,6 +3,7 @@ interface CachedResult<T> {
   res?: T,
   cached: boolean,
   success: boolean
+  errorMsg?: string,
 }
 
 export type { CachedResult };
