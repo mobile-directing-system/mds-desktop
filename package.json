@@ -21,6 +21,7 @@
     "watch": "node scripts/watch.js",
     "prod": "cross-env MODE=production npm run build && electron .",
     "lint": "eslint . --ext js,ts,vue",
+    "fix": "eslint . --ext js,ts,vue --fix",
     "typecheck:main": "tsc --noEmit -p packages/main/tsconfig.json",
     "typecheck:preload": "tsc --noEmit -p packages/preload/tsconfig.json",
     "typecheck:renderer": "vue-tsc --noEmit -p packages/renderer/tsconfig.json",
