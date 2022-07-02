@@ -7,12 +7,6 @@ interface User {
   pass: string,
 }
 
-interface CachedUser {
-  user?: User,
-  cached: boolean,
-  success: boolean,
-}
 
 
-
-export { User, CachedUser };
+export { User };
