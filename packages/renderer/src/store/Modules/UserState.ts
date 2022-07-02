@@ -1,6 +1,6 @@
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
 import { createUser, updateUser, deleteUser, retrieveUser, retrieveUsers } from '#preload';
-import type { User, CachedResult } from '../../../../types';
+import type { User, ErrorResult } from '../../../../types';
 
 
 /**
@@ -8,7 +8,6 @@ import type { User, CachedResult } from '../../../../types';
  */
 class UserState {
   users: User[] = [];
-  cachedUsers: Map<string, boolean> = new Map();
   error = false;
   errorMsg = '';
 }
@@ -20,11 +19,6 @@ class UserStateGetters extends Getters<UserState> {
   get getUsers() {
     return () => {
       return this.state.users;
-    };
-  }
-  get CachedUsers() {
-    return () => {
-      return this.state.cachedUsers;
     };
   }
   get error() {
@@ -59,35 +53,25 @@ class UserStateMutations extends Mutations<UserState> {
   setUsers(users: User[]) {
     this.state.users = users;
   }
-  addUser({user, cached}:{user: User, cached: boolean}) {
-    if(cached) {
-        this.state.cachedUsers.set(user.id, true);
-    }
+  addUser(user: User) {
     this.state.users = [...this.state.users, user];
   }
-  addOrUpdateUser({user, cached}: {user: User, cached: boolean}){
-    if(cached) {
-        this.state.cachedUsers.set(user.id, true);
-    }
+  addOrUpdateUser(user: User){
     if (this.state.users.filter((elem) => elem.username === user.username).length > 0) {
       this.state.users = this.state.users.map((elem) => (elem.username === user.username)? user : elem);
     } else {
       this.state.users = [...this.state.users, user];
     }
   }
-  updateUser({user, cached}: {user: User, cached: boolean}) {
-    if(cached) {
-        this.state.cachedUsers.set(user.id, true);
-    }
+  updateUser(user: User) {
+
     this.state.users = this.state.users.map((elem) => (elem.id === user.id)? user : elem);
   }
   deleteUser(user: User) {
       this.state.users = this.state.users.filter((elem) => elem.id !== user.id);
-      this.state.cachedUsers.delete(user.id);
   }
   deleteUserById(userId: string) {
     this.state.users = this.state.users.filter((elem) => elem.id !== userId);
-      this.state.cachedUsers.delete(userId);
   }
   setError(error: boolean) {
     this.state.error = error;
@@ -100,13 +84,13 @@ class UserStateMutations extends Mutations<UserState> {
 /**
  * define actions for functions which change the state as a side effect. The
  * funciton here call the user related IPC functions in preload. They handle
- * errors and extract possible results from the CachedResult containers.
+ * errors and extract possible results from the ErrorResult containers.
  */
 class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMutations, UserStateActions> {
   async createUser(user: User) {
-    const createdUser:CachedResult<User> = await createUser(user);
+    const createdUser:ErrorResult<User> = await createUser(user);
     if(createdUser.res && !createdUser.error) {
-      this.commit('addUser', {user: createdUser.res, cached: createdUser.cached});
+      this.commit('addUser', createdUser.res);
     } else {
         this.commit('setError', true);
         if(createdUser.errorMsg) {
@@ -115,9 +99,9 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     }
   }
   async updateUser(user: User) {
-    const userUpdated:CachedResult<boolean> = await updateUser(user);
+    const userUpdated:ErrorResult<boolean> = await updateUser(user);
     if(userUpdated.res && !userUpdated.error) {
-      this.commit('updateUser', {user, cached: userUpdated.cached});
+      this.commit('updateUser', user);
     } else {
       this.commit('setError', true);
       if(userUpdated.errorMsg) {
@@ -126,7 +110,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     }
   }
   async deleteUserById(userId: string) {
-    const userDeleted: CachedResult<boolean> = await deleteUser(userId);
+    const userDeleted: ErrorResult<boolean> = await deleteUser(userId);
     if(userDeleted.res && !userDeleted.error) {
       this.commit('deleteUserById', userId);
     } else {
@@ -137,7 +121,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     }
   }
   async retreiveUsers({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
-    const retrievedUsers: CachedResult<User[]> = await retrieveUsers(amount, offset, orderBy, orderDir);
+    const retrievedUsers: ErrorResult<User[]> = await retrieveUsers(amount, offset, orderBy, orderDir);
     if(retrievedUsers.res && !retrievedUsers.error) {
       this.commit('setUsers', retrievedUsers.res);
     } else {
@@ -148,9 +132,9 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     }
   }
   async retreiveUserById(userId: string) {
-    const retrievedUser: CachedResult<User> = await retrieveUser(userId);
+    const retrievedUser: ErrorResult<User> = await retrieveUser(userId);
     if(retrievedUser.res && !retrievedUser.error) {
-      this.commit('addOrUpdateUser', {user: retrievedUser.res, cached: retrievedUser.cached});
+      this.commit('addOrUpdateUser', retrievedUser.res);
     } else {
       this.commit('setError', true);
       if(retrievedUser.errorMsg) {
