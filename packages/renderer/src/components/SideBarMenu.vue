@@ -51,12 +51,6 @@
             to="/main"
             class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
           >
-            Remove User
-          </router-link>
-          <router-link
-            to="/main"
-            class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
-          >
             All Users
           </router-link>
         </div>
@@ -108,12 +102,6 @@
             to="/main"
             class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
           >
-            Remove Operation
-          </router-link>
-          <router-link
-            to="/main"
-            class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
-          >
             All Operations
           </router-link>
         </div>
@@ -159,12 +147,6 @@
             class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
           >
             Add Groups
-          </router-link>
-          <router-link
-            to="/main"
-            class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
-          >
-            Remove Groups
           </router-link>
           <router-link
             to="/main"
