@@ -1,4 +1,6 @@
 <template>
+  <Topnavbar />
+  <Sidebar />
   <h3>Main Application Goes Here</h3>
   <router-link
     to="/"
@@ -49,6 +51,9 @@
 </template>
 
 <script lang="ts" setup>
+  
+  import  Sidebar from '../components/SideBarMenu.vue';
+  import Topnavbar from '../components/TopNavbar.vue';
   import { ref, computed, onMounted } from 'vue';
   import { useLoginState, useUserState } from '../store';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
