@@ -34,7 +34,7 @@
     "@vue/test-utils": "2.0.0",
     "autoprefixer": "^10.4.7",
     "cross-env": "7.0.3",
-    "electron": "^19.0.5",
+    "electron": "19.0.4",
     "electron-builder": "23.0.3",
     "electron-devtools-installer": "3.2.0",
     "eslint": "8.17.0",
@@ -55,9 +55,6 @@
   "dependencies": {
     "axios": "^0.27.2",
     "electron-updater": "5.0.1",
-
-    "flowbite": "^1.4.7",
-
     "vue": "3.2.37",
     "vue-router": "^4.0.16",
     "vuex": "^4.0.2",
