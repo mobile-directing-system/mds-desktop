@@ -19,15 +19,12 @@ Functionality of the side bar
 Just as the navigation bar the side bar shall give the user the oppertunity to navigate in the system quickly.
     * Users
         - Add user
-        - Remove user
         - All users 
     * Oprtations
         - Add operation
-        - Remove operation
         - All operations
     * Groups
         - Add a group
-        - Remove a group
         - All groups
 
 For the points within the sidebar, a sub menu is shown to the user, where the subpoints can be accesesd. In all cases the functionalities of the points in the submenues are adding, removing and getting to view all of the existing entities.
