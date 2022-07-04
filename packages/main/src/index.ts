@@ -1,8 +1,7 @@
-import {app, ipcMain} from 'electron';
-import './security-restrictions';
-import {restoreOrCreateWindow} from '/@/mainWindow';
-
-
+import { app, ipcMain } from 'electron';
+import '/@/security-restrictions';
+import { restoreOrCreateWindow } from '/@/windows/mainWindow';
+import { loginHandler, logoutHandler, createUserHandler, deleteUserHandler, retrieveUserHandler, retrieveUsersHandler, updateUserHandler, updateUserPasswordHandler } from '/@/ipcHandlers';
 /**
  * Prevent multiple instances
  */
@@ -47,13 +46,15 @@ app.whenReady()
  */
 
 app.whenReady().then(() => {
-  ipcMain.handle('login', login);
+  ipcMain.handle('login', loginHandler);
+  ipcMain.handle('logout', logoutHandler);
+  ipcMain.handle('createUser', createUserHandler);
+  ipcMain.handle('updateUser', updateUserHandler);
+  ipcMain.handle('updateUserPassword', updateUserPasswordHandler);
+  ipcMain.handle('deleteUser', deleteUserHandler);
+  ipcMain.handle('retrieveUsers', retrieveUsersHandler);
+  ipcMain.handle('retrieveUser', retrieveUserHandler);
 });
-
-async function login(_: any, username: string, password: string):Promise<boolean> {
-  return username === 'bla' && password === 'blub';
-  //return loginCall(username, password);
-}
 
 /**
  * Install Vue.js or some other devtools in development mode only
@@ -61,7 +62,7 @@ async function login(_: any, username: string, password: string):Promise<boolean
 if (import.meta.env.DEV) {
   app.whenReady()
     .then(() => import('electron-devtools-installer'))
-    .then(({default: installExtension, VUEJS3_DEVTOOLS}) => installExtension(VUEJS3_DEVTOOLS, {
+    .then(({default: installExtension, VUEJS_DEVTOOLS}) => installExtension(VUEJS_DEVTOOLS, {
       loadExtensionOptions: {
         allowFileAccess: true,
       },

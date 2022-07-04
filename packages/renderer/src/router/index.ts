@@ -11,6 +11,7 @@ const routes:RouteRecordRaw[] = [
         component: CreateNewUser,
     },
     {
+
         path: '/',
         name: 'Login',
         component: LoginPage,
