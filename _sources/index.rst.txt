@@ -8,7 +8,7 @@ Welcome to MDS Desktop's documentation!
     :caption: Contents:
 
     configuration/configuration
-
+    Sites/Navbar
 
 
 Indices and tables
