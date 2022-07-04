@@ -1,7 +1,7 @@
 Navigation bar & Side bar
 #########################
 
-This chapter will provide a short explanation of the navigation bar. 
+This chapter will provide a short explanation of the navigation bar as well as of the side bar. 
 
 Functionality of the navigation bar
 -----------------------------------
