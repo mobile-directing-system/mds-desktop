@@ -72,6 +72,7 @@
   }
 
   const users = computed(() => userState.getters.getUsers);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const permissions = computed(() => permissionsState.getters.getPermissions);
   const userId = ref('');
 
@@ -99,7 +100,6 @@
 
   function loadPermissions() {
     users.value().map((user) => permissionsState.dispatch('retrievePermissions', user.id) );
-    console.log(permissions.value());
   }
 
   function generateUser() {
