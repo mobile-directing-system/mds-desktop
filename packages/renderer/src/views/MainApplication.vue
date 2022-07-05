@@ -1,4 +1,6 @@
 <template>
+  <Topnavbar />
+  <Sidebar />
   <h3>Main Application Goes Here</h3>
   <div
     class="cursor-pointer"
@@ -66,7 +68,8 @@
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
   import { updateUserPassword } from '#preload';
   import { PermissionNames } from '../constants';
-
+  import  Sidebar from '../components/SideBarMenu.vue';
+  import Topnavbar from '../components/TopNavbar.vue';
   /**
    * load router and logininfo store to check
    * if already logged in and if so navigate to
