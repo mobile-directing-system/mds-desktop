@@ -46,11 +46,15 @@
       @btn-click="fetchUser(userId)"
     />
   </form>
+  <NormalButton
+    btn-text="Load Permissions"
+    @btn-click="loadPermissions()"
+  />
 </template>
 
 <script lang="ts" setup>
   import { ref, computed, onMounted } from 'vue';
-  import { useLoginState, useUserState } from '../store';
+  import { useLoginState, useUserState, usePermissionsState } from '../store';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
   import { updateUserPassword } from '#preload';
 
@@ -61,12 +65,14 @@
    */
   const loginState = useLoginState();
   const userState = useUserState();
+  const permissionsState = usePermissionsState();
 
   function onBack() {
     loginState.dispatch('logout');
   }
 
   const users = computed(() => userState.getters.getUsers);
+  const permissions = computed(() => permissionsState.getters.getPermissions);
   const userId = ref('');
 
   onMounted(() => {
@@ -89,6 +95,11 @@
 
   function updateUserPw(userId: string) {
     updateUserPassword(userId, 'testpw');
+  }
+
+  function loadPermissions() {
+    users.value().map((user) => permissionsState.dispatch('retrievePermissions', user.id) );
+    console.log(permissions.value());
   }
 
   function generateUser() {

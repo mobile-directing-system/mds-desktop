@@ -1,6 +1,7 @@
 import { Module, createStore } from 'vuex-smart-module';
 import { loginState, useLoginState } from './Modules/LoginState';
 import { userState, useUserState } from './Modules/UserState';
+import { permissionsState, usePermissionsState } from './Modules/PermissionsState';
 
 /**
  * define empty root state for the store to contain
@@ -10,6 +11,7 @@ const root = new Module({
   modules: {
     loginState,
     userState,
+    permissionsState,
   },
 });
 
@@ -24,4 +26,4 @@ export const modulesStore = createStore(
  * re-export useLoginInfo function from ./Modules/LoginInfo
  * to simplify the importation in .vue files
  */
-export { useLoginState, useUserState };
+export { useLoginState, useUserState, usePermissionsState };
