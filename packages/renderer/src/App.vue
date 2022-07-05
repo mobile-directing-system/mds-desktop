@@ -1,7 +1,7 @@
 <template>
   <FloatingErrorToast
-    v-if="showError()"
-    toast-text="An Error has occured."
+    v-if="error()"
+    :toast-text="errorMessage() != ''? errorMessage() : 'An Error has ocurred'"
     toast-id="errorToast"
     @toast-close="closeErrorToast()"
   />
@@ -23,10 +23,11 @@
   const errorState = useErrorState();
   const router = useRouter();
   const loggedIn = computed(() => loginState.getters.loggedIn);
-  const showError = computed(() => errorState.getters.showError);
+  const error = computed(() => errorState.getters.error);
+  const errorMessage = computed(() => errorState.getters.errorMessage);
 
   function closeErrorToast() {
-    errorState.dispatch('setShowError', false);
+    errorState.dispatch('setError', false);
   }
 
   if(loggedIn.value()) {

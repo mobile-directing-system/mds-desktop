@@ -66,7 +66,7 @@ class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStat
     } else if(this.errorState) {
       this.errorState.dispatch('setError', loggedIn.error);
       if(loggedIn.errorMsg) {
-        this.errorState.dispatch('addErrorMessage', loggedIn.errorMsg);
+        this.errorState.dispatch('setErrorMessage', loggedIn.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -82,7 +82,7 @@ class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStat
     } else if(this.errorState) {
       this.errorState.dispatch('setError', loggedOut.error);
       if(loggedOut.errorMsg) {
-        this.errorState.dispatch('addErrorMessage', loggedOut.errorMsg);
+        this.errorState.dispatch('setErrorMessage', loggedOut.errorMsg);
       }
     } else {
       console.error('Missing Error State');

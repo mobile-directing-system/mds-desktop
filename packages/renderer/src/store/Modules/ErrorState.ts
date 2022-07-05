@@ -5,8 +5,7 @@ import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smar
  */
 class ErrorState {
   error = false;
-  showError = false;
-  errorMessages: string[] = [];
+  errorMessage = '';
 }
 
 /**
@@ -18,14 +17,9 @@ class ErrorStateGetters extends Getters<ErrorState> {
       return this.state.error;
     };
   }
-  get showError() {
+  get errorMessage() {
     return () => {
-      return this.state.showError;
-    };
-  }
-  get errorMessages() {
-    return () => {
-      return this.state.errorMessages;
+      return this.state.errorMessage;
     };
   }
 }
@@ -35,9 +29,7 @@ class ErrorStateGetters extends Getters<ErrorState> {
  */
 class ErrorStateMutations extends Mutations<ErrorState> {
   setError(error: boolean) {this.state.error = error;}
-  setShowError(showError: boolean) {this.state.showError = showError;}
-  setErrorMessages(errorMessages: string[]) {this.state.errorMessages = errorMessages;}
-  addErrorMessage(errorMessage: string) {this.state.errorMessages = [...this.state.errorMessages, errorMessage];}
+  setErrorMessage(errorMessages: string) {this.state.errorMessage = errorMessages;}
 }
 
 /**
@@ -46,14 +38,11 @@ class ErrorStateMutations extends Mutations<ErrorState> {
 class ErrorStateActions extends Actions<ErrorState, ErrorStateGetters, ErrorStateMutations, ErrorStateActions> {
   async setError(error: boolean) {
     this.commit('setError', error);
-    this.commit('setShowError', error);
-    setTimeout(() => this.commit('setShowError', false), 10_000);
+    setTimeout(() => this.commit('setError', false), 10_000);
   }
-  async setShowError(showError: boolean) {
-    this.commit('setShowError', showError);
-  }
-  async addErrorMessage(errorMessage: string) {
-    this.commit('addErrorMessage', errorMessage);
+  async setErrorMessage(errorMessage: string) {
+    this.commit('setErrorMessage', errorMessage);
+    setTimeout(() => this.commit('setErrorMessage', ''), 10_000);
   }
 }
 

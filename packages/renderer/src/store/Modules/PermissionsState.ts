@@ -70,7 +70,7 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
     } else if(this.errorState) {
       this.errorState.dispatch('setError', permissions.error);
       if(permissions.errorMsg) {
-        this.errorState.dispatch('addErrorMessage', permissions.errorMsg);
+        this.errorState.dispatch('setErrorMessage', permissions.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -84,7 +84,7 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
     } else if(this.errorState) {
       this.errorState.dispatch('setError', permissionsSet.error);
       if(permissionsSet.errorMsg) {
-        this.errorState.dispatch('addErrorMessage', permissionsSet.errorMsg);
+        this.errorState.dispatch('setErrorMessage', permissionsSet.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -97,7 +97,7 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
     } else if(this.errorState) {
       this.errorState.dispatch('setError', permissionsSet.error);
       if(permissionsSet.errorMsg) {
-        this.errorState.dispatch('addErrorMessage', permissionsSet.errorMsg);
+        this.errorState.dispatch('setErrorMessage', permissionsSet.errorMsg);
       }
     } else {
       console.error('Missing Error State');

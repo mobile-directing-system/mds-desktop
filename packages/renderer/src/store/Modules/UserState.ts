@@ -77,7 +77,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     } else if(this.errorState) {
       this.errorState.dispatch('setError', createdUser.error);
       if(createdUser.errorMsg) {
-        this.errorState.dispatch('addErrorMessage', createdUser.errorMsg);
+        this.errorState.dispatch('setErrorMessage', createdUser.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -90,7 +90,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     } else if(this.errorState) {
       this.errorState.dispatch('setError', userUpdated.error);
       if(userUpdated.errorMsg) {
-        this.errorState.dispatch('addErrorMessage', userUpdated.errorMsg);
+        this.errorState.dispatch('setErrorMessage', userUpdated.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -103,7 +103,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     } else if(this.errorState) {
       this.errorState.dispatch('setError', userDeleted.error);
       if(userDeleted.errorMsg) {
-        this.errorState.dispatch('addErrorMessage', userDeleted.errorMsg);
+        this.errorState.dispatch('setErrorMessage', userDeleted.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -116,7 +116,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     } else if(this.errorState) {
       this.errorState.dispatch('setError', retrievedUsers.error);
       if(retrievedUsers.errorMsg) {
-        this.errorState.dispatch('addErrorMessage', retrievedUsers.errorMsg);
+        this.errorState.dispatch('setErrorMessage', retrievedUsers.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -129,7 +129,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     } else if(this.errorState) {
       this.errorState.dispatch('setError', retrievedUser.error);
       if(retrievedUser.errorMsg) {
-        this.errorState.dispatch('addErrorMessage', retrievedUser.errorMsg);
+        this.errorState.dispatch('setErrorMessage', retrievedUser.errorMsg);
       }
     } else {
       console.error('Missing Error State');
