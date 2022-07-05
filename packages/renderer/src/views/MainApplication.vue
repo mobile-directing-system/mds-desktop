@@ -80,7 +80,7 @@
     loginState.dispatch('logout');
   }
 
-  const users = computed(() => userState.getters.getUsers);
+  const users = computed(() => userState.getters.users);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const permissions = computed(() => permissionsState.getters.getPermissions);
   const userId = ref('');

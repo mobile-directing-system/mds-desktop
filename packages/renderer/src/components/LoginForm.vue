@@ -61,7 +61,7 @@
   const loginState = useLoginState();
   const username = ref('');
   const password = ref('');
-  const loggedIn = computed(() => loginState.getters.getLoggedIn);
+  const loggedIn = computed(() => loginState.getters.loggedIn);
   const loginFailed = ref(false);
 
   /** 

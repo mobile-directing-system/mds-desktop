@@ -18,5 +18,5 @@
   import { computed } from 'vue';
 
   const loginState = useLoginState();
-  const loggingIn = computed(() => loginState.getters.getLoggingIn);
+  const loggingIn = computed(() => loginState.getters.loggingIn);
 </script>

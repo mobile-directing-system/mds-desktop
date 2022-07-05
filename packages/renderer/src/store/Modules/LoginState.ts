@@ -14,12 +14,12 @@ class LoginState {
  * define getters to access the state
  */
 class LoginStateGetters extends Getters<LoginState> {
-  get getLoggedIn() {
+  get loggedIn() {
     return () => {
       return this.state.loggedIn;
     };
   }
-  get getLoggingIn() {
+  get loggingIn() {
     return () => {
       return this.state.loggingIn;
     };

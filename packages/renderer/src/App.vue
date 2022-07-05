@@ -14,7 +14,7 @@
    */
   const loginState = useLoginState();
   const router = useRouter();
-  const loggedIn = computed(() => loginState.getters.getLoggedIn);
+  const loggedIn = computed(() => loginState.getters.loggedIn);
   if(loggedIn.value()) {
     router.push('/main');
   }  else {

@@ -16,7 +16,7 @@ class UserState {
  * define getters to access the state
  */
 class UserStateGetters extends Getters<UserState> {
-  get getUsers() {
+  get users() {
     return () => {
       return this.state.users;
     };
