@@ -58,7 +58,6 @@
    */ 
 
   async function onSubmit() {
-    loginState.dispatch('setLoggingIn', true);
     loginState.dispatch('login', {username: username.value, password: password.value});
   }
 </script>

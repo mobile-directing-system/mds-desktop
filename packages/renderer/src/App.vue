@@ -37,7 +37,6 @@
     }  else {
       router.push('/');
     }
-    loginState.dispatch('setLoggingIn', false);
   });
 
   if(loggedIn.value()) {

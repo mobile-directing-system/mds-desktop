@@ -59,7 +59,9 @@ class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStat
   }
 
   async login({username, password}:{username:string, password:string}) {
+    await this.dispatch('setLoggingIn', true);
     const loggedIn:ErrorResult<boolean> = await login(username, password);
+    await this.dispatch('setLoggingIn', false);
     if(loggedIn.res && !loggedIn.error) {
       this.commit('setLoggedIn', loggedIn.res);
       this.commit('setLoggedInUser', username);
