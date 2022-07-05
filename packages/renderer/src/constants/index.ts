@@ -20,5 +20,16 @@ class PermissionNames {
     static readonly UserView = 'user.view';
 }
 
+class OrderDir {
+    static readonly Ascending = 'asc';
+    static readonly Descending = 'desc';
+}
 
-export { PermissionNames };
+class OrderBy {
+    static readonly UserUsername = 'username';
+    static readonly UserFirstName = 'first_name';
+    static readonly UserLastname = 'last_name';
+    static readonly serIsAdmin = 'is_admin';
+}
+
+export { PermissionNames, OrderDir, OrderBy };
