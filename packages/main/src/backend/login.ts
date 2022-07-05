@@ -19,7 +19,7 @@ export async function login(username: string, pass: string): Promise<ErrorResult
     } catch(error) {
         const axError: AxiosError = error as AxiosError;
         printAxiosError(axError);
-        return {error: true};
+        return {error: true, errorMsg: 'Login Failed'};
     }
 }
 
@@ -33,6 +33,6 @@ export async function logout():Promise<ErrorResult<boolean>> {
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    return {error: true, errorMsg: 'Logout Failed'};
   }
 }
