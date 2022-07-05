@@ -96,7 +96,7 @@
   function updateUser(userId: string) {
     const updatedUser = users.value().filter((elem) => elem.id === userId)[0];
     updatedUser.first_name = `${updatedUser.first_name}u`;
-    userState.dispatch('updateUser', {...updatedUser});
+    userState.dispatch('updateUser', updatedUser);
   }
 
   function deleteUser(userId: string) {

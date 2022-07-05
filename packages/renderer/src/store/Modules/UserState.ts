@@ -2,6 +2,9 @@ import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smar
 import { createUser, updateUser, deleteUser, retrieveUser, retrieveUsers } from '#preload';
 import type { User, ErrorResult } from '../../../../types';
 
+function undom(user: User):User {
+  return {...user};
+}
 
 /**
  * define the content of the UsersState
@@ -88,7 +91,7 @@ class UserStateMutations extends Mutations<UserState> {
  */
 class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMutations, UserStateActions> {
   async createUser(user: User) {
-    const createdUser:ErrorResult<User> = await createUser(user);
+    const createdUser:ErrorResult<User> = await createUser(undom(user));
     if(createdUser.res && !createdUser.error) {
       this.commit('addUser', createdUser.res);
     } else {
@@ -99,7 +102,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     }
   }
   async updateUser(user: User) {
-    const userUpdated:ErrorResult<boolean> = await updateUser(user);
+    const userUpdated:ErrorResult<boolean> = await updateUser(undom(user));
     if(userUpdated.res && !userUpdated.error) {
       this.commit('updateUser', user);
     } else {
