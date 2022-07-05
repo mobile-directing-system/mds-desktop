@@ -1,6 +1,9 @@
+import type { Store } from 'vuex';
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
+import type {Context} from 'vuex-smart-module';
 import { retrievePermissions, updatePermissions } from '#preload';
 import type { Permissions, Permission, ErrorResult } from '../../../../types';
+import { errorState } from './ErrorState';
 
 
 function undom(permissions: Permissions):Permissions {
@@ -52,12 +55,25 @@ class PermissionsStateMutations extends Mutations<PermissionsState> {
  * boolean. login function calls the login glue code of the preload script.
  */
 class PermissionsStateActions extends Actions<PermissionsState, PermissionsStateGetters, PermissionsStateMutations, PermissionsStateActions> {
+
+  errorState: Context<typeof errorState> | undefined;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  $init(store: Store<any>): void {
+    this.errorState = errorState.context(store);
+  }
+
   async retrievePermissions(userId: string) {
     const permissions: ErrorResult<Permissions> = await retrievePermissions(userId);
     if(permissions.res && !permissions.error) {
       this.commit('setPermissions', {userId, permissions: permissions.res});
+    } else if(this.errorState) {
+      this.errorState.dispatch('setError', permissions.error);
+      if(permissions.errorMsg) {
+        this.errorState.dispatch('addErrorMessage', permissions.errorMsg);
+      }
     } else {
-      console.log('error');
+      console.error('Missing Error State');
     }
   }
   async addPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
@@ -65,16 +81,26 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
     const permissionsSet: ErrorResult<boolean> = await updatePermissions(userId, (existingPermissions)? undom(existingPermissions.concat(permissions)):permissions);
     if(permissionsSet.res && !permissionsSet.error) {
       this.commit('addPermissions', {userId, permissions});
+    } else if(this.errorState) {
+      this.errorState.dispatch('setError', permissionsSet.error);
+      if(permissionsSet.errorMsg) {
+        this.errorState.dispatch('addErrorMessage', permissionsSet.errorMsg);
+      }
     } else {
-      console.log('error');
+      console.error('Missing Error State');
     }
   }
   async updateAllPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
     const permissionsSet: ErrorResult<boolean> = await updatePermissions(userId, permissions);
     if(permissionsSet.res && !permissionsSet.error) {
       this.commit('setPermissions', {userId, permissions});
+    } else if(this.errorState) {
+      this.errorState.dispatch('setError', permissionsSet.error);
+      if(permissionsSet.errorMsg) {
+        this.errorState.dispatch('addErrorMessage', permissionsSet.errorMsg);
+      }
     } else {
-      console.log('error');
+      console.error('Missing Error State');
     }
   }
 }
