@@ -8,4 +8,6 @@
  */
 export { login } from './login';
 export { logout } from './login';
+export { retrievePermissions } from './permissions';
+export { updatePermissions } from './permissions';
 export { createUser, updateUser, updateUserPassword, deleteUser, retrieveUsers, retrieveUser } from './users';

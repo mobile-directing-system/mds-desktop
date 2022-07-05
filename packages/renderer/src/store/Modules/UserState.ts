@@ -1,47 +1,28 @@
+import type { Store } from 'vuex';
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
+import type { Context } from 'vuex-smart-module';
 import { createUser, updateUser, deleteUser, retrieveUser, retrieveUsers } from '#preload';
 import type { User, ErrorResult } from '../../../../types';
+import { errorState } from './ErrorState';
 
+function undom(user: User):User {
+  return {...user};
+}
 
 /**
  * define the content of the UsersState
  */
 class UserState {
   users: User[] = [];
-  error = false;
-  errorMsg = '';
 }
 
 /**
  * define getters to access the state
  */
 class UserStateGetters extends Getters<UserState> {
-  get getUsers() {
+  get users() {
     return () => {
       return this.state.users;
-    };
-  }
-  get error() {
-    return () => {
-      return this.state.error;
-    };
-  }
-  /**
-   * errorMsg getter returns error messages depending on the
-   * state. If there is a errorMsg it is returned. If there is
-   * none and there is no error an empty string is returned. If
-   * there is none and there was an error a default error message
-   * for the /users endpoint is returned.
-   */
-  get errorMsg() {
-    return () => {
-      if(this.state.errorMsg !== '') {
-        return this.state.errorMsg;
-      } else if (this.state.error) {
-        return 'There was an error during a call to the /users endpoint.';
-      } else {
-        return '';
-      }
     };
   }
 }
@@ -73,12 +54,6 @@ class UserStateMutations extends Mutations<UserState> {
   deleteUserById(userId: string) {
     this.state.users = this.state.users.filter((elem) => elem.id !== userId);
   }
-  setError(error: boolean) {
-    this.state.error = error;
-  }
-  setErrorMsg(errorMsg: string) {
-    this.state.errorMsg = errorMsg;
-  }
 }
 
 /**
@@ -87,59 +62,77 @@ class UserStateMutations extends Mutations<UserState> {
  * errors and extract possible results from the ErrorResult containers.
  */
 class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMutations, UserStateActions> {
+
+  errorState: Context<typeof errorState> | undefined;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  $init(store: Store<any>): void {
+    this.errorState = errorState.context(store);
+  }
+
   async createUser(user: User) {
-    const createdUser:ErrorResult<User> = await createUser(user);
+    const createdUser:ErrorResult<User> = await createUser(undom(user));
     if(createdUser.res && !createdUser.error) {
       this.commit('addUser', createdUser.res);
+    } else if(this.errorState) {
+      this.errorState.dispatch('setError', createdUser.error);
+      if(createdUser.errorMsg) {
+        this.errorState.dispatch('setErrorMessage', createdUser.errorMsg);
+      }
     } else {
-        this.commit('setError', true);
-        if(createdUser.errorMsg) {
-          this.commit('setErrorMsg', createdUser.errorMsg);
-        }
+      console.error('Missing Error State');
     }
   }
   async updateUser(user: User) {
-    const userUpdated:ErrorResult<boolean> = await updateUser(user);
+    const userUpdated:ErrorResult<boolean> = await updateUser(undom(user));
     if(userUpdated.res && !userUpdated.error) {
       this.commit('updateUser', user);
-    } else {
-      this.commit('setError', true);
+    } else if(this.errorState) {
+      this.errorState.dispatch('setError', userUpdated.error);
       if(userUpdated.errorMsg) {
-        this.commit('setErrorMsg', userUpdated.errorMsg);
+        this.errorState.dispatch('setErrorMessage', userUpdated.errorMsg);
       }
+    } else {
+      console.error('Missing Error State');
     }
   }
   async deleteUserById(userId: string) {
     const userDeleted: ErrorResult<boolean> = await deleteUser(userId);
     if(userDeleted.res && !userDeleted.error) {
       this.commit('deleteUserById', userId);
-    } else {
-      this.commit('setError', true);
+    } else if(this.errorState) {
+      this.errorState.dispatch('setError', userDeleted.error);
       if(userDeleted.errorMsg) {
-        this.commit('setErrorMsg', userDeleted.errorMsg);
+        this.errorState.dispatch('setErrorMessage', userDeleted.errorMsg);
       }
+    } else {
+      console.error('Missing Error State');
     }
   }
   async retreiveUsers({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
     const retrievedUsers: ErrorResult<User[]> = await retrieveUsers(amount, offset, orderBy, orderDir);
     if(retrievedUsers.res && !retrievedUsers.error) {
       this.commit('setUsers', retrievedUsers.res);
-    } else {
-      this.commit('setError', true);
+    } else if(this.errorState) {
+      this.errorState.dispatch('setError', retrievedUsers.error);
       if(retrievedUsers.errorMsg) {
-        this.commit('setErrorMsg', retrievedUsers.errorMsg);
+        this.errorState.dispatch('setErrorMessage', retrievedUsers.errorMsg);
       }
+    } else {
+      console.error('Missing Error State');
     }
   }
   async retreiveUserById(userId: string) {
     const retrievedUser: ErrorResult<User> = await retrieveUser(userId);
     if(retrievedUser.res && !retrievedUser.error) {
       this.commit('addOrUpdateUser', retrievedUser.res);
-    } else {
-      this.commit('setError', true);
+    } else if(this.errorState) {
+      this.errorState.dispatch('setError', retrievedUser.error);
       if(retrievedUser.errorMsg) {
-        this.commit('setErrorMsg', retrievedUser.errorMsg);
+        this.errorState.dispatch('setErrorMessage', retrievedUser.errorMsg);
       }
+    } else {
+      console.error('Missing Error State');
     }
   }
 }

@@ -1,5 +1,6 @@
 import type { IpcMainInvokeEvent } from 'electron';
 import { login, logout } from '/@/backend';
+import type { ErrorResult } from '../../../types';
 
 /**
  * handler function to call login backend function
@@ -9,7 +10,7 @@ import { login, logout } from '/@/backend';
  * @returns boolean indicating if login was successful
  */
 // eslint-disable-next-line no-unused-vars
-export async function loginHandler(_:IpcMainInvokeEvent, username: string, password: string):Promise<boolean> {
+export async function loginHandler(_:IpcMainInvokeEvent, username: string, password: string):Promise<ErrorResult<boolean>> {
   return login(username, password);
 }
 
@@ -19,6 +20,6 @@ with eslint-disable-next-line no-unused-vars*/
  * handler function to call logout backend function
  * @returns boolean indicating if the logout was successful
  */
-export async function logoutHandler():Promise<boolean> {
+export async function logoutHandler():Promise<ErrorResult<boolean>> {
   return logout();
 }
