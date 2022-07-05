@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed } from 'vue';
+  import { computed, watch } from 'vue';
   import { useErrorState, useLoginState } from './store';
   import { useRouter } from 'vue-router';
   import FloatingErrorToast from './components/BasicComponents/FloatingErrorToast.vue';
@@ -29,6 +29,16 @@
   function closeErrorToast() {
     errorState.dispatch('setError', false);
   }
+
+  watch(loggedIn.value, (curValue) => {
+    console.log('loggedIn Change');
+    if(curValue) {
+      router.push('/main');
+    }  else {
+      router.push('/');
+    }
+    loginState.dispatch('setLoggingIn', false);
+  });
 
   if(loggedIn.value()) {
     router.push('/main');

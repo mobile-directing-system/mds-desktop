@@ -1,11 +1,11 @@
 <template>
   <h3>Main Application Goes Here</h3>
-  <router-link
-    to="/"
-    @click="onBack"
+  <div
+    class="cursor-pointer"
+    @click.prevent="logout()"
   >
     Go Back
-  </router-link>
+  </div>
   <div
     v-for="user in users()"
     :key="user.id"
@@ -76,10 +76,6 @@
   const userState = useUserState();
   const permissionsState = usePermissionsState();
 
-  function onBack() {
-    loginState.dispatch('logout');
-  }
-
   const users = computed(() => userState.getters.users);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const permissions = computed(() => permissionsState.getters.getPermissions);
@@ -117,6 +113,10 @@
 
   function addDeletePermission(userId: string) {
     permissionsState.dispatch('addPermissions', {userId, permissions: [{name: PermissionNames.UserDelete}]});
+  }
+
+  function logout() {
+    loginState.dispatch('logout');
   }
 
   function generateUser() {

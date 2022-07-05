@@ -42,15 +42,12 @@
    * login form.
    */
   import NormalButton from './BasicComponents/NormalButton.vue';
-  import { ref, computed } from 'vue';
-  import { useRouter } from 'vue-router';
+  import { ref } from 'vue';
   import { useLoginState } from '../store';
 
-  const router = useRouter();
   const loginState = useLoginState();
   const username = ref('');
   const password = ref('');
-  const loggedIn = computed(() => loginState.getters.loggedIn);
 
   /** 
    * function for the click handler sets loggingIn to true to
@@ -61,11 +58,7 @@
    */ 
 
   async function onSubmit() {
-    await loginState.dispatch('setLoggingIn', true);
-    await loginState.dispatch('login', {username: username.value, password: password.value});
-    loginState.dispatch('setLoggingIn', false);
-    if(loggedIn.value()) {
-      router.push('/main');
-    }
+    loginState.dispatch('setLoggingIn', true);
+    loginState.dispatch('login', {username: username.value, password: password.value});
   }
 </script>
