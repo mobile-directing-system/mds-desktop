@@ -10,7 +10,7 @@
     v-for="user in users()"
     :key="user.id"
   >
-    <div>{{ user }}</div>
+    <div>{{ user }}:{{ permissions().get(user.id) }}</div>
     <NormalButton
       :btn-text="`Update ${user.username}`"
       @btn-click="updateUser(user.id)"
@@ -22,6 +22,14 @@
     <NormalButton
       :btn-text="`Delete ${user.username}`"
       @btn-click="deleteUser(user.id)"
+    />
+    <NormalButton
+      :btn-text="`Add user.create Permission to ${user.username}`"
+      @btn-click="addCreatePermission(user.id)"
+    />
+    <NormalButton
+      :btn-text="`Add user.delete Permission to ${user.username}`"
+      @btn-click="addDeletePermission(user.id)"
     />
   </div>
   <NormalButton
@@ -57,6 +65,7 @@
   import { useLoginState, useUserState, usePermissionsState } from '../store';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
   import { updateUserPassword } from '#preload';
+  import { PermissionNames } from '../constants';
 
   /**
    * load router and logininfo store to check
@@ -100,6 +109,14 @@
 
   function loadPermissions() {
     users.value().map((user) => permissionsState.dispatch('retrievePermissions', user.id) );
+  }
+
+  function addCreatePermission(userId: string) {
+    permissionsState.dispatch('addPermissions', {userId, permissions: [{name: PermissionNames.UserCreate}]});
+  }
+
+  function addDeletePermission(userId: string) {
+    permissionsState.dispatch('addPermissions', {userId, permissions: [{name: PermissionNames.UserDelete}]});
   }
 
   function generateUser() {

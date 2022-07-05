@@ -1,6 +1,15 @@
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
 import { retrievePermissions, updatePermissions } from '#preload';
-import type { Permissions, ErrorResult } from '../../../../types';
+import type { Permissions, Permission, ErrorResult } from '../../../../types';
+
+
+function undom(permissions: Permissions):Permissions {
+  return permissions.map((elem:Permission) => {
+    return {
+      name: elem.name,
+      options: (elem.options)? {...elem.options}: elem.options,
+    };});
+}
 
 /**
  * define the content of the LoginInfoState
@@ -25,6 +34,14 @@ class PermissionsStateGetters extends Getters<PermissionsState> {
  */
 class PermissionsStateMutations extends Mutations<PermissionsState> {
   setPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {this.state.permissions.set(userId, permissions);}
+  addPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
+    const existingPermissions = this.state.permissions.get(userId);
+    if(existingPermissions) {
+      this.state.permissions.set(userId, existingPermissions.concat(permissions));
+    } else {
+      this.state.permissions.set(userId, permissions);
+    }
+  }
   removePermissions(userId: string) {this.state.permissions.delete(userId);}
   clearPermissions() {this.state.permissions.clear();}
 }
@@ -43,7 +60,16 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
       console.log('error');
     }
   }
-  async updatePermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
+  async addPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
+    const existingPermissions = this.state.permissions.get(userId);
+    const permissionsSet: ErrorResult<boolean> = await updatePermissions(userId, (existingPermissions)? undom(existingPermissions.concat(permissions)):permissions);
+    if(permissionsSet.res && !permissionsSet.error) {
+      this.commit('addPermissions', {userId, permissions});
+    } else {
+      console.log('error');
+    }
+  }
+  async updateAllPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
     const permissionsSet: ErrorResult<boolean> = await updatePermissions(userId, permissions);
     if(permissionsSet.res && !permissionsSet.error) {
       this.commit('setPermissions', {userId, permissions});
