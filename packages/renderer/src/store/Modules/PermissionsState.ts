@@ -78,7 +78,7 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
     const existingPermissions = this.state.permissions.get(userId);
     const permissionsSet: ErrorResult<boolean> = await updatePermissions(userId, (existingPermissions)? undom(existingPermissions.concat(permissions)):permissions);
     if(permissionsSet.res && !permissionsSet.error) {
-      this.commit('addPermissions', {userId, permissions});
+      this.dispatch('retrievePermissions', userId);
     } else if(this.errorState) {
       this.errorState.dispatch('setError', permissionsSet.error);
       if(permissionsSet.errorMsg) {
@@ -91,7 +91,7 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
   async updateAllPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
     const permissionsSet: ErrorResult<boolean> = await updatePermissions(userId, permissions);
     if(permissionsSet.res && !permissionsSet.error) {
-      this.commit('setPermissions', {userId, permissions});
+      this.dispatch('retrievePermissions', userId);
     } else if(this.errorState) {
       this.errorState.dispatch('setError', permissionsSet.error);
       if(permissionsSet.errorMsg) {
