@@ -9,7 +9,7 @@
       <h3>Main Application Goes Here</h3>
       <h3>CurrentAppState: {{ mainAppState.getters.getCurrenPositionInApp() }}</h3>
       <CreateNewUserVue v-if="mainAppState.getters.getCurrenPositionInApp() === CurrentPosition.User_AddUser" />
-
+      <BasicTable v-if="mainAppState.getters.getCurrenPositionInApp() === CurrentPosition.User_AllUsers" />
       <div
         v-for="user in users()"
         :key="user.id"
@@ -62,6 +62,7 @@
   import  Sidebar from '../components/SideBarMenu.vue';
   import Topnavbar from '../components/TopNavbar.vue';
   import CreateNewUserVue from '../components/CreateNewUser.vue';
+import BasicTable from '../components/BasicComponents/BasicTable.vue';
   /**
    * load router and logininfo store to check
    * if already logged in and if so navigate to
