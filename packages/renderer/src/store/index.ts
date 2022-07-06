@@ -3,6 +3,7 @@ import { errorState, useErrorState } from './Modules/ErrorState'; //import of Er
 import { loginState, useLoginState } from './Modules/LoginState';
 import { userState, useUserState } from './Modules/UserState';
 import { permissionsState, usePermissionsState } from './Modules/PermissionsState';
+import { mainAppState, useMainAppState } from './Modules/MainAppState';
 
 /**
  * define empty root state for the store to contain
@@ -14,6 +15,7 @@ const root = new Module({
     loginState,
     userState,
     permissionsState,
+    mainAppState,
   },
 });
 
@@ -28,4 +30,4 @@ export const modulesStore = createStore(
  * re-export useLoginInfo function from ./Modules/LoginInfo
  * to simplify the importation in .vue files
  */
-export { useLoginState, useUserState, usePermissionsState, useErrorState };
+export { useLoginState, useUserState, usePermissionsState, useErrorState, useMainAppState };

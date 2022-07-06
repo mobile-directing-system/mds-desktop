@@ -41,18 +41,18 @@
           v-show="showUserOption"
           class="box ml-12 mr-3 rounded-md py-2 mt-2 bg-white shadow-xl  lg:right-0 border-l-2 border-blue-700"
         >
-          <router-link
-            to="/Create-user"
+          <button
             class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
+            @click="updateMainAppState(CurrentPosition.User_AddUser)"
           >
             Add User
-          </router-link>
-          <router-link
-            to="/main"
+          </button>
+          <button
             class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
+            @click="updateMainAppState(CurrentPosition.User_AllUsers)"
           >
             All Users
-          </router-link>
+          </button>
         </div>
         <button
           class="block w-full  items-center pt-5"
@@ -92,18 +92,18 @@
           v-show="showOperationOption"
           class="box ml-12 mr-3 rounded-md py-2 mt-2 bg-white  shadow-xl  lg:right-0 border-l-2 border-blue-700"
         >
-          <router-link
-            to="/main"
+          <button
             class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
+            @click="updateMainAppState(CurrentPosition.Operation_AddOperation)"
           >
             Add Operation
-          </router-link>
-          <router-link
-            to="/main"
+          </button>
+          <button
             class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
+            @click="updateMainAppState(CurrentPosition.Operation_AllOperations)"
           >
             All Operations
-          </router-link>
+          </button>
         </div>
         <button
           class="block w-full  items-center pt-5"
@@ -142,18 +142,18 @@
           v-show="showGroupOption"
           class="box ml-12 mr-3 rounded-md py-2 mt-2 bg-white  shadow-xl  lg:right-0 border-l-2 border-blue-700"
         >
-          <router-link
-            to="/main"
+          <button
             class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
+            @click="updateMainAppState(CurrentPosition.Groups_AddGroup)"
           >
             Add Groups
-          </router-link>
-          <router-link
-            to="/main"
+          </button>
+          <button
             class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
+            @click="updateMainAppState(CurrentPosition.Groups_AllGroups)"
           >
             All Groups
-          </router-link>
+          </button>
         </div>
       </main>
     </div>
@@ -162,10 +162,29 @@
 
 <script lang="ts" setup>
     import { ref } from 'vue';
-
+    import {useMainAppState } from '../store';
+    const mainAppState = useMainAppState();
+    // Submenus
     const showOperationOption = ref(false);
-
     const showUserOption = ref(false);
     const showGroupOption = ref(false);
-    
+    //functions
+    function updateMainAppState(newMainAppState : CurrentPosition){
+      mainAppState.mutations.setCurrentPositionInApp(newMainAppState);
+    }
+
+
+    //enum for State
+    enum CurrentPosition {
+      User_AddUser = 'User_AddUser',
+      User_AllUsers ='User_AllUsers',
+      Operation_AddOperation ='Operation_AddOperation',
+      Operation_AllOperations ='Operation_AllOperations',
+      Groups_AddGroup ='Groups_AddGroup',
+      Groups_AllGroups ='Groups_AllGroups',
+      Ressources ='Ressources',
+      Intelligence ='Intelligence',
+      Settings ='Settings',
+      Main ='Main'
+  }
 </script>
