@@ -51,8 +51,6 @@ class PermissionsStateMutations extends Mutations<PermissionsState> {
 
 /**
  * define actions for functions which change the state as a side effect.
- * setLoggingIn function only changes the loggingIn state to the passed
- * boolean. login function calls the login glue code of the preload script.
  */
 class PermissionsStateActions extends Actions<PermissionsState, PermissionsStateGetters, PermissionsStateMutations, PermissionsStateActions> {
 

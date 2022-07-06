@@ -60,11 +60,43 @@
     btn-text="Load Permissions"
     @btn-click="loadPermissions()"
   />
+  <div
+    v-for="operation in operations()"
+    :key="operation.id"
+  >
+    <div>{{ operation }}</div>
+    <NormalButton
+      :btn-text="`Update ${operation.title}`"
+      @btn-click="updateOperation(operation.id)"
+    />
+  </div>
+  <NormalButton
+    btn-text="Generate New Operation"
+    @btn-click="generateOperation()"
+  />
+  <form>
+    <label
+      for="operation_id"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+    >Username</label>
+    <input
+      id="operation_id"
+      v-model="operationId"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      type="text"
+    >
+    <NormalButton
+      btn-text="Fetch Operation By Id"
+      btn-id="submit"
+      btn-type="submit"
+      @btn-click="fetchOperation(operationId)"
+    />
+  </form>
 </template>
 
 <script lang="ts" setup>
   import { ref, computed, onMounted } from 'vue';
-  import { useLoginState, useUserState, usePermissionsState } from '../store';
+  import { useLoginState, useUserState, usePermissionsState, useOperationsState } from '../store';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
   import { updateUserPassword } from '#preload';
   import { PermissionNames } from '../constants';
@@ -78,14 +110,18 @@
   const loginState = useLoginState();
   const userState = useUserState();
   const permissionsState = usePermissionsState();
+  const operationsState = useOperationsState();
 
   const users = computed(() => userState.getters.users);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const permissions = computed(() => permissionsState.getters.getPermissions);
+  const operations = computed(() => operationsState.getters.operations);
   const userId = ref('');
+  const operationId = ref('');
 
   onMounted(() => {
     userState.dispatch('retreiveUsers', {});
+    operationsState.dispatch('retrieveOperations', {});
   });
 
   function fetchUser(userId: string) {
@@ -120,6 +156,31 @@
 
   function logout() {
     loginState.dispatch('logout');
+  }
+
+  function generateOperation() {
+    const title = Math.random().toString(36).substring(2, 15);
+    const start: Date = new Date();
+    const end:Date = new Date(start.toISOString());
+    end.setHours(end.getHours() * 5);
+    operationsState.dispatch('createOperation', {
+      id: '',
+      title,
+      description: 'This is a test operation',
+      start,
+      end,
+      is_archived: false,
+    });
+  }
+
+  function updateOperation(operationId: string) {
+      const operationToUpdate = operations.value().filter((elem) => elem.id === operationId)[0];
+      operationToUpdate.description = `${operationToUpdate.description}u`;
+      operationsState.dispatch('updateOperation', operationToUpdate);
+  }
+
+  function fetchOperation(operationId: string) {
+    operationsState.dispatch('retrieveOperation', operationId);
   }
 
   function generateUser() {
