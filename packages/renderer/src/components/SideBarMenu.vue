@@ -1,6 +1,6 @@
 <template>
   <div class="relative flex min-h-screen">
-    <div class="bg-white text-blue-700 border-blue-700 border-r-2 w-1/5 min-w-fit">
+    <div class="bg-background text-primary border-primary border-r-2 w-1/5 min-w-fit">
       <!-- SideBar -->
             
       <main>
@@ -8,7 +8,7 @@
           class="block w-full  items-center pt-10 "
           @click="showUserOption = !showUserOption"
         >
-          <div class="flex items-center hover:bg-blue-700 hover:text-white hover:rounded-md hover:shadow-xl">
+          <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
             <svg
               class="px-3 w-12 h-auto"
               fill="none"
@@ -39,17 +39,17 @@
         <!-- Dropdown -->
         <div
           v-show="showUserOption"
-          class="box ml-12 mr-3 rounded-md py-2 mt-2 bg-white shadow-xl  lg:right-0 border-l-2 border-blue-700"
+          class="box ml-12 mr-3 rounded-md py-2 mt-2 bg-background shadow-xl  lg:right-0 border-l-2 border-primary"
         >
           <router-link
             to="/Create-user"
-            class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
+            class="block px-4 py-2 text-base hover:bg-primary hover:rounded-sm hover:text-on_primary"
           >
             Add User
           </router-link>
           <router-link
             to="/main"
-            class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
+            class="block px-4 py-2 text-base hover:bg-primary hover:rounded-sm hover:text-on_primary"
           >
             All Users
           </router-link>
@@ -59,7 +59,7 @@
 
           @click="showOperationOption = !showOperationOption"
         >
-          <div class="flex items-center hover:bg-blue-700 hover:text-white hover:rounded-md hover:shadow-xl">
+          <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
             <svg
               class="px-3 w-12 h-auto"
               fill="none"
@@ -90,17 +90,17 @@
         <!-- Dropdown -->
         <div
           v-show="showOperationOption"
-          class="box ml-12 mr-3 rounded-md py-2 mt-2 bg-white  shadow-xl  lg:right-0 border-l-2 border-blue-700"
+          class="box ml-12 mr-3 rounded-md py-2 mt-2 bg-background  shadow-xl  lg:right-0 border-l-2 border-primary"
         >
           <router-link
             to="/main"
-            class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
+            class="block px-4 py-2 text-base hover:bg-primary hover:rounded-sm hover:text-on_primary"
           >
             Add Operation
           </router-link>
           <router-link
             to="/main"
-            class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
+            class="block px-4 py-2 text-base hover:bg-primary hover:rounded-sm hover:text-on_primary"
           >
             All Operations
           </router-link>
@@ -109,7 +109,7 @@
           class="block w-full  items-center pt-5"
           @click="showGroupOption = !showGroupOption"
         >
-          <div class="flex items-center hover:bg-blue-700 hover:text-white hover:rounded-md hover:shadow-xl">
+          <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
             <svg
               class="px-3 w-12 h-auto"
               fill="none"
@@ -140,17 +140,17 @@
         <!-- Dropdown -->
         <div
           v-show="showGroupOption"
-          class="box ml-12 mr-3 rounded-md py-2 mt-2 bg-white  shadow-xl  lg:right-0 border-l-2 border-blue-700"
+          class="box ml-12 mr-3 rounded-md py-2 mt-2 bg-background  shadow-xl  lg:right-0 border-l-2 border-primary"
         >
           <router-link
             to="/main"
-            class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
+            class="block px-4 py-2 text-base hover:bg-primary hover:rounded-sm hover:text-on_primary"
           >
             Add Groups
           </router-link>
           <router-link
             to="/main"
-            class="block px-4 py-2 text-base hover:bg-blue-700 hover:rounded-sm hover:text-white"
+            class="block px-4 py-2 text-base hover:bg-primary hover:rounded-sm hover:text-on_primary"
           >
             All Groups
           </router-link>
