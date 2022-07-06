@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white text-blue-700 border-b-2 border-blue-700">
+  <div class="bg-background text-primary border-b-2 border-primary">
     <div class="pt-5 pb-3 flex justify-between">
       <div class="px-14 text-center font-extrabold text-4xl">
         MDS
@@ -8,7 +8,7 @@
         <div class=" px-16">
           <router-link
             to="/main"
-            class=" px-3 hover:bg-contain hover:bg-center hover:bg-blue-700 hover:text-white hover:rounded-lg hover:shadow-xl"
+            class=" px-3 hover:bg-contain hover:bg-center hover:bg-primary hover:text-on_primary hover:rounded-lg hover:shadow-xl"
           >
             Ressources
           </router-link>
@@ -17,13 +17,13 @@
         <div class=" px-16 mr-96 ">
           <router-link
             to="/main"
-            class=" px-3 hover:bg-blue-700 hover:text-white hover:rounded-lg hover:shadow-xl"
+            class=" px-3 hover:bg-primary hover:text-on_primary hover:rounded-lg hover:shadow-xl"
           >
             Intelligence
           </router-link>
         </div>
         <!-- Settings -->
-        <div class="hover:bg-blue-700 hover:text-white hover:rounded-xl hover:shadow-xl flex lg:absolute lg:right-10">
+        <div class="hover:bg-primary hover:text-on_primary hover:rounded-xl hover:shadow-xl flex lg:absolute lg:right-10">
           <router-link to="/main">
             <svg
               class="w-8 h-auto"

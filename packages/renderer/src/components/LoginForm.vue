@@ -1,29 +1,29 @@
 <template>
   <main
-    class="bg-white mx-auto max-w-lg p-8 rounded-lg shadow-2xl my-10"
+    class="bg-surface mx-auto max-w-lg p-8 rounded-lg shadow-2xl my-10"
   >
     <form class="w-80">
       <div class="mb-6">
         <label
           for="username"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          class="block mb-2 text-sm font-medium text-on_surface"
         >Username</label>
         <input
           id="username"
           v-model="username"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="bg-gray-50 border border-gray-300 text-on_surface text-sm rounded-lg focus:ring-primary_light focus:border-primary_light block w-full p-2.5"
           type="text"
         >
       </div>
       <div class="mb-6">
         <label
           for="password"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          class="block mb-2 text-sm font-medium text-on_surface"
         >Password</label>
         <input
           id="password"
           v-model="password"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="bg-gray-50 border border-gray-300 text-on_surface text-sm rounded-lg focus:ring-primary_light focus:border-primary_light block w-full p-2.5"
           type="password"
         >
       </div>
