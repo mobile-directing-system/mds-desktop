@@ -7,7 +7,6 @@ const endpoint = '/permissions/user';
 
 export async function retrievePermissions(userId: string):Promise<ErrorResult<Permissions>> {
   try {
-    //explicit use of != instead of !== as a != null is equivalent to a !== null | a !== undefined
     const response = await Backend.instance.get(`${endpoint}/${userId}`);
     return {res: response.data, error: false};
   } catch(error) {
@@ -19,7 +18,6 @@ export async function retrievePermissions(userId: string):Promise<ErrorResult<Pe
 
 export async function updatePermissions(userId: string, permissions: Permissions):Promise<ErrorResult<boolean>> {
   try {
-    //explicit use of != instead of !== as a != null is equivalent to a !== null | a !== undefined
     await Backend.instance.put(`${endpoint}/${userId}`, permissions);
     return {res: true, error: false};
   } catch(error) {
