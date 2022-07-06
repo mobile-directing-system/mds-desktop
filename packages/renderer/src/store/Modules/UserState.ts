@@ -86,7 +86,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
   async updateUser(user: User) {
     const userUpdated:ErrorResult<boolean> = await updateUser(undom(user));
     if(userUpdated.res && !userUpdated.error) {
-      this.commit('updateUser', user);
+      this.dispatch('retreiveUserById', user.id);
     } else if(this.errorState) {
       this.errorState.dispatch('setError', userUpdated.error);
       if(userUpdated.errorMsg) {

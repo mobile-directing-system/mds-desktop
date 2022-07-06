@@ -162,7 +162,7 @@
     const title = Math.random().toString(36).substring(2, 15);
     const start: Date = new Date();
     const end:Date = new Date(start.toISOString());
-    end.setHours(end.getHours() * 5);
+    end.setHours(end.getHours() + 5);
     operationsState.dispatch('createOperation', {
       id: '',
       title,
