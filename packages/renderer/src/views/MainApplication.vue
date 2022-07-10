@@ -78,7 +78,7 @@
     <label
       for="operation_id"
       class="block mb-2 text-sm font-medium text-on_background"
-    >Username</label>
+    >Operation</label>
     <input
       id="operation_id"
       v-model="operationId"
