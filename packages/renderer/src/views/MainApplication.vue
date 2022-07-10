@@ -170,8 +170,7 @@
 
   function updateUser(userId: string) {
     const updatedUser = users.value().filter((elem) => elem.id === userId)[0];
-    updatedUser.first_name = `${updatedUser.first_name}u`;
-    userState.dispatch('updateUser', updatedUser);
+    userState.dispatch('updateUser', {...updatedUser, first_name: `${updatedUser.first_name}u`});
   }
 
   function deleteUser(userId: string) {
@@ -215,8 +214,7 @@
 
   function updateOperation(operationId: string) {
       const operationToUpdate = operations.value().filter((elem) => elem.id === operationId)[0];
-      operationToUpdate.description = `${operationToUpdate.description}u`;
-      operationsState.dispatch('updateOperation', operationToUpdate);
+      operationsState.dispatch('updateOperation', {... operationToUpdate, description: `${operationToUpdate.description}u`});
   }
 
   function fetchOperation(operationId: string) {
