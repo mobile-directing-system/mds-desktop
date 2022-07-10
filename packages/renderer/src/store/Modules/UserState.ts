@@ -45,7 +45,6 @@ class UserStateMutations extends Mutations<UserState> {
     }
   }
   updateUser(user: User) {
-
     this.state.users = this.state.users.map((elem) => (elem.id === user.id)? user : elem);
   }
   deleteUser(user: User) {

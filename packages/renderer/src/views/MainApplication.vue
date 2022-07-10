@@ -78,7 +78,7 @@
     <label
       for="operation_id"
       class="block mb-2 text-sm font-medium text-on_background"
-    >Username</label>
+    >Operation</label>
     <input
       id="operation_id"
       v-model="operationId"
@@ -92,11 +92,47 @@
       @btn-click="fetchOperation(operationId)"
     />
   </form>
+  <div
+    v-for="group in groups()"
+    :key="group.id"
+  >
+    <div>{{ group }}</div>
+    <NormalButton
+      :btn-text="`Update ${group.title}`"
+      @btn-click="updateGroup(group.id)"
+    />
+    <NormalButton
+      :btn-text="`Delete ${group.title}`"
+      @btn-click="deleteGroup(group.id)"
+    />
+  </div>
+  <NormalButton
+    btn-text="Generate New Group"
+    @btn-click="generateGroup()"
+  />
+  <form>
+    <label
+      for="group_id"
+      class="block mb-2 text-sm font-medium text-on_background"
+    >Group</label>
+    <input
+      id="group_id"
+      v-model="groupId"
+      class="bg-gray-50 border border-gray-300 text-on_background text-sm rounded-lg focus:ring-primary_light focus:border-primary_light block w-full p-2.5"
+      type="text"
+    >
+    <NormalButton
+      btn-text="Fetch Group By Id"
+      btn-id="submit"
+      btn-type="submit"
+      @btn-click="fetchGroup(groupId)"
+    />
+  </form>
 </template>
 
 <script lang="ts" setup>
   import { ref, computed, onMounted } from 'vue';
-  import { useLoginState, useUserState, usePermissionsState, useOperationsState } from '../store';
+  import { useLoginState, useUserState, usePermissionsState, useOperationsState, useGroupState } from '../store';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
   import { updateUserPassword } from '#preload';
   import { PermissionNames } from '../constants';
@@ -111,17 +147,21 @@
   const userState = useUserState();
   const permissionsState = usePermissionsState();
   const operationsState = useOperationsState();
+  const groupState = useGroupState();
 
   const users = computed(() => userState.getters.users);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const permissions = computed(() => permissionsState.getters.getPermissions);
   const operations = computed(() => operationsState.getters.operations);
+  const groups = computed(() => groupState.getters.groups);
   const userId = ref('');
   const operationId = ref('');
+  const groupId = ref('');
 
   onMounted(() => {
     userState.dispatch('retreiveUsers', {});
     operationsState.dispatch('retrieveOperations', {});
+    groupState.dispatch('retrieveGroups', {});
   });
 
   function fetchUser(userId: string) {
@@ -130,8 +170,7 @@
 
   function updateUser(userId: string) {
     const updatedUser = users.value().filter((elem) => elem.id === userId)[0];
-    updatedUser.first_name = `${updatedUser.first_name}u`;
-    userState.dispatch('updateUser', updatedUser);
+    userState.dispatch('updateUser', {...updatedUser, first_name: `${updatedUser.first_name}u`});
   }
 
   function deleteUser(userId: string) {
@@ -175,12 +214,38 @@
 
   function updateOperation(operationId: string) {
       const operationToUpdate = operations.value().filter((elem) => elem.id === operationId)[0];
-      operationToUpdate.description = `${operationToUpdate.description}u`;
-      operationsState.dispatch('updateOperation', operationToUpdate);
+      operationsState.dispatch('updateOperation', {... operationToUpdate, description: `${operationToUpdate.description}u`});
   }
 
   function fetchOperation(operationId: string) {
     operationsState.dispatch('retrieveOperation', operationId);
+  }
+
+  function updateGroup(groupId: string) {
+    const groupToUpdate = groups.value().filter((elem) => elem.id === groupId )[0];
+    groupState.dispatch('updateGroup', {... groupToUpdate, description: `${groupToUpdate.description}u`});
+  }
+
+  function generateGroup() {
+    if(!(operations.value().length > 0)) {
+      return;
+    }
+    const title = Math.random().toString(36).substring(2, 15);
+    groupState.dispatch('createGroup', {
+      id:'',
+      title,
+      description: `This is a Test Group with the name ${title}`,
+      operation: operations.value()[0].id,
+      members: users.value().map((elem) => elem.id),
+    });
+  }
+
+  function fetchGroup(groupId: string) {
+    groupState.dispatch('retrieveGroupById', groupId);
+  }
+
+  function deleteGroup(groupId: string) {
+    groupState.dispatch('deleteGroupById', groupId);
   }
 
   function generateUser() {
