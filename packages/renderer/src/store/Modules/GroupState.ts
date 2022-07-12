@@ -3,7 +3,7 @@ import { createGroup, updateGroup, deleteGroup, retrieveGroup, retrieveGroups } 
 import type { Group, ErrorResult } from '../../../../types';
 import type { Context } from 'vuex-smart-module';
 import type { Store } from 'vuex';
-import { errorState } from './ErrorState';
+import { errorState, handleErrors } from './ErrorState';
 
 function undom(group: Group):Group {
   return {
@@ -65,65 +65,40 @@ class GroupStateActions extends Actions<GroupState, GroupStateGetters, GroupStat
     const createdGroup:ErrorResult<Group> = await createGroup(undom(group));
     if(createdGroup.res && !createdGroup.error) {
       this.mutations.addGroup(createdGroup.res);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(createdGroup.error);
-      if(createdGroup.errorMsg) {
-        this.errorState.actions.setErrorMessage(createdGroup.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+    }  else {
+      handleErrors(createdGroup.error, createdGroup.errorMsg, this.errorState);
     }
   }
   async updateGroup(group: Group) {
     const groupUpdated:ErrorResult<boolean> = await updateGroup(undom(group));
     if(groupUpdated.res && !groupUpdated.error) {
       this.actions.retrieveGroupById(group.id);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(groupUpdated.error);
-      if(groupUpdated.errorMsg) {
-        this.errorState.actions.setErrorMessage(groupUpdated.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+    }  else {
+      handleErrors(groupUpdated.error, groupUpdated.errorMsg, this.errorState);
     }
   }
   async deleteGroupById(groupId: string) {
     const groupDeleted:ErrorResult<boolean> = await deleteGroup(groupId);
     if(groupDeleted.res && !groupDeleted.error) {
       this.mutations.deleteGroupById(groupId);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(groupDeleted.error);
-      if(groupDeleted.errorMsg) {
-        this.errorState.actions.setErrorMessage(groupDeleted.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+    }  else {
+      handleErrors(groupDeleted.error, groupDeleted.errorMsg, this.errorState);
     }
   }
   async retrieveGroups({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
     const retrievedGroups:ErrorResult<Group[]> = await retrieveGroups(amount, offset, orderBy, orderDir);
     if(retrievedGroups.res && !retrievedGroups.error) {
       this.mutations.setGroups(retrievedGroups.res);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(retrievedGroups.error);
-      if(retrievedGroups.errorMsg) {
-        this.errorState.actions.setErrorMessage(retrievedGroups.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+    }  else {
+      handleErrors(retrievedGroups.error, retrievedGroups.errorMsg, this.errorState);
     }
   }
   async retrieveGroupById(groupId: string) {
     const retrievedGroup:ErrorResult<Group> = await retrieveGroup(groupId);
     if(retrievedGroup.res && !retrievedGroup.error) {
       this.mutations.addOrUpdateGroup(retrievedGroup.res);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(retrievedGroup.error);
-      if(retrievedGroup.errorMsg) {
-        this.errorState.actions.setErrorMessage(retrievedGroup.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+    }  else {
+      handleErrors(retrievedGroup.error, retrievedGroup.errorMsg, this.errorState);
     }
   }
 }

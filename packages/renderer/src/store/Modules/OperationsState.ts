@@ -3,7 +3,7 @@ import {createOperation, updateOperation, retrieveOperation, retrieveOperations 
 import type { Operation, ErrorResult } from '../../../../types';
 import type { Context } from 'vuex-smart-module';
 import type { Store } from 'vuex';
-import { errorState } from './ErrorState';
+import { errorState, handleErrors } from './ErrorState';
 
 function undom(operation: Operation):Operation {
     return {
@@ -73,13 +73,8 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
     const createdOperation: ErrorResult<Operation> = await createOperation(undom(operation));
     if(createdOperation.res && !createdOperation.error) {
       this.mutations.addOperation(createdOperation.res);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(createdOperation.error);
-      if(createdOperation.errorMsg) {
-        this.errorState.actions.setErrorMessage(createdOperation.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+    }  else {
+      handleErrors(createdOperation.error, createdOperation.errorMsg, this.errorState);
     }
   }
 
@@ -87,13 +82,8 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
     const operationUpdated: ErrorResult<boolean> = await updateOperation(undom(operation));
     if(operationUpdated.res && !operationUpdated.error) {
         this.actions.retrieveOperation(operation.id);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(operationUpdated.error);
-      if(operationUpdated.errorMsg) {
-        this.errorState.actions.setErrorMessage(operationUpdated.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+    }  else {
+      handleErrors(operationUpdated.error, operationUpdated.errorMsg, this.errorState);
     }
   }
 
@@ -101,13 +91,8 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
     const retrievedOperation: ErrorResult<Operation> = await retrieveOperation(operationId);
     if(retrievedOperation.res && !retrievedOperation.error) {
       this.mutations.addOrUpdateOperation(retrievedOperation.res);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(retrievedOperation.error);
-      if(retrievedOperation.errorMsg) {
-        this.errorState.actions.setErrorMessage(retrievedOperation.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+    }  else {
+      handleErrors(retrievedOperation.error, retrievedOperation.errorMsg, this.errorState);
     }
   }
 
@@ -115,13 +100,8 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
     const retrievedOperations: ErrorResult<Operation[]> = await retrieveOperations(amount, offset, orderBy, orderDir);
     if(retrievedOperations.res && !retrievedOperations.error) {
       this.mutations.setOperations(retrievedOperations.res);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(retrievedOperations.error);
-      if(retrievedOperations.errorMsg) {
-        this.errorState.actions.setErrorMessage(retrievedOperations.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+    }  else {
+      handleErrors(retrievedOperations.error, retrievedOperations.errorMsg, this.errorState);
     }
   }
 }

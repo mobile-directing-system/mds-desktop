@@ -3,7 +3,7 @@ import { login, logout } from '#preload';
 import type { ErrorResult } from '../../../../types';
 import type { Context } from 'vuex-smart-module';
 import type { Store } from 'vuex';
-import { errorState } from './ErrorState';
+import { errorState, handleErrors } from './ErrorState';
 
 /**
  * define the content of the LoginInfoState
@@ -65,13 +65,8 @@ class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStat
     if(loggedIn.res && !loggedIn.error) {
       this.mutations.setLoggedIn(loggedIn.res);
       this.mutations.setLoggedInUser(username);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(loggedIn.error);
-      if(loggedIn.errorMsg) {
-        this.errorState.actions.setErrorMessage(loggedIn.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+    }  else {
+      handleErrors(loggedIn.error, loggedIn.errorMsg, this.errorState);
     }
   }
   async setLoggingIn(loggingIn: boolean) {
@@ -81,13 +76,8 @@ class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStat
     const loggedOut:ErrorResult<boolean> = await logout();
     if(loggedOut.res && !loggedOut.error) {
       this.mutations.setLoggedIn(false);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(loggedOut.error);
-      if(loggedOut.errorMsg) {
-        this.errorState.actions.setErrorMessage(loggedOut.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+    }  else {
+      handleErrors(loggedOut.error, loggedOut.errorMsg, this.errorState);
     }
   }
 }
