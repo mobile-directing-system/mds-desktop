@@ -64,11 +64,11 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
   async retrievePermissions(userId: string) {
     const permissions: ErrorResult<Permissions> = await retrievePermissions(userId);
     if(permissions.res && !permissions.error) {
-      this.commit('setPermissions', {userId, permissions: permissions.res});
+      this.mutations.setPermissions({userId, permissions: permissions.res});
     } else if(this.errorState) {
-      this.errorState.dispatch('setError', permissions.error);
+      this.errorState.actions.setError(permissions.error);
       if(permissions.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', permissions.errorMsg);
+        this.errorState.actions.setErrorMessage(permissions.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -78,11 +78,11 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
     const existingPermissions = this.state.permissions.get(userId);
     const permissionsSet: ErrorResult<boolean> = await updatePermissions(userId, (existingPermissions)? undom(existingPermissions.concat(permissions)):permissions);
     if(permissionsSet.res && !permissionsSet.error) {
-      this.dispatch('retrievePermissions', userId);
+      this.actions.retrievePermissions(userId);
     } else if(this.errorState) {
-      this.errorState.dispatch('setError', permissionsSet.error);
+      this.errorState.actions.setError(permissionsSet.error);
       if(permissionsSet.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', permissionsSet.errorMsg);
+        this.errorState.actions.setErrorMessage(permissionsSet.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -91,11 +91,11 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
   async updateAllPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
     const permissionsSet: ErrorResult<boolean> = await updatePermissions(userId, permissions);
     if(permissionsSet.res && !permissionsSet.error) {
-      this.dispatch('retrievePermissions', userId);
+      this.actions.retrievePermissions(userId);
     } else if(this.errorState) {
-      this.errorState.dispatch('setError', permissionsSet.error);
+      this.errorState.actions.setError(permissionsSet.error);
       if(permissionsSet.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', permissionsSet.errorMsg);
+        this.errorState.actions.setErrorMessage(permissionsSet.errorMsg);
       }
     } else {
       console.error('Missing Error State');
