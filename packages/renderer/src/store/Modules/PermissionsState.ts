@@ -3,7 +3,7 @@ import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smar
 import type {Context} from 'vuex-smart-module';
 import { retrievePermissions, updatePermissions } from '#preload';
 import type { Permissions, Permission, ErrorResult } from '../../../../types';
-import { errorState } from './ErrorState';
+import { errorState, handleErrors } from './ErrorState';
 
 
 function undom(permissions: Permissions):Permissions {
@@ -65,13 +65,8 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
     const permissions: ErrorResult<Permissions> = await retrievePermissions(userId);
     if(permissions.res && !permissions.error) {
       this.mutations.setPermissions({userId, permissions: permissions.res});
-    } else if(this.errorState) {
-      this.errorState.actions.setError(permissions.error);
-      if(permissions.errorMsg) {
-        this.errorState.actions.setErrorMessage(permissions.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+    }  else {
+      handleErrors(permissions.error, permissions.errorMsg, this.errorState);
     }
   }
   async addPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
@@ -79,26 +74,16 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
     const permissionsSet: ErrorResult<boolean> = await updatePermissions(userId, (existingPermissions)? undom(existingPermissions.concat(permissions)):permissions);
     if(permissionsSet.res && !permissionsSet.error) {
       this.actions.retrievePermissions(userId);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(permissionsSet.error);
-      if(permissionsSet.errorMsg) {
-        this.errorState.actions.setErrorMessage(permissionsSet.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+    }  else {
+      handleErrors(permissionsSet.error, permissionsSet.errorMsg, this.errorState);
     }
   }
   async updateAllPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
     const permissionsSet: ErrorResult<boolean> = await updatePermissions(userId, permissions);
     if(permissionsSet.res && !permissionsSet.error) {
       this.actions.retrievePermissions(userId);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(permissionsSet.error);
-      if(permissionsSet.errorMsg) {
-        this.errorState.actions.setErrorMessage(permissionsSet.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+    }  else {
+      handleErrors(permissionsSet.error, permissionsSet.errorMsg, this.errorState);
     }
   }
 }

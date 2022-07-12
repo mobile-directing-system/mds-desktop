@@ -3,7 +3,7 @@ import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smar
 import type { Context } from 'vuex-smart-module';
 import { createUser, updateUser, deleteUser, retrieveUser, retrieveUsers } from '#preload';
 import type { User, ErrorResult } from '../../../../types';
-import { errorState } from './ErrorState';
+import { errorState, handleErrors } from './ErrorState';
 
 function undom(user: User):User {
   return {...user};
@@ -73,65 +73,40 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     const createdUser:ErrorResult<User> = await createUser(undom(user));
     if(createdUser.res && !createdUser.error) {
       this.mutations.addUser(createdUser.res);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(createdUser.error);
-      if(createdUser.errorMsg) {
-        this.errorState.actions.setErrorMessage(createdUser.errorMsg);
-      }
     } else {
-      console.error('Missing Error State');
+      handleErrors(createdUser.error, createdUser.errorMsg, this.errorState);
     }
   }
   async updateUser(user: User) {
     const userUpdated:ErrorResult<boolean> = await updateUser(undom(user));
     if(userUpdated.res && !userUpdated.error) {
       this.actions.retreiveUserById(user.id);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(userUpdated.error);
-      if(userUpdated.errorMsg) {
-        this.errorState.actions.setErrorMessage(userUpdated.errorMsg);
-      }
     } else {
-      console.error('Missing Error State');
+      handleErrors(userUpdated.error, userUpdated.errorMsg, this.errorState);
     }
   }
   async deleteUserById(userId: string) {
     const userDeleted: ErrorResult<boolean> = await deleteUser(userId);
     if(userDeleted.res && !userDeleted.error) {
       this.mutations.deleteUserById(userId);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(userDeleted.error);
-      if(userDeleted.errorMsg) {
-        this.errorState.actions.setErrorMessage(userDeleted.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+    }  else {
+      handleErrors(userDeleted.error, userDeleted.errorMsg, this.errorState);
     }
   }
   async retreiveUsers({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
     const retrievedUsers: ErrorResult<User[]> = await retrieveUsers(amount, offset, orderBy, orderDir);
     if(retrievedUsers.res && !retrievedUsers.error) {
       this.mutations.setUsers(retrievedUsers.res);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(retrievedUsers.error);
-      if(retrievedUsers.errorMsg) {
-        this.errorState.actions.setErrorMessage(retrievedUsers.errorMsg);
-      }
     } else {
-      console.error('Missing Error State');
+      handleErrors(retrievedUsers.error, retrievedUsers.errorMsg, this.errorState);
     }
   }
   async retreiveUserById(userId: string) {
     const retrievedUser: ErrorResult<User> = await retrieveUser(userId);
     if(retrievedUser.res && !retrievedUser.error) {
       this.mutations.addOrUpdateUser(retrievedUser.res);
-    } else if(this.errorState) {
-      this.errorState.actions.setError(retrievedUser.error);
-      if(retrievedUser.errorMsg) {
-        this.errorState.actions.setErrorMessage(retrievedUser.errorMsg);
-      }
     } else {
-      console.error('Missing Error State');
+      handleErrors(retrievedUser.error, retrievedUser.errorMsg, this.errorState);
     }
   }
 }

@@ -1,4 +1,17 @@
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
+import type { Context } from 'vuex-smart-module';
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function handleErrors(error: boolean, errorMsg?: string, errorState?:Context<Module<ErrorState, ErrorStateGetters, ErrorStateMutations, ErrorStateActions, {}>>) {
+  if(errorState) {
+    errorState.actions.setError(error);
+    if(errorMsg) {
+      errorState.actions.setErrorMessage(errorMsg);
+    }
+  } else {
+    console.error('Missing Error State');
+  }
+}
 
 /**
  * define the content of the ErrorState
