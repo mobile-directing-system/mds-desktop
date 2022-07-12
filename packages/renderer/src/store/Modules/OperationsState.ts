@@ -72,11 +72,11 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
   async createOperation(operation: Operation) {
     const createdOperation: ErrorResult<Operation> = await createOperation(undom(operation));
     if(createdOperation.res && !createdOperation.error) {
-      this.commit('addOperation', createdOperation.res);
+      this.mutations.addOperation(createdOperation.res);
     } else if(this.errorState) {
-      this.errorState.dispatch('setError', createdOperation.error);
+      this.errorState.actions.setError(createdOperation.error);
       if(createdOperation.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', createdOperation.errorMsg);
+        this.errorState.actions.setErrorMessage(createdOperation.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -86,11 +86,11 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
   async updateOperation(operation: Operation) {
     const operationUpdated: ErrorResult<boolean> = await updateOperation(undom(operation));
     if(operationUpdated.res && !operationUpdated.error) {
-        this.dispatch('retrieveOperation', operation.id);
+        this.actions.retrieveOperation(operation.id);
     } else if(this.errorState) {
-      this.errorState.dispatch('setError', operationUpdated.error);
+      this.errorState.actions.setError(operationUpdated.error);
       if(operationUpdated.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', operationUpdated.errorMsg);
+        this.errorState.actions.setErrorMessage(operationUpdated.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -100,11 +100,11 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
   async retrieveOperation(operationId: string) {
     const retrievedOperation: ErrorResult<Operation> = await retrieveOperation(operationId);
     if(retrievedOperation.res && !retrievedOperation.error) {
-      this.commit('addOrUpdateOperation', retrievedOperation.res);
+      this.mutations.addOrUpdateOperation(retrievedOperation.res);
     } else if(this.errorState) {
-      this.errorState.dispatch('setError', retrievedOperation.error);
+      this.errorState.actions.setError(retrievedOperation.error);
       if(retrievedOperation.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', retrievedOperation.errorMsg);
+        this.errorState.actions.setErrorMessage(retrievedOperation.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -114,11 +114,11 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
   async retrieveOperations({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
     const retrievedOperations: ErrorResult<Operation[]> = await retrieveOperations(amount, offset, orderBy, orderDir);
     if(retrievedOperations.res && !retrievedOperations.error) {
-      this.commit('setOperations', retrievedOperations.res);
+      this.mutations.setOperations(retrievedOperations.res);
     } else if(this.errorState) {
-      this.errorState.dispatch('setError', retrievedOperations.error);
+      this.errorState.actions.setError(retrievedOperations.error);
       if(retrievedOperations.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', retrievedOperations.errorMsg);
+        this.errorState.actions.setErrorMessage(retrievedOperations.errorMsg);
       }
     } else {
       console.error('Missing Error State');

@@ -59,32 +59,32 @@ class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStat
   }
 
   async login({username, password}:{username:string, password:string}) {
-    await this.dispatch('setLoggingIn', true);
+    await this.actions.setLoggingIn(true);
     const loggedIn:ErrorResult<boolean> = await login(username, password);
-    await this.dispatch('setLoggingIn', false);
+    await this.actions.setLoggingIn(false);
     if(loggedIn.res && !loggedIn.error) {
-      this.commit('setLoggedIn', loggedIn.res);
-      this.commit('setLoggedInUser', username);
+      this.mutations.setLoggedIn(loggedIn.res);
+      this.mutations.setLoggedInUser(username);
     } else if(this.errorState) {
-      this.errorState.dispatch('setError', loggedIn.error);
+      this.errorState.actions.setError(loggedIn.error);
       if(loggedIn.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', loggedIn.errorMsg);
+        this.errorState.actions.setErrorMessage(loggedIn.errorMsg);
       }
     } else {
       console.error('Missing Error State');
     }
   }
   async setLoggingIn(loggingIn: boolean) {
-    this.commit('setLoggingIn', loggingIn);
+    this.mutations.setLoggingIn(loggingIn);
   }
   async logout() {
     const loggedOut:ErrorResult<boolean> = await logout();
     if(loggedOut.res && !loggedOut.error) {
-      this.commit('setLoggedIn', false);
+      this.mutations.setLoggedIn(false);
     } else if(this.errorState) {
-      this.errorState.dispatch('setError', loggedOut.error);
+      this.errorState.actions.setError(loggedOut.error);
       if(loggedOut.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', loggedOut.errorMsg);
+        this.errorState.actions.setErrorMessage(loggedOut.errorMsg);
       }
     } else {
       console.error('Missing Error State');

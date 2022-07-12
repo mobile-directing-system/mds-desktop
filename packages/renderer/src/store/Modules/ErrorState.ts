@@ -37,12 +37,12 @@ class ErrorStateMutations extends Mutations<ErrorState> {
  */
 class ErrorStateActions extends Actions<ErrorState, ErrorStateGetters, ErrorStateMutations, ErrorStateActions> {
   async setError(error: boolean) {
-    this.commit('setError', error);
-    setTimeout(() => this.commit('setError', false), 10_000);
+    this.mutations.setError(error);
+    setTimeout(() => this.mutations.setError(false), 10_000);
   }
   async setErrorMessage(errorMessage: string) {
-    this.commit('setErrorMessage', errorMessage);
-    setTimeout(() => this.commit('setErrorMessage', ''), 10_000);
+    this.mutations.setErrorMessage(errorMessage);
+    setTimeout(() => this.mutations.setErrorMessage(''), 10_000);
   }
 }
 

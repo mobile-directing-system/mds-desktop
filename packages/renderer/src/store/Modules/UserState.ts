@@ -72,11 +72,11 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
   async createUser(user: User) {
     const createdUser:ErrorResult<User> = await createUser(undom(user));
     if(createdUser.res && !createdUser.error) {
-      this.commit('addUser', createdUser.res);
+      this.mutations.addUser(createdUser.res);
     } else if(this.errorState) {
-      this.errorState.dispatch('setError', createdUser.error);
+      this.errorState.actions.setError(createdUser.error);
       if(createdUser.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', createdUser.errorMsg);
+        this.errorState.actions.setErrorMessage(createdUser.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -85,11 +85,11 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
   async updateUser(user: User) {
     const userUpdated:ErrorResult<boolean> = await updateUser(undom(user));
     if(userUpdated.res && !userUpdated.error) {
-      this.dispatch('retreiveUserById', user.id);
+      this.actions.retreiveUserById(user.id);
     } else if(this.errorState) {
-      this.errorState.dispatch('setError', userUpdated.error);
+      this.errorState.actions.setError(userUpdated.error);
       if(userUpdated.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', userUpdated.errorMsg);
+        this.errorState.actions.setErrorMessage(userUpdated.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -98,11 +98,11 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
   async deleteUserById(userId: string) {
     const userDeleted: ErrorResult<boolean> = await deleteUser(userId);
     if(userDeleted.res && !userDeleted.error) {
-      this.commit('deleteUserById', userId);
+      this.mutations.deleteUserById(userId);
     } else if(this.errorState) {
-      this.errorState.dispatch('setError', userDeleted.error);
+      this.errorState.actions.setError(userDeleted.error);
       if(userDeleted.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', userDeleted.errorMsg);
+        this.errorState.actions.setErrorMessage(userDeleted.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -111,11 +111,11 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
   async retreiveUsers({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
     const retrievedUsers: ErrorResult<User[]> = await retrieveUsers(amount, offset, orderBy, orderDir);
     if(retrievedUsers.res && !retrievedUsers.error) {
-      this.commit('setUsers', retrievedUsers.res);
+      this.mutations.setUsers(retrievedUsers.res);
     } else if(this.errorState) {
-      this.errorState.dispatch('setError', retrievedUsers.error);
+      this.errorState.actions.setError(retrievedUsers.error);
       if(retrievedUsers.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', retrievedUsers.errorMsg);
+        this.errorState.actions.setErrorMessage(retrievedUsers.errorMsg);
       }
     } else {
       console.error('Missing Error State');
@@ -124,11 +124,11 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
   async retreiveUserById(userId: string) {
     const retrievedUser: ErrorResult<User> = await retrieveUser(userId);
     if(retrievedUser.res && !retrievedUser.error) {
-      this.commit('addOrUpdateUser', retrievedUser.res);
+      this.mutations.addOrUpdateUser(retrievedUser.res);
     } else if(this.errorState) {
-      this.errorState.dispatch('setError', retrievedUser.error);
+      this.errorState.actions.setError(retrievedUser.error);
       if(retrievedUser.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', retrievedUser.errorMsg);
+        this.errorState.actions.setErrorMessage(retrievedUser.errorMsg);
       }
     } else {
       console.error('Missing Error State');
