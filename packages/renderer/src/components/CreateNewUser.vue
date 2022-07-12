@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="grid place-items-center bg-white mx-auto max-w-lg p-8 rounded-lg shadow-2xl my-10">
+    <div class="grid place-items-center bg-white mx-auto max-w-lg rounded-lg  my-10">
       <header class=" max-w-lg mx-auto pb-10">
         <h1 class="text-4xl font-bold text-black text-center">
           Create a new User
@@ -61,10 +61,18 @@
             >
           </div>
           <!--- Submit Button --->
-          <NormalButton 
-            :btn-text="'Create User'"
-            @btn-click="createNewUser(userName, firstName, lastName, iPassword)"
-          />
+          <div class="flex justify-between">
+            <NormalButton 
+              v-if="userName != '' && firstName != '' && lastName !='' && iPassword !=''"
+              :btn-text="'Create User'"
+              @btn-click="createNewUser(userName, firstName, lastName, iPassword)"
+            />
+            <NormalButton
+              class=" ml-auto"
+              :btn-text="'Cancel'"
+              @btn-click="backToMain()"
+            />
+          </div>
         </main>
       </form>
     </div>
@@ -75,13 +83,13 @@
 
     import { ref } from 'vue';
     import NormalButton from './BasicComponents/NormalButton.vue';
-    import { useUserState } from '../store';
+    import { useUserState, useMainAppState } from '../store';
 
     const userName = ref('');
     const firstName = ref('');
     const lastName = ref('');
     const iPassword = ref('');
-
+    const mainAppState = useMainAppState(); 
     const userState = useUserState();
     function createNewUser( username: string, firstname: string, lastname :string, ipassword : string) {
         userState.dispatch('createUser', {
@@ -96,5 +104,11 @@
         firstName.value ='';
         lastName.value ='';
         iPassword.value = '';
+  }
+  function backToMain(){
+    mainAppState.mutations.setCurrentPositionInApp(CurrentPosition.User_AllUsers);
+  }
+  enum CurrentPosition {
+      User_AllUsers ='User_AllUsers',
   }
 </script>
