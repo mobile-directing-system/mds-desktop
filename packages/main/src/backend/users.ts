@@ -10,15 +10,9 @@ const endpoint = '/users';
  * @param param0 user to create
  * @returns created user in error result container
  */
-export async function createUser({username, first_name, last_name, is_admin, pass}: User):Promise<ErrorResult<User>> {
+export async function createUser(user: User):Promise<ErrorResult<User>> {
   try {
-    const response = await Backend.instance.post(`${endpoint}`, {
-      username,
-      first_name,
-      last_name,
-      is_admin,
-      pass,
-    });
+    const response = await Backend.instance.post(`${endpoint}`, {...user, id: undefined});
     return {res: response.data, error: false};
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
@@ -32,15 +26,9 @@ export async function createUser({username, first_name, last_name, is_admin, pas
  * @param param0 updated user
  * @returns boolean indicating if the user was updated in error result container
  */
-export async function updateUser({id, username, first_name, last_name, is_admin}: User):Promise<ErrorResult<boolean>> {
+export async function updateUser(user: User):Promise<ErrorResult<boolean>> {
   try {
-    await Backend.instance.put(`${endpoint}/${id}`, {
-      id,
-      username,
-      first_name,
-      last_name,
-      is_admin,
-    });
+    await Backend.instance.put(`${endpoint}/${user.id}`, {...user, pass: undefined});
     return {res: true, error: false};
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
