@@ -12,7 +12,19 @@ export async function createGroup(group: Group):Promise<ErrorResult<Group>> {
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for creating Groups'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when creating Groups'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when creating Groups'};
+    } else {
+      return {error: true, errorMsg: 'Error when creating Groups'};
+    }
   }
 }
 
@@ -23,7 +35,19 @@ export async function updateGroup(group: Group):Promise<ErrorResult<boolean>> {
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for updating Groups'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when updating Groups'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when updating Groups'};
+    } else {
+      return {error: true, errorMsg: 'Error when updating Groups'};
+    }
   }
 }
 
@@ -34,7 +58,19 @@ export async function deleteGroup(groupId: string):Promise<ErrorResult<boolean>>
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for deleting Groups'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when deleting Groups'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when deleting Groups'};
+    } else {
+      return {error: true, errorMsg: 'Error when deleting Groups'};
+    }
   }
 }
 
@@ -46,7 +82,19 @@ export async function retrieveGroups(amount?: number, offset?: number, order_by?
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for retrieving Groups'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when retrieving Groups'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when retrieving Groups'};
+    } else {
+      return {error: true, errorMsg: 'Error when retrieving Groups'};
+    }
   }
 }
 
@@ -57,6 +105,18 @@ export async function retrieveGroup(groupId: string):Promise<ErrorResult<Group>>
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for retrieving a Group'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when retrieving a Group'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when retrieving a Group'};
+    } else {
+      return {error: true, errorMsg: 'Error when retrieving a Group'};
+    }
   }
 }
