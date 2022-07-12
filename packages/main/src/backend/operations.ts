@@ -12,7 +12,19 @@ export async function createOperation(operation: Operation):Promise<ErrorResult<
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for creating Operations'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when creating Operations'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when creating Operations'};
+    } else {
+      return {error: true, errorMsg: 'Error when creating Operations'};
+    }
   }
 }
 
@@ -23,7 +35,19 @@ export async function updateOperation(operation: Operation):Promise<ErrorResult<
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for updating Operations'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when updating Operations'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when updating Operations'};
+    } else {
+      return {error: true, errorMsg: 'Error when updating Operations'};
+    }
   }
 }
 
@@ -37,7 +61,19 @@ export async function retrieveOperations(amount?: number, offset?: number, order
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for retrieving Operations'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when retrieving Operations'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when retrieving Operations'};
+    } else {
+      return {error: true, errorMsg: 'Error when retrieving Operations'};
+    }
   }
 }
 
@@ -48,7 +84,19 @@ export async function retrieveOperation(operationId: string):Promise<ErrorResult
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for retrieving a Operation'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when retrieving a Operation'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when retrieving a Operation'};
+    } else {
+      return {error: true, errorMsg: 'Error when retrieving a Operation'};
+    }
   }
 }
 

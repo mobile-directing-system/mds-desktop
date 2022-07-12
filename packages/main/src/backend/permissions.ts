@@ -12,7 +12,19 @@ export async function retrievePermissions(userId: string):Promise<ErrorResult<Pe
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for retrieving Permissions'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when retrieving Permissions'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when retrieving Permissions'};
+    } else {
+      return {error: true, errorMsg: 'Error when updating retrieving Permissions'};
+    }
   }
 }
 
@@ -23,6 +35,18 @@ export async function updatePermissions(userId: string, permissions: Permissions
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for updating Permissions'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when updating Permissions'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when updating Permissions'};
+    } else {
+      return {error: true, errorMsg: 'Error when updating Permissions'};
+    }
   }
 }

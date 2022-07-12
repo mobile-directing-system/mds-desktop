@@ -17,7 +17,19 @@ export async function createUser(user: User):Promise<ErrorResult<User>> {
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for creating Users'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when creating User'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when creating User'};
+    } else {
+      return {error: true, errorMsg: 'Error when creating User'};
+    }
   }
 }
 
@@ -33,7 +45,19 @@ export async function updateUser(user: User):Promise<ErrorResult<boolean>> {
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for updating Users'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when updating Users'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when updating Users'};
+    } else {
+      return {error: true, errorMsg: 'Error when updating Users'};
+    }
   }
 }
 
@@ -53,7 +77,19 @@ export async function updateUserPassword(user_id: string, new_pass: string):Prom
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for updating User Passwords'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when updating User Passwords'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when updating User Passwords'};
+    } else {
+      return {error: true, errorMsg: 'Error when updating User Passwords'};
+    }
   }
 }
 
@@ -69,7 +105,19 @@ export async function deleteUser(userId: string):Promise<ErrorResult<boolean>> {
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for deleting Users'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when deleting Users'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when deleting Users'};
+    } else {
+      return {error: true, errorMsg: 'Error when deleting Users'};
+    }
   }
 }
 
@@ -89,7 +137,19 @@ export async function retrieveUsers(amount?: number, offset?: number, order_by?:
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for retrieving Users'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when retrieving Users'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when retrieving Users'};
+    } else {
+      return {error: true, errorMsg: 'Error when retrieving Users'};
+    }
   }
 }
 
@@ -105,6 +165,18 @@ export async function retrieveUser(userId: string):Promise<ErrorResult<User>> {
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
-    return {error: true};
+    if(axError.response) {
+      if(axError.response.status === 401) {
+        return {error: true, errorMsg: 'Not authenticated'};
+      } else if(axError.response.status === 403) {
+        return {error: true, errorMsg: 'Missing Permissions for retrieving a User'};
+      } else {
+        return {error: true, errorMsg: 'Response Error when retrieving a Users'};
+      }
+    } else if(axError.request) {
+      return {error: true, errorMsg: 'Request Error when retrieving a Users'};
+    } else {
+      return {error: true, errorMsg: 'Error when retrieving a Users'};
+    }
   }
 }
