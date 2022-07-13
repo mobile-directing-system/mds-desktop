@@ -1,9 +1,9 @@
 <template>
-  <div class="mb-6 bg-background">
+  <div :class="rDivClass? rDivClass : aDivClass? 'mb-6 bg-background ' + aDivClass : 'mb-6 bg-background'">
     <label 
       v-if="props.label !== undefined"
       :for="props.id"
-      class="block mb-2 text-sm font-medium text-on_background"
+      :class="rLabelClass? rLabelClass : aLabelClass? 'block mb-2 text-sm font-medium text-on_background ' + aLabelClass : 'block mb-2 text-sm font-medium text-on_background'"
     >{{ props.label }}</label>
     <input 
       :value="props.modelValue" 
@@ -26,6 +26,10 @@
     modelValue: string|number;
     id?: string;
     label?: string;
+    rDivClass?: string;
+    rLabelClass?: string;
+    aDivClass?: string;
+    aLabelClass?: string;
   }
   const props = defineProps<Props>();
 
