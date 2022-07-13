@@ -16,10 +16,10 @@
         type="password"
       />
       <NormalButton
+        id="submit"
         btn-text="Login"
-        btn-id="submit"
-        btn-type="submit"
-        @btn-click="onSubmit"
+        type="submit"
+        @click.prevent="onSubmit"
       />
     </form>
   </main>
