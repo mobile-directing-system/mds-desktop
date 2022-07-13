@@ -39,16 +39,11 @@
     @btn-click="generateUser()"
   />
   <form>
-    <label
-      for="user_id"
-      class="block mb-2 text-sm font-medium text-on_background"
-    >Username</label>
-    <input
+    <FormInput
       id="user_id"
       v-model="userId"
-      class="bg-gray-50 border border-gray-300 text-on_background text-sm rounded-lg focus:ring-primary_light focus:border-primary_light block w-full p-2.5"
-      type="text"
-    >
+      label="Username"
+    />
     <NormalButton
       btn-text="Fetch User By Id"
       btn-id="submit"
@@ -75,16 +70,11 @@
     @btn-click="generateOperation()"
   />
   <form>
-    <label
-      for="operation_id"
-      class="block mb-2 text-sm font-medium text-on_background"
-    >Operation</label>
-    <input
-      id="operation_id"
+    <FormInput
+      id="opertion_id"
       v-model="operationId"
-      class="bg-gray-50 border border-gray-300 text-on_background text-sm rounded-lg focus:ring-primary_light focus:border-primary_light block w-full p-2.5"
-      type="text"
-    >
+      label="Operation"
+    />
     <NormalButton
       btn-text="Fetch Operation By Id"
       btn-id="submit"
@@ -111,16 +101,11 @@
     @btn-click="generateGroup()"
   />
   <form>
-    <label
-      for="group_id"
-      class="block mb-2 text-sm font-medium text-on_background"
-    >Group</label>
-    <input
+    <FormInput
       id="group_id"
       v-model="groupId"
-      class="bg-gray-50 border border-gray-300 text-on_background text-sm rounded-lg focus:ring-primary_light focus:border-primary_light block w-full p-2.5"
-      type="text"
-    >
+      label="Group"
+    />
     <NormalButton
       btn-text="Fetch Group By Id"
       btn-id="submit"
@@ -138,6 +123,7 @@
   import { PermissionNames } from '../constants';
   import  Sidebar from '../components/SideBarMenu.vue';
   import Topnavbar from '../components/TopNavbar.vue';
+import FormInput from '../components/BasicComponents/FormInput.vue';
   /**
    * load router and logininfo store to check
    * if already logged in and if so navigate to
@@ -186,7 +172,8 @@
   }
 
   function addCreatePermission(userId: string) {
-    permissionsState.dispatch('addPermissions', {userId, permissions: [{name: PermissionNames.UserCreate}]});
+    permissionsState.dispatch('addPermissions', {userId, permissions: [{name: PermissionNames.UserCreate}, {name: PermissionNames.GroupView}, 
+    {name: PermissionNames.OperationViewAny}, {name: PermissionNames.UserView}, {name: PermissionNames.PermissionsView}]});
   }
 
   function addDeletePermission(userId: string) {
