@@ -3,30 +3,18 @@
     class="bg-surface mx-auto max-w-lg p-8 rounded-lg shadow-2xl my-10"
   >
     <form class="w-80">
-      <div class="mb-6">
-        <label
-          for="username"
-          class="block mb-2 text-sm font-medium text-on_surface"
-        >Username</label>
-        <input
-          id="username"
-          v-model="username"
-          class="bg-gray-50 border border-gray-300 text-on_surface text-sm rounded-lg focus:ring-primary_light focus:border-primary_light block w-full p-2.5"
-          type="text"
-        >
-      </div>
-      <div class="mb-6">
-        <label
-          for="password"
-          class="block mb-2 text-sm font-medium text-on_surface"
-        >Password</label>
-        <input
-          id="password"
-          v-model="password"
-          class="bg-gray-50 border border-gray-300 text-on_surface text-sm rounded-lg focus:ring-primary_light focus:border-primary_light block w-full p-2.5"
-          type="password"
-        >
-      </div>
+      <FormInput 
+        id="username"
+        v-model="username"
+        label="Username"
+        type="text"
+      />
+      <FormInput 
+        id="password" 
+        v-model="password"
+        label="Password"
+        type="password"
+      />
       <NormalButton
         btn-text="Login"
         btn-id="submit"
@@ -42,6 +30,7 @@
    * login form.
    */
   import NormalButton from './BasicComponents/NormalButton.vue';
+  import FormInput from './BasicComponents/FormInput.vue';
   import { ref } from 'vue';
   import { useLoginState } from '../store';
 
