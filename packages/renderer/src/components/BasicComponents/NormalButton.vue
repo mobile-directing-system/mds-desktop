@@ -1,13 +1,19 @@
 <template>
   <button
-    :id="props.btnId"
-    :type="props.btnType"
     class="text-on_primary bg-primary hover:bg-primary_dark hover:text-on_primary_dark focus:ring-4 focus:outline-none focus:ring-primary_light font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-    @click.prevent="$emit('btn-click', $event)"
+    v-bind="$attrs"
+    @click="$emit('click', $event)"
   >
     {{ props.btnText }}
   </button>
 </template>
+
+<script lang="ts">
+  export default {
+    inheritAttrs: false,
+  };
+</script>
+
 <script lang="ts" setup>
   /**
    * Normal button component represents a 
@@ -20,12 +26,10 @@
    */
   interface Props {
     btnText: string;
-    btnId?: string;
-    btnType?: 'submit' | 'reset' | 'button' | undefined;
   }
   const props = defineProps<Props>();
   // eslint-disable-next-line
   const emits = defineEmits<{
-    (name: 'btn-click', e: MouseEvent ): void
+    (name: 'click', e: MouseEvent ): void
   }>();
 </script>

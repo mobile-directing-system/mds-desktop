@@ -15,28 +15,28 @@
     <div>{{ user }}:{{ permissions().get(user.id) }}</div>
     <NormalButton
       :btn-text="`Update ${user.username}`"
-      @btn-click="updateUser(user.id)"
+      @click.prevent="updateUser(user.id)"
     />
     <NormalButton
       :btn-text="`Update Password for ${user.username}`"
-      @btn-click="updateUserPw(user.id)"
+      @click.prevent="updateUserPw(user.id)"
     />
     <NormalButton
       :btn-text="`Delete ${user.username}`"
-      @btn-click="deleteUser(user.id)"
+      @click.prevent="deleteUser(user.id)"
     />
     <NormalButton
       :btn-text="`Add user.create Permission to ${user.username}`"
-      @btn-click="addCreatePermission(user.id)"
+      @click.prevent="addCreatePermission(user.id)"
     />
     <NormalButton
       :btn-text="`Add user.delete Permission to ${user.username}`"
-      @btn-click="addDeletePermission(user.id)"
+      @click.prevent="addDeletePermission(user.id)"
     />
   </div>
   <NormalButton
     btn-text="Generate New User"
-    @btn-click="generateUser()"
+    @click.prevent="generateUser()"
   />
   <form>
     <FormInput
@@ -45,15 +45,15 @@
       label="Username"
     />
     <NormalButton
+      id="submit"
       btn-text="Fetch User By Id"
-      btn-id="submit"
-      btn-type="submit"
-      @btn-click="fetchUser(userId)"
+      type="submit"
+      @click.prevent="fetchUser(userId)"
     />
   </form>
   <NormalButton
     btn-text="Load Permissions"
-    @btn-click="loadPermissions()"
+    @click.prevent="loadPermissions()"
   />
   <div
     v-for="operation in operations()"
@@ -62,12 +62,12 @@
     <div>{{ operation }}</div>
     <NormalButton
       :btn-text="`Update ${operation.title}`"
-      @btn-click="updateOperation(operation.id)"
+      @click.prevent="updateOperation(operation.id)"
     />
   </div>
   <NormalButton
     btn-text="Generate New Operation"
-    @btn-click="generateOperation()"
+    @click.prevent="generateOperation()"
   />
   <form>
     <FormInput
@@ -76,10 +76,10 @@
       label="Operation"
     />
     <NormalButton
+      id="submit"
       btn-text="Fetch Operation By Id"
-      btn-id="submit"
-      btn-type="submit"
-      @btn-click="fetchOperation(operationId)"
+      type="submit"
+      @click.prevent="fetchOperation(operationId)"
     />
   </form>
   <div
@@ -89,16 +89,16 @@
     <div>{{ group }}</div>
     <NormalButton
       :btn-text="`Update ${group.title}`"
-      @btn-click="updateGroup(group.id)"
+      @click.prevent="updateGroup(group.id)"
     />
     <NormalButton
       :btn-text="`Delete ${group.title}`"
-      @btn-click="deleteGroup(group.id)"
+      @click.prevent="deleteGroup(group.id)"
     />
   </div>
   <NormalButton
     btn-text="Generate New Group"
-    @btn-click="generateGroup()"
+    @click.prevent="generateGroup()"
   />
   <form>
     <FormInput
@@ -107,10 +107,10 @@
       label="Group"
     />
     <NormalButton
+      id="submit"
       btn-text="Fetch Group By Id"
-      btn-id="submit"
-      btn-type="submit"
-      @btn-click="fetchGroup(groupId)"
+      type="submit"
+      @click.prevent="fetchGroup(groupId)"
     />
   </form>
 </template>

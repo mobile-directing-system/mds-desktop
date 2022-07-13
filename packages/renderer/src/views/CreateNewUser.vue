@@ -36,8 +36,8 @@
         <NormalButton
           id="submit"
           btn-text="Submit"
-          btn-type="submit"
-          @btn-click="onSubmit"
+          type="submit"
+          @click.prevent="onSubmit"
         />
       </main>
     </form>
