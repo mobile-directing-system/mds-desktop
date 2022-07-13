@@ -1,4 +1,17 @@
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
+import type { Context } from 'vuex-smart-module';
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function handleErrors(error: boolean, errorMsg?: string, errorState?:Context<Module<ErrorState, ErrorStateGetters, ErrorStateMutations, ErrorStateActions, {}>>) {
+  if(errorState) {
+    errorState.actions.setError(error);
+    if(errorMsg) {
+      errorState.actions.setErrorMessage(errorMsg);
+    }
+  } else {
+    console.error('Missing Error State');
+  }
+}
 
 /**
  * define the content of the ErrorState
@@ -37,12 +50,12 @@ class ErrorStateMutations extends Mutations<ErrorState> {
  */
 class ErrorStateActions extends Actions<ErrorState, ErrorStateGetters, ErrorStateMutations, ErrorStateActions> {
   async setError(error: boolean) {
-    this.commit('setError', error);
-    setTimeout(() => this.commit('setError', false), 10_000);
+    this.mutations.setError(error);
+    setTimeout(() => this.mutations.setError(false), 10_000);
   }
   async setErrorMessage(errorMessage: string) {
-    this.commit('setErrorMessage', errorMessage);
-    setTimeout(() => this.commit('setErrorMessage', ''), 10_000);
+    this.mutations.setErrorMessage(errorMessage);
+    setTimeout(() => this.mutations.setErrorMessage(''), 10_000);
   }
 }
 

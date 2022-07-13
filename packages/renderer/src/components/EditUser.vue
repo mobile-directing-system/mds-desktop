@@ -67,18 +67,15 @@
 <script lang="ts" setup> 
     import { ref } from 'vue';
     import NormalButton from './BasicComponents/NormalButton.vue';
-    import { useUserState, useMainAppState} from '../store';
+    import { useUserState} from '../store';
     import type {User} from '../../../types';
+import router from '../router';
 
     const userState = useUserState();
-    const mainAppState = useMainAppState(); 
-    const selectedUserID = mainAppState.getters.getSelectedUserId();
     const updatedUserFirstName = ref('');
-    updatedUserFirstName.value = mainAppState.getters.getSelectedUserFirstName();
     const updatedUserName = ref('');
-    updatedUserName.value = mainAppState.getters.getSelectedUserUserName();
     const updatedUserLastName = ref('');
-    updatedUserLastName.value = mainAppState.getters.getSelectedUserLastName();
+    const selectedUserID = '';
 
     function editUser(){
         const updatedUser:User = {
@@ -90,12 +87,9 @@
             is_admin : false,            
         };
         userState.dispatch('updateUser', updatedUser);
-        mainAppState.mutations.setCurrentPositionInApp(CurrentPosition.User_AllUsers);
     }
     function backToMain(){
-      mainAppState.mutations.setCurrentPositionInApp(CurrentPosition.User_AllUsers);
+      router.push('/main');
     }
-    enum CurrentPosition {
-        User_AllUsers ='User_AllUsers',
-    }
+
 </script>

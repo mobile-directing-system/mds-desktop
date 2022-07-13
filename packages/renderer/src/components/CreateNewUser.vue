@@ -83,13 +83,13 @@
 
     import { ref } from 'vue';
     import NormalButton from './BasicComponents/NormalButton.vue';
-    import { useUserState, useMainAppState } from '../store';
+    import { useUserState } from '../store';
+    import router from '../router';
 
     const userName = ref('');
     const firstName = ref('');
     const lastName = ref('');
-    const iPassword = ref('');
-    const mainAppState = useMainAppState(); 
+    const iPassword = ref(''); 
     const userState = useUserState();
     function createNewUser( username: string, firstname: string, lastname :string, ipassword : string) {
         userState.dispatch('createUser', {
@@ -106,9 +106,7 @@
         iPassword.value = '';
   }
   function backToMain(){
-    mainAppState.mutations.setCurrentPositionInApp(CurrentPosition.User_AllUsers);
+    router.push('user/');
   }
-  enum CurrentPosition {
-      User_AllUsers ='User_AllUsers',
-  }
+
 </script>

@@ -31,7 +31,6 @@
   }
 
   watch(loggedIn.value, (curValue) => {
-    console.log('loggedIn Change');
     if(curValue) {
       router.push('/main');
     }  else {

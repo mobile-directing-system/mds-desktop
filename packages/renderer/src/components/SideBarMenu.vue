@@ -6,9 +6,9 @@
       <main>
         <button
           class="block w-full  items-center pt-10 "
-          @click="updateMainAppState(CurrentPosition.User_AllUsers)"
+          @click="$router.push(`/users`)"
         >
-          <div class="flex items-center hover:bg-blue-700 hover:text-white hover:rounded-md hover:shadow-xl">
+          <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
             <svg
               class="px-3 w-12 h-auto"
               fill="none"
@@ -27,9 +27,9 @@
         <button
           class="block w-full  items-center pt-5"
 
-          @click="updateMainAppState(CurrentPosition.Operation_AllOperations)"
+          @click="$router.push(`/operations`)"
         >
-          <div class="flex items-center hover:bg-blue-700 hover:text-white hover:rounded-md hover:shadow-xl">
+          <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
             <svg
               class="px-3 w-12 h-auto"
               fill="none"
@@ -47,9 +47,9 @@
         </button>
         <button
           class="block w-full  items-center pt-5"
-          @click="updateMainAppState(CurrentPosition.Groups_AllGroups)"
+          @click="$router.push(`/groups`)"
         >
-          <div class="flex items-center hover:bg-blue-700 hover:text-white hover:rounded-md hover:shadow-xl">
+          <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
             <svg
               class="px-3 w-12 h-auto"
               fill="none"
@@ -71,25 +71,4 @@
 </template>
 
 <script lang="ts" setup>
-    import {useMainAppState } from '../store';
-    const mainAppState = useMainAppState();
-    // Submenus
-    //functions
-    function updateMainAppState(newMainAppState : CurrentPosition){
-      mainAppState.mutations.setCurrentPositionInApp(newMainAppState);
-    }
-
-
-    //enum for State
-    enum CurrentPosition {
-      User_AllUsers ='User_AllUsers',
-      Operation_AddOperation ='Operation_AddOperation',
-      Operation_AllOperations ='Operation_AllOperations',
-      Groups_AddGroup ='Groups_AddGroup',
-      Groups_AllGroups ='Groups_AllGroups',
-      Ressources ='Ressources',
-      Intelligence ='Intelligence',
-      Settings ='Settings',
-      Main ='Main'
-  }
 </script>
