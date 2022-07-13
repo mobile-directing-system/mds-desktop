@@ -2,7 +2,7 @@
   <button
     :id="props.btnId"
     :type="props.btnType"
-    class="text-on_primary bg-primary hover:bg-primary_dark focus:ring-4 focus:outline-none focus:ring-primary_light font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+    class="text-on_primary bg-primary hover:bg-primary_dark hover:text-on_primary_dark focus:ring-4 focus:outline-none focus:ring-primary_light font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
     @click.prevent="$emit('btn-click', $event)"
   >
     {{ props.btnText }}

@@ -1,12 +1,12 @@
 <template>
   <header class=" max-w-lg mx-auto">
-    <h1 class="text-4xl font-bold text-black text-center">
+    <h1 class="text-4xl font-bold text-on_background text-center">
       Create a new User
     </h1>        
   </header>
   <div class="grid place-items-center">
     <form class="w-80">
-      <main class="bg-white mx-auto max-w-lg p-8 rounded-lg shadow-2xl my-10">
+      <main class="bg-background mx-auto max-w-lg p-8 rounded-lg shadow-2xl my-10">
         <!------- Username  ------>
         <FormInput
           id="username"

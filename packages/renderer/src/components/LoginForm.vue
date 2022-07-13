@@ -1,6 +1,6 @@
 <template>
   <main
-    class="bg-surface mx-auto max-w-lg p-8 rounded-lg shadow-2xl my-10"
+    class="bg-background mx-auto max-w-lg p-8 rounded-lg shadow-2xl my-10"
   >
     <form class="w-80">
       <FormInput 
