@@ -3,7 +3,7 @@ import { login, logout } from '#preload';
 import type { ErrorResult } from '../../../../types';
 import type { Context } from 'vuex-smart-module';
 import type { Store } from 'vuex';
-import { errorState } from './ErrorState';
+import { errorState, handleErrors } from './ErrorState';
 
 /**
  * define the content of the LoginInfoState
@@ -59,35 +59,25 @@ class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStat
   }
 
   async login({username, password}:{username:string, password:string}) {
-    await this.dispatch('setLoggingIn', true);
+    await this.actions.setLoggingIn(true);
     const loggedIn:ErrorResult<boolean> = await login(username, password);
-    await this.dispatch('setLoggingIn', false);
+    await this.actions.setLoggingIn(false);
     if(loggedIn.res && !loggedIn.error) {
-      this.commit('setLoggedIn', loggedIn.res);
-      this.commit('setLoggedInUser', username);
-    } else if(this.errorState) {
-      this.errorState.dispatch('setError', loggedIn.error);
-      if(loggedIn.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', loggedIn.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+      this.mutations.setLoggedIn(loggedIn.res);
+      this.mutations.setLoggedInUser(username);
+    }  else {
+      handleErrors(loggedIn.error, loggedIn.errorMsg, this.errorState);
     }
   }
   async setLoggingIn(loggingIn: boolean) {
-    this.commit('setLoggingIn', loggingIn);
+    this.mutations.setLoggingIn(loggingIn);
   }
   async logout() {
     const loggedOut:ErrorResult<boolean> = await logout();
     if(loggedOut.res && !loggedOut.error) {
-      this.commit('setLoggedIn', false);
-    } else if(this.errorState) {
-      this.errorState.dispatch('setError', loggedOut.error);
-      if(loggedOut.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', loggedOut.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+      this.mutations.setLoggedIn(false);
+    }  else {
+      handleErrors(loggedOut.error, loggedOut.errorMsg, this.errorState);
     }
   }
 }

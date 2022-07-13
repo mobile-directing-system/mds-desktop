@@ -3,7 +3,7 @@ import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smar
 import type { Context } from 'vuex-smart-module';
 import { createUser, updateUser, deleteUser, retrieveUser, retrieveUsers } from '#preload';
 import type { User, ErrorResult } from '../../../../types';
-import { errorState } from './ErrorState';
+import { errorState, handleErrors } from './ErrorState';
 
 function undom(user: User):User {
   return {...user};
@@ -45,7 +45,6 @@ class UserStateMutations extends Mutations<UserState> {
     }
   }
   updateUser(user: User) {
-
     this.state.users = this.state.users.map((elem) => (elem.id === user.id)? user : elem);
   }
   deleteUser(user: User) {
@@ -73,66 +72,41 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
   async createUser(user: User) {
     const createdUser:ErrorResult<User> = await createUser(undom(user));
     if(createdUser.res && !createdUser.error) {
-      this.commit('addUser', createdUser.res);
-    } else if(this.errorState) {
-      this.errorState.dispatch('setError', createdUser.error);
-      if(createdUser.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', createdUser.errorMsg);
-      }
+      this.mutations.addUser(createdUser.res);
     } else {
-      console.error('Missing Error State');
+      handleErrors(createdUser.error, createdUser.errorMsg, this.errorState);
     }
   }
   async updateUser(user: User) {
     const userUpdated:ErrorResult<boolean> = await updateUser(undom(user));
     if(userUpdated.res && !userUpdated.error) {
-      this.commit('updateUser', user);
-    } else if(this.errorState) {
-      this.errorState.dispatch('setError', userUpdated.error);
-      if(userUpdated.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', userUpdated.errorMsg);
-      }
+      this.actions.retreiveUserById(user.id);
     } else {
-      console.error('Missing Error State');
+      handleErrors(userUpdated.error, userUpdated.errorMsg, this.errorState);
     }
   }
   async deleteUserById(userId: string) {
     const userDeleted: ErrorResult<boolean> = await deleteUser(userId);
     if(userDeleted.res && !userDeleted.error) {
-      this.commit('deleteUserById', userId);
-    } else if(this.errorState) {
-      this.errorState.dispatch('setError', userDeleted.error);
-      if(userDeleted.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', userDeleted.errorMsg);
-      }
-    } else {
-      console.error('Missing Error State');
+      this.mutations.deleteUserById(userId);
+    }  else {
+      handleErrors(userDeleted.error, userDeleted.errorMsg, this.errorState);
     }
   }
   async retreiveUsers({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
     const retrievedUsers: ErrorResult<User[]> = await retrieveUsers(amount, offset, orderBy, orderDir);
     if(retrievedUsers.res && !retrievedUsers.error) {
-      this.commit('setUsers', retrievedUsers.res);
-    } else if(this.errorState) {
-      this.errorState.dispatch('setError', retrievedUsers.error);
-      if(retrievedUsers.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', retrievedUsers.errorMsg);
-      }
+      this.mutations.setUsers(retrievedUsers.res);
     } else {
-      console.error('Missing Error State');
+      handleErrors(retrievedUsers.error, retrievedUsers.errorMsg, this.errorState);
     }
   }
   async retreiveUserById(userId: string) {
     const retrievedUser: ErrorResult<User> = await retrieveUser(userId);
     if(retrievedUser.res && !retrievedUser.error) {
-      this.commit('addOrUpdateUser', retrievedUser.res);
-    } else if(this.errorState) {
-      this.errorState.dispatch('setError', retrievedUser.error);
-      if(retrievedUser.errorMsg) {
-        this.errorState.dispatch('setErrorMessage', retrievedUser.errorMsg);
-      }
+      this.mutations.addOrUpdateUser(retrievedUser.res);
     } else {
-      console.error('Missing Error State');
+      handleErrors(retrievedUser.error, retrievedUser.errorMsg, this.errorState);
     }
   }
 }

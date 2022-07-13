@@ -79,10 +79,10 @@
 <script lang="ts" setup> 
     import { ref, computed } from 'vue';
     import NormalButton from './NormalButton.vue';
-    import { useUserState, useMainAppState } from '../../store';
+    import { useUserState } from '../../store';
+import router from '/@/router';
 
     const userState = useUserState();
-    const mainAppState = useMainAppState();
     const users = computed(() => userState.getters.users);
     const selectedUserIndex = ref(-1);
     const selectedUserID = ref('');
@@ -92,12 +92,8 @@
     function selectRow(i: number, user_id: string){
             selectedUserIndex.value = i;
             selectedUserID.value = user_id;
-            mainAppState.mutations.setSelectedUserId(user_id);
             const selectedUser = users.value().filter((elem) => elem.id === selectedUserID.value)[0];
             selectedUserUsername.value = selectedUser.username;
-            mainAppState.mutations.setSelectedUserUserName(selectedUser.username);
-            mainAppState.mutations.setSelectedUserFirstName(selectedUser.first_name);
-            mainAppState.mutations.setSelectedUserLastName(selectedUser.last_name);
     }
 
     function deleteUser(){
@@ -106,17 +102,12 @@
     }
 
     function showEditUser(){
-      mainAppState.mutations.setCurrentPositionInApp(CurrentPosition.User_EditUser);
+      router.push('user/');
     }
     function backToMain(){
-      mainAppState.mutations.setCurrentPositionInApp(CurrentPosition.Main);
+      router.push('user/');
     }
     function showAddUser(){
-       mainAppState.mutations.setCurrentPositionInApp(CurrentPosition.User_AddUser);
-    }
-    enum CurrentPosition {
-      User_EditUser = 'EditUser',
-      User_AddUser = 'User_AddUser',
-      Main = 'Main'
+      router.push('user/');
     }
 </script>
