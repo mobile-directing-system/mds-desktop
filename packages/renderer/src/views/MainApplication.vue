@@ -156,7 +156,7 @@ import FormInput from '../components/BasicComponents/FormInput.vue';
 
   function updateUser(userId: string) {
     const updatedUser = users.value().filter((elem) => elem.id === userId)[0];
-    userState.dispatch('updateUser', {...updatedUser, first_name: `${updatedUser.first_name}u`});
+    userState.dispatch('updateUser', {...updatedUser, username: `${updatedUser.username}u`});
   }
 
   function deleteUser(userId: string) {
