@@ -7,6 +7,7 @@ import CreateNewUser from '../views/CreateNewUser.vue';
 import EditUser from '../views/EditUser.vue';
 import AllOperationsVue from '../views/AllOperations.vue';
 import CreateNewOperation from '../views/CreateNewOperation.vue';
+import EditOperation from '../views/EditOperation.vue';
 
 
 const routes:RouteRecordRaw[] = [
@@ -45,6 +46,11 @@ const routes:RouteRecordRaw[] = [
                 path: '/create-new-operation',
                 name: 'CreateOperation',
                 component: CreateNewOperation,
+            },
+            {
+                path: 'edit-operation/:selectedOperationID',
+                name: 'EditCurrentOperation',
+                component: EditOperation,
             },
         ],
     },
