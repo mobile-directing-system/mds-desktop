@@ -6,7 +6,7 @@
       <main>
         <button
           class="block w-full  items-center pt-10 "
-          @click="$router.push(`/users`)"
+          @click="router.push('/user')"
         >
           <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
             <svg
@@ -27,7 +27,7 @@
         <button
           class="block w-full  items-center pt-5"
 
-          @click="$router.push(`/operations`)"
+          @click="router.push(`/operation`)"
         >
           <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
             <svg
@@ -47,7 +47,7 @@
         </button>
         <button
           class="block w-full  items-center pt-5"
-          @click="$router.push(`/groups`)"
+          @click="router.push(`/groups`)"
         >
           <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
             <svg
@@ -70,5 +70,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup>  
+  import {useRouter} from 'vue-router';
+  const router = useRouter();
 </script>

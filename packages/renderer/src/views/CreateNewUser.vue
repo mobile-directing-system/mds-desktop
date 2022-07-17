@@ -70,7 +70,7 @@
             <NormalButton
               class=" ml-auto"
               :btn-text="'Cancel'"
-              @btn-click="backToMain()"
+              @btn-click="router.push('/user')"
             />
           </div>
         </main>
@@ -82,15 +82,17 @@
 <script lang="ts" setup>
 
     import { ref } from 'vue';
-    import NormalButton from './BasicComponents/NormalButton.vue';
+    import NormalButton from '../components/BasicComponents/NormalButton.vue';
     import { useUserState } from '../store';
-    import router from '../router';
+    import{useRouter} from 'vue-router';
 
     const userName = ref('');
     const firstName = ref('');
     const lastName = ref('');
     const iPassword = ref(''); 
     const userState = useUserState();
+    const router = useRouter();
+
     function createNewUser( username: string, firstname: string, lastname :string, ipassword : string) {
         userState.dispatch('createUser', {
             id: '',
@@ -105,8 +107,6 @@
         lastName.value ='';
         iPassword.value = '';
   }
-  function backToMain(){
-    router.push('user/');
-  }
 
 </script>
+

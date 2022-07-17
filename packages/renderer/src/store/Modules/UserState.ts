@@ -38,8 +38,8 @@ class UserStateMutations extends Mutations<UserState> {
     this.state.users = [...this.state.users, user];
   }
   addOrUpdateUser(user: User){
-    if (this.state.users.filter((elem) => elem.username === user.username).length > 0) {
-      this.state.users = this.state.users.map((elem) => (elem.username === user.username)? user : elem);
+    if (this.state.users.filter((elem) => elem.id === user.id).length > 0) {
+      this.state.users = this.state.users.map((elem) => (elem.id === user.id)? user : elem);
     } else {
       this.state.users = [...this.state.users, user];
     }

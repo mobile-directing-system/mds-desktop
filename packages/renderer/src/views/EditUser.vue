@@ -50,13 +50,14 @@
           
         <div class="flex justify-between">
           <NormalButton 
+            v-if="updatedUserFirstName != '' && updatedUserName != '' && updatedUserLastName != ''"
             :btn-text="'Update User'"
             @btn-click="editUser()"
           />
           <NormalButton
             class=" ml-auto"
             :btn-text="'Cancel'"
-            @btn-click="backToMain()"
+            @btn-click="router.push('/user')"
           />
         </div>
       </main>
@@ -65,31 +66,38 @@
 </template>
 
 <script lang="ts" setup> 
-    import { ref } from 'vue';
-    import NormalButton from './BasicComponents/NormalButton.vue';
+    import { ref, computed} from 'vue';
+    import NormalButton from '../components/BasicComponents/NormalButton.vue';
     import { useUserState} from '../store';
     import type {User} from '../../../types';
-import router from '../router';
-
+  
+    import{useRouter, useRoute} from 'vue-router';
     const userState = useUserState();
+    const router = useRouter();
+    const route = useRoute();
+
+    const users = computed(() => userState.getters.users);
+    const selectedUserID = route.params.selectedUserID;
+    const currentUser = users.value().filter((elem) => elem.id === selectedUserID)[0];
     const updatedUserFirstName = ref('');
+    updatedUserFirstName.value = currentUser.first_name;
     const updatedUserName = ref('');
+    updatedUserName.value = currentUser.username;
     const updatedUserLastName = ref('');
-    const selectedUserID = '';
+    updatedUserLastName.value = currentUser.last_name;
+   
 
     function editUser(){
         const updatedUser:User = {
-            id: selectedUserID,
-            username : updatedUserName.value,
-            first_name : updatedUserFirstName.value,
-            last_name : updatedUserLastName.value,
-            pass : 'newPass',
-            is_admin : false,            
+          id: selectedUserID[0],
+          username: updatedUserName.value,
+          first_name: updatedUserFirstName.value,
+          last_name: updatedUserLastName.value,
+          is_admin: false,
+          pass: '',
         };
         userState.dispatch('updateUser', updatedUser);
-    }
-    function backToMain(){
-      router.push('/main');
+        router.push('/user');
     }
 
 </script>

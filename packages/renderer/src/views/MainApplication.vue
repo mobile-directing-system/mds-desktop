@@ -1,19 +1,21 @@
 <template>
   <Topnavbar />
 
-  <div class="bottonmPartwithSideBar">
+  <div class="bottomPartwithSidebar">
     <div>
       <Sidebar />
     </div>
-    <div />
+    <div>
+      <router-view />
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
   import { onMounted } from 'vue';
   import {  useUserState,  useOperationsState, useGroupState } from '../store';
-
   import  Sidebar from '../components/SideBarMenu.vue';
   import Topnavbar from '../components/TopNavbar.vue';
+ // import {useRouter} from 'vue-router';
   /**
    * load router and logininfo store to check
    * if already logged in and if so navigate to
@@ -24,6 +26,7 @@
 //  const permissionsState = usePermissionsState();
   const operationsState = useOperationsState();
   const groupState = useGroupState();
+  //const router = useRouter();
 
 /*  const users = computed(() => userState.getters.users);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -38,6 +41,7 @@
     userState.dispatch('retreiveUsers', {});
     operationsState.dispatch('retrieveOperations', {});
     groupState.dispatch('retrieveGroups', {});
+    //router.push('/main/user');
   });
 
 /*
@@ -132,3 +136,18 @@
   }
 */
 </script>
+<style>
+  .bottomPartwithSidebar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--1);
+  }
+  .bottomPartwithSidebar > :first-child{
+    flex-basis: 1;
+  }
+  .bottomPartwithSidebar > :last-child{
+    flex-basis: 0;
+    flex-grow: 999;
+    min-inline-size: 75%;
+  }
+</style>
