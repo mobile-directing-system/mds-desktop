@@ -1,7 +1,7 @@
 <template>
   <div
     :id="props.toastText"
-    class="z-50 absolute top-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center w-full max-w-xs p-4 mb-4 text-on_error_light bg-error_light rounded-lg shadow"
+    class="z-50 absolute top-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center w-full max-w-xs p-4 mb-4 text-on_error bg-error rounded-lg shadow"
     role="alert"
   >
     <div class="ml-3 text-sm font-normal">
@@ -9,7 +9,7 @@
     </div>
     <button
       type="button"
-      class="ml-auto -mx-1.5 -my-1.5 bg-error_light text-on_error_light hover:bg-error rounded-lg focus:ring-2 focus:ring-error_dark p-1.5 inline-flex h-8 w-8 "
+      class="ml-auto -mx-1.5 -my-1.5 bg-error text-on_error hover:bg-error_dark rounded-lg focus:ring-2 focus:ring-error_light p-1.5 inline-flex h-8 w-8 "
       aria-label="Close"
       @click.prevent="$emit('toast-close', $event)"
     >

@@ -48,7 +48,7 @@
 
   function updateUser(userId: string) {
     const updatedUser = users.value().filter((elem) => elem.id === userId)[0];
-    userState.dispatch('updateUser', {...updatedUser, first_name: `${updatedUser.first_name}u`});
+    userState.dispatch('updateUser', {...updatedUser, username: `${updatedUser.username}u`});
   }
 
 
@@ -61,7 +61,8 @@
   }
 
   function addCreatePermission(userId: string) {
-    permissionsState.dispatch('addPermissions', {userId, permissions: [{name: PermissionNames.UserCreate}]});
+    permissionsState.dispatch('addPermissions', {userId, permissions: [{name: PermissionNames.UserCreate}, {name: PermissionNames.GroupView}, 
+    {name: PermissionNames.OperationViewAny}, {name: PermissionNames.UserView}, {name: PermissionNames.PermissionsView}]});
   }
 
   function addDeletePermission(userId: string) {

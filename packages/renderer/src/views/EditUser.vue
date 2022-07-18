@@ -1,50 +1,35 @@
 <template>
-  <div class="grid place-items-center bg-white mx-auto max-w-lg rounded-lg my-10">
-    <header class=" max-w-lg mx-auto pb-10">
-      <h1 class="text-4xl font-bold text-black text-center">
-        Update User
+  <div class=" bg-white ml-4  my-10">
+    <header class=" max-w-lg pb-10">
+      <h1 class="  text-left text-4xl font-bold text-black">
+        User Information
       </h1>        
     </header>
     <form class="w-80">
       <main class="">
         <!------- Username  ------>
         <div class="mb-6">
-          <label
-            for="username"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >Username</label>
-          <input
+          <FormInput
             id="username"
             v-model="updatedUserName"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            type="text"
-          >
+            label="Username"
+          />
         </div>
         <!------- first_name  ------>
         <div class="mb-6">
-          <label
-            for="firstName"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >First Name</label>
-          <input
+          <FormInput
             id="firstName"
             v-model="updatedUserFirstName"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            type="text"
-          >
+            label="Firstname"
+          />
         </div>
         <!------- last_name  ------>
         <div class="mb-6">
-          <label
-            for="lastName"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >Last Name</label>
-          <input
+          <FormInput
             id="lastName"
             v-model="updatedUserLastName"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            type="text"
-          >
+            label="Lastname"
+          />
         </div>
         <!--- Submit Button --->
           
@@ -52,12 +37,19 @@
           <NormalButton 
             v-if="updatedUserFirstName != '' && updatedUserName != '' && updatedUserLastName != ''"
             :btn-text="'Update User'"
-            @btn-click="editUser()"
+            @click="editUser()"
           />
+          <NormalButton
+            class="ml-auto"
+            :btn-text="'Delete User'"
+            @click="deleteUser()"
+          />
+        </div>
+        <div class=" pt-4 flex justify-between">
           <NormalButton
             class=" ml-auto"
             :btn-text="'Cancel'"
-            @btn-click="router.push('/user')"
+            @click="router.push('/user')"
           />
         </div>
       </main>
@@ -66,38 +58,42 @@
 </template>
 
 <script lang="ts" setup> 
-    import { ref, computed} from 'vue';
-    import NormalButton from '../components/BasicComponents/NormalButton.vue';
-    import { useUserState} from '../store';
-    import type {User} from '../../../types';
+  import { ref, computed} from 'vue';
+  import NormalButton from '../components/BasicComponents/NormalButton.vue';
+  import FormInput from '../components/BasicComponents/FormInput.vue';
+  import { useUserState} from '../store';
+  import type {User} from '../../../types';
+
+  import{useRouter, useRoute} from 'vue-router';
+  const userState = useUserState();
+  const router = useRouter();
+  const route = useRoute();
+
+  const users = computed(() => userState.getters.users);
+  const selectedUserID = route.params.selectedUserID;
+  const currentUser = users.value().filter((elem) => elem.id === selectedUserID)[0];
+  const updatedUserFirstName = ref('');
+  updatedUserFirstName.value = currentUser.first_name;
+  const updatedUserName = ref('');
+  updatedUserName.value = currentUser.username;
+  const updatedUserLastName = ref('');
+  updatedUserLastName.value = currentUser.last_name;
+  console.log(selectedUserID.toString());
   
-    import{useRouter, useRoute} from 'vue-router';
-    const userState = useUserState();
-    const router = useRouter();
-    const route = useRoute();
 
-    const users = computed(() => userState.getters.users);
-    const selectedUserID = route.params.selectedUserID;
-    const currentUser = users.value().filter((elem) => elem.id === selectedUserID)[0];
-    const updatedUserFirstName = ref('');
-    updatedUserFirstName.value = currentUser.first_name;
-    const updatedUserName = ref('');
-    updatedUserName.value = currentUser.username;
-    const updatedUserLastName = ref('');
-    updatedUserLastName.value = currentUser.last_name;
-   
-
-    function editUser(){
-        const updatedUser:User = {
-          id: selectedUserID[0],
-          username: updatedUserName.value,
-          first_name: updatedUserFirstName.value,
-          last_name: updatedUserLastName.value,
-          is_admin: false,
-          pass: '',
-        };
-        userState.dispatch('updateUser', updatedUser);
-        router.push('/user');
-    }
-
+  function editUser(){
+      const updatedUser:User = {
+        id: selectedUserID.toString(),
+        username: updatedUserName.value,
+        first_name: updatedUserFirstName.value,
+        last_name: updatedUserLastName.value,
+        is_admin: false,
+        pass: '',
+      };
+      userState.dispatch('updateUser', updatedUser);
+      router.push('/user');
+  }
+    function deleteUser(){
+      userState.dispatch('deleteUserById', selectedUserID.toString());
+  }
 </script>

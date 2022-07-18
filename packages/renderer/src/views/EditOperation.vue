@@ -1,7 +1,7 @@
 <template>
-  <div class="grid place-items-center bg-white mx-auto max-w-lg rounded-lg my-10">
-    <header class=" max-w-lg mx-auto pb-10">
-      <h1 class="text-4xl font-bold text-black text-center">
+  <div class=" bg-white ml-4 max-w-lg rounded-lg my-10">
+    <header class=" max-w-lg pb-10">
+      <h1 class="text-4xl font-bold text-black ">
         Update Operation
       </h1>        
     </header>
@@ -9,55 +9,37 @@
       <main class="">
         <!------- Title  ------>
         <div class="mb-6">
-          <label
-            for="title"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >Title</label>
-          <input
+          <FormInput
             id="title"
             v-model="updatedtitle"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            type="text"
-          >
+            label="Title"
+          />
         </div>
         <!------- Description  ------>
         <div class="mb-6">
-          <label
-            for="description"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >Description</label>
-          <input
+          <FormInput
             id="description"
             v-model="updateddescription"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            type="text"
-          >
+            label="Description"
+          />
         </div>
         <!------- start  ------>
         <div class="mb-6">
-          <label
-            for="start"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          > Start</label>
-          <input
+          <FormInput
             id="start"
             v-model="updatedstart"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            label="Start"
             type="datetime-local"
-          >
+          />
         </div>
         <!---- end --->
         <div class="mb-6">
-          <label
-            for="end"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >End</label>
-          <input
+          <FormInput
             id="end"
             v-model="updatedend"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            label="End"
             type="datetime-local"
-          >
+          />
         </div>
         <!---- archive --->
         <div class="mb-6">
@@ -78,12 +60,12 @@
           <NormalButton 
             v-if="updatedtitle != '' && updateddescription != '' && updatedstart!= '' && updatedend != ''"
             :btn-text="'Update Operation'"
-            @btn-click="editOperation()"
+            @click="editOperation()"
           />
           <NormalButton
             class=" ml-auto"
             :btn-text="'Cancel'"
-            @btn-click="router.push('/operation')"
+            @click="router.push('/operation')"
           />
         </div>
       </main>
@@ -94,6 +76,7 @@
 <script lang="ts" setup> 
     import { ref, computed} from 'vue';
     import NormalButton from '../components/BasicComponents/NormalButton.vue';
+    import FormInput from '../components/BasicComponents/FormInput.vue';
     import { useOperationsState} from '../store';
     import type {Operation} from '../../../types';
   
