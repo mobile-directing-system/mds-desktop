@@ -14,16 +14,16 @@ export async function createGroup(group: Group):Promise<ErrorResult<Group>> {
     printAxiosError(axError);
     if(axError.response) {
       if(axError.response.status === 401) {
-        return {error: true, errorMsg: 'Not authenticated'};
+        return {error: true, errorMsg: 'not authenticated'};
       } else if(axError.response.status === 403) {
-        return {error: true, errorMsg: 'Missing Permissions for creating Groups'};
+        return {error: true, errorMsg: 'missing permissions for creating groups'};
       } else {
-        return {error: true, errorMsg: 'Response Error when creating Groups'};
+        return {error: true, errorMsg: 'response error when creating groups'};
       }
     } else if(axError.request) {
-      return {error: true, errorMsg: 'Request Error when creating Groups'};
+      return {error: true, errorMsg: 'request error when creating groups'};
     } else {
-      return {error: true, errorMsg: 'Error when creating Groups'};
+      return {error: true, errorMsg: 'error when creating groups'};
     }
   }
 }
@@ -37,16 +37,16 @@ export async function updateGroup(group: Group):Promise<ErrorResult<boolean>> {
     printAxiosError(axError);
     if(axError.response) {
       if(axError.response.status === 401) {
-        return {error: true, errorMsg: 'Not authenticated'};
+        return {error: true, errorMsg: 'not authenticated'};
       } else if(axError.response.status === 403) {
-        return {error: true, errorMsg: 'Missing Permissions for updating Groups'};
+        return {error: true, errorMsg: 'missing permissions for updating groups'};
       } else {
-        return {error: true, errorMsg: 'Response Error when updating Groups'};
+        return {error: true, errorMsg: 'response error when updating groups'};
       }
     } else if(axError.request) {
-      return {error: true, errorMsg: 'Request Error when updating Groups'};
+      return {error: true, errorMsg: 'request error when updating groups'};
     } else {
-      return {error: true, errorMsg: 'Error when updating Groups'};
+      return {error: true, errorMsg: 'error when updating groups'};
     }
   }
 }
@@ -60,16 +60,16 @@ export async function deleteGroup(groupId: string):Promise<ErrorResult<boolean>>
     printAxiosError(axError);
     if(axError.response) {
       if(axError.response.status === 401) {
-        return {error: true, errorMsg: 'Not authenticated'};
+        return {error: true, errorMsg: 'bot authenticated'};
       } else if(axError.response.status === 403) {
-        return {error: true, errorMsg: 'Missing Permissions for deleting Groups'};
+        return {error: true, errorMsg: 'missing permissions for deleting groups'};
       } else {
-        return {error: true, errorMsg: 'Response Error when deleting Groups'};
+        return {error: true, errorMsg: 'response error when deleting groups'};
       }
     } else if(axError.request) {
-      return {error: true, errorMsg: 'Request Error when deleting Groups'};
+      return {error: true, errorMsg: 'request error when deleting groups'};
     } else {
-      return {error: true, errorMsg: 'Error when deleting Groups'};
+      return {error: true, errorMsg: 'error when deleting groups'};
     }
   }
 }
@@ -84,16 +84,16 @@ export async function retrieveGroups(amount?: number, offset?: number, order_by?
     printAxiosError(axError);
     if(axError.response) {
       if(axError.response.status === 401) {
-        return {error: true, errorMsg: 'Not authenticated'};
+        return {error: true, errorMsg: 'not authenticated'};
       } else if(axError.response.status === 403) {
-        return {error: true, errorMsg: 'Missing Permissions for retrieving Groups'};
+        return {error: true, errorMsg: 'missing permissions for retrieving groups'};
       } else {
-        return {error: true, errorMsg: 'Response Error when retrieving Groups'};
+        return {error: true, errorMsg: 'response error when retrieving groups'};
       }
     } else if(axError.request) {
-      return {error: true, errorMsg: 'Request Error when retrieving Groups'};
+      return {error: true, errorMsg: 'request error when retrieving groups'};
     } else {
-      return {error: true, errorMsg: 'Error when retrieving Groups'};
+      return {error: true, errorMsg: 'error when retrieving groups'};
     }
   }
 }
@@ -107,16 +107,16 @@ export async function retrieveGroup(groupId: string):Promise<ErrorResult<Group>>
     printAxiosError(axError);
     if(axError.response) {
       if(axError.response.status === 401) {
-        return {error: true, errorMsg: 'Not authenticated'};
+        return {error: true, errorMsg: 'not authenticated'};
       } else if(axError.response.status === 403) {
-        return {error: true, errorMsg: 'Missing Permissions for retrieving a Group'};
+        return {error: true, errorMsg: 'missing permissions for retrieving a group'};
       } else {
-        return {error: true, errorMsg: 'Response Error when retrieving a Group'};
+        return {error: true, errorMsg: 'response error when retrieving a group'};
       }
     } else if(axError.request) {
-      return {error: true, errorMsg: 'Request Error when retrieving a Group'};
+      return {error: true, errorMsg: 'request error when retrieving a group'};
     } else {
-      return {error: true, errorMsg: 'Error when retrieving a Group'};
+      return {error: true, errorMsg: 'error when retrieving a group'};
     }
   }
 }
