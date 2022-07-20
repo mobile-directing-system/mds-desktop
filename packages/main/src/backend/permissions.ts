@@ -14,16 +14,16 @@ export async function retrievePermissions(userId: string):Promise<ErrorResult<Pe
     printAxiosError(axError);
     if(axError.response) {
       if(axError.response.status === 401) {
-        return {error: true, errorMsg: 'Not authenticated'};
+        return {error: true, errorMsg: 'not authenticated'};
       } else if(axError.response.status === 403) {
-        return {error: true, errorMsg: 'Missing Permissions for retrieving Permissions'};
+        return {error: true, errorMsg: 'missing permissions for retrieving permissions'};
       } else {
-        return {error: true, errorMsg: 'Response Error when retrieving Permissions'};
+        return {error: true, errorMsg: 'response error when retrieving permissions'};
       }
     } else if(axError.request) {
-      return {error: true, errorMsg: 'Request Error when retrieving Permissions'};
+      return {error: true, errorMsg: 'request error when retrieving permissions'};
     } else {
-      return {error: true, errorMsg: 'Error when updating retrieving Permissions'};
+      return {error: true, errorMsg: 'error when updating retrieving permissions'};
     }
   }
 }
@@ -37,16 +37,16 @@ export async function updatePermissions(userId: string, permissions: Permissions
     printAxiosError(axError);
     if(axError.response) {
       if(axError.response.status === 401) {
-        return {error: true, errorMsg: 'Not authenticated'};
+        return {error: true, errorMsg: 'not authenticated'};
       } else if(axError.response.status === 403) {
-        return {error: true, errorMsg: 'Missing Permissions for updating Permissions'};
+        return {error: true, errorMsg: 'missing permissions for updating permissions'};
       } else {
-        return {error: true, errorMsg: 'Response Error when updating Permissions'};
+        return {error: true, errorMsg: 'response error when updating permissions'};
       }
     } else if(axError.request) {
-      return {error: true, errorMsg: 'Request Error when updating Permissions'};
+      return {error: true, errorMsg: 'request error when updating permissions'};
     } else {
-      return {error: true, errorMsg: 'Error when updating Permissions'};
+      return {error: true, errorMsg: 'error when updating permissions'};
     }
   }
 }
