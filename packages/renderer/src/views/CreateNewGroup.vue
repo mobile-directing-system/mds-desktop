@@ -205,7 +205,7 @@
   onMounted(() => {
     groupState.dispatch('retrieveGroups', {});
     operationsState.dispatch('retrieveOperations', {});
-    userState.dispatch('retreiveUsers', {});
+    userState.dispatch('retrieveUsers', {});
   });
 
   function createGroup(){

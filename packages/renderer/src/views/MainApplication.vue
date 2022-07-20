@@ -152,13 +152,13 @@ import FormInput from '../components/BasicComponents/FormInput.vue';
   const groupId = ref('');
 
   onMounted(() => {
-    userState.dispatch('retreiveUsers', {});
+    userState.dispatch('retrieveUsers', {});
     operationsState.dispatch('retrieveOperations', {});
     groupState.dispatch('retrieveGroups', {});
   });
 
   function fetchUser(userId: string) {
-    userState.dispatch('retreiveUserById', userId);
+    userState.dispatch('retrieveUserById', userId);
   }
 
   function updateUser(userId: string) {
