@@ -52,8 +52,8 @@
     import {useRouter} from 'vue-router';
 
     onMounted(() => {
-      groupState.dispatch('retrieveGroups', {});
-      operationsState.dispatch('retrieveOperations', {});
+      groupState.dispatch('retrieveGroups', {amount: 100});
+      operationsState.dispatch('retrieveOperations', {amount: 100});
     });
 
     const groupState = useGroupState();

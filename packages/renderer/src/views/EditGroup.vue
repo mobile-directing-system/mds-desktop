@@ -129,6 +129,10 @@
                   for="members"
                   class="mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
                 >Select an Operation</label>
+                <FormInput
+                  v-model="addMemberSearchTerm"
+                  placeholder="Search..."
+                />
                 <select
                   id="members"
                   v-model="addGroupMemberIds"
@@ -136,7 +140,7 @@
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
                   <option
-                    v-for="user in users().filter((elem1) => updatedGroupMemberIds.findIndex((elem2) => elem1.id === elem2 ) === -1)"
+                    v-for="user in users().filter((elem1) => updatedGroupMemberIds.findIndex((elem2) => elem1.id === elem2 ) === -1).filter((elem) => elem.username.includes(addMemberSearchTerm) || elem.first_name.includes(addMemberSearchTerm) || elem.last_name.includes(addMemberSearchTerm))"
                     :key="user.id"
                     :value="user.id"
                   >
@@ -210,11 +214,12 @@
   const updatedGroupMemberIds : Ref<string[]> = ref([]);
   updatedGroupMemberIds.value = currentGroup.members;
   const addGroupMemberIds: Ref<string[]> = ref([]);
+  const addMemberSearchTerm = ref('');
 
   onMounted(() => {
-    groupState.dispatch('retrieveGroups', {});
-    operationsState.dispatch('retrieveOperations', {});
-    userState.dispatch('retrieveUsers', {});
+    groupState.dispatch('retrieveGroups', {amount: 100});
+    operationsState.dispatch('retrieveOperations', {amount: 100});
+    userState.dispatch('retrieveUsers', {amount: 100});
   });
 
   function editGroup(){
@@ -233,11 +238,12 @@
   }
   function addMembers(){
     updatedGroupMemberIds.value = [...updatedGroupMemberIds.value, ...addGroupMemberIds.value];
-    addGroupMemberIds.value = [];
     toggleMembersModal();
   }
   function toggleMembersModal() {
     showMembersModal.value = !showMembersModal.value;
+    addGroupMemberIds.value = [];
+    addMemberSearchTerm.value = '';
   }
 
 </script>
