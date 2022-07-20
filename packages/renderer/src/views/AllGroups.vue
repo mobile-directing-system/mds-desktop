@@ -29,7 +29,7 @@
             >      
               <td>{{ group.title }}</td>
               <td>{{ group.description }}</td>
-              <td>{{ operations().filter((elem) => elem.id === group.operation)[0].title }}</td>
+              <td>{{ operations().filter((elem) => elem.id === group.operation)[0]?.title }}</td>
             </tr> 
           </tbody>
         </table>

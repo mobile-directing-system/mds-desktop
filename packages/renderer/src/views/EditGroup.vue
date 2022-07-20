@@ -77,13 +77,13 @@
                   class="p-2 border-b-2 border-b-gray-500 bg-background text-on_background"
                 >      
                   <td class="p-2">
-                    {{ users().filter((elem) => elem.id === userId)[0].username }}
+                    {{ users().filter((elem) => elem.id === userId)[0]?.username }}
                   </td>
                   <td class="p-2">
-                    {{ users().filter((elem) => elem.id === userId)[0].first_name }}
+                    {{ users().filter((elem) => elem.id === userId)[0]?.first_name }}
                   </td>
                   <td class="p-2">
-                    {{ users().filter((elem) => elem.id === userId)[0].last_name }}
+                    {{ users().filter((elem) => elem.id === userId)[0]?.last_name }}
                   </td>
                   <td>
                     <!-- Delete Member Button -->
