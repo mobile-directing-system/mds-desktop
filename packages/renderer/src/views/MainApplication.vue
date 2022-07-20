@@ -1,6 +1,13 @@
 <template>
   <Topnavbar />
-  <Sidebar />
+  <div class="bottomPartwithSidebar">
+    <div>
+      <Sidebar />
+    </div>
+    <div>
+      <router-view />
+    </div>
+  </div>
   <h3>Main Application Goes Here</h3>
   <div
     class="cursor-pointer"
@@ -145,13 +152,13 @@ import FormInput from '../components/BasicComponents/FormInput.vue';
   const groupId = ref('');
 
   onMounted(() => {
-    userState.dispatch('retreiveUsers', {});
+    userState.dispatch('retrieveUsers', {});
     operationsState.dispatch('retrieveOperations', {});
     groupState.dispatch('retrieveGroups', {});
   });
 
   function fetchUser(userId: string) {
-    userState.dispatch('retreiveUserById', userId);
+    userState.dispatch('retrieveUserById', userId);
   }
 
   function updateUser(userId: string) {
@@ -248,3 +255,18 @@ import FormInput from '../components/BasicComponents/FormInput.vue';
   }
 
 </script>
+<style scoped>
+  .bottomPartwithSidebar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--1);
+  }
+  .bottomPartwithSidebar > :first-child{
+    flex-basis: 1;
+  }
+  .bottomPartwithSidebar > :last-child{
+    flex-basis: 0;
+    flex-grow: 999;
+    min-inline-size: 75%;
+  }
+</style>

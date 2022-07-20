@@ -42,7 +42,7 @@
           class="box ml-12 mr-3 rounded-md py-2 mt-2 bg-background shadow-xl  lg:right-0 border-l-2 border-primary"
         >
           <router-link
-            to="/Create-user"
+            to="/main"
             class="block px-4 py-2 text-base hover:bg-primary hover:rounded-sm hover:text-on_primary"
           >
             Add User
@@ -107,7 +107,7 @@
         </div>
         <button
           class="block w-full  items-center pt-5"
-          @click="showGroupOption = !showGroupOption"
+          @click="groups()"
         >
           <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
             <svg
@@ -123,38 +123,8 @@
               d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
             /></svg>
             <span class="text-2xl"> Groups </span>
-            <svg
-              class="lg:right-5 w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            ><path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"
-            /></svg>
           </div>
         </button>
-        <!-- Dropdown -->
-        <div
-          v-show="showGroupOption"
-          class="box ml-12 mr-3 rounded-md py-2 mt-2 bg-background  shadow-xl  lg:right-0 border-l-2 border-primary"
-        >
-          <router-link
-            to="/main"
-            class="block px-4 py-2 text-base hover:bg-primary hover:rounded-sm hover:text-on_primary"
-          >
-            Add Groups
-          </router-link>
-          <router-link
-            to="/main"
-            class="block px-4 py-2 text-base hover:bg-primary hover:rounded-sm hover:text-on_primary"
-          >
-            All Groups
-          </router-link>
-        </div>
       </main>
     </div>
   </div>
@@ -162,10 +132,18 @@
 
 <script lang="ts" setup>
     import { ref } from 'vue';
+    import { useRouter } from 'vue-router';
+
+    const router = useRouter();
 
     const showOperationOption = ref(false);
 
     const showUserOption = ref(false);
-    const showGroupOption = ref(false);
     
+
+    function groups() {
+      console.log('groups'); 
+      router.push('/groups');
+    }
+
 </script>
