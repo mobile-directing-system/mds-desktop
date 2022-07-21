@@ -33,7 +33,7 @@
             <tr
               v-for="(operation,i) in operations()" 
               :key="i"
-              class="border-b-2 border-b-gray-500 bg-white text-black hover:bg-primary_superlight"
+              class="border-b-2 border-b-gray-500 bg-white text-black hover:bg-primary_superlight cursor-pointer"
               @click="selectRow(i, operation.id)"
             >  
               <td class="p-2">
@@ -51,13 +51,6 @@
             </tr> 
           </tbody>
         </table>
-        <div class="flex justify-between">
-          <NormalButton
-            class="mt-4 ml-auto"
-            :btn-text="'Cancel'"
-            @btn-click="router.push('/main');"
-          />
-        </div>
       </div>
     </div>
   </div>
@@ -98,5 +91,8 @@
     flex-basis: 0;
     flex-grow: 999;
     min-inline-size: 75%;
+  }
+  ::-webkit-scrollbar {
+    display: none;
   }
 </style>

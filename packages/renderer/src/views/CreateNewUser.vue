@@ -45,7 +45,7 @@
           <NormalButton
             class=" ml-auto"
             :btn-text="'Cancel'"
-            @click="router.push('/user')"
+            @click.prevent="router.push('/user')"
           />
         </div>
       </main>

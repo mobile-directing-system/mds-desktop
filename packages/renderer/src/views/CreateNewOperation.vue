@@ -42,21 +42,21 @@
               type="datetime-local"
             />
           </div>
-          <!--- Submit Button --->
-          <div class="flex justify-between">
-            <NormalButton 
-              v-if="title != '' && description != '' && start !='' && end !=''"
-              :btn-text="'Create Operation'"
-              @click="createNewOperation(title, description, start, end)"
-            />
-            <NormalButton
-              class=" ml-auto"
-              :btn-text="'Cancel'"
-              @click="router.push('/operation')"
-            />
-          </div>
         </main>
       </form>
+      <!--- Submit Button --->
+      <div class="flex justify-between">
+        <NormalButton 
+          v-if="title != '' && description != '' && start !='' && end !=''"
+          :btn-text="'Create Operation'"
+          @click.prevent="createNewOperation(title, description, start, end)"
+        />
+        <NormalButton
+          class=" ml-auto"
+          :btn-text="'Cancel'"
+          @click.prevent="router.push('/operation')"
+        />
+      </div>
     </div>
   </div>
 </template>

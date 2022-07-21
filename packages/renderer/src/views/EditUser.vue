@@ -37,19 +37,19 @@
           <NormalButton 
             v-if="updatedUserFirstName != '' && updatedUserName != '' && updatedUserLastName != ''"
             :btn-text="'Update User'"
-            @click="editUser()"
+            @click.prevent="editUser()"
           />
           <NormalButton
             class="ml-auto"
             :btn-text="'Delete User'"
-            @click="deleteUser()"
+            @click.prevent="deleteUser()"
           />
         </div>
         <div class=" pt-4 flex justify-between">
           <NormalButton
             class=" ml-auto"
             :btn-text="'Cancel'"
-            @click="router.push('/user')"
+            @click.prevent="router.push('/user')"
           />
         </div>
       </main>
@@ -91,9 +91,9 @@
         pass: '',
       };
       userState.dispatch('updateUser', updatedUser);
-      router.push('/user');
   }
     function deleteUser(){
       userState.dispatch('deleteUserById', selectedUserID.toString());
+      router.push('/user');
   }
 </script>

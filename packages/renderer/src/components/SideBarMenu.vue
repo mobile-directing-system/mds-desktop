@@ -1,14 +1,17 @@
 <template>
-  <div class="relative flex min-h-screen">
-    <div class="bg-white text-blue-700 border-blue-700 border-r-2 w-1/5 min-w-fit p-3">
+  <div class=" flex min-h-screen pt-auto">
+    <div class="bg-white text-blue-700 border-blue-700 border-r-2 w-1/5 min-w-fit py-3">
       <!-- SideBar -->
             
       <main>
         <button
-          class="block w-full  items-center pt-10 "
+          class="block w-full  items-center pt-10 mr-3"
           @click="router.push('/user')"
         >
-          <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
+          <div
+            class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl"
+            :class="[route.fullPath.includes('user') ? 'bg-primary text-on_primary rounded-md shadow-xl' : '']"
+          >
             <svg
               class="px-3 w-12 h-auto"
               fill="none"
@@ -25,11 +28,14 @@
           </div>
         </button>
         <button
-          class="block w-full  items-center pt-5"
+          class="block w-full  items-center pt-5 mr-3"
 
           @click="router.push(`/operation`)"
         >
-          <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
+          <div
+            class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl"
+            :class="[route.fullPath.includes('operation') ? 'bg-primary text-on_primary rounded-md shadow-xl' : '']"
+          >
             <svg
               class="px-3 w-12 h-auto"
               fill="none"
@@ -49,7 +55,10 @@
           class="block w-full  items-center pt-5"
           @click="router.push(`/groups`)"
         >
-          <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
+          <div
+            class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl"
+            :class="[route.fullPath.includes('group') ? 'bg-primary text-on_primary rounded-md shadow-xl' : '']"
+          >
             <svg
               class="px-3 w-12 h-auto"
               fill="none"
@@ -72,5 +81,7 @@
 
 <script lang="ts" setup>  
   import {useRouter} from 'vue-router';
+  import { useRoute } from 'vue-router';
   const router = useRouter();
+  const route = useRoute();
 </script>

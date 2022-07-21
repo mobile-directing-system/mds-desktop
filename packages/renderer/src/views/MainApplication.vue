@@ -1,12 +1,10 @@
 <template>
-  <Topnavbar />
-
-  <div class="bottomPartwithSidebar">
-    <div>
-      <Sidebar />
-    </div>
-    <div>
-      <router-view />
+  <div class="flex flex-col">
+    <Topnavbar />
+  
+    <div class="flex flex-row">
+      <Sidebar class=" overflow-x-hidden" />
+      <router-view class=" w-4/5 ml-4" />
     </div>
   </div>
 </template>

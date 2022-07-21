@@ -8,7 +8,7 @@
         <NormalButton
           class=" ml-auto mr-6"
           :btn-text="'+'"
-          @click="router.push('/create-new-user')"
+          @click.prevent="router.push('/create-new-user')"
         />
       </div>
       <div class=" table-fixed place-items-center mr-10">
@@ -30,7 +30,7 @@
             <tr
               v-for="(user,i) in users()" 
               :key="i"
-              class="p-2 border-b-2 border-b-gray-500 bg-white text-black hover:bg-primary_superlight hover:text-white"
+              class="p-2 border-b-2 border-b-gray-500 bg-white text-black hover:bg-primary_superlight hover:text-white cursor-pointer"
             
               @click="selectRow(i, user.id)"
             >      
@@ -46,13 +46,6 @@
             </tr> 
           </tbody>
         </table>
-        <div class="flex justify-between">
-          <NormalButton
-            class=" ml-auto"
-            :btn-text="'Cancel'"
-            @click="router.push('/main');"
-          />
-        </div>
       </div>
     </div>
   </div>
