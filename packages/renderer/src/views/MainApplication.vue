@@ -5,18 +5,12 @@
     <div class="flex flex-row">
       <Sidebar class=" overflow-x-hidden" />
       <router-view class=" w-4/5 ml-4" />
-      <div
-        class="cursor-pointer"
-        @click.prevent="logout()"
-      >
-        Go Back
-      </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
   import { onMounted } from 'vue';
-  import {  useUserState,  useOperationsState, useGroupState, useLoginState } from '../store';
+  import {  useUserState,  useOperationsState, useGroupState} from '../store';
   import  Sidebar from '../components/SideBarMenu.vue';
   import Topnavbar from '../components/TopNavbar.vue';
 //import FormInput from '../components/BasicComponents/FormInput.vue';
@@ -25,7 +19,7 @@
    * if already logged in and if so navigate to
    * the main application view
    */
-  const loginState = useLoginState();
+  //const loginState = useLoginState();
   const userState = useUserState();
 //  const permissionsState = usePermissionsState();
   const operationsState = useOperationsState();
@@ -75,11 +69,9 @@
   function addDeletePermission(userId: string) {
     permissionsState.dispatch('addPermissions', {userId, permissions: [{name: PermissionNames.UserDelete}]});
   }
-  */
   function logout() {
     loginState.dispatch('logout');
   }
-  /*
   function generateOperation() {
     const title = Math.random().toString(36).substring(2, 15);
     const start: Date = new Date();
