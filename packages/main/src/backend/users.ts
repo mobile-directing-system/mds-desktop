@@ -19,16 +19,16 @@ export async function createUser(user: User):Promise<ErrorResult<User>> {
     printAxiosError(axError);
     if(axError.response) {
       if(axError.response.status === 401) {
-        return {error: true, errorMsg: 'Not authenticated'};
+        return {error: true, errorMsg: 'not authenticated'};
       } else if(axError.response.status === 403) {
-        return {error: true, errorMsg: 'Missing Permissions for creating Users'};
+        return {error: true, errorMsg: 'missing permissions for creating users'};
       } else {
-        return {error: true, errorMsg: 'Response Error when creating User'};
+        return {error: true, errorMsg: 'response error when creating user'};
       }
     } else if(axError.request) {
-      return {error: true, errorMsg: 'Request Error when creating User'};
+      return {error: true, errorMsg: 'request error when creating user'};
     } else {
-      return {error: true, errorMsg: 'Error when creating User'};
+      return {error: true, errorMsg: 'error when creating user'};
     }
   }
 }
@@ -47,16 +47,16 @@ export async function updateUser(user: User):Promise<ErrorResult<boolean>> {
     printAxiosError(axError);
     if(axError.response) {
       if(axError.response.status === 401) {
-        return {error: true, errorMsg: 'Not authenticated'};
+        return {error: true, errorMsg: 'aot authenticated'};
       } else if(axError.response.status === 403) {
-        return {error: true, errorMsg: 'Missing Permissions for updating Users'};
+        return {error: true, errorMsg: 'missing permissions for updating users'};
       } else {
-        return {error: true, errorMsg: 'Response Error when updating Users'};
+        return {error: true, errorMsg: 'response error when updating users'};
       }
     } else if(axError.request) {
-      return {error: true, errorMsg: 'Request Error when updating Users'};
+      return {error: true, errorMsg: 'request error when updating users'};
     } else {
-      return {error: true, errorMsg: 'Error when updating Users'};
+      return {error: true, errorMsg: 'error when updating users'};
     }
   }
 }
@@ -79,16 +79,16 @@ export async function updateUserPassword(user_id: string, new_pass: string):Prom
     printAxiosError(axError);
     if(axError.response) {
       if(axError.response.status === 401) {
-        return {error: true, errorMsg: 'Not authenticated'};
+        return {error: true, errorMsg: 'not authenticated'};
       } else if(axError.response.status === 403) {
-        return {error: true, errorMsg: 'Missing Permissions for updating User Passwords'};
+        return {error: true, errorMsg: 'missing permissions for updating user passwords'};
       } else {
-        return {error: true, errorMsg: 'Response Error when updating User Passwords'};
+        return {error: true, errorMsg: 'response error when updating user passwords'};
       }
     } else if(axError.request) {
-      return {error: true, errorMsg: 'Request Error when updating User Passwords'};
+      return {error: true, errorMsg: 'request error when updating user passwords'};
     } else {
-      return {error: true, errorMsg: 'Error when updating User Passwords'};
+      return {error: true, errorMsg: 'error when updating user passwords'};
     }
   }
 }
@@ -107,16 +107,16 @@ export async function deleteUser(userId: string):Promise<ErrorResult<boolean>> {
     printAxiosError(axError);
     if(axError.response) {
       if(axError.response.status === 401) {
-        return {error: true, errorMsg: 'Not authenticated'};
+        return {error: true, errorMsg: 'not authenticated'};
       } else if(axError.response.status === 403) {
-        return {error: true, errorMsg: 'Missing Permissions for deleting Users'};
+        return {error: true, errorMsg: 'missing permissions for deleting users'};
       } else {
-        return {error: true, errorMsg: 'Response Error when deleting Users'};
+        return {error: true, errorMsg: 'response error when deleting users'};
       }
     } else if(axError.request) {
-      return {error: true, errorMsg: 'Request Error when deleting Users'};
+      return {error: true, errorMsg: 'request error when deleting users'};
     } else {
-      return {error: true, errorMsg: 'Error when deleting Users'};
+      return {error: true, errorMsg: 'error when deleting users'};
     }
   }
 }
@@ -139,16 +139,16 @@ export async function retrieveUsers(amount?: number, offset?: number, order_by?:
     printAxiosError(axError);
     if(axError.response) {
       if(axError.response.status === 401) {
-        return {error: true, errorMsg: 'Not authenticated'};
+        return {error: true, errorMsg: 'not authenticated'};
       } else if(axError.response.status === 403) {
-        return {error: true, errorMsg: 'Missing Permissions for retrieving Users'};
+        return {error: true, errorMsg: 'missing permissions for retrieving users'};
       } else {
-        return {error: true, errorMsg: 'Response Error when retrieving Users'};
+        return {error: true, errorMsg: 'response error when retrieving users'};
       }
     } else if(axError.request) {
-      return {error: true, errorMsg: 'Request Error when retrieving Users'};
+      return {error: true, errorMsg: 'request error when retrieving users'};
     } else {
-      return {error: true, errorMsg: 'Error when retrieving Users'};
+      return {error: true, errorMsg: 'error when retrieving users'};
     }
   }
 }
@@ -167,16 +167,16 @@ export async function retrieveUser(userId: string):Promise<ErrorResult<User>> {
     printAxiosError(axError);
     if(axError.response) {
       if(axError.response.status === 401) {
-        return {error: true, errorMsg: 'Not authenticated'};
+        return {error: true, errorMsg: 'not authenticated'};
       } else if(axError.response.status === 403) {
-        return {error: true, errorMsg: 'Missing Permissions for retrieving a User'};
+        return {error: true, errorMsg: 'missing Permissions for retrieving a user'};
       } else {
-        return {error: true, errorMsg: 'Response Error when retrieving a Users'};
+        return {error: true, errorMsg: 'response Error when retrieving a user'};
       }
     } else if(axError.request) {
-      return {error: true, errorMsg: 'Request Error when retrieving a Users'};
+      return {error: true, errorMsg: 'request error when retrieving a user'};
     } else {
-      return {error: true, errorMsg: 'Error when retrieving a Users'};
+      return {error: true, errorMsg: 'error when retrieving a user'};
     }
   }
 }

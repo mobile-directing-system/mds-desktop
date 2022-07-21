@@ -9,6 +9,9 @@ import AllOperationsVue from '../views/AllOperations.vue';
 import CreateNewOperation from '../views/CreateNewOperation.vue';
 import EditOperation from '../views/EditOperation.vue';
 
+import EditGroup from '../views/EditGroup.vue';
+import AllGroups from '../views/AllGroups.vue';
+import CreateNewGroup from '../views/CreateNewGroup.vue';
 
 const routes:RouteRecordRaw[] = [
     {
@@ -51,6 +54,21 @@ const routes:RouteRecordRaw[] = [
                 path: 'edit-operation/:selectedOperationID',
                 name: 'EditCurrentOperation',
                 component: EditOperation,
+            },
+            {
+                path: '/groups',
+                name: 'Groups',
+                component: AllGroups,
+            },
+            {
+                path: '/edit-group/:selectedGroupID',
+                name: 'EditCurrentGroup',
+                component: EditGroup,
+            },
+            {
+                path: '/create-new-group',
+                name: 'CreateGroup',
+                component: CreateNewGroup,
             },
         ],
     },

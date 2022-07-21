@@ -80,7 +80,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
   async updateUser(user: User) {
     const userUpdated:ErrorResult<boolean> = await updateUser(undom(user));
     if(userUpdated.res && !userUpdated.error) {
-      this.actions.retreiveUserById(user.id);
+      this.actions.retrieveUserById(user.id);
     } else {
       handleErrors(userUpdated.error, userUpdated.errorMsg, this.errorState);
     }
@@ -93,7 +93,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
       handleErrors(userDeleted.error, userDeleted.errorMsg, this.errorState);
     }
   }
-  async retreiveUsers({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
+  async retrieveUsers({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
     const retrievedUsers: ErrorResult<User[]> = await retrieveUsers(amount, offset, orderBy, orderDir);
     if(retrievedUsers.res && !retrievedUsers.error) {
       this.mutations.setUsers(retrievedUsers.res);
@@ -101,7 +101,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
       handleErrors(retrievedUsers.error, retrievedUsers.errorMsg, this.errorState);
     }
   }
-  async retreiveUserById(userId: string) {
+  async retrieveUserById(userId: string) {
     const retrievedUser: ErrorResult<User> = await retrieveUser(userId);
     if(retrievedUser.res && !retrievedUser.error) {
       this.mutations.addOrUpdateUser(retrievedUser.res);
