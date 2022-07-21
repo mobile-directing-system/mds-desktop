@@ -1,136 +1,25 @@
 <template>
-  <Topnavbar />
-  <div class="bottomPartwithSidebar">
-    <div>
-      <Sidebar />
+  <div class="flex flex-col">
+    <Topnavbar />
+  
+    <div class="flex flex-row">
+      <Sidebar class=" overflow-x-hidden" />
+      <router-view class=" w-4/5 ml-4" />
+      <div
+        class="cursor-pointer"
+        @click.prevent="logout()"
+      >
+        Go Back
+      </div>
     </div>
-    <div>
-      <router-view />
-    </div>
   </div>
-  <h3>Main Application Goes Here</h3>
-  <div
-    class="cursor-pointer"
-    @click.prevent="logout()"
-  >
-    Go Back
-  </div>
-  <div
-    v-for="user in users()"
-    :key="user.id"
-  >
-    <div>{{ user }}:{{ permissions().get(user.id) }}</div>
-    <NormalButton
-      :btn-text="`Update ${user.username}`"
-      @click.prevent="updateUser(user.id)"
-    />
-    <NormalButton
-      :btn-text="`Update Password for ${user.username}`"
-      @click.prevent="updateUserPw(user.id)"
-    />
-    <NormalButton
-      :btn-text="`Delete ${user.username}`"
-      @click.prevent="deleteUser(user.id)"
-    />
-    <NormalButton
-      :btn-text="`Add user.create Permission to ${user.username}`"
-      @click.prevent="addCreatePermission(user.id)"
-    />
-    <NormalButton
-      :btn-text="`Add user.delete Permission to ${user.username}`"
-      @click.prevent="addDeletePermission(user.id)"
-    />
-  </div>
-  <NormalButton
-    btn-text="Generate New User"
-    @click.prevent="generateUser()"
-  />
-  <form>
-    <FormInput
-      id="user_id"
-      v-model="userId"
-      label="Username"
-    />
-    <NormalButton
-      id="submit"
-      btn-text="Fetch User By Id"
-      type="submit"
-      @click.prevent="fetchUser(userId)"
-    />
-  </form>
-  <NormalButton
-    btn-text="Load Permissions"
-    @click.prevent="loadPermissions()"
-  />
-  <div
-    v-for="operation in operations()"
-    :key="operation.id"
-  >
-    <div>{{ operation }}</div>
-    <NormalButton
-      :btn-text="`Update ${operation.title}`"
-      @click.prevent="updateOperation(operation.id)"
-    />
-  </div>
-  <NormalButton
-    btn-text="Generate New Operation"
-    @click.prevent="generateOperation()"
-  />
-  <form>
-    <FormInput
-      id="opertion_id"
-      v-model="operationId"
-      label="Operation"
-    />
-    <NormalButton
-      id="submit"
-      btn-text="Fetch Operation By Id"
-      type="submit"
-      @click.prevent="fetchOperation(operationId)"
-    />
-  </form>
-  <div
-    v-for="group in groups()"
-    :key="group.id"
-  >
-    <div>{{ group }}</div>
-    <NormalButton
-      :btn-text="`Update ${group.title}`"
-      @click.prevent="updateGroup(group.id)"
-    />
-    <NormalButton
-      :btn-text="`Delete ${group.title}`"
-      @click.prevent="deleteGroup(group.id)"
-    />
-  </div>
-  <NormalButton
-    btn-text="Generate New Group"
-    @click.prevent="generateGroup()"
-  />
-  <form>
-    <FormInput
-      id="group_id"
-      v-model="groupId"
-      label="Group"
-    />
-    <NormalButton
-      id="submit"
-      btn-text="Fetch Group By Id"
-      type="submit"
-      @click.prevent="fetchGroup(groupId)"
-    />
-  </form>
 </template>
-
 <script lang="ts" setup>
-  import { ref, computed, onMounted } from 'vue';
-  import { useLoginState, useUserState, usePermissionsState, useOperationsState, useGroupState } from '../store';
-  import NormalButton from '../components/BasicComponents/NormalButton.vue';
-  import { updateUserPassword } from '#preload';
-  import { PermissionNames } from '../constants';
+  import { onMounted } from 'vue';
+  import {  useUserState,  useOperationsState, useGroupState, useLoginState } from '../store';
   import  Sidebar from '../components/SideBarMenu.vue';
   import Topnavbar from '../components/TopNavbar.vue';
-import FormInput from '../components/BasicComponents/FormInput.vue';
+//import FormInput from '../components/BasicComponents/FormInput.vue';
   /**
    * load router and logininfo store to check
    * if already logged in and if so navigate to
@@ -138,11 +27,12 @@ import FormInput from '../components/BasicComponents/FormInput.vue';
    */
   const loginState = useLoginState();
   const userState = useUserState();
-  const permissionsState = usePermissionsState();
+//  const permissionsState = usePermissionsState();
   const operationsState = useOperationsState();
   const groupState = useGroupState();
+  //const router = useRouter();
 
-  const users = computed(() => userState.getters.users);
+/*  const users = computed(() => userState.getters.users);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const permissions = computed(() => permissionsState.getters.getPermissions);
   const operations = computed(() => operationsState.getters.operations);
@@ -150,13 +40,15 @@ import FormInput from '../components/BasicComponents/FormInput.vue';
   const userId = ref('');
   const operationId = ref('');
   const groupId = ref('');
-
+*/
   onMounted(() => {
     userState.dispatch('retrieveUsers', {});
     operationsState.dispatch('retrieveOperations', {});
     groupState.dispatch('retrieveGroups', {});
+    //router.push('/main/user');
   });
 
+/*
   function fetchUser(userId: string) {
     userState.dispatch('retrieveUserById', userId);
   }
@@ -166,9 +58,6 @@ import FormInput from '../components/BasicComponents/FormInput.vue';
     userState.dispatch('updateUser', {...updatedUser, username: `${updatedUser.username}u`});
   }
 
-  function deleteUser(userId: string) {
-    userState.dispatch('deleteUserById', userId);
-  }
 
   function updateUserPw(userId: string) {
     updateUserPassword(userId, 'testpw');
@@ -186,11 +75,11 @@ import FormInput from '../components/BasicComponents/FormInput.vue';
   function addDeletePermission(userId: string) {
     permissionsState.dispatch('addPermissions', {userId, permissions: [{name: PermissionNames.UserDelete}]});
   }
-
+  */
   function logout() {
     loginState.dispatch('logout');
   }
-
+  /*
   function generateOperation() {
     const title = Math.random().toString(36).substring(2, 15);
     const start: Date = new Date();
@@ -253,7 +142,7 @@ import FormInput from '../components/BasicComponents/FormInput.vue';
       pass: 'testtest',
     });
   }
-
+*/
 </script>
 <style scoped>
   .bottomPartwithSidebar {

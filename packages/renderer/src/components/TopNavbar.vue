@@ -14,7 +14,7 @@
           </router-link>
         </div>
 
-        <div class=" px-16 mr-96 ">
+        <div class=" px-16 ">
           <router-link
             to="/main"
             class=" px-3 hover:bg-primary hover:text-on_primary hover:rounded-lg hover:shadow-xl"
@@ -23,7 +23,7 @@
           </router-link>
         </div>
         <!-- Settings -->
-        <div class="hover:bg-primary hover:text-on_primary hover:rounded-xl hover:shadow-xl flex lg:absolute lg:right-10">
+        <div class="hover:bg-primary hover:text-on_primary hover:rounded-xl hover:shadow-xl flex ml-auto mr-5">
           <router-link to="/main">
             <svg
               class="w-8 h-auto"

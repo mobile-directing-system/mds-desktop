@@ -1,16 +1,16 @@
 <template>
-  <header class=" max-w-lg mx-auto">
-    <h1 class="text-4xl font-bold text-on_background text-center">
+  <header class=" max-w-lg ml-4 my-10">
+    <h1 class="text-4xl font-bold text-on_background ">
       Create a new User
     </h1>        
   </header>
-  <div class="grid place-items-center">
+  <div class="ml-4">
     <form class="w-80">
-      <main class="bg-background mx-auto max-w-lg p-8 rounded-lg shadow-2xl my-10">
+      <main class="">
         <!------- Username  ------>
         <FormInput
           id="username"
-          v-model="username"
+          v-model="userName"
           label="Username"
         />
         <!------- first_name  ------>
@@ -33,12 +33,21 @@
           type="password"
         />
         <!--- Submit Button --->
-        <NormalButton
-          id="submit"
-          btn-text="Submit"
-          type="submit"
-          @click.prevent="onSubmit"
-        />
+        
+        <div class=" pt-4 flex justify-between">
+          <NormalButton
+            id="submit"
+            class=""
+            btn-text="Submit"
+            type="submit"
+            @click.prevent="createNewUser(userName, firstName, lastName,iPassword)"
+          />
+          <NormalButton
+            class=" ml-auto"
+            :btn-text="'Cancel'"
+            @click.prevent="router.push('/user')"
+          />
+        </div>
       </main>
     </form>
   </div>
@@ -50,20 +59,29 @@
     import { useRouter } from 'vue-router';
     import FormInput from '../components/BasicComponents/FormInput.vue';
     import NormalButton from '../components/BasicComponents/NormalButton.vue';
-    import type { Router } from 'vue-router';
+    import {useUserState} from '../store';
 
-    const router:Router = useRouter();
-
-    const username = ref('');
+    const userName = ref('');
     const firstName = ref('');
     const lastName = ref('');
-    const iPassword = ref('');
+    const iPassword = ref(''); 
+    const userState = useUserState();
+    const router = useRouter();
 
-    async function onSubmit() {
-        const loggedIn = username.value!='' && firstName.value != '' && lastName.value!='' && iPassword.value !='';
-        console.log(loggedIn);
-        if(loggedIn) {
-            router.push('/main');
-        } 
-    }
+    function createNewUser( username: string, firstname: string, lastname :string, ipassword : string) {
+        userState.dispatch('createUser', {
+            id: '',
+            username: username,
+            first_name: firstname,
+            last_name: lastname,
+            is_admin: false,
+            pass: ipassword,
+        });
+        userName.value = '';
+        firstName.value ='';
+        lastName.value ='';
+        iPassword.value = '';
+  }
+
 </script>
+

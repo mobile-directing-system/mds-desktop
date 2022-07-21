@@ -1,14 +1,17 @@
 <template>
-  <div class="relative flex min-h-screen">
-    <div class="bg-background text-primary border-primary border-r-2 w-1/5 min-w-fit">
+  <div class=" flex min-h-screen pt-auto">
+    <div class="bg-white text-blue-700 border-blue-700 border-r-2 w-1/5 min-w-fit py-3">
       <!-- SideBar -->
             
       <main>
         <button
-          class="block w-full  items-center pt-10 "
-          @click="showUserOption = !showUserOption"
+          class="block w-full  items-center pt-10 mr-3"
+          @click="router.push('/user')"
         >
-          <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
+          <div
+            class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl"
+            :class="[route.fullPath.includes('user') ? 'bg-primary text-on_primary rounded-md shadow-xl' : '']"
+          >
             <svg
               class="px-3 w-12 h-auto"
               fill="none"
@@ -22,44 +25,17 @@
               d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
             /></svg>
             <span class="text-2xl"> Users </span>
-            <svg
-              class="lg:right-5 w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            ><path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"
-            /></svg>
           </div>
         </button>
-        <!-- Dropdown -->
-        <div
-          v-show="showUserOption"
-          class="box ml-12 mr-3 rounded-md py-2 mt-2 bg-background shadow-xl  lg:right-0 border-l-2 border-primary"
-        >
-          <router-link
-            to="/main"
-            class="block px-4 py-2 text-base hover:bg-primary hover:rounded-sm hover:text-on_primary"
-          >
-            Add User
-          </router-link>
-          <router-link
-            to="/main"
-            class="block px-4 py-2 text-base hover:bg-primary hover:rounded-sm hover:text-on_primary"
-          >
-            All Users
-          </router-link>
-        </div>
         <button
-          class="block w-full  items-center pt-5"
+          class="block w-full  items-center pt-5 mr-3"
 
-          @click="showOperationOption = !showOperationOption"
+          @click="router.push(`/operation`)"
         >
-          <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
+          <div
+            class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl"
+            :class="[route.fullPath.includes('operation') ? 'bg-primary text-on_primary rounded-md shadow-xl' : '']"
+          >
             <svg
               class="px-3 w-12 h-auto"
               fill="none"
@@ -73,43 +49,16 @@
               d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
             /></svg>
             <span class="text-2xl"> Operations </span>
-            <svg
-              class="lg:right-5 w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            ><path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"
-            /></svg>
           </div>
         </button>
-        <!-- Dropdown -->
-        <div
-          v-show="showOperationOption"
-          class="box ml-12 mr-3 rounded-md py-2 mt-2 bg-background  shadow-xl  lg:right-0 border-l-2 border-primary"
-        >
-          <router-link
-            to="/main"
-            class="block px-4 py-2 text-base hover:bg-primary hover:rounded-sm hover:text-on_primary"
-          >
-            Add Operation
-          </router-link>
-          <router-link
-            to="/main"
-            class="block px-4 py-2 text-base hover:bg-primary hover:rounded-sm hover:text-on_primary"
-          >
-            All Operations
-          </router-link>
-        </div>
         <button
           class="block w-full  items-center pt-5"
-          @click="groups()"
+          @click="router.push(`/groups`)"
         >
-          <div class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl">
+          <div
+            class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl"
+            :class="[route.fullPath.includes('group') ? 'bg-primary text-on_primary rounded-md shadow-xl' : '']"
+          >
             <svg
               class="px-3 w-12 h-auto"
               fill="none"
@@ -130,20 +79,9 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-    import { ref } from 'vue';
-    import { useRouter } from 'vue-router';
-
-    const router = useRouter();
-
-    const showOperationOption = ref(false);
-
-    const showUserOption = ref(false);
-    
-
-    function groups() {
-      console.log('groups'); 
-      router.push('/groups');
-    }
-
+<script lang="ts" setup>  
+  import {useRouter} from 'vue-router';
+  import { useRoute } from 'vue-router';
+  const router = useRouter();
+  const route = useRoute();
 </script>
