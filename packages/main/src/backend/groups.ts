@@ -78,7 +78,7 @@ export async function retrieveGroups(amount?: number, offset?: number, order_by?
   try {
     //explicit use of != instead of !== as a != null is equivalent to a !== null | a !== undefined
     const response = await Backend.instance.get(`${endpoint}/?${(amount != null)? `&limit=${amount}` : ''}${(offset != null)? `&offset=${offset}` : ''}${(order_by != null)? `&order_by=${order_by}` : ''}${(order_dir != null)? `&order_dir=${order_dir}` : ''}`);
-    return {res: response.data.entries, error: false};
+    return {res: response.data.entries, error: false, total: response.data.total};
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);

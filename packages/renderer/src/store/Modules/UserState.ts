@@ -14,6 +14,8 @@ function undom(user: User):User {
  */
 class UserState {
   users: User[] = [];
+  page: User[] = [];
+  total = 0;
 }
 
 /**
@@ -25,14 +27,39 @@ class UserStateGetters extends Getters<UserState> {
       return this.state.users;
     };
   }
+  get page() {
+    return () => {
+      return this.state.page;
+    };
+  }
+  get total() {
+    return () => {
+      return this.state.total;
+    };
+  }
 }
 
 /**
  * define mutations to change the state
  */
 class UserStateMutations extends Mutations<UserState> {
+  setPage(users: User[]) {
+    this.state.page = users;
+  }
   setUsers(users: User[]) {
     this.state.users = users;
+  }
+  setTotal(total: number) {
+    this.state.total = total;
+  }
+  addOrUpdateUsers(users: User[]) {
+    users.map((user) => {
+      if (this.state.users.filter((elem) => elem.id === user.id).length > 0) {
+        this.state.users = this.state.users.map((elem) => (elem.id === user.id)? user : elem);
+      } else{
+        this.state.users = [...this.state.users, user];
+      }
+    });
   }
   addUser(user: User) {
     this.state.users = [...this.state.users, user];
@@ -68,7 +95,10 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
   $init(store: Store<any>): void {
     this.errorState = errorState.context(store);
   }
-
+  async clearUsers() {
+    this.mutations.setUsers([]);
+    this.mutations.setPage([]);
+  }
   async createUser(user: User) {
     const createdUser:ErrorResult<User> = await createUser(undom(user));
     if(createdUser.res && !createdUser.error) {
@@ -95,8 +125,10 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
   }
   async retrieveUsers({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
     const retrievedUsers: ErrorResult<User[]> = await retrieveUsers(amount, offset, orderBy, orderDir);
-    if(retrievedUsers.res && !retrievedUsers.error) {
-      this.mutations.setUsers(retrievedUsers.res);
+    if(retrievedUsers.res && retrievedUsers.total !== undefined && !retrievedUsers.error) {
+      this.mutations.setPage(retrievedUsers.res);
+      this.mutations.addOrUpdateUsers(retrievedUsers.res);
+      this.mutations.setTotal(retrievedUsers.total);
     } else {
       handleErrors(retrievedUsers.error, retrievedUsers.errorMsg, this.errorState);
     }

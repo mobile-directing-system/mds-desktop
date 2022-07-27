@@ -17,6 +17,8 @@ function undom(group: Group):Group {
  */
 class GroupState {
   groups: Group[] = [];
+  page: Group[] = [];
+  total = 0;
 }
 
 /**
@@ -28,13 +30,34 @@ class GroupStateGetters extends Getters<GroupState> {
       return this.state.groups;
     };
   }
+  get page() {
+    return () => {
+      return this.state.page;
+    };
+  }
+  get total() {
+    return() => {
+      return this.state.total;
+    };
+  }
 }
 
 /**
  * define mutations to change the state
  */
 class GroupStateMutations extends Mutations<GroupState> {
+  setPage(groups: Group[]) {this.state.page = groups;}
   setGroups(groups: Group[]) {this.state.groups = groups;}
+  setTotal(total: number) {this.state.total = total;}
+  addOrUpdateGroups(groups: Group[]) {
+    groups.map((group) => {
+      if (this.state.groups.filter((elem) => elem.id === group.id).length > 0) {
+        this.state.groups = this.state.groups.map((elem) => (elem.id === group.id)? group : elem);
+      } else {
+        this.state.groups = [...this.state.groups, group];
+      }
+    });
+  }
   addGroup(group: Group){this.state.groups = [...this.state.groups, group];}
   addOrUpdateGroup(group: Group) {
     if (this.state.groups.filter((elem) => elem.id === group.id).length > 0) {
@@ -60,7 +83,10 @@ class GroupStateActions extends Actions<GroupState, GroupStateGetters, GroupStat
   $init(store: Store<any>): void {
     this.errorState = errorState.context(store);
   }
-
+  async clearGroups() {
+    this.mutations.setGroups([]);
+    this.mutations.setPage([]);
+  }
   async createGroup(group: Group) {
     const createdGroup:ErrorResult<Group> = await createGroup(undom(group));
     if(createdGroup.res && !createdGroup.error) {
@@ -87,8 +113,10 @@ class GroupStateActions extends Actions<GroupState, GroupStateGetters, GroupStat
   }
   async retrieveGroups({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
     const retrievedGroups:ErrorResult<Group[]> = await retrieveGroups(amount, offset, orderBy, orderDir);
-    if(retrievedGroups.res && !retrievedGroups.error) {
-      this.mutations.setGroups(retrievedGroups.res);
+    if(retrievedGroups.res && retrievedGroups.total !== undefined && !retrievedGroups.error) {
+      this.mutations.setPage(retrievedGroups.res);
+      this.mutations.addOrUpdateGroups(retrievedGroups.res);
+      this.mutations.setTotal(retrievedGroups.total);
     }  else {
       handleErrors(retrievedGroups.error, retrievedGroups.errorMsg, this.errorState);
     }
