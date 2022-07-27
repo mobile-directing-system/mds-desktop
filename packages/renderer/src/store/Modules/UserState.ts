@@ -1,7 +1,7 @@
 import type { Store } from 'vuex';
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
 import type { Context } from 'vuex-smart-module';
-import { createUser, updateUser, deleteUser, retrieveUser, retrieveUsers } from '#preload';
+import { createUser, updateUser, deleteUser, retrieveUser, retrieveUsers, updateUserPassword } from '#preload';
 import type { User, ErrorResult } from '../../../../types';
 import { errorState, handleErrors } from './ErrorState';
 
@@ -113,6 +113,12 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
       this.actions.retrieveUserById(user.id);
     } else {
       handleErrors(userUpdated.error, userUpdated.errorMsg, this.errorState);
+    }
+  }
+  async updateUserPasswordById({userId, pass}:{userId: string, pass: string}) {
+    const userPasswordUpdated:ErrorResult<boolean> = await updateUserPassword(userId, pass);
+    if(!userPasswordUpdated.res && userPasswordUpdated.error) {
+      handleErrors(userPasswordUpdated.error, userPasswordUpdated.errorMsg, this.errorState);
     }
   }
   async deleteUserById(userId: string) {
