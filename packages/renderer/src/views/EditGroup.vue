@@ -219,7 +219,10 @@
   onMounted(() => {
     groupState.dispatch('retrieveGroups', {amount: 100});
     operationsState.dispatch('retrieveOperations', {amount: 100});
-    userState.dispatch('retrieveUsers', {amount: 100});
+    //get page for member selection
+    userState.dispatch('retrieveUsers', {amount: 100, offset: 0});
+    //get users for displaying with group
+    currentGroup.members.map((elem) => userState.dispatch('retrieveUserById', elem ));
   });
 
   function editGroup(){

@@ -16,6 +16,8 @@ function undom(operation: Operation):Operation {
  */
 class OperationsState {
   operations: Operation[] = [];
+  page: Operation[] = [];
+  total = 0;
 }
 
 /**
@@ -27,6 +29,16 @@ class OperationsStateGetters extends Getters<OperationsState> {
       return this.state.operations;
     };
   }
+  get page() {
+    return () => {
+      return this.state.page;
+    };
+  }
+  get total() {
+    return () => {
+      return this.state.total;
+    };
+  }
 }
 
 /**
@@ -35,6 +47,21 @@ class OperationsStateGetters extends Getters<OperationsState> {
 class OperationsStateMutations extends Mutations<OperationsState> {
   setOperations(operations: Operation[]) {
     this.state.operations = operations;
+  }
+  setPage(page: Operation[]) {
+    this.state.page = page;
+  }
+  setTotal(total: number) {
+    this.state.total = total;
+  }
+  addOrUpdateOperations(operations: Operation[]) {
+    operations.map((operation) => {
+      if (this.state.operations.filter((elem) => elem.id === operation.id).length > 0) {
+        this.state.operations = this.state.operations.map((elem) => (elem.id === operation.id)? operation : elem);
+      } else {
+          this.state.operations = [...this.state.operations, operation];
+      }
+    });
   }
   addOperation(operation: Operation) {
     this.state.operations = [...this.state.operations, operation];
@@ -69,6 +96,10 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
     this.errorState = errorState.context(store);
   }
 
+  async clearOperations() {
+    this.mutations.setOperations([]);
+  }
+
   async createOperation(operation: Operation) {
     const createdOperation: ErrorResult<Operation> = await createOperation(undom(operation));
     if(createdOperation.res && !createdOperation.error) {
@@ -98,8 +129,10 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
 
   async retrieveOperations({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
     const retrievedOperations: ErrorResult<Operation[]> = await retrieveOperations(amount, offset, orderBy, orderDir);
-    if(retrievedOperations.res && !retrievedOperations.error) {
-      this.mutations.setOperations(retrievedOperations.res);
+    if(retrievedOperations.res && retrievedOperations.total !== undefined && !retrievedOperations.error) {
+      this.mutations.setPage(retrievedOperations.res);
+      this.mutations.addOrUpdateOperations(retrievedOperations.res);
+      this.mutations.setTotal(retrievedOperations.total);
     }  else {
       handleErrors(retrievedOperations.error, retrievedOperations.errorMsg, this.errorState);
     }

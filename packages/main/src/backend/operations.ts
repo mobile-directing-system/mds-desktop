@@ -57,7 +57,7 @@ export async function retrieveOperations(amount?: number, offset?: number, order
     const response = await Backend.instance.get(`${endpoint}/?${(amount != null)? `&limit=${amount}` : ''}${(offset != null)? `&offset=${offset}` : ''}${(order_by != null)? `&order_by=${order_by}` : ''}${(order_dir != null)? `&order_dir=${order_dir}` : ''}`);
     return {res: response.data.entries.map((elem:{id: string, title: string, description: string, start: string, end: string, is_archived: boolean}) => {
       return { ...elem, start: new Date(elem.start), end: new Date(elem.end) };
-    }), error: false};
+    }), total: response.data.total, error: false};
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
