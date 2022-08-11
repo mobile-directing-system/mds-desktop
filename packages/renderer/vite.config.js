@@ -21,7 +21,6 @@ const config = {
   },
   base: '',
   server: {
-    port: 7000, 
     fs: {
       strict: true,
     },
