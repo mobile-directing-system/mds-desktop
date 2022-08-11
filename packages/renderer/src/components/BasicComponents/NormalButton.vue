@@ -4,7 +4,7 @@
     v-bind="$attrs"
     @click=" emitClickEvent($event)"
   >
-    {{ props.btnText }}
+    <slot />
   </button>
 </template>
 
@@ -25,7 +25,6 @@
    * where you use the component.
    */
   interface Props {
-    btnText: string;
     disabled?: boolean;
   }
   const props = defineProps<Props>();

@@ -31,17 +31,19 @@
       <div class="flex gap-5">
         <NormalButton
           class="mt-4 ml-auto"
-          :btn-text="'Previous'"
           :disabled="showPreviousButton? false:true"
           @click="previousPage()"
-        />
+        >
+          Previous
+        </NormalButton>
         {{ paginationPage + 1 }}/{{ paginationMaxPages }}
         <NormalButton
           class="mt-4 ml-auto"
-          :btn-text="'Next'"
           :disabled="showNextButton? false:true"
           @click="nextPage()"
-        />
+        >
+          Next
+        </NormalButton>
       </div>
     </div>
   </div>
@@ -61,7 +63,6 @@
     initialPage?: number;
   }
   const props = defineProps<Props>();
-  // eslint-disable-next-line
   const emit = defineEmits<{
     (name: 'updatePage', {amount, offset}:{amount: number, offset: number}): void
     (name: 'click', entityId: string): void

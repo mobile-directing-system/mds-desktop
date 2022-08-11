@@ -7,9 +7,10 @@
         </h1>
         <NormalButton
           class=" ml-auto mr-6"
-          :btn-text="'+'"
           @click.prevent="router.push('/create-new-group')"
-        />
+        >
+          +
+        </NormalButton>
       </div>
       <PaginatedTable 
         :contents="contents"
@@ -20,13 +21,6 @@
         @click="selectRow($event)"
         @update-page="updatePage($event.amount, $event.offset)"
       />
-      <div class="flex justify-between">
-        <NormalButton
-          class="mt-4 ml-auto"
-          :btn-text="'Cancel'"
-          @click="router.push('/main');"
-        />
-      </div>
     </div>
   </div>
 </template>

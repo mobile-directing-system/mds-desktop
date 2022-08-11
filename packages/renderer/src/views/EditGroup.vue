@@ -49,9 +49,10 @@
             <label class="block text-sm font-medium text-gray-900 dark:text-gray-400">Group Members</label>
             <!-- Add Members Button -->
             <NormalButton
-              btn-text="+"
               @click.prevent="toggleMembersModal()"
-            />
+            >
+              +
+            </NormalButton>
           </div>
           <!-- Members Table -->
           <div class="table-fixed place-items-center mr-10 -ml-5">
@@ -151,13 +152,15 @@
               <div class="flex justify-between">
                 <NormalButton
                   class="mr-2"
-                  btn-text="Add Members"
                   @click.prevent="addMembers()"
-                />
+                >
+                  Add Members
+                </NormalButton>
                 <NormalButton 
-                  btn-text="Cancel"
                   @click.prevent="toggleMembersModal()"
-                />
+                >
+                  Cancel
+                </NormalButton>
               </div>
             </div>
           </div>
@@ -167,21 +170,24 @@
         <div class="flex justify-between">
           <NormalButton 
             v-if="updatedGroupTitle != '' && updatedGroupOperationId != ''"
-            :btn-text="'Update Group'"
             @click.prevent="editGroup()"
-          />
+          >
+            Update Group
+          </NormalButton>
           <NormalButton
             class="ml-auto"
-            :btn-text="'Delete Group'"
             @click.prevent="deleteGroup()"
-          />
+          >
+            Delete Group
+          </NormalButton>
         </div>
         <div class=" pt-4 flex justify-between">
           <NormalButton
             class=" ml-auto"
-            :btn-text="'Cancel'"
             @click.prevent="router.push('/groups')"
-          />
+          >
+            Cancel
+          </NormalButton>
         </div>
       </main>
     </form>

@@ -36,21 +36,24 @@
         <div class="flex justify-between">
           <NormalButton 
             v-if="updatedUserFirstName != '' && updatedUserName != '' && updatedUserLastName != ''"
-            :btn-text="'Update User'"
             @click.prevent="editUser()"
-          />
+          >
+            Update User
+          </NormalButton>
           <NormalButton
             class="ml-auto"
-            :btn-text="'Delete User'"
             @click.prevent="deleteUser()"
-          />
+          >
+            Delete User
+          </NormalButton>
         </div>
         <div class=" pt-4 flex justify-between">
           <NormalButton
             class=" ml-auto"
-            :btn-text="'Cancel'"
             @click.prevent="router.push('/user')"
-          />
+          >
+            Cancel
+          </NormalButton>
         </div>
       </main>
     </form>
