@@ -5,13 +5,14 @@
         Group Information
       </h1>        
     </header>
-    <form class="w-80">
+    <form class="w-100">
       <main class="">
         <!------- Title  ------>
         <div class="mb-6">
           <FormInput
             id="title"
             v-model="updatedGroupTitle"
+            div-class="w-80"
             label="Title"
           />
         </div>
@@ -20,19 +21,20 @@
           <FormInput
             id="description"
             v-model="updatedGroupDescription"
+            div-class="w-80"
             label="Description"
           />
         </div>
         <!------- Operation  ------>
-        <div class="mb-6">
+        <div class="mb-6 w-80">
           <label
             for="operations"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+            class="block mb-2 text-sm font-medium text-on_background"
           >Select an Operation</label>
           <select
             id="operations"
             v-model="updatedGroupOperationId"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-surface_superlight border border-surface_dark text-on_surface_superlight text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           >
             <option
               v-for="operation in operations()"
@@ -46,7 +48,7 @@
         <!-- Members -->
         <div class="mb-6">
           <div class="flex justify-between">
-            <label class="block text-sm font-medium text-gray-900 dark:text-gray-400">Group Members</label>
+            <label class="block text-sm font-medium text-on_background">Group Members</label>
             <!-- Add Members Button -->
             <NormalButton
               @click.prevent="toggleMembersModal()"
@@ -55,118 +57,158 @@
             </NormalButton>
           </div>
           <!-- Members Table -->
-          <div class="table-fixed place-items-center mr-10 -ml-5">
-            <table class=" border-spacing-2 w-full rounded-md overflow-hidden m-4">
-              <thead class=" bg-blue-700 font-bold text-white text-l text-left text-lg">
-                <tr class="p-2">
-                  <th class="p-2">
-                    User Name
-                  </th>
-                  <th class="p-2">
-                    Firstname
-                  </th>
-                  <th class="p-2">
-                    Lastname
-                  </th>
-                  <th class="p-2" />
-                </tr>
-              </thead> 
-              <tbody class="text-left">     
-                <tr
-                  v-for="userId in updatedGroupMemberIds" 
-                  :key="userId"
-                  class="p-2 border-b-2 border-b-gray-500 bg-background text-on_background"
-                >      
-                  <td class="p-2">
-                    {{ users().filter((elem) => elem.id === userId)[0]?.username }}
-                  </td>
-                  <td class="p-2">
-                    {{ users().filter((elem) => elem.id === userId)[0]?.first_name }}
-                  </td>
-                  <td class="p-2">
-                    {{ users().filter((elem) => elem.id === userId)[0]?.last_name }}
-                  </td>
-                  <td>
-                    <!-- Delete Member Button -->
-                    <button
-                      type="button"
-                      class="bg-background text-on_background hover:bg-surface_dark hover:text-on_surface_dark rounded-lg focus:ring-2 focus:ring-surface p-1.5 inline-flex h-8 w-8 "
-                      @click.prevent="updatedGroupMemberIds = updatedGroupMemberIds.filter((elem) => elem !== userId)"
-                    >
-                      <span class="sr-only">Close</span>
-                      <svg
-                        class="w-5 h-5"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                  </td>
-                </tr> 
-              </tbody>
-            </table>
-          </div>
-          <!-- Opaque Overlay behind Modal -->
-          <div
-            v-if="showMembersModal"
-            class="absolute inset-0 z-40 opacity-25 bg-black"
-          />
-          <!-- Add Member Modal -->
-          <div
-            v-if="showMembersModal"
-            class="fixed overflow-x-hidden overflow-y-auto inset-0 flex justify-center items-center z-50"
+          <TableContainer
+            class="-ml-4"
+            :contents="updatedGroupMemberIds"
+            id-identifier="id"
           >
-            <div
-              class="relative mx-auto w-auto p-2 max-w-2xl bg-white rounded"
-            >
-              <div class="mb-6">
-                <label
-                  for="members"
-                  class="mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-                >Select an Operation</label>
-                <FormInput
-                  v-model="addMemberSearchTerm"
-                  placeholder="Search..."
-                />
-                <select
-                  id="members"
-                  v-model="addGroupMemberIds"
-                  multiple
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                >
-                  <option
-                    v-for="user in users().filter((elem1) => updatedGroupMemberIds.findIndex((elem2) => elem1.id === elem2 ) === -1).filter((elem) => elem.username.includes(addMemberSearchTerm) || elem.first_name.includes(addMemberSearchTerm) || elem.last_name.includes(addMemberSearchTerm))"
-                    :key="user.id"
-                    :value="user.id"
+            <template #tableHeader>
+              <TableHeader :num-of-cols="4">
+                <template #header1>
+                  User Name
+                </template>
+                <template #header2>
+                  Firstname
+                </template>
+                <template #header3>
+                  Lastname
+                </template>
+              </TableHeader>
+            </template>
+            <template #tableRow="{rowData}:{rowData:User}">
+              <TableRow
+                class="hover:bg-background cursor-auto"
+                :num-of-cols="4"
+                :row-data="rowData"
+                :identifier="rowData.id"
+                :t-data-class="'p-2'"
+              >
+                <template #data1="{data}:{data: string}">
+                  {{ users().filter((elem) => elem.id === data)[0]?.username }}
+                </template>
+                <template #data2="{data}:{data: string}">
+                  {{ users().filter((elem) => elem.id === data)[0]?.first_name }}
+                </template>
+                <template #data3="{data}:{data: string}">
+                  {{ users().filter((elem) => elem.id === data)[0]?.last_name }}
+                </template>
+                <template #data4="{data}:{data: string}">
+                  <button
+                    type="button"
+                    class="bg-background text-on_background hover:bg-surface_dark hover:text-on_surface_dark rounded-lg focus:ring-2 focus:ring-surface p-1.5 inline-flex h-8 w-8 "
+                    @click.prevent="updatedGroupMemberIds = updatedGroupMemberIds.filter((elem) => elem !== data)"
                   >
-                    {{ user.username }}
-                  </option>
-                </select>
-              </div>
-              <div class="flex justify-between">
-                <NormalButton
-                  class="mr-2"
-                  @click.prevent="addMembers()"
+                    <span class="sr-only">Close</span>
+                    <svg
+                      class="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </template>
+              </TableRow>
+            </template>
+          </TableContainer>
+          <FloatingModal
+            :show-modal="showMembersModal"
+            title="Select a User"
+            @click="toggleMembersModal()"
+          >
+            <div class="mb-6 w-96 max-w-sm">
+              <FormInput
+                v-model="addMemberSearchTerm"
+                placeholder="Search..."
+              />
+              <div class="w-2xl relative bg-background">
+                <div
+                  v-for="memberId in addGroupMemberIds"
+                  :key="memberId"
+                  class="flex-grow-0 inline-flex text-center my-1 ml-1 rounded-full bg-primary_superlight text-on_primary_superlight pr-2"
                 >
-                  Add Members
-                </NormalButton>
-                <NormalButton 
-                  @click.prevent="toggleMembersModal()"
-                >
-                  Cancel
-                </NormalButton>
+                  <button 
+                    type="button"
+                    class="flex-shrink-0 mt-1.5 mb-1.5 -mr-0.5 ml-1.5 inline-flex hover:bg-primary_light p-1 rounded-full"
+                    @click="toggleId(memberId)"
+                  >
+                    <svg
+                      stroke="currentColor"
+                      fill="none"
+                      viewBox="0 0 8 8"
+                      class="h-2 w-2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-width="1.5"
+                        d="M1 1l6 6m0-6L1 7"
+                      />
+                    </svg>
+                  </button>
+                  <span class="inline-flex items-center rounded-full pl-1 py-1 text-sm font-semibold">
+                    {{ users().filter((elem) => elem.id === memberId)[0].username }}
+                  </span>
+                </div>
               </div>
+              <TableContainer
+                :contents="usersPage()"
+                id-identifier="id"
+              >
+                <template #tableHeader>
+                  <TableHeader :num-of-cols="3">
+                    <template #header1>
+                      Username
+                    </template>
+                    <template #header2>
+                      First Name
+                    </template>
+                    <template #header3>
+                      Last Name
+                    </template>
+                  </TableHeader>
+                </template>
+                <template #tableRow="{rowData}:{rowData:User}">
+                  <TableRow
+                    :class="addGroupMemberIds.includes(rowData.id)? 'bg-primary_superlight' : ''"
+                    :num-of-cols="3"
+                    :row-data="rowData"
+                    :identifier="rowData.id"
+                    @click="toggleId(rowData.id)"
+                  >
+                    <template #data1="{data}:{data:User}">
+                      {{ data.username }}
+                    </template>
+                    <template #data2="{data}:{data:User}">
+                      {{ data.first_name }}
+                    </template>
+                    <template #data3="{data}:{data:User}">
+                      {{ data.last_name }}
+                    </template>
+                  </TableRow>
+                </template>
+              </TableContainer>
+              <PaginationBar
+                v-if="addMemberSearchTerm === ''"
+                :total-retrievable-entities="totalUserAmount()"
+                @update-page="updatePage($event.amount, $event.offset)"
+              />
             </div>
-          </div>
+            <div class="flex justify-between">
+              <NormalButton
+                class="mr-2"
+                @click.prevent="addMembers()"
+              >
+                Add Members
+              </NormalButton>
+            </div>
+          </FloatingModal>
         </div>
         <!--- Submit Button --->
-          
         <div class="flex justify-between">
           <NormalButton 
             v-if="updatedGroupTitle != '' && updatedGroupOperationId != ''"
@@ -197,9 +239,17 @@
   import { ref, computed, onMounted } from 'vue';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
   import FormInput from '../components/BasicComponents/FormInput.vue';
+  import TableContainer from '../components/BasicComponents/TableContainer.vue';
+  import TableHeader from '../components/BasicComponents/TableHeader.vue';
+  import TableRow from '../components/BasicComponents/TableRow.vue';
+  import FloatingModal from '../components/BasicComponents/FloatingModal.vue';
+  import PaginationBar from '../components/BasicComponents/PaginationBar.vue';
   import { useGroupState, useOperationsState, useUserState } from '../store';
   import{useRouter, useRoute} from 'vue-router';
   import type { Ref } from 'vue';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  import type { User } from '../../../types';
+
   const groupState = useGroupState();
   const operationsState = useOperationsState();
   const userState = useUserState();
@@ -210,6 +260,8 @@
   const users = computed(() => userState.getters.users);
   const selectedGroupID = route.params.selectedGroupID;
   const currentGroup = groups.value().filter((elem) => elem.id === selectedGroupID)[0];
+  const totalUserAmount = computed(() => userState.getters.total);
+  const usersPage = computed(() => userState.getters.page);
   const showMembersModal = ref(false);
   const updatedGroupTitle = ref('');
   updatedGroupTitle.value = currentGroup.title;
@@ -223,27 +275,24 @@
   const addMemberSearchTerm = ref('');
 
   onMounted(() => {
-    groupState.dispatch('retrieveGroups', {amount: 100});
     operationsState.dispatch('retrieveOperations', {amount: 100});
-    //get page for member selection
-    userState.dispatch('retrieveUsers', {amount: 100, offset: 0});
     //get users for displaying with group
     currentGroup.members.map((elem) => userState.dispatch('retrieveUserById', elem ));
   });
 
   function editGroup(){
-      groupState.dispatch('updateGroup', {
-        id: selectedGroupID.toString(),
-        title: updatedGroupTitle.value,
-        description: updatedGroupDescription.value,
-        operation: updatedGroupOperationId.value,
-        members: updatedGroupMemberIds.value,
-      });
-      router.push('/groups');
+    groupState.dispatch('updateGroup', {
+      id: selectedGroupID.toString(),
+      title: updatedGroupTitle.value,
+      description: updatedGroupDescription.value,
+      operation: updatedGroupOperationId.value,
+      members: updatedGroupMemberIds.value,
+    });
+    router.push('/groups');
   }
   function deleteGroup(){
-      groupState.dispatch('deleteGroupById', selectedGroupID.toString());
-      router.push('/groups');
+    groupState.dispatch('deleteGroupById', selectedGroupID.toString());
+    router.push('/groups');
   }
   function addMembers(){
     updatedGroupMemberIds.value = [...updatedGroupMemberIds.value, ...addGroupMemberIds.value];
@@ -253,6 +302,16 @@
     showMembersModal.value = !showMembersModal.value;
     addGroupMemberIds.value = [];
     addMemberSearchTerm.value = '';
+  }
+  function toggleId(groupId:string) {
+    if(addGroupMemberIds.value.includes(groupId)) {
+      addGroupMemberIds.value = addGroupMemberIds.value.filter((elem) => elem !== groupId );
+    } else {
+      addGroupMemberIds.value = [...addGroupMemberIds.value, groupId];
+    }
+  }
+  function updatePage(amount:number, offset:number) {
+    userState.dispatch('retrieveUsers', {amount, offset});
   }
 
 </script>

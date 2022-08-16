@@ -7,9 +7,9 @@
       <tbody class="text-left">
         <slot
           v-for="entity in props.contents"
-          :key="entity[idIdentifier]"
+          :key="props.idIdentifier? entity[props.idIdentifier] : entity"
+          :row-data="entity"
           name="tableRow"
-          :row-entity="entity"
         />
       </tbody>
     </table>
@@ -18,10 +18,10 @@
 
 <script lang="ts" setup>
 
-  interface Props {
+interface Props {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    contents: any[];
-    idIdentifier: string;
+    contents: any;
+    idIdentifier?: string;
   }
   const props = defineProps<Props>();
 

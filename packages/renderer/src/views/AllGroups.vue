@@ -13,9 +13,8 @@
         </NormalButton>
       </div>
       <TableContainer
-        :contents="contents"
+        :contents="groupPage()"
         id-identifier="id"
-        @click="selectRow($event)"
       >
         <template #tableHeader>
           <TableHeader :num-of-cols="3">
@@ -31,21 +30,21 @@
           </TableHeader>
         </template>
 
-        <template #tableRow="{rowEntity}:{rowEntity: Group}">
+        <template #tableRow="{rowData}:{rowData:Group}">
           <TableRow 
-            :entity="rowEntity"
+            :row-data="rowData"
             :num-of-cols="3"
-            :identifier="rowEntity.id"
+            :identifier="rowData.id"
             @click="selectRow($event)"
           >
-            <template #data1="{entity}:{entity:Group}">
-              {{ entity.title }}
+            <template #data1="{data}:{data:Group}">
+              {{ data.title }}
             </template>
-            <template #data2="{entity}:{entity:Group}">
-              {{ entity.description }}
+            <template #data2="{data}:{data:Group}">
+              {{ data.description }}
             </template>
-            <template #data3="{entity}:{entity:Group}">
-              {{ entity.operation }}
+            <template #data3="{data}:{data:Group}">
+              {{ operations().filter((elem) => elem.id === data.operation)[0]?.title }}
             </template>
           </TableRow>
         </template>
@@ -82,13 +81,6 @@
     const operationsState = useOperationsState();
     const groupPage = computed(() => groupState.getters.page);
     const operations = computed(() => operationsState.getters.operations);
-    const contents = computed(() => {
-      return [...groupPage.value()].map((elem) => {
-        const group = {...elem};
-        group.operation = operations.value().filter((elem) => elem.id === group.operation)[0]?.title;
-        return group;
-      });
-    });
     const totalGroupAmount = computed(() => groupState.getters.total);
     const router = useRouter();
     function selectRow(groupId: string){
