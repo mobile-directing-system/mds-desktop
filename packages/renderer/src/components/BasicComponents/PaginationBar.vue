@@ -4,7 +4,7 @@
       <NormalButton
         class="mt-4 ml-auto"
         :disabled="showPreviousButton? false:true"
-        @click="previousPage()"
+        @click.prevent="previousPage()"
       >
         Previous
       </NormalButton>
@@ -12,7 +12,7 @@
       <NormalButton
         class="mt-4 ml-auto"
         :disabled="showNextButton? false:true"
-        @click="nextPage()"
+        @click.prevent="nextPage()"
       >
         Next
       </NormalButton>
