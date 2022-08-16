@@ -1,6 +1,6 @@
 import type { IpcMainInvokeEvent } from 'electron';
 import type { User, ErrorResult } from '../../../types';
-import { createUser, deleteUser, retrieveUser, retrieveUsers, updateUser, updateUserPassword } from '/@/backend';
+import { createUser, deleteUser, retrieveUser, retrieveUsers, updateUser, updateUserPassword, searchUsers } from '/@/backend';
 
 /**
  * handler function to call backend createUser function
@@ -70,4 +70,16 @@ export async function retrieveUsersHandler(_:IpcMainInvokeEvent, amount?: number
 // eslint-disable-next-line no-unused-vars
 export async function retrieveUserHandler(_:IpcMainInvokeEvent, userId: string):Promise<ErrorResult<User>> {
   return retrieveUser(userId);
+}
+/**
+ * handler function to call backend searchUsers function
+ * @param _ event not used
+ * @param query for the search of users
+ * @param limit max amount of users returned
+ * @param offset offset at which to start the search
+ * @returns retrieved user in error result conatiner
+ */
+// eslint-disable-next-line no-unused-vars
+export async function searchUsersHandler(_:IpcMainInvokeEvent, query: string, limit?: number, offset?: number):Promise<ErrorResult<User[]>> {
+  return searchUsers(query, limit, offset);
 }
