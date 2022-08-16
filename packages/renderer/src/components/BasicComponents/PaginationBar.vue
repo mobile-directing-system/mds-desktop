@@ -2,15 +2,15 @@
   <div class="flex justify-end">
     <div class="flex gap-5">
       <NormalButton
-        class="mt-4 ml-auto"
+        class="mt-2 mb-2 ml-auto"
         :disabled="showPreviousButton? false:true"
         @click.prevent="previousPage()"
       >
         Previous
       </NormalButton>
-      {{ paginationPage + 1 }}/{{ paginationMaxPages }}
+      <span class=" text-base mt-3">{{ paginationPage + 1 }}/{{ paginationMaxPages }}</span>
       <NormalButton
-        class="mt-4 ml-auto"
+        class="mt-2 mb-2 ml-auto"
         :disabled="showNextButton? false:true"
         @click.prevent="nextPage()"
       >
