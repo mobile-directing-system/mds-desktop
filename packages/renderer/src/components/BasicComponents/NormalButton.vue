@@ -37,6 +37,8 @@
   function emitClickEvent(me: MouseEvent) {
     if(!props.disabled) {
       emit('click', me);
+    } else {
+      me.preventDefault();
     }
   }
 </script>
