@@ -1,8 +1,9 @@
 <template>
   <tr v-bind="$attrs">
-    <th 
+    <th
       v-for="colNum in props.numOfCols"
       :key="colNum"
+      class="p-2"
     >
       <!-- slots for table headers -->
       <slot
