@@ -79,7 +79,6 @@
   const updatedUserFirstName = ref('');
   const updatedUserName = ref('');
   const updatedUserLastName = ref('');
-  console.log(selectedUserID.toString());
 
   if(currentUser) {
     updatedUserFirstName.value = currentUser.first_name;
