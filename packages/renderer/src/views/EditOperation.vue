@@ -115,7 +115,6 @@
             is_archived: updatedisArchived.value,       
         };
         operationState.dispatch('updateOperation', updatedOperation);
-        router.push('/user');
+        router.push('/operation');
     }
-
 </script>
