@@ -107,7 +107,7 @@
 
     function editOperation(){
         const updatedOperation:Operation = {
-            id: selectedOperationID[0],
+            id: selectedOperationID as string,
             title : updatedtitle.value,
             description : updateddescription.value,
             start : new Date(updatedstart.value),
