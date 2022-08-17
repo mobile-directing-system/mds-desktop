@@ -13,8 +13,8 @@ function undom(user: User):User {
  * define the content of the UsersState
  */
 class UserState {
-  users: User[] = [];
-  page: User[] = [];
+  users: Map<string, User> = new Map<string, User>();
+  page: Map<string, User> = new Map<string, User>();
   total = 0;
 }
 
@@ -44,41 +44,30 @@ class UserStateGetters extends Getters<UserState> {
  */
 class UserStateMutations extends Mutations<UserState> {
   setPage(users: User[]) {
-    this.state.page = users;
+    this.state.page.clear();
+    users.forEach((elem) => this.state.page.set(elem.id, elem));
   }
   setUsers(users: User[]) {
-    this.state.users = users;
+    this.state.users.clear();
+    users.forEach((elem) => this.state.users.set(elem.id, elem));
+
   }
   setTotal(total: number) {
     this.state.total = total;
   }
   addOrUpdateUsers(users: User[]) {
     users.map((user) => {
-      if (this.state.users.filter((elem) => elem.id === user.id).length > 0) {
-        this.state.users = this.state.users.map((elem) => (elem.id === user.id)? user : elem);
-      } else{
-        this.state.users = [...this.state.users, user];
-      }
+        this.state.users.set(user.id, user);
     });
   }
-  addUser(user: User) {
-    this.state.users = [...this.state.users, user];
-  }
   addOrUpdateUser(user: User){
-    if (this.state.users.filter((elem) => elem.id === user.id).length > 0) {
-      this.state.users = this.state.users.map((elem) => (elem.id === user.id)? user : elem);
-    } else{
-      this.state.users = [...this.state.users, user];
-    }
-  }
-  updateUser(user: User) {
-    this.state.users = this.state.users.map((elem) => (elem.id === user.id)? user : elem);
+    this.state.users.set(user.id, user);
   }
   deleteUser(user: User) {
-      this.state.users = this.state.users.filter((elem) => elem.id !== user.id);
+    this.state.users.delete(user.id);
   }
   deleteUserById(userId: string) {
-    this.state.users = this.state.users.filter((elem) => elem.id !== userId);
+    this.state.users.delete(userId);
   }
 }
 
@@ -102,7 +91,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
   async createUser(user: User) {
     const createdUser:ErrorResult<User> = await createUser(undom(user));
     if(createdUser.res && !createdUser.error) {
-      this.mutations.addUser(createdUser.res);
+      this.mutations.addOrUpdateUser(createdUser.res);
     } else {
       handleErrors(createdUser.error, createdUser.errorMsg, this.errorState);
     }

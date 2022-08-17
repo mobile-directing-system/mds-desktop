@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 
-interface Props {
+  interface Props {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     contents: any;
     idIdentifier?: string;

@@ -29,11 +29,11 @@
           </thead> 
           <tbody class="text-left">     
             <tr
-              v-for="(user,i) in users()" 
-              :key="i"
+              v-for="(user) in users().values()" 
+              :key="user.id"
               class="p-2 border-b-2 border-b-gray-500 bg-white text-black hover:bg-primary_superlight hover:text-white cursor-pointer"
             
-              @click="selectRow(i, user.id)"
+              @click="selectRow(user.id)"
             >      
               <td class="p-2">
                 {{ user.username }}
@@ -60,16 +60,16 @@
 
   const userState = useUserState();
   const users = computed(() => userState.getters.users);
-  const selectedUserIndex = ref(-1);
   const selectedUserID = ref('');
   const selectedUserUsername = ref('');
   const router = useRouter();
 
-  function selectRow(i: number, user_id: string){
-    selectedUserIndex.value = i;
+  function selectRow(user_id: string){
     selectedUserID.value = user_id;
-    const selectedUser = users.value().filter((elem) => elem.id === selectedUserID.value)[0];
-    selectedUserUsername.value = selectedUser.username;
+    const selectedUser = users.value().get(selectedUserID.value);
+    if(selectedUser) {
+      selectedUserUsername.value = selectedUser.username;
+    }
     router.push({ name: 'EditCurrentUser', params: { selectedUserID: user_id } });
   }
 </script>

@@ -48,14 +48,3 @@
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-
-    import { useRouter } from 'vue-router';
-    import type { Router } from 'vue-router';
-
-    const router:Router = useRouter();
-
-    console.log(router);
-    
-</script>

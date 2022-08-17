@@ -32,10 +32,10 @@
           </thead> 
           <tbody class="text-left">     
             <tr
-              v-for="(operation,i) in operations()" 
-              :key="i"
+              v-for="operation in operations().values()" 
+              :key="operation.id"
               class="border-b-2 border-b-gray-500 bg-white text-black hover:bg-primary_superlight cursor-pointer"
-              @click="selectRow(i, operation.id)"
+              @click="selectRow(operation.id)"
             >  
               <td class="p-2">
                 {{ operation.title }}
@@ -58,26 +58,25 @@
 </template>
 
 <script lang="ts" setup> 
-    import { ref, computed } from 'vue';
-    import NormalButton from '../components/BasicComponents/NormalButton.vue';
-    import { useOperationsState } from '../store';
-    import {useRouter} from 'vue-router';
+  import { ref, computed } from 'vue';
+  import NormalButton from '../components/BasicComponents/NormalButton.vue';
+  import { useOperationsState } from '../store';
+  import {useRouter} from 'vue-router';
 
-    const operationState = useOperationsState();
-    const operations = computed(()=>operationState.getters.operations);
-    const selectedOperationIndex = ref(-1);
-    const selectedOperationID = ref('');
-    const selectedOperationTitle = ref('');
-    const router = useRouter();
+  const operationState = useOperationsState();
+  const operations = computed(()=>operationState.getters.operations);
+  const selectedOperationID = ref('');
+  const selectedOperationTitle = ref('');
+  const router = useRouter();
 
-    function selectRow(i: number, operation_id: string){
-            selectedOperationIndex.value = i;
-            selectedOperationID.value = operation_id;
-            const selectedOperation = operations.value().filter((elem) => elem.id === selectedOperationID.value)[0];
+  function selectRow(operation_id: string){
+          selectedOperationID.value = operation_id;
+          const selectedOperation = operations.value().get(selectedOperationID.value);
+          if(selectedOperation) {
             selectedOperationTitle.value = selectedOperation.title;
-            router.push({ name: 'EditCurrentOperation', params: { selectedOperationID: operation_id} });
-    }
-
+          }
+          router.push({ name: 'EditCurrentOperation', params: { selectedOperationID: operation_id} });
+  }
 </script>
 <style>
   .bottomPartwithSidebar {

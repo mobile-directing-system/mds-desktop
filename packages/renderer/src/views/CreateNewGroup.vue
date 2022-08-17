@@ -39,7 +39,7 @@
               Choose an Operation
             </option>
             <option
-              v-for="operation in operations()"
+              v-for="operation in operations().values()"
               :key="operation.id"
               :value="operation.id"
             >
@@ -77,22 +77,21 @@
                 </template>
               </TableHeader>
             </template>
-            <template #tableRow="{rowData}:{rowData:User}">
+            <template #tableRow="{rowData}:{rowData:string}">
               <TableRow
                 class="hover:bg-background cursor-auto"
                 :num-of-cols="4"
                 :row-data="rowData"
-                :identifier="rowData.id"
                 :t-data-class="'p-2'"
               >
                 <template #data1="{data}:{data: string}">
-                  {{ users().filter((elem) => elem.id === data)[0]?.username }}
+                  {{ users().get(data)?.username }}
                 </template>
                 <template #data2="{data}:{data: string}">
-                  {{ users().filter((elem) => elem.id === data)[0]?.first_name }}
+                  {{ users().get(data)?.first_name }}
                 </template>
                 <template #data3="{data}:{data: string}">
-                  {{ users().filter((elem) => elem.id === data)[0]?.last_name }}
+                  {{ users().get(data)?.last_name }}
                 </template>
                 <template #data4="{data}:{data: string}">
                   <button
@@ -153,12 +152,12 @@
                     </svg>
                   </button>
                   <span class="inline-flex items-center rounded-full pl-1 py-1 text-sm font-semibold">
-                    {{ users().filter((elem) => elem.id === memberId)[0].username }}
+                    {{ users().get(memberId)?.username }}
                   </span>
                 </div>
               </div>
               <TableContainer
-                :contents="usersPage()"
+                :contents="usersPage().values()"
                 id-identifier="id"
               >
                 <template #tableHeader>

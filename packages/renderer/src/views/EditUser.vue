@@ -74,15 +74,18 @@
 
   const users = computed(() => userState.getters.users);
   const selectedUserID = route.params.selectedUserID;
-  const currentUser = users.value().filter((elem) => elem.id === selectedUserID)[0];
+  const currentUser = users.value().get(selectedUserID as string);
+
   const updatedUserFirstName = ref('');
-  updatedUserFirstName.value = currentUser.first_name;
   const updatedUserName = ref('');
-  updatedUserName.value = currentUser.username;
   const updatedUserLastName = ref('');
-  updatedUserLastName.value = currentUser.last_name;
-  console.log(selectedUserID.toString());
-  
+
+  if(currentUser) {
+    updatedUserFirstName.value = currentUser.first_name;
+    updatedUserName.value = currentUser.username;
+    updatedUserLastName.value = currentUser.last_name;
+  }
+
 
   function editUser(){
       const updatedUser:User = {

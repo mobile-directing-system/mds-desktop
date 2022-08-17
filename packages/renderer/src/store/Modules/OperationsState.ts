@@ -15,8 +15,8 @@ function undom(operation: Operation):Operation {
  * define the content of the OperationsState
  */
 class OperationsState {
-  operations: Operation[] = [];
-  page: Operation[] = [];
+  operations: Map<string, Operation> = new Map<string, Operation>();
+  page: Map<string, Operation> = new Map<string, Operation>();
   total = 0;
 }
 
@@ -46,41 +46,27 @@ class OperationsStateGetters extends Getters<OperationsState> {
  */
 class OperationsStateMutations extends Mutations<OperationsState> {
   setOperations(operations: Operation[]) {
-    this.state.operations = operations;
+    this.state.operations.clear();
+    operations.forEach((elem) => this.state.operations.set(elem.id, elem));
   }
   setPage(page: Operation[]) {
-    this.state.page = page;
+    this.state.operations.clear();
+    page.forEach((elem) => this.state.page.set(elem.id, elem));
   }
   setTotal(total: number) {
     this.state.total = total;
   }
   addOrUpdateOperations(operations: Operation[]) {
-    operations.map((operation) => {
-      if (this.state.operations.filter((elem) => elem.id === operation.id).length > 0) {
-        this.state.operations = this.state.operations.map((elem) => (elem.id === operation.id)? operation : elem);
-      } else {
-          this.state.operations = [...this.state.operations, operation];
-      }
-    });
-  }
-  addOperation(operation: Operation) {
-    this.state.operations = [...this.state.operations, operation];
+    operations.forEach((elem) => this.state.operations.set(elem.id, elem));
   }
   addOrUpdateOperation(operation: Operation){
-    if (this.state.operations.filter((elem) => elem.id === operation.id).length > 0) {
-      this.state.operations = this.state.operations.map((elem) => (elem.id === operation.id)? operation : elem);
-    } else {
-        this.state.operations = [...this.state.operations, operation];
-    }
-  }
-  updateOperation(operation: Operation) {
-    this.state.operations = this.state.operations.map((elem) => (elem.id === operation.id)? operation : elem);
+    this.state.operations.set(operation.id, operation);
   }
   deleteOperation(operation: Operation) {
-      this.state.operations = this.state.operations.filter((elem) => elem.id !== operation.id);
+      this.state.operations.delete(operation.id);
   }
   deleteOperationById(operationId: string) {
-    this.state.operations = this.state.operations.filter((elem) => elem.id !== operationId);
+    this.state.operations.delete(operationId);
   }
 }
 
@@ -103,7 +89,7 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
   async createOperation(operation: Operation) {
     const createdOperation: ErrorResult<Operation> = await createOperation(undom(operation));
     if(createdOperation.res && !createdOperation.error) {
-      this.mutations.addOperation(createdOperation.res);
+      this.mutations.addOrUpdateOperation(createdOperation.res);
     }  else {
       handleErrors(createdOperation.error, createdOperation.errorMsg, this.errorState);
     }

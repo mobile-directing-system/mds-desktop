@@ -37,7 +37,7 @@
             class="bg-surface_superlight border border-surface_dark text-on_surface_superlight text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           >
             <option
-              v-for="operation in operations()"
+              v-for="operation in operations().values()"
               :key="operation.id"
               :value="operation.id"
             >
@@ -75,22 +75,21 @@
                 </template>
               </TableHeader>
             </template>
-            <template #tableRow="{rowData}:{rowData:User}">
+            <template #tableRow="{rowData}:{rowData:string}">
               <TableRow
                 class="hover:bg-background cursor-auto"
                 :num-of-cols="4"
                 :row-data="rowData"
-                :identifier="rowData.id"
                 :t-data-class="'p-2'"
               >
                 <template #data1="{data}:{data: string}">
-                  {{ users().filter((elem) => elem.id === data)[0]?.username }}
+                  {{ users().get(data)?.username }}
                 </template>
                 <template #data2="{data}:{data: string}">
-                  {{ users().filter((elem) => elem.id === data)[0]?.first_name }}
+                  {{ users().get(data)?.first_name }}
                 </template>
                 <template #data3="{data}:{data: string}">
-                  {{ users().filter((elem) => elem.id === data)[0]?.last_name }}
+                  {{ users().get(data)?.last_name }}
                 </template>
                 <template #data4="{data}:{data: string}">
                   <button
@@ -151,12 +150,12 @@
                     </svg>
                   </button>
                   <span class="inline-flex items-center rounded-full pl-1 py-1 text-sm font-semibold">
-                    {{ users().filter((elem) => elem.id === memberId)[0].username }}
+                    {{ users().get(memberId)?.username }}
                   </span>
                 </div>
               </div>
               <TableContainer
-                :contents="usersPage()"
+                :contents="usersPage().values()"
                 id-identifier="id"
               >
                 <template #tableHeader>
@@ -236,7 +235,7 @@
   </div>
 </template>
 <script lang="ts" setup> 
-  import { ref, computed, onMounted } from 'vue';
+  import { ref, computed, onMounted, watch } from 'vue';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
   import FormInput from '../components/BasicComponents/FormInput.vue';
   import TableContainer from '../components/BasicComponents/TableContainer.vue';
@@ -259,25 +258,35 @@
   const operations = computed(() => operationsState.getters.operations);
   const users = computed(() => userState.getters.users);
   const selectedGroupID = route.params.selectedGroupID;
-  const currentGroup = groups.value().filter((elem) => elem.id === selectedGroupID)[0];
+  const currentGroup = groups.value().get(selectedGroupID as string);
   const totalUserAmount = computed(() => userState.getters.total);
   const usersPage = computed(() => userState.getters.page);
   const showMembersModal = ref(false);
   const updatedGroupTitle = ref('');
-  updatedGroupTitle.value = currentGroup.title;
   const updatedGroupDescription = ref('');
-  updatedGroupDescription.value = currentGroup.description;
   const updatedGroupOperationId = ref('');
-  updatedGroupOperationId.value = currentGroup.operation;
   const updatedGroupMemberIds : Ref<string[]> = ref([]);
-  updatedGroupMemberIds.value = currentGroup.members;
   const addGroupMemberIds: Ref<string[]> = ref([]);
+
+  if(currentGroup) {
+    updatedGroupTitle.value = currentGroup.title;
+    updatedGroupDescription.value = currentGroup.description;
+    updatedGroupOperationId.value = currentGroup.operation;
+    updatedGroupMemberIds.value = currentGroup.members;
+  }
+
   const addMemberSearchTerm = ref('');
 
   onMounted(() => {
     operationsState.dispatch('retrieveOperations', {amount: 100});
     //get users for displaying with group
-    currentGroup.members.map((elem) => userState.dispatch('retrieveUserById', elem ));
+    if(currentGroup) {
+      currentGroup.members.map((elem) => userState.dispatch('retrieveUserById', elem ));
+    }
+  });
+
+  watch(addMemberSearchTerm, (curVal) => {
+    userState.dispatch('searchUsersByQuery', {query: curVal});
   });
 
   function editGroup(){
