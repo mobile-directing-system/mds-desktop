@@ -59,41 +59,41 @@
 </template>
 
 <script lang="ts" setup> 
-    import { computed, onMounted, ref } from 'vue';
-    import NormalButton from '../components/BasicComponents/NormalButton.vue';
-    import PaginationBar from '../components/BasicComponents/PaginationBar.vue';
-    import TableContainer from '../components/BasicComponents/TableContainer.vue';
-    import TableRow from '../components/BasicComponents/TableRow.vue';
-    import TableHeader from '../components/BasicComponents/TableHeader.vue';
-    import { useGroupState, useOperationsState } from '../store';
-    import {useRouter} from 'vue-router';
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    import type { Group } from '../../../types';
+  import { computed, onMounted, ref } from 'vue';
+  import NormalButton from '../components/BasicComponents/NormalButton.vue';
+  import PaginationBar from '../components/BasicComponents/PaginationBar.vue';
+  import TableContainer from '../components/BasicComponents/TableContainer.vue';
+  import TableRow from '../components/BasicComponents/TableRow.vue';
+  import TableHeader from '../components/BasicComponents/TableHeader.vue';
+  import { useGroupState, useOperationsState } from '../store';
+  import {useRouter} from 'vue-router';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  import type { Group } from '../../../types';
 
-    onMounted(async () => {
-      await groupState.dispatch('retrieveGroups', {amount: paginationAmount, offset: paginationPage.value * paginationAmount});
-      for (const group of groupPage.value().values()) {
-        operationsState.dispatch('retrieveOperation', group.operation);
-      }
-    });
+  onMounted(async () => {
+    await groupState.dispatch('retrieveGroups', {amount: paginationAmount, offset: paginationPage.value * paginationAmount});
+    for (const group of groupPage.value().values()) {
+      operationsState.dispatch('retrieveOperation', group.operation);
+    }
+  });
 
-    const paginationAmount = 5;
-    const paginationPage = ref(0);
-    const groupState = useGroupState();
-    const operationsState = useOperationsState();
-    const groupPage = computed(() => groupState.getters.page);
-    const operations = computed(() => operationsState.getters.operations);
-    const totalGroupAmount = computed(() => groupState.getters.total);
-    const router = useRouter();
-    function selectRow(groupId: string){
-            router.push({name: 'EditCurrentGroup', params:{ selectedGroupID: groupId}});
+  const paginationAmount = 5;
+  const paginationPage = ref(0);
+  const groupState = useGroupState();
+  const operationsState = useOperationsState();
+  const groupPage = computed(() => groupState.getters.page);
+  const operations = computed(() => operationsState.getters.operations);
+  const totalGroupAmount = computed(() => groupState.getters.total);
+  const router = useRouter();
+  function selectRow(groupId: string){
+          router.push({name: 'EditCurrentGroup', params:{ selectedGroupID: groupId}});
+  }
+  async function updatePage(amount: number, offset: number) {
+    await groupState.dispatch('retrieveGroups', {amount, offset});
+    for(const group of groupPage.value().values()) {
+      operationsState.dispatch('retrieveOperation', group.operation );
     }
-    async function updatePage(amount: number, offset: number) {
-      await groupState.dispatch('retrieveGroups', {amount, offset});
-      for(const group of groupPage.value().values()) {
-        operationsState.dispatch('retrieveOperation', group.operation );
-      }
-    }
+  }
 </script>
 <style>
   .bottomPartwithSidebar {

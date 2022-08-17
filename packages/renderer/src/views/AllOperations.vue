@@ -58,25 +58,25 @@
 </template>
 
 <script lang="ts" setup> 
-    import { ref, computed } from 'vue';
-    import NormalButton from '../components/BasicComponents/NormalButton.vue';
-    import { useOperationsState } from '../store';
-    import {useRouter} from 'vue-router';
+  import { ref, computed } from 'vue';
+  import NormalButton from '../components/BasicComponents/NormalButton.vue';
+  import { useOperationsState } from '../store';
+  import {useRouter} from 'vue-router';
 
-    const operationState = useOperationsState();
-    const operations = computed(()=>operationState.getters.operations);
-    const selectedOperationID = ref('');
-    const selectedOperationTitle = ref('');
-    const router = useRouter();
+  const operationState = useOperationsState();
+  const operations = computed(()=>operationState.getters.operations);
+  const selectedOperationID = ref('');
+  const selectedOperationTitle = ref('');
+  const router = useRouter();
 
-    function selectRow(operation_id: string){
-            selectedOperationID.value = operation_id;
-            const selectedOperation = operations.value().get(selectedOperationID.value);
-            if(selectedOperation) {
-              selectedOperationTitle.value = selectedOperation.title;
-            }
-            router.push({ name: 'EditCurrentOperation', params: { selectedOperationID: operation_id} });
-    }
+  function selectRow(operation_id: string){
+          selectedOperationID.value = operation_id;
+          const selectedOperation = operations.value().get(selectedOperationID.value);
+          if(selectedOperation) {
+            selectedOperationTitle.value = selectedOperation.title;
+          }
+          router.push({ name: 'EditCurrentOperation', params: { selectedOperationID: operation_id} });
+  }
 </script>
 <style>
   .bottomPartwithSidebar {
