@@ -81,7 +81,7 @@
     import FormInput from '../components/BasicComponents/FormInput.vue';
     import { useOperationsState} from '../store';
     import type {Operation} from '../../../types';
-  
+
     import{useRouter, useRoute} from 'vue-router';
     const operationState = useOperationsState();
     const router = useRouter();
@@ -89,18 +89,21 @@
 
     const operations = computed(() => operationState.getters.operations);
     const selectedOperationID = route.params.selectedOperationID;
-    const currentOperation = operations.value().filter((elem) => elem.id === selectedOperationID)[0];
+    const currentOperation = operations.value().get(selectedOperationID as string);
     const updatedtitle = ref('');
-    updatedtitle.value = currentOperation.title;
     const updateddescription = ref('');
-    updateddescription.value = currentOperation.description;
     const updatedstart = ref('');
-    updatedstart.value = currentOperation.start.toString();
     const updatedend = ref('');
-    updatedend.value = currentOperation.end.toString();
     const updatedisArchived = ref(false);
-    updatedisArchived.value = currentOperation.is_archived;
-   
+
+    if(currentOperation) {
+      updatedtitle.value = currentOperation.title;
+      updateddescription.value = currentOperation.description;
+      updatedstart.value = currentOperation.start.toString();
+      updatedend.value = currentOperation.end.toString();
+      updatedisArchived.value = currentOperation.is_archived;
+    }
+    
 
     function editOperation(){
         const updatedOperation:Operation = {

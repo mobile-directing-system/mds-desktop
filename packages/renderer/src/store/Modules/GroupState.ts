@@ -16,8 +16,8 @@ function undom(group: Group):Group {
  * define the content of the LoginInfoState
  */
 class GroupState {
-  groups: Group[] = [];
-  page: Group[] = [];
+  groups: Map<string, Group> = new Map<string, Group>();
+  page: Map<string, Group> = new Map<string, Group>();
   total = 0;
 }
 
@@ -46,30 +46,24 @@ class GroupStateGetters extends Getters<GroupState> {
  * define mutations to change the state
  */
 class GroupStateMutations extends Mutations<GroupState> {
-  setPage(groups: Group[]) {this.state.page = groups;}
-  setGroups(groups: Group[]) {this.state.groups = groups;}
+  setPage(groups: Group[]) {
+    this.state.page.clear();
+    groups.forEach((elem) => this.state.page.set(elem.id, elem));
+  }
+  setGroups(groups: Group[]) {
+    this.state.groups.clear();
+    groups.forEach((elem) => this.state.groups.set(elem.id, elem));
+  }
   setTotal(total: number) {this.state.total = total;}
   addOrUpdateGroups(groups: Group[]) {
-    groups.map((group) => {
-      if (this.state.groups.filter((elem) => elem.id === group.id).length > 0) {
-        this.state.groups = this.state.groups.map((elem) => (elem.id === group.id)? group : elem);
-      } else {
-        this.state.groups = [...this.state.groups, group];
-      }
-    });
+    groups.forEach((elem) => this.state.groups.set(elem.id, elem));
   }
-  addGroup(group: Group){this.state.groups = [...this.state.groups, group];}
   addOrUpdateGroup(group: Group) {
-    if (this.state.groups.filter((elem) => elem.id === group.id).length > 0) {
-      this.state.groups = this.state.groups.map((elem) => (elem.id === group.id)? group : elem);
-    } else {
-      this.state.groups = [...this.state.groups, group];
-    }
+    this.state.groups.set(group.id, group);
   }
-  updateGroup(group: Group){
-    this.state.groups = this.state.groups.map((elem) => (elem.id === group.id)? group : elem);
+  deleteGroupById(groupId: string){
+    this.state.groups.delete(groupId);
   }
-  deleteGroupById(groupId: string){this.state.groups = this.state.groups.filter((elem) => elem.id != groupId);}
 }
 
 /**
@@ -90,7 +84,7 @@ class GroupStateActions extends Actions<GroupState, GroupStateGetters, GroupStat
   async createGroup(group: Group) {
     const createdGroup:ErrorResult<Group> = await createGroup(undom(group));
     if(createdGroup.res && !createdGroup.error) {
-      this.mutations.addGroup(createdGroup.res);
+      this.mutations.addOrUpdateGroup(createdGroup.res);
     }  else {
       handleErrors(createdGroup.error, createdGroup.errorMsg, this.errorState);
     }

@@ -13,7 +13,7 @@
         </NormalButton>
       </div>
       <TableContainer
-        :contents="groupPage()"
+        :contents="groupPage().values()"
         id-identifier="id"
       >
         <template #tableHeader>
@@ -44,7 +44,7 @@
               {{ data.description }}
             </template>
             <template #data3="{data}:{data:Group}">
-              {{ operations().filter((elem) => elem.id === data.operation)[0]?.title }}
+              {{ operations().get(data.operation)?.title }}
             </template>
           </TableRow>
         </template>
@@ -72,7 +72,9 @@
 
     onMounted(async () => {
       await groupState.dispatch('retrieveGroups', {amount: paginationAmount, offset: paginationPage.value * paginationAmount});
-      groupPage.value().map((group) => operationsState.dispatch('retrieveOperation', group.operation ));
+      for (const group of groupPage.value().values()) {
+        operationsState.dispatch('retrieveOperation', group.operation);
+      }
     });
 
     const paginationAmount = 5;
@@ -88,7 +90,9 @@
     }
     async function updatePage(amount: number, offset: number) {
       await groupState.dispatch('retrieveGroups', {amount, offset});
-      groupPage.value().map((group) => operationsState.dispatch('retrieveOperation', group.operation ));
+      for(const group of groupPage.value().values()) {
+        operationsState.dispatch('retrieveOperation', group.operation );
+      }
     }
 </script>
 <style>
