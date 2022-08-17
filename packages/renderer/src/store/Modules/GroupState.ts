@@ -86,7 +86,7 @@ class GroupStateActions extends Actions<GroupState, GroupStateGetters, GroupStat
     if(createdGroup.res && !createdGroup.error) {
       this.mutations.addOrUpdateGroup(createdGroup.res);
     }  else {
-      handleErrors(createdGroup.error, createdGroup.errorMsg, this.errorState);
+      handleErrors(createdGroup.errorMsg, this.errorState);
     }
   }
   async updateGroup(group: Group) {
@@ -94,7 +94,7 @@ class GroupStateActions extends Actions<GroupState, GroupStateGetters, GroupStat
     if(groupUpdated.res && !groupUpdated.error) {
       this.actions.retrieveGroupById(group.id);
     }  else {
-      handleErrors(groupUpdated.error, groupUpdated.errorMsg, this.errorState);
+      handleErrors(groupUpdated.errorMsg, this.errorState);
     }
   }
   async deleteGroupById(groupId: string) {
@@ -102,7 +102,7 @@ class GroupStateActions extends Actions<GroupState, GroupStateGetters, GroupStat
     if(groupDeleted.res && !groupDeleted.error) {
       this.mutations.deleteGroupById(groupId);
     }  else {
-      handleErrors(groupDeleted.error, groupDeleted.errorMsg, this.errorState);
+      handleErrors(groupDeleted.errorMsg, this.errorState);
     }
   }
   async retrieveGroups({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
@@ -112,7 +112,7 @@ class GroupStateActions extends Actions<GroupState, GroupStateGetters, GroupStat
       this.mutations.addOrUpdateGroups(retrievedGroups.res);
       this.mutations.setTotal(retrievedGroups.total);
     }  else {
-      handleErrors(retrievedGroups.error, retrievedGroups.errorMsg, this.errorState);
+      handleErrors(retrievedGroups.errorMsg, this.errorState);
     }
   }
   async retrieveGroupById(groupId: string) {
@@ -120,7 +120,7 @@ class GroupStateActions extends Actions<GroupState, GroupStateGetters, GroupStat
     if(retrievedGroup.res && !retrievedGroup.error) {
       this.mutations.addOrUpdateGroup(retrievedGroup.res);
     }  else {
-      handleErrors(retrievedGroup.error, retrievedGroup.errorMsg, this.errorState);
+      handleErrors(retrievedGroup.errorMsg, this.errorState);
     }
   }
 }

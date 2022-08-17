@@ -66,7 +66,7 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
     if(permissions.res && !permissions.error) {
       this.mutations.setPermissions({userId, permissions: permissions.res});
     }  else {
-      handleErrors(permissions.error, permissions.errorMsg, this.errorState);
+      handleErrors(permissions.errorMsg, this.errorState);
     }
   }
   async addPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
@@ -75,7 +75,7 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
     if(permissionsSet.res && !permissionsSet.error) {
       this.actions.retrievePermissions(userId);
     }  else {
-      handleErrors(permissionsSet.error, permissionsSet.errorMsg, this.errorState);
+      handleErrors(permissionsSet.errorMsg, this.errorState);
     }
   }
   async updateAllPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
@@ -83,7 +83,7 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
     if(permissionsSet.res && !permissionsSet.error) {
       this.actions.retrievePermissions(userId);
     }  else {
-      handleErrors(permissionsSet.error, permissionsSet.errorMsg, this.errorState);
+      handleErrors(permissionsSet.errorMsg, this.errorState);
     }
   }
 }
