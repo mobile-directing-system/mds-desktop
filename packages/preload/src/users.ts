@@ -29,3 +29,7 @@ export async function retrieveUsers(amount?: number, offset?: number, orderBy?: 
 export async function retrieveUser(userId: string):Promise<ErrorResult<User>> {
   return ipcRenderer.invoke('retrieveUser', userId);
 }
+
+export async function searchUsers(query: string, limit?: number, offset?: number):Promise<ErrorResult<User[]>> {
+  return ipcRenderer.invoke('searchUsers', query, limit, offset);
+}

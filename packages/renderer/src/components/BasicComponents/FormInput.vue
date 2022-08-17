@@ -1,14 +1,14 @@
 <template>
-  <div :class="rDivClass? rDivClass : aDivClass? 'mb-6 bg-background ' + aDivClass : 'mb-6 bg-background'">
+  <div :class="props.overwrite? props.divClass : props.divClass? 'mb-6 bg-background ' + props.divClass : 'mb-6 bg-background'">
     <label 
       v-if="props.label !== undefined"
       :for="props.id"
-      :class="rLabelClass? rLabelClass : aLabelClass? 'block mb-2 text-sm font-medium text-on_background ' + aLabelClass : 'block mb-2 text-sm font-medium text-on_background'"
+      :class="props.overwrite? props.labelClass : props.labelClass? 'block mb-2 text-sm font-medium text-on_background ' + props.labelClass : 'block mb-2 text-sm font-medium text-on_background'"
     >{{ props.label }}</label>
     <input 
       :value="props.modelValue" 
       v-bind="$attrs"
-      class="bg-surface_superlight border border-surface_dark text-on_surface_superlight text-sm rounded-lg focus:ring-primary_light focus:border-primary_light block w-full p-2.5"
+      :class="props.overwrite? '' : 'bg-surface_superlight border border-surface_dark text-on_surface_superlight text-sm rounded-lg focus:ring-primary_light focus:border-primary_light block w-full p-2.5'"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     >
   </div>
@@ -26,10 +26,9 @@
     modelValue: string|number;
     id?: string;
     label?: string;
-    rDivClass?: string;
-    rLabelClass?: string;
-    aDivClass?: string;
-    aLabelClass?: string;
+    divClass?: string;
+    labelClass?: string;
+    overwrite?: boolean;
   }
   const props = defineProps<Props>();
 

@@ -1,10 +1,10 @@
 <template>
   <button
-    :class="props.disabled? 'bg-surface text-on_surface hover:bg-surface hover:text-on_surface cursor-auto font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center' : 'text-on_primary bg-primary hover:bg-primary_dark hover:text-on_primary_dark focus:ring-4 focus:outline-none focus:ring-primary_light font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'"
+    :class="props.overwrite? '' : props.disabled? 'bg-surface text-on_surface hover:bg-surface hover:text-on_surface cursor-auto font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center' : 'text-on_primary bg-primary hover:bg-primary_dark hover:text-on_primary_dark focus:ring-4 focus:outline-none focus:ring-primary_light font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'"
     v-bind="$attrs"
     @click=" emitClickEvent($event)"
   >
-    {{ props.btnText }}
+    <slot />
   </button>
 </template>
 
@@ -25,11 +25,11 @@
    * where you use the component.
    */
   interface Props {
-    btnText: string;
     disabled?: boolean;
+    overwrite?: boolean;
   }
   const props = defineProps<Props>();
-  // eslint-disable-next-line
+  
   const emit = defineEmits<{
     (name: 'click', e: MouseEvent ): void
   }>();
@@ -37,6 +37,8 @@
   function emitClickEvent(me: MouseEvent) {
     if(!props.disabled) {
       emit('click', me);
+    } else {
+      me.preventDefault();
     }
   }
 </script>

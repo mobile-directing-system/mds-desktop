@@ -38,15 +38,17 @@
           <NormalButton
             id="submit"
             class=""
-            btn-text="Submit"
             type="submit"
             @click.prevent="createNewUser(userName, firstName, lastName,iPassword)"
-          />
+          >
+            Submit
+          </NormalButton>
           <NormalButton
             class=" ml-auto"
-            :btn-text="'Cancel'"
             @click.prevent="router.push('/user')"
-          />
+          >
+            Cancel
+          </NormalButton>
         </div>
       </main>
     </form>

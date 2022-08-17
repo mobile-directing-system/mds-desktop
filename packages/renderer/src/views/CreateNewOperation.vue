@@ -48,14 +48,16 @@
       <div class="flex justify-between">
         <NormalButton 
           v-if="title != '' && description != '' && start !='' && end !=''"
-          :btn-text="'Create Operation'"
           @click.prevent="createNewOperation(title, description, start, end)"
-        />
+        >
+          Create Operation
+        </NormalButton>
         <NormalButton
           class=" ml-auto"
-          :btn-text="'Cancel'"
           @click.prevent="router.push('/operation')"
-        />
+        >
+          Cancel
+        </NormalButton>
       </div>
     </div>
   </div>

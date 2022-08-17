@@ -17,10 +17,11 @@
       />
       <NormalButton
         id="submit"
-        btn-text="Login"
         type="submit"
         @click.prevent="onSubmit"
-      />
+      >
+        Login
+      </NormalButton>
     </form>
   </main>
 </template>

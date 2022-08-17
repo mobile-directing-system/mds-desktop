@@ -1,7 +1,7 @@
 import type { Store } from 'vuex';
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
 import type { Context } from 'vuex-smart-module';
-import { createUser, updateUser, deleteUser, retrieveUser, retrieveUsers, updateUserPassword } from '#preload';
+import { createUser, updateUser, deleteUser, retrieveUser, retrieveUsers, updateUserPassword, searchUsers } from '#preload';
 import type { User, ErrorResult } from '../../../../types';
 import { errorState, handleErrors } from './ErrorState';
 
@@ -145,6 +145,16 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
       this.mutations.addOrUpdateUser(retrievedUser.res);
     } else {
       handleErrors(retrievedUser.error, retrievedUser.errorMsg, this.errorState);
+    }
+  }
+  async searchUsersByQuery({query, limit, offset}:{query: string, limit?: number, offset?: number|undefined}) {
+    const searchResult: ErrorResult<User[]> = await searchUsers(query, limit, offset);
+    if(searchResult.res && !searchResult.error) {
+      this.mutations.setPage(searchResult.res);
+      this.mutations.addOrUpdateUsers(searchResult.res);
+      this.mutations.setTotal(searchResult.res.length);
+    } else {
+      handleErrors(searchResult.error, searchResult.errorMsg, this.errorState);
     }
   }
 }

@@ -7,9 +7,10 @@
         </h1>
         <NormalButton
           class=" ml-auto mr-6"
-          :btn-text="'+'"
           @click.prevent="router.push('/create-new-user')"
-        />
+        >
+          +
+        </NormalButton>
       </div>
       <div class=" table-fixed place-items-center mr-10">
         <table class=" border-spacing-2 w-full rounded-md overflow-hidden m-4">

@@ -59,14 +59,16 @@
         <div class="flex justify-between">
           <NormalButton 
             v-if="updatedtitle != '' && updateddescription != '' && updatedstart!= '' && updatedend != ''"
-            :btn-text="'Update Operation'"
             @click.prevent="editOperation()"
-          />
+          >
+            Update Operation
+          </NormalButton>
           <NormalButton
             class=" ml-auto"
-            :btn-text="'Cancel'"
             @click.prevent="router.push('/operation')"
-          />
+          >
+            Cancel
+          </NormalButton>
         </div>
       </main>
     </form>

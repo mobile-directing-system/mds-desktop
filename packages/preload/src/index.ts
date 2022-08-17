@@ -19,4 +19,4 @@ export { updateGroup } from './groups';
 export { deleteGroup } from './groups';
 export { retrieveGroup } from './groups';
 export { retrieveGroups } from './groups';
-export { createUser, updateUser, updateUserPassword, deleteUser, retrieveUsers, retrieveUser } from './users';
+export { createUser, updateUser, updateUserPassword, deleteUser, retrieveUsers, retrieveUser, searchUsers } from './users';
