@@ -1,12 +1,12 @@
 <template>
-  <header class=" max-w-lg ml-4 my-10">
-    <h1 class="text-4xl font-bold text-on_background ">
-      Create a new User
-    </h1>        
-  </header>
-  <div class="ml-4">
+  <div class=" bg-white ml-4  my-10">
+    <header class=" max-w-lg ml-4 my-10">
+      <h1 class="text-4xl font-bold text-on_background ">
+        Create a new User
+      </h1>        
+    </header>
     <form class="w-80">
-      <main class="">
+      <main class="ml-4">
         <!------- Username  ------>
         <FormInput
           id="username"
@@ -33,7 +33,7 @@
           type="password"
         />
         <!--- Submit Button --->
-        
+          
         <div class=" pt-4 flex justify-between">
           <NormalButton
             id="submit"
