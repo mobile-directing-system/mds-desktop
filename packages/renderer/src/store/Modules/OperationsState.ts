@@ -91,7 +91,7 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
     if(createdOperation.res && !createdOperation.error) {
       this.mutations.addOrUpdateOperation(createdOperation.res);
     }  else {
-      handleErrors(createdOperation.error, createdOperation.errorMsg, this.errorState);
+      handleErrors(createdOperation.errorMsg, this.errorState);
     }
   }
 
@@ -100,7 +100,7 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
     if(operationUpdated.res && !operationUpdated.error) {
         this.actions.retrieveOperation(operation.id);
     }  else {
-      handleErrors(operationUpdated.error, operationUpdated.errorMsg, this.errorState);
+      handleErrors(operationUpdated.errorMsg, this.errorState);
     }
   }
 
@@ -109,7 +109,7 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
     if(retrievedOperation.res && !retrievedOperation.error) {
       this.mutations.addOrUpdateOperation(retrievedOperation.res);
     }  else {
-      handleErrors(retrievedOperation.error, retrievedOperation.errorMsg, this.errorState);
+      handleErrors(retrievedOperation.errorMsg, this.errorState);
     }
   }
 
@@ -120,7 +120,7 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
       this.mutations.addOrUpdateOperations(retrievedOperations.res);
       this.mutations.setTotal(retrievedOperations.total);
     }  else {
-      handleErrors(retrievedOperations.error, retrievedOperations.errorMsg, this.errorState);
+      handleErrors(retrievedOperations.errorMsg, this.errorState);
     }
   }
 }
