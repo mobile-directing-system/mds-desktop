@@ -12,65 +12,79 @@
           +
         </NormalButton>
       </div>
-      <div class=" table-fixed place-items-center mr-10">
-        <table class=" border-spacing-2 w-full rounded-md overflow-hidden m-4">
-          <thead class=" bg-blue-700 font-bold text-white text-l text-left text-lg">
-            <tr class="p-2">
-              <th class="p-2">
-                User Name
-              </th>
-              <th class="p-2">
-                Firstname
-              </th>
-              <th class="p-2">
-                Lastname
-              </th>
-            </tr>
-          </thead> 
-          <tbody class="text-left">     
-            <tr
-              v-for="(user) in users().values()" 
-              :key="user.id"
-              class="p-2 border-b-2 border-b-gray-500 bg-white text-black hover:bg-primary_superlight hover:text-white cursor-pointer"
-            
-              @click="selectRow(user.id)"
-            >      
-              <td class="p-2">
-                {{ user.username }}
-              </td>
-              <td class="p-2">
-                {{ user.first_name }}
-              </td>
-              <td class="p-2">
-                {{ user.last_name }}
-              </td>
-            </tr> 
-          </tbody>
-        </table>
-      </div>
+      <TableContainer
+        :contents="userPage().values()"
+        id-identifier="id"
+      >
+        <template #tableHeader>
+          <TableHeader :num-of-cols="3">
+            <template #header1>
+              Username
+            </template>
+            <template #header2>
+              First name
+            </template>
+            <template #header3>
+              Last name
+            </template>
+          </TableHeader>
+        </template>
+
+        <template #tableRow="{rowData}:{rowData:User}">
+          <TableRow 
+            :row-data="rowData"
+            :num-of-cols="3"
+            :identifier="rowData.id"
+            @click="selectRow($event)"
+          >
+            <template #data1="{data}:{data:User}">
+              {{ data.username }}
+            </template>
+            <template #data2="{data}:{data:User}">
+              {{ data.first_name }}
+            </template>
+            <template #data3="{data}:{data:User}">
+              {{ data.last_name }}
+            </template>            
+          </TableRow>
+        </template>
+      </TableContainer>
+      <PaginationBar
+        :total-retrievable-entities="totalUserAmount()"
+        :initial-page="paginationPage"
+        @update-page="updatePage($event.amount, $event.offset)"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup> 
-  import { ref, computed } from 'vue';
+  import { ref, computed, onMounted } from 'vue';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
+  import PaginationBar from '../components/BasicComponents/PaginationBar.vue';
+  import TableContainer from '../components/BasicComponents/TableContainer.vue';
+  import TableRow from '../components/BasicComponents/TableRow.vue';
+  import TableHeader from '../components/BasicComponents/TableHeader.vue';
   import { useUserState } from '../store';
   import {useRouter} from 'vue-router';
+   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  import type { User }  from '../../../types';
 
   const userState = useUserState();
-  const users = computed(() => userState.getters.users);
-  const selectedUserID = ref('');
-  const selectedUserUsername = ref('');
+  const userPage = computed(() => userState.getters.page);
+  const totalUserAmount = computed(() => userState.getters.total);
   const router = useRouter();
+  const paginationAmount = 5;
+  const paginationPage = ref(0);
 
-  function selectRow(user_id: string){
-    selectedUserID.value = user_id;
-    const selectedUser = users.value().get(selectedUserID.value);
-    if(selectedUser) {
-      selectedUserUsername.value = selectedUser.username;
-    }
-    router.push({ name: 'EditCurrentUser', params: { selectedUserID: user_id } });
+  onMounted(async () => {
+    await userState.dispatch('retrieveUsers', {amount: paginationAmount, offset: paginationPage.value * paginationAmount});
+  });
+  async function updatePage(amount: number, offset: number) {
+    await userState.dispatch('retrieveUsers', {amount, offset});
+  }
+  function selectRow(userId: string){
+          router.push({name: 'EditCurrentUser', params:{ selectedUserID: userId}});
   }
 </script>
 <style>
