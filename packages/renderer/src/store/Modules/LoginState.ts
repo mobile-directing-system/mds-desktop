@@ -66,7 +66,7 @@ class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStat
       this.mutations.setLoggedIn(loggedIn.res);
       this.mutations.setLoggedInUser(username);
     }  else {
-      handleErrors(loggedIn.error, loggedIn.errorMsg, this.errorState);
+      handleErrors(loggedIn.errorMsg, this.errorState);
     }
   }
   async setLoggingIn(loggingIn: boolean) {
@@ -77,7 +77,7 @@ class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStat
     if(loggedOut.res && !loggedOut.error) {
       this.mutations.setLoggedIn(false);
     }  else {
-      handleErrors(loggedOut.error, loggedOut.errorMsg, this.errorState);
+      handleErrors(loggedOut.errorMsg, this.errorState);
     }
   }
 }

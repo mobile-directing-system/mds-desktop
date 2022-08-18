@@ -1,38 +1,35 @@
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
 import type { Context } from 'vuex-smart-module';
+import type { Error } from '../../../types/Error';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export function handleErrors(error: boolean, errorMsg?: string, errorState?:Context<Module<ErrorState, ErrorStateGetters, ErrorStateMutations, ErrorStateActions, {}>>) {
+export function handleErrors(errorMsg?: string, errorState?:Context<Module<ErrorState, ErrorStateGetters, ErrorStateMutations, ErrorStateActions, {}>>) {
   if(errorState) {
-    errorState.actions.setError(error);
     if(errorMsg) {
-      errorState.actions.setErrorMessage(errorMsg);
+      errorState.actions.addError(errorMsg);
+    } else {
+      errorState.actions.addError('There was an error.');
     }
   } else {
     console.error('Missing Error State');
   }
 }
-
 /**
  * define the content of the ErrorState
  */
 class ErrorState {
-  error = false;
-  errorMessage = '';
+  errors: Error[] = [];
+  timeouts: Map<string, number> = new Map<string, number>();
 }
 
 /**
  * define getters to access the state
  */
 class ErrorStateGetters extends Getters<ErrorState> {
-  get error() {
+  get errors() {
     return () => {
-      return this.state.error;
-    };
-  }
-  get errorMessage() {
-    return () => {
-      return this.state.errorMessage;
+      setTimeout;
+      return this.state.errors;
     };
   }
 }
@@ -41,21 +38,24 @@ class ErrorStateGetters extends Getters<ErrorState> {
  * define mutations to change the state
  */
 class ErrorStateMutations extends Mutations<ErrorState> {
-  setError(error: boolean) {this.state.error = error;}
-  setErrorMessage(errorMessages: string) {this.state.errorMessage = errorMessages;}
+  addError(error:Error){ this.state.errors = [...this.state.errors, error]; }
+  removeError(errorId: string) { this.state.errors =  this.state.errors.filter((elem) => elem.errorId !== errorId); }
+  addTimeout({errorId, timeoutHandler}:{errorId: string, timeoutHandler: number}) { this.state.timeouts.set(errorId, timeoutHandler);}
+  removeTimeout(errorId: string) { this.state.timeouts.delete(errorId); }
 }
 
 /**
  * define actions for functions which change the state as a side effect.
  */
 class ErrorStateActions extends Actions<ErrorState, ErrorStateGetters, ErrorStateMutations, ErrorStateActions> {
-  async setError(error: boolean) {
-    this.mutations.setError(error);
-    setTimeout(() => this.mutations.setError(false), 10_000);
+  async addError(errorMessage: string) {
+    const errorId = crypto.randomUUID();
+    this.mutations.addTimeout({errorId, timeoutHandler: window.setTimeout(() => this.actions.removeError(errorId), 10_000)});
+    this.mutations.addError({errorId, errorMessage});
   }
-  async setErrorMessage(errorMessage: string) {
-    this.mutations.setErrorMessage(errorMessage);
-    setTimeout(() => this.mutations.setErrorMessage(''), 10_000);
+  async removeError(errorId: string) {
+    this.mutations.removeTimeout(errorId);
+    this.mutations.removeError(errorId);
   }
 }
 
