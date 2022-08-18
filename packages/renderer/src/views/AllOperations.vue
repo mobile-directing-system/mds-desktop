@@ -12,70 +12,85 @@
           +
         </NormalButton>
       </div>
-      <div class=" table-fixed place-items-center mr-10">
-        <table class=" border-spacing-2 w-full rounded-md overflow-hidden m-4">
-          <thead class=" bg-blue-700 font-bold text-white text-l text-left text-lg">
-            <tr class="p-2">
-              <th class="p-2">
-                Title
-              </th>
-              <th class="p-2">
-                Description
-              </th>
-              <th class="p-2">
-                Start
-              </th>
-              <th class="p-2">
-                End
-              </th>
-            </tr>
-          </thead> 
-          <tbody class="text-left">     
-            <tr
-              v-for="operation in operations().values()" 
-              :key="operation.id"
-              class="border-b-2 border-b-gray-500 bg-white text-black hover:bg-primary_superlight cursor-pointer"
-              @click="selectRow(operation.id)"
-            >  
-              <td class="p-2">
-                {{ operation.title }}
-              </td>
-              <td class="p-2">
-                {{ operation.description }}
-              </td>
-              <td class="p-2">
-                {{ operation.start.toDateString() }},<br> {{ operation.start.toLocaleTimeString() }}
-              </td>
-              <td class="p-2">
-                {{ operation.end.toDateString() }},<br> {{ operation.end.toLocaleTimeString() }}
-              </td>
-            </tr> 
-          </tbody>
-        </table>
-      </div>
     </div>
+    <TableContainer
+      :contents="groupPage().values()"
+      id-identifier="id"
+    >
+      <template #tableHeader>
+        <TableHeader :num-of-cols="4">
+          <template #header1>
+            Title
+          </template>
+          <template #header2>
+            Description
+          </template>
+          <template #header3>
+            Start
+          </template>
+          <template #header4>
+            End
+          </template>
+        </TableHeader>
+      </template>
+
+      <template #tableRow="{rowData}:{rowData:Operation}">
+        <TableRow 
+          :row-data="rowData"
+          :num-of-cols="4"
+          :identifier="rowData.id"
+          @click="selectRow($event)"
+        >
+          <template #data1="{data}:{data:Operation}">
+            {{ data.title }}
+          </template>
+          <template #data2="{data}:{data:Operation}">
+            {{ data.description }}
+          </template>
+          <template #data3="{data}:{data:Operation}">
+            {{ data.start }}
+          </template>
+          <template #data4="{data}:{data:Operation}">
+            {{ data.end }}
+          </template>
+        </TableRow>
+      </template>
+    </TableContainer>
+    <PaginationBar
+      :total-retrievable-entities="totalOperationAmount()"
+      :initial-page="paginationPage"
+      @update-page="updatePage($event.amount, $event.offset)"
+    />
   </div>
 </template>
 
 <script lang="ts" setup> 
-  import { ref, computed } from 'vue';
+  import { computed, onMounted, ref } from 'vue';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
-  import { useOperationsState } from '../store';
+  import PaginationBar from '../components/BasicComponents/PaginationBar.vue';
+  import TableContainer from '../components/BasicComponents/TableContainer.vue';
+  import TableRow from '../components/BasicComponents/TableRow.vue';
+  import TableHeader from '../components/BasicComponents/TableHeader.vue';
+  import {useOperationsState } from '../store';
   import {useRouter} from 'vue-router';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  import type { Operation } from '../../../types';
 
-  const operationState = useOperationsState();
-  const operations = computed(()=>operationState.getters.operations);
-  const selectedOperationID = ref('');
-  const selectedOperationTitle = ref('');
+  onMounted(async () => {
+    await operationsState.dispatch('retrieveOperations', {amount: paginationAmount, offset: paginationPage.value * paginationAmount});
+  });
+
+  const paginationAmount = 5;
+  const paginationPage = ref(0);
+  const operationsState = useOperationsState();
+  const groupPage = computed(() => operationsState.getters.page);
+  const totalOperationAmount = computed(() => operationsState.getters.total);
   const router = useRouter();
-
-  function selectRow(operation_id: string){
-          selectedOperationID.value = operation_id;
-          const selectedOperation = operations.value().get(selectedOperationID.value);
-          if(selectedOperation) {
-            selectedOperationTitle.value = selectedOperation.title;
-          }
-          router.push({ name: 'EditCurrentOperation', params: { selectedOperationID: operation_id} });
+  function selectRow(groupId: string){
+          router.push({name: 'EditCurrentGroup', params:{ selectedGroupID: groupId}});
+  }
+  async function updatePage(amount: number, offset: number) {
+    await operationsState.dispatch('retrieveOperations', {amount, offset});
   }
 </script>
 <style>
