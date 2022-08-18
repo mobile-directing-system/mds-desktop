@@ -86,8 +86,8 @@
   const groupPage = computed(() => operationsState.getters.page);
   const totalOperationAmount = computed(() => operationsState.getters.total);
   const router = useRouter();
-  function selectRow(groupId: string){
-          router.push({name: 'EditCurrentGroup', params:{ selectedGroupID: groupId}});
+  function selectRow(operationID: string){
+          router.push({name: 'EditCurrentOperation', params:{ selectedOperationID: operationID}});
   }
   async function updatePage(amount: number, offset: number) {
     await operationsState.dispatch('retrieveOperations', {amount, offset});
