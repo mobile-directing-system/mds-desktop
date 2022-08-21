@@ -15,6 +15,7 @@ function undom(user: User):User {
 class UserState {
   users: Map<string, User> = new Map<string, User>();
   page: Map<string, User> = new Map<string, User>();
+  searchResult: Map<string, User> = new Map<string, User>();
   total = 0;
 }
 
@@ -30,6 +31,11 @@ class UserStateGetters extends Getters<UserState> {
   get page() {
     return () => {
       return this.state.page;
+    };
+  }
+  get searchResults() {
+    return () => {
+      return this.state.searchResult;
     };
   }
   get total() {
@@ -52,11 +58,15 @@ class UserStateMutations extends Mutations<UserState> {
     users.forEach((elem) => this.state.users.set(elem.id, elem));
 
   }
+  setSearchResult(users: User[]) {
+    this.state.searchResult.clear();
+    users.forEach((elem) => this.state.searchResult.set(elem.id, elem));
+  }
   setTotal(total: number) {
     this.state.total = total;
   }
   addOrUpdateUsers(users: User[]) {
-    users.map((user) => {
+    users.forEach((user) => {
         this.state.users.set(user.id, user);
     });
   }
@@ -139,9 +149,8 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
   async searchUsersByQuery({query, limit, offset}:{query: string, limit?: number, offset?: number|undefined}) {
     const searchResult: ErrorResult<User[]> = await searchUsers(query, limit, offset);
     if(searchResult.res && !searchResult.error) {
-      this.mutations.setPage(searchResult.res);
+      this.mutations.setSearchResult(searchResult.res);
       this.mutations.addOrUpdateUsers(searchResult.res);
-      this.mutations.setTotal(searchResult.res.length);
     } else {
       handleErrors(searchResult.errorMsg, this.errorState);
     }

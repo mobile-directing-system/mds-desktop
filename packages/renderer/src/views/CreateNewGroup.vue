@@ -123,39 +123,16 @@
             @click="toggleMembersModal()"
           >
             <div class="mb-6 w-96 max-w-sm">
-              <FormInput
-                v-model="addMemberSearchTerm"
-                placeholder="Search..."
+              <SearchableSelect
+                v-model="addGroupMemberIds"
+                :options="[...usersSearchResultsArray, ...addGroupMemberIds.map((elem) => users().get(elem))]"
+                placeholder="Select group members"
+                label="username"
+                value-prop="id"
+                track-by="username"
+                @search-change="handleSelectionInput"
+                @open="handleSelectionInput('')"
               />
-              <div class="w-2xl relative bg-background">
-                <div
-                  v-for="memberId in addGroupMemberIds"
-                  :key="memberId"
-                  class="flex-grow-0 inline-flex text-center my-1 ml-1 rounded-full bg-primary_superlight text-on_primary_superlight pr-2"
-                >
-                  <button 
-                    type="button"
-                    class="flex-shrink-0 mt-1.5 mb-1.5 -mr-0.5 ml-1.5 inline-flex hover:bg-primary_light p-1 rounded-full"
-                    @click="toggleId(memberId)"
-                  >
-                    <svg
-                      stroke="currentColor"
-                      fill="none"
-                      viewBox="0 0 8 8"
-                      class="h-2 w-2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-width="1.5"
-                        d="M1 1l6 6m0-6L1 7"
-                      />
-                    </svg>
-                  </button>
-                  <span class="inline-flex items-center rounded-full pl-1 py-1 text-sm font-semibold">
-                    {{ users().get(memberId)?.username }}
-                  </span>
-                </div>
-              </div>
               <TableContainer
                 :contents="usersPage().values()"
                 id-identifier="id"
@@ -194,7 +171,6 @@
                 </template>
               </TableContainer>
               <PaginationBar
-                v-if="addMemberSearchTerm === ''"
                 :total-retrievable-entities="totalUserAmount()"
                 @update-page="updatePage($event.amount, $event.offset)"
               />
@@ -230,7 +206,7 @@
   </div>
 </template>
 <script lang="ts" setup> 
-  import { ref, computed, onMounted, watch } from 'vue';
+  import { ref, computed, onMounted } from 'vue';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
   import FormInput from '../components/BasicComponents/FormInput.vue';
   import TableContainer from '../components/BasicComponents/TableContainer.vue';
@@ -238,6 +214,7 @@
   import TableHeader from '../components/BasicComponents/TableHeader.vue';
   import FloatingModal from '../components/BasicComponents/FloatingModal.vue';
   import PaginationBar from '../components/BasicComponents/PaginationBar.vue';
+  import SearchableSelect from '../components/BasicComponents/SearchableSelect.vue';
   import { useGroupState, useOperationsState, useUserState } from '../store';
   import{useRouter } from 'vue-router';
   import type { Ref } from 'vue';
@@ -247,6 +224,7 @@
   const operationsState = useOperationsState();
   const userState = useUserState();
   const usersPage = computed(() => userState.getters.page);
+  const usersSearchResults = computed(() => userState.getters.searchResults);
   const router = useRouter();
   const operations = computed(() => operationsState.getters.operations);
   const users = computed(() => userState.getters.users);
@@ -256,17 +234,19 @@
   const updatedGroupOperationId = ref('');
   const updatedGroupMemberIds : Ref<string[]> = ref([]);
   const addGroupMemberIds: Ref<string[]> = ref([]);
-  const addMemberSearchTerm = ref('');
   const totalUserAmount = computed(() => userState.getters.total);
+  const usersSearchResultsArray = computed(() => {
+    return InterableIteratorToArray(usersSearchResults.value().values());
+  });
 
 
   onMounted(() => {
     operationsState.dispatch('retrieveOperations', {amount: 100});
   });
 
-  watch(addMemberSearchTerm, (curVal) => {
-    userState.dispatch('searchUsersByQuery', {query: curVal});
-  });
+  function handleSelectionInput(query: string) {
+    userState.dispatch('searchUsersByQuery', {query, limit:10});
+  }
 
   function createGroup(){
       groupState.dispatch('createGroup', {
@@ -278,15 +258,17 @@
       });
       router.push('/groups');
   }
+
   function addMembers(){
     updatedGroupMemberIds.value = [...updatedGroupMemberIds.value, ...addGroupMemberIds.value];
     toggleMembersModal();
   }
+
   function toggleMembersModal() {
     showMembersModal.value = !showMembersModal.value;
     addGroupMemberIds.value = [];
-    addMemberSearchTerm.value = '';
   }
+
   function toggleId(groupId: string) {
     if(addGroupMemberIds.value.includes(groupId)) {
       addGroupMemberIds.value = addGroupMemberIds.value.filter((elem) => elem !== groupId );
@@ -294,8 +276,21 @@
       addGroupMemberIds.value = [...addGroupMemberIds.value, groupId];
     }
   }
+
   function updatePage(amount:number, offset:number) {
     userState.dispatch('retrieveUsers', {amount, offset});
   }
 
+  function InterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {
+    const arr: T[] = [];
+    // eslint-disable-next-line no-constant-condition
+    while(true) {
+      const next = iter.next();
+      if(next.done) {
+        break;
+      }
+      arr.push(next.value);
+    }
+    return arr;
+  }
 </script>
