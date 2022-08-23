@@ -188,7 +188,7 @@
         <!--- Submit Button --->
         <div class="flex justify-between">
           <NormalButton 
-            v-if="updatedGroupTitle != '' && updatedGroupOperationId != ''"
+            v-if="updatedGroupTitle != ''"
             @click.prevent="editGroup()"
           >
             Update Group

@@ -190,7 +190,7 @@
           
         <div class="pt-4 flex justify-between">
           <NormalButton 
-            v-if="updatedGroupTitle != '' && updatedGroupOperationId != ''"
+            v-if="updatedGroupTitle != ''"
             @click.prevent="createGroup()"
           >
             Create Group
