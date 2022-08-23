@@ -27,25 +27,17 @@
             for="operations"
             class="block mb-2 text-sm font-medium text-on_background"
           >Select an Operation</label>
-          <select
-            id="operations"
+          <SearchableSelect
             v-model="updatedGroupOperationId"
-            class="bg-surface_superlight border border-surface_dark text-on_surface_superlight text-sm rounded-lg focus:ring-primary_light focus:border-primary_light block w-full p-2.5"
-          >
-            <option
-              value=""
-              selected
-            >
-              Choose an Operation
-            </option>
-            <option
-              v-for="operation in operations().values()"
-              :key="operation.id"
-              :value="operation.id"
-            >
-              {{ operation.title }}
-            </option>
-          </select>
+            :options="operationsSearchResultsArray"
+            mode="single"
+            placeholder="Select operation"
+            label="title"
+            value-prop="id"
+            track-by="title"
+            @search-change="handleOperationSelectionInput"
+            @open="handleOperationSelectionInput('')"
+          />
         </div>
         <!-- Members -->
         <div class="mb-6">
@@ -131,8 +123,8 @@
                 label="username"
                 value-prop="id"
                 track-by="username"
-                @search-change="handleSelectionInput"
-                @open="handleSelectionInput('')"
+                @search-change="handleMemberSelectionInput"
+                @open="handleMemberSelectionInput('')"
               />
               <TableContainer
                 :contents="usersPage().values()"
@@ -207,7 +199,7 @@
   </div>
 </template>
 <script lang="ts" setup> 
-  import { ref, computed, onMounted } from 'vue';
+  import { ref, computed } from 'vue';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
   import FormInput from '../components/BasicComponents/FormInput.vue';
   import TableContainer from '../components/BasicComponents/TableContainer.vue';
@@ -227,7 +219,6 @@
   const usersPage = computed(() => userState.getters.page);
   const usersSearchResults = computed(() => userState.getters.searchResults);
   const router = useRouter();
-  const operations = computed(() => operationsState.getters.operations);
   const users = computed(() => userState.getters.users);
   const showMembersModal = ref(false);
   const updatedGroupTitle = ref('');
@@ -239,14 +230,17 @@
   const usersSearchResultsArray = computed(() => {
     return InterableIteratorToArray(usersSearchResults.value().values());
   });
-
-
-  onMounted(() => {
-    operationsState.dispatch('retrieveOperations', {amount: 100});
+  const operationsSearchResults = computed(() => operationsState.getters.searchResults);
+  const operationsSearchResultsArray = computed(() => {
+    return InterableIteratorToArray(operationsSearchResults.value().values());
   });
 
-  function handleSelectionInput(query: string) {
+  function handleMemberSelectionInput(query: string) {
     userState.dispatch('searchUsersByQuery', {query, limit:10});
+  }
+
+  function handleOperationSelectionInput(query: string) {
+    operationsState.dispatch('searchOperationsByQuery', {query, limit:10});
   }
 
   function createGroup(){
