@@ -1,3 +1,6 @@
 @tailwind base;
 @tailwind components;
+.multiselect input {
+  @apply focus:ring-0 focus:ring-offset-0;
+}
 @tailwind utilities;

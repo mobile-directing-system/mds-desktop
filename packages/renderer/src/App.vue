@@ -32,3 +32,6 @@
     router.push('/');
   }
 </script>
+<style>
+  @import '@vueform/multiselect/themes/tailwind.css';
+</style>
