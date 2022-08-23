@@ -5,9 +5,9 @@
       tag: 'bg-primary_superlight text-white text-sm font-semibold py-0.5 pl-2 rounded mr-1 mb-1 flex items-center whitespace-nowrap rtl:pl-0 rtl:pr-2 rtl:mr-0 rtl:ml-1',
     }"
     v-bind="$attrs"
-    mode="tags"
     searchable
     hide-selected
+    :mode="props.mode"
     :filterResults="false"
     :options="props.options"
     :label="props.label"
@@ -27,6 +27,7 @@
   import Multiselect from '@vueform/multiselect';
 
   interface Props {
+    mode: 'tags' | 'multiple' | 'single';
     placeholder: string;
     label:string;
     trackBy: string;
