@@ -93,7 +93,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     if(createdUser.res && !createdUser.error) {
       this.mutations.addOrUpdateUser(createdUser.res);
     } else {
-      handleErrors(createdUser.error, createdUser.errorMsg, this.errorState);
+      handleErrors(createdUser.errorMsg, this.errorState);
     }
   }
   async updateUser(user: User) {
@@ -101,13 +101,13 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     if(userUpdated.res && !userUpdated.error) {
       this.actions.retrieveUserById(user.id);
     } else {
-      handleErrors(userUpdated.error, userUpdated.errorMsg, this.errorState);
+      handleErrors(userUpdated.errorMsg, this.errorState);
     }
   }
   async updateUserPasswordById({userId, pass}:{userId: string, pass: string}) {
     const userPasswordUpdated:ErrorResult<boolean> = await updateUserPassword(userId, pass);
     if(!userPasswordUpdated.res && userPasswordUpdated.error) {
-      handleErrors(userPasswordUpdated.error, userPasswordUpdated.errorMsg, this.errorState);
+      handleErrors(userPasswordUpdated.errorMsg, this.errorState);
     }
   }
   async deleteUserById(userId: string) {
@@ -115,7 +115,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     if(userDeleted.res && !userDeleted.error) {
       this.mutations.deleteUserById(userId);
     }  else {
-      handleErrors(userDeleted.error, userDeleted.errorMsg, this.errorState);
+      handleErrors(userDeleted.errorMsg, this.errorState);
     }
   }
   async retrieveUsers({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
@@ -125,7 +125,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
       this.mutations.addOrUpdateUsers(retrievedUsers.res);
       this.mutations.setTotal(retrievedUsers.total);
     } else {
-      handleErrors(retrievedUsers.error, retrievedUsers.errorMsg, this.errorState);
+      handleErrors(retrievedUsers.errorMsg, this.errorState);
     }
   }
   async retrieveUserById(userId: string) {
@@ -133,7 +133,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
     if(retrievedUser.res && !retrievedUser.error) {
       this.mutations.addOrUpdateUser(retrievedUser.res);
     } else {
-      handleErrors(retrievedUser.error, retrievedUser.errorMsg, this.errorState);
+      handleErrors(retrievedUser.errorMsg, this.errorState);
     }
   }
   async searchUsersByQuery({query, limit, offset}:{query: string, limit?: number, offset?: number|undefined}) {
@@ -143,7 +143,7 @@ class UserStateActions extends Actions<UserState, UserStateGetters, UserStateMut
       this.mutations.addOrUpdateUsers(searchResult.res);
       this.mutations.setTotal(searchResult.res.length);
     } else {
-      handleErrors(searchResult.error, searchResult.errorMsg, this.errorState);
+      handleErrors(searchResult.errorMsg, this.errorState);
     }
   }
 }
