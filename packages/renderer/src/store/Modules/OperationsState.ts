@@ -1,5 +1,5 @@
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
-import {createOperation, updateOperation, retrieveOperation, retrieveOperations } from '#preload';
+import {createOperation, updateOperation, retrieveOperation, retrieveOperations, searchOperations } from '#preload';
 import type { Operation, ErrorResult } from '../../../../types';
 import type { Context } from 'vuex-smart-module';
 import type { Store } from 'vuex';
@@ -17,6 +17,7 @@ function undom(operation: Operation):Operation {
 class OperationsState {
   operations: Map<string, Operation> = new Map<string, Operation>();
   page: Map<string, Operation> = new Map<string, Operation>();
+  searchResult: Map<string, Operation> = new Map<string, Operation>();
   total = 0;
 }
 
@@ -32,6 +33,11 @@ class OperationsStateGetters extends Getters<OperationsState> {
   get page() {
     return () => {
       return this.state.page;
+    };
+  }
+  get searchResults() {
+    return () => {
+      return this.state.searchResult;
     };
   }
   get total() {
@@ -52,6 +58,10 @@ class OperationsStateMutations extends Mutations<OperationsState> {
   setPage(page: Operation[]) {
     this.state.operations.clear();
     page.forEach((elem) => this.state.page.set(elem.id, elem));
+  }
+  setSearchResult(operations: Operation[]) {
+    this.state.searchResult.clear();
+    operations.forEach((elem) => this.state.searchResult.set(elem.id, elem));
   }
   setTotal(total: number) {
     this.state.total = total;
@@ -121,6 +131,16 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
       this.mutations.setTotal(retrievedOperations.total);
     }  else {
       handleErrors(retrievedOperations.errorMsg, this.errorState);
+    }
+  }
+
+  async searchOperationsByQuery({query, limit, offset}:{query: string, limit?: number, offset?: number|undefined}) {
+    const searchResult: ErrorResult<Operation[]> = await searchOperations(query, limit, offset);
+    if(searchResult.res && !searchResult.error) {
+      this.mutations.setSearchResult(searchResult.res);
+      this.mutations.addOrUpdateOperations(searchResult.res);
+    } else {
+      handleErrors(searchResult.errorMsg, this.errorState);
     }
   }
 }

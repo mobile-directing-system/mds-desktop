@@ -16,3 +16,7 @@ export async function retrieveOperation(operationId: string):Promise<ErrorResult
 export async function retrieveOperations(amount?: number, offset?: number, order_by?: string, order_dir?: string):Promise<ErrorResult<Operation[]>> {
     return ipcRenderer.invoke('retrieveOperations', amount, offset, order_by, order_dir); 
 }
+
+export async function searchOperations(query: string, limit?: number, offset?: number):Promise<ErrorResult<Operation[]>> {
+  return ipcRenderer.invoke('searchOperations', query, limit, offset);
+}

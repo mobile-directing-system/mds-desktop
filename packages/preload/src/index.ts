@@ -14,6 +14,7 @@ export { createOperation } from './operation';
 export { updateOperation } from './operation';
 export { retrieveOperation } from './operation';
 export { retrieveOperations } from './operation';
+export { searchOperations } from './operation';
 export { createGroup } from './groups';
 export { updateGroup } from './groups';
 export { deleteGroup } from './groups';
