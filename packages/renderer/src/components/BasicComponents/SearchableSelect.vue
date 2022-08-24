@@ -16,6 +16,7 @@
     :value-prop="props.valueProp"
     :track-by="props.trackBy"
     :placeholder="props.placeholder"
+    @search-change="debouncedHandleSelectionInput"
   />
 </template>
 
@@ -27,6 +28,7 @@
 
 <script lang="ts" setup>
   import Multiselect from '@vueform/multiselect';
+  import { debounce } from 'lodash';
 
   interface Props {
     mode: 'tags' | 'multiple' | 'single';
@@ -34,10 +36,28 @@
     label:string;
     trackBy: string;
     valueProp: string;
+    debounce?: number;
+    maxWait?: number;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: any[];
   }
 
+  const defaultDebounceTime = 200;
+  const defaultMaxWaitTime = 200;
   const props = defineProps<Props>();
+
+  const emit = defineEmits<{
+    (e: 'search-change', query: string, select: Multiselect): void
+  }>();
+
+  function handleSelectionInput(query: string, select: Multiselect):void {
+    console.log('emit search-change with value ', query);
+    emit('search-change', query, select);
+  }
+
+  const debouncedHandleSelectionInput = debounce(handleSelectionInput, props.debounce? props.debounce : defaultDebounceTime, {'maxWait': props.maxWait? props.maxWait : defaultMaxWaitTime});
+
+
+
 </script>
 <style src="@vueform/multiselect/themes/default.css"></style>
