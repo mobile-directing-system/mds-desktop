@@ -51,7 +51,6 @@
   }>();
 
   function handleSelectionInput(query: string, select: Multiselect):void {
-    console.log('emit search-change with value ', query);
     emit('search-change', query, select);
   }
 
