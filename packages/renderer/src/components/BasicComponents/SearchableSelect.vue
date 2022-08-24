@@ -3,6 +3,8 @@
     :classes="{
       containerActive: 'ring ring-primary_light ring-opacity-30',
       tag: 'bg-primary_superlight text-white text-sm font-semibold py-0.5 pl-2 rounded mr-1 mb-1 flex items-center whitespace-nowrap rtl:pl-0 rtl:pr-2 rtl:mr-0 rtl:ml-1',
+      optionSelected: 'bg-primary text-on_primary',
+      optionSelectedPointed: 'bg-primary_light text-on_primary_light',
     }"
     v-bind="$attrs"
     searchable
