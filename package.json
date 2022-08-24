@@ -53,9 +53,11 @@
     "vue-tsc": "0.37.3"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.184",
     "@vueform/multiselect": "^2.5.2",
     "axios": "^0.27.2",
     "electron-updater": "5.0.1",
+    "lodash": "^4.17.21",
     "vue": "3.2.37",
     "vue-router": "^4.0.16",
     "vuex": "^4.0.2",
