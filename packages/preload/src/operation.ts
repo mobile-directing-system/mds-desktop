@@ -1,4 +1,4 @@
-import type { Operation, ErrorResult } from '../../types';
+import type { User, Operation, ErrorResult } from '../../types';
 const { ipcRenderer } = require('electron');
 
 export async function createOperation(operation: Operation):Promise<ErrorResult<Operation>> {
@@ -19,4 +19,12 @@ export async function retrieveOperations(amount?: number, offset?: number, order
 
 export async function searchOperations(query: string, limit?: number, offset?: number):Promise<ErrorResult<Operation[]>> {
   return ipcRenderer.invoke('searchOperations', query, limit, offset);
+}
+
+export async function retrieveOperationMembers(operationId: string, amount?: number, offset?: number, order_by?: string, order_dir?: string):Promise<ErrorResult<User[]>> {
+  return ipcRenderer.invoke('retrieveOperationMembers', operationId, amount, offset, order_by, order_dir);
+}
+
+export async function updateOperationMembers(operationId: string, memberIds: string[]):Promise<ErrorResult<boolean>> {
+  return ipcRenderer.invoke('updateOperationMembers', operationId, memberIds);
 }

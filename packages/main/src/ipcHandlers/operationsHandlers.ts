@@ -1,6 +1,6 @@
 import type { IpcMainInvokeEvent } from 'electron';
-import type { Operation, ErrorResult } from '../../../types';
-import { createOperation, updateOperation, retrieveOperation, retrieveOperations, searchOperations } from '/@/backend';
+import type { User, Operation, ErrorResult } from '../../../types';
+import { createOperation, updateOperation, retrieveOperation, retrieveOperations, searchOperations, retrieveOperationMembers, updateOperationMembers } from '/@/backend';
 
 export async function createOperationHandler(_:IpcMainInvokeEvent, operation: Operation):Promise<ErrorResult<Operation>> {
     return createOperation(operation);
@@ -28,4 +28,12 @@ export async function retrieveOperationHandler(_:IpcMainInvokeEvent, operationId
 // eslint-disable-next-line no-unused-vars
 export async function searchOperationsHandler(_:IpcMainInvokeEvent, query: string, limit?: number, offset?: number):Promise<ErrorResult<Operation[]>> {
   return searchOperations(query, limit, offset);
+}
+
+export async function retrieveOperationMembersHandler(_:IpcMainInvokeEvent, operationId: string, amount?: number, offset?: number, order_by?: string, order_dir?: string):Promise<ErrorResult<User[]>> {
+  return retrieveOperationMembers(operationId, amount, offset, order_by, order_dir);
+}
+
+export async function updateOperationMembersHandler(_:IpcMainInvokeEvent, operationId: string, memberIds: string[]):Promise<ErrorResult<boolean>> {
+  return updateOperationMembers(operationId, memberIds);
 }
