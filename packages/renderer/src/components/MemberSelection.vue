@@ -11,7 +11,7 @@
   <!-- Members Table -->
   <TableContainer
     class="-ml-4"
-    :contents="updatedMemberIds"
+    :contents="props.modelValue"
     id-identifier="id"
   >
     <template #tableHeader>
@@ -47,7 +47,7 @@
           <button
             type="button"
             class="bg-background text-on_background hover:bg-surface_dark hover:text-on_surface_dark rounded-lg focus:ring-2 focus:ring-surface p-1.5 inline-flex h-8 w-8 "
-            @click.prevent="updatedMemberIds = updatedMemberIds.filter((elem) => elem !== data)"
+            @click.prevent="deleteMember(data)"
           >
             <span class="sr-only">Close</span>
             <svg
@@ -76,7 +76,7 @@
     <div class="mb-6 w-96 max-w-sm">
       <SearchableSelect
         v-model="addMemberIds"
-        :options="[...usersSearchResultsArray, ...addMemberIds.map((elem) => users().get(elem))]"
+        :options="union(usersSearchResultsArray, addMemberIds.map((elem) => users().get(elem)))"
         mode="tags"
         placeholder="Select group members"
         label="username"
@@ -148,6 +148,7 @@
 
   import { ref, computed, watch } from 'vue';
   import { useUserState } from '../store';
+  import { union } from 'lodash';
   import type { Ref } from 'vue';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type { User } from '../../../types';
@@ -168,19 +169,14 @@
 
   const showMembersModal = ref(false);
   const addMemberIds: Ref<string[]> = ref([]);
-  const updatedMemberIds : Ref<string[]> = ref([]);
 
   const props = defineProps<Props>();
-
-  updatedMemberIds.value = [... props.modelValue];
 
   const emit = defineEmits<{
     (e:'update:modelValue', memberIds: string[]):void
   }>();
 
-  watch(updatedMemberIds, (curVal) => {
-    emit('update:modelValue', curVal);
-  });
+  watch(addMemberIds, (curVal) => console.log(curVal.map((elem) => users.value().get(elem))));
 
   function toggleMembersModal() {
     showMembersModal.value = !showMembersModal.value;
@@ -200,8 +196,12 @@
   }
   
   function addMembers(){
-    updatedMemberIds.value = [...updatedMemberIds.value, ...addMemberIds.value];
+    emit('update:modelValue', [...props.modelValue, ...addMemberIds.value]);
     toggleMembersModal();
+  }
+
+  function deleteMember(memberId: string) {
+    emit('update:modelValue', props.modelValue.filter((elem) => elem !== memberId));
   }
 
   function updatePage(amount:number, offset:number) {
