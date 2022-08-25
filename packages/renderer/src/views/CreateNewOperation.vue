@@ -42,6 +42,12 @@
               type="datetime-local"
             />
           </div>
+          <!-- Operation Member Selection -->
+          <div class="mb-6">
+            <MemberSelection 
+              v-model="operationMemberIds"
+            />
+          </div>
         </main>
       </form>
       <!--- Submit Button --->
@@ -67,15 +73,18 @@
 
     import { ref } from 'vue';
     import NormalButton from '../components/BasicComponents/NormalButton.vue';
+    import MemberSelection from '../components/MemberSelection.vue';
     import { useOperationsState } from '../store';
     import{useRouter} from 'vue-router';
     import type {Operation} from '../../../types';
     import FormInput from '../components/BasicComponents/FormInput.vue';
+    import type {Ref} from 'vue';
 
     const title = ref('');
     const description = ref('');
     const start = ref('');
     const end = ref(''); 
+    const operationMemberIds: Ref<string[]> = ref([]);
     const operationState = useOperationsState();
     const router = useRouter();
     /* eslint-disable */
@@ -89,7 +98,7 @@
             end: new Date(end),
             is_archived: false,
         };
-        operationState.dispatch('createOperation', newOperation);
+        operationState.dispatch('createOperation', {operation: newOperation, memberIds: operationMemberIds.value});
         title.value ='';
         description.value ='';
   }

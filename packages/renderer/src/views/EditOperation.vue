@@ -41,6 +41,12 @@
             type="datetime-local"
           />
         </div>
+        <!-- Operation Member Selection -->
+        <div class="mb-6">
+          <MemberSelection 
+            v-model="updatedOperationMemberIds"
+          />
+        </div>
         <!---- archive --->
         <div class="mb-6 flex justify-between flex-row">
           <label
@@ -76,11 +82,13 @@
 </template>
 
 <script lang="ts" setup> 
-    import { ref, computed} from 'vue';
+    import { ref, computed, onMounted} from 'vue';
     import NormalButton from '../components/BasicComponents/NormalButton.vue';
     import FormInput from '../components/BasicComponents/FormInput.vue';
+    import MemberSelection from '../components/MemberSelection.vue';
     import { useOperationsState} from '../store';
     import type {Operation} from '../../../types';
+    import type { Ref } from 'vue';
 
     import{useRouter, useRoute} from 'vue-router';
     const operationState = useOperationsState();
@@ -88,13 +96,21 @@
     const route = useRoute();
 
     const operations = computed(() => operationState.getters.operations);
+    const operationMembers = computed(() => operationState.getters.members);
     const selectedOperationID = route.params.selectedOperationID;
     const currentOperation = operations.value().get(selectedOperationID as string);
     const updatedtitle = ref('');
     const updateddescription = ref('');
     const updatedstart = ref('');
     const updatedend = ref('');
+    const updatedOperationMemberIds:Ref<string[]> = ref([]);
     const updatedisArchived = ref(false);
+
+    onMounted(async () => {
+      await operationState.dispatch('retrieveOperationMembersById', {operationId: selectedOperationID as string});
+      const members = operationMembers.value().get(selectedOperationID as string);
+      updatedOperationMemberIds.value = members?members:[];
+    });
 
     if(currentOperation) {
       updatedtitle.value = currentOperation.title;
@@ -115,6 +131,7 @@
             is_archived: updatedisArchived.value,       
         };
         operationState.dispatch('updateOperation', updatedOperation);
+        operationState.dispatch('updateOperationMembersById', {operationId: selectedOperationID as string, memberIds: updatedOperationMemberIds.value });
         router.push('/operation');
     }
 </script>
