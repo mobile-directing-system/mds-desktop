@@ -33,7 +33,7 @@
           >Select an Operation</label>
           <SearchableSelect
             v-model="updatedGroupOperationId"
-            :options="[...operationsSearchResultsArray, operationsSearchResults().has(updatedGroupOperationId)? [] : operations().get(updatedGroupOperationId)]"
+            :options="options"
             mode="single"
             placeholder="Select operation"
             label="title"
@@ -98,6 +98,13 @@
   const operationsSearchResults = computed(() => operationsState.getters.searchResults);
   const operationsSearchResultsArray = computed(() => {
     return InterableIteratorToArray(operationsSearchResults.value().values());
+  });
+  const options = computed(() => {
+    if(operationsSearchResults.value().has(updatedGroupOperationId.value) || !updatedGroupOperationId.value) {
+      return operationsSearchResultsArray.value;
+    } else {
+      return [...operationsSearchResultsArray.value, operations.value().get(updatedGroupOperationId.value)];
+    }
   });
 
   const updatedGroupTitle = ref('');
