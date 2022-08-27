@@ -76,7 +76,7 @@
     <div class="mb-6 w-96 max-w-sm">
       <SearchableSelect
         v-model="addMemberIds"
-        :options="union(usersSearchResultsArray, addMemberIds.map((elem) => users().get(elem)))"
+        :options="options"
         mode="tags"
         placeholder="Select group members"
         label="username"
@@ -86,7 +86,7 @@
         @open="handleSelectionInput('')"
       />
       <TableContainer
-        :contents="usersPage().values()"
+        :contents="usersPageArray.filter((elem) => !modelValue.includes(elem?.id? elem?.id : ''))"
         id-identifier="id"
       >
         <template #tableHeader>
@@ -146,7 +146,7 @@
   import PaginationBar from '../components/BasicComponents/PaginationBar.vue';
   import SearchableSelect from '../components/BasicComponents/SearchableSelect.vue';
 
-  import { ref, computed, watch } from 'vue';
+  import { ref, computed } from 'vue';
   import { useUserState } from '../store';
   import { union } from 'lodash';
   import type { Ref } from 'vue';
@@ -164,19 +164,22 @@
   const totalUserAmount = computed(() => userState.getters.total);
   const usersSearchResults = computed(() => userState.getters.searchResults);
   const usersSearchResultsArray = computed(() => {
-    return InterableIteratorToArray(usersSearchResults.value().values());
+    return IterableIteratorToArray(usersSearchResults.value().values());
+  });
+  const usersPageArray = computed(() => {
+    return IterableIteratorToArray(usersPage.value().values());
   });
 
   const showMembersModal = ref(false);
   const addMemberIds: Ref<string[]> = ref([]);
+  const arr: Ref<string[]> = ref([]);
+  const options: Ref<(User | undefined)[]> = computed(() => union(usersSearchResultsArray.value, arr.value.map((elem) => users.value().get(elem)).filter((elem) => !props.modelValue.includes(elem?.id? elem?.id: ''))));
 
   const props = defineProps<Props>();
 
   const emit = defineEmits<{
     (e:'update:modelValue', memberIds: string[]):void
   }>();
-
-  watch(addMemberIds, (curVal) => console.log(curVal.map((elem) => users.value().get(elem))));
 
   function toggleMembersModal() {
     showMembersModal.value = !showMembersModal.value;
@@ -185,9 +188,15 @@
 
   function toggleId(groupId: string) {
     if(addMemberIds.value.includes(groupId)) {
-      addMemberIds.value = addMemberIds.value.filter((elem) => elem !== groupId );
+      arr.value = arr.value.filter((elem) => elem !== groupId );
+      setTimeout(() => {
+        addMemberIds.value = addMemberIds.value.filter((elem) => elem !== groupId );
+      }, 0);
     } else {
-      addMemberIds.value = [...addMemberIds.value, groupId];
+      arr.value = [...arr.value, groupId];
+      setTimeout(() => {
+        addMemberIds.value = [...addMemberIds.value, groupId];
+      }, 0);
     }
   }
 
@@ -208,7 +217,7 @@
     userState.dispatch('retrieveUsers', {amount, offset});
   }
 
-  function InterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {
+  function IterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {
     const arr: T[] = [];
     // eslint-disable-next-line no-constant-condition
     while(true) {
