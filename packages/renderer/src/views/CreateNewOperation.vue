@@ -14,6 +14,7 @@
               id="title"
               v-model="title"
               label="Title"
+              required
             />
           </div>
           <!------- Description  ------>
@@ -31,6 +32,7 @@
               v-model="start"
               label="Start"
               type="datetime-local"
+              required
             />
           </div>
           <!--- End --->
@@ -40,6 +42,7 @@
               v-model="end"
               label="End"
               type="datetime-local"
+              :min="start"
             />
           </div>
           <!-- Operation Member Selection -->

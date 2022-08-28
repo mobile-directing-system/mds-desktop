@@ -13,6 +13,7 @@
             id="title"
             v-model="updatedtitle"
             label="Title"
+            required
           />
         </div>
         <!------- Description  ------>
@@ -30,6 +31,7 @@
             v-model="updatedstart"
             label="Start"
             type="datetime-local"
+            required
           />
         </div>
         <!---- end --->
@@ -39,6 +41,7 @@
             v-model="updatedend"
             label="End"
             type="datetime-local"
+            :min="updatedstart"
           />
         </div>
         <!-- Operation Member Selection -->
