@@ -63,7 +63,7 @@ class OperationsStateMutations extends Mutations<OperationsState> {
     operations.forEach((elem) => this.state.operations.set(elem.id, elem));
   }
   setPage(page: Operation[]) {
-    this.state.operations.clear();
+    this.state.page.clear();
     page.forEach((elem) => this.state.page.set(elem.id, elem));
   }
   setSearchResult(operations: Operation[]) {
