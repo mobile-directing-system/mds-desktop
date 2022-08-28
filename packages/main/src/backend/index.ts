@@ -2,4 +2,5 @@ export { createUser, updateUser, updateUserPassword, retrieveUser, retrieveUsers
 export { createGroup, updateGroup, deleteGroup, retrieveGroups, retrieveGroup } from './groups';
 export { createOperation, updateOperation, retrieveOperation, retrieveOperations } from './operations';
 export { retrievePermissions, updatePermissions } from './permissions';
+export { createAddressbookEntry, updateAddressbookEntry, deleteAddressbookEntry, retrieveAddressbookEntries, retrieveAddressbookEntry, setChannels, retrieveChannels } from './addressbook';
 export { login, logout } from './login';

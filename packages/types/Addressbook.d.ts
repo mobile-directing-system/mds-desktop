@@ -17,6 +17,6 @@ interface Channel {
     timeout: number,
 }
 
-type Channels = [Channel];
+type Channels = Channel[];
 
 export { AddressbookEntry, Channel, Channels};

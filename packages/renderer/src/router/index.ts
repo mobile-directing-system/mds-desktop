@@ -12,6 +12,7 @@ import EditOperation from '../views/EditOperation.vue';
 import EditGroup from '../views/EditGroup.vue';
 import AllGroups from '../views/AllGroups.vue';
 import CreateNewGroup from '../views/CreateNewGroup.vue';
+import Addressbook from '../views/AllAddressbookEntries.vue';
 
 const routes:RouteRecordRaw[] = [
     {
@@ -69,6 +70,11 @@ const routes:RouteRecordRaw[] = [
                 path: '/create-new-group',
                 name: 'CreateGroup',
                 component: CreateNewGroup,
+            },
+            {
+                path: '/addressbook',
+                name: 'Addressbook',
+                component: Addressbook,
             },
         ],
     },

@@ -22,6 +22,14 @@
             Intelligence
           </router-link>
         </div>
+        <div class=" px-16 ">
+          <router-link
+            to="/addressbook"
+            class=" px-3 hover:bg-primary hover:text-on_primary hover:rounded-lg hover:shadow-xl"
+          >
+            Adressbook
+          </router-link>
+        </div>
         <!-- Settings -->
         <div class="hover:bg-primary hover:text-on_primary hover:rounded-xl hover:shadow-xl flex ml-auto mr-5">
           <router-link to="/main">

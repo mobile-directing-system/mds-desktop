@@ -5,6 +5,7 @@ import { userState, useUserState } from './Modules/UserState';
 import { permissionsState, usePermissionsState } from './Modules/PermissionsState';
 import { operationsState, useOperationsState } from './Modules/OperationsState';
 import { groupState, useGroupState } from './Modules/GroupState';
+import { addressbookState, useAddressbookState} from './Modules/AddressbookState';
 
 /**
  * define empty root state for the store to contain
@@ -18,6 +19,7 @@ const root = new Module({
     permissionsState,
     operationsState,
     groupState,
+    addressbookState,
   },
 });
 
@@ -32,4 +34,4 @@ export const modulesStore = createStore(
  * re-export useLoginInfo function from ./Modules/LoginInfo
  * to simplify the importation in .vue files
  */
-export { useLoginState, useUserState, usePermissionsState, useErrorState, useOperationsState, useGroupState };
+export { useLoginState, useUserState, usePermissionsState, useErrorState, useOperationsState, useGroupState, useAddressbookState };
