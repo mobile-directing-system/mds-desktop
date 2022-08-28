@@ -103,7 +103,9 @@ export async function searchOperations(query: string, limit?: number, offset?: n
   try {
     //explicit use of != instead of !== as a != null is equivalent to a !== null | a !== undefined
     const response = await Backend.instance.get(`${endpoint}/search?${(query != null)? `&q=${query}` : ''}${(offset != null)? `&offset=${offset}` : ''}${(limit != null)? `&limit=${limit}` : ''}`);
-    return {res: response.data.hits, total: response.data.estimated_total_hits , error: false};
+    return {res: response.data.hits.map((elem:{id: string, title: string, description: string, start: string, end: string, is_archived: boolean}) => {
+      return { ...elem, start: elem.start? new Date(elem.start) : undefined, end: elem.end? new Date(elem.end) : undefined };
+    }), total: response.data.estimated_total_hits , error: false};
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
