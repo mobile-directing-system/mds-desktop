@@ -115,8 +115,8 @@
     if(currentOperation) {
       updatedtitle.value = currentOperation.title;
       updateddescription.value = currentOperation.description;
-      updatedstart.value = currentOperation.start.toString();
-      updatedend.value = currentOperation.end.toString();
+      updatedstart.value = currentOperation.start.toISOString().slice(0, 19);
+      updatedend.value = currentOperation.end.toISOString().slice(0, 19);
       updatedisArchived.value = currentOperation.is_archived;
     }
     
