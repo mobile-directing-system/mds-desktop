@@ -91,19 +91,22 @@
     const operationState = useOperationsState();
     const router = useRouter();
     /* eslint-disable */
-    function createNewOperation( titleI: string, descriptionI: string, start :string, end : string) {
+    function createNewOperation( titleI: string, descriptionI: string, startI :string, endI : string) {
         const newOperation:Operation = {
             id: '',
             title: titleI,
             description: descriptionI? descriptionI : undefined,
-            start: start? new Date(start) : undefined,
-            end: end? new Date(end) : undefined,
+            start: startI? new Date(startI) : undefined,
+            end: endI? new Date(endI) : undefined,
             is_archived: false,
         };
 
         operationState.dispatch('createOperation', {operation: newOperation, memberIds: operationMemberIds.value});
         title.value ='';
         description.value ='';
+        end.value='';
+        start.value='';
+        operationMemberIds.value = [];
   }
   /* eslint-enable */
 
