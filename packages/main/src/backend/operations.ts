@@ -124,11 +124,11 @@ export async function searchOperations(query: string, limit?: number, offset?: n
   }
 }
 
-export async function retrieveOperationMembers(operationId: string, amount?: number, offset?: number, order_by?: string, order_dir?: string): Promise<ErrorResult<User[]>> {
+export async function retrieveOperationMembers(operationId: string): Promise<ErrorResult<User[]>> {
   try {
     //explicit use of != instead of !== as a != null is equivalent to a !== null | a !== undefined
-    const response = await Backend.instance.get(`${endpoint}/${operationId}/members?${(amount != null)? `&limit=${amount}` : ''}${(offset != null)? `&offset=${offset}` : ''}${(order_by != null)? `&order_by=${order_by}` : ''}${(order_dir != null)? `&order_dir=${order_dir}` : ''}`);
-    return {res: response.data.entries, total: response.data.total , error: false};
+    const response = await Backend.instance.get(`${endpoint}/${operationId}/members`);
+    return {res: response.data, total: response.data.total , error: false};
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);

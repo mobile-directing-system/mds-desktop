@@ -30,8 +30,8 @@ export async function searchOperationsHandler(_:IpcMainInvokeEvent, query: strin
   return searchOperations(query, limit, offset);
 }
 
-export async function retrieveOperationMembersHandler(_:IpcMainInvokeEvent, operationId: string, amount?: number, offset?: number, order_by?: string, order_dir?: string):Promise<ErrorResult<User[]>> {
-  return retrieveOperationMembers(operationId, amount, offset, order_by, order_dir);
+export async function retrieveOperationMembersHandler(_:IpcMainInvokeEvent, operationId: string):Promise<ErrorResult<User[]>> {
+  return retrieveOperationMembers(operationId);
 }
 
 export async function updateOperationMembersHandler(_:IpcMainInvokeEvent, operationId: string, memberIds: string[]):Promise<ErrorResult<boolean>> {

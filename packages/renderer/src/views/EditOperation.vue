@@ -107,7 +107,7 @@
     const updatedisArchived = ref(false);
 
     onMounted(async () => {
-      await operationState.dispatch('retrieveOperationMembersById', {operationId: selectedOperationID as string});
+      await operationState.dispatch('retrieveOperationMembersById', selectedOperationID as string);
       const members = operationMembers.value().get(selectedOperationID as string);
       updatedOperationMemberIds.value = members?members:[];
     });

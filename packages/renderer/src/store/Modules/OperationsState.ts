@@ -160,8 +160,8 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
     }
   }
 
-  async retrieveOperationMembersById({operationId, amount, offset, orderBy, orderDir}:{operationId: string, amount?:number, offset?:number, orderBy?:string, orderDir?:string}) {
-    const retrievedOperationMembers: ErrorResult<User[]> = await retrieveOperationMembers(operationId, amount, offset, orderBy, orderDir);
+  async retrieveOperationMembersById(operationId: string) {
+    const retrievedOperationMembers: ErrorResult<User[]> = await retrieveOperationMembers(operationId);
     if(retrievedOperationMembers.res && !retrievedOperationMembers.error) {
       this.mutations.setOperationMembers({operationId, memberIds: retrievedOperationMembers.res.map((elem) => elem.id)});
       if(!this.userCtx && !this.ctx){
@@ -179,7 +179,7 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
   async updateOperationMembersById({operationId, memberIds}:{operationId: string, memberIds: string[]}) {
     const operationMembersUpdated: ErrorResult<boolean> = await updateOperationMembers(operationId, [...memberIds]);
     if(operationMembersUpdated.res && !operationMembersUpdated.error) {
-      await this.actions.retrieveOperationMembersById({operationId, amount: memberIds.length, offset: 0});
+      await this.actions.retrieveOperationMembersById(operationId);
     } else {
       handleErrors(operationMembersUpdated.errorMsg, this.errorState);
     }
