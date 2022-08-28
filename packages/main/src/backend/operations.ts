@@ -8,7 +8,7 @@ const endpoint = '/operations';
 export async function createOperation(operation: Operation):Promise<ErrorResult<Operation>> {
   try {
     const response = await Backend.instance.post(`${endpoint}`, {...operation, id: undefined});
-    return {res: {...response.data, start: new Date(response.data.start), end: new Date(response.data.end) }, error: false};
+    return {res: {...response.data, start: response.data.start? new Date(response.data.start) : undefined, end: response.data.end? new Date(response.data.end) :undefined }, error: false};
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);
@@ -54,9 +54,8 @@ export async function updateOperation(operation: Operation):Promise<ErrorResult<
 export async function retrieveOperations(amount?: number, offset?: number, order_by?: string, order_dir?: string):Promise<ErrorResult<Operation[]>> {
   try {
     //explicit use of != instead of !== as a != null is equivalent to a !== null | a !== undefined
-    const response = await Backend.instance.get(`${endpoint}/?${(amount != null)? `&limit=${amount}` : ''}${(offset != null)? `&offset=${offset}` : ''}${(order_by != null)? `&order_by=${order_by}` : ''}${(order_dir != null)? `&order_dir=${order_dir}` : ''}`);
-    return {res: response.data.entries.map((elem:{id: string, title: string, description: string, start: string, end: string, is_archived: boolean}) => {
-      return { ...elem, start: new Date(elem.start), end: new Date(elem.end) };
+    const response = await Backend.instance.get(`${endpoint}/?${(amount != null)? `&limit=${amount}` : ''}${(offset != null)? `&offset=${offset}` : ''}${(order_by != null)? `&order_by=${order_by}` : ''}${(order_dir != null)? `&order_dir=${order_dir}` : ''}`);    return {res: response.data.entries.map((elem:{id: string, title: string, description: string, start: string, end: string, is_archived: boolean}) => {
+      return { ...elem, start: elem.start? new Date(elem.start) : undefined, end: elem.end? new Date(elem.end) : undefined };
     }), total: response.data.total, error: false};
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
@@ -80,7 +79,7 @@ export async function retrieveOperations(amount?: number, offset?: number, order
 export async function retrieveOperation(operationId: string):Promise<ErrorResult<Operation>> {
   try {
     const response = await Backend.instance.get(`${endpoint}/${operationId}`);
-    return {res: {...response.data, start: new Date(response.data.start), end: new Date(response.data.end) }, error: false};
+    return {res: {...response.data, start: response.data.start? new Date(response.data.start) : undefined, end: response.data.end? new Date(response.data.end) : undefined }, error: false};
   } catch(error) {
     const axError: AxiosError = error as AxiosError;
     printAxiosError(axError);

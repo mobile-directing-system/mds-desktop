@@ -64,7 +64,7 @@
           
         <div class="flex justify-between">
           <NormalButton 
-            v-if="updatedtitle != '' && updateddescription != '' && updatedstart!= '' && updatedend != ''"
+            v-if="updatedtitle != '' && updatedstart && (!updatedend || new Date(updatedstart) < new Date(updatedend))"
             @click.prevent="editOperation()"
           >
             Update Operation
@@ -114,9 +114,15 @@
 
     if(currentOperation) {
       updatedtitle.value = currentOperation.title;
-      updateddescription.value = currentOperation.description;
-      updatedstart.value = currentOperation.start.toISOString().slice(0, 19);
-      updatedend.value = currentOperation.end.toISOString().slice(0, 19);
+      if(currentOperation.description) {
+        updateddescription.value = currentOperation.description;
+      }
+      if(currentOperation.start) {
+        updatedstart.value = currentOperation.start.toISOString().slice(0, 16);
+      }
+      if(currentOperation.end) {
+        updatedend.value = currentOperation.end.toISOString().slice(0, 16);
+      }
       updatedisArchived.value = currentOperation.is_archived;
     }
     
@@ -125,9 +131,9 @@
         const updatedOperation:Operation = {
             id: selectedOperationID as string,
             title : updatedtitle.value,
-            description : updateddescription.value,
-            start : new Date(updatedstart.value),
-            end: new Date(updatedend.value),
+            description : updateddescription.value? updateddescription.value : undefined,
+            start : updatedstart.value? new Date(updatedstart.value) : undefined,
+            end: updatedend.value? new Date(updatedend.value) : undefined,
             is_archived: updatedisArchived.value,       
         };
         operationState.dispatch('updateOperation', updatedOperation);

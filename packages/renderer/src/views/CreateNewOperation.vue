@@ -53,7 +53,7 @@
       <!--- Submit Button --->
       <div class="flex justify-between">
         <NormalButton 
-          v-if="title != '' && description != '' && start !='' && end !=''"
+          v-if="title != '' && start && (!end || new Date(start) < new Date(end))"
           @click.prevent="createNewOperation(title, description, start, end)"
         >
           Create Operation
@@ -89,15 +89,15 @@
     const router = useRouter();
     /* eslint-disable */
     function createNewOperation( titleI: string, descriptionI: string, start :string, end : string) {
-        
         const newOperation:Operation = {
             id: '',
             title: titleI,
-            description: descriptionI,
-            start: new Date(start),
-            end: new Date(end),
+            description: descriptionI? descriptionI : undefined,
+            start: start? new Date(start) : undefined,
+            end: end? new Date(end) : undefined,
             is_archived: false,
         };
+
         operationState.dispatch('createOperation', {operation: newOperation, memberIds: operationMemberIds.value});
         title.value ='';
         description.value ='';
