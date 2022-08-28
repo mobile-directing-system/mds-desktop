@@ -14,7 +14,7 @@
       </div>
     </div>
     <TableContainer
-      :contents="groupPage().values()"
+      :contents="operationsPage().values()"
       id-identifier="id"
     >
       <template #tableHeader>
@@ -77,7 +77,7 @@
   import type { Operation } from '../../../types';
 
   const operationsState = useOperationsState();
-  const groupPage = computed(() => operationsState.getters.page);
+  const operationsPage = computed(() => operationsState.getters.page);
   const totalOperationAmount = computed(() => operationsState.getters.total);
   const router = useRouter();
   function selectRow(groupId: string){
