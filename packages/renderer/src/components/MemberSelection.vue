@@ -124,6 +124,7 @@
       </TableContainer>
       <PaginationBar
         :total-retrievable-entities="totalUserAmount()"
+        :page-size="5"
         @update-page="updatePage($event.amount, $event.offset)"
       />
     </div>
