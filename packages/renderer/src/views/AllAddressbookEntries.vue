@@ -3,7 +3,7 @@
     <div class="grid bg-white  rounded-lg  my-10">
       <div class="flex justify-between">
         <h1 class=" ml-4 text-4xl font-bold text-black ">
-          All Users
+          Addressbook Entries:
         </h1>
         <NormalButton
           class=" ml-auto mr-6"

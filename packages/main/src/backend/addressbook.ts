@@ -77,7 +77,7 @@ export async function deleteAddressbookEntry(entryId:string):Promise<ErrorResult
 
 export async function retrieveAddressbookEntries(amount?: number, offset?: number,order_by?: string, order_dir?: string):Promise<ErrorResult<AddressbookEntry[]>> {
     try{
-        const response = await Backend.instance.delete(`${endpoint}/?${(amount != null)? `&limit=${amount}` : ''}${(offset != null)? `&offset=${offset}` : ''}${(order_by != null)? `&order_by=${order_by}` : ''}${(order_dir != null)? `&order_dir=${order_dir}` : ''}`);
+        const response = await Backend.instance.get(`${endpoint}/?${(amount != null)? `&limit=${amount}` : ''}${(offset != null)? `&offset=${offset}` : ''}${(order_by != null)? `&order_by=${order_by}` : ''}${(order_dir != null)? `&order_dir=${order_dir}` : ''}`);
         return {res: response.data.entries, error:false, total: response.data.total};
     }catch(error){
         const axError: AxiosError = error as AxiosError;
@@ -100,7 +100,7 @@ export async function retrieveAddressbookEntries(amount?: number, offset?: numbe
 
 export async function retrieveAddressbookEntry(entryId:string):Promise<ErrorResult<AddressbookEntry>> {
     try{
-        const response = await Backend.instance.delete(`${endpoint}/${entryId}`);
+        const response = await Backend.instance.get(`${endpoint}/${entryId}`);
         return {res: response.data, error:false};
     }catch(error){
         const axError: AxiosError = error as AxiosError;

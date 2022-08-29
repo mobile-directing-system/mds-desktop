@@ -1,7 +1,7 @@
 import { app, ipcMain } from 'electron';
 import '/@/security-restrictions';
 import { restoreOrCreateWindow } from '/@/windows/mainWindow';
-import { loginHandler, logoutHandler, createUserHandler, deleteUserHandler, retrieveUserHandler, retrieveUsersHandler, searchUsersHandler, updateUserHandler, updateUserPasswordHandler, retrievePermissionsHandler, updatePermissionsHandler, createOperationHandler, updateOperationHandler, retrieveOperationHandler, retrieveOperationsHandler, createGroupHandler, updateGroupHandler, deleteGroupHandler, retrieveGroupHandler, retrieveGroupsHandler } from '/@/ipcHandlers';
+import { loginHandler, logoutHandler, createUserHandler, deleteUserHandler, retrieveUserHandler, retrieveUsersHandler, searchUsersHandler, updateUserHandler, updateUserPasswordHandler, retrievePermissionsHandler, updatePermissionsHandler, createOperationHandler, updateOperationHandler, retrieveOperationHandler, retrieveOperationsHandler, createGroupHandler, updateGroupHandler, deleteGroupHandler, retrieveGroupHandler, retrieveGroupsHandler, retrieveAddressbookEntriesHandler, deleteAddressbookEntryHandler, updateAddressbookEntryHandler, createAddressbookEntryHandler, retrieveAddressbookEntryHandler} from '/@/ipcHandlers';
 /**
  * Prevent multiple instances
  */
@@ -48,6 +48,12 @@ app.whenReady()
 app.whenReady().then(() => {
   ipcMain.handle('login', loginHandler);
   ipcMain.handle('logout', logoutHandler);
+
+  ipcMain.handle('createAddressbookEntry', createAddressbookEntryHandler);
+  ipcMain.handle('updateAddressbookEntry', updateAddressbookEntryHandler);
+  ipcMain.handle('deleteAddressbookEntry', deleteAddressbookEntryHandler);
+  ipcMain.handle('retrieveAddressbookEntry', retrieveAddressbookEntryHandler);
+  ipcMain.handle('retrieveAddressbookEntries', retrieveAddressbookEntriesHandler);
 
   ipcMain.handle('createUser', createUserHandler);
   ipcMain.handle('updateUser', updateUserHandler);
