@@ -114,15 +114,21 @@
 
   if(currentGroup) {
     updatedGroupTitle.value = currentGroup.title;
-    updatedGroupDescription.value = currentGroup.description;
-    updatedGroupOperationId.value = currentGroup.operation;
+    if(currentGroup.description) {
+      updatedGroupDescription.value = currentGroup.description;
+    }
+    if(currentGroup.operation) {
+      updatedGroupOperationId.value = currentGroup.operation;
+    }
     updatedGroupMemberIds.value = currentGroup.members;
   }
 
   onMounted(() => {
     //get users for displaying with group
     if(currentGroup) {
-      operationsState.dispatch('retrieveOperation', currentGroup.operation);
+      if(currentGroup.operation) {
+        operationsState.dispatch('retrieveOperation', currentGroup.operation);
+      }
       currentGroup.members.map((elem) => userState.dispatch('retrieveUserById', elem ));
     }
   });

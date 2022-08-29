@@ -94,8 +94,8 @@
       groupState.dispatch('createGroup', {
         id: '',
         title: updatedGroupTitle.value,
-        description: updatedGroupDescription.value,
-        operation: updatedGroupOperationId.value,
+        description: updatedGroupDescription.value? updatedGroupDescription.value : undefined,
+        operation: updatedGroupOperationId.value? updatedGroupOperationId.value: undefined,
         members: updatedGroupMemberIds.value,
       });
       router.push('/groups');

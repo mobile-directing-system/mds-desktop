@@ -44,7 +44,7 @@
               {{ data.description }}
             </template>
             <template #data3="{data}:{data:Group}">
-              {{ operations().get(data.operation)?.title }}
+              {{ operations().get(data.operation? data.operation : '')?.title }}
             </template>
           </TableRow>
         </template>
@@ -82,7 +82,9 @@
   async function updatePage(amount: number, offset: number) {
     await groupState.dispatch('retrieveGroups', {amount, offset});
     for(const group of groupPage.value().values()) {
-      operationsState.dispatch('retrieveOperation', group.operation );
+      if(group.operation) {
+        operationsState.dispatch('retrieveOperation', group.operation );
+      }
     }
   }
 </script>
