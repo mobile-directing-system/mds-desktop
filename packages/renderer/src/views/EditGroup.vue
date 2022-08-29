@@ -14,6 +14,7 @@
             v-model="updatedGroupTitle"
             div-class="w-80"
             label="Title"
+            required
           />
         </div>
         <!------- Description  ------>
