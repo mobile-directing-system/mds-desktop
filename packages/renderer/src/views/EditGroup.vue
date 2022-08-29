@@ -45,8 +45,16 @@
         </div>
         <!-- Members -->
         <div class="mb-6">
+          <div
+            v-if="updatedGroupOperationId"
+            class="bg-error_superlight border-2 w-80 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+          >
+            Only members of the selected operation can be members of this group.
+          </div>
           <MemberSelection
             v-model="updatedGroupMemberIds"
+            :include-ids="selectedOperationMembers"
+            :include="updatedGroupOperationId? true: false"
           />
         </div>
         <!--- Submit Button --->
@@ -77,7 +85,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, onMounted } from 'vue';
+  import { ref, computed, onMounted, watch } from 'vue';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
   import FormInput from '../components/BasicComponents/FormInput.vue';
   import MemberSelection from '../components/MemberSelection.vue';
@@ -93,6 +101,7 @@
   const route = useRoute();
   const groups = computed(() => groupState.getters.groups);
   const operations = computed(() => operationsState.getters.operations);
+  const operationMembers = computed(() => operationsState.getters.members);
   const selectedGroupID = route.params.selectedGroupID;
   const currentGroup = groups.value().get(selectedGroupID as string);
   const operationsSearchResults = computed(() => operationsState.getters.searchResults);
@@ -106,6 +115,7 @@
       return [...operationsSearchResultsArray.value, operations.value().get(updatedGroupOperationId.value)];
     }
   });
+  const selectedOperationMembers = computed(() => operationMembers.value().get(updatedGroupOperationId.value));
 
   const updatedGroupTitle = ref('');
   const updatedGroupDescription = ref('');
@@ -130,6 +140,12 @@
         operationsState.dispatch('retrieveOperation', currentGroup.operation);
       }
       currentGroup.members.map((elem) => userState.dispatch('retrieveUserById', elem ));
+    }
+  });
+
+  watch(updatedGroupOperationId, (curVal) => {
+    if(curVal) {
+      operationsState.dispatch('retrieveOperationMembersById', curVal);
     }
   });
 

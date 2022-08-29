@@ -29,7 +29,7 @@
     </template>
     <template #tableRow="{rowData}:{rowData:string}">
       <TableRow
-        class="hover:bg-background cursor-auto"
+        :class="( include && !includeIds?.includes(rowData))? 'bg-error_superlight' : 'hover:bg-background cursor-auto'"
         :num-of-cols="4"
         :row-data="rowData"
         :t-data-class="'p-2'"
@@ -86,7 +86,7 @@
         @open="handleSelectionInput('')"
       />
       <TableContainer
-        :contents="usersPageArray.filter((elem) => !modelValue.includes(elem?.id? elem?.id : ''))"
+        :contents="usersPageArray"
         id-identifier="id"
       >
         <template #tableHeader>
@@ -156,6 +156,8 @@
 
   interface Props {
     modelValue: string[];
+    includeIds?: string[];
+    include?: boolean;
   }
 
   const userState = useUserState();
@@ -168,13 +170,23 @@
     return IterableIteratorToArray(usersSearchResults.value().values());
   });
   const usersPageArray = computed(() => {
-    return IterableIteratorToArray(usersPage.value().values());
+    if(props.include) {
+      return IterableIteratorToArray(usersPage.value().values()).filter((elem) => !props.modelValue.includes(elem?.id? elem?.id : '') && props.includeIds?.includes(elem?.id? elem?.id : ''));
+    } else {
+      return IterableIteratorToArray(usersPage.value().values()).filter((elem) => !props.modelValue.includes(elem?.id? elem?.id : ''));
+    }
   });
 
   const showMembersModal = ref(false);
   const addMemberIds: Ref<string[]> = ref([]);
   const arr: Ref<string[]> = ref([]);
-  const options: Ref<(User | undefined)[]> = computed(() => union(usersSearchResultsArray.value, arr.value.map((elem) => users.value().get(elem)).filter((elem) => !props.modelValue.includes(elem?.id? elem?.id: ''))));
+  const options: Ref<(User | undefined)[]> = computed(() => {
+    if(props.include) {
+      return union(usersSearchResultsArray.value, arr.value.map((elem) => users.value().get(elem)))?.filter((elem) => !props.modelValue.includes(elem?.id? elem?.id: '') && props.includeIds?.includes(elem?.id? elem.id : ''));
+    } else {
+      return union(usersSearchResultsArray.value, arr.value.map((elem) => users.value().get(elem)))?.filter((elem) => !props.modelValue.includes(elem?.id? elem?.id: ''));
+    }
+  });
 
   const props = defineProps<Props>();
 

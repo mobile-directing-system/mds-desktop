@@ -41,8 +41,16 @@
         </div>
         <!-- Members -->
         <div class="mb-6">
+          <div
+            v-if="updatedGroupOperationId"
+            class="bg-error_superlight border-2 w-80 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+          >
+            Only members of the selected operation can be members of this group.
+          </div>
           <MemberSelection 
             v-model="updatedGroupMemberIds"
+            :include-ids="selectedOperationMembers"
+            :include="updatedGroupOperationId? true: false"
           />
         </div>
         <!--- Submit Button --->
@@ -66,7 +74,7 @@
   </div>
 </template>
 <script lang="ts" setup> 
-  import { ref, computed } from 'vue';
+  import { ref, computed, watch } from 'vue';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
   import FormInput from '../components/BasicComponents/FormInput.vue';
   import MemberSelection from '../components/MemberSelection.vue';
@@ -83,9 +91,18 @@
   const updatedGroupOperationId = ref('');
   const updatedGroupMemberIds : Ref<string[]> = ref([]);
   const operationsSearchResults = computed(() => operationsState.getters.searchResults);
+  const operationMembers = computed(() => operationsState.getters.members); 
   const operationsSearchResultsArray = computed(() => {
     return InterableIteratorToArray(operationsSearchResults.value().values());
   });
+  const selectedOperationMembers = computed(() => operationMembers.value().get(updatedGroupOperationId.value));
+
+  watch(updatedGroupOperationId, (curVal) => {
+    if(curVal) {
+      operationsState.dispatch('retrieveOperationMembersById', curVal);
+    }
+  });
+
   function handleOperationSelectionInput(query: string) {
     operationsState.dispatch('searchOperationsByQuery', {query, limit:10});
   }
