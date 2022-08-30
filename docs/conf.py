@@ -38,7 +38,9 @@ extlinks = {
   "vue-homepage": ("https://vuejs.org/", "Vue.js"),
   "vite-homepage": ("https://vitejs.dev/", "Vite"),
   "electron-homepage": ("https://www.electronjs.org/", "Electron"),
-  "vite-electron-builder-homepage": ("https://github.com/cawa-93/vite-electron-builder", "vite-electron-builder")
+  "vite-electron-builder-homepage": ("https://github.com/cawa-93/vite-electron-builder", "vite-electron-builder"),
+  "node-homepage": ("https://nodejs.org/en/", "Node.js"),
+  "npm-homepage": ("https://www.npmjs.com/", "npm")
 }
 
 # Add any paths that contain templates here, relative to this directory.
