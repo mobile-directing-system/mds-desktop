@@ -40,7 +40,10 @@ extlinks = {
   "electron-homepage": ("https://www.electronjs.org/", "Electron"),
   "vite-electron-builder-homepage": ("https://github.com/cawa-93/vite-electron-builder", "vite-electron-builder"),
   "node-homepage": ("https://nodejs.org/en/", "Node.js"),
-  "npm-homepage": ("https://www.npmjs.com/", "npm")
+  "npm-homepage": ("https://www.npmjs.com/", "npm"),
+  "vscode-homepage": ("https://code.visualstudio.com/", "VSCode"),
+  "node-installer": ("https://nodejs.org/en/download/", "Node.js Installer"),
+  "node-pm-installer" ("https://nodejs.org/en/download/package-manager/", "package manager")
 }
 
 # Add any paths that contain templates here, relative to this directory.
