@@ -43,7 +43,7 @@ extlinks = {
   "npm-homepage": ("https://www.npmjs.com/", "npm"),
   "vscode-homepage": ("https://code.visualstudio.com/", "VSCode"),
   "node-installer": ("https://nodejs.org/en/download/", "Node.js Installer"),
-  "node-pm-installer": ("https://nodejs.org/en/download/package-manager/", "package manager")
+  "node-pm-installer": ("https://nodejs.org/en/download/package-manager/", "package manager"),
   "tailwind-homepage": ("https://tailwindcss.com/", "tailwindcss"),
   "vuex-homepage": ("https://vuex.vuejs.org/", "vuex"),
   "vuex-smart-module-homepage": ("https://www.npmjs.com/package/vuex-smart-module", "vuex-smart-module"),
