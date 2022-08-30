@@ -44,6 +44,13 @@ extlinks = {
   "vscode-homepage": ("https://code.visualstudio.com/", "VSCode"),
   "node-installer": ("https://nodejs.org/en/download/", "Node.js Installer"),
   "node-pm-installer": ("https://nodejs.org/en/download/package-manager/", "package manager")
+  "tailwind-homepage": ("https://tailwindcss.com/", "tailwindcss"),
+  "vuex-homepage": ("https://vuex.vuejs.org/", "vuex"),
+  "vuex-smart-module-homepage": ("https://www.npmjs.com/package/vuex-smart-module", "vuex-smart-module"),
+  "vue-router-homepage": ("https://router.vuejs.org/", "vue-router"),
+  "flowbite-homepage": ("https://flowbite.com/", "Flowbite"),
+  "axios-homepage": ("https://axios-http.com/", "Axios"),
+  "lodash-homepage": ("https://lodash.com/", "Lodash")
 }
 
 # Add any paths that contain templates here, relative to this directory.
