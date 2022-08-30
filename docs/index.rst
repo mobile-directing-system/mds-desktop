@@ -8,6 +8,7 @@ Welcome to MDS Desktop's documentation!
     :caption: Contents:
 
     sites/development-environment
+    sites/technologies-architecture
 
 
 Indices and tables
