@@ -28,8 +28,18 @@ author = 'Yves Haas, Laurin Todt, Lennart Altenhof'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "sphinx.ext.duration"
+    "sphinx.ext.duration",
+    "sphinx.ext.extlinks"
 ]
+
+#Add external URLs
+
+extlinks = {
+  "vue-homepage": ("https://vuejs.org/", "Vue.js"),
+  "vite-homepage": ("https://vitejs.dev/", "Vite"),
+  "electron-homepage": ("https://www.electronjs.org/", "Electron"),
+  "vite-electron-builder-homepage": ("https://github.com/cawa-93/vite-electron-builder", "vite-electron-builder")
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
