@@ -2,8 +2,9 @@ interface AddressbookEntry {
     id: string,
     label: string,
     description: string,
-    user: string,
-    user_details: object,
+    operation?: string,
+    user?: string,
+    user_details?: object,
 }
 
 interface Channel {

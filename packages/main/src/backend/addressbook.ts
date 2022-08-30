@@ -8,6 +8,7 @@ const channelsEndpointExtension = '/channel';
 
 export async function createAddressbookEntry(entry:AddressbookEntry):Promise<ErrorResult<AddressbookEntry>> {
     try{
+        console.log(entry);
         const response = await Backend.instance.post(`${endpoint}`, {...entry, id: undefined});
         return {res: response.data, error:false};
     }catch(error){

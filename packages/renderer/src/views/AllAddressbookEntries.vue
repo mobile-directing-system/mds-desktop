@@ -7,7 +7,7 @@
         </h1>
         <NormalButton
           class=" ml-auto mr-6"
-          @click.prevent="router.push('/create-new-user')"
+          @click.prevent="router.push('/create-new-addressbookentry')"
         >
           +
         </NormalButton>
@@ -17,15 +17,18 @@
         id-identifier="id"
       >
         <template #tableHeader>
-          <TableHeader :num-of-cols="3">
+          <TableHeader :num-of-cols="4">
             <template #header1>
-              Username
+              Label
             </template>
             <template #header2>
-              First name
+              Description
             </template>
             <template #header3>
-              Last name
+              User
+            </template>
+            <template #header4>
+              Operation
             </template>
           </TableHeader>
         </template>
@@ -33,7 +36,7 @@
         <template #tableRow="{rowData}:{rowData:AddressbookEntry}">
           <TableRow 
             :row-data="rowData"
-            :num-of-cols="3"
+            :num-of-cols="4"
             :identifier="rowData.id"
             @click="selectRow($event)"
           >
@@ -42,7 +45,13 @@
             </template>
             <template #data2="{data}:{data:AddressbookEntry}">
               {{ data.description }}
-            </template>            
+            </template>  
+            <template #data3="{data}:{data:AddressbookEntry}">
+              {{ getUserName(data.user) }}
+            </template>
+            <template #data4="{data}:{data:AddressbookEntry}">
+              {{ getOperationName(data.operation) }}
+            </template>
           </TableRow>
         </template>
       </TableContainer>
@@ -61,10 +70,11 @@
     import TableContainer from '../components/BasicComponents/TableContainer.vue';
     import TableRow from '../components/BasicComponents/TableRow.vue';
     import TableHeader from '../components/BasicComponents/TableHeader.vue';
-    import {useAddressbookState } from '../store';
+    import {useAddressbookState, useUserState, useOperationsState} from '../store';
     import {useRouter} from 'vue-router';
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    import type { AddressbookEntry } from '../../../types';
+    import type { AddressbookEntry, User } from '../../../types';
+   
 
     onMounted(async () => {
         await addressbookState.dispatch('retrieveEntries', {amount: paginationAmount, offset: paginationPage.value * paginationAmount});
@@ -76,12 +86,34 @@
     const addressbookEntryPage = computed(() => addressbookState.getters.page);
     const totalAddressbookEntryAmount = computed(() => addressbookState.getters.total);
     const router = useRouter();
-
+    const userState = useUserState();
+    const operationsState = useOperationsState();
+    const users = computed(() => userState.getters.users);
+    const operations = computed(() => operationsState.getters.operations);
+  
     async function updatePage(amount: number, offset: number) {
         await addressbookState.dispatch('retrieveEntries', {amount, offset});
     }
     function selectRow(groupId: string){
           router.push({name: 'EditCurrentGroup', params:{ selectedGroupID: groupId}});
+    }
+    function getUserName(id: string | undefined):string{
+      if(id && id != ''){
+        const currentUser = users.value().get(id);
+        if(currentUser){
+          return currentUser.first_name + ' ' +  currentUser.last_name;
+        }
+      }
+      return '';
+    }
+    function getOperationName(id: string | undefined):string{
+      if(id && id != ''){
+        const currentOperation = operations.value().get(id);
+        if(currentOperation){
+          return currentOperation.title;
+        }
+      }
+      return '';
     }
 </script>
 
