@@ -14,7 +14,7 @@ The communication with the backend is implemented using :axios-homepage:`Axios <
 Architecture
 ============
 
-.. image:: images/mds-desktop-architecture.plugin
+.. image:: images/mds-desktop-architecture.svg
   :width: 600
   :alt: MDS-Desktop Architecture Diagram
 
