@@ -1,5 +1,5 @@
-Manual
-######
+User Manual
+###########
 
 This chapter covers how to use the MDS-Desktop App as an Enduser.
 
