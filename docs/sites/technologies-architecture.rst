@@ -28,5 +28,7 @@ To implement a minimal service for a new entity (e.g. User, Group, etc.) do the 
 #. Use them to write a handler-wrapper in *main/src/ipcHandlers*. Export these handlers in the *main/src/ipcHandlers/index.ts*.
 #. Register these handlers in ipcMain in *main/src/index.ts* and give them speaking names.
 #. Write a wrapper functions for calling those ipcHandlers in *preload/src* and export them in *preload/src/index.ts*.
+
    .. warning:: make sure that the names used for calling the ipcHandlers are **exactly** the same as the ones given to them when registering them. **Important** There is a bug with the auto-export plugin that requires you to export each wrapper function sperately on a new line. If this is not done the vue code can't find the preload module.
+    
 #. Lastly implement a seperate vuex module to manage the state of the retrieved entities. Use the preload wrapper functions to fetch data from the backend.
