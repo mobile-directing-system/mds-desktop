@@ -25,7 +25,7 @@ Here we use is mainly to expose wrapper functions around the IPC calls to the No
 Lastly there is the Node.js part. This part starts & configures the browser windows to display the web app and implements other functionality not available to JS in the browser such as access to the files on the computer.
 
 The Vue UI app is split between the router, views, components and the vuex state.
-The app is sturctured by using the router to route between different views.
+The app is structured by using the router to route between different views.
 These views themselves are made up of components, HTML and Typescript.
 Those components them are made up similary to the view, but in contrast to the views they are supposed to be usable at multiple points in the application.
 We decide on which functionality to put into a component based on if it is going to be reused or not.
