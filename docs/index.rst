@@ -10,6 +10,8 @@ Welcome to MDS Desktop's documentation!
     sites/development-environment
     sites/technologies-architecture
     sites/manual
+    sites/component-documentation
+    sites/ui-customization
 
 
 Indices and tables

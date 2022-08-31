@@ -47,6 +47,9 @@ If this is not done the vue app will not be able to find the preload module.
 We use the Node.js part mostly to implement the skaffolding of the app (e.g. start browser window with the web app and hide window bar, implement exit window function, etc.) and the IPC, Handler and client-side implementation of the MDS-Server HTTP API.
 To Familiarize youself with Electron you can use the :electron-intro:`Electron Introduction <>`.
 
+Directory Structure of the Project
+==================================
+
 Minimal Implementation for new Service
 ======================================
 
