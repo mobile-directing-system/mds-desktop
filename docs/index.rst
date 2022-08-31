@@ -9,6 +9,7 @@ Welcome to MDS Desktop's documentation!
 
     sites/development-environment
     sites/technologies-architecture
+    sites/manual
 
 
 Indices and tables
