@@ -1,6 +1,8 @@
 Technolgies & Architecture
 ##########################
 
+This chapter covers used technologies, theirs docs, if necessary how they are used and the architecture of the MDS-Desktop app.
+
 Technologies
 ============
 
