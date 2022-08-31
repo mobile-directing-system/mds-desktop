@@ -5,10 +5,10 @@
       tag: 'bg-primary_superlight text-white text-sm font-semibold py-0.5 pl-2 rounded mr-1 mb-1 flex items-center whitespace-nowrap rtl:pl-0 rtl:pr-2 rtl:mr-0 rtl:ml-1',
     }"
     v-bind="$attrs"
-    mode="tags"
     searchable
     hide-selected
-    :filterResults="false"
+    :mode="props.mode"
+    :filterResults="props.filterResults"
     :options="props.options"
     :label="props.label"
     :value-prop="props.valueProp"
@@ -27,10 +27,12 @@
   import Multiselect from '@vueform/multiselect';
 
   interface Props {
+    mode: 'tags' | 'multiple' | 'single';
     placeholder: string;
-    label:string;
-    trackBy: string;
-    valueProp: string;
+    label?:string;
+    trackBy?: string;
+    valueProp?: string;
+    filterResults: boolean;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: any[];
   }

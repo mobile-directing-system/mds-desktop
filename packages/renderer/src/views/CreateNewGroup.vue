@@ -125,7 +125,9 @@
             <div class="mb-6 w-96 max-w-sm">
               <SearchableSelect
                 v-model="addGroupMemberIds"
+                :filter-results="false"
                 :options="[...usersSearchResultsArray, ...addGroupMemberIds.map((elem) => users().get(elem))]"
+                mode="tags"
                 placeholder="Select group members"
                 label="username"
                 value-prop="id"

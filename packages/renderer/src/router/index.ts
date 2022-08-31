@@ -14,6 +14,7 @@ import AllGroups from '../views/AllGroups.vue';
 import CreateNewGroup from '../views/CreateNewGroup.vue';
 import Addressbook from '../views/AllAddressbookEntries.vue';
 import CreateNewAddressbookEntry from '../views/CreateNewAddressbookEntry.vue';
+import EditAddressbookEntry from '../views/EditAddressbookEntry.vue';
 
 const routes:RouteRecordRaw[] = [
     {
@@ -81,6 +82,11 @@ const routes:RouteRecordRaw[] = [
                 path: '/create-new-addressbookentry',
                 name: 'CreateAddressbookEntry',
                 component: CreateNewAddressbookEntry,
+            },
+            {
+                path: '/edit-addressbookentry/:addressbookEntryID',
+                name: 'EditCurrentAddressbookEntry',
+                component: EditAddressbookEntry,
             },
         ],
     },

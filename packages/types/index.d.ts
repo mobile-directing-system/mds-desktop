@@ -11,4 +11,4 @@ export type { User } from './User';
 export type { Permission, Permissions } from './Permissions';
 export type { Operation } from './Operation';
 export type { Group } from './Group';
-export type { AddressbookEntry, Channels, Channel } from './Addressbook';
+export type { AddressbookEntry, Channels, Channel, ChannelDetail, ChannelType } from './Addressbook';

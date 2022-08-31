@@ -21,8 +21,8 @@ export async function retrieveAddressbookEntry(entryId: string):Promise<ErrorRes
   return ipcRenderer.invoke('retrieveAddressbookEntry', entryId);
 }
 
-export async function setChannels(channels :Channels):Promise<ErrorResult<Channels>> {
-    return ipcRenderer.invoke('setChannels', channels);
+export async function setChannels(entryId: string, channels :Channels):Promise<ErrorResult<boolean>> {
+    return ipcRenderer.invoke('setChannels', entryId, channels);
 }
 
 export async function retrieveChannels(entryId:string):Promise<ErrorResult<Channels>> {

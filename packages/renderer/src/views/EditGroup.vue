@@ -125,10 +125,12 @@
               <SearchableSelect
                 v-model="addGroupMemberIds"
                 :options="[...usersSearchResultsArray, ...addGroupMemberIds.map((elem) => users().get(elem))]"
+                mode="tags"
                 placeholder="Select group members"
                 label="username"
                 value-prop="id"
                 track-by="username"
+                :filter-results="false"
                 @search-change="handleSelectionInput"
                 @open="handleSelectionInput('')"
               />

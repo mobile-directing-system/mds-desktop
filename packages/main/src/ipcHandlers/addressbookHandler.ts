@@ -1,6 +1,6 @@
 import type { IpcMainInvokeEvent } from 'electron';
-import type { AddressbookEntry, ErrorResult } from '../../../types';
-import { createAddressbookEntry, updateAddressbookEntry, deleteAddressbookEntry, retrieveAddressbookEntries, retrieveAddressbookEntry} from '/@/backend';
+import type { AddressbookEntry, ErrorResult, Channels } from '../../../types';
+import { createAddressbookEntry, updateAddressbookEntry, deleteAddressbookEntry, retrieveAddressbookEntries, retrieveAddressbookEntry, setChannels, retrieveChannels} from '/@/backend';
 
 
 export async function createAddressbookEntryHandler(_:IpcMainInvokeEvent, entry: AddressbookEntry):Promise<ErrorResult<AddressbookEntry>> {
@@ -21,4 +21,11 @@ export async function retrieveAddressbookEntriesHandler(_:IpcMainInvokeEvent, am
 
 export async function retrieveAddressbookEntryHandler(_:IpcMainInvokeEvent, entryId: string):Promise<ErrorResult<AddressbookEntry>> {
     return retrieveAddressbookEntry(entryId);
+}
+
+export async function setChannelsHandler(_:IpcMainInvokeEvent,entryId : string, channels: Channels):Promise<ErrorResult<boolean>> {
+    return setChannels(entryId,channels);
+}
+export async function retrieveChannlesHandler(_:IpcMainInvokeEvent, entryId: string):Promise<ErrorResult<Channels>> {
+    return retrieveChannels(entryId);
 }
