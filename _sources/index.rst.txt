@@ -7,13 +7,12 @@ Welcome to MDS Desktop's documentation!
     :maxdepth: 2
     :caption: Contents:
 
-    configuration/configuration
-    Sites/Navbar
+    sites/development-environment
+    sites/technologies-architecture
 
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
