@@ -11,3 +11,6 @@ These include Users, Groups, Operations.
 
 Users
 -----
+
+In the app Users can be created, changed and deleted.
+To create a User

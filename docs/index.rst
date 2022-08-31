@@ -4,7 +4,7 @@ Welcome to MDS Desktop's documentation!
 =======================================
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 3
     :caption: Contents:
 
     sites/development-environment
