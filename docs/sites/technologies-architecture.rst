@@ -27,9 +27,7 @@ To implement a minimal service for a new entity (e.g. User, Group, etc.) do the 
 #. Start with implementing the calls to the backend API using Axios in *main/src/backend*. Once implemented export them in the *main/src/backend/index.ts* file.
 #. Use them to write a handler-wrapper in *main/src/ipcHandlers*. Export these handlers in the *main/src/ipcHandlers/index.ts*.
 #. Register these handlers in ipcMain in *main/src/index.ts* and give them speaking names.
-
-  .. warning::
-    
-    Use those names, make sure that those names are **exactly** the same as the ones given to them when registering them, write a wrapper for calling them in *preload/src*. Export those wrappers in *preload/src/index.ts*. **Important** There is a bug with the auto-export plugin that requires you to export each wrapper function sperately on a new line. If this is not done the vue code can't find the preload module.
-    
+#. Write a wrapper functions for calling those ipcHandlers in *preload/src* and export them in *preload/src/index.ts*.
+   .. warning::
+     make sure that the names used for calling the ipcHandlers are **exactly** the same as the ones given to them when registering them. **Important** There is a bug with the auto-export plugin that requires you to export each wrapper function sperately on a new line. If this is not done the vue code can't find the preload module.
 #. Lastly implement a seperate vuex module to manage the state of the retrieved entities. Use the preload wrapper functions to fetch data from the backend.
