@@ -23,6 +23,7 @@ Minimal Implementation for new Service
 ======================================
 
 To implement a minimal service for a new entity (e.g. User, Group, etc.) do the following:
+
 #. 1. Start with implementing the calls to the backend API using Axios in *main/src/backend*. Once implemented export them in the *main/src/backend/index.ts* file.
 #. 2. Use them to write a handler-wrapper in *main/src/ipcHandlers*. Export these handlers in the *main/src/ipcHandlers/index.ts*.
 #. 3. Register these handlers in ipcMain in *main/src/index.ts* and give them speaking names.
