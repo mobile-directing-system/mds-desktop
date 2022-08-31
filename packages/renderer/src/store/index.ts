@@ -10,7 +10,7 @@ import { groupState, useGroupState } from './Modules/GroupState';
  * define empty root state for the store to contain
  * the modules
  */
-const root = new Module({
+export const root = new Module({
   modules: {
     errorState, //errorState must be first Here so that it exsits for all other Modules
     loginState,

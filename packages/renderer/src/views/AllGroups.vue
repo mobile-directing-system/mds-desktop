@@ -44,14 +44,14 @@
               {{ data.description }}
             </template>
             <template #data3="{data}:{data:Group}">
-              {{ operations().get(data.operation)?.title }}
+              {{ operations().get(data.operation? data.operation : '')?.title }}
             </template>
           </TableRow>
         </template>
       </TableContainer>
       <PaginationBar
         :total-retrievable-entities="totalGroupAmount()"
-        :initial-page="paginationPage"
+        :page-size="5"
         @update-page="updatePage($event.amount, $event.offset)"
       />
     </div>
@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts" setup> 
-  import { computed, onMounted, ref } from 'vue';
+  import { computed } from 'vue';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
   import PaginationBar from '../components/BasicComponents/PaginationBar.vue';
   import TableContainer from '../components/BasicComponents/TableContainer.vue';
@@ -70,15 +70,6 @@
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type { Group } from '../../../types';
 
-  onMounted(async () => {
-    await groupState.dispatch('retrieveGroups', {amount: paginationAmount, offset: paginationPage.value * paginationAmount});
-    for (const group of groupPage.value().values()) {
-      operationsState.dispatch('retrieveOperation', group.operation);
-    }
-  });
-
-  const paginationAmount = 5;
-  const paginationPage = ref(0);
   const groupState = useGroupState();
   const operationsState = useOperationsState();
   const groupPage = computed(() => groupState.getters.page);
@@ -91,7 +82,9 @@
   async function updatePage(amount: number, offset: number) {
     await groupState.dispatch('retrieveGroups', {amount, offset});
     for(const group of groupPage.value().values()) {
-      operationsState.dispatch('retrieveOperation', group.operation );
+      if(group.operation) {
+        operationsState.dispatch('retrieveOperation', group.operation );
+      }
     }
   }
 </script>

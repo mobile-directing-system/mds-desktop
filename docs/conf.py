@@ -28,8 +28,30 @@ author = 'Yves Haas, Laurin Todt, Lennart Altenhof'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "sphinx.ext.duration"
+    "sphinx.ext.duration",
+    "sphinx.ext.extlinks"
 ]
+
+#Add external URLs
+
+extlinks = {
+  "vue-homepage": ("https://vuejs.org/", "Vue.js"),
+  "vite-homepage": ("https://vitejs.dev/", "Vite"),
+  "electron-homepage": ("https://www.electronjs.org/", "Electron"),
+  "vite-electron-builder-homepage": ("https://github.com/cawa-93/vite-electron-builder", "vite-electron-builder"),
+  "node-homepage": ("https://nodejs.org/en/", "Node.js"),
+  "npm-homepage": ("https://www.npmjs.com/", "npm"),
+  "vscode-homepage": ("https://code.visualstudio.com/", "VSCode"),
+  "node-installer": ("https://nodejs.org/en/download/", "Node.js Installer"),
+  "node-pm-installer": ("https://nodejs.org/en/download/package-manager/", "package manager"),
+  "tailwind-homepage": ("https://tailwindcss.com/", "tailwindcss"),
+  "vuex-homepage": ("https://vuex.vuejs.org/", "vuex"),
+  "vuex-smart-module-homepage": ("https://www.npmjs.com/package/vuex-smart-module", "vuex-smart-module"),
+  "vue-router-homepage": ("https://router.vuejs.org/", "vue-router"),
+  "flowbite-homepage": ("https://flowbite.com/", "Flowbite"),
+  "axios-homepage": ("https://axios-http.com/", "Axios"),
+  "lodash-homepage": ("https://lodash.com/", "Lodash")
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

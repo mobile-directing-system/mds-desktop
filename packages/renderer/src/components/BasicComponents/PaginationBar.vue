@@ -27,6 +27,7 @@
   interface Props {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     totalRetrievableEntities: number;
+    pageSize: number;
     initialPage?: number;
   }
 
@@ -35,9 +36,8 @@
     (name: 'updatePage', {amount, offset}:{amount: number, offset: number}): void
   }>();
 
-  const paginationAmount = 5;
   const paginationPage = ref(props.initialPage? props.initialPage : 0);
-  const paginationMaxPages = computed(() => Math.ceil(props.totalRetrievableEntities / paginationAmount ));
+  const paginationMaxPages = computed(() => Math.ceil(props.totalRetrievableEntities / props.pageSize ));
   const showNextButton = computed(() => (paginationPage.value +1) < paginationMaxPages.value);
   const showPreviousButton = computed(() => paginationPage.value > 0);
 
@@ -46,7 +46,7 @@
   });
 
   async function updatePage() {
-    emit('updatePage', {amount: paginationAmount, offset: paginationPage.value * paginationAmount});
+    emit('updatePage', {amount: props.pageSize, offset: paginationPage.value * props.pageSize});
   }
 
   async function previousPage() {

@@ -12,18 +12,21 @@
           id="username"
           v-model="userName"
           label="Username"
+          required
         />
         <!------- first_name  ------>
         <FormInput
           id="firstName"
           v-model="firstName"
           label="First Name"
+          required
         />
         <!------- last_name  ------>
         <FormInput
           id="lastName"
           v-model="lastName"
           label="Last Name"
+          required
         />
         <!--- Initial Password--->
         <FormInput
@@ -31,6 +34,7 @@
           v-model="iPassword"
           label="Initial Password"
           type="password"
+          required
         />
         <!--- Submit Button --->
           
