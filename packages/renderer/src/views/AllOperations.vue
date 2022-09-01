@@ -14,7 +14,7 @@
       </div>
     </div>
     <TableContainer
-      :contents="groupPage().values()"
+      :contents="operationsPage().values()"
       id-identifier="id"
     >
       <template #tableHeader>
@@ -58,14 +58,14 @@
     </TableContainer>
     <PaginationBar
       :total-retrievable-entities="totalOperationAmount()"
-      :initial-page="paginationPage"
+      :page-size="5"
       @update-page="updatePage($event.amount, $event.offset)"
     />
   </div>
 </template>
 
 <script lang="ts" setup> 
-  import { computed, onMounted, ref } from 'vue';
+  import { computed } from 'vue';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
   import PaginationBar from '../components/BasicComponents/PaginationBar.vue';
   import TableContainer from '../components/BasicComponents/TableContainer.vue';
@@ -76,14 +76,8 @@
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type { Operation } from '../../../types';
 
-  onMounted(async () => {
-    await operationsState.dispatch('retrieveOperations', {amount: paginationAmount, offset: paginationPage.value * paginationAmount});
-  });
-
-  const paginationAmount = 5;
-  const paginationPage = ref(0);
   const operationsState = useOperationsState();
-  const groupPage = computed(() => operationsState.getters.page);
+  const operationsPage = computed(() => operationsState.getters.page);
   const totalOperationAmount = computed(() => operationsState.getters.total);
   const router = useRouter();
   function selectRow(operationID: string){

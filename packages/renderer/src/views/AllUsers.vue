@@ -51,7 +51,7 @@
       </TableContainer>
       <PaginationBar
         :total-retrievable-entities="totalUserAmount()"
-        :initial-page="paginationPage"
+        :page-size="5"
         @update-page="updatePage($event.amount, $event.offset)"
       />
     </div>
@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts" setup> 
-  import { ref, computed, onMounted } from 'vue';
+  import { computed } from 'vue';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
   import PaginationBar from '../components/BasicComponents/PaginationBar.vue';
   import TableContainer from '../components/BasicComponents/TableContainer.vue';
@@ -74,12 +74,7 @@
   const userPage = computed(() => userState.getters.page);
   const totalUserAmount = computed(() => userState.getters.total);
   const router = useRouter();
-  const paginationAmount = 5;
-  const paginationPage = ref(0);
 
-  onMounted(async () => {
-    await userState.dispatch('retrieveUsers', {amount: paginationAmount, offset: paginationPage.value * paginationAmount});
-  });
   async function updatePage(amount: number, offset: number) {
     await userState.dispatch('retrieveUsers', {amount, offset});
   }

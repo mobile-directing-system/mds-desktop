@@ -1,22 +1,25 @@
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
-import {createOperation, updateOperation, retrieveOperation, retrieveOperations } from '#preload';
-import type { Operation, ErrorResult } from '../../../../types';
+import {createOperation, updateOperation, retrieveOperation, retrieveOperations, searchOperations, retrieveOperationMembers, updateOperationMembers } from '#preload';
+import type { User, Operation, ErrorResult } from '../../../../types';
 import type { Context } from 'vuex-smart-module';
 import type { Store } from 'vuex';
 import { errorState, handleErrors } from './ErrorState';
+import { root, modulesStore } from '../index';
+import type { userState } from './UserState';
 
 function undom(operation: Operation):Operation {
     return {
         ...operation,
     };
 }
-
 /**
  * define the content of the OperationsState
  */
 class OperationsState {
   operations: Map<string, Operation> = new Map<string, Operation>();
   page: Map<string, Operation> = new Map<string, Operation>();
+  searchResult: Map<string, Operation> = new Map<string, Operation>();
+  members: Map<string, string[]> = new Map<string, string[]>();
   total = 0;
 }
 
@@ -32,6 +35,16 @@ class OperationsStateGetters extends Getters<OperationsState> {
   get page() {
     return () => {
       return this.state.page;
+    };
+  }
+  get searchResults() {
+    return () => {
+      return this.state.searchResult;
+    };
+  }
+  get members() {
+    return () => {
+      return this.state.members;
     };
   }
   get total() {
@@ -50,8 +63,15 @@ class OperationsStateMutations extends Mutations<OperationsState> {
     operations.forEach((elem) => this.state.operations.set(elem.id, elem));
   }
   setPage(page: Operation[]) {
-    this.state.operations.clear();
+    this.state.page.clear();
     page.forEach((elem) => this.state.page.set(elem.id, elem));
+  }
+  setSearchResult(operations: Operation[]) {
+    this.state.searchResult.clear();
+    operations.forEach((elem) => this.state.searchResult.set(elem.id, elem));
+  }
+  setOperationMembers({operationId, memberIds}:{operationId: string, memberIds: string[]}) {
+      this.state.members.set(operationId, memberIds);
   }
   setTotal(total: number) {
     this.state.total = total;
@@ -75,7 +95,10 @@ class OperationsStateMutations extends Mutations<OperationsState> {
  */
 class OperationsStateActions extends Actions<OperationsState, OperationsStateGetters, OperationsStateMutations, OperationsStateActions> {
 
-  errorState: Context<typeof errorState> | undefined;
+  errorState: Context<typeof errorState> | undefined;  
+  ctx: Context<typeof root> | undefined;
+  userCtx: Context<typeof userState> | undefined; //maybe use a function exported from the vuex-module similar to the handle error function
+
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   $init(store: Store<any>): void {
@@ -86,10 +109,13 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
     this.mutations.setOperations([]);
   }
 
-  async createOperation(operation: Operation) {
+  async createOperation({operation, memberIds}:{operation: Operation, memberIds: string[]}) {
     const createdOperation: ErrorResult<Operation> = await createOperation(undom(operation));
     if(createdOperation.res && !createdOperation.error) {
       this.mutations.addOrUpdateOperation(createdOperation.res);
+      if(memberIds.length > 0) {
+        this.actions.updateOperationMembersById({operationId: createdOperation.res.id, memberIds});
+      }
     }  else {
       handleErrors(createdOperation.errorMsg, this.errorState);
     }
@@ -121,6 +147,41 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
       this.mutations.setTotal(retrievedOperations.total);
     }  else {
       handleErrors(retrievedOperations.errorMsg, this.errorState);
+    }
+  }
+
+  async searchOperationsByQuery({query, limit, offset}:{query: string, limit?: number, offset?: number|undefined}) {
+    const searchResult: ErrorResult<Operation[]> = await searchOperations(query, limit, offset);
+    if(searchResult.res && !searchResult.error) {
+      this.mutations.setSearchResult(searchResult.res);
+      this.mutations.addOrUpdateOperations(searchResult.res);
+    } else {
+      handleErrors(searchResult.errorMsg, this.errorState);
+    }
+  }
+
+  async retrieveOperationMembersById(operationId: string) {
+    const retrievedOperationMembers: ErrorResult<User[]> = await retrieveOperationMembers(operationId);
+    if(retrievedOperationMembers.res && !retrievedOperationMembers.error) {
+      this.mutations.setOperationMembers({operationId, memberIds: retrievedOperationMembers.res.map((elem) => elem.id)});
+      if(!this.userCtx && !this.ctx){
+        this.ctx = root.context(modulesStore);
+        this.userCtx = this.ctx.modules.userState;
+      }
+      if(this.userCtx) {
+        this.userCtx.commit('addOrUpdateUsers', retrievedOperationMembers.res);
+      }
+    } else {
+      handleErrors(retrievedOperationMembers.errorMsg, this.errorState);
+    }
+  }
+
+  async updateOperationMembersById({operationId, memberIds}:{operationId: string, memberIds: string[]}) {
+    const operationMembersUpdated: ErrorResult<boolean> = await updateOperationMembers(operationId, [...memberIds]);
+    if(operationMembersUpdated.res && !operationMembersUpdated.error) {
+      await this.actions.retrieveOperationMembersById(operationId);
+    } else {
+      handleErrors(operationMembersUpdated.errorMsg, this.errorState);
     }
   }
 }

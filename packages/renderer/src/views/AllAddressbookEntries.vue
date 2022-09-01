@@ -105,7 +105,7 @@
       </TableContainer>
       <PaginationBar
         :total-retrievable-entities="totalAddressbookEntryAmount()"
-        :initial-page="paginationPage"
+        :page-size="paginationAmount"
         @update-page="updatePage($event.amount, $event.offset)"
       />
     </div>

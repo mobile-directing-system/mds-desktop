@@ -14,6 +14,7 @@
               id="title"
               v-model="title"
               label="Title"
+              required
             />
           </div>
           <!------- Description  ------>
@@ -31,6 +32,7 @@
               v-model="start"
               label="Start"
               type="datetime-local"
+              required
             />
           </div>
           <!--- End --->
@@ -40,6 +42,13 @@
               v-model="end"
               label="End"
               type="datetime-local"
+              :min="start"
+            />
+          </div>
+          <!-- Operation Member Selection -->
+          <div class="mb-6">
+            <MemberSelection 
+              v-model="operationMemberIds"
             />
           </div>
         </main>
@@ -47,7 +56,7 @@
       <!--- Submit Button --->
       <div class="flex justify-between">
         <NormalButton 
-          v-if="title != '' && description != '' && start !='' && end !=''"
+          v-if="title != '' && start && (!end || new Date(start) < new Date(end))"
           @click.prevent="createNewOperation(title, description, start, end)"
         >
           Create Operation
@@ -67,31 +76,37 @@
 
     import { ref } from 'vue';
     import NormalButton from '../components/BasicComponents/NormalButton.vue';
+    import MemberSelection from '../components/MemberSelection.vue';
     import { useOperationsState } from '../store';
     import{useRouter} from 'vue-router';
     import type {Operation} from '../../../types';
     import FormInput from '../components/BasicComponents/FormInput.vue';
+    import type {Ref} from 'vue';
 
     const title = ref('');
     const description = ref('');
     const start = ref('');
     const end = ref(''); 
+    const operationMemberIds: Ref<string[]> = ref([]);
     const operationState = useOperationsState();
     const router = useRouter();
     /* eslint-disable */
-    function createNewOperation( titleI: string, descriptionI: string, start :string, end : string) {
-        
+    function createNewOperation( titleI: string, descriptionI: string, startI :string, endI : string) {
         const newOperation:Operation = {
             id: '',
             title: titleI,
-            description: descriptionI,
-            start: new Date(start),
-            end: new Date(end),
+            description: descriptionI? descriptionI : undefined,
+            start: startI? new Date(startI) : undefined,
+            end: endI? new Date(endI) : undefined,
             is_archived: false,
         };
-        operationState.dispatch('createOperation', newOperation);
+
+        operationState.dispatch('createOperation', {operation: newOperation, memberIds: operationMemberIds.value});
         title.value ='';
         description.value ='';
+        end.value='';
+        start.value='';
+        operationMemberIds.value = [];
   }
   /* eslint-enable */
 

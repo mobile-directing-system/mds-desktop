@@ -5,4 +5,4 @@
 
 Desktop App for Mobile Directing System
 
-_Work in progress._
+Full documentation available [here](https://mobile-directing-system.github.io/mds-desktop/)

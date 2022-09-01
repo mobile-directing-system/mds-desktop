@@ -13,6 +13,7 @@
             id="title"
             v-model="updatedtitle"
             label="Title"
+            required
           />
         </div>
         <!------- Description  ------>
@@ -30,6 +31,7 @@
             v-model="updatedstart"
             label="Start"
             type="datetime-local"
+            required
           />
         </div>
         <!---- end --->
@@ -39,6 +41,13 @@
             v-model="updatedend"
             label="End"
             type="datetime-local"
+            :min="updatedstart"
+          />
+        </div>
+        <!-- Operation Member Selection -->
+        <div class="mb-6">
+          <MemberSelection 
+            v-model="updatedOperationMemberIds"
           />
         </div>
         <!---- archive --->
@@ -58,7 +67,7 @@
           
         <div class="flex justify-between">
           <NormalButton 
-            v-if="updatedtitle != '' && updateddescription != '' && updatedstart!= '' && updatedend != ''"
+            v-if="updatedtitle != '' && updatedstart && (!updatedend || new Date(updatedstart) < new Date(updatedend))"
             @click.prevent="editOperation()"
           >
             Update Operation
@@ -76,11 +85,13 @@
 </template>
 
 <script lang="ts" setup> 
-    import { ref, computed} from 'vue';
+    import { ref, computed, onMounted} from 'vue';
     import NormalButton from '../components/BasicComponents/NormalButton.vue';
     import FormInput from '../components/BasicComponents/FormInput.vue';
+    import MemberSelection from '../components/MemberSelection.vue';
     import { useOperationsState} from '../store';
     import type {Operation} from '../../../types';
+    import type { Ref } from 'vue';
 
     import{useRouter, useRoute} from 'vue-router';
     const operationState = useOperationsState();
@@ -88,19 +99,33 @@
     const route = useRoute();
 
     const operations = computed(() => operationState.getters.operations);
+    const operationMembers = computed(() => operationState.getters.members);
     const selectedOperationID = route.params.selectedOperationID;
     const currentOperation = operations.value().get(selectedOperationID as string);
     const updatedtitle = ref('');
     const updateddescription = ref('');
     const updatedstart = ref('');
     const updatedend = ref('');
+    const updatedOperationMemberIds:Ref<string[]> = ref([]);
     const updatedisArchived = ref(false);
+
+    onMounted(async () => {
+      await operationState.dispatch('retrieveOperationMembersById', selectedOperationID as string);
+      const members = operationMembers.value().get(selectedOperationID as string);
+      updatedOperationMemberIds.value = members?members:[];
+    });
 
     if(currentOperation) {
       updatedtitle.value = currentOperation.title;
-      updateddescription.value = currentOperation.description;
-      updatedstart.value = currentOperation.start.toString();
-      updatedend.value = currentOperation.end.toString();
+      if(currentOperation.description) {
+        updateddescription.value = currentOperation.description;
+      }
+      if(currentOperation.start) {
+        updatedstart.value = currentOperation.start.toISOString().slice(0, 16);
+      }
+      if(currentOperation.end) {
+        updatedend.value = currentOperation.end.toISOString().slice(0, 16);
+      }
       updatedisArchived.value = currentOperation.is_archived;
     }
     
@@ -109,12 +134,13 @@
         const updatedOperation:Operation = {
             id: selectedOperationID as string,
             title : updatedtitle.value,
-            description : updateddescription.value,
-            start : new Date(updatedstart.value),
-            end: new Date(updatedend.value),
+            description : updateddescription.value? updateddescription.value : undefined,
+            start : updatedstart.value? new Date(updatedstart.value) : undefined,
+            end: updatedend.value? new Date(updatedend.value) : undefined,
             is_archived: updatedisArchived.value,       
         };
         operationState.dispatch('updateOperation', updatedOperation);
+        operationState.dispatch('updateOperationMembersById', {operationId: selectedOperationID as string, memberIds: updatedOperationMemberIds.value });
         router.push('/operation');
     }
 </script>

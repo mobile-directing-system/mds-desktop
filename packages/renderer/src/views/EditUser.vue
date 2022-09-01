@@ -13,6 +13,7 @@
             id="username"
             v-model="updatedUserName"
             label="Username"
+            required
           />
         </div>
         <!------- first_name  ------>
@@ -21,6 +22,7 @@
             id="firstName"
             v-model="updatedUserFirstName"
             label="Firstname"
+            required
           />
         </div>
         <!------- last_name  ------>
@@ -29,6 +31,7 @@
             id="lastName"
             v-model="updatedUserLastName"
             label="Lastname"
+            required
           />
         </div>
         <!--- Submit Button --->
