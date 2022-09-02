@@ -102,8 +102,21 @@ To implement a minimal service for a new entity (e.g. User, Group, etc.) do the 
 Component Documentation
 =======================
 
-Documentation for the components themselves (in `packages/renderer/src/components`) can be found either as code comments in the components themselves or in the form of a :vuepress-homepage:`VuePress <>` documentation.
-The vuepress documentation is written in markdown files in `docs/README.md` and `docs/md/*`. To serve the documentation use the `npm run docs:dev` command in the project root. If you want a statically built HTML version run `npm run docs:build` in the project root.
+Documentation for the components themselves (in *packages/renderer/src/components*) can be found either as code comments in the components themselves or in the form of a :vuepress-homepage:`VuePress <>` documentation.
+The vuepress documentation is written in markdown files in *docs/README.md* and *docs/md/\**. To serve the documentation use the
+
+.. code-block:: sh
+
+    npm run docs:dev
+
+
+command in the project root. If you want a statically built HTML version run 
+
+.. code-block:: sh
+
+    npm run docs:build
+
+in the project root.
 
 The vue components are documented with a general description of their use and particularities, as well as a list of their slots, events and props.
 
