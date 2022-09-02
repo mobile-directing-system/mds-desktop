@@ -83,6 +83,79 @@ To Familiarize youself with Electron you can use the :electron-intro:`Electron I
 Directory Structure of the Project
 ----------------------------------
 
+.. code-block:: sh
+
+    docs/                       # All the documentation, both vuepress and sphinx
+    Makefile                    # Makefile to build the sphinx documentation (run make in
+                                # project root)
+    node_modules                # Contains the downloaded node packages/modules (don't touch)
+    package.json                # Conatins node.js configuration, e.g. entry point into the app,
+                                # dependecies, scripts (what can be run with npm run [command])
+    packages/                   # Contains the source code of the app and configuration specific
+                                # to the different parts of the app
+    postcss.config.js           # Part of the TailwindCSS configuration. Concerns only the
+                                # renderer part of the app. Is here for build compatibility
+                                # purposes with the production build. Must be the same as the
+                                # packages/renderer/postcss.config.js file
+    README.md                   # Main README of the project. Mostly points to the sphinx
+                                # documentation
+    scripts/                    # contains mostly watch.js to support HMR with vite and electron
+    tailwind.config.js          # Main TailwindCSS configuration. Concerns only the renderer
+                                # part of the app. Is here for build compatibility purposes
+                                # with the production build. Must be the same as the
+                                # packages/renderer/tailwind.config.js file
+    tests/                      # Contains E2E tests
+    vitest.config.js            # Configuration for the vitest testing framework
+    docs/make.bat               # Build the sphinx documentation on windows (run make.bat)
+    docs/images                 # Contains the images used in the sphinx documentation
+    docs/index.rst              # Entry point into the sphinx documentation (toctree)
+    docs/conf.py                # Configuration for the sphinx documentation contains
+                                # the definition of external links among other things
+    docs/sites                  # Contains the chapters of the sphinx documentation
+    docs/_build                 # Contains the built sphinx documentation in HTML files
+    docs/README.md              # Entry point into the vupress documentation
+    docs/.vuepress              # Contains configuration and build products of the vuepress
+                                # documentation
+    docs/.vuepress/config.ts    # Configuration of vuepress (mainly instruct vuepress to use
+                                # vite as the bundler)
+    packages/main/              # All code and configs specific to the main node.js part of 
+                                # the electron app
+    packages/preload/           # All code and configs specific to the preload module (mostly
+                                # wrappers and auto-generated)
+    packages/renderer/          # All code and configs specific to the renderer part (UI) of
+                                # the electron app
+    packages/types/             # Contains the types for entities (e.g. Users, Groups, etc.)
+                                # Used in all three parts of the app
+    packages/*/vite.config.js   # Configuration for Vite for all three different parts
+    packages/*/tsconfig.json    # Configuration for the Typescript compiler for all three
+                                # different parts
+    packages/*/src/             # Source code for the three different parts
+    packages/*/dist/            # Build products for the three different parts
+    packages/main/src/backend       # Code for the communication with the MDS-Server HTTP
+                                    # API including e.g. the caching of the Auth Cookie
+    packages/main/src/config        # Rudimentary config file
+    packages/main/src/index.ts      # Main entry point into the whole app. Starts the Windows,
+                                    # registers the ipc handlers, etc.
+    packages/main/src/ipcHandlers   # Implementation of ipcHandler wrappers for the backend
+                                    # comms functions
+    packages/main/src/windows       # Contains the code for the different windows
+    packages/renderer/index.css             # Main CSS for the whole UI
+    packages/renderer/index.html            # Main Page for the SPA UI vue app
+    packages/renderer/postcss.config.js     # See postcss.config.js above
+    packages/renderer/tailwind.config.js    # See tailwind.config.js above
+    packages/renderer/src/App.vue           # Main Vue file.
+    packages/renderer/components/           # Contains resuable vue components
+    packages/renderer/constants/            # Contains constants such as permissions strings
+    packages/renderer/src/index.ts          # Main logic entry point into the vue app.
+                                            # Starts the whole vue app.
+    packages/renderer/src/router/           # Contains the definition and configuration of
+                                            # the vue-router
+    packages/renderer/src/store/            # Contains all the code related to the
+                                            # implementation and configuration of the 
+                                            # vuex store & vuex modules
+    packages/renderer/src/views/            # contains the pages routed through with the
+                                            # router
+
 Minimal Implementation for new Service
 --------------------------------------
 
