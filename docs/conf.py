@@ -55,7 +55,8 @@ extlinks = {
   "vue-router-guide": ("https://router.vuejs.org/guide/", "vue-router Guide"),
   "vuex-guide": ("https://vuex.vuejs.org/guide/", "vuex Guide"),
   "vuex-smart-module-github": ("https://github.com/ktsn/vuex-smart-module", "vuex-smart-module Github"),
-  "electron-intro": ("https://www.electronjs.org/docs/latest", "Electron Introduction")
+  "electron-intro": ("https://www.electronjs.org/docs/latest", "Electron Introduction"),
+  "vuepress-homepage": ("https://vuepress.vuejs.org/", "VuePress")
 }
 
 # Add any paths that contain templates here, relative to this directory.
