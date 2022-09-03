@@ -139,6 +139,7 @@
     if(currentGroup) {
       if(currentGroup.operation) {
         operationsState.dispatch('retrieveOperation', currentGroup.operation);
+        operationsState.dispatch('retrieveOperationMembersById', currentGroup.operation);
       }
       currentGroup.members.map((elem) => userState.dispatch('retrieveUserById', elem ));
     }
