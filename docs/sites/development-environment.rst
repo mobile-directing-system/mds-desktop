@@ -196,5 +196,40 @@ The vue components are documented with a general description of their use and pa
 UI-Customization
 ================
 
+As for customization of the standard TailwindCSS, we chose to only adapt the colors.
+
 Custom Colors
 -------------
+
+For the implementation of our custom color theme we oriented ourselves at :tailwindcss-colors:`TailwindCSS Customizing Colors <>`.
+As such the color definitions can be found in the either of the *tailwind.config.js* files.
+
+.. warning:: If you want to change of extend the custom color theme please be aware that **both** *tailwind.config.js* files need to be changes for the changes to be reflected in the dev and production modes.
+
+We chose to implement 6 different colors:
+
+* primary: The primary color for e.g. normal buttons or other primary UI elements
+* secondary: The secondary color for e.g. highlights etc or other secondary UI elements
+* warning: The warning color for things the user should perceive more than the standard UI, but is not an error
+* error: The error color displayed when e.g. an error occurs or form fields are not filled correctly
+* surface: The color for e.g. form fields to be more recognizable on the background or for delimiter
+* background: The color for the background
+
+Each of those colors as five different hues, except the background color:
+
+* superlight
+* light
+* \-
+* dark
+* superdark
+
+Those must can be combinied with the colors using an *_* to choose a color, e.g. *primary_superlight* is the superlight hue of the primary color.
+If no hue is provides the normal middleground color is chosen.
+The combinations themselves are taken from the default TailwindCSS color palatte, so they are a subset of this palatte.
+
+Each of these color and hue combinations also has a *on_* color for text to be displayed readably on it.
+E.g. for text on the background color it would be the color *on_background* or for text on the primary_superlight color *on_primary_superlight*
+
+These colors can be combined with TailwindCSS designators such as *text* for text color or *bg* for background color. 
+The colors are appended to those designators using a *-*, so when the primary color is wanted as a background color it is *bg-primary* with 
+*text-on_primary* as the text color for it to be readable.
