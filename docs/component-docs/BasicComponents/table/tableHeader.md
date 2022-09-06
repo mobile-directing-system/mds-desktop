@@ -19,4 +19,4 @@ This component has no events.
 
 | Name        | Prop-Name    | Prop-Type                  | Description                                       |
 | ----------- | ------------ | -------------------------- | ------------------------------------------------- |
-| header#num  | -            | -                          | This prop defines the header of the #num columnn. |
+| header#num  | -            | -                          | Defines the header of the #num columnn.           |

@@ -1,6 +1,8 @@
 # Table Row
 
 This component is located at `packages/renderer/src/components#/BasicComponents/TableRow.vue`.
+This component provides `<tr>` with `numOfCols` many `<td>`.
+All passed attributes, which are not props, are inherited by the `<tr>`.
 
 ## Props
 
@@ -19,5 +21,6 @@ This component is located at `packages/renderer/src/components#/BasicComponents/
 
 ## Slots
 
-| Name        | Prop-Name    | Prop-Type                  | Description                                 |
-| ----------- | ------------ | -------------------------- | ------------------------------------------- |
+| Name        | Prop-Name    | Prop-Type                                  | Description                                 |
+| ----------- | ------------ | ------------------------------------------ | ------------------------------------------- |
+| data#num    | {data}       | `element type of table container contents` | Defines the contents of the #num columnn    |

@@ -20,6 +20,6 @@ All passed attributes, which are not props, are inherited by the HTML `<button>`
 
 ## Slots
 
-| Name | Type | Description                                                                 |
-| ---- | ---- | --------------------------------------------------------------------------- |
-| -    | -    | Unnamed slot without passed props. Displayed as content of the HTML button. | 
+| Name | Prop-Name | Prop-Type | Description                                                                 |
+| ---- | ----------| --------- | --------------------------------------------------------------------------- |
+| -    | -         | -         | Unnamed slot without passed props. Displayed as content of the HTML button. | 

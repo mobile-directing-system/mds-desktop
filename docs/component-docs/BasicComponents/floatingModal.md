@@ -23,6 +23,6 @@ All passed attributes, which are not props, are passed to the div wrapping the p
 
 ## Slots
 
-| Name | Type | Description                                                                 |
-| ---- | ---- | --------------------------------------------------------------------------- |
-| -    | -    | Unnamed slot without passed props for the content of the modal              |
+| Name | Prop-Name | Prop-Type | Description                                                                 |
+| ---- | --------- | --------- | --------------------------------------------------------------------------- |
+| -    | -         | -         | Unnamed slot without passed props for the content of the modal              |
