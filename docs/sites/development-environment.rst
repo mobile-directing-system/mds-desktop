@@ -116,6 +116,7 @@ Directory Structure of the Project
     docs/README.md              # Entry point into the vupress documentation
     docs/.vuepress              # Contains configuration and build products of the vuepress
                                 # documentation
+    docs/component-docs         # Vuepress markdown documentation files
     docs/.vuepress/config.ts    # Configuration of vuepress (mainly instruct vuepress to use
                                 # vite as the bundler)
     packages/main/              # All code and configs specific to the main node.js part of 
@@ -176,7 +177,7 @@ Component Documentation
 =======================
 
 Documentation for the components themselves (in *packages/renderer/src/components*) can be found either as code comments in the components themselves or in the form of a :vuepress-homepage:`VuePress <>` documentation.
-The vuepress documentation is written in markdown files in *docs/README.md* and *docs/md/\**. To serve the documentation use the
+The vuepress documentation is written in markdown files in *docs/README.md* and *docs/component-docs/\**. To serve the documentation use the
 
 .. code-block:: sh
 
