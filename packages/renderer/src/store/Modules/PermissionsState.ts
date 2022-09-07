@@ -5,7 +5,11 @@ import { retrievePermissions, updatePermissions } from '#preload';
 import type { Permissions, Permission, ErrorResult } from '../../../../types';
 import { errorState, handleErrors } from './ErrorState';
 
-
+/**
+ * function to create a deep enough copy of a permissions object to be able to pass through the IPC
+ * @param permissions permissions object to be undomed
+ * @returns a relatively deep copy of the permissions object
+ */
 function undom(permissions: Permissions):Permissions {
   return permissions.map((elem:Permission) => {
     return {
@@ -36,7 +40,15 @@ class PermissionsStateGetters extends Getters<PermissionsState> {
  * define mutations to change the state
  */
 class PermissionsStateMutations extends Mutations<PermissionsState> {
+  /**
+   * Mutation to set the permissions of a user
+   * @param param0 {userId, permission} set the permissions state of the user with userID to permissions
+   */
   setPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {this.state.permissions.set(userId, permissions);}
+  /**
+   * Mutation to add permissions to the permissions of a user
+   * @param param0 {userId, permission} add permission to the permissions state of the user with userId
+   */
   addPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
     const existingPermissions = this.state.permissions.get(userId);
     if(existingPermissions) {
@@ -45,7 +57,14 @@ class PermissionsStateMutations extends Mutations<PermissionsState> {
       this.state.permissions.set(userId, permissions);
     }
   }
+  /**
+   * Mutation to remove the permission of a user from the permissions state
+   * @param userId id of the user whose permissions should be removed
+   */
   removePermissions(userId: string) {this.state.permissions.delete(userId);}
+  /**
+   * Mutation to completely clear the permissions state
+   */
   clearPermissions() {this.state.permissions.clear();}
 }
 
@@ -54,13 +73,19 @@ class PermissionsStateMutations extends Mutations<PermissionsState> {
  */
 class PermissionsStateActions extends Actions<PermissionsState, PermissionsStateGetters, PermissionsStateMutations, PermissionsStateActions> {
 
+  //reference to the error state to be able to add errors
   errorState: Context<typeof errorState> | undefined;
 
+  // set error state on init of the store
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   $init(store: Store<any>): void {
     this.errorState = errorState.context(store);
   }
 
+  /**
+   * Action to retrieve the permission for a user and set them in the permissions state
+   * @param userId id of the user for which to retrieve permissions
+   */
   async retrievePermissions(userId: string) {
     const permissions: ErrorResult<Permissions> = await retrievePermissions(userId);
     if(permissions.res && !permissions.error) {
@@ -69,6 +94,11 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
       handleErrors(permissions.errorMsg, this.errorState);
     }
   }
+
+  /**
+   * Action to addPermission to a users permission and then retrieve them again to be up to date.
+   * @param param0 {userId, permissions} for the user with userId permissions are concatenated to its permissions state
+   */
   async addPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
     const existingPermissions = this.state.permissions.get(userId);
     const permissionsSet: ErrorResult<boolean> = await updatePermissions(userId, (existingPermissions)? undom(existingPermissions.concat(permissions)):permissions);
@@ -78,6 +108,11 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
       handleErrors(permissionsSet.errorMsg, this.errorState);
     }
   }
+
+  /**
+   * Action to updateAllPermission of a user, e.g. replace them. Then retrieve them again to be up to date.
+   * @param param0 {userId, permissions} for the user with userId its permissions are replaced with permissions argument
+   */
   async updateAllPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
     const permissionsSet: ErrorResult<boolean> = await updatePermissions(userId, permissions);
     if(permissionsSet.res && !permissionsSet.error) {

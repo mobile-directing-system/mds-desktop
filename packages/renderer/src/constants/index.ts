@@ -1,3 +1,4 @@
+// read-only permission strings in one place for quality of life reasons
 class PermissionNames {
     // Permissions Permissions
     static readonly PermissionsUpdate = 'permissions.update';
@@ -20,11 +21,13 @@ class PermissionNames {
     static readonly UserView = 'user.view';
 }
 
+// readonly strings for available order dirs
 class OrderDir {
     static readonly Ascending = 'asc';
     static readonly Descending = 'desc';
 }
 
+// readonly strings for available order_by fields
 class OrderBy {
     static readonly UserUsername = 'username';
     static readonly UserFirstName = 'first_name';

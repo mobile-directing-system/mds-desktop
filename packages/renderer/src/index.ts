@@ -9,7 +9,7 @@ import 'flowbite';
 /**
  * load the content into the #app div and
  * tell vue.js that we are using a store
- * and a router.
+ * and a router and the MultipleSelect component
  */
 createApp(App).use(modulesStore).use(router).component('Multiselect', Multiselect).mount('#app');
 

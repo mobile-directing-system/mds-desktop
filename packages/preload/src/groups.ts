@@ -1,3 +1,8 @@
+/**
+ * glue code to be able to call the backend group
+ * functions from the browser context
+ */
+
 import type { Group, ErrorResult } from '../../types';
 const { ipcRenderer } = require('electron');
 

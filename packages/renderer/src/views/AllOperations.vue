@@ -2,9 +2,11 @@
   <div>
     <div class="grid bg-white  rounded-lg  my-10">
       <div class="flex justify-between">
+        <!-- Header -->
         <h1 class="ml-4 text-4xl font-bold text-black text-center">
           All Operations
         </h1>
+        <!-- Create Operation Button -->
         <NormalButton
           class=" ml-auto  mr-6"
           @click="router.push('/create-new-operation')"
@@ -13,6 +15,7 @@
         </NormalButton>
       </div>
     </div>
+    <!-- All Operations Table -->
     <TableContainer
       :contents="operationsPage().values()"
       id-identifier="id"
@@ -56,6 +59,7 @@
         </TableRow>
       </template>
     </TableContainer>
+    <!-- Pagination Bar -->
     <PaginationBar
       :total-retrievable-entities="totalOperationAmount()"
       :page-size="5"
@@ -80,9 +84,20 @@
   const operationsPage = computed(() => operationsState.getters.page);
   const totalOperationAmount = computed(() => operationsState.getters.total);
   const router = useRouter();
-  function selectRow(groupId: string){
-          router.push({name: 'EditCurrentGroup', params:{ selectedGroupID: groupId}});
+
+  /**
+   * click handler for the table row which route to operation views
+   * @param operationId id of operation to route to
+   */
+  function selectRow(operationId: string){
+          router.push({name: 'EditCurrentOperation', params:{ selectedOperationID: operationId}});
   }
+
+  /**
+   * update page handler for pagination bar
+   * @param amount number of operations to be retrieved
+   * @param offset offset beginning at which operations are retrieved
+   */
   async function updatePage(amount: number, offset: number) {
     await operationsState.dispatch('retrieveOperations', {amount, offset});
   }
