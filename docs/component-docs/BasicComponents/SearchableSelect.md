@@ -6,7 +6,9 @@ look of the dependency to the look of the app at large, to add debounce to the s
 All props and events of the multiselect not handled by the wrapper can be used with the wrapper as mentioned in the multiselect documentation
 All passed attributes, which are not props, are inherited by the multiselect component.
 
+::: warning
 **Important** The underlying multiselect component uses the options list to display selected options. This means that if the v-model is changed programatically the options list needs to contain the new selections and they need to be **rendered already**. Because of this it is not possible to set the options list and then immediatley set the v-model. This can be solved by putting the updating of the v-model inside a setTimeout with durartion of 0.
+:::
 
 ## Props
 
