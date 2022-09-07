@@ -10,6 +10,10 @@ All passed attributes, which are not props, are inherited by the multiselect com
 **Important** The underlying multiselect component uses the options list to display selected options. This means that if the v-model is changed programatically the options list needs to contain the new selections and they need to be **rendered already**. Because of this it is not possible to set the options list and then immediatley set the v-model. This can be solved by putting the updating of the v-model inside a setTimeout with durartion of 0.
 :::
 
+::: warning
+the options prop must be an array.
+:::
+
 ## Props
 
 | Name        | Type                               | Required | Default Value | Description                            |
@@ -21,7 +25,7 @@ All passed attributes, which are not props, are inherited by the multiselect com
 | valueProp   | `string`                           | no       | undefined     | If options are objects, this string defines what object property is used as value for selected options |
 | debounce    | `string`                           | no       | undefined     | Defines the debouce time               |
 | maxWait     | `string`                           | no       | undefined     | Defines the maxWait during debounce    |
-| options     | `any []`                           | yes      | -             | Defines the options that are shown in the options list |
+| options     | `any []`                           | yes      | -             | Defines the options that are shown in the options list. Must be an array. |
 
 ## Events
 
