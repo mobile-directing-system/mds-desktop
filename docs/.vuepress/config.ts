@@ -1,9 +1,12 @@
-import { viteBundler } from '@vuepress/bundler-vite'
-import { defineUserConfig } from '@vuepress/cli'
+import { defaultTheme } from '@vuepress/theme-default'
 
-export default defineUserConfig({
-  bundler: viteBundler({
-    viteOptions: {},
-    vuePluginOptions: {},
-  })
-})
+export default {
+  title: 'MDS-Desktop Documentation',
+  theme: defaultTheme({
+    navbar: [
+      '/README.md'
+    ],
+    sidebar: false,
+    contributors: false,
+  }),
+}
