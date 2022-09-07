@@ -1,13 +1,11 @@
-# MDS-Desktop Component Documentation
-
-## Components
+# Components
 
 * [LoginForm](component-docs/loginForm.md)
 * [MemberSelection](component-docs/memberSelection.md)
 * [SideBarMenu](component-docs/sideBarMenu.md)
 * [TopNavbar](component-docs/topNavbar.md)
 
-### Baisc Components
+## Basic Components
 
 The basic components are simplier than normal component and reusable in more situations.
 
