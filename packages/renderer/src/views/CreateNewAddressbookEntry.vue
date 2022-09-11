@@ -24,55 +24,41 @@
         <!----- Operation ----->
         <div class="mb-6 w-80">
           <label
-            for="operation"
+            for="operations"
             class="block mb-2 text-sm font-medium text-on_background"
           >Select an Operation</label>
-          <select
-            id="operation"
+          <SearchableSelect
             v-model="addedOperationId"
-            class="bg-surface_superlight border border-surface_dark text-on_surface_superlight text-sm rounded-lg focus:ring-primary_light focus:border-primary_light block w-full p-2.5"
-          >
-            <option
-              value=""
-              selected
-            >
-              Choose an Operation
-            </option>
-            <option
-              v-for="operation in operations().values()"
-              :key="operation.id"
-              :value="operation.id"
-            >
-              {{ operation.title }}
-            </option>
-          </select>
-        </div>
+            :options="operationsSearchResultsArray"
+            mode="single"
+            placeholder="Select operation"
+            label="title"
+            value-prop="id"
+            :filter-results="false"
+            track-by="title"
+            @search-change="handleOperationSelectionInput"
+            @open="handleOperationSelectionInput('')"
+          />
+        </div>  
         <!------ User ----->
         <div class="mb-6 w-80">
           <label
-            for="users"
+            for="operations"
             class="block mb-2 text-sm font-medium text-on_background"
           >Select an User</label>
-          <select
-            id="users"
+          <SearchableSelect
             v-model="addedUserId"
-            class="bg-surface_superlight border border-surface_dark text-on_surface_superlight text-sm rounded-lg focus:ring-primary_light focus:border-primary_light block w-full p-2.5"
-          >
-            <option
-              value=""
-              selected
-            >
-              Choose an User
-            </option>
-            <option
-              v-for="user in users().values()"
-              :key="user.id"
-              :value="user.id"
-            >
-              {{ user.first_name }} {{ user.last_name }}
-            </option>
-          </select>
-        </div>
+            :options="usersSearchResultsArray"
+            mode="single"
+            placeholder="Select User"
+            label="username"
+            value-prop="id"
+            :filter-results="false"
+            track-by="username"
+            @search-change="handleUserSelectionInput"
+            @open="handleUserSelectionInput('')"
+          />
+        </div>  
         <div class="pt-4 flex justify-between">
           <NormalButton
             v-if="addedlabel !='' && addeddescription != ''"
@@ -92,39 +78,74 @@
   </div>
 </template>
 <script lang = "ts" setup>
-    import { ref, computed, onMounted } from 'vue';
-    import NormalButton from '../components/BasicComponents/NormalButton.vue';
-    import { useRouter } from 'vue-router';
-    import { useAddressbookState, useUserState, useOperationsState } from '../store';
-    import FormInput from '../components/BasicComponents/FormInput.vue';
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    import type { User, Operation, AddressbookEntry } from '../../../types';
-    const addedlabel = ref('');
-    const addeddescription = ref('');
-    const addedOperationId = ref('');
-    const addedUserId = ref('');
-    const router = useRouter();
-    const userState = useUserState();
-    const addressbookState = useAddressbookState();
-    const operationsState = useOperationsState();
+  import { ref, computed, onMounted, watch } from 'vue';
+  import NormalButton from '../components/BasicComponents/NormalButton.vue';
+  import { useRouter } from 'vue-router';
+  import { useAddressbookState, useUserState, useOperationsState } from '../store';
+  import FormInput from '../components/BasicComponents/FormInput.vue';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  import type { User, Operation, AddressbookEntry } from '../../../types';
+  import SearchableSelect from '../components/BasicComponents/SearchableSelect.vue';
+  const addedlabel = ref('');
+  const addeddescription = ref('');
+  const addedOperationId = ref('');
+  const addedUserId = ref('');
+  const router = useRouter();
+  const userState = useUserState();
+  const addressbookState = useAddressbookState();
+  const operationsState = useOperationsState();
 
-    const operations = computed(() => operationsState.getters.operations);
-    const users = computed(() => userState.getters.users);
+  const operationsSearchResults = computed(() => operationsState.getters.searchResults);
+  const operationsSearchResultsArray = computed(() => {
+    return InterableIteratorToArray(operationsSearchResults.value().values());
+  });
+  const usersSearchResults = computed(() => userState.getters.searchResults);
+  const usersSearchResultsArray = computed(() => {
+    return InterableIteratorToArray(usersSearchResults.value().values());
+  });
 
-    onMounted(() => {
-        operationsState.dispatch('retrieveOperations', {amount : 100});
-        userState.dispatch('retrieveUsers', {amount: 100});
-    });
-    
-    function createAddressbookEntry(){
-        const newEntry:AddressbookEntry =  {
-            id:'',
-            label: addedlabel.value,
-            description: addeddescription.value ,
-            operation: addedOperationId.value? addedOperationId.value:undefined,
-            user: addedUserId.value? addedUserId.value:undefined,
-        };
-        addressbookState.dispatch('createEntry', newEntry);
-        router.push('/addressbook');
+  onMounted(() => {
+      operationsState.dispatch('retrieveOperations', {amount : 100});
+      userState.dispatch('retrieveUsers', {amount: 100});
+  });
+
+  watch(addedOperationId, (curVal) => {
+    if(curVal) {
+      operationsState.dispatch('retrieveOperationMembersById', curVal);
     }
+  });
+  watch(addedUserId, (curVal) => {
+    if(curVal) {
+      userState.dispatch('retrieveUserById', curVal);
+    }
+  });
+  function createAddressbookEntry(){
+      const newEntry:AddressbookEntry =  {
+          id:'',
+          label: addedlabel.value,
+          description: addeddescription.value ,
+          operation: addedOperationId.value? addedOperationId.value:undefined,
+          user: addedUserId.value? addedUserId.value:undefined,
+      };
+      addressbookState.dispatch('createEntry', newEntry);
+      router.push('/addressbook');
+  }
+  function InterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {
+    const arr: T[] = [];
+    // eslint-disable-next-line no-constant-condition
+    while(true) {
+      const next = iter.next();
+      if(next.done) {
+        break;
+      }
+      arr.push(next.value);
+    }
+    return arr;
+  }
+  function handleOperationSelectionInput(query: string) {
+    operationsState.dispatch('searchOperationsByQuery', {query, limit:10});
+  }
+  function handleUserSelectionInput(query: string) {
+    userState.dispatch('searchUsersByQuery', {query, limit:10});
+  }
 </script>

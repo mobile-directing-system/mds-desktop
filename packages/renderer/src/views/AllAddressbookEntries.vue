@@ -3,7 +3,7 @@
     <div class="grid bg-white  rounded-lg  my-10">
       <div class="flex justify-between">
         <h1 class=" ml-4 text-4xl font-bold text-black ">
-          Addressbook Entries:
+          Addressbook Entries
         </h1>
         <NormalButton
           class=" ml-auto mr-6"
@@ -17,7 +17,7 @@
         id-identifier="id"
       >
         <template #tableHeader>
-          <TableHeader :num-of-cols="6">
+          <TableHeader :num-of-cols="5">
             <template #header1>
               Label
             </template>
@@ -31,15 +31,15 @@
               Operation
             </template>
             <template #header5 />
-            <template #header6 />
           </TableHeader>
         </template>
 
         <template #tableRow="{rowData}:{rowData:AddressbookEntry}">
           <TableRow 
             :row-data="rowData"
-            :num-of-cols="6"
+            :num-of-cols="5"
             :identifier="rowData.id"
+            @click="selectRow($event)"
           >
             <template #data1="{data}:{data:AddressbookEntry}">
               {{ data.label }}
@@ -57,33 +57,7 @@
               <button
                 type="button"
                 class="bg-background text-on_background hover:bg-surface_dark hover:text-on_surface_dark rounded-lg focus:ring-2 focus:ring-surface p-1.5 inline-flex h-8 w-8 "
-                @click.prevent="selectRow(data.id)"
-              >
-                <span class="sr-only">Edit</span>
-                <svg
-                  class="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                /><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                /></svg>
-              </button>
-            </template>
-            <template #data6="{data}:{data:AddressbookEntry}">
-              <button
-                type="button"
-                class="bg-background text-on_background hover:bg-surface_dark hover:text-on_surface_dark rounded-lg focus:ring-2 focus:ring-surface p-1.5 inline-flex h-8 w-8 "
-                @click.prevent="deleteEntry(data.id)"
+                @click.stop="deleteEntry(data.id)"
               >
                 <span class="sr-only">Close</span>  
                 <svg

@@ -2,7 +2,7 @@
   <!-- Opaque Overlay behind Modal -->
   <div
     v-if="props.showModal"
-    class="absolute inset-0 z-40 opacity-25 bg-black"
+    class="absolute inset-0 z-40 opacity-25 bg-black "
   />
   <!-- Add Member Modal -->
   <div

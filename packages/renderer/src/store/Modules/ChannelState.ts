@@ -5,6 +5,10 @@ import type { Context } from 'vuex-smart-module';
 import type { Store } from 'vuex';
 import { errorState, handleErrors } from './ErrorState';
 
+function undom(channel: Channel):Channel {
+    console.log(channel);
+    return {...channel, details:{ ...channel.details}};
+}
 /**
  * define content for AddressbookState
  */
@@ -55,8 +59,9 @@ class ChannelStateActions extends Actions<ChannelState, ChannelStateGetters, Cha
         this.mutations.setChannels([]);
     }
     async setChannels({entryId, channels}:{entryId: string, channels: Channels}) {
-        const setChannelsRes: ErrorResult<boolean> = await setChannels(entryId, channels);
-        if(setChannelsRes.res && ! setChannelsRes.error && setChannelsRes.total !== undefined){
+        console.log(channels);
+        const setChannelsRes: ErrorResult<boolean> = await setChannels(entryId, channels.map(x => x = undom(x)));
+        if(setChannelsRes.res && ! setChannelsRes.error){
             this.mutations.setChannels(channels);
             this.mutations.setTotal(channels.length);
         } else {
@@ -65,9 +70,10 @@ class ChannelStateActions extends Actions<ChannelState, ChannelStateGetters, Cha
     }
     async retrieveChannels (entryId:string) {
         const retrievedChannels: ErrorResult<Channels> = await retrieveChannels(entryId);
-        if(retrievedChannels.res && !retrievedChannels.error && retrievedChannels.total !== undefined){
+        if(retrievedChannels.res && !retrievedChannels.error){
             this.mutations.setChannels(retrievedChannels.res);
-            this.mutations.setTotal(retrievedChannels.total);
+        } else {
+            handleErrors(retrievedChannels.errorMsg, this.errorState);
         }
     }
     

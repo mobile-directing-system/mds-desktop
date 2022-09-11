@@ -4,7 +4,7 @@ import Backend from './backendInstance';
 import { printAxiosError } from './backendInstance';
 
 const endpoint ='/address-book/entries';
-const channelsEndpointExtension = '/channel';
+const channelsEndpointExtension = 'channels';
 
 export async function createAddressbookEntry(entry:AddressbookEntry):Promise<ErrorResult<AddressbookEntry>> {
     try{
@@ -124,7 +124,7 @@ export async function retrieveAddressbookEntry(entryId:string):Promise<ErrorResu
 
 export async function setChannels(entryId: string, channels:Channels):Promise<ErrorResult<boolean>> {
     try{
-        const response = await Backend.instance.put(`${endpoint}/${entryId}/${channelsEndpointExtension}`, {...channels[0], id:undefined});
+        const response = await Backend.instance.put(`${endpoint}/${entryId}/${channelsEndpointExtension}`, channels.map((elem) => elem.id === '' ?  {...elem, id:undefined}: elem));
         return {res: response.data, error:false};
     }catch(error){
         const axError: AxiosError = error as AxiosError;

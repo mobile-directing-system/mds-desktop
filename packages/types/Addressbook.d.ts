@@ -26,7 +26,7 @@ interface ChannelDetail {
     phone?: string,
 }
 
-enum ChannelType{
+declare enum ChannelType{
     direct = 'direct',
     email = 'email',
     forward_to_group ='forward-to-group',
