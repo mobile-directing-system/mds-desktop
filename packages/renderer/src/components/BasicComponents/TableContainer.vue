@@ -1,10 +1,14 @@
 <template>
   <div class=" table-fixed place-items-center mr-10">
     <table class=" border-spacing-2 w-full rounded-md overflow-hidden m-4">
+      <!-- Table Header -->
       <thead class=" bg-blue-700 font-bold text-white text-l text-left text-lg">
+        <!-- User-defined Table Headers -->
         <slot name="tableHeader" />
-      </thead> 
+      </thead>
+      <!-- Table Body -->
       <tbody class="text-left">
+        <!-- User-defined Table Rows -->
         <slot
           v-for="entity in props.contents"
           :key="props.idIdentifier? entity[props.idIdentifier] : entity"
@@ -17,11 +21,15 @@
 </template>
 
 <script lang="ts" setup>
+  /**
+   * This component provides a <div> with the table class and a HTML <table>. All passed attributes,
+   * which are not props, are inherited by the surrounding div.
+   */
 
   interface Props {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    contents: any;
-    idIdentifier?: string;
+    contents: any;          // This prop contains any collection of data items to display
+    idIdentifier?: string;  // If contents are collection of objects, defines the object propterty to use as key for vue loop
   }
   const props = defineProps<Props>();
 

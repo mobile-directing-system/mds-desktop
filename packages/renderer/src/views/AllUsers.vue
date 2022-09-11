@@ -2,9 +2,11 @@
   <div>
     <div class="grid bg-white  rounded-lg  my-10">
       <div class="flex justify-between">
+        <!-- Header -->
         <h1 class=" ml-4 text-4xl font-bold text-black ">
           All Users
         </h1>
+        <!-- Add User Button -->
         <NormalButton
           class=" ml-auto mr-6"
           @click.prevent="router.push('/create-new-user')"
@@ -12,6 +14,7 @@
           +
         </NormalButton>
       </div>
+      <!-- All Users Table -->
       <TableContainer
         :contents="userPage().values()"
         id-identifier="id"
@@ -49,6 +52,7 @@
           </TableRow>
         </template>
       </TableContainer>
+      <!-- Pagination Bar -->
       <PaginationBar
         :total-retrievable-entities="totalUserAmount()"
         :page-size="5"
@@ -75,9 +79,19 @@
   const totalUserAmount = computed(() => userState.getters.total);
   const router = useRouter();
 
+  /**
+   * update page handler for pagination bar
+   * @param amount number of users to be retrieved
+   * @param offset offset beginning at which users are retrieved
+   */
   async function updatePage(amount: number, offset: number) {
     await userState.dispatch('retrieveUsers', {amount, offset});
   }
+
+  /**
+   * click handler for the table row which route to user views
+   * @param userId id of user to route to
+   */
   function selectRow(userId: string){
           router.push({name: 'EditCurrentUser', params:{ selectedUserID: userId}});
   }

@@ -36,17 +36,18 @@
           type="password"
           required
         />
-        <!--- Submit Button --->
           
         <div class=" pt-4 flex justify-between">
+          <!-- Create User Button -->
           <NormalButton
             id="submit"
             class=""
             type="submit"
             @click.prevent="createNewUser(userName, firstName, lastName,iPassword)"
           >
-            Submit
+            Create User
           </NormalButton>
+          <!-- Cancel Button -->
           <NormalButton
             class=" ml-auto"
             @click.prevent="router.push('/user')"
@@ -74,6 +75,13 @@
     const userState = useUserState();
     const router = useRouter();
 
+    /**
+     * function to create new user object and initiate call to backend. Click handler for the create user button.
+     * @param username username of the new user
+     * @param firstname firstname of the new user
+     * @param lastname lastname of the new user
+     * @param ipassword password of the new user
+     */
     function createNewUser( username: string, firstname: string, lastname :string, ipassword : string) {
         userState.dispatch('createUser', {
             id: '',

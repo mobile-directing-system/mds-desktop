@@ -14,6 +14,7 @@ import AllGroups from '../views/AllGroups.vue';
 import CreateNewGroup from '../views/CreateNewGroup.vue';
 
 const routes:RouteRecordRaw[] = [
+    //Definition of Routes and Subroutes and how they relate to the views
     {
 
         path: '/',

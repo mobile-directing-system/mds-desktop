@@ -4,11 +4,16 @@
     v-bind="$attrs"
     @click=" emitClickEvent($event)"
   >
+    <!-- User-defined Button Content -->
     <slot />
   </button>
 </template>
 
 <script lang="ts">
+  /** script tag to disable default attribute inheritance
+   * so that v-bind="$attrs" works. Needs an extra script tag
+   * as it can't be done in script setup tags
+   */
   export default {
     inheritAttrs: false,
   };
@@ -16,25 +21,26 @@
 
 <script lang="ts" setup>
   /**
-   * Normal button component represents a 
-   * button in normal color. Must be passed
-   * btnText for the text to be displayed in
-   * the button. Can be Passed btnId and btnType
-   * which map to the id and type HTML-attributes.
-   * To handle click events define a click handler
-   * where you use the component.
+   * It is a container which provides a normal HTML button with customizable content, consistent style and is disableable.
+   * When the NormalButton is disabled no events are emitted and the style changes to signify that the button is disabled.
+   * All passed attributes, which are not props, are inherited by the HTML button element.
    */
   interface Props {
-    disabled?: boolean;
-    overwrite?: boolean;
+    disabled?: boolean;   // when set disables the button
+    overwrite?: boolean;  // when set changes the behavior of the class attribute to append
   }
   const props = defineProps<Props>();
   
   const emit = defineEmits<{
-    (name: 'click', e: MouseEvent ): void
+    (name: 'click', e: MouseEvent ): void // returns the MouseEvent from the inital click event on the HTML-Button
   }>();
 
+  /**
+   * Button click handler
+   * @param me original MouseEvent
+   */
   function emitClickEvent(me: MouseEvent) {
+    // only emit click event if the button is not disabled
     if(!props.disabled) {
       emit('click', me);
     } else {

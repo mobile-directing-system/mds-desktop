@@ -46,9 +46,11 @@ app.whenReady()
  */
 
 app.whenReady().then(() => {
+  //register login/logout ipc handlers
   ipcMain.handle('login', loginHandler);
   ipcMain.handle('logout', logoutHandler);
 
+  //register user ipc handlers
   ipcMain.handle('createUser', createUserHandler);
   ipcMain.handle('updateUser', updateUserHandler);
   ipcMain.handle('updateUserPassword', updateUserPasswordHandler);
@@ -57,9 +59,11 @@ app.whenReady().then(() => {
   ipcMain.handle('retrieveUser', retrieveUserHandler);
   ipcMain.handle('searchUsers', searchUsersHandler);
 
+  //register permission ipc handlers
   ipcMain.handle('retrievePermissions', retrievePermissionsHandler);
   ipcMain.handle('updatePermissions', updatePermissionsHandler);
 
+  //register operation ipc handlers
   ipcMain.handle('createOperation', createOperationHandler);
   ipcMain.handle('updateOperation', updateOperationHandler);
   ipcMain.handle('retrieveOperation', retrieveOperationHandler);
@@ -68,6 +72,7 @@ app.whenReady().then(() => {
   ipcMain.handle('retrieveOperationMembers', retrieveOperationMembersHandler);
   ipcMain.handle('updateOperationMembers', updateOperationMembersHandler);
 
+  //register group ipc handlers
   ipcMain.handle('createGroup', createGroupHandler);
   ipcMain.handle('updateGroup', updateGroupHandler);
   ipcMain.handle('deleteGroup', deleteGroupHandler);

@@ -63,15 +63,15 @@
             type="checkbox"
           >
         </div>
-        <!--- Submit Button --->
-          
         <div class="flex justify-between">
+          <!-- Update Operation Button -->
           <NormalButton 
             v-if="updatedtitle != '' && updatedstart && (!updatedend || new Date(updatedstart) < new Date(updatedend))"
             @click.prevent="editOperation()"
           >
             Update Operation
           </NormalButton>
+          <!-- Cancel Button -->
           <NormalButton
             class=" ml-auto"
             @click.prevent="router.push('/operation')"
@@ -109,12 +109,14 @@
     const updatedOperationMemberIds:Ref<string[]> = ref([]);
     const updatedisArchived = ref(false);
 
+    // get operation members if they exist
     onMounted(async () => {
       await operationState.dispatch('retrieveOperationMembersById', selectedOperationID as string);
       const members = operationMembers.value().get(selectedOperationID as string);
       updatedOperationMemberIds.value = members?members:[];
     });
 
+    //set refs with content of current operation if it exists
     if(currentOperation) {
       updatedtitle.value = currentOperation.title;
       if(currentOperation.description) {
@@ -129,7 +131,9 @@
       updatedisArchived.value = currentOperation.is_archived;
     }
     
-
+    /**
+     * function to create the edited operation object and initate call to the backend. Click handler for the Edit Operation Button.
+     */
     function editOperation(){
         const updatedOperation:Operation = {
             id: selectedOperationID as string,

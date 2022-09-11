@@ -53,14 +53,15 @@
           </div>
         </main>
       </form>
-      <!--- Submit Button --->
       <div class="flex justify-between">
+        <!-- Create Operation Button -->
         <NormalButton 
           v-if="title != '' && start && (!end || new Date(start) < new Date(end))"
           @click.prevent="createNewOperation(title, description, start, end)"
         >
           Create Operation
         </NormalButton>
+        <!-- Cancel Button -->
         <NormalButton
           class=" ml-auto"
           @click.prevent="router.push('/operation')"
@@ -90,6 +91,14 @@
     const operationMemberIds: Ref<string[]> = ref([]);
     const operationState = useOperationsState();
     const router = useRouter();
+
+    /**
+     * function to create new operation object and initiate call to backend. Click handler for the create opertion button.
+     * @param titleI title of the new operation
+     * @param descriptionI description of the new operation
+     * @param startI start datetime of the new operation
+     * @param endI end datetime of the new operation
+     */
     /* eslint-disable */
     function createNewOperation( titleI: string, descriptionI: string, startI :string, endI : string) {
         const newOperation:Operation = {

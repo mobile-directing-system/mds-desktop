@@ -2,9 +2,11 @@
   <div>
     <div class="grid bg-white  rounded-lg  my-10">
       <div class="flex justify-between">
+        <!-- Header -->
         <h1 class=" ml-4 text-4xl font-bold text-black text-center">
           All Groups
         </h1>
+        <!-- Create New Group Button -->
         <NormalButton
           class=" ml-auto mr-6"
           @click.prevent="router.push('/create-new-group')"
@@ -12,6 +14,7 @@
           +
         </NormalButton>
       </div>
+      <!-- Table of All Groups -->
       <TableContainer
         :contents="groupPage().values()"
         id-identifier="id"
@@ -49,6 +52,7 @@
           </TableRow>
         </template>
       </TableContainer>
+      <!-- Pagination Bar -->
       <PaginationBar
         :total-retrievable-entities="totalGroupAmount()"
         :page-size="5"
@@ -76,9 +80,20 @@
   const operations = computed(() => operationsState.getters.operations);
   const totalGroupAmount = computed(() => groupState.getters.total);
   const router = useRouter();
+
+  /**
+   * click handler for the table row which route to group views
+   * @param groupId id of group to route to
+   */
   function selectRow(groupId: string){
           router.push({name: 'EditCurrentGroup', params:{ selectedGroupID: groupId}});
   }
+  
+  /**
+   * update page handler for pagination bar
+   * @param amount number of groups to be retrieved
+   * @param offset offset beginning at which groups are retrieved
+   */
   async function updatePage(amount: number, offset: number) {
     await groupState.dispatch('retrieveGroups', {amount, offset});
     for(const group of groupPage.value().values()) {

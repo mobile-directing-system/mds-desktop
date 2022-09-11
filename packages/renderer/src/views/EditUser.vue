@@ -34,15 +34,15 @@
             required
           />
         </div>
-        <!--- Submit Button --->
-          
         <div class="flex justify-between">
+          <!-- Update User Button -->
           <NormalButton 
             v-if="updatedUserFirstName != '' && updatedUserName != '' && updatedUserLastName != ''"
             @click.prevent="editUser()"
           >
             Update User
           </NormalButton>
+          <!-- Delete User Button -->
           <NormalButton
             class="ml-auto"
             @click.prevent="deleteUser()"
@@ -51,6 +51,7 @@
           </NormalButton>
         </div>
         <div class=" pt-4 flex justify-between">
+          <!-- Cancel Button -->
           <NormalButton
             class=" ml-auto"
             @click.prevent="router.push('/user')"
@@ -83,13 +84,16 @@
   const updatedUserName = ref('');
   const updatedUserLastName = ref('');
 
+  //set refs with content of current user if it exists
   if(currentUser) {
     updatedUserFirstName.value = currentUser.first_name;
     updatedUserName.value = currentUser.username;
     updatedUserLastName.value = currentUser.last_name;
   }
 
-
+  /**
+   * function to create the edited user object and initate call to the backend. Click handler for the Edit User Button.
+   */
   function editUser(){
       const updatedUser:User = {
         id: selectedUserID.toString(),
@@ -101,7 +105,11 @@
       };
       userState.dispatch('updateUser', updatedUser);
   }
-    function deleteUser(){
+
+  /**
+   * function to delete the user. Click handler for the Delete User Button.
+   */
+  function deleteUser(){
       userState.dispatch('deleteUserById', selectedUserID.toString());
       router.push('/user');
   }

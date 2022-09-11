@@ -5,6 +5,11 @@ import { printAxiosError } from './backendInstance';
 
 const endpoint = '/permissions/user';
 
+/**
+ * call the /permissions endpoint to retrieve the permissions for one user
+ * @param userId id of the user for which to get permissions
+ * @returns the permissions for a given user
+ */
 export async function retrievePermissions(userId: string):Promise<ErrorResult<Permissions>> {
   try {
     const response = await Backend.instance.get(`${endpoint}/${userId}`);
@@ -28,6 +33,12 @@ export async function retrievePermissions(userId: string):Promise<ErrorResult<Pe
   }
 }
 
+/**
+ * call to the /permissions endpoint to set the permissions for one user
+ * @param userId id of the user for which to set the permissions
+ * @param permissions the permissions which to set for the user
+ * @returns boolean indicating whether the operation in the backend was successful or not
+ */
 export async function updatePermissions(userId: string, permissions: Permissions):Promise<ErrorResult<boolean>> {
   try {
     await Backend.instance.put(`${endpoint}/${userId}`, permissions);

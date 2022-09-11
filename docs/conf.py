@@ -50,7 +50,14 @@ extlinks = {
   "vue-router-homepage": ("https://router.vuejs.org/", "vue-router"),
   "flowbite-homepage": ("https://flowbite.com/", "Flowbite"),
   "axios-homepage": ("https://axios-http.com/", "Axios"),
-  "lodash-homepage": ("https://lodash.com/", "Lodash")
+  "lodash-homepage": ("https://lodash.com/", "Lodash"),
+  "vue-doc": ("https://vuejs.org/guide/introduction.html", "Vue.js Documentation"),
+  "vue-router-guide": ("https://router.vuejs.org/guide/", "vue-router Guide"),
+  "vuex-guide": ("https://vuex.vuejs.org/guide/", "vuex Guide"),
+  "vuex-smart-module-github": ("https://github.com/ktsn/vuex-smart-module", "vuex-smart-module Github"),
+  "electron-intro": ("https://www.electronjs.org/docs/latest", "Electron Introduction"),
+  "vuepress-homepage": ("https://vuepress.vuejs.org/", "VuePress"),
+  "tailwindcss-colors": ("https://tailwindcss.com/docs/customizing-colors", "TailwindCSS Customizing Colors")
 }
 
 # Add any paths that contain templates here, relative to this directory.
