@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Technolgies &amp; Architecture" href="technologies-architecture.html" /><link rel="prev" title="Welcome to MDS Desktop’s documentation!" href="../index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="User Manual" href="manual.html" /><link rel="prev" title="Welcome to MDS Desktop’s documentation!" href="../index.html" />
 
     <meta name="generator" content="sphinx-4.5.0, furo 2022.06.21"/>
-        <title>Development Environment - MDS Desktop documentation</title>
+        <title>Development - MDS Desktop documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -156,8 +156,8 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Development Environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="technologies-architecture.html">Technolgies &amp; Architecture</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual.html">User Manual</a></li>
 </ul>
 
 </div>
@@ -191,13 +191,16 @@
           </label>
         </div>
         <article role="main">
-          <section id="development-environment">
-<h1>Development Environment<a class="headerlink" href="#development-environment" title="Permalink to this headline">#</a></h1>
+          <section id="development">
+<h1>Development<a class="headerlink" href="#development" title="Permalink to this headline">#</a></h1>
+<p>This chapter concerns documentation related to the development of the MDS-Desktop app not the use of it by endusers.</p>
+<section id="development-environment">
+<h2>Development Environment<a class="headerlink" href="#development-environment" title="Permalink to this headline">#</a></h2>
 <p>This chapter provides instructions on how to setup the recommended development environment for the MDS-Desktop project.
 The MDS-Desktop app is built, on top of <a class="reference external" href="https://github.com/cawa-93/vite-electron-builder">vite-electron-builder</a> as an <a class="reference external" href="https://www.electronjs.org/">Electron</a> application which uses <a class="reference external" href="https://vuejs.org/">Vue.js</a> to render the ui and <a class="reference external" href="https://vitejs.dev/">Vite</a> to build the vue.js application.
 As an Electron app this application is built on top of <a class="reference external" href="https://nodejs.org/en/">Node.js</a> and uses the <a class="reference external" href="https://www.npmjs.com/">npm</a> package manager for dependency management and the build process.</p>
 <section id="setup-development-environment">
-<h2>Setup Development Environment<a class="headerlink" href="#setup-development-environment" title="Permalink to this headline">#</a></h2>
+<h3>Setup Development Environment<a class="headerlink" href="#setup-development-environment" title="Permalink to this headline">#</a></h3>
 <p>First you need to setup Node.js and npm if you haven’t already.
 To install both download and execute the <a class="reference external" href="https://nodejs.org/en/download/">Node.js Installer</a> or use a <a class="reference external" href="https://nodejs.org/en/download/package-manager/">package manager</a> for the installation, if available.</p>
 <p>Next if you just want to run the MDS-Desktop app you can clone the regular repository using:</p>
@@ -213,18 +216,209 @@ This editor enable comfortable development by providing a number of extensions t
 Recommended extensions for working on the app are <em>npm Intellisense</em>, <em>Vue Language Features</em>, <em>ESLint</em> and <em>Tailwind CSS IntelliSense</em>.</p>
 </section>
 </section>
+<section id="technolgies-architecture">
+<h2>Technolgies &amp; Architecture<a class="headerlink" href="#technolgies-architecture" title="Permalink to this headline">#</a></h2>
+<p>This chapter covers used technologies, theirs docs, if necessary how they are used and the architecture of the MDS-Desktop app.</p>
+<section id="technologies">
+<h3>Technologies<a class="headerlink" href="#technologies" title="Permalink to this headline">#</a></h3>
+<p>For this <a class="reference external" href="https://www.electronjs.org/">Electron</a> app we use <a class="reference external" href="https://vuejs.org/">Vue.js</a> as the web framework with <a class="reference external" href="https://tailwindcss.com/">tailwindcss</a> and <a class="reference external" href="https://flowbite.com/">Flowbite</a> as the UI framework and the logic is writtin in Typescript.
+For routing we use <a class="reference external" href="https://router.vuejs.org/">vue-router</a>.
+For state management of the UI we use <a class="reference external" href="https://vuex.vuejs.org/">vuex</a> with the <a class="reference external" href="https://www.npmjs.com/package/vuex-smart-module">vuex-smart-module</a> to have TypeScript support.
+We use <a class="reference external" href="https://lodash.com/">Lodash</a> as a utitlity library in the frontend.
+The vue app the UI uses <a class="reference external" href="https://vitejs.dev/">Vite</a> for building and bundling.
+The communication with the backend is implemented using <a class="reference external" href="https://axios-http.com/">Axios</a>.</p>
+</section>
+<section id="architecture">
+<h3>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">#</a></h3>
+<a class="reference internal image-reference" href="../_images/mds-desktop-architecture.svg"><img alt="MDS-Desktop Architecture Diagram" src="../_images/mds-desktop-architecture.svg" width="600" /></a>
+<p>As an Electron app the MDS-Desktop app is split into three parts.
+The first is the Website which defines the UI, for which we use a web app developed in vue.
+The second is the Preload Module which defines what Node.js functionality is usable from the web app.
+Here we use is mainly to expose wrapper functions around the IPC calls to the Node.js part of the app.
+Lastly there is the Node.js part. This part starts &amp; configures the browser windows to display the web app and implements other functionality not available to JS in the browser such as access to the files on the computer.</p>
+<p>The Vue UI app is split between the router, views, components and the vuex state.
+The app is structured by using the router to route between different views.
+These views themselves are made up of components, HTML and Typescript.
+Those components them are made up similary to the view, but in contrast to the views they are supposed to be usable at multiple points in the application.
+We decide on which functionality to put into a component based on if it is going to be reused or not.
+The data which is displayed by the UI is taken from vuex which we use to manage the state of our app.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Both views and components are written in the <em>SFC</em> format using Vue3 with the Composition API. We also use Typescript and the <cite>&lt;script setup&gt;</cite> tag for our code. When ever possible try to use those technolgies and make sure that when browsing the <a class="reference external" href="https://vuejs.org/guide/introduction.html">Vue.js Documentation</a> you have the toggle at the top of the sidebar set to Composition API.</p>
+</div>
+<p>To get started with Vue.js take a look at the <a class="reference external" href="https://vuejs.org/guide/introduction.html">Vue.js Documentation</a>.
+For an introduction to the vue-router visit the <a class="reference external" href="https://router.vuejs.org/guide/">vue-router Guide</a>.
+To get a general understanding of vuex you can orient yourself at the <a class="reference external" href="https://vuex.vuejs.org/guide/">vuex Guide</a>.
+But we use the vuex-smart-module to gain TypeScript support for vuex and used the README in the <a class="reference external" href="https://github.com/ktsn/vuex-smart-module">vuex-smart-module Github</a> orient ourself when writing our vuex module.</p>
+<p>The Preload Module is mostly autmated and only conists of wrapper functions to expose the IPC calls to the vue app.
+But here it is <strong>Important</strong> to note that the auto-export plugin currently is bugged and needs all of the functions you want to export to be on a seperate line and in a seperate export statement.
+If this is not done the vue app will not be able to find the preload module.</p>
+<p>We use the Node.js part mostly to implement the skaffolding of the app (e.g. start browser window with the web app and hide window bar, implement exit window function, etc.) and the IPC, Handler and client-side implementation of the MDS-Server HTTP API.
+To Familiarize youself with Electron you can use the <a class="reference external" href="https://www.electronjs.org/docs/latest">Electron Introduction</a>.</p>
+</section>
+<section id="directory-structure-of-the-project">
+<h3>Directory Structure of the Project<a class="headerlink" href="#directory-structure-of-the-project" title="Permalink to this headline">#</a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>docs/                       <span class="c1"># All the documentation, both vuepress and sphinx</span>
+Makefile                    <span class="c1"># Makefile to build the sphinx documentation (run make in</span>
+                            <span class="c1"># project root)</span>
+node_modules                <span class="c1"># Contains the downloaded node packages/modules (don&#39;t touch)</span>
+package.json                <span class="c1"># Conatins node.js configuration, e.g. entry point into the app,</span>
+                            <span class="c1"># dependecies, scripts (what can be run with npm run [command])</span>
+packages/                   <span class="c1"># Contains the source code of the app and configuration specific</span>
+                            <span class="c1"># to the different parts of the app</span>
+postcss.config.js           <span class="c1"># Part of the TailwindCSS configuration. Concerns only the</span>
+                            <span class="c1"># renderer part of the app. Is here for build compatibility</span>
+                            <span class="c1"># purposes with the production build. Must be the same as the</span>
+                            <span class="c1"># packages/renderer/postcss.config.js file</span>
+README.md                   <span class="c1"># Main README of the project. Mostly points to the sphinx</span>
+                            <span class="c1"># documentation</span>
+scripts/                    <span class="c1"># contains mostly watch.js to support HMR with vite and electron</span>
+tailwind.config.js          <span class="c1"># Main TailwindCSS configuration. Concerns only the renderer</span>
+                            <span class="c1"># part of the app. Is here for build compatibility purposes</span>
+                            <span class="c1"># with the production build. Must be the same as the</span>
+                            <span class="c1"># packages/renderer/tailwind.config.js file</span>
+tests/                      <span class="c1"># Contains E2E tests</span>
+vitest.config.js            <span class="c1"># Configuration for the vitest testing framework</span>
+docs/make.bat               <span class="c1"># Build the sphinx documentation on windows (run make.bat)</span>
+docs/images                 <span class="c1"># Contains the images used in the sphinx documentation</span>
+docs/index.rst              <span class="c1"># Entry point into the sphinx documentation (toctree)</span>
+docs/conf.py                <span class="c1"># Configuration for the sphinx documentation contains</span>
+                            <span class="c1"># the definition of external links among other things</span>
+docs/sites                  <span class="c1"># Contains the chapters of the sphinx documentation</span>
+docs/_build                 <span class="c1"># Contains the built sphinx documentation in HTML files</span>
+docs/README.md              <span class="c1"># Entry point into the vupress documentation</span>
+docs/.vuepress              <span class="c1"># Contains configuration and build products of the vuepress</span>
+                            <span class="c1"># documentation</span>
+docs/component-docs         <span class="c1"># Vuepress markdown documentation files</span>
+docs/.vuepress/config.ts    <span class="c1"># Configuration of vuepress (mainly instruct vuepress to use</span>
+                            <span class="c1"># vite as the bundler)</span>
+packages/main/              <span class="c1"># All code and configs specific to the main node.js part of</span>
+                            <span class="c1"># the electron app</span>
+packages/preload/           <span class="c1"># All code and configs specific to the preload module (mostly</span>
+                            <span class="c1"># wrappers and auto-generated)</span>
+packages/renderer/          <span class="c1"># All code and configs specific to the renderer part (UI) of</span>
+                            <span class="c1"># the electron app</span>
+packages/types/             <span class="c1"># Contains the types for entities (e.g. Users, Groups, etc.)</span>
+                            <span class="c1"># Used in all three parts of the app</span>
+packages/*/vite.config.js   <span class="c1"># Configuration for Vite for all three different parts</span>
+packages/*/tsconfig.json    <span class="c1"># Configuration for the Typescript compiler for all three</span>
+                            <span class="c1"># different parts</span>
+packages/*/src/             <span class="c1"># Source code for the three different parts</span>
+packages/*/dist/            <span class="c1"># Build products for the three different parts</span>
+packages/main/src/backend       <span class="c1"># Code for the communication with the MDS-Server HTTP</span>
+                                <span class="c1"># API including e.g. the caching of the Auth Cookie</span>
+packages/main/src/config        <span class="c1"># Rudimentary config file</span>
+packages/main/src/index.ts      <span class="c1"># Main entry point into the whole app. Starts the Windows,</span>
+                                <span class="c1"># registers the ipc handlers, etc.</span>
+packages/main/src/ipcHandlers   <span class="c1"># Implementation of ipcHandler wrappers for the backend</span>
+                                <span class="c1"># comms functions</span>
+packages/main/src/windows       <span class="c1"># Contains the code for the different windows</span>
+packages/renderer/index.css             <span class="c1"># Main CSS for the whole UI</span>
+packages/renderer/index.html            <span class="c1"># Main Page for the SPA UI vue app</span>
+packages/renderer/postcss.config.js     <span class="c1"># See postcss.config.js above</span>
+packages/renderer/tailwind.config.js    <span class="c1"># See tailwind.config.js above</span>
+packages/renderer/src/App.vue           <span class="c1"># Main Vue file.</span>
+packages/renderer/components/           <span class="c1"># Contains resuable vue components</span>
+packages/renderer/constants/            <span class="c1"># Contains constants such as permissions strings</span>
+packages/renderer/src/index.ts          <span class="c1"># Main logic entry point into the vue app.</span>
+                                        <span class="c1"># Starts the whole vue app.</span>
+packages/renderer/src/router/           <span class="c1"># Contains the definition and configuration of</span>
+                                        <span class="c1"># the vue-router</span>
+packages/renderer/src/store/            <span class="c1"># Contains all the code related to the</span>
+                                        <span class="c1"># implementation and configuration of the</span>
+                                        <span class="c1"># vuex store &amp; vuex modules</span>
+packages/renderer/src/views/            <span class="c1"># contains the pages routed through with the</span>
+                                        <span class="c1"># router</span>
+</pre></div>
+</div>
+</section>
+<section id="minimal-implementation-for-new-service">
+<h3>Minimal Implementation for new Service<a class="headerlink" href="#minimal-implementation-for-new-service" title="Permalink to this headline">#</a></h3>
+<p>To implement a minimal service for a new entity (e.g. User, Group, etc.) do the following:</p>
+<ol class="arabic">
+<li><p>Start with implementing the calls to the backend API using Axios in <em>main/src/backend</em>. Once implemented export them in the <em>main/src/backend/index.ts</em> file.</p></li>
+<li><p>Use them to write a handler-wrapper in <em>main/src/ipcHandlers</em>. Export these handlers in the <em>main/src/ipcHandlers/index.ts</em>.</p></li>
+<li><p>Register these handlers in ipcMain in <em>main/src/index.ts</em> and give them speaking names.</p></li>
+<li><p>Write a wrapper functions for calling those ipcHandlers in <em>preload/src</em> and export them in <em>preload/src/index.ts</em>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure that the names used for calling the ipcHandlers are <strong>exactly</strong> the same as the ones given to them when registering them. <strong>Important</strong> There is a bug with the auto-export plugin that requires you to export each wrapper function sperately on a new line. If this is not done the vue code can’t find the preload module.</p>
+</div>
+</li>
+<li><p>Lastly implement a seperate vuex module to manage the state of the retrieved entities. Use the preload wrapper functions to fetch data from the backend.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When writing a new vuex module and utilizing the IPC wrapper exposed by the preload module it is necessary to <em>undom</em> the objects of the vuex state before they are passed to the wrapper function. If not electron will throw an error complaining that it cannot serialize the object. With <em>undom</em> we mean that you must create a deep copy of the object, so that only basic data types such as number, booleans and strings are copied. Also only fields specified in the type of the object must be copied, but not additional fields created at runtime. This means that if an object holds a reference to another object or array those must be deep copied as well.</p>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="component-documentation">
+<h2>Component Documentation<a class="headerlink" href="#component-documentation" title="Permalink to this headline">#</a></h2>
+<p>Documentation for the components themselves (in <em>packages/renderer/src/components</em>) can be found either as code comments in the components themselves or in the form of a <a class="reference external" href="https://vuepress.vuejs.org/">VuePress</a> documentation.
+The vuepress documentation is written in markdown files in <em>docs/README.md</em> and <em>docs/component-docs/*</em>. To serve the documentation use the</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>npm run docs:dev
+</pre></div>
+</div>
+<p>command in the project root. If you want a statically built HTML version run</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>npm run docs:build
+</pre></div>
+</div>
+<p>in the project root.</p>
+<p>The vue components are documented with a general description of their use and particularities, as well as a list of their slots, events and props.</p>
+</section>
+<section id="ui-customization">
+<h2>UI-Customization<a class="headerlink" href="#ui-customization" title="Permalink to this headline">#</a></h2>
+<p>As for customization of the standard TailwindCSS, we chose to only adapt the colors.</p>
+<section id="custom-colors">
+<h3>Custom Colors<a class="headerlink" href="#custom-colors" title="Permalink to this headline">#</a></h3>
+<p>For the implementation of our custom color theme we oriented ourselves at <a class="reference external" href="https://tailwindcss.com/docs/customizing-colors">TailwindCSS Customizing Colors</a>.
+As such the color definitions can be found in the either of the <em>tailwind.config.js</em> files.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you want to change of extend the custom color theme please be aware that <strong>both</strong> <em>tailwind.config.js</em> files need to be changes for the changes to be reflected in the dev and production modes.</p>
+</div>
+<p>We chose to implement 6 different colors:</p>
+<ul class="simple">
+<li><p>primary: The primary color for e.g. normal buttons or other primary UI elements</p></li>
+<li><p>secondary: The secondary color for e.g. highlights etc or other secondary UI elements</p></li>
+<li><p>warning: The warning color for things the user should perceive more than the standard UI, but is not an error</p></li>
+<li><p>error: The error color displayed when e.g. an error occurs or form fields are not filled correctly</p></li>
+<li><p>surface: The color for e.g. form fields to be more recognizable on the background or for delimiter</p></li>
+<li><p>background: The color for the background</p></li>
+</ul>
+<p>Each of those colors as five different hues, except the background color:</p>
+<ul class="simple">
+<li><p>superlight</p></li>
+<li><p>light</p></li>
+<li><p>-</p></li>
+<li><p>dark</p></li>
+<li><p>superdark</p></li>
+</ul>
+<p>Those must can be combinied with the colors using an <em>_</em> to choose a color, e.g. <em>primary_superlight</em> is the superlight hue of the primary color.
+If no hue is provides the normal middleground color is chosen.
+The combinations themselves are taken from the default TailwindCSS color palatte, so they are a subset of this palatte.</p>
+<p>Each of these color and hue combinations also has a <em>on_</em> color for text to be displayed readably on it.
+E.g. for text on the background color it would be the color <em>on_background</em> or for text on the primary_superlight color <em>on_primary_superlight</em></p>
+<p>These colors can be combined with TailwindCSS designators such as <em>text</em> for text color or <em>bg</em> for background color.
+The colors are appended to those designators using a <em>-</em>, so when the primary color is wanted as a background color it is <em>bg-primary</em> with
+<em>text-on_primary</em> as the text color for it to be readable.</p>
+</section>
+</section>
+</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="technologies-architecture.html">
+          <a class="next-page" href="manual.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Technolgies &amp; Architecture</div>
+                <div class="title">User Manual</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -271,8 +465,23 @@ Recommended extensions for working on the app are <em>npm Intellisense</em>, <em
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Development Environment</a><ul>
+<li><a class="reference internal" href="#">Development</a><ul>
+<li><a class="reference internal" href="#development-environment">Development Environment</a><ul>
 <li><a class="reference internal" href="#setup-development-environment">Setup Development Environment</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#technolgies-architecture">Technolgies &amp; Architecture</a><ul>
+<li><a class="reference internal" href="#technologies">Technologies</a></li>
+<li><a class="reference internal" href="#architecture">Architecture</a></li>
+<li><a class="reference internal" href="#directory-structure-of-the-project">Directory Structure of the Project</a></li>
+<li><a class="reference internal" href="#minimal-implementation-for-new-service">Minimal Implementation for new Service</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#component-documentation">Component Documentation</a></li>
+<li><a class="reference internal" href="#ui-customization">UI-Customization</a><ul>
+<li><a class="reference internal" href="#custom-colors">Custom Colors</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
