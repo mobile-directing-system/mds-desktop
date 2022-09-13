@@ -1,10 +1,12 @@
-import type { User, Operation, Group } from '../../../../../types';
+import type { User, Operation, Group, Permission } from '../../../../../types';
+import {v4 as uuid} from 'uuid';
+import { difference } from 'lodash';
 
 class MockDatabase {
     private loggedIn = false;
     //set of users on startup. Generated with testDataGenerators/gen_users.sh
     private readonly users: Map<string, User> = new Map<string, User>([
-        ['d63ef06e-50fa-4ff1-b0ff-61ced9af154f', {id: '14baea6f-5e6c-4d7f-972c-5b2c0c02950f', username: 'admin', first_name: 'admin', last_name: 'admin', is_admin: true, pass: 'admin'}],
+        ['14baea6f-5e6c-4d7f-972c-5b2c0c02950f', {id: '14baea6f-5e6c-4d7f-972c-5b2c0c02950f', username: 'admin', first_name: 'admin', last_name: 'admin', is_admin: true, pass: 'admin'}],
         ['827bf9cd-f911-43a0-9e41-fb52c9295e8d', {id: '827bf9cd-f911-43a0-9e41-fb52c9295e8d', username: 'TestUser1', first_name: 'FvTHZDLRdMwLGdAKLfML', last_name: 'ckgMhsOvHJXtmumxgUir', is_admin: false, pass: 'testpw'}],
         ['94a66e6a-edec-4160-a582-ee177f4b0c63', {id: '94a66e6a-edec-4160-a582-ee177f4b0c63', username: 'TestUser2', first_name: 'tYwSHbsHhTzaZjzssGfy', last_name: 'XHFkSHwpruaxizAxLizb', is_admin: false, pass: 'testpw'}],
         ['45e948a9-e9d4-4ac7-b5c7-7b08c64ded20', {id: '45e948a9-e9d4-4ac7-b5c7-7b08c64ded20', username: 'TestUser3', first_name: 'ZqxxJphkRZUmVlmjsuiZ', last_name: 'ljudDmDdeBsNPfAijDnO', is_admin: false, pass: 'testpw'}],
@@ -73,28 +75,278 @@ class MockDatabase {
         ['790fc1f3-d262-41b4-8daa-369cfa487dde', {id: '790fc1f3-d262-41b4-8daa-369cfa487dde', title: 'WuCTLTeTkGEKLxlrXSaA', description: 'PJEHgyglsOFWevqORgLG', members:[]}],
     ]);
 
-    public getUsers() {
-        //shallow copy the map so that sets on the outside don't effect the readonly maps in the db
-        return [...this.users.values()];
-    }
-    public getOperations() {
-        //shallow copy the map so that sets on the outside don't effect the readonly maps in the db
-        return [...this.operations.values()];
-    }
-    public getGroups() {
-        //shallow copy the map so that sets on the outside don't effect the readonly maps in the db
-        return [...this.groups.values()];
-    }
-    public isLoggedIn() {
-        return this.loggedIn;
-    }
-    public login() {
-        this.loggedIn = true;
-    }
-    public logout() {
-        this.loggedIn = false;
+    private readonly operationMembers: Map<string, string[]> = new Map<string, string[]>();
+
+    private readonly permissions: Map<string, Permission[]> = new Map<string, Permission[]>();
+
+    //Permission Functions
+    public getPermissions(id:string):Permission[] {
+      const permissions = this.permissions.get(id);
+      return permissions? permissions : [];
     }
 
+    public setPermissions(id: string, permissions: Permission[]):boolean {
+      if(!this.userExists(id)) {
+        throw new Error();
+      }
+      this.permissions.set(id, permissions);
+      return true;
+    }
 
+    //Login Functions
+    public isLoggedIn():boolean {
+      return this.loggedIn;
+    }
+
+    public login(username: string, password: string): boolean {
+      this.loggedIn = true;
+      const user = this.getUsersWithPasswords().filter((elem) => elem.username === username );
+      
+      if(user.length > 0 && user[0].pass === password) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public logout():void {
+      this.loggedIn = false;
+    }
+
+    //User Functions
+    private validateUser(user: User):boolean {
+      return Boolean(user.username) && Boolean(user.first_name) && Boolean(user.last_name) && Boolean(user.pass) && user.is_admin !== undefined;
+    }
+
+    private getUsersWithPasswords():User[] {
+      //shallow copy the map so that sets on the outside don't effect the readonly maps in the db
+      return [...this.users.values()];
+    }
+    
+    public getUsers():User[] {
+      // remove passwords from the users.
+      return this.getUsersWithPasswords().map((elem) => {return {...elem, pass:''};});
+    }
+
+    public userExists(id: string):boolean {
+      return this.users.has(id);
+    }
+
+    public getUser(id: string):User {
+      const user = this.users.get(id);
+      if(!user) {
+        throw Error();
+      }
+      return user;
+    }
+
+    public addUser(user: User): User {
+      if(!this.getUsers().map((elem) => elem.username).includes(user.username) && !this.validateUser(user)) {
+        throw Error();
+      } else {
+        const userWithId = {...user, id: uuid()};
+        this.users.set(userWithId.id, userWithId);
+        return {...userWithId, pass: ''};
+      }
+    }
+
+    public updateUser(user: User): boolean {
+      if(!this.userExists(user.id) && !this.validateUser(user)) {
+        throw new Error();
+      }
+      this.users.set(user.id, user);
+      return true;
+    }
+
+    public deleteUser(userId: string): boolean {
+      if(!this.userExists(userId)) {
+        throw new Error();
+      }
+      this.users.delete(userId);
+      return true;
+    }
+
+    public updateUserPassword(userId: string, password: string): boolean {
+      if(!this.userExists(userId) && password !== undefined) {
+        throw new Error();
+      }
+      const user = this.users.get(userId);
+      if(user) {
+        this.users.set(userId, {...user, pass: password});
+      }
+      return true;
+    }
+
+    public searchUsers(query: string, limit?: number, offset?: number):User[] {
+      const usersToSearch = this.getUsers().splice(offset? offset:0);
+      const result:User[] = [];
+      let limitCtr = 1;
+      for(const user of usersToSearch) {
+        if(limit && limitCtr > limit) {
+          break;
+        }
+        if(user.username.includes(query) || user.first_name.includes(query) || user.last_name.includes(query)) {
+          result.push({...user});
+          limitCtr = limitCtr + 1;
+        }
+      }
+      return result;
+    }
+
+    //Operation Functions
+    private validateOperation(operation: Operation):boolean{
+      let startBeforeEnd = true;
+
+      if(operation.start && operation.end) {
+        startBeforeEnd = operation.start < operation.end;
+      }
+      return Boolean(operation.title) && startBeforeEnd;
+    }
+
+    public getOperations():Operation[] {
+      //shallow copy the map so that sets on the outside don't effect the readonly maps in the db
+      return [...this.operations.values()];
+    }
+
+    public addOpertion(operation: Operation):Operation {
+      if(!this.validateOperation(operation)) {
+        throw new Error();
+      }
+      const operationWithId = {...operation, id: uuid()};
+      this.operations.set(operationWithId.id, operationWithId);
+      return {...operationWithId};
+    }
+
+    public getOperation(id: string):Operation {
+      const operation = this.operations.get(id);
+      if(!operation) {
+        throw Error();
+      }
+      return operation;
+    }
+
+    public operationExists(id: string): boolean {
+      return this.operations.has(id);
+    }
+
+    public getOperationMembers(id: string): User[] {
+      if(!this.operationExists(id)) {
+        throw new Error();
+      }
+      const members = this.operationMembers.get(id);
+      return members? members.map((elem) => this.getUser(elem)): [];
+    }
+
+    public setOperationMembers(id: string, userIds: string[]):boolean {
+      if(!this.operationExists(id)) {
+        throw new Error();
+      }
+      for(const userId of userIds) {
+        if(!this.userExists(userId)) {
+          throw new Error();
+        }
+      }
+      const groupsWithOp: Group[] = this.getGroups().filter((elem) => elem.operation === id);
+      for(const group of groupsWithOp) {
+        this.updateGroup({...group, members: group.members.filter((elem) => !difference(group.members, userIds).includes(elem))});
+      }
+      this.operationMembers.set(id, userIds);
+      return true;
+    }
+
+    public updateOperation(operation: Operation): boolean {
+      if(!this.operationExists(operation.id) && !this.validateOperation(operation)) {
+        throw new Error();
+      }
+      this.operations.set(operation.id, operation);
+      return true;
+    }
+
+    public searchOperations(query: string, limit?: number, offset?: number):Operation[] {
+      const operationsToSearch = this.getOperations().splice(offset? offset:0);
+      const result:Operation[] = [];
+      let limitCtr = 1;
+      for(const operation of operationsToSearch) {
+        if(limit && limitCtr > limit) {
+          break;
+        }
+        if(operation.title.includes(query) || operation.description?.includes(query)) {
+          result.push({...operation});
+          limitCtr = limitCtr + 1;
+        }
+      }
+      return result;
+    }
+
+    //Group Functions
+    private validateGroup(group: Group): boolean {
+      let membersExist = true;
+      let membersOfOperation = true;
+      let operationMembers;
+
+      if(group.operation) {
+        operationMembers = this.getOperationMembers(group.operation);
+      }
+
+      if(group.members) {
+        //Ensure members exist as users
+        for(const member of group.members) {
+          if(!this.userExists(member)) {
+            membersExist = false;
+          }
+          if(group.operation) {
+            //Ensure members are also members of the associated operation
+            if(operationMembers && !operationMembers.map((elem) => elem.id).includes(member)) {
+              membersOfOperation = false;
+            }
+          }
+        }
+      }
+
+      return Boolean(group.title) && membersExist && membersOfOperation;
+    }
+
+    public getGroups(): Group[] {
+      //shallow copy the map so that sets on the outside don't effect the readonly maps in the db
+      return [...this.groups.values()];
+    }
+
+    public getGroup(id: string): Group {
+      const group = this.groups.get(id);
+      if(!group) {
+        throw Error();
+      }
+      return group;
+    }
+
+    public groupExists(id: string): boolean {
+      return this.groups.has(id);
+    }
+
+    public addGroup(group: Group):Group {
+      if(!this.validateGroup(group)) {
+        throw new Error();
+      }
+
+      const groupWithId = {...group, id: uuid()};
+      this.groups.set(groupWithId.id, groupWithId);
+      return {...groupWithId};
+    }
+
+    public updateGroup(group: Group):boolean {
+      if(!this.groupExists(group.id) && !this.validateGroup(group)) {
+        throw new Error();
+      }
+      this.groups.set(group.id, group);
+      return true;
+    }
+
+    public deleteGroup(groupId: string): boolean {
+      if(!this.groupExists(groupId)) {
+        throw new Error();
+      }
+      this.groups.delete(groupId);
+      return true;
+    }
 }
 export const db = new MockDatabase();
