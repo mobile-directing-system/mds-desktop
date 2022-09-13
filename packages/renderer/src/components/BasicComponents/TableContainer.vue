@@ -1,6 +1,9 @@
 <template>
   <div class=" table-fixed place-items-center mr-10">
-    <table class=" border-spacing-2 w-full rounded-md overflow-hidden m-4">
+    <table 
+      v-bind="$attrs"
+      class=" border-spacing-2 w-full rounded-md overflow-hidden m-4"
+    >
       <!-- Table Header -->
       <thead class=" bg-blue-700 font-bold text-white text-l text-left text-lg">
         <!-- User-defined Table Headers -->
@@ -19,6 +22,16 @@
     </table>
   </div>
 </template>
+
+<script lang="ts">
+  /** script tag to disable default attribute inheritance
+   * so that v-bind="$attrs" works. Needs an extra script tag
+   * as it can't be done in script setup tags
+   */
+  export default {
+    inheritAttrs: false,
+  };
+</script>
 
 <script lang="ts" setup>
   /**
