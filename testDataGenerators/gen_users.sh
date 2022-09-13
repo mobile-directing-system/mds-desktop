@@ -1,5 +1,6 @@
 #!/usr/bin/zsh
-echo "['$(cat /proc/sys/kernel/random/uuid)', {id: '$(cat /proc/sys/kernel/random/uuid)', username: 'admin', first_name: 'admin', last_name: 'admin', is_admin: true, pass: 'admin'}],"
+UUID="$(cat /proc/sys/kernel/random/uuid)"
+echo "['$UUID', {id: '$UUID', username: 'admin', first_name: 'admin', last_name: 'admin', is_admin: true, pass: 'admin'}],"
 for NUM in {1..$1}
 do
   UUID="$(cat /proc/sys/kernel/random/uuid)"
