@@ -1,5 +1,8 @@
 <template>
-  <div class=" bg-white ml-4  my-10">
+  <div
+    id="update-user-form"
+    class=" bg-white ml-4  my-10"
+  >
     <header class=" max-w-lg pb-10">
       <h1 class="  text-left text-4xl font-bold text-black">
         User Information
@@ -10,7 +13,7 @@
         <!------- Username  ------>
         <div class="mb-6">
           <FormInput
-            id="username"
+            id="update-user-username"
             v-model="updatedUserName"
             label="Username"
             required
@@ -19,7 +22,7 @@
         <!------- first_name  ------>
         <div class="mb-6">
           <FormInput
-            id="firstName"
+            id="update-user-firstName"
             v-model="updatedUserFirstName"
             label="Firstname"
             required
@@ -28,7 +31,7 @@
         <!------- last_name  ------>
         <div class="mb-6">
           <FormInput
-            id="lastName"
+            id="update-user-lastName"
             v-model="updatedUserLastName"
             label="Lastname"
             required
@@ -36,14 +39,16 @@
         </div>
         <div class="flex justify-between">
           <!-- Update User Button -->
-          <NormalButton 
+          <NormalButton
             v-if="updatedUserFirstName != '' && updatedUserName != '' && updatedUserLastName != ''"
+            id="update-user-update-button"
             @click.prevent="editUser()"
           >
             Update User
           </NormalButton>
           <!-- Delete User Button -->
           <NormalButton
+            id="update-user-delete-button"
             class="ml-auto"
             @click.prevent="deleteUser()"
           >
@@ -53,6 +58,7 @@
         <div class=" pt-4 flex justify-between">
           <!-- Cancel Button -->
           <NormalButton
+            id="update-user-cancel-button"
             class=" ml-auto"
             @click.prevent="router.push('/user')"
           >

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="all-users">
     <div class="grid bg-white  rounded-lg  my-10">
       <div class="flex justify-between">
         <!-- Header -->
@@ -8,6 +8,7 @@
         </h1>
         <!-- Add User Button -->
         <NormalButton
+          id="open-create-user-button"
           class=" ml-auto mr-6"
           @click.prevent="router.push('/create-new-user')"
         >
@@ -16,6 +17,7 @@
       </div>
       <!-- All Users Table -->
       <TableContainer
+        id="users-table"
         :contents="userPage().values()"
         id-identifier="id"
       >
@@ -34,7 +36,7 @@
         </template>
 
         <template #tableRow="{rowData}:{rowData:User}">
-          <TableRow 
+          <TableRow
             :row-data="rowData"
             :num-of-cols="3"
             :identifier="rowData.id"
@@ -73,6 +75,7 @@
   import {useRouter} from 'vue-router';
    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type { User }  from '../../../types';
+  import { OrderBy, OrderDir } from '../constants';
 
   const userState = useUserState();
   const userPage = computed(() => userState.getters.page);
@@ -85,7 +88,7 @@
    * @param offset offset beginning at which users are retrieved
    */
   async function updatePage(amount: number, offset: number) {
-    await userState.dispatch('retrieveUsers', {amount, offset});
+    await userState.dispatch('retrieveUsers', {amount, offset, orderBy: OrderBy.UserUsername, orderDir: OrderDir.Ascending});
   }
 
   /**
