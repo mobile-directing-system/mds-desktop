@@ -134,7 +134,7 @@
           <SearchableSelect
             v-model="newChannelTypeValue"
             mode="single"
-            :options="['direct', 'email','forward-to-group','forward-to-user','phone-call','push','radio']"
+            :options="['in-app-notification']"
             :placeholder="'ChannelType'"
             label="Channel Type"
             :filter-results="true"
@@ -155,7 +155,7 @@
             @open="handleUserSelectionInput('')"
           />
           <FormInput
-            v-if="(newChannelTypeValue != 'forward-to-user') && (newChannelTypeValue != '') && (newChannelTypeValue != 'forward-to-group')"
+            v-if="(newChannelTypeValue != 'forward-to-user') && (newChannelTypeValue != '') && (newChannelTypeValue != 'forward-to-group') && (newChannelTypeValue != 'in-app-notification') && (newChannelTypeValue != '')"
             id="details"
             v-model="newChannelDetailsValue"
             div-class="w-50"
@@ -296,149 +296,151 @@
   </div>
 </template>
 <script lang="ts" setup>
-    import { computed, onMounted, ref, watch } from 'vue';
-    import NormalButton from '../components/BasicComponents/NormalButton.vue';
-    import TableContainer from '../components/BasicComponents/TableContainer.vue';
-    import TableRow from '../components/BasicComponents/TableRow.vue';
-    import TableHeader from '../components/BasicComponents/TableHeader.vue';
-    import {useAddressbookState, useUserState, useChannelState, useGroupState, useOperationsState} from '../store';
-    import {useRoute, useRouter} from 'vue-router';
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    import type { AddressbookEntry, Channel, ChannelDetail, ChannelType, Group, User} from '../../../types';
-    import FloatingModal from '../components/BasicComponents/FloatingModal.vue';
-    import FormInput from '../components/BasicComponents/FormInput.vue';
-    import SearchableSelect from '../components/BasicComponents/SearchableSelect.vue';
+  import { computed, onMounted, ref, watch } from 'vue';
+  import NormalButton from '../components/BasicComponents/NormalButton.vue';
+  import TableContainer from '../components/BasicComponents/TableContainer.vue';
+  import TableRow from '../components/BasicComponents/TableRow.vue';
+  import TableHeader from '../components/BasicComponents/TableHeader.vue';
+  import {useAddressbookState, useUserState, useChannelState, useGroupState, useOperationsState} from '../store';
+  import {useRoute, useRouter} from 'vue-router';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  import type { AddressbookEntry, Channel, ChannelDetail, ChannelType, Group, User} from '../../../types';
+  import FloatingModal from '../components/BasicComponents/FloatingModal.vue';
+  import FormInput from '../components/BasicComponents/FormInput.vue';
+  import SearchableSelect from '../components/BasicComponents/SearchableSelect.vue';
 
-    onMounted(() => {
-      console.log(selectedAddressbookEntryId as string);
-      channelState.dispatch('retrieveChannels', selectedAddressbookEntryId as string);} );
+  onMounted(() => {
+    console.log(selectedAddressbookEntryId as string);
+    channelState.dispatch('retrieveChannels', selectedAddressbookEntryId as string);} );
 
-    const route = useRoute();
-    const router = useRouter();
-    const addressbookState = useAddressbookState();
-    const channelState = useChannelState();
-    const groupState = useGroupState();
-    const operationsState = useOperationsState();
-    const userState = useUserState();
-    const showModalNewChannel = ref(false);
-    const showModalEditEntry = ref(false);
+  const route = useRoute();
+  const router = useRouter();
+  const addressbookState = useAddressbookState();
+  const channelState = useChannelState();
+  const groupState = useGroupState();
+  const operationsState = useOperationsState();
+  const userState = useUserState();
+  const showModalNewChannel = ref(false);
+  const showModalEditEntry = ref(false);
 
-    const selectedAddressbookEntryId = route.params.addressbookEntryID;
-    const entries = computed(() => addressbookState.getters.entries);
-    const selectedAddressbookEntry = entries.value().get(selectedAddressbookEntryId as string);
-    const channels = computed(() => channelState.getters.channels);
-    const groups = computed(() => groupState.getters.groups);
-    const users = computed(() => userState.getters.users);
-    const usersSearchResults = computed(() => userState.getters.searchResults);
-    const usersSearchResultsArray = computed(() => {
-        return InterableIteratorToArray(usersSearchResults.value().values());
-    });
-    const operations = computed(() => operationsState.getters.operations);
+  const selectedAddressbookEntryId = route.params.addressbookEntryID;
+  const entries = computed(() => addressbookState.getters.entries);
+  const selectedAddressbookEntry = entries.value().get(selectedAddressbookEntryId as string);
+  const channels = computed(() => channelState.getters.channels);
+  const groups = computed(() => groupState.getters.groups);
+  const users = computed(() => userState.getters.users);
+  const usersSearchResults = computed(() => userState.getters.searchResults);
+  const usersSearchResultsArray = computed(() => {
+      return InterableIteratorToArray(usersSearchResults.value().values());
+  });
+  const operations = computed(() => operationsState.getters.operations);
 
-    const updatedLabel = ref('');
-    const updatedDescription = ref('');
-    const updatedUser = ref('');
-    const updatedOperation = ref('');
-    const channelButtonText = ref('');
+  const updatedLabel = ref('');
+  const updatedDescription = ref('');
+  const updatedUser = ref('');
+  const updatedOperation = ref('');
+  const channelButtonText = ref('');
 
-    const newChannelLabel = ref('');
-    var newChannelType:ChannelType|undefined;
-    const newChannelTypeValue = ref('');
-    const newChannelPrio = ref(0);
-    const newChannelMinImprotance = ref(0);
-    var newChannelDetails:ChannelDetail;
-    const newChannelTimeout = ref(0);
-    const newChannelDetailsValue = ref('');
+  const newChannelLabel = ref('');
+  var newChannelType:ChannelType|undefined;
+  const newChannelTypeValue = ref('');
+  const newChannelPrio = ref(0);
+  const newChannelMinImprotance = ref(0);
+  var newChannelDetails:ChannelDetail;
+  const newChannelTimeout = ref(0);
+  const newChannelDetailsValue = ref('');
 
-    const selectedChannelID = ref('');
-    const currentChannel = ref();
+  const selectedChannelID = ref('');
+  const currentChannel = ref();
 
-    watch(selectedChannelID, (curVal) => {
-      if(curVal){
-        currentChannel.value = channels.value().get(curVal);
+  watch(selectedChannelID, (curVal) => {
+    if(curVal){
+      currentChannel.value = channels.value().get(curVal);
+    }
+  });
+  if( newChannelTypeValue.value == 'forward-to-user'){
+    watch(newChannelDetailsValue, (curVal) => {
+      if(curVal) {
+        userState.dispatch('retrieveUserById', curVal);
       }
     });
-    if( newChannelTypeValue.value == 'forward-to-user'){
-      watch(newChannelDetailsValue, (curVal) => {
-        if(curVal) {
-          userState.dispatch('retrieveUserById', curVal);
-        }
-      });
-    }
-   
+  }
+  
 
-    if(selectedAddressbookEntry) {
-        updatedLabel.value = selectedAddressbookEntry.label;
-        updatedDescription.value = selectedAddressbookEntry.description;
-        updatedUser.value = selectedAddressbookEntry.user ? selectedAddressbookEntry.user : '';
-        updatedOperation.value = selectedAddressbookEntry.operation ? selectedAddressbookEntry.operation : '';
+  if(selectedAddressbookEntry) {
+      updatedLabel.value = selectedAddressbookEntry.label;
+      updatedDescription.value = selectedAddressbookEntry.description;
+      updatedUser.value = selectedAddressbookEntry.user ? selectedAddressbookEntry.user : '';
+      updatedOperation.value = selectedAddressbookEntry.operation ? selectedAddressbookEntry.operation : '';
+  }
+  function getChannelDetail(channel: Channel):string{
+    switch(channel.type){
+      case 'email':
+          return channel.details.email ? channel.details.email : '';
+      case 'direct' : 
+          return channel.details.info ? channel.details.info : '';
+      case 'forward-to-group' : 
+          if(channel.details.forward_to_group){
+              const group = groups.value().get(channel.details.forward_to_group);
+              if(group){
+                  return group.title;
+              }
+          }
+          return '';
+      case 'forward-to-user' : 
+          if(channel.details.forward_to_user){
+              const user = users.value().get(channel.details.forward_to_user);
+              if(user){
+                  return user.first_name + ' ' + user.last_name;
+              }
+          }
+          return '';
+      case 'phone-call' : 
+          return channel.details.phone ? channel.details.phone : '';
+      case 'radio' : 
+          return channel.details.info ? channel.details.info : '';
+      default:
+          return '';
     }
-    function getChannelDetail(channel: Channel):string{
-      switch(channel.type){
-        case 'email':
-            return channel.details.email ? channel.details.email : '';
-        case 'direct' : 
-            return channel.details.info ? channel.details.info : '';
-        case 'forward-to-group' : 
-            if(channel.details.forward_to_group){
-                const group = groups.value().get(channel.details.forward_to_group);
-                if(group){
-                    return group.title;
-                }
-            }
-            return '';
-        case 'forward-to-user' : 
-            if(channel.details.forward_to_user){
-                const user = users.value().get(channel.details.forward_to_user);
-                if(user){
-                    return user.first_name + ' ' + user.last_name;
-                }
-            }
-            return '';
-        case 'phone-call' : 
-            return channel.details.phone ? channel.details.phone : '';
-        case 'radio' : 
-            return channel.details.info ? channel.details.info : '';
-        default:
-            return '';
+  }
+  async function toggleShowModal() {
+      showModalNewChannel.value = false;        
+      resetValues();
+  }
+  async function createNewChannel() {
+      newChannelType = newChannelTypeValue.value as ChannelType;
+      setChannelDetailsAccordinly();
+      if(newChannelType != undefined){
+          const newChannel:Channel = {
+              id: '',
+              entry : selectedAddressbookEntryId as string,
+              label : newChannelLabel.value,
+              priority : Number(newChannelPrio.value),
+              min_importance : Number(newChannelMinImprotance.value),
+              timeout : Number(newChannelTimeout.value),
+              type : newChannelType,
+              details : newChannelDetails,
+          };
+          var channelsList:Channel[] = [... channels.value().values(), newChannel];
+          channelState.dispatch('setChannels', {entryId: (selectedAddressbookEntryId as string), channels: channelsList});
+          channelState.dispatch('retrieveChannels', selectedAddressbookEntryId as string);
+          console.log(channels.value().values());
+          showModalNewChannel.value = false; 
+          resetValues();
       }
-    }
-    async function toggleShowModal() {
-        showModalNewChannel.value = false;        
-        resetValues();
-    }
-    async function createNewChannel() {
-        newChannelType = newChannelTypeValue.value as ChannelType;
-        setChannelDetailsAccordinly();
-        if(newChannelDetails != undefined && newChannelType != undefined){
-            const newChannel:Channel = {
-                id: '',
-                entry : selectedAddressbookEntryId as string,
-                label : newChannelLabel.value,
-                priority : Number(newChannelPrio.value),
-                min_importance : Number(newChannelMinImprotance.value),
-                timeout : Number(newChannelTimeout.value),
-                type : newChannelType,
-                details : newChannelDetails,
-            };
-            var channelsList:Channel[] = [... channels.value().values(), newChannel];
-            channelState.dispatch('setChannels', {entryId: (selectedAddressbookEntryId as string), channels: channelsList});
-            showModalNewChannel.value = false; 
-            resetValues();
-        }
     }
     function InterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {
-    const arr: T[] = [];
-    // eslint-disable-next-line no-constant-condition
-    while(true) {
-      const next = iter.next();
-      if(next.done) {
-        break;
+      const arr: T[] = [];
+      // eslint-disable-next-line no-constant-condition
+      while(true) {
+        const next = iter.next();
+        if(next.done) {
+          break;
+        }
+        arr.push(next.value);
       }
-      arr.push(next.value);
+      return arr;
     }
-    return arr;
-  }
   function resetValues() {
     newChannelType = undefined;
     newChannelTypeValue.value = '';
