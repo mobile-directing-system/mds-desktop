@@ -1,5 +1,5 @@
 import type { IpcMainInvokeEvent } from 'electron';
-import type { Permissions, ErrorResult } from '../../../types';
+import type { Permission, ErrorResult } from '../../../types';
 import { retrievePermissions, updatePermissions } from '/@/backend';
 
 /**
@@ -8,7 +8,7 @@ import { retrievePermissions, updatePermissions } from '/@/backend';
  * @param userId id of the user for which to retrieve the permissions
  * @returns the permissions for the user in an error result container
  */
-export async function retrievePermissionsHandler(_:IpcMainInvokeEvent, userId: string):Promise<ErrorResult<Permissions>> {
+export async function retrievePermissionsHandler(_:IpcMainInvokeEvent, userId: string):Promise<ErrorResult<Permission[]>> {
   return retrievePermissions(userId);
 }
 
@@ -19,6 +19,6 @@ export async function retrievePermissionsHandler(_:IpcMainInvokeEvent, userId: s
  * @param permissions the permissions which should be set
  * @returns boolean indicating if the update of the permissions was successful in an error result container 
  */
-export async function updatePermissionsHandler(_:IpcMainInvokeEvent, userId: string, permissions: Permissions):Promise<ErrorResult<boolean>> {
+export async function updatePermissionsHandler(_:IpcMainInvokeEvent, userId: string, permissions: Permission[]):Promise<ErrorResult<boolean>> {
   return updatePermissions(userId, permissions);
 }

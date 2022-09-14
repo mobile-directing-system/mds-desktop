@@ -8,6 +8,6 @@ interface ErrorResult<T> {
 
 export type { ErrorResult };
 export type { User } from './User';
-export type { Permission, Permissions } from './Permissions';
+export type { Permission } from './Permissions';
 export type { Operation } from './Operation';
 export type { Group } from './Group.d';
