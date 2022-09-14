@@ -56,6 +56,7 @@
       </TableContainer>
       <!-- Pagination Bar -->
       <PaginationBar
+        id="users-table-pagination"
         :total-retrievable-entities="totalUserAmount()"
         :page-size="5"
         @update-page="updatePage($event.amount, $event.offset)"

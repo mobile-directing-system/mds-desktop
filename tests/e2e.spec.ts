@@ -104,6 +104,204 @@ test('Check leaving update user form', async() => {
   await leaveUpdateUserForm(page);
 });
 
+test('Check if pagination on the users page works', async () => {
+  const page = await electronApp.firstWindow();
+  await navigateToUsersView(page);
+
+  //check if pagination buttons are present
+  const previousButton = await page.$('#users-table-pagination-previous-button', {strict: true});
+  expect(previousButton, 'Can\'t find pagination previous button').toBeTruthy();
+  const nextButton = await page.$('#users-table-pagination-next-button', {strict: true});
+  expect(nextButton, 'Can\'t find pagination next button').toBeTruthy();
+
+  //check if pagination page number is present
+  const pageNumber = await page.$('#users-table-pagination-page-number', {strict: true});
+  expect(pageNumber, 'Can\'t find pagination page number').toBeTruthy();
+
+  //check if page number is one
+  expect(await pageNumber?.innerText(), 'Pagination page number is not one').toSatisfy((elem: string) => elem.startsWith('1'));
+
+  //check if previous button is disabled
+  expect(await previousButton?.getAttribute('aria-disabled'), ('Pagination previous button is not disabled')).toBe('true');
+
+  //check if next button is enabled
+  expect(await nextButton?.getAttribute('aria-disabled'), ('Pagination previous button is not enabled')).toBe('false');
+
+  //cache usernames of the first page
+  let usernames1:string[] = [];
+  const usersTableEntries1 = await page.$$('#users-table >> tbody >> tr');
+  for(const entry of usersTableEntries1) {
+    const username = await (await entry.$('td:first-of-type'))?.innerText();
+    if(username) {
+      usernames1 = [...usernames1, username];
+    }
+  }
+
+  //open next users table page
+  await nextButton?.click();
+
+  //check if the page number is two
+  expect(await pageNumber?.innerText(), 'Pagination page number is not two').toSatisfy((elem: string) => elem.startsWith('2'));
+
+  //check that the usernames of the second page are not the same as on the first page & cache them
+  let usernames2:string[] = [];
+  const usersTableEntries2 = await page.$$('#users-table >> tbody >> tr');
+  for(const entry of usersTableEntries2) {
+    const username = await (await entry.$('td:first-of-type'))?.innerText();
+    if(username) {
+      expect(usernames1.includes(username)).toBe(false);
+    }
+    if(username) {
+      usernames2 = [...usernames2, username];
+    }
+  }
+
+  //open next users table page
+  await nextButton?.click();
+
+  //check if the page number is three
+  expect(await pageNumber?.innerText(), 'Pagination page number is not three').toSatisfy((elem: string) => elem.startsWith('3'));
+
+  //check that the usernames of the third page are not the same as on the second page & cache them
+  let usernames3:string[] = [];
+  const usersTableEntries3 = await page.$$('#users-table >> tbody >> tr');
+  for(const entry of usersTableEntries3) {
+    const username = await (await entry.$('td:first-of-type'))?.innerText();
+    if(username) {
+      expect(usernames2.includes(username)).toBe(false);
+    }
+    if(username) {
+      usernames3 = [...usernames3, username];
+    }
+  }
+
+  //open next users table page
+  await nextButton?.click();
+
+  //check if the page number is four
+  expect(await pageNumber?.innerText(), 'Pagination page number is not four').toSatisfy((elem: string) => elem.startsWith('4'));
+
+  //check that the usernames of the fourth page are not the same as on the third page & cache them
+  let usernames4:string[] = [];
+  const usersTableEntries4 = await page.$$('#users-table >> tbody >> tr');
+  for(const entry of usersTableEntries4) {
+    const username = await (await entry.$('td:first-of-type'))?.innerText();
+    if(username) {
+      expect(usernames3.includes(username)).toBe(false);
+    }
+    if(username) {
+      usernames4 = [...usernames4, username];
+    }
+  }
+
+  //open next users table page
+  await nextButton?.click();
+
+  //check if the page number is five
+  expect(await pageNumber?.innerText(), 'Pagination page number is not five').toSatisfy((elem: string) => elem.startsWith('5'));
+
+  //check that the usernames of the fifth page are not the same as on the fourth page
+  const usersTableEntries5 = await page.$$('#users-table >> tbody >> tr');
+  for(const entry of usersTableEntries5) {
+    const username = await (await entry.$('td:first-of-type'))?.innerText();
+    if(username) {
+      expect(usernames4.includes(username)).toBe(false);
+    }
+  }
+
+  //check that next button is disabled
+  expect(await nextButton?.getAttribute('aria-disabled'), ('Pagination previous button is not disabled')).toBe('true');
+
+  //check that previous button is enabled
+  expect(await previousButton?.getAttribute('aria-disabled'), ('Pagination previous button is not enabled')).toBe('false');
+
+  //navigate back and check if content on each page is the same
+  await previousButton?.click();
+
+  //check if the page number is four
+  expect(await pageNumber?.innerText(), 'Pagination page number is not four').toSatisfy((elem: string) => elem.startsWith('4'));
+
+  const usersTableEntries6 = await page.$$('#users-table >> tbody >> tr');
+  for(const entry of usersTableEntries6) {
+    const username = await (await entry.$('td:first-of-type'))?.innerText();
+    if(username) {
+      expect(usernames4.includes(username)).toBe(true);
+    }
+  }
+
+  await previousButton?.click();
+
+  //check if the page number is three
+  expect(await pageNumber?.innerText(), 'Pagination page number is not three').toSatisfy((elem: string) => elem.startsWith('3'));
+
+  const usersTableEntries7 = await page.$$('#users-table >> tbody >> tr');
+  for(const entry of usersTableEntries7) {
+    const username = await (await entry.$('td:first-of-type'))?.innerText();
+    if(username) {
+      expect(usernames3.includes(username)).toBe(true);
+    }
+  }
+
+  await previousButton?.click();
+
+  //check if the page number is two
+  expect(await pageNumber?.innerText(), 'Pagination page number is not two').toSatisfy((elem: string) => elem.startsWith('2'));
+
+  const usersTableEntries8 = await page.$$('#users-table >> tbody >> tr');
+  for(const entry of usersTableEntries8) {
+    const username = await (await entry.$('td:first-of-type'))?.innerText();
+    if(username) {
+      expect(usernames2.includes(username)).toBe(true);
+    }
+  }
+
+  await previousButton?.click();
+
+  //check if the page number is one 
+  expect(await pageNumber?.innerText(), 'Pagination page number is not one').toSatisfy((elem: string) => elem.startsWith('1'));
+
+  const usersTableEntries9 = await page.$$('#users-table >> tbody >> tr');
+  for(const entry of usersTableEntries9) {
+    const username = await (await entry.$('td:first-of-type'))?.innerText();
+    if(username) {
+      expect(usernames1.includes(username)).toBe(true);
+    }
+  }
+
+  //check if previous button is disabled
+  expect(await previousButton?.getAttribute('aria-disabled'), ('Pagination previous button is not disabled')).toBe('true');
+
+  //check if next button is enabled
+  expect(await nextButton?.getAttribute('aria-disabled'), ('Pagination previous button is not enabled')).toBe('false');
+
+});
+
+test('Check if table entries in users table are present and not empty', async () => {
+  const page = await electronApp.firstWindow();
+  await navigateToUsersView(page);
+  
+  const usersTableHeaders = await page.$$('#users-table >> thead');
+  const usersTableEntries = await page.$$('#users-table >> tbody >> tr');
+
+  //Check that headers are present
+  for(const header of usersTableHeaders) {
+    expect(await header.$('th:has-text("Username")', {strict: true}), 'Can\'t find Table Header \'Username\'').toBeTruthy();
+    expect(await header.$('th:has-text("First name")', {strict: true}), 'Can\'t find Table Header \'First name\'').toBeTruthy();
+    expect(await header.$('th:has-text("Last name")', {strict: true}), 'Can\'t find Table Header \'Last name\'').toBeTruthy();
+  }
+
+  //Check that each row has three td's and they are not empty
+  for(const entry of usersTableEntries) {
+    const tds = await entry.$$('td');
+    expect(tds.length, 'User table entry does not have three columns').toBe(3);
+
+    for(const td of tds) {
+      expect(await td.innerText()).toBeTruthy();
+    }
+  }
+
+});
+
 test('Create user and check if creation in users table', async () => {
   const page = await electronApp.firstWindow();
 
