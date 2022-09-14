@@ -21,6 +21,10 @@ export async function retrieveAddressbookEntry(entryId: string):Promise<ErrorRes
   return ipcRenderer.invoke('retrieveAddressbookEntry', entryId);
 }
 
+export async function searchEntries(query: string, limit?: number, offset?: number|undefined):Promise<ErrorResult<AddressbookEntry[]>>{
+  return ipcRenderer.invoke('searchAddressbookEntryByQuery', query, limit, offset);
+}
+
 export async function setChannels(entryId: string, channels :Channels):Promise<ErrorResult<boolean>> {
     return ipcRenderer.invoke('setChannels', entryId, channels);
 }

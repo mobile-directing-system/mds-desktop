@@ -27,6 +27,7 @@ export { updateAddressbookEntry} from './addressbook';
 export { deleteAddressbookEntry} from './addressbook';
 export { retrieveAddressbookEntries} from './addressbook';
 export { retrieveAddressbookEntry} from './addressbook';
+export {searchEntries} from './addressbook';
 export { setChannels} from './addressbook';
 export { retrieveChannels} from './addressbook';
 export { createUser, updateUser, updateUserPassword, deleteUser, retrieveUsers, retrieveUser, searchUsers } from './users';

@@ -122,6 +122,30 @@ export async function retrieveAddressbookEntry(entryId:string):Promise<ErrorResu
     }
 }
 
+export async function searchAddressbookEntryByQuery(query: string, limit?: number, offset?: number):Promise<ErrorResult<AddressbookEntry[]>> {
+    try {
+        //explicit use of != instead of !== as a != null is equivalent to a !== null | a !== undefined
+        const response = await Backend.instance.get(`${endpoint}/search?${(query != null)? `&q=${query}` : ''}${(offset != null)? `&offset=${offset}` : ''}${(limit != null)? `&limit=${limit}` : ''}`);
+        return {res: response.data.hits, total: response.data.estimated_total_hits , error: false};
+    } catch(error) {
+        const axError: AxiosError = error as AxiosError;
+        printAxiosError(axError);
+        if(axError.response) {
+          if(axError.response.status === 401) {
+            return {error: true, errorMsg: 'not authenticated'};
+          } else if(axError.response.status === 403) {
+            return {error: true, errorMsg: 'missing permissions for searching entries'};
+          } else {
+            return {error: true, errorMsg: 'response error when searching entries'};
+          }
+        } else if(axError.request) {
+          return {error: true, errorMsg: 'request error when searching entries'};
+        } else {
+          return {error: true, errorMsg: 'error when searching entries'};
+        }
+    }
+}
+
 export async function setChannels(entryId: string, channels:Channels):Promise<ErrorResult<boolean>> {
     try{
         const response = await Backend.instance.put(`${endpoint}/${entryId}/${channelsEndpointExtension}`, channels.map((elem) => elem.id === '' ?  {...elem, id:undefined}: elem));

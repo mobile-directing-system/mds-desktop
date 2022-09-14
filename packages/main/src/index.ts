@@ -1,7 +1,7 @@
 import { app, ipcMain } from 'electron';
 import '/@/security-restrictions';
 import { restoreOrCreateWindow } from '/@/windows/mainWindow';
-import { loginHandler, logoutHandler, createUserHandler, deleteUserHandler, retrieveUserHandler, retrieveUsersHandler, searchUsersHandler, updateUserHandler, updateUserPasswordHandler, retrievePermissionsHandler, updatePermissionsHandler, createOperationHandler, updateOperationHandler, retrieveOperationHandler, retrieveOperationsHandler, searchOperationsHandler, retrieveOperationMembersHandler, updateOperationMembersHandler, createGroupHandler, updateGroupHandler, deleteGroupHandler, retrieveGroupHandler, retrieveGroupsHandler, retrieveAddressbookEntriesHandler, deleteAddressbookEntryHandler, updateAddressbookEntryHandler, createAddressbookEntryHandler, retrieveAddressbookEntryHandler, retrieveChannlesHandler, setChannelsHandler} from '/@/ipcHandlers';
+import { loginHandler, logoutHandler, createUserHandler, deleteUserHandler, retrieveUserHandler, retrieveUsersHandler, searchUsersHandler, updateUserHandler, updateUserPasswordHandler, retrievePermissionsHandler, updatePermissionsHandler, createOperationHandler, updateOperationHandler, retrieveOperationHandler, retrieveOperationsHandler, searchOperationsHandler, retrieveOperationMembersHandler, updateOperationMembersHandler, createGroupHandler, updateGroupHandler, deleteGroupHandler, retrieveGroupHandler, retrieveGroupsHandler, retrieveAddressbookEntriesHandler, deleteAddressbookEntryHandler, updateAddressbookEntryHandler, createAddressbookEntryHandler, retrieveAddressbookEntryHandler, retrieveChannlesHandler, setChannelsHandler, searchAddressbookEntryByQueryHandler} from '/@/ipcHandlers';
 /**
  * Prevent multiple instances
  */
@@ -54,6 +54,7 @@ app.whenReady().then(() => {
   ipcMain.handle('deleteAddressbookEntry', deleteAddressbookEntryHandler);
   ipcMain.handle('retrieveAddressbookEntry', retrieveAddressbookEntryHandler);
   ipcMain.handle('retrieveAddressbookEntries', retrieveAddressbookEntriesHandler);
+  ipcMain.handle('searchAddressbookEntryByQuery', searchAddressbookEntryByQueryHandler);
 
   ipcMain.handle('retrieveChannels', retrieveChannlesHandler);
   ipcMain.handle('setChannels', setChannelsHandler);

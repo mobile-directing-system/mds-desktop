@@ -1,5 +1,5 @@
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
-import { createAddressbookEntry, updateAddressbookEntry, deleteAddressbookEntry, retrieveAddressbookEntries, retrieveAddressbookEntry} from '#preload';
+import { createAddressbookEntry, updateAddressbookEntry, deleteAddressbookEntry, retrieveAddressbookEntries, retrieveAddressbookEntry, searchEntries} from '#preload';
 import type { AddressbookEntry,  ErrorResult } from '../../../../types';
 import type { Context } from 'vuex-smart-module';
 import type { Store } from 'vuex';
@@ -11,6 +11,7 @@ import { errorState, handleErrors } from './ErrorState';
 class AddressbookState {
     entries: Map<string, AddressbookEntry> = new Map<string, AddressbookEntry>();
     page: Map<string, AddressbookEntry> = new Map<string, AddressbookEntry>();
+    searchResult: Map<string, AddressbookEntry> = new Map<string, AddressbookEntry>();
     total = 0;
 }
 
@@ -33,6 +34,11 @@ class AddressbookStateGetters extends Getters<AddressbookState> {
             return this.state.total;
         };
     }
+    get searchResults() {
+        return () => {
+          return this.state.searchResult;
+        };
+    }
 }
 
 /**
@@ -53,6 +59,10 @@ class AddressbookStateMutations extends Mutations<AddressbookState> {
     }
     addOrUpdateEntry(entry: AddressbookEntry){
         this.state.entries.set(entry.id, entry);
+    }
+    setSearchResult(entries: AddressbookEntry[]){
+        this.state.searchResult.clear;
+        entries.forEach((entry) => this.state.searchResult.set(entry.id, entry));
     }
     setTotal(total: number) {
         this.state.total = total;
@@ -115,6 +125,15 @@ class AddressbookStateActions extends Actions<AddressbookState, AddressbookState
             this.mutations.addOrUpdateEntry(retrievedEntry.res);
         } else {
             handleErrors(retrievedEntry.errorMsg, this.errorState);
+        }
+    }
+    async searchEntryByQuery({query, limit, offset}:{query: string, limit?: number, offset?: number|undefined}) {
+        const searchResult: ErrorResult<AddressbookEntry[]> = await searchEntries(query, limit, offset);
+        if(searchResult.res && !searchResult.error) {
+          this.mutations.setSearchResult(searchResult.res);
+          this.mutations.addOrUpdateEntries(searchResult.res);
+        } else {
+          handleErrors(searchResult.errorMsg, this.errorState);
         }
     }
 }
