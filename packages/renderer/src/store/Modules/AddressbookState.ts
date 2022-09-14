@@ -84,8 +84,10 @@ class AddressbookStateActions extends Actions<AddressbookState, AddressbookState
         }
     }
     async updateEntries(entry: AddressbookEntry) {
+
         const updateEntry:ErrorResult<boolean> = await updateAddressbookEntry(entry);
-        if(updateEntry.res && !updateEntry.error){
+        console.log(updateEntry);
+        if(!updateEntry.error){
             this.actions.retrieveEntryById(entry.id);
         } else {
             handleErrors(updateEntry.errorMsg, this.errorState);

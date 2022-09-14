@@ -365,13 +365,11 @@
       }
     });
   }
-  
-
   if(selectedAddressbookEntry) {
-      updatedLabel.value = selectedAddressbookEntry.label;
-      updatedDescription.value = selectedAddressbookEntry.description;
-      updatedUser.value = selectedAddressbookEntry.user ? selectedAddressbookEntry.user : '';
-      updatedOperation.value = selectedAddressbookEntry.operation ? selectedAddressbookEntry.operation : '';
+    updatedLabel.value = selectedAddressbookEntry.label;
+    updatedDescription.value = selectedAddressbookEntry.description;
+    updatedUser.value = selectedAddressbookEntry.user ? selectedAddressbookEntry.user : '';
+    updatedOperation.value = selectedAddressbookEntry.operation ? selectedAddressbookEntry.operation : '';
   }
   function getChannelDetail(channel: Channel):string{
     switch(channel.type){
@@ -428,19 +426,19 @@
           showModalNewChannel.value = false; 
           resetValues();
       }
-    }
-    function InterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {
-      const arr: T[] = [];
-      // eslint-disable-next-line no-constant-condition
-      while(true) {
-        const next = iter.next();
-        if(next.done) {
-          break;
-        }
-        arr.push(next.value);
+  }
+  function InterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {
+    const arr: T[] = [];
+    // eslint-disable-next-line no-constant-condition
+    while(true) {
+      const next = iter.next();
+      if(next.done) {
+        break;
       }
-      return arr;
+      arr.push(next.value);
     }
+    return arr;
+  }
   function resetValues() {
     newChannelType = undefined;
     newChannelTypeValue.value = '';

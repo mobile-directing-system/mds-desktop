@@ -8,7 +8,7 @@ const channelsEndpointExtension = 'channels';
 
 export async function createAddressbookEntry(entry:AddressbookEntry):Promise<ErrorResult<AddressbookEntry>> {
     try{
-        console.log(entry);
+        
         const response = await Backend.instance.post(`${endpoint}`, {...entry, id: undefined});
         return {res: response.data, error:false};
     }catch(error){
@@ -32,7 +32,7 @@ export async function createAddressbookEntry(entry:AddressbookEntry):Promise<Err
 
 export async function updateAddressbookEntry(entry:AddressbookEntry):Promise<ErrorResult<boolean>> {
     try{
-        const response = await Backend.instance.put(`${endpoint}/${entry.id}`, entry);
+        const response = await Backend.instance.put(`${endpoint}/${entry.id}`, {...entry, user: entry.user == ''? null : entry.user, operation: entry.operation == ''? null : entry.operation });
         return {res: response.data, error:false};
     }catch(error){
         const axError: AxiosError = error as AxiosError;
