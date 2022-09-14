@@ -119,7 +119,7 @@
     <!------ Channel Modal ------->
     <FloatingModal
       :show-modal="showModalNewChannel"
-      :title="'Create new Channel'"
+      :title="channelButtonText"
       class=" p-10 text-xl"
       @click="toggleShowModal()"
     >
@@ -219,7 +219,7 @@
             <button
               type="button"
               class=" mlauto bg-background text-on_background hover:bg-surface_dark hover:text-on_surface_dark rounded-lg focus:ring-2 focus:ring-surface p-1.5 inline-flex h-8 w-8 "
-              @click.prevent="showModalNewChannel = !showModalNewChannel"
+              @click.prevent="showModalNewChannel = !showModalNewChannel; channelButtonText = 'Create Channel'"
             >
               <span class="sr-only">+</span>
               <svg
@@ -263,7 +263,7 @@
             <button
               type="button"
               class="bg-background text-on_background hover:bg-surface_dark hover:text-on_surface_dark rounded-lg focus:ring-2 focus:ring-surface p-1.5 inline-flex h-8 w-8 "
-              @click.stop="editCurrentChannel(data.id)"
+              @click.stop="editCurrentChannel(data.id); channelButtonText = 'Update Channel'"
             >
               <span class="sr-only">Edit</span>
               <svg
