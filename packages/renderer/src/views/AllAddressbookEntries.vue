@@ -212,15 +212,15 @@
 
     watch(searchInput, (curVal) => {
     if(curVal) {
-      handleUserSelectionInput(curVal);
+      handleEntrySelectionInput(curVal);
     }
   });
   const entriesSearchResults = computed(() => addressbookState.getters.searchResults);
   const entriesSearchResultsArray = computed(() => {
       return InterableIteratorToArray(entriesSearchResults.value().values());
   });
-  function handleUserSelectionInput(query: string) {
-    userState.dispatch('searchUsersByQuery', {query, limit:5});
+  function handleEntrySelectionInput(query: string) {
+    addressbookState.dispatch('searchEntryByQuery', {query, limit:5});
     console.log(entriesSearchResultsArray);
   }
   function InterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {

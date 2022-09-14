@@ -61,7 +61,7 @@ class AddressbookStateMutations extends Mutations<AddressbookState> {
         this.state.entries.set(entry.id, entry);
     }
     setSearchResult(entries: AddressbookEntry[]){
-        this.state.searchResult.clear;
+        this.state.searchResult.clear();
         entries.forEach((entry) => this.state.searchResult.set(entry.id, entry));
     }
     setTotal(total: number) {
