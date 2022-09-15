@@ -264,6 +264,7 @@
     function deleteEntry(id: string | undefined){
       if(id && id != ''){
         addressbookState.dispatch('deleteEntryById', id);
+        addressbookEntryPage.value().clear();
         updatePage(paginationAmount, paginationAmount *paginationPage.value);
       }
     }

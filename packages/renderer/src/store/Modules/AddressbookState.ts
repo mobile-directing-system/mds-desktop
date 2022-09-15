@@ -52,13 +52,17 @@ class AddressbookStateMutations extends Mutations<AddressbookState> {
     
     setEntries(entries: AddressbookEntry[]) {
         this.state.page.clear();
+        this.state.entries.clear();
         entries.forEach((elem) => this.state.entries.set(elem.id, elem));
+        entries.forEach((elem) => this.state.page.set(elem.id, elem));
     }
     addOrUpdateEntries(entries: AddressbookEntry[]) {
         entries.forEach((elem) => this.state.entries.set(elem.id, elem));
+        entries.forEach((elem) => this.state.page.set(elem.id, elem));
     }
     addOrUpdateEntry(entry: AddressbookEntry){
         this.state.entries.set(entry.id, entry);
+        this.state.page.set(entry.id, entry);
     }
     setSearchResult(entries: AddressbookEntry[]){
         this.state.searchResult.clear();
@@ -69,6 +73,7 @@ class AddressbookStateMutations extends Mutations<AddressbookState> {
     }
     deleteEntries(entryId: string){
         this.state.entries.delete(entryId);
+        this.state.page.delete(entryId);
     }
 }
 
@@ -88,6 +93,7 @@ class AddressbookStateActions extends Actions<AddressbookState, AddressbookState
     async createEntry(entry: AddressbookEntry) {
         const createdEntry:ErrorResult<AddressbookEntry> = await createAddressbookEntry(entry);
         if(createdEntry.res && !createdEntry.error){
+            console.log(createdEntry);
             this.mutations.addOrUpdateEntry(createdEntry.res);
         } else {
             handleErrors(createdEntry.errorMsg, this.errorState);

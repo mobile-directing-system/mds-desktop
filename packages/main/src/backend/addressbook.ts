@@ -169,8 +169,8 @@ export async function setChannels(entryId: string, channels:Channels):Promise<Er
 }
 export async function retrieveChannels(entryId:string):Promise<ErrorResult<Channels>> {
     try{
-        await Backend.instance.get(`${endpoint}/${entryId}/${channelsEndpointExtension}`);
-        return {error:false};
+        const result = await Backend.instance.get(`${endpoint}/${entryId}/${channelsEndpointExtension}`);
+        return {res: result.data,error:false};
     }catch(error){
         const axError: AxiosError = error as AxiosError;
         printAxiosError(axError);
