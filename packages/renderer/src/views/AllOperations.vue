@@ -61,6 +61,7 @@
     </TableContainer>
     <!-- Pagination Bar -->
     <PaginationBar
+      id="operations-table-pagination"
       :total-retrievable-entities="totalOperationAmount()"
       :page-size="5"
       @update-page="updatePage($event.amount, $event.offset)"

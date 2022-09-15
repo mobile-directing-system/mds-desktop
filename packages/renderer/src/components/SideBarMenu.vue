@@ -5,6 +5,7 @@
             
       <main>
         <button
+          id="manage-users-button"
           class="block w-full  items-center pt-10 mr-3"
           @click="router.push('/user')"
         >
@@ -28,8 +29,8 @@
           </div>
         </button>
         <button
+          id="manage-operations-button"
           class="block w-full  items-center pt-5 mr-3"
-
           @click="router.push(`/operation`)"
         >
           <div
@@ -52,6 +53,7 @@
           </div>
         </button>
         <button
+          id="manage-groups-button"
           class="block w-full  items-center pt-5"
           @click="router.push(`/groups`)"
         >

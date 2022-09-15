@@ -6,21 +6,21 @@
     <form class="w-80">
       <!-- Login Username Input -->
       <FormInput 
-        id="username"
+        id="login-username"
         v-model="username"
         label="Username"
         type="text"
       />
       <!-- Password Input -->
       <FormInput 
-        id="password" 
+        id="login-password" 
         v-model="password"
         label="Password"
         type="password"
       />
       <!-- Login Button -->
       <NormalButton
-        id="submit"
+        id="login-button"
         type="submit"
         @click.prevent="onSubmit"
       >

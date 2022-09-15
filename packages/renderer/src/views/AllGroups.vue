@@ -54,6 +54,7 @@
       </TableContainer>
       <!-- Pagination Bar -->
       <PaginationBar
+        id="groups-table-pagination"
         :total-retrievable-entities="totalGroupAmount()"
         :page-size="5"
         @update-page="updatePage($event.amount, $event.offset)"
