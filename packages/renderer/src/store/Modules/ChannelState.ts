@@ -61,7 +61,7 @@ class ChannelStateActions extends Actions<ChannelState, ChannelStateGetters, Cha
     async setChannels({entryId, channels}:{entryId: string, channels: Channels}) {
         console.log(channels);
         const setChannelsRes: ErrorResult<boolean> = await setChannels(entryId, channels.map(x => x = undom(x)));
-        if(setChannelsRes.res && ! setChannelsRes.error){
+        if(!setChannelsRes.error){
             this.mutations.setChannels(channels);
             this.mutations.setTotal(channels.length);
         } else {
