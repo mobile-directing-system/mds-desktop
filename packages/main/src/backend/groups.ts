@@ -5,6 +5,11 @@ import { printAxiosError } from './backendInstance';
 
 const endpoint = '/groups';
 
+/**
+ * call to the /groups endponit to create a group
+ * @param group the group to create
+ * @returns the created group
+ */
 export async function createGroup(group: Group):Promise<ErrorResult<Group>> {
   try {
     const response = await Backend.instance.post(`${endpoint}`, {...group, id: undefined});
@@ -28,6 +33,11 @@ export async function createGroup(group: Group):Promise<ErrorResult<Group>> {
   }
 }
 
+/**
+ * call to the /groups endpoint to update a group
+ * @param group the group to update
+ * @returns boolean indicating if the update was successful
+ */
 export async function updateGroup(group: Group):Promise<ErrorResult<boolean>> {
   try {
     await Backend.instance.put(`${endpoint}/${group.id}`, group);
@@ -51,6 +61,11 @@ export async function updateGroup(group: Group):Promise<ErrorResult<boolean>> {
   }
 }
 
+/**
+ * call to the /groups endpoint to delete groups
+ * @param groupId id of the group to be deleted
+ * @returns boolean indicating if the deletion was successful
+ */
 export async function deleteGroup(groupId: string):Promise<ErrorResult<boolean>> {
   try {
     await Backend.instance.delete(`${endpoint}/${groupId}`);
@@ -74,6 +89,14 @@ export async function deleteGroup(groupId: string):Promise<ErrorResult<boolean>>
   }
 }
 
+/**
+ * call to the /groups endpoint to retrieve a number of groups
+ * @param amount the amount of groups to retrieve
+ * @param offset  the offset at which to begin retrieving groups
+ * @param order_by the group property to use for sorting the result
+ * @param order_dir the direction ('asc' or 'desc') in which to sort the result
+ * @returns retrieved groups in the form of an group array
+ */
 export async function retrieveGroups(amount?: number, offset?: number, order_by?: string, order_dir?: string):Promise<ErrorResult<Group[]>> {
   try {
     //explicit use of != instead of !== as a != null is equivalent to a !== null | a !== undefined
@@ -98,6 +121,11 @@ export async function retrieveGroups(amount?: number, offset?: number, order_by?
   }
 }
 
+/**
+ * call to the /groups endpoint to retrieve a single group
+ * @param groupId id of the group to be retrieved
+ * @returns retrieved group
+ */
 export async function retrieveGroup(groupId: string):Promise<ErrorResult<Group>> {
   try {
     const response = await Backend.instance.get(`${endpoint}/${groupId}`);

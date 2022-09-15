@@ -5,7 +5,7 @@ import type { ErrorResult } from '../../../types';
 
 
 /**
- * call /login endpoint in the backend
+ * call to the /login endpoint to log a specified user in
  * @param username username to send to the backend
  * @param password password to send to the backend
  * @returns boolean indicating if login was successful or not
@@ -23,6 +23,10 @@ export async function login(username: string, pass: string): Promise<ErrorResult
     }
 }
 
+/**
+ * call to the /logout endpoint to log the currently logged in user out
+ * @returns result indicating if the login was succesful
+ */
 export async function logout():Promise<ErrorResult<boolean>> {
   try {
     const response = await Backend.instance.post('/logout');

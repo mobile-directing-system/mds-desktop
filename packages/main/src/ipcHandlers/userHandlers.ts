@@ -3,7 +3,7 @@ import type { User, ErrorResult } from '../../../types';
 import { createUser, deleteUser, retrieveUser, retrieveUsers, updateUser, updateUserPassword, searchUsers } from '/@/backend';
 
 /**
- * handler function to call backend createUser function
+ * handler function to call backend {@link createUser} function
  * @param _ event not used
  * @param user user to be created
  * @returns created user in error result container
@@ -14,7 +14,7 @@ export async function createUserHandler(_:IpcMainInvokeEvent, user:User):Promise
 }
 
 /**
- * handler function to call backend updateUser function
+ * handler function to call backend {@link updateUser} function
  * @param _ event not used
  * @param user user to be updated
  * @returns boolean indicating if the user was updated in error result container
@@ -25,7 +25,7 @@ export async function updateUserHandler(_:IpcMainInvokeEvent, user:User):Promise
 }
 
 /**
- * handler function to call backend updateUserPassword function
+ * handler function to call backend {@link updateUserPassword} function
  * @param _ event not used
  * @param userId  id of user for which to change password
  * @param newPass password to change to
@@ -37,7 +37,7 @@ export async function updateUserPasswordHandler(_:IpcMainInvokeEvent, userId: st
 }
 
 /**
- * handler function to call backend deleteUser function
+ * handler function to call backend {@link deleteUser} function
  * @param _ event not used
  * @param userId  id of user to delete
  * @returns boolean indicating if the user was deleted in error result container
@@ -48,7 +48,7 @@ export async function deleteUserHandler(_:IpcMainInvokeEvent, userId: string):Pr
 }
 
 /**
- * handler function to call backend retrieveUsers function
+ * handler function to call backend {@link retrieveUsers} function
  * @param _ event not used
  * @param amount optional number indicating the maxmimal amount of users to return
  * @param offset optional number indicating the offset starting from which users should be return
@@ -62,7 +62,7 @@ export async function retrieveUsersHandler(_:IpcMainInvokeEvent, amount?: number
 }
 
 /**
- * handler function to call backend retrieveUser function
+ * handler function to call backend {@link retrieveUser} function
  * @param _ event not used
  * @param userId id of user to be retrieved
  * @returns retrieved user in error result conatiner
@@ -72,7 +72,7 @@ export async function retrieveUserHandler(_:IpcMainInvokeEvent, userId: string):
   return retrieveUser(userId);
 }
 /**
- * handler function to call backend searchUsers function
+ * handler function to call backend {@link searchUsers} function
  * @param _ event not used
  * @param query for the search of users
  * @param limit max amount of users returned

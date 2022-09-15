@@ -2,9 +2,11 @@
   <div>
     <div class="grid bg-white  rounded-lg  my-10">
       <div class="flex justify-between">
+        <!-- Header -->
         <h1 class=" ml-4 text-4xl font-bold text-black ">
           All Users
         </h1>
+        <!-- Add User Button -->
         <div class="flex h-12 mt-3">
           <FormInput
             v-if="showSearch"
@@ -37,6 +39,7 @@
             +
           </NormalButton>
         </div>
+      <!-- All Users Table -->
       </div>
       <TableContainer
         v-if="searchInput === ''"
@@ -116,6 +119,7 @@
         </template>
       </TableContainer>
 
+      <!-- Pagination Bar -->
       <PaginationBar
         v-if="searchInput === ''"
         :total-retrievable-entities="totalUserAmount()"
@@ -146,6 +150,11 @@
   const showSearch = ref(false);
   const searchInput = ref('');
 
+  /**
+   * update page handler for pagination bar
+   * @param amount number of users to be retrieved
+   * @param offset offset beginning at which users are retrieved
+   */
   watch(searchInput, (curVal) => {
     if(curVal) {
       handleUserSelectionInput(curVal);
@@ -174,6 +183,11 @@
   async function updatePage(amount: number, offset: number) {
     await userState.dispatch('retrieveUsers', {amount, offset});
   }
+
+  /**
+   * click handler for the table row which route to user views
+   * @param userId id of user to route to
+   */
   function selectRow(userId: string){
           router.push({name: 'EditCurrentUser', params:{ selectedUserID: userId}});
   }

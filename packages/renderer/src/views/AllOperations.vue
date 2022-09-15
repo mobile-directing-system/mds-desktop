@@ -2,9 +2,11 @@
   <div>
     <div class="grid bg-white  rounded-lg  my-10">
       <div class="flex justify-between">
+        <!-- Header -->
         <h1 class="ml-4 text-4xl font-bold text-black text-center">
           All Operations
         </h1>
+        <!-- Create Operation Button -->
         <div class="flex h-12 mt-3">
           <FormInput
             v-if="showSearch"
@@ -38,6 +40,7 @@
           </NormalButton>
         </div>
       </div>
+    <!-- All Operations Table -->
     </div>
     <TableContainer
       v-if="searchInput === ''"
@@ -127,6 +130,7 @@
         </TableRow>
       </template>
     </TableContainer>
+    <!-- Pagination Bar -->
     <PaginationBar
       v-if="searchInput === ''"
       :total-retrievable-entities="totalOperationAmount()"
@@ -157,9 +161,19 @@
   
   const showSearch = ref(false);
   const searchInput = ref('');
+  /**
+   * click handler for the table row which route to operation views
+   * @param operationId id of operation to route to
+   */
   function selectRow(operationID: string){
           router.push({name: 'EditCurrentOperation', params:{ selectedOperationID: operationID}});
   }
+
+  /**
+   * update page handler for pagination bar
+   * @param amount number of operations to be retrieved
+   * @param offset offset beginning at which operations are retrieved
+   */
   async function updatePage(amount: number, offset: number) {
     await operationsState.dispatch('retrieveOperations', {amount, offset});
   }

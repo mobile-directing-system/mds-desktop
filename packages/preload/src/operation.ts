@@ -1,3 +1,8 @@
+/**
+ * glue code to be able to call the backend operation
+ * functions from the browser context
+ */
+
 import type { User, Operation, ErrorResult } from '../../types';
 const { ipcRenderer } = require('electron');
 

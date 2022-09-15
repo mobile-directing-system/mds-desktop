@@ -181,6 +181,13 @@ export async function retrieveUser(userId: string):Promise<ErrorResult<User>> {
   }
 }
 
+/**
+ * call to the /users/search endpoint to search for users
+ * @param query search query to be sent to the backend
+ * @param limit the maximum amount of search results to be returned
+ * @param offset the offset in entries where the search should begin
+ * @returns received search result in the form of a user array
+ */
 export async function searchUsers(query: string, limit?: number, offset?: number): Promise<ErrorResult<User[]>> {
   try {
     //explicit use of != instead of !== as a != null is equivalent to a !== null | a !== undefined

@@ -1,3 +1,6 @@
+/**
+ * Class used to cache the login cookie
+ */
 class LoginCache  {
   _tokenType= '';
   _token = '';
@@ -20,4 +23,7 @@ class LoginCache  {
 
 }
 
+/**
+ * Instance for caching the login cookie
+ */
 export default new LoginCache();

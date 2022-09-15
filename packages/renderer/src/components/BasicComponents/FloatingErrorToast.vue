@@ -1,17 +1,21 @@
 <template>
+  <!-- Floating Error Container -->
   <div
     v-if="errors().length >0"
     class="z-50 absolute mx-auto w-96 max-w-sm p-4 grid grid-cols-1 left-1/2 transform -translate-x-1/2 "
     role="alert"
   >
+    <!-- Error Toasts -->
     <div
       v-for="error in errors().slice(0, 3)"
       :key="error.errorId"
       class="text-on_error_light bg-error_light rounded-lg shadow mb-1 flex items-center"
     >
+      <!-- Error Message -->
       <div class="ml-3 text-sm font-normal inline-flex w-72 max-w-xs overflow-x-hidden max-h-16">
         {{ error.errorMessage }}
       </div>
+      <!-- Close Error Button -->
       <button
         type="button"
         class="ml-auto mt-1 mb-1 mr-1 bg-error_light text-on_error_light hover:bg-error_dark rounded-lg focus:ring-2 focus:ring-error p-1.5 inline-flex h-8 w-8"
@@ -36,12 +40,22 @@
   </div>
 </template>
 <script lang="ts" setup>
+  /**
+   * This component that displays errors in the form of floating toasts at the top of the app.
+   * The oldest 3 errors in the error state are displayed. The toasts disappear after 10s or
+   * if they are manually closed using the x button on the toasts. If this happens and more
+   * newer errors they are then displayed in the same way.
+   */
   import {computed} from 'vue';
   import { useErrorState } from '../../store';
 
   const errorState = useErrorState();
   const errors = computed(() => errorState.getters.errors);
   
+  /**
+   * function to remove Error from the error state, including the timeout
+   * @param errorId id of the error to remove
+   */
   function removeError(errorId: string) {
     errorState.dispatch('removeError', errorId);
   }

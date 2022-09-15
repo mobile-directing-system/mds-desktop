@@ -55,15 +55,15 @@
             :include="updatedGroupOperationId? true: false"
           />
         </div>
-        <!--- Submit Button --->
-          
         <div class="pt-4 flex justify-between">
+          <!-- Create Group Button -->
           <NormalButton 
             v-if="updatedGroupTitle != ''"
             @click.prevent="createGroup()"
           >
             Create Group
           </NormalButton>
+          <!-- Cancel Button -->
           <NormalButton
             class=" ml-auto"
             @click.prevent="router.push('/groups')"
@@ -95,20 +95,29 @@
   const operationsSearchResults = computed(() => operationsState.getters.searchResults);
   const operationMembers = computed(() => operationsState.getters.members); 
   const operationsSearchResultsArray = computed(() => {
+    //InterableIterator converted to Array to be used in searchable select
     return InterableIteratorToArray(operationsSearchResults.value().values());
   });
   const selectedOperationMembers = computed(() => operationMembers.value().get(updatedGroupOperationId.value));
 
+  //watcher to retrieve new operation members when the operation id changes. Needed for filtering available group members
   watch(updatedGroupOperationId, (curVal) => {
     if(curVal) {
       operationsState.dispatch('retrieveOperationMembersById', curVal);
     }
   });
 
+  /**
+   * input handler for the operations searchable select
+   * @param query search string
+   */
   function handleOperationSelectionInput(query: string) {
     operationsState.dispatch('searchOperationsByQuery', {query, limit:10});
   }
 
+  /**
+   * function to create new group object and initate call to the backend. Click handler for the Create Group Button.
+   */
   function createGroup(){
       groupState.dispatch('createGroup', {
         id: '',
@@ -120,6 +129,11 @@
       router.push('/groups');
   }
 
+  /**
+   * utility function to change an IterableIterator to an array. Needed for use with e.g. the SearchableSelect.
+   * @param iter IterableIterator to convert into an array
+   * @returns shallow copied array
+   */
   function InterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {
     const arr: T[] = [];
     // eslint-disable-next-line no-constant-condition

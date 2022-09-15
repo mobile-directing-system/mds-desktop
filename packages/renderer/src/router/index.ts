@@ -17,6 +17,7 @@ import CreateNewAddressbookEntry from '../views/CreateNewAddressbookEntry.vue';
 import EditAddressbookEntry from '../views/EditAddressbookEntry.vue';
 
 const routes:RouteRecordRaw[] = [
+    //Definition of Routes and Subroutes and how they relate to the views
     {
 
         path: '/',

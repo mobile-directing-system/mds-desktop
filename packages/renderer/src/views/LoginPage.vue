@@ -4,9 +4,11 @@
     class="w-screen h-screen grid place-items-center"
   >
     <div>
+      <!-- Header -->
       <h1 class="text-4xl font-bold text-on_background text-center">
         Mobile Directing Service
       </h1>
+      <!-- Login Form -->
       <LoginForm />
     </div>
   </div>

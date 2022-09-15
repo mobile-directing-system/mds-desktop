@@ -9,7 +9,6 @@ import type { ErrorResult } from '../../../types';
  * @param password password to pass to the backend for logging in
  * @returns boolean indicating if login was successful
  */
-// eslint-disable-next-line no-unused-vars
 export async function loginHandler(_:IpcMainInvokeEvent, username: string, password: string):Promise<ErrorResult<boolean>> {
   return login(username, password);
 }

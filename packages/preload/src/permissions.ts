@@ -1,3 +1,8 @@
+/**
+ * glue code to be able to call the backend permission
+ * functions from the browser context
+ */
+
 import type { Permissions, ErrorResult } from '../../types';
 const { ipcRenderer } = require('electron');
 

@@ -1,9 +1,12 @@
 <template>
   <div class="flex flex-col">
+    <!-- TopNavBar -->
     <Topnavbar />
   
     <div class="flex flex-row">
+      <!-- Sidebar -->
       <Sidebar class=" overflow-x-hidden" />
+      <!-- SubRouterView -->
       <router-view class=" w-4/5 ml-4" />
     </div>
   </div>

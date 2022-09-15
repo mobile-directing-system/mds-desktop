@@ -1,5 +1,5 @@
 /**
- * glue code to be able to call the backend login
+ * glue code to be able to call the backend login/logout
  * functions from the browser context
  */
 

@@ -32,7 +32,7 @@ export const modulesStore = createStore(
 );
 
 /**
- * re-export useLoginInfo function from ./Modules/LoginInfo
+ * re-export useModule functions
  * to simplify the importation in .vue files
  */
 export { useLoginState, useUserState, usePermissionsState, useErrorState, useOperationsState, useGroupState, useAddressbookState, useChannelState };

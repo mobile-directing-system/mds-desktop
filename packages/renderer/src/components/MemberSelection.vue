@@ -44,6 +44,7 @@
           {{ users().get(data)?.last_name }}
         </template>
         <template #data4="{data}:{data: string}">
+          <!-- Remove Member Button -->
           <button
             type="button"
             class="bg-background text-on_background hover:bg-surface_dark hover:text-on_surface_dark rounded-lg focus:ring-2 focus:ring-surface p-1.5 inline-flex h-8 w-8 "
@@ -74,6 +75,7 @@
     @click="toggleMembersModal()"
   >
     <div class="mb-6 w-96 max-w-sm">
+      <!-- Searchable Select for Members -->
       <SearchableSelect
         v-model="addMemberIds"
         :options="options"
@@ -86,6 +88,7 @@
         @search-change="handleSelectionInput"
         @open="handleSelectionInput('')"
       />
+      <!-- Available Members Table -->
       <TableContainer
         :contents="usersPageArray"
         id-identifier="id"
@@ -123,6 +126,7 @@
           </TableRow>
         </template>
       </TableContainer>
+      <!-- Pagination Buttons -->
       <PaginationBar
         :total-retrievable-entities="totalUserAmount()"
         :page-size="5"
@@ -130,6 +134,7 @@
       />
     </div>
     <div class="flex justify-between">
+      <!-- Add Members Button -->
       <NormalButton
         class="mr-2"
         @click.prevent="addMembers()"
@@ -140,6 +145,13 @@
   </FloatingModal>
 </template>
 <script lang="ts" setup>
+
+  /**
+   * This component provides a table of users, a.k.a. members, with a button for adding members.
+   * This button opens a modal for adding user, including a table view of available users and a
+   * searchable select. Passed attributes, which are not props, to this component won't work.
+   */
+
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
   import TableContainer from '../components/BasicComponents/TableContainer.vue';
   import TableRow from '../components/BasicComponents/TableRow.vue';
@@ -156,9 +168,9 @@
   import type { User } from '../../../types';
 
   interface Props {
-    modelValue: string[];
-    includeIds?: string[];
-    include?: boolean;
+    modelValue: string[];   // v-model repsentation
+    includeIds?: string[];  // array of selectable user ids
+    include?: boolean;      // if set the includeIds array is processed
   }
 
   const userState = useUserState();
@@ -171,6 +183,7 @@
     return IterableIteratorToArray(usersSearchResults.value().values());
   });
   const usersPageArray = computed(() => {
+    // change user iterables to arrays for use with searchable select
     if(props.include) {
       return IterableIteratorToArray(usersPage.value().values()).filter((elem) => !props.modelValue.includes(elem?.id? elem?.id : '') && props.includeIds?.includes(elem?.id? elem?.id : ''));
     } else {
@@ -192,45 +205,74 @@
   const props = defineProps<Props>();
 
   const emit = defineEmits<{
-    (e:'update:modelValue', memberIds: string[]):void
+    (e:'update:modelValue', memberIds: string[]):void // Emitted upon clicking the Add Members button, updates the v-model
   }>();
 
+
+  /**
+   * function to toggle the add member modal
+   */
   function toggleMembersModal() {
     showMembersModal.value = !showMembersModal.value;
     addMemberIds.value = [];
   }
 
-  function toggleId(groupId: string) {
-    if(addMemberIds.value.includes(groupId)) {
-      arr.value = arr.value.filter((elem) => elem !== groupId );
+  /**
+   * function to toggle the add members status of a user
+   * @param userId id for which user to toggle the add member status
+   */
+  function toggleId(userId: string) {
+    if(addMemberIds.value.includes(userId)) {
+      arr.value = arr.value.filter((elem) => elem !== userId );
       setTimeout(() => {
-        addMemberIds.value = addMemberIds.value.filter((elem) => elem !== groupId );
+        addMemberIds.value = addMemberIds.value.filter((elem) => elem !== userId );
       }, 0);
     } else {
-      arr.value = [...arr.value, groupId];
+      arr.value = [...arr.value, userId];
       setTimeout(() => {
-        addMemberIds.value = [...addMemberIds.value, groupId];
+        addMemberIds.value = [...addMemberIds.value, userId];
       }, 0);
     }
   }
 
+  /**
+   * function to handle the search inputs returned by the searchable select
+   * @param query search string
+   */
   function handleSelectionInput(query: string) {
     userState.dispatch('searchUsersByQuery', {query, limit:10});
   }
   
+  /**
+   * function to emit the v-model update event if the add member button on the modal is clicked
+   */
   function addMembers(){
     emit('update:modelValue', [...props.modelValue, ...addMemberIds.value]);
     toggleMembersModal();
   }
 
+  /**
+   * function to remove a member by emitting an v-model update if the delete member buttons are clicked
+   * @param memberId id of the member to be removed as a member
+   */
   function deleteMember(memberId: string) {
     emit('update:modelValue', props.modelValue.filter((elem) => elem !== memberId));
   }
 
+  /**
+   * handler for pagination bar
+   * @param amount amount of users to retrieve
+   * @param offset offset beginng at which users are retrieved
+   */
   function updatePage(amount:number, offset:number) {
     userState.dispatch('retrieveUsers', {amount, offset});
   }
 
+  /**
+   * utility function to change an IterableIterator to an array. Needed for use with e.g. the SearchableSelect.
+   * @param iter IterableIterator to convert into an array
+   * @returns shallow copied array
+   */
   function IterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {
     const arr: T[] = [];
     // eslint-disable-next-line no-constant-condition

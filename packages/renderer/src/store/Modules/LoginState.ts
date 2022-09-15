@@ -39,8 +39,20 @@ class LoginStateGetters extends Getters<LoginState> {
  * define mutations to change the state
  */
 class LoginStateMutations extends Mutations<LoginState> {
+  /**
+   * Set the loggedin state
+   * @param loggedIn boolean to set the loggedIn state to
+   */
   setLoggedIn(loggedIn: boolean) {this.state.loggedIn = loggedIn;}
+  /**
+   * Set the loggingin state
+   * @param loggingIn boolean to set the loggingIn state to
+   */
   setLoggingIn(loggingIn: boolean) {this.state.loggingIn = loggingIn;}
+  /**
+   * Set the loggedInUser state
+   * @param loggedInUser boolean to set the loggedInUser state to
+   */
   setLoggedInUser(loggedInUser: string) {this.state.loggedInUser = loggedInUser;}
 }
 
@@ -58,6 +70,10 @@ class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStat
     this.errorState = errorState.context(store);
   }
 
+  /**
+   * Action to perform the login in the backend and set all necessary dependencies in the login state
+   * @param param0 {username, password} username and password to login with
+   */
   async login({username, password}:{username:string, password:string}) {
     await this.actions.setLoggingIn(true);
     const loggedIn:ErrorResult<boolean> = await login(username, password);
@@ -69,9 +85,16 @@ class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStat
       handleErrors(loggedIn.errorMsg, this.errorState);
     }
   }
+  /**
+   * Action to set the loggingIn state
+   * @param loggingIn boolean to set the loggingIn state to
+   */
   async setLoggingIn(loggingIn: boolean) {
     this.mutations.setLoggingIn(loggingIn);
   }
+  /**
+   * Action to perform the logout in the backend and reset all necessary dependencies
+   */
   async logout() {
     const loggedOut:ErrorResult<boolean> = await logout();
     if(loggedOut.res && !loggedOut.error) {
