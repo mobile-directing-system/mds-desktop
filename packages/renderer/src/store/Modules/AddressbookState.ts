@@ -105,7 +105,9 @@ class AddressbookStateActions extends Actions<AddressbookState, AddressbookState
     }
     async deleteEntryById(entryId:string){
         const entryDeleted:ErrorResult<boolean> = await deleteAddressbookEntry(entryId);
-        if(entryDeleted.res && !entryDeleted.error){
+        if(!entryDeleted.error){
+            this.mutations.deleteEntries(entryId);
+        }else{
             handleErrors(entryDeleted.errorMsg, this.errorState);
         }
     }

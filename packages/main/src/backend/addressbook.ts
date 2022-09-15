@@ -8,7 +8,6 @@ const channelsEndpointExtension = 'channels';
 
 export async function createAddressbookEntry(entry:AddressbookEntry):Promise<ErrorResult<AddressbookEntry>> {
     try{
-        
         const response = await Backend.instance.post(`${endpoint}`, {...entry, id: undefined});
         return {res: response.data, error:false};
     }catch(error){
@@ -32,8 +31,8 @@ export async function createAddressbookEntry(entry:AddressbookEntry):Promise<Err
 
 export async function updateAddressbookEntry(entry:AddressbookEntry):Promise<ErrorResult<boolean>> {
     try{
-        const response = await Backend.instance.put(`${endpoint}/${entry.id}`, {...entry, user: entry.user == ''? null : entry.user, operation: entry.operation == ''? null : entry.operation });
-        return {res: response.data, error:false};
+        await Backend.instance.put(`${endpoint}/${entry.id}`, {...entry, user: entry.user == ''? null : entry.user, operation: entry.operation == ''? null : entry.operation });
+        return {error:false};
     }catch(error){
         const axError: AxiosError = error as AxiosError;
         printAxiosError(axError);
@@ -55,8 +54,8 @@ export async function updateAddressbookEntry(entry:AddressbookEntry):Promise<Err
 
 export async function deleteAddressbookEntry(entryId:string):Promise<ErrorResult<boolean>> {
     try{
-        const response = await Backend.instance.delete(`${endpoint}/${entryId}`);
-        return {res: response.data, error:false};
+        await Backend.instance.delete(`${endpoint}/${entryId}`);
+        return {error:false};
     }catch(error){
         const axError: AxiosError = error as AxiosError;
         printAxiosError(axError);
@@ -148,8 +147,8 @@ export async function searchAddressbookEntryByQuery(query: string, limit?: numbe
 
 export async function setChannels(entryId: string, channels:Channels):Promise<ErrorResult<boolean>> {
     try{
-        const response = await Backend.instance.put(`${endpoint}/${entryId}/${channelsEndpointExtension}`, channels.map((elem) => elem.id === '' ?  {...elem, id:undefined}: elem));
-        return {res: response.data, error:false};
+        await Backend.instance.put(`${endpoint}/${entryId}/${channelsEndpointExtension}`, channels.map((elem) => elem.id === '' ?  {...elem, id:undefined}: elem));
+        return {error:false};
     }catch(error){
         const axError: AxiosError = error as AxiosError;
         printAxiosError(axError);
@@ -170,8 +169,8 @@ export async function setChannels(entryId: string, channels:Channels):Promise<Er
 }
 export async function retrieveChannels(entryId:string):Promise<ErrorResult<Channels>> {
     try{
-        const response = await Backend.instance.get(`${endpoint}/${entryId}/${channelsEndpointExtension}`);
-        return {res: response.data, error:false};
+        await Backend.instance.get(`${endpoint}/${entryId}/${channelsEndpointExtension}`);
+        return {error:false};
     }catch(error){
         const axError: AxiosError = error as AxiosError;
         printAxiosError(axError);
