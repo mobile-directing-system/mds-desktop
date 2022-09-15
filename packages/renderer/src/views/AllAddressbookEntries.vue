@@ -172,6 +172,7 @@
       </TableContainer>
       <PaginationBar
         v-if="searchInput === ''"
+        id="adressbook-table-pagination"
         :total-retrievable-entities="totalAddressbookEntryAmount()"
         :page-size="paginationAmount"
         @update-page="updatePage($event.amount, $event.offset)"

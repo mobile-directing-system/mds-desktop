@@ -38,7 +38,7 @@
     <h2 class="text-xl font-bold">
       Channels:
     </h2>
-    <!------ Addressbook Modal------>
+    <!-- Addressbook Modal-->
     <FloatingModal
       :show-modal="showModalEditEntry"
       :title="'Edit Addressbook Entry'"
@@ -57,7 +57,7 @@
         div-class="w-50"
         :label="'Description'"
       />
-      <!---- Operation ----->
+      <!-- Operation -->
       <div class="mb-6 w-80">
         <label
           for="operation"
@@ -83,7 +83,7 @@
           </option>
         </select>
       </div>
-      <!---- User ----->
+      <!-- User -->
       <div class="mb-6 w-80">
         <label
           for="users"
@@ -116,7 +116,7 @@
         Update Entry
       </NormalButton>
     </FloatingModal>
-    <!------ Channel Modal ------->
+    <!-- Channel Modal -->
     <FloatingModal
       :show-modal="showModalNewChannel"
       :title="channelButtonText"
@@ -193,7 +193,7 @@
         {{ channelButtonText }}
       </NormalButton>
     </FloatingModal>
-    <!------ Channel Table------>
+    <!-- Channel Table -->
     <TableContainer
       :contents="channels().values()"
       id-identifier="id"

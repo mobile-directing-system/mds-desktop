@@ -7,21 +7,21 @@
     </header>
     <form class="w-100">
       <main>
-        <!----- Label ---->
+        <!-- Label -->
         <FormInput
           id="label"
           v-model="addedlabel"
           div-class="w-80"
           label="Label"
         />
-        <!----- Description ----->
+        <!-- Description -->
         <FormInput
           id="description"
           v-model="addeddescription"
           div-class="w-80"
           label="Description"
         />
-        <!----- Operation ----->
+        <!-- Operation -->
         <div class="mb-6 w-80">
           <label
             for="operations"
@@ -40,7 +40,7 @@
             @open="handleOperationSelectionInput('')"
           />
         </div>  
-        <!------ User ----->
+        <!-- User -->
         <div class="mb-6 w-80">
           <label
             for="operations"
