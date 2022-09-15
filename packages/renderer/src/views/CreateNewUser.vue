@@ -1,5 +1,8 @@
 <template>
-  <div class=" bg-white ml-4  my-10">
+  <div 
+    id="create-new-user-form"
+    class=" bg-white ml-4  my-10"
+  >
     <header class=" max-w-lg ml-4 my-10">
       <h1 class="text-4xl font-bold text-on_background ">
         Create a new User
@@ -9,28 +12,28 @@
       <main class="ml-4">
         <!------- Username  ------>
         <FormInput
-          id="username"
+          id="create-user-username"
           v-model="userName"
           label="Username"
           required
         />
         <!------- first_name  ------>
         <FormInput
-          id="firstName"
+          id="create-user-firstName"
           v-model="firstName"
           label="First Name"
           required
         />
         <!------- last_name  ------>
         <FormInput
-          id="lastName"
+          id="create-user-lastName"
           v-model="lastName"
           label="Last Name"
           required
         />
         <!--- Initial Password--->
         <FormInput
-          id="iPassword"
+          id="create-user-password"
           v-model="iPassword"
           label="Initial Password"
           type="password"
@@ -40,7 +43,7 @@
         <div class=" pt-4 flex justify-between">
           <!-- Create User Button -->
           <NormalButton
-            id="submit"
+            id="create-user-button"
             class=""
             type="submit"
             @click.prevent="createNewUser(userName, firstName, lastName,iPassword)"
@@ -49,6 +52,7 @@
           </NormalButton>
           <!-- Cancel Button -->
           <NormalButton
+            id="create-user-cancel"
             class=" ml-auto"
             @click.prevent="router.push('/user')"
           >

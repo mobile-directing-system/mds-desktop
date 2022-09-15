@@ -133,6 +133,7 @@
     <!-- Pagination Bar -->
     <PaginationBar
       v-if="searchInput === ''"
+      id="operations-table-pagination"
       :total-retrievable-entities="totalOperationAmount()"
       :page-size="5"
       @update-page="updatePage($event.amount, $event.offset)"

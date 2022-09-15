@@ -7,7 +7,8 @@
       :class="props.overwrite? props.labelClass : props.labelClass? 'block mb-2 text-sm font-medium text-on_background ' + props.labelClass : 'block mb-2 text-sm font-medium text-on_background'"
     >{{ props.label }}</label>
     <!-- Form Input -->
-    <input 
+    <input
+      :id="id"
       :value="props.modelValue" 
       v-bind="$attrs"
       :class="props.overwrite? '' : 'bg-surface_superlight border border-surface_dark text-on_surface_superlight text-sm rounded-lg focus:ring-primary_light focus:border-primary_light block w-full p-2.5 invalid:bg-error_superlight invalid:text-on_error_superlight invalid:border-error_dark'"

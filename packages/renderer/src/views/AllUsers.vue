@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="all-users">
     <div class="grid bg-white  rounded-lg  my-10">
       <div class="flex justify-between">
         <!-- Header -->
@@ -33,6 +33,7 @@
             /></svg>
           </NormalButton>
           <NormalButton
+            id="open-create-user-button"
             class=" ml-auto mr-6"
             @click.prevent="router.push('/create-new-user')"
           >
@@ -43,6 +44,7 @@
       </div>
       <TableContainer
         v-if="searchInput === ''"
+        id="users-table"
         :contents="userPage().values()"
         id-identifier="id"
       >
@@ -61,7 +63,7 @@
         </template>
 
         <template #tableRow="{rowData}:{rowData:User}">
-          <TableRow 
+          <TableRow
             :row-data="rowData"
             :num-of-cols="3"
             :identifier="rowData.id"
@@ -122,6 +124,7 @@
       <!-- Pagination Bar -->
       <PaginationBar
         v-if="searchInput === ''"
+        id="users-table-pagination"
         :total-retrievable-entities="totalUserAmount()"
         :page-size="5"
         @update-page="updatePage($event.amount, $event.offset)"
@@ -142,6 +145,7 @@
    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type { User }  from '../../../types';
   import FormInput from '../components/BasicComponents/FormInput.vue';
+  import { OrderBy, OrderDir } from '../constants';
 
   const userState = useUserState();
   const userPage = computed(() => userState.getters.page);
@@ -181,7 +185,7 @@
       return arr;
     }
   async function updatePage(amount: number, offset: number) {
-    await userState.dispatch('retrieveUsers', {amount, offset});
+    await userState.dispatch('retrieveUsers', {amount, offset, orderBy: OrderBy.UserUsername, orderDir: OrderDir.Ascending});
   }
 
   /**

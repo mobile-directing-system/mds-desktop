@@ -1,8 +1,12 @@
 <template>
-  <div class="flex justify-end">
+  <div 
+    :id="props.id"
+    class="flex justify-end"
+  >
     <div class="flex gap-5">
       <!-- Previous Page Button -->
       <NormalButton
+        :id="`${props.id}-previous-button`"
         class="mt-2 mb-2 ml-auto"
         :disabled="showPreviousButton? false:true"
         @click.prevent="previousPage()"
@@ -10,9 +14,13 @@
         Previous
       </NormalButton>
       <!-- Current/Toal Pages Display -->
-      <span class=" text-base mt-3">{{ paginationPage + 1 }}/{{ paginationMaxPages }}</span>
+      <span
+        :id="`${props.id}-page-number`"
+        class=" text-base mt-3"
+      >{{ paginationPage + 1 }}/{{ paginationMaxPages }}</span>
       <!-- Next Page Button -->
       <NormalButton
+        :id="`${props.id}-next-button`"
         class="mt-2 mb-2 ml-auto"
         :disabled="showNextButton? false:true"
         @click.prevent="nextPage()"
@@ -36,6 +44,7 @@
   import NormalButton from './NormalButton.vue';
 
   interface Props {
+    id: string,                       // id for the container and to make button ids & span id unique
     totalRetrievableEntities: number; // the total amount of entities which could be retreived
     pageSize: number;                 // the amount of entities per page
     initialPage?: number;             // when passed the initialPage and not page 1 is considered when returning the pageSize and offset

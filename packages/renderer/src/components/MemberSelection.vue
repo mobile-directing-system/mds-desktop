@@ -128,6 +128,7 @@
       </TableContainer>
       <!-- Pagination Buttons -->
       <PaginationBar
+        id="select-member-table-pagination"
         :total-retrievable-entities="totalUserAmount()"
         :page-size="5"
         @update-page="updatePage($event.amount, $event.offset)"

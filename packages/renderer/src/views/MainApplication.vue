@@ -3,7 +3,10 @@
     <!-- TopNavBar -->
     <Topnavbar />
   
-    <div class="flex flex-row">
+    <div
+      id="app-content" 
+      class="flex flex-row"
+    >
       <!-- Sidebar -->
       <Sidebar class=" overflow-x-hidden" />
       <!-- SubRouterView -->
