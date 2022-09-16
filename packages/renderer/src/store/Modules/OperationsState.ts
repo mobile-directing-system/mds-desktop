@@ -246,7 +246,7 @@ class OperationsStateActions extends Actions<OperationsState, OperationsStateGet
         this.userCtx = this.ctx.modules.userState;
       }
       if(this.userCtx) {
-        this.userCtx.commit('addOrUpdateUsers', retrievedOperationMembers.res);
+        this.userCtx.commit('deepAddOrUpdateUsers', retrievedOperationMembers.res);
       }
     } else {
       handleErrors(retrievedOperationMembers.errorMsg, this.errorState);
