@@ -92,6 +92,7 @@
             username: username,
             first_name: firstname,
             last_name: lastname,
+            is_active: true,
             is_admin: false,
             pass: ipassword,
         });

@@ -117,6 +117,7 @@
         username: updatedUserName.value,
         first_name: updatedUserFirstName.value,
         last_name: updatedUserLastName.value,
+        is_active: true,
         is_admin: false,
         pass: '',
       };
