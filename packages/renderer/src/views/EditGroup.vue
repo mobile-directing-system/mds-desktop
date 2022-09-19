@@ -1,5 +1,8 @@
 <template>
-  <div class=" bg-white ml-4 max-w-lg rounded-lg  my-10">
+  <div
+    id="update-group-form"
+    class=" bg-white ml-4 max-w-lg rounded-lg  my-10"
+  >
     <header class=" max-w-lg pb-10">
       <h1 class="  text-left text-4xl font-bold text-on_background">
         Group Information
@@ -10,29 +13,34 @@
         <!------- Title  ------>
         <div class="mb-6">
           <FormInput
-            id="title"
+            id="update-group-title"
             v-model="updatedGroupTitle"
             div-class="w-80"
             label="Title"
             required
+            :disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? undefined:'true'"
+            :aria-disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? 'false':'true'"
           />
         </div>
         <!------- Description  ------>
         <div class="mb-6">
           <FormInput
-            id="description"
+            id="update-group-description"
             v-model="updatedGroupDescription"
             div-class="w-80"
             label="Description"
+            :disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? undefined:'true'"
+            :aria-disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? 'false':'true'"
           />
         </div>
         <!------- Operation  ------>
         <div class="mb-6 w-80">
           <label
-            for="operations"
+            for="update-group-operations"
             class="block mb-2 text-sm font-medium text-on_background"
           >Select an Operation</label>
           <SearchableSelect
+            id="update-group-operation"
             v-model="updatedGroupOperationId"
             :options="options"
             mode="single"
@@ -40,6 +48,8 @@
             label="title"
             value-prop="id"
             track-by="title"
+            :disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? undefined:true"
+            :aria-disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? 'false':'true'"
             @search-change="handleOperationSelectionInput"
             @open="handleOperationSelectionInput('')"
           />
@@ -53,22 +63,28 @@
             Only members of the selected operation can be members of this group.
           </div>
           <MemberSelection
+            id="group-members"
             v-model="updatedGroupMemberIds"
             :include-ids="selectedOperationMembers"
             :include="updatedGroupOperationId? true: false"
+            :disable-add-members="!checkPermissions([{name: PermissionNames.GroupUpdate}])"
           />
         </div>
         <div class="flex justify-between">
           <!-- Update Group Button -->
-          <NormalButton 
+          <NormalButton
             v-if="updatedGroupTitle != ''"
+            id="update-group-update-button"
+            :disabled="!checkPermissions([{name: PermissionNames.GroupUpdate}])"
             @click.prevent="editGroup()"
           >
             Update Group
           </NormalButton>
           <!-- Delete Group Button -->
           <NormalButton
+            id="update-group-delete-button"
             class="ml-auto"
+            :disabled="!checkPermissions([{name: PermissionNames.GroupDelete}])"
             @click.prevent="deleteGroup()"
           >
             Delete Group
@@ -77,6 +93,7 @@
         <div class=" pt-4 flex justify-between">
           <!-- Cancel Button -->
           <NormalButton
+            id="update-group-cancel-button"
             class=" ml-auto"
             @click.prevent="router.push('/groups')"
           >
@@ -94,9 +111,12 @@
   import MemberSelection from '../components/MemberSelection.vue';
   import SearchableSelect from '../components/BasicComponents/SearchableSelect.vue';
   import { useGroupState, useOperationsState, useUserState } from '../store';
+  import { usePermissions } from '../composables';
+  import { PermissionNames } from '../constants';
   import{useRouter, useRoute} from 'vue-router';
   import type { Ref } from 'vue';
 
+  const checkPermissions = usePermissions();
   const groupState = useGroupState();
   const operationsState = useOperationsState();
   const userState = useUserState();

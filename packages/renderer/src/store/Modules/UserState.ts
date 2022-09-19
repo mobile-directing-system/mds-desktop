@@ -96,6 +96,16 @@ class UserStateMutations extends Mutations<UserState> {
     });
   }
   /**
+   * Mutation to addd or update users in a deep way, by overriding existing properties and including the properties which are not shared
+   * @param users the users to be deeply added or updated in the users state
+   */
+  deepAddOrUpdateUsers(users: User[]) {
+    users.forEach((user) => {
+      const cachedUser = this.state.users.get(user.id);
+      this.state.users.set(user.id, {...user, ...cachedUser});
+    });
+  }
+  /**
    * Mutation to add of update a single user, if they exist
    * @param user the user that should be added to or updated in the user state
    */

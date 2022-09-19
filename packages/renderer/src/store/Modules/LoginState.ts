@@ -4,6 +4,8 @@ import type { ErrorResult } from '../../../../types';
 import type { Context } from 'vuex-smart-module';
 import type { Store } from 'vuex';
 import { errorState, handleErrors } from './ErrorState';
+import { root, modulesStore } from '../index';
+import type { permissionsState } from './PermissionsState';
 
 /**
  * define the content of the LoginInfoState
@@ -12,6 +14,7 @@ class LoginState {
   loggedIn = false;
   loggingIn = false;
   loggedInUser = '';
+  loggedInUserId = '';
 }
 
 /**
@@ -31,6 +34,11 @@ class LoginStateGetters extends Getters<LoginState> {
   get loggedInUser() {
     return () => {
       return this.state.loggedInUser;
+    };
+  }
+  get loggedInUserId() {
+    return () => {
+      return this.state.loggedInUserId;
     };
   }
 }
@@ -54,6 +62,11 @@ class LoginStateMutations extends Mutations<LoginState> {
    * @param loggedInUser boolean to set the loggedInUser state to
    */
   setLoggedInUser(loggedInUser: string) {this.state.loggedInUser = loggedInUser;}
+  /**
+   * Set the loggedInUserId state
+   * @param loggedInUserId id of the user logging in
+   */
+  setLoggedInUserId(loggedInUserId: string) {this.state.loggedInUserId = loggedInUserId;}
 }
 
 /**
@@ -64,6 +77,11 @@ class LoginStateMutations extends Mutations<LoginState> {
 class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStateMutations, LoginStateActions> {
 
   errorState: Context<typeof errorState> | undefined;
+
+  // root context to be able to get permission context
+  ctx: Context<typeof root> | undefined;
+  // user context to be able to use permission store actions
+  permissionsCtx: Context<typeof permissionsState> | undefined; //maybe use a function exported from the vuex-module similar to the handle error function
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   $init(store: Store<any>): void {
@@ -76,11 +94,18 @@ class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStat
    */
   async login({username, password}:{username:string, password:string}) {
     await this.actions.setLoggingIn(true);
-    const loggedIn:ErrorResult<boolean> = await login(username, password);
+    const loggedIn:ErrorResult<string> = await login(username, password);
     await this.actions.setLoggingIn(false);
     if(loggedIn.res && !loggedIn.error) {
-      this.mutations.setLoggedIn(loggedIn.res);
+      if(!this.permissionsCtx && !this.ctx){
+        // Add members to the users store
+        this.ctx = root.context(modulesStore);
+        this.permissionsCtx = this.ctx.modules.permissionsState;
+      }
+      this.mutations.setLoggedIn(true);
       this.mutations.setLoggedInUser(username);
+      this.mutations.setLoggedInUserId(loggedIn.res);
+      this.permissionsCtx?.actions.retrievePermissions(loggedIn.res);
     }  else {
       handleErrors(loggedIn.errorMsg, this.errorState);
     }

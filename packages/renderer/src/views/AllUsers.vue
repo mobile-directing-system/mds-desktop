@@ -9,6 +9,7 @@
         <!-- Add User Button -->
         <NormalButton
           id="open-create-user-button"
+          :disabled="!checkPermissions([{name: PermissionNames.UserCreate}])"
           class=" ml-auto mr-6"
           @click.prevent="router.push('/create-new-user')"
         >
@@ -74,14 +75,16 @@
   import TableHeader from '../components/BasicComponents/TableHeader.vue';
   import { useUserState } from '../store';
   import {useRouter} from 'vue-router';
+  import { usePermissions } from '../composables';
    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type { User }  from '../../../types';
-  import { OrderBy, OrderDir } from '../constants';
+  import { PermissionNames, OrderBy, OrderDir } from '../constants';
 
   const userState = useUserState();
   const userPage = computed(() => userState.getters.page);
   const totalUserAmount = computed(() => userState.getters.total);
   const router = useRouter();
+  const checkPermissions = usePermissions();
 
   /**
    * update page handler for pagination bar

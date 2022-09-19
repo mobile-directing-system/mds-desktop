@@ -5,7 +5,7 @@
 
 const { ipcRenderer } = require('electron');
 import type { ErrorResult } from '../../types';
-export async function login(username: string, password: string):Promise<ErrorResult<boolean>> {
+export async function login(username: string, password: string):Promise<ErrorResult<string>> {
     return ipcRenderer.invoke('login', username, password); 
 }
 
