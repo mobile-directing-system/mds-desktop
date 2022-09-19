@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="all-operations">
     <div class="grid bg-white  rounded-lg  my-10">
       <div class="flex justify-between">
         <!-- Header -->
@@ -8,6 +8,7 @@
         </h1>
         <!-- Create Operation Button -->
         <NormalButton
+          id="open-create-operation-button"
           :disabled="!checkPermissions([{name: PermissionNames.OperationCreate}])"
           class=" ml-auto  mr-6"
           @click="router.push('/create-new-operation')"
@@ -18,6 +19,7 @@
     </div>
     <!-- All Operations Table -->
     <TableContainer
+      id="operations-table"
       :contents="operationsPage().values()"
       id-identifier="id"
     >

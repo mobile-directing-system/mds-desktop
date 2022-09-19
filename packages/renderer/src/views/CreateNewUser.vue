@@ -52,7 +52,7 @@
           </NormalButton>
           <!-- Cancel Button -->
           <NormalButton
-            id="create-user-cancel"
+            id="create-user-cancel-button"
             class=" ml-auto"
             @click.prevent="router.push('/user')"
           >

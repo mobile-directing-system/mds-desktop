@@ -1,5 +1,8 @@
 <template>
-  <div class=" bg-background ml-4 max-w-lg rounded-lg  my-10">
+  <div
+    id="create-new-group-form"
+    class=" bg-background ml-4 max-w-lg rounded-lg  my-10"
+  >
     <header class=" max-w-lg pb-10">
       <h1 class="  text-left text-4xl font-bold text-on_background">
         Create a new Group
@@ -9,7 +12,7 @@
       <main>
         <!------- Title  ------>
         <FormInput
-          id="title"
+          id="create-group-title"
           v-model="updatedGroupTitle"
           div-class="w-80"
           label="Title"
@@ -17,7 +20,7 @@
         />
         <!------- Description  ------>
         <FormInput
-          id="description"
+          id="create-group-description"
           v-model="updatedGroupDescription"
           div-class="w-80"
           label="Description"
@@ -25,7 +28,7 @@
         <!------- Operation  ------>
         <div class="mb-6 w-80">
           <label
-            for="operations"
+            for="create-group-operation"
             class="block mb-2 text-sm font-medium text-on_background"
           >Select an Operation</label>
           <SearchableSelect
@@ -48,7 +51,8 @@
           >
             Only members of the selected operation can be members of this group.
           </div>
-          <MemberSelection 
+          <MemberSelection
+            id="create-group-add-members"
             v-model="updatedGroupMemberIds"
             :include-ids="selectedOperationMembers"
             :include="updatedGroupOperationId? true: false"
@@ -56,14 +60,16 @@
         </div>
         <div class="pt-4 flex justify-between">
           <!-- Create Group Button -->
-          <NormalButton 
+          <NormalButton
             v-if="updatedGroupTitle != ''"
+            id="create-group-button"
             @click.prevent="createGroup()"
           >
             Create Group
           </NormalButton>
           <!-- Cancel Button -->
           <NormalButton
+            id="create-group-cancel-button"
             class=" ml-auto"
             @click.prevent="router.push('/groups')"
           >

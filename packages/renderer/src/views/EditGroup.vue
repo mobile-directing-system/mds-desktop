@@ -1,5 +1,8 @@
 <template>
-  <div class=" bg-white ml-4 max-w-lg rounded-lg  my-10">
+  <div
+    id="update-group-form"
+    class=" bg-white ml-4 max-w-lg rounded-lg  my-10"
+  >
     <header class=" max-w-lg pb-10">
       <h1 class="  text-left text-4xl font-bold text-on_background">
         Group Information
@@ -10,7 +13,7 @@
         <!------- Title  ------>
         <div class="mb-6">
           <FormInput
-            id="title"
+            id="update-group-title"
             v-model="updatedGroupTitle"
             div-class="w-80"
             label="Title"
@@ -22,7 +25,7 @@
         <!------- Description  ------>
         <div class="mb-6">
           <FormInput
-            id="description"
+            id="update-group-description"
             v-model="updatedGroupDescription"
             div-class="w-80"
             label="Description"
@@ -33,10 +36,11 @@
         <!------- Operation  ------>
         <div class="mb-6 w-80">
           <label
-            for="operations"
+            for="update-group-operations"
             class="block mb-2 text-sm font-medium text-on_background"
           >Select an Operation</label>
           <SearchableSelect
+            id="update-group-operation"
             v-model="updatedGroupOperationId"
             :options="options"
             mode="single"
@@ -59,6 +63,7 @@
             Only members of the selected operation can be members of this group.
           </div>
           <MemberSelection
+            id="group-members"
             v-model="updatedGroupMemberIds"
             :include-ids="selectedOperationMembers"
             :include="updatedGroupOperationId? true: false"
@@ -69,6 +74,7 @@
           <!-- Update Group Button -->
           <NormalButton
             v-if="updatedGroupTitle != ''"
+            id="update-group-update-button"
             :disabled="!checkPermissions([{name: PermissionNames.GroupUpdate}])"
             @click.prevent="editGroup()"
           >
@@ -76,6 +82,7 @@
           </NormalButton>
           <!-- Delete Group Button -->
           <NormalButton
+            id="update-group-delete-button"
             class="ml-auto"
             :disabled="!checkPermissions([{name: PermissionNames.GroupDelete}])"
             @click.prevent="deleteGroup()"
@@ -86,6 +93,7 @@
         <div class=" pt-4 flex justify-between">
           <!-- Cancel Button -->
           <NormalButton
+            id="update-group-cancel-button"
             class=" ml-auto"
             @click.prevent="router.push('/groups')"
           >

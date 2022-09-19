@@ -1,5 +1,8 @@
 <template>
-  <div class=" bg-white ml-4 max-w-lg rounded-lg my-10">
+  <div
+    id="update-operation-form" 
+    class=" bg-white ml-4 max-w-lg rounded-lg my-10"
+  >
     <header class=" max-w-lg pb-10">
       <h1 class="text-4xl font-bold text-black ">
         Update Operation
@@ -10,7 +13,7 @@
         <!------- Title  ------>
         <div class="mb-6">
           <FormInput
-            id="title"
+            id="update-operation-title"
             v-model="updatedtitle"
             label="Title"
             required
@@ -21,7 +24,7 @@
         <!------- Description  ------>
         <div class="mb-6">
           <FormInput
-            id="description"
+            id="update-operation-description"
             v-model="updateddescription"
             label="Description"
             :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
@@ -31,7 +34,7 @@
         <!------- start  ------>
         <div class="mb-6">
           <FormInput
-            id="start"
+            id="update-operation-start"
             v-model="updatedstart"
             label="Start"
             type="datetime-local"
@@ -43,7 +46,7 @@
         <!---- end --->
         <div class="mb-6">
           <FormInput
-            id="end"
+            id="update-operation-end"
             v-model="updatedend"
             label="End"
             type="datetime-local"
@@ -58,6 +61,7 @@
           class="mb-6"
         >
           <MemberSelection
+            id="operation-members"
             v-model="updatedOperationMemberIds"
             :disable-add-members="!checkPermissions([{name: PermissionNames.OperationMembersUpdate}])"
           />
@@ -65,11 +69,11 @@
         <!---- archive --->
         <div class="mb-6 flex justify-between flex-row">
           <label
-            for="is_archived"
+            for="update-operation-is_archived"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 "
           >Archive</label>
           <input
-            id="is_archived"
+            id="update-operation-is_archived"
             v-model="updatedisArchived"
             class="bg-gray-50 border w-1/12 mr-40 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             type="checkbox"
@@ -81,6 +85,7 @@
           <!-- Update Operation Button -->
           <NormalButton 
             v-if="updatedtitle != '' && updatedstart && (!updatedend || new Date(updatedstart) < new Date(updatedend))"
+            id="update-operation-update-button"
             :disabled="!checkPermissions([{name: PermissionNames.OperationUpdate}])"
             @click.prevent="editOperation()"
           >
@@ -88,6 +93,7 @@
           </NormalButton>
           <!-- Cancel Button -->
           <NormalButton
+            id="update-operation-cancel-button"
             class=" ml-auto"
             @click.prevent="router.push('/operation')"
           >

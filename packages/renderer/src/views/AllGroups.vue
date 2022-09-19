@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="all-groups">
     <div class="grid bg-white  rounded-lg  my-10">
       <div class="flex justify-between">
         <!-- Header -->
@@ -8,6 +8,7 @@
         </h1>
         <!-- Create New Group Button -->
         <NormalButton
+          id="open-create-group-button"
           class=" ml-auto mr-6"
           :disabled="!checkPermissions([{name: PermissionNames.GroupCreate}])"
           @click.prevent="router.push('/create-new-group')"
@@ -17,6 +18,7 @@
       </div>
       <!-- Table of All Groups -->
       <TableContainer
+        id="groups-table"
         :contents="groupPage().values()"
         id-identifier="id"
       >
