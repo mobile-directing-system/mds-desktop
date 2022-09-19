@@ -2,6 +2,10 @@ import { computed, onMounted } from 'vue';
 import { useLoginState, usePermissionsState, useUserState } from '../store';
 import type { Permission } from '../../../types';
 
+/**
+ * Composable to create a function and encapsulated state to check user permissions.
+ * @returns a function to check wether the logged in user has a set of permissions.
+ */
 export function usePermissions() {
   const loginState = useLoginState();
   const permissionsState = usePermissionsState();
@@ -21,11 +25,9 @@ export function usePermissions() {
       return true;
     }
     let userHasPermissions = false;
-    //
     if(loggedInUserPermissions.value) {
       userHasPermissions = true;
       for(const permission of permissions) {
-        console.log(loggedInUserPermissions.value?.filter((elem) => elem.name === permission.name));
         if(!(loggedInUserPermissions.value?.filter((elem) => elem.name === permission.name).length > 0)) {
           userHasPermissions = false;
         }
