@@ -123,7 +123,7 @@
             is_archived: false,
         };
 
-        operationState.dispatch('createOperation', {operation: newOperation, memberIds: operationMemberIds.value});
+        operationState.dispatch('createOperation', {operation: newOperation, memberIds: checkPermissions([{name: PermissionNames.OperationMembersUpdate}])? operationMemberIds.value : []});
         title.value ='';
         description.value ='';
         end.value='';
