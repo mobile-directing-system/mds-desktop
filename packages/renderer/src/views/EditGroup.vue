@@ -15,6 +15,8 @@
             div-class="w-80"
             label="Title"
             required
+            :disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? undefined:'true'"
+            :aria-disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? 'false':'true'"
           />
         </div>
         <!------- Description  ------>
@@ -24,6 +26,8 @@
             v-model="updatedGroupDescription"
             div-class="w-80"
             label="Description"
+            :disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? undefined:'true'"
+            :aria-disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? 'false':'true'"
           />
         </div>
         <!------- Operation  ------>
@@ -40,6 +44,8 @@
             label="title"
             value-prop="id"
             track-by="title"
+            :disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? undefined:true"
+            :aria-disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? 'false':'true'"
             @search-change="handleOperationSelectionInput"
             @open="handleOperationSelectionInput('')"
           />
@@ -56,12 +62,14 @@
             v-model="updatedGroupMemberIds"
             :include-ids="selectedOperationMembers"
             :include="updatedGroupOperationId? true: false"
+            :disable-add-members="!checkPermissions([{name: PermissionNames.GroupUpdate}])"
           />
         </div>
         <div class="flex justify-between">
           <!-- Update Group Button -->
-          <NormalButton 
+          <NormalButton
             v-if="updatedGroupTitle != ''"
+            :disabled="!checkPermissions([{name: PermissionNames.GroupUpdate}])"
             @click.prevent="editGroup()"
           >
             Update Group
@@ -69,6 +77,7 @@
           <!-- Delete Group Button -->
           <NormalButton
             class="ml-auto"
+            :disabled="!checkPermissions([{name: PermissionNames.GroupDelete}])"
             @click.prevent="deleteGroup()"
           >
             Delete Group
@@ -94,9 +103,12 @@
   import MemberSelection from '../components/MemberSelection.vue';
   import SearchableSelect from '../components/BasicComponents/SearchableSelect.vue';
   import { useGroupState, useOperationsState, useUserState } from '../store';
+  import { usePermissions } from '../composables';
+  import { PermissionNames } from '../constants';
   import{useRouter, useRoute} from 'vue-router';
   import type { Ref } from 'vue';
 
+  const checkPermissions = usePermissions();
   const groupState = useGroupState();
   const operationsState = useOperationsState();
   const userState = useUserState();

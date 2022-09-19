@@ -30,6 +30,7 @@
           </div>
         </button>
         <button
+          v-if="checkPermissions([{name: PermissionNames.OperationViewAny}])"
           id="manage-operations-button"
           class="block w-full  items-center pt-5 mr-3"
           @click="router.push(`/operation`)"
@@ -54,6 +55,7 @@
           </div>
         </button>
         <button
+          v-if="checkPermissions([{name: PermissionNames.GroupView}])"
           id="manage-groups-button"
           class="block w-full  items-center pt-5"
           @click="router.push(`/groups`)"

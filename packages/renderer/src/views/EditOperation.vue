@@ -14,6 +14,8 @@
             v-model="updatedtitle"
             label="Title"
             required
+            :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
+            :aria-disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? 'false':'true'"
           />
         </div>
         <!------- Description  ------>
@@ -22,6 +24,8 @@
             id="description"
             v-model="updateddescription"
             label="Description"
+            :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
+            :aria-disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? 'false':'true'"
           />
         </div>
         <!------- start  ------>
@@ -32,6 +36,8 @@
             label="Start"
             type="datetime-local"
             required
+            :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
+            :aria-disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? 'false':'true'"
           />
         </div>
         <!---- end --->
@@ -42,12 +48,18 @@
             label="End"
             type="datetime-local"
             :min="updatedstart"
+            :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
+            :aria-disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? 'false':'true'"
           />
         </div>
         <!-- Operation Member Selection -->
-        <div class="mb-6">
-          <MemberSelection 
+        <div
+          v-if="checkPermissions([{name: PermissionNames.OperationMembersView}])"
+          class="mb-6"
+        >
+          <MemberSelection
             v-model="updatedOperationMemberIds"
+            :disable-add-members="!checkPermissions([{name: PermissionNames.OperationMembersUpdate}])"
           />
         </div>
         <!---- archive --->
@@ -61,12 +73,15 @@
             v-model="updatedisArchived"
             class="bg-gray-50 border w-1/12 mr-40 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             type="checkbox"
+            :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
+            :aria-disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? 'false':'true'"
           >
         </div>
         <div class="flex justify-between">
           <!-- Update Operation Button -->
           <NormalButton 
             v-if="updatedtitle != '' && updatedstart && (!updatedend || new Date(updatedstart) < new Date(updatedend))"
+            :disabled="!checkPermissions([{name: PermissionNames.OperationUpdate}])"
             @click.prevent="editOperation()"
           >
             Update Operation
@@ -90,6 +105,8 @@
     import FormInput from '../components/BasicComponents/FormInput.vue';
     import MemberSelection from '../components/MemberSelection.vue';
     import { useOperationsState} from '../store';
+    import { usePermissions } from '../composables';
+    import { PermissionNames } from '../constants';
     import type {Operation} from '../../../types';
     import type { Ref } from 'vue';
 
@@ -108,12 +125,15 @@
     const updatedend = ref('');
     const updatedOperationMemberIds:Ref<string[]> = ref([]);
     const updatedisArchived = ref(false);
+    const checkPermissions = usePermissions();
 
     // get operation members if they exist
     onMounted(async () => {
-      await operationState.dispatch('retrieveOperationMembersById', selectedOperationID as string);
-      const members = operationMembers.value().get(selectedOperationID as string);
-      updatedOperationMemberIds.value = members?members:[];
+      if(checkPermissions([{name: PermissionNames.OperationMembersView}])) {
+        await operationState.dispatch('retrieveOperationMembersById', selectedOperationID as string);
+        const members = operationMembers.value().get(selectedOperationID as string);
+        updatedOperationMemberIds.value = members?members:[];
+      }
     });
 
     //set refs with content of current operation if it exists
@@ -144,7 +164,9 @@
             is_archived: updatedisArchived.value,       
         };
         operationState.dispatch('updateOperation', updatedOperation);
-        operationState.dispatch('updateOperationMembersById', {operationId: selectedOperationID as string, memberIds: updatedOperationMemberIds.value });
+        if(checkPermissions([{name: PermissionNames.OperationMembersUpdate}])) {
+          operationState.dispatch('updateOperationMembersById', {operationId: selectedOperationID as string, memberIds: updatedOperationMemberIds.value });
+        }
         router.push('/operation');
     }
 </script>

@@ -46,9 +46,13 @@
             />
           </div>
           <!-- Operation Member Selection -->
-          <div class="mb-6">
-            <MemberSelection 
+          <div
+            v-if="checkPermissions([{name: PermissionNames.OperationMembersView}])" 
+            class="mb-6"
+          >
+            <MemberSelection
               v-model="operationMemberIds"
+              :disable-add-members="!checkPermissions([{name: PermissionNames.OperationMembersUpdate}])"
             />
           </div>
         </main>
@@ -83,6 +87,8 @@
     import type {Operation} from '../../../types';
     import FormInput from '../components/BasicComponents/FormInput.vue';
     import type {Ref} from 'vue';
+    import { usePermissions } from '../composables';
+    import { PermissionNames } from '../constants';
 
     const title = ref('');
     const description = ref('');
@@ -91,6 +97,7 @@
     const operationMemberIds: Ref<string[]> = ref([]);
     const operationState = useOperationsState();
     const router = useRouter();
+    const checkPermissions = usePermissions();
 
     /**
      * function to create new operation object and initiate call to backend. Click handler for the create opertion button.

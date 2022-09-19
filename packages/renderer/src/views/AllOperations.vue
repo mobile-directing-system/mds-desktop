@@ -8,6 +8,7 @@
         </h1>
         <!-- Create Operation Button -->
         <NormalButton
+          :disabled="!checkPermissions([{name: PermissionNames.OperationCreate}])"
           class=" ml-auto  mr-6"
           @click="router.push('/create-new-operation')"
         >
@@ -78,9 +79,12 @@
   import TableHeader from '../components/BasicComponents/TableHeader.vue';
   import {useOperationsState } from '../store';
   import {useRouter} from 'vue-router';
+  import { usePermissions } from '../composables';
+  import { PermissionNames } from '../constants';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type { Operation } from '../../../types';
 
+  const checkPermissions = usePermissions();
   const operationsState = useOperationsState();
   const operationsPage = computed(() => operationsState.getters.page);
   const totalOperationAmount = computed(() => operationsState.getters.total);
