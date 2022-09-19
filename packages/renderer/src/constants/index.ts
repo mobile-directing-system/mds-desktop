@@ -9,11 +9,11 @@ class PermissionNames {
   public static readonly GroupDelete = 'group.delete';
   public static readonly GroupView = 'group.view';
   // Operations Permissions
-  public static readonly OperationViewAny = 'operations.view.any';
-  public static readonly OperationCreate = 'operations.create';
-  public static readonly OperationUpdate = 'operations.update';
-  public static readonly OperationMembersView = 'operations.members.view';
-  public static readonly OperationMembersUpdate = 'operations.members.update';
+  public static readonly OperationViewAny = 'operation.view.any';
+  public static readonly OperationCreate = 'operation.create';
+  public static readonly OperationUpdate = 'operation.update';
+  public static readonly OperationMembersView = 'operation.members.view';
+  public static readonly OperationMembersUpdate = 'operation.members.update';
   // Users Permissions
   public static readonly UserCreate = 'user.create';
   public static readonly UserUpdate = 'user.update';
