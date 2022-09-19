@@ -11,7 +11,7 @@
     searchable
     hide-selected
     :mode="props.mode"
-    :filterResults="false"
+    :filterResults="props.filterResults"
     :options="props.options"
     :label="props.label"
     :value-prop="props.valueProp"
@@ -55,9 +55,10 @@
   interface Props {
     mode: 'tags' | 'multiple' | 'single';   // Select the mode for the multiselect
     placeholder: string;                    // Placeholder string for the multiselect
-    label:string;                           // If options are objects, this string defines what object property is shown in the options list
-    trackBy: string;                        // If options are objects, this string defines what object property is searched
-    valueProp: string;                      // If options are objects, this string defines what object property is used as value for selected options
+    label?:string;                           // If options are objects, this string defines what object property is shown in the options list
+    trackBy?: string;                        // If options are objects, this string defines what object property is searched
+    valueProp?: string;                      // If options are objects, this string defines what object property is used as value for selected options
+    filterResults: boolean;
     debounce?: number;                      // Defines the debouce time
     maxWait?: number;                       // Defines the maxWait during debounce
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

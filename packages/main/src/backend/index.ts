@@ -66,6 +66,7 @@ import { retrieveGroup as mockedRetrieveGroup } from './mockedBackend/groups';
 import {retrievePermissions as mockedRetrievePermissions} from './mockedBackend/permissions';
 import { updatePermissions as mockedUpdatePermissions } from './mockedBackend/permissions';
 
+export { createAddressbookEntry, updateAddressbookEntry, deleteAddressbookEntry, retrieveAddressbookEntries, retrieveAddressbookEntry, searchAddressbookEntryByQuery, setChannels, retrieveChannels } from './addressbook';
 //login calls
 export const login = config.mockedBackend? mockedLogin : realLogin;
 export const logout = config.mockedBackend? mockedLogout : realLogout;

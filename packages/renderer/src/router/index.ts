@@ -12,6 +12,9 @@ import EditOperation from '../views/EditOperation.vue';
 import EditGroup from '../views/EditGroup.vue';
 import AllGroups from '../views/AllGroups.vue';
 import CreateNewGroup from '../views/CreateNewGroup.vue';
+import Addressbook from '../views/AllAddressbookEntries.vue';
+import CreateNewAddressbookEntry from '../views/CreateNewAddressbookEntry.vue';
+import EditAddressbookEntry from '../views/EditAddressbookEntry.vue';
 
 const routes:RouteRecordRaw[] = [
     //Definition of Routes and Subroutes and how they relate to the views
@@ -70,6 +73,21 @@ const routes:RouteRecordRaw[] = [
                 path: '/create-new-group',
                 name: 'CreateGroup',
                 component: CreateNewGroup,
+            },
+            {
+                path: '/addressbook',
+                name: 'Addressbook',
+                component: Addressbook,
+            },
+            {
+                path: '/create-new-addressbookentry',
+                name: 'CreateAddressbookEntry',
+                component: CreateNewAddressbookEntry,
+            },
+            {
+                path: '/edit-addressbookentry/:addressbookEntryID',
+                name: 'EditCurrentAddressbookEntry',
+                component: EditAddressbookEntry,
             },
         ],
     },

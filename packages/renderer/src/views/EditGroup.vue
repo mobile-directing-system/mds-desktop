@@ -35,6 +35,7 @@
           <SearchableSelect
             v-model="updatedGroupOperationId"
             :options="options"
+            :filter-results="false"
             mode="single"
             placeholder="Select operation"
             label="title"
