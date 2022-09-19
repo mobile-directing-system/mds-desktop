@@ -128,6 +128,7 @@
           user: addedUserId.value? addedUserId.value:undefined,
       };
       addressbookState.dispatch('createEntry', newEntry);
+      addressbookState.dispatch('retrieveEntries', {amount: 5, offset:0});
       router.push('/addressbook');
   }
   function InterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {
