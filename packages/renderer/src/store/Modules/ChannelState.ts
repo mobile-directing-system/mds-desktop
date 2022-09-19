@@ -6,7 +6,6 @@ import type { Store } from 'vuex';
 import { errorState, handleErrors } from './ErrorState';
 
 function undom(channel: Channel):Channel {
-    console.log(channel);
     return {...channel, details:{ ...channel.details}};
 }
 /**
@@ -59,7 +58,6 @@ class ChannelStateActions extends Actions<ChannelState, ChannelStateGetters, Cha
         this.mutations.setChannels([]);
     }
     async setChannels({entryId, channels}:{entryId: string, channels: Channels}) {
-        console.log(channels);
         const setChannelsRes: ErrorResult<boolean> = await setChannels(entryId, channels.map(x => x = undom(x)));
         if(!setChannelsRes.error){
             this.mutations.setChannels(channels);

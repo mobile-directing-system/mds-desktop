@@ -222,7 +222,6 @@
   });
   function handleEntrySelectionInput(query: string) {
     addressbookState.dispatch('searchEntryByQuery', {query, limit:5});
-    console.log(entriesSearchResultsArray);
   }
   function InterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {
       const arr: T[] = [];

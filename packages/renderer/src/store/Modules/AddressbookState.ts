@@ -93,7 +93,6 @@ class AddressbookStateActions extends Actions<AddressbookState, AddressbookState
     async createEntry(entry: AddressbookEntry) {
         const createdEntry:ErrorResult<AddressbookEntry> = await createAddressbookEntry(entry);
         if(createdEntry.res && !createdEntry.error){
-            console.log(createdEntry);
             this.mutations.addOrUpdateEntry(createdEntry.res);
         } else {
             handleErrors(createdEntry.errorMsg, this.errorState);
@@ -102,7 +101,6 @@ class AddressbookStateActions extends Actions<AddressbookState, AddressbookState
     async updateEntries(entry: AddressbookEntry) {
 
         const updateEntry:ErrorResult<boolean> = await updateAddressbookEntry(entry);
-        console.log(updateEntry);
         if(!updateEntry.error){
             this.actions.retrieveEntryById(entry.id);
         } else {

@@ -310,7 +310,6 @@
   import SearchableSelect from '../components/BasicComponents/SearchableSelect.vue';
 
   onMounted(() => {
-    console.log(selectedAddressbookEntryId as string);
     channelState.dispatch('retrieveChannels', selectedAddressbookEntryId as string);} );
 
   const route = useRoute();
@@ -422,7 +421,6 @@
           var channelsList:Channel[] = [... channels.value().values(), newChannel];
           channelState.dispatch('setChannels', {entryId: (selectedAddressbookEntryId as string), channels: channelsList});
           channelState.dispatch('retrieveChannels', selectedAddressbookEntryId as string);
-          console.log(channels.value().values());
           showModalNewChannel.value = false; 
           resetValues();
       }
