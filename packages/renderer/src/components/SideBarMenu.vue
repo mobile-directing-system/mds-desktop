@@ -79,6 +79,32 @@
             <span class="text-2xl"> Groups </span>
           </div>
         </button>
+        <button
+          id="manage-groups-button"
+          class="block w-full  items-center pt-5"
+          @click="router.push(`/permissions`)"
+        >
+          <div
+            class="flex items-center hover:bg-primary hover:text-on_primary hover:rounded-md hover:shadow-xl"
+            :class="[route.fullPath.includes('permissions') ? 'bg-primary text-on_primary rounded-md shadow-xl' : '']"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+              />
+            </svg>
+            <span class="text-2xl"> Permissions </span>
+          </div>
+        </button>
       </main>
     </div>
   </div>
