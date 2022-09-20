@@ -38,6 +38,7 @@
             placeholder="Select operation"
             label="title"
             value-prop="id"
+            :filter-results="false"
             track-by="title"
             @search-change="handleOperationSelectionInput"
             @open="handleOperationSelectionInput('')"
