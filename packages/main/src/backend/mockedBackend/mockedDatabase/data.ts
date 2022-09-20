@@ -104,6 +104,11 @@ class MockDatabase {
         {name: PermissionNames.OperationUpdate}, {name: PermissionNames.GroupUpdate}, {name: PermissionNames.OperationMembersView},
         {name: PermissionNames.OperationMembersUpdate}, {name: PermissionNames.GroupDelete}],
       ],
+      ['b5782cc2-c41b-4b13-953b-562b714fb7b3',[{name: PermissionNames.UserView}, {name:  PermissionNames.OperationViewAny}, {name: PermissionNames.GroupView}, 
+        {name: PermissionNames.UserCreate}, {name: PermissionNames.OperationCreate}, {name: PermissionNames.GroupCreate}, {name: PermissionNames.UserUpdate},
+        {name: PermissionNames.OperationUpdate}, {name: PermissionNames.GroupUpdate}, {name: PermissionNames.OperationMembersView},
+        {name: PermissionNames.OperationMembersUpdate}, {name: PermissionNames.GroupDelete}, {name: PermissionNames.UserSetActive}],
+      ],
     ]);
 
     //Permission Functions
