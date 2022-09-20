@@ -7,6 +7,7 @@
           All Operations
         </h1>
         <div class="flex h-12 mt-3">
+          <!-- Search Input -->
           <FormInput
             v-if="showSearch"
             id="prio"
@@ -14,10 +15,8 @@
             div-class=" ml-auto w-50 mr-3"
             label=""
           />
-          <!-- Create Operation Button -->
+          <!-- Search Button -->
           <NormalButton
-            id="open-create-operation-button"
-            :disabled="!checkPermissions([{name: PermissionNames.OperationCreate}])"
             class=" ml-auto mr-6"
             @click.prevent="showSearch=!showSearch; searchInput =''"
           >
@@ -34,7 +33,10 @@
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             /></svg>
           </NormalButton>
+          <!-- Create Operation Button -->
           <NormalButton
+            id="open-create-operation-button"
+            :disabled="!checkPermissions([{name: PermissionNames.OperationCreate}])"
             class=" ml-auto  mr-6"
             @click="router.push('/create-new-operation')"
           >
@@ -45,8 +47,8 @@
     <!-- All Operations Table -->
     </div>
     <TableContainer
-      id="operations-table"
       v-if="searchInput === ''"
+      id="operations-table"
       :contents="operationsPage().values()"
       id-identifier="id"
     >
