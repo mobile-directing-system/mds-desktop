@@ -9,7 +9,7 @@ import type { ErrorResult } from '../../../types';
  * @param password password to pass to the backend for logging in
  * @returns boolean indicating if login was successful
  */
-export async function loginHandler(_:IpcMainInvokeEvent, username: string, password: string):Promise<ErrorResult<boolean>> {
+export async function loginHandler(_:IpcMainInvokeEvent, username: string, password: string):Promise<ErrorResult<string>> {
   return login(username, password);
 }
 

@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div id="all-operations">
     <div class="grid bg-white  rounded-lg  my-10">
       <div class="flex justify-between">
         <!-- Header -->
         <h1 class="ml-4 text-4xl font-bold text-black text-center">
           All Operations
         </h1>
-        <!-- Create Operation Button -->
         <div class="flex h-12 mt-3">
+          <!-- Search Input -->
           <FormInput
             v-if="showSearch"
             id="prio"
@@ -15,6 +15,7 @@
             div-class=" ml-auto w-50 mr-3"
             label=""
           />
+          <!-- Search Button -->
           <NormalButton
             class=" ml-auto mr-6"
             @click.prevent="showSearch=!showSearch; searchInput =''"
@@ -32,7 +33,10 @@
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             /></svg>
           </NormalButton>
+          <!-- Create Operation Button -->
           <NormalButton
+            id="open-create-operation-button"
+            :disabled="!checkPermissions([{name: PermissionNames.OperationCreate}])"
             class=" ml-auto  mr-6"
             @click="router.push('/create-new-operation')"
           >
@@ -44,6 +48,7 @@
     </div>
     <TableContainer
       v-if="searchInput === ''"
+      id="operations-table"
       :contents="operationsPage().values()"
       id-identifier="id"
     >
@@ -150,11 +155,14 @@
   import TableHeader from '../components/BasicComponents/TableHeader.vue';
   import {useOperationsState } from '../store';
   import {useRouter} from 'vue-router';
+  import { usePermissions } from '../composables';
+  import { PermissionNames } from '../constants';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type { Operation } from '../../../types';
   
   import FormInput from '../components/BasicComponents/FormInput.vue';
 
+  const checkPermissions = usePermissions();
   const operationsState = useOperationsState();
   const operationsPage = computed(() => operationsState.getters.page);
   const totalOperationAmount = computed(() => operationsState.getters.total);

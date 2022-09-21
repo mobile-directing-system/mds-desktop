@@ -5,6 +5,7 @@
             
       <main>
         <button
+          v-if="checkPermissions([{name: PermissionNames.UserView}])"
           id="manage-users-button"
           class="block w-full  items-center pt-10 mr-3"
           @click="router.push('/user')"
@@ -29,6 +30,7 @@
           </div>
         </button>
         <button
+          v-if="checkPermissions([{name: PermissionNames.OperationViewAny}])"
           id="manage-operations-button"
           class="block w-full  items-center pt-5 mr-3"
           @click="router.push(`/operation`)"
@@ -53,6 +55,7 @@
           </div>
         </button>
         <button
+          v-if="checkPermissions([{name: PermissionNames.GroupView}])"
           id="manage-groups-button"
           class="block w-full  items-center pt-5"
           @click="router.push(`/groups`)"
@@ -84,6 +87,10 @@
 <script lang="ts" setup>  
   import {useRouter} from 'vue-router';
   import { useRoute } from 'vue-router';
+  import { usePermissions } from '../composables';
+  import { PermissionNames } from '../constants';
+
   const router = useRouter();
   const route = useRoute();
+  const checkPermissions = usePermissions();
 </script>

@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class=" bg-white ml-4 max-w-lg rounded-lg  my-10">
+    <div
+      id="create-new-operation-form"
+      class=" bg-white ml-4 max-w-lg rounded-lg  my-10"
+    >
       <header class=" max-w-lg pb-10">
         <h1 class="text-4xl font-bold text-black ">
           Create a new Operation
@@ -11,7 +14,7 @@
           <!------- Title  ------>
           <div class="mb-6">
             <FormInput
-              id="title"
+              id="create-operation-title"
               v-model="title"
               label="Title"
               required
@@ -20,7 +23,7 @@
           <!------- Description  ------>
           <div class="mb-6">
             <FormInput
-              id="description"
+              id="create-operation-description"
               v-model="description"
               label="Description"
             />
@@ -28,7 +31,7 @@
           <!------- Start  ------>
           <div class="mb-6">
             <FormInput
-              id="start"
+              id="create-operation-start"
               v-model="start"
               label="Start"
               type="datetime-local"
@@ -38,7 +41,7 @@
           <!--- End --->
           <div class="mb-6">
             <FormInput
-              id="end"
+              id="create-operation-end"
               v-model="end"
               label="End"
               type="datetime-local"
@@ -46,9 +49,14 @@
             />
           </div>
           <!-- Operation Member Selection -->
-          <div class="mb-6">
-            <MemberSelection 
+          <div
+            v-if="checkPermissions([{name: PermissionNames.OperationMembersView}])" 
+            class="mb-6"
+          >
+            <MemberSelection
+              id="create-operation-operation-members"
               v-model="operationMemberIds"
+              :disable-add-members="!checkPermissions([{name: PermissionNames.OperationMembersUpdate}])"
             />
           </div>
         </main>
@@ -57,12 +65,14 @@
         <!-- Create Operation Button -->
         <NormalButton 
           v-if="title != '' && start && (!end || new Date(start) < new Date(end))"
+          id="create-operation-button"
           @click.prevent="createNewOperation(title, description, start, end)"
         >
           Create Operation
         </NormalButton>
         <!-- Cancel Button -->
         <NormalButton
+          id="create-operation-cancel-button"
           class=" ml-auto"
           @click.prevent="router.push('/operation')"
         >
@@ -83,6 +93,8 @@
     import type {Operation} from '../../../types';
     import FormInput from '../components/BasicComponents/FormInput.vue';
     import type {Ref} from 'vue';
+    import { usePermissions } from '../composables';
+    import { PermissionNames } from '../constants';
 
     const title = ref('');
     const description = ref('');
@@ -91,6 +103,7 @@
     const operationMemberIds: Ref<string[]> = ref([]);
     const operationState = useOperationsState();
     const router = useRouter();
+    const checkPermissions = usePermissions();
 
     /**
      * function to create new operation object and initiate call to backend. Click handler for the create opertion button.
@@ -110,7 +123,7 @@
             is_archived: false,
         };
 
-        operationState.dispatch('createOperation', {operation: newOperation, memberIds: operationMemberIds.value});
+        operationState.dispatch('createOperation', {operation: newOperation, memberIds: checkPermissions([{name: PermissionNames.OperationMembersUpdate}])? operationMemberIds.value : []});
         title.value ='';
         description.value ='';
         end.value='';

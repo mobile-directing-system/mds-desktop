@@ -17,6 +17,8 @@
             v-model="updatedUserName"
             label="Username"
             required
+            :disabled="checkPermissions([{name: PermissionNames.UserUpdate}])? undefined:'true'"
+            :aria-disabled="checkPermissions([{name: PermissionNames.UserUpdate}])? 'false':'true'"
           />
         </div>
         <!------- first_name  ------>
@@ -26,6 +28,8 @@
             v-model="updatedUserFirstName"
             label="Firstname"
             required
+            :disabled="checkPermissions([{name: PermissionNames.UserUpdate}])? undefined:'true'"
+            :aria-disabled="checkPermissions([{name: PermissionNames.UserUpdate}])? 'false':'true'"
           />
         </div>
         <!------- last_name  ------>
@@ -35,6 +39,8 @@
             v-model="updatedUserLastName"
             label="Lastname"
             required
+            :disabled="checkPermissions([{name: PermissionNames.UserUpdate}])? undefined:'true'"
+            :aria-disabled="checkPermissions([{name: PermissionNames.UserUpdate}])? 'false':'true'"
           />
         </div>
         <div class="flex justify-between">
@@ -42,6 +48,7 @@
           <NormalButton
             v-if="updatedUserFirstName != '' && updatedUserName != '' && updatedUserLastName != ''"
             id="update-user-update-button"
+            :disabled="!checkPermissions([{name: PermissionNames.UserUpdate}])"
             @click.prevent="editUser()"
           >
             Update User
@@ -77,7 +84,10 @@
   import { useUserState} from '../store';
   import type {User} from '../../../types';
 
-  import{useRouter, useRoute} from 'vue-router';
+  import { useRouter, useRoute } from 'vue-router';
+  import { usePermissions } from '../composables';
+  import { PermissionNames } from '../constants';
+
   const userState = useUserState();
   const router = useRouter();
   const route = useRoute();
@@ -85,6 +95,7 @@
   const users = computed(() => userState.getters.users);
   const selectedUserID = route.params.selectedUserID;
   const currentUser = users.value().get(selectedUserID as string);
+  const checkPermissions = usePermissions();
 
   const updatedUserFirstName = ref('');
   const updatedUserName = ref('');
@@ -106,6 +117,7 @@
         username: updatedUserName.value,
         first_name: updatedUserFirstName.value,
         last_name: updatedUserLastName.value,
+        is_active: true,
         is_admin: false,
         pass: '',
       };

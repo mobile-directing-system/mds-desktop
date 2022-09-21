@@ -3,6 +3,4 @@ interface Permission {
   options?: object,
 }
 
-type Permissions = Permisson[];
-
-export { Permission, Permissions };
+export { Permission };

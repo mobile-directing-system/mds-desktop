@@ -1,4 +1,5 @@
 import type { User, Operation, Group, Permission } from '../../../../../types';
+import {PermissionNames} from '../../../../../renderer/src/constants';
 import {v4 as uuid} from 'uuid';
 import { difference } from 'lodash';
 
@@ -6,27 +7,27 @@ class MockDatabase {
     private loggedIn = false;
     //set of users on startup. Generated with testDataGenerators/gen_users.sh
     private readonly users: Map<string, User> = new Map<string, User>([
-        ['14baea6f-5e6c-4d7f-972c-5b2c0c02950f', {id: '14baea6f-5e6c-4d7f-972c-5b2c0c02950f', username: 'admin', first_name: 'admin', last_name: 'admin', is_admin: true, pass: 'admin'}],
-        ['827bf9cd-f911-43a0-9e41-fb52c9295e8d', {id: '827bf9cd-f911-43a0-9e41-fb52c9295e8d', username: 'TestUser1', first_name: 'FvTHZDLRdMwLGdAKLfML', last_name: 'ckgMhsOvHJXtmumxgUir', is_admin: false, pass: 'testpw'}],
-        ['94a66e6a-edec-4160-a582-ee177f4b0c63', {id: '94a66e6a-edec-4160-a582-ee177f4b0c63', username: 'TestUser2', first_name: 'tYwSHbsHhTzaZjzssGfy', last_name: 'XHFkSHwpruaxizAxLizb', is_admin: false, pass: 'testpw'}],
-        ['45e948a9-e9d4-4ac7-b5c7-7b08c64ded20', {id: '45e948a9-e9d4-4ac7-b5c7-7b08c64ded20', username: 'TestUser3', first_name: 'ZqxxJphkRZUmVlmjsuiZ', last_name: 'ljudDmDdeBsNPfAijDnO', is_admin: false, pass: 'testpw'}],
-        ['dd5271cf-1132-4086-9852-d7f4ee889767', {id: 'dd5271cf-1132-4086-9852-d7f4ee889767', username: 'TestUser4', first_name: 'zefKqnqvBRQBFVIowJkf', last_name: 'owSQjCNRjMmLeKbslxRW', is_admin: false, pass: 'testpw'}],
-        ['9ed8ab53-87f0-46cc-b0d8-e0c37dd7209b', {id: '9ed8ab53-87f0-46cc-b0d8-e0c37dd7209b', username: 'TestUser5', first_name: 'RQfXjdmdibOSyGACKqqi', last_name: 'QuLutkGqjSyOWYZicgbS', is_admin: false, pass: 'testpw'}],
-        ['a24f1ebb-cfc8-4b73-9e51-ba93bb03cca8', {id: 'a24f1ebb-cfc8-4b73-9e51-ba93bb03cca8', username: 'TestUser6', first_name: 'EGogSAYxEcjXcJYTESEj', last_name: 'GUGoaZlQKXEOBlvHKATO', is_admin: false, pass: 'testpw'}],
-        ['34c13975-7cab-4a75-84b4-fd5349440edc', {id: '34c13975-7cab-4a75-84b4-fd5349440edc', username: 'TestUser7', first_name: 'TShPoOVCFirHjQcrmnSd', last_name: 'CPiNWslNCwYGCOxgRgbh', is_admin: false, pass: 'testpw'}],
-        ['b5782cc2-c41b-4b13-953b-562b714fb7b3', {id: 'b5782cc2-c41b-4b13-953b-562b714fb7b3', username: 'TestUser8', first_name: 'NCTtsvDAKKnHJyfNanbe', last_name: 'YqMiGfXwRzQdFWdwFaxS', is_admin: false, pass: 'testpw'}],
-        ['2e2f96e9-07e7-4681-b9c2-7706dd76e8cf', {id: '2e2f96e9-07e7-4681-b9c2-7706dd76e8cf', username: 'TestUser9', first_name: 'vLeDhncAyRgSHKMvmylC', last_name: 'MTcKoZnndrNWMlyBoJZh', is_admin: false, pass: 'testpw'}],
-        ['24a74581-df9c-4739-b33d-a65530d31515', {id: '24a74581-df9c-4739-b33d-a65530d31515', username: 'TestUser10', first_name: 'KJBARxmgbfjxtYOlXCyJ', last_name: 'xQDJSJqIiqlmDGEcvdnz', is_admin: false, pass: 'testpw'}],
-        ['6651c2e0-a55c-4080-a882-660a0ca1fa33', {id: '6651c2e0-a55c-4080-a882-660a0ca1fa33', username: 'TestUser11', first_name: 'hDMozMdnNhhlHMWuSaON', last_name: 'nBqsQPObVSvOsMhIBUKP', is_admin: false, pass: 'testpw'}],
-        ['4c2274fc-576e-42c7-89ff-0e63edba0ec3', {id: '4c2274fc-576e-42c7-89ff-0e63edba0ec3', username: 'TestUser12', first_name: 'WiiAaCKXjFrjCVZDcZEF', last_name: 'CuWVNTLIXCyKnNtfjkJj', is_admin: false, pass: 'testpw'}],
-        ['b0a7145a-b4b2-4090-9a05-50a901a57769', {id: 'b0a7145a-b4b2-4090-9a05-50a901a57769', username: 'TestUser13', first_name: 'WhLAUIgilfjtfzTmgBzX', last_name: 'sRctmwgLAAzpnniOPSlI', is_admin: false, pass: 'testpw'}],
-        ['6688d1fb-a9ca-4987-9237-6616edec0596', {id: '6688d1fb-a9ca-4987-9237-6616edec0596', username: 'TestUser14', first_name: 'kMXiIIZrdtkBsiFPCzfJ', last_name: 'OZUlrYZTamKnawJAxbqp', is_admin: false, pass: 'testpw'}],
-        ['15967ee4-334b-43c4-8783-72841a07d85a', {id: '15967ee4-334b-43c4-8783-72841a07d85a', username: 'TestUser15', first_name: 'mDvANKbQVAnhRKPIACIF', last_name: 'gPlQsmjzisdssHAgfRpC', is_admin: false, pass: 'testpw'}],
-        ['56955da3-ba67-4a10-aa90-2b147ccb8209', {id: '56955da3-ba67-4a10-aa90-2b147ccb8209', username: 'TestUser16', first_name: 'BuzGtTVdRXWXDYpFrcYO', last_name: 'XFDlnotbyShTiQTvXCDu', is_admin: false, pass: 'testpw'}],
-        ['0faf22fa-f60b-45e9-a96b-0e73c93d3836', {id: '0faf22fa-f60b-45e9-a96b-0e73c93d3836', username: 'TestUser17', first_name: 'rmEkhzMPUOUaruXVWCnF', last_name: 'qpBfeEdOcLlbNRftSQkw', is_admin: false, pass: 'testpw'}],
-        ['374d383f-e4f0-4fd9-848d-8f272374c8db', {id: '374d383f-e4f0-4fd9-848d-8f272374c8db', username: 'TestUser18', first_name: 'REVHmyKxcTRDFZooMdbb', last_name: 'kgWzGUgkWoUMpjPtgLhx', is_admin: false, pass: 'testpw'}],
-        ['f7300dfe-f4c1-41c8-87d7-edbeaea82b69', {id: 'f7300dfe-f4c1-41c8-87d7-edbeaea82b69', username: 'TestUser19', first_name: 'nijOHSaDjliFHZohBvTK', last_name: 'lTbqArfnzfJBVSIWgjzy', is_admin: false, pass: 'testpw'}],
-        ['ddfb1acc-8a21-4f67-b124-67086bd72a9d', {id: 'ddfb1acc-8a21-4f67-b124-67086bd72a9d', username: 'TestUser20', first_name: 'iowpvmJKbFNbAoJWHwwh', last_name: 'nldhXyMgZARzmcDtqGLd', is_admin: false, pass: 'testpw'}],
+        ['14baea6f-5e6c-4d7f-972c-5b2c0c02950f', {id: '14baea6f-5e6c-4d7f-972c-5b2c0c02950f', username: 'admin', first_name: 'admin', last_name: 'admin', is_active: true, is_admin: true, pass: 'admin'}],
+        ['827bf9cd-f911-43a0-9e41-fb52c9295e8d', {id: '827bf9cd-f911-43a0-9e41-fb52c9295e8d', username: 'TestUser1', first_name: 'FvTHZDLRdMwLGdAKLfML', last_name: 'ckgMhsOvHJXtmumxgUir', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['94a66e6a-edec-4160-a582-ee177f4b0c63', {id: '94a66e6a-edec-4160-a582-ee177f4b0c63', username: 'TestUser2', first_name: 'tYwSHbsHhTzaZjzssGfy', last_name: 'XHFkSHwpruaxizAxLizb', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['45e948a9-e9d4-4ac7-b5c7-7b08c64ded20', {id: '45e948a9-e9d4-4ac7-b5c7-7b08c64ded20', username: 'TestUser3', first_name: 'ZqxxJphkRZUmVlmjsuiZ', last_name: 'ljudDmDdeBsNPfAijDnO', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['dd5271cf-1132-4086-9852-d7f4ee889767', {id: 'dd5271cf-1132-4086-9852-d7f4ee889767', username: 'TestUser4', first_name: 'zefKqnqvBRQBFVIowJkf', last_name: 'owSQjCNRjMmLeKbslxRW', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['9ed8ab53-87f0-46cc-b0d8-e0c37dd7209b', {id: '9ed8ab53-87f0-46cc-b0d8-e0c37dd7209b', username: 'TestUser5', first_name: 'RQfXjdmdibOSyGACKqqi', last_name: 'QuLutkGqjSyOWYZicgbS', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['a24f1ebb-cfc8-4b73-9e51-ba93bb03cca8', {id: 'a24f1ebb-cfc8-4b73-9e51-ba93bb03cca8', username: 'TestUser6', first_name: 'EGogSAYxEcjXcJYTESEj', last_name: 'GUGoaZlQKXEOBlvHKATO', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['34c13975-7cab-4a75-84b4-fd5349440edc', {id: '34c13975-7cab-4a75-84b4-fd5349440edc', username: 'TestUser7', first_name: 'TShPoOVCFirHjQcrmnSd', last_name: 'CPiNWslNCwYGCOxgRgbh', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['b5782cc2-c41b-4b13-953b-562b714fb7b3', {id: 'b5782cc2-c41b-4b13-953b-562b714fb7b3', username: 'TestUser8', first_name: 'NCTtsvDAKKnHJyfNanbe', last_name: 'YqMiGfXwRzQdFWdwFaxS', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['2e2f96e9-07e7-4681-b9c2-7706dd76e8cf', {id: '2e2f96e9-07e7-4681-b9c2-7706dd76e8cf', username: 'TestUser9', first_name: 'vLeDhncAyRgSHKMvmylC', last_name: 'MTcKoZnndrNWMlyBoJZh', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['24a74581-df9c-4739-b33d-a65530d31515', {id: '24a74581-df9c-4739-b33d-a65530d31515', username: 'TestUser10', first_name: 'KJBARxmgbfjxtYOlXCyJ', last_name: 'xQDJSJqIiqlmDGEcvdnz', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['6651c2e0-a55c-4080-a882-660a0ca1fa33', {id: '6651c2e0-a55c-4080-a882-660a0ca1fa33', username: 'TestUser11', first_name: 'hDMozMdnNhhlHMWuSaON', last_name: 'nBqsQPObVSvOsMhIBUKP', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['4c2274fc-576e-42c7-89ff-0e63edba0ec3', {id: '4c2274fc-576e-42c7-89ff-0e63edba0ec3', username: 'TestUser12', first_name: 'WiiAaCKXjFrjCVZDcZEF', last_name: 'CuWVNTLIXCyKnNtfjkJj', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['b0a7145a-b4b2-4090-9a05-50a901a57769', {id: 'b0a7145a-b4b2-4090-9a05-50a901a57769', username: 'TestUser13', first_name: 'WhLAUIgilfjtfzTmgBzX', last_name: 'sRctmwgLAAzpnniOPSlI', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['6688d1fb-a9ca-4987-9237-6616edec0596', {id: '6688d1fb-a9ca-4987-9237-6616edec0596', username: 'TestUser14', first_name: 'kMXiIIZrdtkBsiFPCzfJ', last_name: 'OZUlrYZTamKnawJAxbqp', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['15967ee4-334b-43c4-8783-72841a07d85a', {id: '15967ee4-334b-43c4-8783-72841a07d85a', username: 'TestUser15', first_name: 'mDvANKbQVAnhRKPIACIF', last_name: 'gPlQsmjzisdssHAgfRpC', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['56955da3-ba67-4a10-aa90-2b147ccb8209', {id: '56955da3-ba67-4a10-aa90-2b147ccb8209', username: 'TestUser16', first_name: 'BuzGtTVdRXWXDYpFrcYO', last_name: 'XFDlnotbyShTiQTvXCDu', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['0faf22fa-f60b-45e9-a96b-0e73c93d3836', {id: '0faf22fa-f60b-45e9-a96b-0e73c93d3836', username: 'TestUser17', first_name: 'rmEkhzMPUOUaruXVWCnF', last_name: 'qpBfeEdOcLlbNRftSQkw', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['374d383f-e4f0-4fd9-848d-8f272374c8db', {id: '374d383f-e4f0-4fd9-848d-8f272374c8db', username: 'TestUser18', first_name: 'REVHmyKxcTRDFZooMdbb', last_name: 'kgWzGUgkWoUMpjPtgLhx', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['f7300dfe-f4c1-41c8-87d7-edbeaea82b69', {id: 'f7300dfe-f4c1-41c8-87d7-edbeaea82b69', username: 'TestUser19', first_name: 'nijOHSaDjliFHZohBvTK', last_name: 'lTbqArfnzfJBVSIWgjzy', is_active: true, is_admin: false, pass: 'testpw'}],
+        ['ddfb1acc-8a21-4f67-b124-67086bd72a9d', {id: 'ddfb1acc-8a21-4f67-b124-67086bd72a9d', username: 'TestUser20', first_name: 'iowpvmJKbFNbAoJWHwwh', last_name: 'nldhXyMgZARzmcDtqGLd', is_active: true, is_admin: false, pass: 'testpw'}],
     ]);
     //set of operations on startup. Generated with testDataGenerators/gen_operations.sh
     private readonly operations: Map<string, Operation> = new Map<string, Operation>([
@@ -53,7 +54,7 @@ class MockDatabase {
     ]);
     //set of groups on startup. Generated with testDataGenerators/gen_groups.sh
     private readonly groups: Map<string, Group> = new Map<string, Group>([
-      ['59348381-6821-492b-b44e-85f13418a60d', {id: '59348381-6821-492b-b44e-85f13418a60d', title: 'TestGroup1', description: 'HlUeyZiNfpqTXPejQgKI', members:[]}],
+      ['59348381-6821-492b-b44e-85f13418a60d', {id: '59348381-6821-492b-b44e-85f13418a60d', title: 'TestGroup1', description: 'HlUeyZiNfpqTXPejQgKI', operation: '4437f658-9f3c-48e1-96c6-3063cf238d9c', members:['14baea6f-5e6c-4d7f-972c-5b2c0c02950f', '827bf9cd-f911-43a0-9e41-fb52c9295e8d']}],
       ['be30ceb9-1f90-4d96-ae55-664d8bf25dde', {id: 'be30ceb9-1f90-4d96-ae55-664d8bf25dde', title: 'TestGroup2', description: 'FEXTcKDkNiDoUraktNFx', members:[]}],
       ['30e6c3dc-cb60-453f-aa2a-3ec43bf84c0f', {id: '30e6c3dc-cb60-453f-aa2a-3ec43bf84c0f', title: 'TestGroup3', description: 'sGtkVXSssWZhNYFlFfii', members:[]}],
       ['c0ff0a6c-0493-45ff-9660-bdc6f9da809d', {id: 'c0ff0a6c-0493-45ff-9660-bdc6f9da809d', title: 'TestGroup4', description: 'KqTWwBNuIrylJiYfSvDJ', members:[]}],
@@ -75,9 +76,35 @@ class MockDatabase {
       ['e15b77ee-fe88-4d6f-b740-e5cc0ac8fa64', {id: 'e15b77ee-fe88-4d6f-b740-e5cc0ac8fa64', title: 'TestGroup20', description: 'QxikWyBbiHNdUzXMyiLz', members:[]}],
     ]);
 
-    private readonly operationMembers: Map<string, string[]> = new Map<string, string[]>();
+    private readonly operationMembers: Map<string, string[]> = new Map<string, string[]>([
+      ['4437f658-9f3c-48e1-96c6-3063cf238d9c', ['14baea6f-5e6c-4d7f-972c-5b2c0c02950f', '827bf9cd-f911-43a0-9e41-fb52c9295e8d']],
+    ]);
 
-    private readonly permissions: Map<string, Permission[]> = new Map<string, Permission[]>();
+    private readonly permissions: Map<string, Permission[]> = new Map<string, Permission[]>([
+      ['827bf9cd-f911-43a0-9e41-fb52c9295e8d', []],
+      ['94a66e6a-edec-4160-a582-ee177f4b0c63', [{name: PermissionNames.UserView}, {name:  PermissionNames.OperationViewAny}, {name: PermissionNames.GroupView}]],
+      ['45e948a9-e9d4-4ac7-b5c7-7b08c64ded20', [{name: PermissionNames.UserView}, {name:  PermissionNames.OperationViewAny}, {name: PermissionNames.GroupView}, 
+        {name: PermissionNames.UserCreate}, {name: PermissionNames.OperationCreate}, {name: PermissionNames.GroupCreate}],
+      ],
+      ['dd5271cf-1132-4086-9852-d7f4ee889767', [{name: PermissionNames.UserView}, {name:  PermissionNames.OperationViewAny}, {name: PermissionNames.GroupView}, 
+        {name: PermissionNames.UserCreate}, {name: PermissionNames.OperationCreate}, {name: PermissionNames.GroupCreate}, {name: PermissionNames.UserUpdate},
+        {name: PermissionNames.OperationUpdate}, {name: PermissionNames.GroupUpdate}],
+      ],
+      ['9ed8ab53-87f0-46cc-b0d8-e0c37dd7209b',[{name: PermissionNames.UserView}, {name:  PermissionNames.OperationViewAny}, {name: PermissionNames.GroupView}, 
+        {name: PermissionNames.UserCreate}, {name: PermissionNames.OperationCreate}, {name: PermissionNames.GroupCreate}, {name: PermissionNames.UserUpdate},
+        {name: PermissionNames.OperationUpdate}, {name: PermissionNames.GroupUpdate}, {name: PermissionNames.OperationMembersView}],
+      ],
+      ['a24f1ebb-cfc8-4b73-9e51-ba93bb03cca8',[{name: PermissionNames.UserView}, {name:  PermissionNames.OperationViewAny}, {name: PermissionNames.GroupView}, 
+        {name: PermissionNames.UserCreate}, {name: PermissionNames.OperationCreate}, {name: PermissionNames.GroupCreate}, {name: PermissionNames.UserUpdate},
+        {name: PermissionNames.OperationUpdate}, {name: PermissionNames.GroupUpdate}, {name: PermissionNames.OperationMembersView},
+        {name: PermissionNames.OperationMembersUpdate}],
+      ],
+      ['34c13975-7cab-4a75-84b4-fd5349440edc',[{name: PermissionNames.UserView}, {name:  PermissionNames.OperationViewAny}, {name: PermissionNames.GroupView}, 
+        {name: PermissionNames.UserCreate}, {name: PermissionNames.OperationCreate}, {name: PermissionNames.GroupCreate}, {name: PermissionNames.UserUpdate},
+        {name: PermissionNames.OperationUpdate}, {name: PermissionNames.GroupUpdate}, {name: PermissionNames.OperationMembersView},
+        {name: PermissionNames.OperationMembersUpdate}, {name: PermissionNames.GroupDelete}],
+      ],
+    ]);
 
     //Permission Functions
     public getPermissions(id:string):Permission[] {

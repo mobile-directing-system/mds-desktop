@@ -3,6 +3,9 @@
     <label class="block text-sm font-medium text-on_background">Group Members</label>
     <!-- Add Members Button -->
     <NormalButton
+      :id="`${props.id}-add-members-button`"
+      :disabled="props.disableAddMembers? props.disableAddMembers : false"
+      :aria-disabled="props.disableAddMembers? 'true':'false'"
       @click.prevent="toggleMembersModal()"
     >
       +
@@ -10,6 +13,7 @@
   </div>
   <!-- Members Table -->
   <TableContainer
+    :id="`${props.id}`"
     class="-ml-4"
     :contents="props.modelValue"
     id-identifier="id"
@@ -46,6 +50,7 @@
         <template #data4="{data}:{data: string}">
           <!-- Remove Member Button -->
           <button
+            v-if="!props.disableAddMembers"
             type="button"
             class="bg-background text-on_background hover:bg-surface_dark hover:text-on_surface_dark rounded-lg focus:ring-2 focus:ring-surface p-1.5 inline-flex h-8 w-8 "
             @click.prevent="deleteMember(data)"
@@ -172,6 +177,8 @@
     modelValue: string[];   // v-model repsentation
     includeIds?: string[];  // array of selectable user ids
     include?: boolean;      // if set the includeIds array is processed
+    disableAddMembers?: boolean; //disable the add members button if set to true
+    id?: string; //id to make element id's of this component unique
   }
 
   const userState = useUserState();
