@@ -80,7 +80,7 @@
           </div>
         </button>
         <button
-          v-if="checkPermissions([{name: PermissionNames.PermissionsView}]) && checkPermissions([{name: PermissionNames.UserView}])"
+          v-if="checkPermissions([{name: PermissionNames.PermissionsView}, {name: PermissionNames.UserView}])"
           id="manage-permissions-button"
           class="block w-full  items-center pt-5 mr-3"
           @click="router.push(`/permissions`)"
