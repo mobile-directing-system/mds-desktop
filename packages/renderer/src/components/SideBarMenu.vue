@@ -57,7 +57,7 @@
         <button
           v-if="checkPermissions([{name: PermissionNames.GroupView}])"
           id="manage-groups-button"
-          class="block w-full  items-center pt-5"
+          class="block w-full  items-center pt-5 mr-3"
           @click="router.push(`/groups`)"
         >
           <div
@@ -80,8 +80,9 @@
           </div>
         </button>
         <button
-          id="manage-groups-button"
-          class="block w-full  items-center pt-5"
+          v-if="checkPermissions([{name: PermissionNames.PermissionsView}]) && checkPermissions([{name: PermissionNames.UserView}])"
+          id="manage-permissions-button"
+          class="block w-full  items-center pt-5 mr-3"
           @click="router.push(`/permissions`)"
         >
           <div
@@ -89,7 +90,7 @@
             :class="[route.fullPath.includes('permissions') ? 'bg-primary text-on_primary rounded-md shadow-xl' : '']"
           >
             <svg
-              class="w-6 h-6"
+              class="px-3 w-12 h-auto"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
