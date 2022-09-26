@@ -6,8 +6,8 @@
         <h1 class=" ml-4 text-4xl font-bold text-black ">
           All Users
         </h1>
-        <!-- Add User Button -->
         <div class="flex h-12 mt-3">
+          <!-- Search Input -->
           <FormInput
             v-if="showSearch"
             id="prio"
@@ -15,6 +15,7 @@
             div-class=" ml-auto w-50 mr-3"
             label=""
           />
+          <!-- Search Button -->
           <NormalButton
             class=" ml-auto mr-6"
             @click.prevent="showSearch=!showSearch; searchInput =''"
@@ -32,8 +33,10 @@
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             /></svg>
           </NormalButton>
+          <!-- Add User Button -->
           <NormalButton
             id="open-create-user-button"
+            :disabled="!checkPermissions([{name: PermissionNames.UserCreate}])"
             class=" ml-auto mr-6"
             @click.prevent="router.push('/create-new-user')"
           >
@@ -142,15 +145,17 @@
   import TableHeader from '../components/BasicComponents/TableHeader.vue';
   import { useUserState } from '../store';
   import {useRouter} from 'vue-router';
+  import { usePermissions } from '../composables';
    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type { User }  from '../../../types';
   import FormInput from '../components/BasicComponents/FormInput.vue';
-  import { OrderBy, OrderDir } from '../constants';
+  import { PermissionNames, OrderBy, OrderDir } from '../constants';
 
   const userState = useUserState();
   const userPage = computed(() => userState.getters.page);
   const totalUserAmount = computed(() => userState.getters.total);
   const router = useRouter();
+  const checkPermissions = usePermissions();
   const showSearch = ref(false);
   const searchInput = ref('');
 

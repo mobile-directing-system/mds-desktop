@@ -1,5 +1,6 @@
 <template>
   <main
+    id="login-form"
     class="bg-background mx-auto max-w-lg p-8 rounded-lg shadow-2xl my-10"
   >
     <!-- Login Form -->

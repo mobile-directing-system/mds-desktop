@@ -1,5 +1,5 @@
 import type { AxiosError } from 'axios';
-import type { Permissions, ErrorResult } from '../../../types';
+import type { Permission, ErrorResult } from '../../../types';
 import Backend from './backendInstance';
 import { printAxiosError } from './backendInstance';
 
@@ -10,7 +10,7 @@ const endpoint = '/permissions/user';
  * @param userId id of the user for which to get permissions
  * @returns the permissions for a given user
  */
-export async function retrievePermissions(userId: string):Promise<ErrorResult<Permissions>> {
+export async function retrievePermissions(userId: string):Promise<ErrorResult<Permission[]>> {
   try {
     const response = await Backend.instance.get(`${endpoint}/${userId}`);
     return {res: response.data, error: false};
@@ -39,7 +39,7 @@ export async function retrievePermissions(userId: string):Promise<ErrorResult<Pe
  * @param permissions the permissions which to set for the user
  * @returns boolean indicating whether the operation in the backend was successful or not
  */
-export async function updatePermissions(userId: string, permissions: Permissions):Promise<ErrorResult<boolean>> {
+export async function updatePermissions(userId: string, permissions: Permission[]):Promise<ErrorResult<boolean>> {
   try {
     await Backend.instance.put(`${endpoint}/${userId}`, permissions);
     return {res: true, error: false};

@@ -2,7 +2,7 @@ import type { Store } from 'vuex';
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
 import type {Context} from 'vuex-smart-module';
 import { retrievePermissions, updatePermissions } from '#preload';
-import type { Permissions, Permission, ErrorResult } from '../../../../types';
+import type { Permission, ErrorResult } from '../../../../types';
 import { errorState, handleErrors } from './ErrorState';
 
 /**
@@ -10,7 +10,7 @@ import { errorState, handleErrors } from './ErrorState';
  * @param permissions permissions object to be undomed
  * @returns a relatively deep copy of the permissions object
  */
-function undom(permissions: Permissions):Permissions {
+function undom(permissions: Permission[]):Permission[] {
   return permissions.map((elem:Permission) => {
     return {
       name: elem.name,
@@ -22,7 +22,7 @@ function undom(permissions: Permissions):Permissions {
  * define the content of the LoginInfoState
  */
 class PermissionsState {
-  permissions: Map<string, Permissions> = new Map();
+  permissions: Map<string, Permission[]> = new Map();
 }
 
 /**
@@ -44,12 +44,12 @@ class PermissionsStateMutations extends Mutations<PermissionsState> {
    * Mutation to set the permissions of a user
    * @param param0 {userId, permission} set the permissions state of the user with userID to permissions
    */
-  setPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {this.state.permissions.set(userId, permissions);}
+  setPermissions({userId, permissions}:{userId: string, permissions: Permission[]}) {this.state.permissions.set(userId, permissions);}
   /**
    * Mutation to add permissions to the permissions of a user
    * @param param0 {userId, permission} add permission to the permissions state of the user with userId
    */
-  addPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
+  addPermissions({userId, permissions}:{userId: string, permissions: Permission[]}) {
     const existingPermissions = this.state.permissions.get(userId);
     if(existingPermissions) {
       this.state.permissions.set(userId, existingPermissions.concat(permissions));
@@ -87,7 +87,7 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
    * @param userId id of the user for which to retrieve permissions
    */
   async retrievePermissions(userId: string) {
-    const permissions: ErrorResult<Permissions> = await retrievePermissions(userId);
+    const permissions: ErrorResult<Permission[]> = await retrievePermissions(userId);
     if(permissions.res && !permissions.error) {
       this.mutations.setPermissions({userId, permissions: permissions.res});
     }  else {
@@ -99,7 +99,7 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
    * Action to addPermission to a users permission and then retrieve them again to be up to date.
    * @param param0 {userId, permissions} for the user with userId permissions are concatenated to its permissions state
    */
-  async addPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
+  async addPermissions({userId, permissions}:{userId: string, permissions: Permission[]}) {
     const existingPermissions = this.state.permissions.get(userId);
     const permissionsSet: ErrorResult<boolean> = await updatePermissions(userId, (existingPermissions)? undom(existingPermissions.concat(permissions)):permissions);
     if(permissionsSet.res && !permissionsSet.error) {
@@ -113,7 +113,7 @@ class PermissionsStateActions extends Actions<PermissionsState, PermissionsState
    * Action to updateAllPermission of a user, e.g. replace them. Then retrieve them again to be up to date.
    * @param param0 {userId, permissions} for the user with userId its permissions are replaced with permissions argument
    */
-  async updateAllPermissions({userId, permissions}:{userId: string, permissions: Permissions}) {
+  async updateAllPermissions({userId, permissions}:{userId: string, permissions: Permission[]}) {
     const permissionsSet: ErrorResult<boolean> = await updatePermissions(userId, permissions);
     if(permissionsSet.res && !permissionsSet.error) {
       this.actions.retrievePermissions(userId);

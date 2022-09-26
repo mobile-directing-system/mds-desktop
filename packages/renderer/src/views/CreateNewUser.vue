@@ -52,7 +52,7 @@
           </NormalButton>
           <!-- Cancel Button -->
           <NormalButton
-            id="create-user-cancel"
+            id="create-user-cancel-button"
             class=" ml-auto"
             @click.prevent="router.push('/user')"
           >
@@ -92,6 +92,7 @@
             username: username,
             first_name: firstname,
             last_name: lastname,
+            is_active: true,
             is_admin: false,
             pass: ipassword,
         });

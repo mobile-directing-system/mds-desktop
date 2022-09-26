@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="all-groups">
     <div class="grid bg-white  rounded-lg  my-10">
       <div class="flex justify-between">
         <!-- Header -->
@@ -8,7 +8,9 @@
         </h1>
         <!-- Create New Group Button -->
         <NormalButton
+          id="open-create-group-button"
           class=" ml-auto mr-6"
+          :disabled="!checkPermissions([{name: PermissionNames.GroupCreate}])"
           @click.prevent="router.push('/create-new-group')"
         >
           +
@@ -16,6 +18,7 @@
       </div>
       <!-- Table of All Groups -->
       <TableContainer
+        id="groups-table"
         :contents="groupPage().values()"
         id-identifier="id"
       >
@@ -72,6 +75,8 @@
   import TableHeader from '../components/BasicComponents/TableHeader.vue';
   import { useGroupState, useOperationsState } from '../store';
   import {useRouter} from 'vue-router';
+  import { usePermissions } from '../composables';
+  import { PermissionNames } from '../constants';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type { Group } from '../../../types';
 
@@ -81,6 +86,7 @@
   const operations = computed(() => operationsState.getters.operations);
   const totalGroupAmount = computed(() => groupState.getters.total);
   const router = useRouter();
+  const checkPermissions = usePermissions();
 
   /**
    * click handler for the table row which route to group views
