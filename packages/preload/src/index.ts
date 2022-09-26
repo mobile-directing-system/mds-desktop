@@ -27,8 +27,13 @@ export { updateAddressbookEntry} from './addressbook';
 export { deleteAddressbookEntry} from './addressbook';
 export { retrieveAddressbookEntries} from './addressbook';
 export { retrieveAddressbookEntry} from './addressbook';
-export {searchEntries} from './addressbook';
-export { setChannels} from './addressbook';
-export { retrieveChannels} from './addressbook';
+export { searchEntries } from './addressbook';
+export { setChannels } from './addressbook';
+export { retrieveChannels } from './addressbook';
+export { retrieveIntel } from './intel';
+export { createIntel } from './intel';
+export { retrieveMultipleIntel } from './intel';
+export { invalidateIntel } from './intel';
+export { searchIntelByQuery } from './intel';
 export { createUser, updateUser, updateUserPassword, deleteUser, retrieveUsers, retrieveUser, searchUsers } from './users';
 
