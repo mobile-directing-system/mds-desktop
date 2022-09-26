@@ -49,8 +49,17 @@
             <template #data2="{data}:{data:Group}">
               {{ data.description }}
             </template>
-            <template #data3="{data}:{data:Group}">
+            <template
+              v-if="checkPermissions([{name: PermissionNames.OperationViewAny}])"
+              #data3="{data}:{data:Group}"
+            >
               {{ operations().get(data.operation? data.operation : '')?.title }}
+            </template>
+            <template
+              v-else
+              #data3
+            >
+              You lack the operation view permission to see the groups associated operation.
             </template>
           </TableRow>
         </template>
@@ -104,7 +113,7 @@
   async function updatePage(amount: number, offset: number) {
     await groupState.dispatch('retrieveGroups', {amount, offset});
     for(const group of groupPage.value().values()) {
-      if(group.operation) {
+      if(group.operation && checkPermissions([{name: PermissionNames.OperationViewAny}])) {
         operationsState.dispatch('retrieveOperation', group.operation );
       }
     }
