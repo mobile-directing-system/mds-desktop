@@ -6,7 +6,7 @@
     <div>
       <!-- Header -->
       <h1 class="text-4xl font-bold text-on_background text-center">
-        Mobile Directing Service
+        Mobile Directing System
       </h1>
       <!-- Login Form -->
       <LoginForm />
