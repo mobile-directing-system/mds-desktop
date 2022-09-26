@@ -1,6 +1,6 @@
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
-import { invalidateIntel, createIntel, searchIntelByQuery, retrieveIntel, retrieveMultipleIntel} from '#preload';
-import type { Intel,  ErrorResult } from '../../../../types';
+import { invalidateIntel, createIntel, searchIntelByQuery, retrieveIntel, retrieveMultipleIntel, intelDeliveredAttempt} from '#preload';
+import type { Intel, IntelType,  ErrorResult } from '../../../../types';
 import type { Context } from 'vuex-smart-module';
 import type { Store } from 'vuex';
 import { errorState, handleErrors } from './ErrorState';
@@ -93,8 +93,8 @@ class IntelStateGetters extends Getters<IntelState> {
             handleErrors(createdIntel.errorMsg, this.errorState);
         }
     }
-    async retrieveMultipleIntel({amount, offset, orderBy, orderDir}:{amount?:number, offset?:number, orderBy?:string, orderDir?:string}){
-        const retrievedIntel: ErrorResult<Intel[]> = await retrieveMultipleIntel(amount, offset, orderBy, orderDir);
+    async retrieveMultipleIntel({one_of_delivered_to_entries,one_of_delivery_for_entries,include_invalid,min_importance,intel_type,operationId,created_by_user_id, amount, offset, order_by, order_dir}:{one_of_delivered_to_entries?: string[], one_of_delivery_for_entries?:string[], include_invalid?: boolean, min_importance?: number, intel_type?: IntelType, operationId?: string, created_by_user_id?: string, amount?: number, offset?: number,order_by?: string, order_dir?: string}){
+        const retrievedIntel: ErrorResult<Intel[]> = await retrieveMultipleIntel(one_of_delivered_to_entries,one_of_delivery_for_entries,include_invalid,min_importance,intel_type,operationId,created_by_user_id, amount, offset, order_by, order_dir);
         if(retrievedIntel.res && !retrievedIntel.error && retrievedIntel.total !== undefined){
             this.mutations.setPage(retrievedIntel.res);
             this.mutations.addIntel(retrievedIntel.res);
@@ -125,6 +125,18 @@ class IntelStateGetters extends Getters<IntelState> {
         if(!res.error){
             this.retrieveIntelById(intelId);
         }else{
+            handleErrors(res.errorMsg, this.errorState);
+        }
+    }
+    async confirmIntelDeliveredAttempt(attepmtId:string) {
+        const res: ErrorResult<boolean> =  await intelDeliveredAttempt(attepmtId);
+        if(res.error){
+            handleErrors(res.errorMsg, this.errorState);
+        }
+    }
+    async confirmIntelDeliveredDelivery(deliveryId:string) {
+        const res: ErrorResult<boolean> =  await intelDeliveredAttempt(deliveryId);
+        if(res.error){
             handleErrors(res.errorMsg, this.errorState);
         }
     }

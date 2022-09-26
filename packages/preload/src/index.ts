@@ -35,5 +35,7 @@ export { createIntel } from './intel';
 export { retrieveMultipleIntel } from './intel';
 export { invalidateIntel } from './intel';
 export { searchIntelByQuery } from './intel';
+export { intelDeliveredAttempt } from './intel';
+export { intelDeliveredDelivery } from './intel';
 export { createUser, updateUser, updateUserPassword, deleteUser, retrieveUsers, retrieveUser, searchUsers } from './users';
 

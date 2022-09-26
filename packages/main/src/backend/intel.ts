@@ -5,6 +5,8 @@ import Backend from './backendInstance';
 import { printAxiosError } from './backendInstance';
 
 const endpoint ='/intel';
+const endpointAttempt = '/intel-delivery-attempts';
+const endpointDelivery = ' /intel-deliveries';
 
 export async function createIntel(intel:Intel):Promise<ErrorResult<Intel>> {
     try{
@@ -131,6 +133,50 @@ export async function invalidateIntel(intelId:string):Promise<ErrorResult<boolea
             return {error: true, errorMsg: 'request error when invalidating Intel'};
         } else {
             return {error: true, errorMsg: 'error when invalidating Intel'};
+        }
+    }
+}
+export async function intelDeliveredAttempt(attepmtId:string):Promise<ErrorResult<boolean>> {
+    try{
+        const response = await Backend.instance.post(`${endpointAttempt}/${attepmtId}/delivered`);
+        return {res: response.data, error:false};
+    }catch(error){
+        const axError: AxiosError = error as AxiosError;
+        printAxiosError(axError);
+        if(axError.response) {
+            if(axError.response.status === 401) {
+                return {error: true, errorMsg: 'not authenticated'};
+            } else if(axError.response.status === 403) {
+                return {error: true, errorMsg: 'missing permissions for confirming delivery of Intel'};
+            } else {
+                return {error: true, errorMsg: 'response error when confirming delivery of Intel'};
+            }
+        } else if(axError.request) {
+            return {error: true, errorMsg: 'request error when confirming delivery of Intel'};
+        } else {
+            return {error: true, errorMsg: 'error when confirming delivery of Intel'};
+        }
+    }
+}
+export async function intelDeliveredDelivery(deliveryId:string):Promise<ErrorResult<boolean>> {
+    try{
+        const response = await Backend.instance.post(`${endpointDelivery}/${deliveryId}/delivered`);
+        return {res: response.data, error:false};
+    }catch(error){
+        const axError: AxiosError = error as AxiosError;
+        printAxiosError(axError);
+        if(axError.response) {
+            if(axError.response.status === 401) {
+                return {error: true, errorMsg: 'not authenticated'};
+            } else if(axError.response.status === 403) {
+                return {error: true, errorMsg: 'missing permissions for confirming delivery of Intel'};
+            } else {
+                return {error: true, errorMsg: 'response error when confirming delivery of Intel'};
+            }
+        } else if(axError.request) {
+            return {error: true, errorMsg: 'request error when confirming delivery of Intel'};
+        } else {
+            return {error: true, errorMsg: 'error when confirming delivery of Intel'};
         }
     }
 }
