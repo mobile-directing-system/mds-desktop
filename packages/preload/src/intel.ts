@@ -18,12 +18,12 @@ export async function retrieveMultipleIntel(one_of_delivered_to_entries?: string
 }
 
 export async function searchIntelByQuery(query:string, amount?: number, offset?: number, orderBy?: string, orderDir?: string):Promise<ErrorResult<Intel[]>> {
-    return ipcRenderer.invoke('retrieveMultipleIntel',query, amount, offset, orderBy, orderDir );
+    return ipcRenderer.invoke('searchIntel',query, amount, offset, orderBy, orderDir );
 }
 
 export async function intelDeliveredAttempt(attepmtId:string):Promise<ErrorResult<boolean>> {
     return ipcRenderer.invoke('intelDeliveredAttempt', attepmtId);
 }
 export async function intelDeliveredDelivery(deliveryId:string):Promise<ErrorResult<boolean>> {
-    return ipcRenderer.invoke('intelDeliveredAttempt', deliveryId);
+    return ipcRenderer.invoke('intelDeliveredDelivery', deliveryId);
 }

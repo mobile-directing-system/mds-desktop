@@ -21,9 +21,9 @@ export async function retrieveMultipleIntelHandler(_:IpcMainInvokeEvent, one_of_
 export async function searchIntelByQueryHandler(_:IpcMainInvokeEvent, query:string, amount?: number, offset?: number, order_by?: string, order_dir?: string):Promise<ErrorResult<Intel[]>> {
     return searchIntelByQuery(query, amount, offset, order_by, order_dir);
 }
-export async function intelDeliveredAttemptHandler(attepmtId:string):Promise<ErrorResult<boolean>> {
+export async function intelDeliveredAttemptHandler(_:IpcMainInvokeEvent, attepmtId:string):Promise<ErrorResult<boolean>> {
     return intelDeliveredAttempt(attepmtId);
 }
-export async function intelDeliveredDeliveryHandler(deliveryId:string):Promise<ErrorResult<boolean>> {
+export async function intelDeliveredDeliveryHandler(_:IpcMainInvokeEvent, deliveryId:string):Promise<ErrorResult<boolean>> {
     return intelDeliveredDelivery(deliveryId);
 }
