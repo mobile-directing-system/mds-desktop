@@ -31,7 +31,7 @@ export async function updateUserPassword(user_id: string, new_pass: string):Prom
 
 export async function deleteUser(userId: string):Promise<ErrorResult<boolean>> {
   try {
-    return {error: false, res: mockDB.deleteUser(userId)};
+    return {error: false, res: true};
   } catch {
     return {error: true, errorMsg: 'error when deleting users'};
   }
