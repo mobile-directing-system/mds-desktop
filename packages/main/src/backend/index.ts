@@ -67,6 +67,8 @@ import {retrievePermissions as mockedRetrievePermissions} from './mockedBackend/
 import { updatePermissions as mockedUpdatePermissions } from './mockedBackend/permissions';
 
 export { createAddressbookEntry, updateAddressbookEntry, deleteAddressbookEntry, retrieveAddressbookEntries, retrieveAddressbookEntry, searchAddressbookEntryByQuery, setChannels, retrieveChannels } from './addressbook';
+export{ createIntel, invalidateIntel, searchIntelByQuery, retrieveIntel, retrieveMultipleIntel, intelDeliveredAttempt, intelDeliveredDelivery} from './intel';
+
 //login calls
 export const login = config.mockedBackend? mockedLogin : realLogin;
 export const logout = config.mockedBackend? mockedLogout : realLogout;

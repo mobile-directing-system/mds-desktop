@@ -1,7 +1,7 @@
 import { app, ipcMain } from 'electron';
 import '/@/security-restrictions';
 import { restoreOrCreateWindow } from '/@/windows/mainWindow';
-import { loginHandler, logoutHandler, createUserHandler, deleteUserHandler, retrieveUserHandler, retrieveUsersHandler, searchUsersHandler, updateUserHandler, updateUserPasswordHandler, retrievePermissionsHandler, updatePermissionsHandler, createOperationHandler, updateOperationHandler, retrieveOperationHandler, retrieveOperationsHandler, searchOperationsHandler, retrieveOperationMembersHandler, updateOperationMembersHandler, createGroupHandler, updateGroupHandler, deleteGroupHandler, retrieveGroupHandler, retrieveGroupsHandler, retrieveAddressbookEntriesHandler, deleteAddressbookEntryHandler, updateAddressbookEntryHandler, createAddressbookEntryHandler, retrieveAddressbookEntryHandler, retrieveChannlesHandler, setChannelsHandler, searchAddressbookEntryByQueryHandler} from '/@/ipcHandlers';
+import { intelDeliveredAttemptHandler, intelDeliveredDeliveryHandler, invalidateIntelHandler, createIntelHandler, searchIntelByQueryHandler, retrieveIntelHandler, retrieveMultipleIntelHandler, loginHandler, logoutHandler, createUserHandler, deleteUserHandler, retrieveUserHandler, retrieveUsersHandler, searchUsersHandler, updateUserHandler, updateUserPasswordHandler, retrievePermissionsHandler, updatePermissionsHandler, createOperationHandler, updateOperationHandler, retrieveOperationHandler, retrieveOperationsHandler, searchOperationsHandler, retrieveOperationMembersHandler, updateOperationMembersHandler, createGroupHandler, updateGroupHandler, deleteGroupHandler, retrieveGroupHandler, retrieveGroupsHandler, retrieveAddressbookEntriesHandler, deleteAddressbookEntryHandler, updateAddressbookEntryHandler, createAddressbookEntryHandler, retrieveAddressbookEntryHandler, retrieveChannlesHandler, setChannelsHandler, searchAddressbookEntryByQueryHandler} from '/@/ipcHandlers';
 /**
  * Prevent multiple instances
  */
@@ -87,6 +87,15 @@ app.whenReady().then(() => {
   ipcMain.handle('deleteGroup', deleteGroupHandler);
   ipcMain.handle('retrieveGroup', retrieveGroupHandler);
   ipcMain.handle('retrieveGroups', retrieveGroupsHandler);
+
+  //register intel handlers
+  ipcMain.handle('createIntel', createIntelHandler);
+  ipcMain.handle('retrieveIntel', retrieveIntelHandler);
+  ipcMain.handle('invalidateIntel', invalidateIntelHandler);
+  ipcMain.handle('retrieveMultipleIntel', retrieveMultipleIntelHandler);
+  ipcMain.handle('searchIntel', searchIntelByQueryHandler);
+  ipcMain.handle('intelDeliveredAttempt', intelDeliveredAttemptHandler);
+  ipcMain.handle('intelDeliveredDelivery', intelDeliveredDeliveryHandler);
 });
 
 /**

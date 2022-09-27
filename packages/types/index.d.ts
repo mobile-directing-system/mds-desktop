@@ -1,4 +1,3 @@
-
 interface ErrorResult<T> {
   res?: T,  //optional result if a result was received
   error: boolean, //boolean to indicate whether there was an error during network communication
@@ -12,3 +11,4 @@ export type { Permission } from './Permissions';
 export type { Operation } from './Operation';
 export type { Group } from './Group';
 export type { AddressbookEntry, Channels, Channel, ChannelDetail, ChannelType } from './Addressbook';
+export type {Intel, IntelType, PlainTextContent, RadioContent} from './Intel';
