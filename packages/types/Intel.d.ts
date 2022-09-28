@@ -6,7 +6,7 @@ interface Intel {
     type: IntelType,
     content: RadioContent[] | PlainTextContent[],
     importance: number,
-    initail_deliver_to: string[],
+    initial_deliver_to: string[],
     search_text: string,
     is_valid: boolean
 }
