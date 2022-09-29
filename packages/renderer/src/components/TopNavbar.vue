@@ -16,7 +16,7 @@
 
         <div class=" px-16 ">
           <router-link
-            to="/main"
+            to="/intel/create-new-intel-complete"
             class=" px-3 hover:bg-primary hover:text-on_primary hover:rounded-lg hover:shadow-xl"
           >
             Intelligence

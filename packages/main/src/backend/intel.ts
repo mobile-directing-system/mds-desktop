@@ -53,10 +53,10 @@ export async function retrieveIntel(intelId:string):Promise<ErrorResult<Intel>> 
         }
     }
 }
-export async function searchIntelByQuery(query: string, limit?: number, offset?: number):Promise<ErrorResult<Intel[]>> {
+export async function searchIntelByQuery(query:string, amount?: number, offset?: number, order_by?: string, order_dir?: string):Promise<ErrorResult<Intel[]>> {
     try {
         //explicit use of != instead of !== as a != null is equivalent to a !== null | a !== undefined
-        const response = await Backend.instance.get(`${endpoint}/search?${(query != null)? `&q=${query}` : ''}${(offset != null)? `&offset=${offset}` : ''}${(limit != null)? `&limit=${limit}` : ''}`);
+        const response = await Backend.instance.get(`${endpoint}/search?${(query != null)? `&q=${query}` : ''}${(offset != null)? `&offset=${offset}` : ''}${(order_by != null)? `&order_by=${order_by}`:''}${(order_dir != null)? `&order_dir=${order_dir}` : ''}`);
         return {res: response.data.hits, total: response.data.estimated_total_hits , error: false};
     } catch(error) {
         const axError: AxiosError = error as AxiosError;

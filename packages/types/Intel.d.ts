@@ -4,7 +4,7 @@ interface Intel {
     created_by: string,
     operation: string,
     type: IntelType,
-    content: RadioContent[] | PlainTextContent[],
+    content: RadioContent | PlainTextContent,
     importance: number,
     initial_deliver_to: string[],
     search_text: string,

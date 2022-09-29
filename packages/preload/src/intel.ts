@@ -1,6 +1,5 @@
 import type{Intel,IntelType, ErrorResult} from '../../types';
-const {ipcRenderer} = require('electron');
-
+const { ipcRenderer } = require('electron');
 export async function createIntel(intel: Intel):Promise<ErrorResult<Intel>> {
     return ipcRenderer.invoke('createIntel', intel);
 }

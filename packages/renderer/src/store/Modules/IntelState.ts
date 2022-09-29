@@ -5,6 +5,9 @@ import type { Context } from 'vuex-smart-module';
 import type { Store } from 'vuex';
 import { errorState, handleErrors } from './ErrorState';
 
+function undom(intel: Intel):Intel {
+    return {...intel, initial_deliver_to:[...intel.initial_deliver_to]};
+}
 /**
  * define content for IntelState
  */
@@ -81,12 +84,12 @@ class IntelStateGetters extends Getters<IntelState> {
     $init(store: Store<any>):void {
         this.errorState = errorState.context(store);
     }
-    async clearEntries() {
+    async clearIntel() {
         this.mutations.setIntel([]);
         this.mutations.setPage([]);
     }
-    async createEntry(intel: Intel) {
-        const createdIntel:ErrorResult<Intel> = await createIntel(intel);
+    async createIntel(intel: Intel) {
+        const createdIntel:ErrorResult<Intel> = await createIntel(undom(intel));
         if(createdIntel.res && !createdIntel.error){
             this.mutations.addOrUpdateIntel(createdIntel.res);
         } else {

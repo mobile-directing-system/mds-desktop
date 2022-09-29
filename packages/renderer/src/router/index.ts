@@ -16,6 +16,8 @@ import Addressbook from '../views/AllAddressbookEntries.vue';
 import CreateNewAddressbookEntry from '../views/CreateNewAddressbookEntry.vue';
 import EditAddressbookEntry from '../views/EditAddressbookEntry.vue';
 
+import CreateNewIntel from '../views/CreateNewIntelComplete.vue';
+
 const routes:RouteRecordRaw[] = [
     //Definition of Routes and Subroutes and how they relate to the views
     {
@@ -88,6 +90,11 @@ const routes:RouteRecordRaw[] = [
                 path: '/edit-addressbookentry/:addressbookEntryID',
                 name: 'EditCurrentAddressbookEntry',
                 component: EditAddressbookEntry,
+            },
+            {
+                path: '/intel/create-new-intel-complete',
+                name: 'CreateIntelComplete',
+                component: CreateNewIntel,
             },
         ],
     },

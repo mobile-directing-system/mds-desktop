@@ -1,6 +1,6 @@
 import type { IpcMainInvokeEvent } from 'electron';
 import type {Intel, IntelType, ErrorResult} from '../../../types';
-import { searchIntelByQuery, createIntel, invalidateIntel, retrieveIntel, retrieveMultipleIntel, intelDeliveredAttempt, intelDeliveredDelivery} from '../../../preload/src';
+import { searchIntelByQuery, createIntel, invalidateIntel, retrieveIntel, retrieveMultipleIntel, intelDeliveredAttempt, intelDeliveredDelivery} from '/@/backend';
 
 export async function createIntelHandler(_:IpcMainInvokeEvent, intel: Intel):Promise<ErrorResult<Intel>> {
     return createIntel(intel);
