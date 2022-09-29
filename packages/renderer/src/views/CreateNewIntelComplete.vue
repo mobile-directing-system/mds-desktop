@@ -22,10 +22,12 @@
         
             <!-- Addressbook Selection -->
             <AddressBookSelection 
+              v-if="selectedIntelTypeValue !=''"
               id="Address-book-selection"
               v-model="addressbookIDs"
             />
             <SearchableSelect
+              v-if="selectedIntelTypeValue !=''"
               v-model="selectedOperationId"
               mode="single"
               :options="operationsSearchResultsArray"
@@ -37,9 +39,10 @@
               @open="handleOperationSelectionInput('')"
             />
             <SearchableSelect
+              v-if="selectedIntelTypeValue !=''"
               v-model="Importance"
               mode="single"
-              :options="['Standard', 'Instant', 'Immedieatly', 'Catastrophe']"
+              :options="['Standard', 'Instant', 'Lightning', 'Catastrophe']"
               :placeholder="'Importance:'"
               label="Select the importance"
               :filter-results="true"
@@ -182,7 +185,7 @@
         operation: selectedOperationId.value,
         type: selectedIntelType,
         content: content,
-        importance: (Importance.value == 'Standard'? 1000: (Importance.value == 'Instant'?2000:(Importance.value == 'Immedieatly'?3000:(Importance.value == 'Catastrophe'?4000:  0)))),
+        importance: (Importance.value == 'Standard'? 1000: (Importance.value == 'Instant'?2000:(Importance.value == 'Lightning'?3000:(Importance.value == 'Catastrophe'?4000:  0)))),
         initial_deliver_to: addressbookIDs.value as string[], 
       };
       intelState.dispatch('createIntel',intelToCreate);
