@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-between">
-    <label class="block text-sm font-medium text-on_background">Group Members</label>
+    <label class="block text-sm font-medium text-on_background">Members</label>
     <!-- Add Members Button -->
     <NormalButton
       :id="`${props.id}-add-members-button`"
@@ -50,7 +50,7 @@
         <template #data4="{data}:{data: string}">
           <!-- Remove Member Button -->
           <button
-            v-if="!props.disableAddMembers"
+            v-if="!props.disableRemoveMembers"
             type="button"
             class="bg-background text-on_background hover:bg-surface_dark hover:text-on_surface_dark rounded-lg focus:ring-2 focus:ring-surface p-1.5 inline-flex h-8 w-8 "
             @click.prevent="deleteMember(data)"
@@ -79,16 +79,26 @@
     title="Select a User"
     @click="toggleMembersModal()"
   >
-    <div class="mb-6 w-96 max-w-sm">
+    <div
+      v-if="!checkPermissions([{name: PermissionNames.UserView}])"
+      class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+    >
+      You can not select users to add as members, as you lack the user view permission.
+    </div>
+    <div
+      v-if="checkPermissions([{name: PermissionNames.UserView}])"
+      class="mb-6 w-96 max-w-sm"
+    >
       <!-- Searchable Select for Members -->
       <SearchableSelect
         v-model="addMemberIds"
         :options="options"
         mode="tags"
+        :filter-results="false"
         placeholder="Select group members"
-        label="username"
-        value-prop="id"
-        track-by="username"
+        :label="'username'"
+        :value-prop="'id'"
+        :track-by="'username'"
         @search-change="handleSelectionInput"
         @open="handleSelectionInput('')"
       />
@@ -167,6 +177,8 @@
 
   import { ref, computed } from 'vue';
   import { useUserState } from '../store';
+  import { usePermissions } from '../composables';
+  import { PermissionNames } from '../constants';
   import { union } from 'lodash';
   import type { Ref } from 'vue';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -177,10 +189,12 @@
     includeIds?: string[];  // array of selectable user ids
     include?: boolean;      // if set the includeIds array is processed
     disableAddMembers?: boolean; //disable the add members button if set to true
+    disableRemoveMembers?: boolean; //disable the removing of members
     id?: string; //id to make element id's of this component unique
   }
 
   const userState = useUserState();
+  const checkPermissions = usePermissions();
 
   const users = computed(() => userState.getters.users);
   const usersPage = computed(() => userState.getters.page);
@@ -247,7 +261,9 @@
    * @param query search string
    */
   function handleSelectionInput(query: string) {
-    userState.dispatch('searchUsersByQuery', {query, limit:10});
+    if(checkPermissions([{name: PermissionNames.UserView}])) {
+      userState.dispatch('searchUsersByQuery', {query, limit:10});
+    }
   }
   
   /**
@@ -272,7 +288,9 @@
    * @param offset offset beginng at which users are retrieved
    */
   function updatePage(amount:number, offset:number) {
-    userState.dispatch('retrieveUsers', {amount, offset});
+    if(checkPermissions([{name: PermissionNames.UserView}])) {
+      userState.dispatch('retrieveUsers', {amount, offset});
+    }
   }
 
   /**

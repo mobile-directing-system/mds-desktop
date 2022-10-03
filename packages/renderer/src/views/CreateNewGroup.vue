@@ -26,7 +26,16 @@
           label="Description"
         />
         <!------- Operation  ------>
-        <div class="mb-6 w-80">
+        <div
+          v-if="!checkPermissions([{name: PermissionNames.OperationViewAny}])"
+          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+        >
+          You lack the operation view permission, as such you cannot set or change the associated operation of the group.
+        </div>
+        <div 
+          v-if="checkPermissions([{name: PermissionNames.OperationViewAny}])"
+          class="mb-6 w-80"
+        >
           <label
             for="create-group-operation"
             class="block mb-2 text-sm font-medium text-on_background"
@@ -38,13 +47,39 @@
             placeholder="Select operation"
             label="title"
             value-prop="id"
+            :filter-results="false"
             track-by="title"
             @search-change="handleOperationSelectionInput"
             @open="handleOperationSelectionInput('')"
           />
         </div>
         <!-- Members -->
-        <div class="mb-6">
+        <div
+          v-if="!checkPermissions([{name: PermissionNames.OperationMembersView}]) && checkPermissions([{name: PermissionNames.OperationViewAny}])"
+          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+        >
+          If an operation is selected no group member can be selected, as you are missing the operation members view permission to verify
+          that group members are also operation members. If you select group members and afterwards select an operation the group will
+          be created with no members.
+        </div>
+        <div
+          v-if="!checkPermissions([{name: PermissionNames.OperationMembersView}]) && !checkPermissions([{name: PermissionNames.OperationViewAny}]) && updatedGroupOperationId"
+          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+        >
+          This group has an associated operation and you lack the permission to see its members, as such you cannot change the group members
+          as it can not be verified that they are operation members as well.
+        </div>
+        <div
+          v-if="!checkPermissions([{name: PermissionNames.UserView}])"
+          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+        >
+          You cannot see the names of the group members, as you lack the users view permission. As such
+          you cannot change the group members.
+        </div>
+        <div
+          v-if="(!updatedGroupOperationId || checkPermissions([{name: PermissionNames.OperationMembersView}])) && checkPermissions([{name: PermissionNames.UserView}])" 
+          class="mb-6"
+        >
           <div
             v-if="updatedGroupOperationId"
             class="bg-error_superlight border-2 w-80 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
@@ -87,12 +122,15 @@
   import MemberSelection from '../components/MemberSelection.vue';
   import SearchableSelect from '../components/BasicComponents/SearchableSelect.vue';
   import { useGroupState, useOperationsState } from '../store';
+  import { usePermissions } from '../composables';
+  import { PermissionNames } from '../constants';
   import{useRouter } from 'vue-router';
   import type { Ref } from 'vue';
 
   const groupState = useGroupState();
   const operationsState = useOperationsState();
   const router = useRouter();
+  const checkPermissions = usePermissions();
   const updatedGroupTitle = ref('');
   const updatedGroupDescription = ref('');
   const updatedGroupOperationId = ref('');
@@ -108,7 +146,9 @@
   //watcher to retrieve new operation members when the operation id changes. Needed for filtering available group members
   watch(updatedGroupOperationId, (curVal) => {
     if(curVal) {
-      operationsState.dispatch('retrieveOperationMembersById', curVal);
+      if(checkPermissions([{name: PermissionNames.OperationMembersView}])) {
+        operationsState.dispatch('retrieveOperationMembersById', curVal);
+      }
     }
   });
 
@@ -117,7 +157,9 @@
    * @param query search string
    */
   function handleOperationSelectionInput(query: string) {
-    operationsState.dispatch('searchOperationsByQuery', {query, limit:10});
+    if(checkPermissions([{name: PermissionNames.OperationViewAny}])) {
+      operationsState.dispatch('searchOperationsByQuery', {query, limit:10});
+    }
   }
 
   /**
@@ -129,7 +171,7 @@
         title: updatedGroupTitle.value,
         description: updatedGroupDescription.value? updatedGroupDescription.value : undefined,
         operation: updatedGroupOperationId.value? updatedGroupOperationId.value: undefined,
-        members: updatedGroupMemberIds.value,
+        members: checkPermissions([{name: PermissionNames.OperationMembersView}]) ? updatedGroupMemberIds.value : [],
       });
       router.push('/groups');
   }

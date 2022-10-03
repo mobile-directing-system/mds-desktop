@@ -22,6 +22,14 @@
             Intelligence
           </router-link>
         </div>
+        <div class=" px-16 ">
+          <router-link
+            to="/addressbook"
+            class=" px-3 hover:bg-primary hover:text-on_primary hover:rounded-lg hover:shadow-xl"
+          >
+            Adressbook
+          </router-link>
+        </div>
         <!-- Settings -->
         <button
           id="toggle-dropdown-button"

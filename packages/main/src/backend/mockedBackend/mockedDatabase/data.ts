@@ -5,6 +5,7 @@ import { difference } from 'lodash';
 
 class MockDatabase {
     private loggedIn = false;
+    private loggedInUserId = '';
     //set of users on startup. Generated with testDataGenerators/gen_users.sh
     private readonly users: Map<string, User> = new Map<string, User>([
         ['14baea6f-5e6c-4d7f-972c-5b2c0c02950f', {id: '14baea6f-5e6c-4d7f-972c-5b2c0c02950f', username: 'admin', first_name: 'admin', last_name: 'admin', is_active: true, is_admin: true, pass: 'admin'}],
@@ -111,14 +112,39 @@ class MockDatabase {
       ],
     ]);
 
+    public checkPermission(permissions: Permission[]) {
+      const loggedInPermissions = this.permissions.get(this.loggedInUserId);
+      if(this.users.get(this.loggedInUserId) && this.users.get(this.loggedInUserId)?.is_admin) {
+        return true;
+      }
+      if(loggedInPermissions) {
+        let userHasPermissions = false;
+        if(loggedInPermissions) {
+          userHasPermissions = true;
+          for(const permission of permissions) {
+            if(!(loggedInPermissions.filter((elem) => elem.name === permission.name).length > 0)) {
+              userHasPermissions = false;
+            }
+          }
+        }
+        return userHasPermissions;
+      } else {
+        return false;
+      }
+    }
+
     //Permission Functions
     public getPermissions(id:string):Permission[] {
+      //a user can get his own permissions
+      if(id !== this.loggedInUserId && !this.checkPermission([{name: PermissionNames.PermissionsView}])) {
+        throw new Error();
+      }
       const permissions = this.permissions.get(id);
       return permissions? permissions : [];
     }
 
     public setPermissions(id: string, permissions: Permission[]):boolean {
-      if(!this.userExists(id)) {
+      if(!this.userExists(id) || !this.checkPermission([{name: PermissionNames.PermissionsUpdate}])) {
         throw new Error();
       }
       this.permissions.set(id, permissions);
@@ -133,8 +159,8 @@ class MockDatabase {
     public login(username: string, password: string): boolean {
       this.loggedIn = true;
       const user = this.getUsersWithPasswords().filter((elem) => elem.username === username );
-      
       if(user.length > 0 && user[0].pass === password) {
+        this.loggedInUserId = user[0].id;
         return true;
       } else {
         return false;
@@ -147,7 +173,7 @@ class MockDatabase {
 
     //User Functions
     private validateUser(user: User):boolean {
-      return Boolean(user.username) && Boolean(user.first_name) && Boolean(user.last_name) && Boolean(user.pass) && user.is_admin !== undefined;
+      return Boolean(user.username) && Boolean(user.first_name) && Boolean(user.last_name) && user.is_admin !== undefined;
     }
 
     private getUsersWithPasswords():User[] {
@@ -156,25 +182,50 @@ class MockDatabase {
     }
     
     public getUsers():User[] {
+      if(!this.checkPermission([{name: PermissionNames.UserView}])) {
+        throw new Error();
+      }
       // remove passwords from the users.
       return this.getUsersWithPasswords().map((elem) => {return {...elem, pass:''};});
     }
 
+    public getUserByUsername(username: string):User {
+      //user can get his own user object
+      if(username !== this.users.get(this.loggedInUserId)?.username && !this.checkPermission([{name: PermissionNames.UserView}])) {
+        throw new Error();
+      }
+      const usersWithUsername = [...this.users.values()].filter((elem) => elem.username === username);
+      if(usersWithUsername.length !== 1) {
+        throw new Error();
+      }
+      return usersWithUsername[0];
+    }
+
     public userExists(id: string):boolean {
+      if(!this.checkPermission([{name: PermissionNames.UserView}])) {
+        throw new Error();
+      }
       return this.users.has(id);
     }
 
     public getUser(id: string):User {
+      //a user can get his own user object
+      if(id !== this.loggedInUserId && !this.checkPermission([{name: PermissionNames.UserView}])) {
+        throw new Error();
+      }
       const user = this.users.get(id);
       if(!user) {
-        throw Error();
+        throw new Error();
       }
       return user;
     }
 
     public addUser(user: User): User {
+      if(!this.checkPermission([{name: PermissionNames.UserCreate}])) {
+        throw new Error();
+      }
       if(!this.getUsers().map((elem) => elem.username).includes(user.username) && !this.validateUser(user)) {
-        throw Error();
+        throw new Error();
       } else {
         const userWithId = {...user, id: uuid()};
         this.users.set(userWithId.id, userWithId);
@@ -183,23 +234,22 @@ class MockDatabase {
     }
 
     public updateUser(user: User): boolean {
-      if(!this.userExists(user.id) && !this.validateUser(user)) {
+      if(!this.userExists(user.id) || !this.validateUser(user) || !this.checkPermission([{name: PermissionNames.UserUpdate}])) {
+        throw new Error();
+      }
+      const existingUser = this.getUser(user.id);
+      if(existingUser.is_active != user.is_active && !this.checkPermission([{name: PermissionNames.UserSetActive}])) {
+        throw new Error();
+      }
+      if(existingUser.is_admin != existingUser.is_admin && !this.checkPermission([{name: PermissionNames.UserSetAdmin}])) {
         throw new Error();
       }
       this.users.set(user.id, user);
       return true;
     }
 
-    public deleteUser(userId: string): boolean {
-      if(!this.userExists(userId)) {
-        throw new Error();
-      }
-      this.users.delete(userId);
-      return true;
-    }
-
     public updateUserPassword(userId: string, password: string): boolean {
-      if(!this.userExists(userId) && password !== undefined) {
+      if(!this.userExists(userId) || password !== undefined || !this.checkPermission([{name: PermissionNames.UserUpdatePass}])) {
         throw new Error();
       }
       const user = this.users.get(userId);
@@ -210,6 +260,9 @@ class MockDatabase {
     }
 
     public searchUsers(query: string, limit?: number, offset?: number):User[] {
+      if(!this.checkPermission([{name: PermissionNames.UserView}])) {
+          throw new Error();
+      }
       const usersToSearch = this.getUsers().splice(offset? offset:0);
       const result:User[] = [];
       let limitCtr = 1;
@@ -236,12 +289,16 @@ class MockDatabase {
     }
 
     public getOperations():Operation[] {
+      if(!this.checkPermission([{name: PermissionNames.OperationViewAny}])) {
+        //if a user does not have the permission to view any operations only return the operations he is a member of
+        return [... this.operations.values()].filter((elem) => this.operationMembers.get(elem.id)?.includes(this.loggedInUserId));
+      }
       //shallow copy the map so that sets on the outside don't effect the readonly maps in the db
       return [...this.operations.values()];
     }
 
     public addOpertion(operation: Operation):Operation {
-      if(!this.validateOperation(operation)) {
+      if(!this.validateOperation(operation) || !this.checkPermission([{name: PermissionNames.OperationCreate}])) {
         throw new Error();
       }
       const operationWithId = {...operation, id: uuid()};
@@ -250,6 +307,9 @@ class MockDatabase {
     }
 
     public getOperation(id: string):Operation {
+      if(!this.checkPermission([{name: PermissionNames.OperationViewAny}])) {
+        throw new Error();
+      }
       const operation = this.operations.get(id);
       if(!operation) {
         throw Error();
@@ -258,11 +318,14 @@ class MockDatabase {
     }
 
     public operationExists(id: string): boolean {
+      if(!this.checkPermission([{name: PermissionNames.OperationViewAny}])) {
+        throw new Error();
+      }
       return this.operations.has(id);
     }
 
     public getOperationMembers(id: string): User[] {
-      if(!this.operationExists(id)) {
+      if(!this.operationExists(id) || !this.checkPermission([{name: PermissionNames.OperationMembersView}])) {
         throw new Error();
       }
       const members = this.operationMembers.get(id);
@@ -270,7 +333,7 @@ class MockDatabase {
     }
 
     public setOperationMembers(id: string, userIds: string[]):boolean {
-      if(!this.operationExists(id)) {
+      if(!this.operationExists(id) || !this.checkPermission([{name: PermissionNames.OperationMembersUpdate}])) {
         throw new Error();
       }
       for(const userId of userIds) {
@@ -287,7 +350,7 @@ class MockDatabase {
     }
 
     public updateOperation(operation: Operation): boolean {
-      if(!this.operationExists(operation.id) && !this.validateOperation(operation)) {
+      if(!this.operationExists(operation.id) || !this.validateOperation(operation) || !this.checkPermission([{name: PermissionNames.OperationUpdate}])) {
         throw new Error();
       }
       this.operations.set(operation.id, operation);
@@ -295,6 +358,9 @@ class MockDatabase {
     }
 
     public searchOperations(query: string, limit?: number, offset?: number):Operation[] {
+      if(!this.checkPermission([{name: PermissionNames.OperationViewAny}])) {
+        throw new Error();
+      }
       const operationsToSearch = this.getOperations().splice(offset? offset:0);
       const result:Operation[] = [];
       let limitCtr = 1;
@@ -339,11 +405,17 @@ class MockDatabase {
     }
 
     public getGroups(): Group[] {
+      if(!this.checkPermission([{name: PermissionNames.GroupView}])) {
+        throw new Error();
+      }
       //shallow copy the map so that sets on the outside don't effect the readonly maps in the db
       return [...this.groups.values()];
     }
 
     public getGroup(id: string): Group {
+      if(!this.checkPermission([{name: PermissionNames.GroupView}])) {
+        throw new Error();
+      }
       const group = this.groups.get(id);
       if(!group) {
         throw Error();
@@ -352,21 +424,23 @@ class MockDatabase {
     }
 
     public groupExists(id: string): boolean {
+      if(!this.checkPermission([{name: PermissionNames.GroupView}])) {
+        throw new Error();
+      }
       return this.groups.has(id);
     }
 
     public addGroup(group: Group):Group {
-      if(!this.validateGroup(group)) {
+      if(!this.validateGroup(group) || !this.checkPermission([{name: PermissionNames.GroupCreate}])) {
         throw new Error();
       }
-
       const groupWithId = {...group, id: uuid()};
       this.groups.set(groupWithId.id, groupWithId);
       return {...groupWithId};
     }
 
     public updateGroup(group: Group):boolean {
-      if(!this.groupExists(group.id) && !this.validateGroup(group)) {
+      if(!this.groupExists(group.id) || !this.validateGroup(group) || !this.checkPermission([{name: PermissionNames.GroupUpdate}])) {
         throw new Error();
       }
       this.groups.set(group.id, group);
@@ -374,7 +448,7 @@ class MockDatabase {
     }
 
     public deleteGroup(groupId: string): boolean {
-      if(!this.groupExists(groupId)) {
+      if(!this.groupExists(groupId) || !this.checkPermission([{name: PermissionNames.GroupDelete}])) {
         throw new Error();
       }
       this.groups.delete(groupId);

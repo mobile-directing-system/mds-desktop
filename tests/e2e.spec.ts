@@ -439,7 +439,7 @@ test('Main view with no view permissions', async () => {
   await logout(page);
 });
 
-test('Main view with with view permissions and entity views', async () => {
+test('Main view with view permissions and entity views', async () => {
   //open all users view
   const page = await electronApp.firstWindow();
 
@@ -529,7 +529,7 @@ test('Main view with with view permissions and entity views', async () => {
   const updateGroupOperationInput = await page.$('#update-group-operation', {strict: true});
   expect(updateGroupOperationInput, 'Update group operation select not disabled').toBeFalsy();
   const updateGroupMembersInput = await page.$('#group-members-add-members-button', {strict: true});
-  expect(updateGroupMembersInput, 'Can\'t find update group add members button').toBeTruthy();
+  expect(updateGroupMembersInput, 'Can find update group add members button, but shouln\'t be able to').toBeFalsy();
   const updateGroupUpdateButton = await page.$('#update-group-update-button', {strict: true});
   expect(updateGroupUpdateButton, 'Can\'t find update group update button').toBeTruthy();
   const updateGroupDeleteButton = await page.$('#update-group-delete-button',  {strict: true});
@@ -537,15 +537,12 @@ test('Main view with with view permissions and entity views', async () => {
 
   expect(await updateGroupTitleInput?.getAttribute('aria-disabled'), ('Update group title input is not disabled')).toBe('true');
   expect(await updateGroupDescriptionInput?.getAttribute('aria-disabled'), ('Update group description input is not disabled')).toBe('true');
-  expect(await updateGroupMembersInput?.getAttribute('aria-disabled'), ('Update group add group members input is not disabled')).toBe('true');
   expect(await updateGroupUpdateButton?.getAttribute('aria-disabled'), ('Update group update button is not disabled')).toBe('true');
   expect(await updateGroupDeleteButton?.getAttribute('aria-disabled'), ('Update group delete button is not disabled')).toBe('true');
 
-  const groupMembersTableRows = await page.$$('#group-members >> tbody >> tr');
-  expect(groupMembersTableRows.length, 'No operation members to check').toBeGreaterThan(0);
+  const groupMembersTable = await page.$('#group-members');
+  expect(groupMembersTable, 'Operation members table is there, but shouldn\'t be').toBeFalsy;
 
-  const groupMembersDeleteMemberButtons = await page.$$('#group-members >> tbody >> tr >> td >> button');
-  expect(groupMembersDeleteMemberButtons.length, 'There are operation member delete buttons, but there shouldn\'t be any').toBe(0);
 
   await leaveUpdateGroupForm(page);
 
@@ -639,7 +636,7 @@ test('Enity view with update permissions', async () => {
   const updateGroupOperationInput = await page.$('#update-group-operation', {strict: true});
   expect(updateGroupOperationInput, 'Update group operation select not disabled').toBeTruthy();
   const updateGroupMembersInput = await page.$('#group-members-add-members-button', {strict: true});
-  expect(updateGroupMembersInput, 'Can\'t find update group add members button').toBeTruthy();
+  expect(updateGroupMembersInput, 'Can find update group add members button, but shouldn\'t be able to').toBeFalsy();
   const updateGroupUpdateButton = await page.$('#update-group-update-button', {strict: true});
   expect(updateGroupUpdateButton, ('Can\'t find update group update button')).toBeTruthy();
   const updateGroupDeleteButton = await page.$('#update-group-delete-button',  {strict: true});
@@ -647,9 +644,11 @@ test('Enity view with update permissions', async () => {
 
   expect(await updateGroupTitleInput?.getAttribute('aria-disabled'), ('Update group title input is disabled')).toBe('false');
   expect(await updateGroupDescriptionInput?.getAttribute('aria-disabled'), ('Update group description input is disabled')).toBe('false');
-  expect(await updateGroupMembersInput?.getAttribute('aria-disabled'), ('Update group add group members input is disabled')).toBe('false');
   expect(await updateGroupUpdateButton?.getAttribute('aria-disabled'), ('Update group update button is disabled')).toBe('false');
   expect(await updateGroupDeleteButton?.getAttribute('aria-disabled'), ('Update group delete button is not disabled')).toBe('true');
+
+  const groupMembersTable = await page.$('#group-members');
+  expect(groupMembersTable, 'Operation members table is there, but shouldn\'t be').toBeFalsy;
 
   await leaveUpdateGroupForm(page);
 
@@ -701,6 +700,30 @@ test('Operations view with operation members view & update permissions', async (
   expect(operationMembersDeleteMemberButtons.length, 'There should be operation member delete buttons, but there aren\'t any').toBe(numOfMemberRows);
 
   await leaveUpdateOperationForm(page);
+
+  await navigateToGroupsView(page);
+  await openUpdateGroupForm(page, 'TestGroup1');
+
+  const updateGroupTitleInput = await page.$('#update-group-title', {strict: true});
+  expect(updateGroupTitleInput, 'Can\'t find update group title input').toBeTruthy();
+  const updateGroupDescriptionInput = await page.$('#update-group-description', {strict: true});
+  expect(updateGroupDescriptionInput, 'Can\'t find update group description input').toBeTruthy();
+  const updateGroupOperationInput = await page.$('#update-group-operation', {strict: true});
+  expect(updateGroupOperationInput, 'Update group operation select not disabled').toBeTruthy();
+  const updateGroupMembersInput = await page.$('#group-members-add-members-button', {strict: true});
+  expect(updateGroupMembersInput, 'Can\'t find update group add members button').toBeTruthy();
+  const updateGroupUpdateButton = await page.$('#update-group-update-button', {strict: true});
+  expect(updateGroupUpdateButton, ('Can\'t find update group update button')).toBeTruthy();
+  const updateGroupDeleteButton = await page.$('#update-group-delete-button',  {strict: true});
+  expect(updateGroupDeleteButton, 'Can\'t find update group delete button').toBeTruthy();
+
+  expect(await updateGroupTitleInput?.getAttribute('aria-disabled'), ('Update group title input is disabled')).toBe('false');
+  expect(await updateGroupDescriptionInput?.getAttribute('aria-disabled'), ('Update group description input is disabled')).toBe('false');
+  expect(await updateGroupMembersInput?.getAttribute('aria-disabled'), ('Update group add group members input is disabled')).toBe('false');
+  expect(await updateGroupUpdateButton?.getAttribute('aria-disabled'), ('Update group update button is disabled')).toBe('false');
+  expect(await updateGroupDeleteButton?.getAttribute('aria-disabled'), ('Update group delete button is not disabled')).toBe('true');
+
+  await leaveUpdateGroupForm(page);
  
   await logout(page);
 });
