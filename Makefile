@@ -1,6 +1,6 @@
 # Partly taken from https://about.gitlab.com/blog/2017/11/27/go-tools-and-gitlab-how-to-do-continuous-integration-like-a-boss/
 
-.PHONY: all dep build test coverage coverhtml lint docs
+.PHONY: docs
 
 # Sphinx.
 
