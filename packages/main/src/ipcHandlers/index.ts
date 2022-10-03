@@ -4,3 +4,4 @@ export { createOperationHandler, updateOperationHandler, retrieveOperationHandle
 export { createGroupHandler, updateGroupHandler, deleteGroupHandler, retrieveGroupHandler, retrieveGroupsHandler } from './groupHandlers';
 export { createUserHandler, deleteUserHandler, retrieveUserHandler, retrieveUsersHandler, updateUserHandler, updateUserPasswordHandler, searchUsersHandler } from './userHandlers';
 export { createAddressbookEntryHandler, updateAddressbookEntryHandler, deleteAddressbookEntryHandler, searchAddressbookEntryByQueryHandler, retrieveAddressbookEntriesHandler, retrieveAddressbookEntryHandler, setChannelsHandler, retrieveChannlesHandler } from './addressbookHandler';
+export { invalidateIntelHandler, createIntelHandler, retrieveIntelHandler, retrieveMultipleIntelHandler, searchIntelByQueryHandler, intelDeliveredAttemptHandler, intelDeliveredDeliveryHandler} from './intelHandler';
