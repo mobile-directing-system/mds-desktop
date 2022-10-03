@@ -168,7 +168,7 @@ class MockDatabase {
 
     //User Functions
     private validateUser(user: User):boolean {
-      return Boolean(user.username) && Boolean(user.first_name) && Boolean(user.last_name) && Boolean(user.pass) && user.is_admin !== undefined;
+      return Boolean(user.username) && Boolean(user.first_name) && Boolean(user.last_name) && user.is_admin !== undefined;
     }
 
     private getUsersWithPasswords():User[] {
