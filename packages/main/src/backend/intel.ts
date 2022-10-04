@@ -34,7 +34,7 @@ export async function createIntel(intel:Intel):Promise<ErrorResult<Intel>> {
 export async function retrieveIntel(intelId:string):Promise<ErrorResult<Intel>> {
     try{
         const response = await Backend.instance.get(`${endpoint}/${intelId}`);
-        return {res: response.data, error:false};
+        return {res: {...response.data, created_at: new Date(response.data.created_at)}, error:false};
     }catch(error){
         const axError: AxiosError = error as AxiosError;
         printAxiosError(axError);
@@ -57,7 +57,8 @@ export async function searchIntelByQuery(query: string, limit?: number, offset?:
     try {
         //explicit use of != instead of !== as a != null is equivalent to a !== null | a !== undefined
         const response = await Backend.instance.get(`${endpoint}/search?${(query != null)? `&q=${query}` : ''}${(offset != null)? `&offset=${offset}` : ''}${(limit != null)? `&limit=${limit}` : ''}`);
-        return {res: response.data.hits, total: response.data.estimated_total_hits , error: false};
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return {res: response.data.hits.map((elem: any) => {return {...elem, created_at: new Date(elem.created_at)};}), total: response.data.estimated_total_hits , error: false};
     } catch(error) {
         const axError: AxiosError = error as AxiosError;
         printAxiosError(axError);
@@ -94,7 +95,8 @@ export async function retrieveMultipleIntel(one_of_delivered_to_entries?: string
             one_of_delivered_to_entriesQuery.value += ']';
         }
         const response = await Backend.instance.get(`${endpoint}/?${(one_of_delivery_for_entries != null)? `&one_of_delivery_for_entries=${one_of_delivery_for_entriesQuery.value}`: ''}${(one_of_delivered_to_entries != null)? `&one_of_delivered_to_entries=${one_of_delivered_to_entriesQuery.value}`: ''}${(include_invalid != null)? `&include_invalid=${include_invalid}`: ''}${(min_importance != null)? `&min_importance=${min_importance}`: ''}${(intel_type != null)? `&intel_type=${intel_type}`: ''}${(operationId != null)? `&operation=${operationId}`: ''}${(created_by_user_id != null)? `&created_by=${created_by_user_id}`: ''} ${(amount != null)? `&limit=${amount}` : ''}${(offset != null)? `&offset=${offset}` : ''}${(order_by != null)? `&order_by=${order_by}` : ''}${(order_dir != null)? `&order_dir=${order_dir}` : ''} `);
-        return {res: response.data.entries, error:false, total: response.data.total};
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return {res: response.data.entries.map((elem: any) => {return {...elem, created_at: new Date(elem.created_at)};}), error:false, total: response.data.total};
     }catch(error){
         const axError: AxiosError = error as AxiosError;
         printAxiosError(axError);
