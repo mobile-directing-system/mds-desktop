@@ -349,11 +349,14 @@ test('Check if created user data correct', async() => {
   expect(updateUserFirstNameInput, 'Can\'t find update user first name input').toBeTruthy();
   const updateUserLastNameInput = await page.$('#update-user-lastName', {strict: true});
   expect(updateUserLastNameInput, 'Can\'t find update user last name input').toBeTruthy();
+  const updateUserActiveCheckbox = await page.$('#update-user-is_active', {strict: true});
+  expect(updateUserActiveCheckbox, 'Can\'t find update user is_active checkbox').toBeTruthy();
 
   //check if content of user form inputs correct for newly created user
   expect(await updateUserUsernameInput?.inputValue(), `Value of update user form username input is not ${username}.`).toBe(username);
   expect(await updateUserFirstNameInput?.inputValue(), `Value of update user form username input is not ${firstName}.`).toBe(firstName);
   expect(await updateUserLastNameInput?.inputValue(), `Value of update user form username input is not ${lastName}.`).toBe(lastName);
+  expect(await updateUserActiveCheckbox?.isChecked(), 'Is active checkbox for the created user not set to on').toBe(true);
 
   await logout(page);
 });
@@ -395,23 +398,28 @@ test('Change created user and check in users table', async() => {
   await logout(page);
 });
 
-test('Delete created user and check in table', async() => {
+test('Deactivate created user and check if its deactivated', async() => {
   const page = await electronApp.firstWindow();
 
   await loginAsUser(page);
   await navigateToUsersView(page);
-  await openUpdateUserForm(page, username);
+  await openUpdateUserForm(page, updatedUsername);
 
-  const updateUserDeleteButton = await page.$('#update-user-delete-button', {strict: true});
-  expect(updateUserDeleteButton, 'Can\'t find update user delete button').toBeTruthy();
-  await updateUserDeleteButton?.click();
+  const updateUserActiveCheckbox = await page.$('#update-user-is_active', {strict: true});
+  expect(updateUserActiveCheckbox, 'Can\'t find update user is_active checkbox').toBeTruthy();
+  await updateUserActiveCheckbox?.click();
 
-  const createdUserUsernameTableData = await page.$(`#users-table >> td:has-text("${updatedUsername}")`);
-  expect(createdUserUsernameTableData, 'Can\'t find table data with username for newly created user').toBeFalsy();
-  const createdUserFirstNameTableData = await page.$(`#users-table >> td:has-text("${updatedFirstName}")`);
-  expect(createdUserFirstNameTableData, 'Can\'t find table data with first name for newly created user').toBeFalsy();
-  const createdUserLastNameTableData = await page.$(`#users-table >> td:has-text("${updatedLastName}")`);
-  expect(createdUserLastNameTableData, 'Can\'t find table data with last name for newly created user').toBeFalsy();
+  //get update user button and update user
+  const updateUserUpdateButton = await page.$('#update-user-update-button', {strict: true});
+  expect(updateUserUpdateButton, ('Can\'t find update user update button')).toBeTruthy();
+  await updateUserUpdateButton?.click();
+
+  await leaveUpdateUserForm(page);
+  await openUpdateUserForm(page, updatedUsername);
+  
+  const updateUserActiveCheckbox2 = await page.$('#update-user-is_active', {strict: true});
+  expect(updateUserActiveCheckbox2, 'Can\'t find update user is_active checkbox').toBeTruthy();
+  expect(await updateUserActiveCheckbox2?.isChecked(), 'Is active checkbox for the created user not set to off').toBe(false);
 
   await logout(page);
 });
@@ -431,7 +439,7 @@ test('Main view with no view permissions', async () => {
   await logout(page);
 });
 
-test('Main view with with view permissions and entity views', async () => {
+test('Main view with view permissions and entity views', async () => {
   //open all users view
   const page = await electronApp.firstWindow();
 
@@ -457,12 +465,15 @@ test('Main view with with view permissions and entity views', async () => {
   expect(updateUserFirstNameInput, 'Can\'t find update user first name input').toBeTruthy();
   const updateUserLastNameInput = await page.$('#update-user-lastName', {strict: true});
   expect(updateUserLastNameInput, 'Can\'t find update user last name input').toBeTruthy();
+  const updateUserActiveCheckbox = await page.$('#update-user-is_active', {strict: true});
+  expect(updateUserActiveCheckbox, 'Can\'t find update user is_active checkbox').toBeTruthy();
   const updateUserUpdateButton = await page.$('#update-user-update-button', {strict: true});
   expect(updateUserUpdateButton, ('Can\'t find update user update button')).toBeTruthy();
 
   expect(await updateUserUsernameInput?.getAttribute('aria-disabled'), ('Update user username input is not disabled')).toBe('true');
   expect(await updateUserFirstNameInput?.getAttribute('aria-disabled'), ('Update user first name input is not disabled')).toBe('true');
   expect(await updateUserLastNameInput?.getAttribute('aria-disabled'), ('Update user last name input is not disabled')).toBe('true');
+  expect(await updateUserActiveCheckbox?.getAttribute('aria-disabled'), 'Is active checkbox is not disabled').toBe('true');
   expect(await updateUserUpdateButton?.getAttribute('aria-disabled'), ('Update user update button is not disabled')).toBe('true');
 
   await leaveUpdateUserForm(page);
@@ -518,7 +529,7 @@ test('Main view with with view permissions and entity views', async () => {
   const updateGroupOperationInput = await page.$('#update-group-operation', {strict: true});
   expect(updateGroupOperationInput, 'Update group operation select not disabled').toBeFalsy();
   const updateGroupMembersInput = await page.$('#group-members-add-members-button', {strict: true});
-  expect(updateGroupMembersInput, 'Can\'t find update group add members button').toBeTruthy();
+  expect(updateGroupMembersInput, 'Can find update group add members button, but shouln\'t be able to').toBeFalsy();
   const updateGroupUpdateButton = await page.$('#update-group-update-button', {strict: true});
   expect(updateGroupUpdateButton, 'Can\'t find update group update button').toBeTruthy();
   const updateGroupDeleteButton = await page.$('#update-group-delete-button',  {strict: true});
@@ -526,15 +537,12 @@ test('Main view with with view permissions and entity views', async () => {
 
   expect(await updateGroupTitleInput?.getAttribute('aria-disabled'), ('Update group title input is not disabled')).toBe('true');
   expect(await updateGroupDescriptionInput?.getAttribute('aria-disabled'), ('Update group description input is not disabled')).toBe('true');
-  expect(await updateGroupMembersInput?.getAttribute('aria-disabled'), ('Update group add group members input is not disabled')).toBe('true');
   expect(await updateGroupUpdateButton?.getAttribute('aria-disabled'), ('Update group update button is not disabled')).toBe('true');
   expect(await updateGroupDeleteButton?.getAttribute('aria-disabled'), ('Update group delete button is not disabled')).toBe('true');
 
-  const groupMembersTableRows = await page.$$('#group-members >> tbody >> tr');
-  expect(groupMembersTableRows.length, 'No operation members to check').toBeGreaterThan(0);
+  const groupMembersTable = await page.$('#group-members');
+  expect(groupMembersTable, 'Operation members table is there, but shouldn\'t be').toBeFalsy;
 
-  const groupMembersDeleteMemberButtons = await page.$$('#group-members >> tbody >> tr >> td >> button');
-  expect(groupMembersDeleteMemberButtons.length, 'There are operation member delete buttons, but there shouldn\'t be any').toBe(0);
 
   await leaveUpdateGroupForm(page);
 
@@ -574,12 +582,16 @@ test('Enity view with update permissions', async () => {
   expect(updateUserFirstNameInput, 'Can\'t find update user first name input').toBeTruthy();
   const updateUserLastNameInput = await page.$('#update-user-lastName', {strict: true});
   expect(updateUserLastNameInput, 'Can\'t find update user last name input').toBeTruthy();
+  const updateUserActiveCheckbox = await page.$('#update-user-is_active', {strict: true});
+  expect(updateUserActiveCheckbox, 'Can\'t find update user is_active checkbox').toBeTruthy();
   const updateUserUpdateButton = await page.$('#update-user-update-button', {strict: true});
   expect(updateUserUpdateButton, ('Can\'t find update user update button')).toBeTruthy();
 
   expect(await updateUserUsernameInput?.getAttribute('aria-disabled'), ('Update user username input is disabled')).toBe('false');
   expect(await updateUserFirstNameInput?.getAttribute('aria-disabled'), ('Update user first name input is disabled')).toBe('false');
   expect(await updateUserLastNameInput?.getAttribute('aria-disabled'), ('Update user last name input is disabled')).toBe('false');
+  //active check box should still be disabled
+  expect(await updateUserActiveCheckbox?.getAttribute('aria-disabled'), 'Is active checkbox is not disabled').toBe('true');
   expect(await updateUserUpdateButton?.getAttribute('aria-disabled'), ('Update user update button is disabled')).toBe('false');
 
   await leaveUpdateUserForm(page);
@@ -624,7 +636,7 @@ test('Enity view with update permissions', async () => {
   const updateGroupOperationInput = await page.$('#update-group-operation', {strict: true});
   expect(updateGroupOperationInput, 'Update group operation select not disabled').toBeTruthy();
   const updateGroupMembersInput = await page.$('#group-members-add-members-button', {strict: true});
-  expect(updateGroupMembersInput, 'Can\'t find update group add members button').toBeTruthy();
+  expect(updateGroupMembersInput, 'Can find update group add members button, but shouldn\'t be able to').toBeFalsy();
   const updateGroupUpdateButton = await page.$('#update-group-update-button', {strict: true});
   expect(updateGroupUpdateButton, ('Can\'t find update group update button')).toBeTruthy();
   const updateGroupDeleteButton = await page.$('#update-group-delete-button',  {strict: true});
@@ -632,9 +644,11 @@ test('Enity view with update permissions', async () => {
 
   expect(await updateGroupTitleInput?.getAttribute('aria-disabled'), ('Update group title input is disabled')).toBe('false');
   expect(await updateGroupDescriptionInput?.getAttribute('aria-disabled'), ('Update group description input is disabled')).toBe('false');
-  expect(await updateGroupMembersInput?.getAttribute('aria-disabled'), ('Update group add group members input is disabled')).toBe('false');
   expect(await updateGroupUpdateButton?.getAttribute('aria-disabled'), ('Update group update button is disabled')).toBe('false');
   expect(await updateGroupDeleteButton?.getAttribute('aria-disabled'), ('Update group delete button is not disabled')).toBe('true');
+
+  const groupMembersTable = await page.$('#group-members');
+  expect(groupMembersTable, 'Operation members table is there, but shouldn\'t be').toBeFalsy;
 
   await leaveUpdateGroupForm(page);
 
@@ -686,6 +700,30 @@ test('Operations view with operation members view & update permissions', async (
   expect(operationMembersDeleteMemberButtons.length, 'There should be operation member delete buttons, but there aren\'t any').toBe(numOfMemberRows);
 
   await leaveUpdateOperationForm(page);
+
+  await navigateToGroupsView(page);
+  await openUpdateGroupForm(page, 'TestGroup1');
+
+  const updateGroupTitleInput = await page.$('#update-group-title', {strict: true});
+  expect(updateGroupTitleInput, 'Can\'t find update group title input').toBeTruthy();
+  const updateGroupDescriptionInput = await page.$('#update-group-description', {strict: true});
+  expect(updateGroupDescriptionInput, 'Can\'t find update group description input').toBeTruthy();
+  const updateGroupOperationInput = await page.$('#update-group-operation', {strict: true});
+  expect(updateGroupOperationInput, 'Update group operation select not disabled').toBeTruthy();
+  const updateGroupMembersInput = await page.$('#group-members-add-members-button', {strict: true});
+  expect(updateGroupMembersInput, 'Can\'t find update group add members button').toBeTruthy();
+  const updateGroupUpdateButton = await page.$('#update-group-update-button', {strict: true});
+  expect(updateGroupUpdateButton, ('Can\'t find update group update button')).toBeTruthy();
+  const updateGroupDeleteButton = await page.$('#update-group-delete-button',  {strict: true});
+  expect(updateGroupDeleteButton, 'Can\'t find update group delete button').toBeTruthy();
+
+  expect(await updateGroupTitleInput?.getAttribute('aria-disabled'), ('Update group title input is disabled')).toBe('false');
+  expect(await updateGroupDescriptionInput?.getAttribute('aria-disabled'), ('Update group description input is disabled')).toBe('false');
+  expect(await updateGroupMembersInput?.getAttribute('aria-disabled'), ('Update group add group members input is disabled')).toBe('false');
+  expect(await updateGroupUpdateButton?.getAttribute('aria-disabled'), ('Update group update button is disabled')).toBe('false');
+  expect(await updateGroupDeleteButton?.getAttribute('aria-disabled'), ('Update group delete button is not disabled')).toBe('true');
+
+  await leaveUpdateGroupForm(page);
  
   await logout(page);
 });
@@ -702,6 +740,22 @@ test('Groups with delete group permission', async () => {
   expect(await updateGroupDeleteButton?.getAttribute('aria-disabled'), 'Update group delete button disabled').toBe('false');
  
   await leaveUpdateGroupForm(page);
+ 
+  await logout(page);
+});
+
+test('Users with set active permission', async () => {
+  const page = await electronApp.firstWindow();
+
+  await loginAsUser(page, 'TestUser8', 'testpw');
+  await navigateToUsersView(page);
+  await openUpdateUserForm(page, 'TestUser1');
+
+  const updateUserActiveCheckbox = await page.$('#update-user-is_active', {strict: true});
+  expect(updateUserActiveCheckbox, 'Can\'t find update user is_active checkbox').toBeTruthy();
+  expect(await updateUserActiveCheckbox?.getAttribute('aria-disabled'), 'Is active checkbox is disabled').toBe('false');
+ 
+  await leaveUpdateUserForm(page);
  
   await logout(page);
 });

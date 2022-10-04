@@ -17,6 +17,9 @@ import CreateNewAddressbookEntry from '../views/CreateNewAddressbookEntry.vue';
 import EditAddressbookEntry from '../views/EditAddressbookEntry.vue';
 import Mailbox from '../views/MailboxPage.vue';
 
+import AllPermissions from '../views/AllPermissions.vue';
+import EditPermissions from '../views/EditPermissions.vue';
+
 const routes:RouteRecordRaw[] = [
     //Definition of Routes and Subroutes and how they relate to the views
     {
@@ -94,6 +97,18 @@ const routes:RouteRecordRaw[] = [
               path: '/mailbox',
               name: 'Mailbox',
               component: Mailbox,
+            },
+            {
+                path: '/permissions',
+                name: 'Permissions',
+                component: AllPermissions,
+                children: [
+                  {
+                    path: '/edit-permissions/:userId',
+                    name: 'EditCurrentUserPermissions',
+                    component: EditPermissions,
+                  },
+                ],
             },
         ],
     },

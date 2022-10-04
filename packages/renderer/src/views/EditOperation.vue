@@ -57,13 +57,26 @@
         </div>
         <!-- Operation Member Selection -->
         <div
+          v-if="!checkPermissions([{name: PermissionNames.OperationMembersView}])"
+          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+        >
+          You lack the operation members view permission, as such you cannot see or change the operation members.
+        </div>
+        <div
+          v-if="!checkPermissions([{name: PermissionNames.UserView}])"
+          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+        >
+          You lack the user view permission, as such you cannot add operation members.
+        </div>
+        <div
           v-if="checkPermissions([{name: PermissionNames.OperationMembersView}])"
           class="mb-6"
         >
           <MemberSelection
             id="operation-members"
             v-model="updatedOperationMemberIds"
-            :disable-add-members="!checkPermissions([{name: PermissionNames.OperationMembersUpdate}])"
+            :disable-add-members="!checkPermissions([{name: PermissionNames.OperationMembersUpdate}, {name: PermissionNames.UserView}])"
+            :disable-remove-members="!checkPermissions([{name: PermissionNames.OperationMembersUpdate}])"
           />
         </div>
         <!---- archive --->
