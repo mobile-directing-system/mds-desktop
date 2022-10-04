@@ -15,6 +15,7 @@ import CreateNewGroup from '../views/CreateNewGroup.vue';
 import Addressbook from '../views/AllAddressbookEntries.vue';
 import CreateNewAddressbookEntry from '../views/CreateNewAddressbookEntry.vue';
 import EditAddressbookEntry from '../views/EditAddressbookEntry.vue';
+import Mailbox from '../views/MailboxPage.vue';
 
 const routes:RouteRecordRaw[] = [
     //Definition of Routes and Subroutes and how they relate to the views
@@ -88,6 +89,11 @@ const routes:RouteRecordRaw[] = [
                 path: '/edit-addressbookentry/:addressbookEntryID',
                 name: 'EditCurrentAddressbookEntry',
                 component: EditAddressbookEntry,
+            },
+            {
+              path: '/mailbox',
+              name: 'Mailbox',
+              component: Mailbox,
             },
         ],
     },

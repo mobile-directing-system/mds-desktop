@@ -2,6 +2,7 @@ import type { AxiosError, AxiosRequestConfig, AxiosInstance } from 'axios';
 import axios from 'axios';
 import config from '/@/config';
 import { loginCache } from '/@/cache';
+import { WebSocket } from 'ws';
 
 /**
  * This class hold the xaiox instance we use to communicate with the backend.
@@ -17,6 +18,7 @@ class Backend {
     timeout: 10000,
   };
   _backendInstance: AxiosInstance;
+  _websocket: WebSocket | undefined;
   constructor() {
     this._backendInstance = axios.create(this.instanceData);
   }
@@ -28,8 +30,17 @@ class Backend {
       headers: {'Authorization': `${loginCache.tokenType} ${loginCache.token}`},
     });
   }
+  connectWebsocket(token: string, tokenType: string) {
+    this._websocket = new WebSocket(`ws://${config.baseURL}:30080/ws/desktop-app`, {headers: {Authorization: `${tokenType} ${token}`}});
+  }
+  disconnectWebsocket() {
+    this._websocket?.close();
+  }
   get instance() {
     return this._backendInstance;
+  }
+  get websocket() {
+    return this._websocket;
   }
 
 }
