@@ -8,9 +8,7 @@
         Mailbox
       </h1>        
     </header>
-    <Mailbox 
-      class="w-3/5"
-    />
+    <Mailbox />
   </div>
 </template>
 <script lang="ts" setup>

@@ -1,57 +1,56 @@
 <template>
-  <div>
+  <div
+    class="mailbox-container"
+  >
     <div
       v-if="selectedIntel === ''"
       class="overflow-x-hidden"
     >
-      <TableContainer
-        id="incoming-intel-table"
-        :contents="intelPage().values()"
-        id-identifier="id"
-      >
-        <template #tableRow="{rowData}:{rowData:Intel}">
-          <TableRow
-            :row-data="rowData"
-            :num-of-cols="3"
-            :identifier="rowData.id"
-            @click="selectedIntel = $event"
-          >
-            <template #data1="{data}:{data:Intel}">
-              {{ users().get(data.created_by)?.username }}
-            </template>
-            <template #data2="{data}:{data:Intel}">
-              <div
-                class=""
-              >
+      <div class="table-fixed">
+        <table class="w-full">
+          <tbody>
+            <tr
+              v-for="data in intelPage().values()"
+              :key="data.id"
+              class="border-b-2 border-b-surface_dark cursor-pointer hover:bg-surface_light hover:text-on_surface_light"
+              @click="selectedIntel = data.id"
+            >
+              <td class="table-data1">
+                <div class="mr-5">
+                  {{ users().get(data.created_by)?.username }}
+                </div>
+              </td>
+              <td class="table-data2">
                 {{ printIntelHeading(data) }}
-              </div>
-            </template>
-            <template #data3="{data}:{data:Intel}">
-              {{ printDate(data.created_at) }}
-            </template>
-          </TableRow>
-        </template>
-      </TableContainer>
-      <PaginationBar
-        id="incoming-intel-table-pagination"
-        class="mr-10"
-        :total-retrievable-entities="intelTotal()"
-        :page-size="10"
-        @update-page="updatePage($event.amount, $event.offset)"
-      />
+              </td>
+              <td class="table-data3">
+                <div class="ml-5">
+                  {{ printDate(data.created_at) }}
+                </div>
+              </td> 
+            </tr>
+          </tbody>
+        </table>
+        <PaginationBar
+          id="incoming-intel-table-pagination"
+          :total-retrievable-entities="intelTotal()"
+          :page-size="10"
+          @update-page="updatePage($event.amount, $event.offset)"
+        />
+      </div>
     </div>
     <div
       v-if="selectedIntel !== ''"
       class="overflow-x-hidden"
     >
       <div
-        class="flex justify-between mb-2 border-b-2 border-b-surface_light"
+        class="flex justify-between mb-2 border-b-2 border-b-surface_dark"
       >
         <span>From: {{ users().get(intel().get(selectedIntel)?.created_by ?? '' )?.username }}</span>
         <span>At: {{ printDate(intel().get(selectedIntel)?.created_at) }}</span>
       </div>
       <div
-        class="mb-2 border-b-2 border-b-surface_light"
+        class="mb-2 border-b-2 border-b-surface_dark"
       >
         <span>{{ printIntelContent(intel().get(selectedIntel)) }}</span>
       </div>
@@ -71,8 +70,6 @@
   import { IntelType } from '../constants';
   import { computed, onMounted, watch, ref } from 'vue';
   import { useIntelState, useInAppNotificationState, useUserState } from '../store';
-  import TableContainer from './BasicComponents/TableContainer.vue';
-  import TableRow from './BasicComponents/TableRow.vue';
   import PaginationBar from './BasicComponents/PaginationBar.vue';
   import NormalButton from './BasicComponents/NormalButton.vue';
 
@@ -146,8 +143,35 @@
     const month = new Intl.DateTimeFormat('en', {month: '2-digit'}).format(date);
     const day = new Intl.DateTimeFormat('en', {day: '2-digit'}).format(date);
     const hour = new Intl.DateTimeFormat('en', {hour12: false, hour: '2-digit'}).format(date);
-    const minute = new Intl.DateTimeFormat('en', {minute: '2-digit'}).format(date);
+    let minute = new Intl.DateTimeFormat('en', {minute: '2-digit'}).format(date);
+    if(minute.length === 1) {
+      minute = `0${minute}`;
+    }
     return `${day}.${month}.${year} ${hour}:${minute}`;
   }
 
 </script>
+<style scoped>
+  .mailbox-container {
+  }
+  .table-data1 {
+    white-space: nowrap;
+  }
+  .table-data2 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    max-width: 0;
+  }
+  .table-data3 {
+    white-space: nowrap;
+  }
+  .table-ellipsis {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
