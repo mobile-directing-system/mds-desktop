@@ -1,16 +1,16 @@
 <template>
-  <div class="flex flex-col">
+  <div class="min-h-full flex-grow flex flex-col">
     <!-- TopNavBar -->
     <Topnavbar />
   
     <div
       id="app-content" 
-      class="flex flex-row"
+      class="flex-grow flex flex-row"
     >
       <!-- Sidebar -->
       <Sidebar class=" overflow-x-hidden" />
       <!-- SubRouterView -->
-      <router-view class=" w-4/5 ml-4" />
+      <router-view class="w-4/5 ml-4" />
     </div>
   </div>
 </template>
