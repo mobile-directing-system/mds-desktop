@@ -6,6 +6,7 @@ import type { Store } from 'vuex';
 import { errorState, handleErrors } from './ErrorState';
 import { root, modulesStore } from '../index';
 import type { permissionsState } from './PermissionsState';
+import type { userState } from './UserState';
 
 /**
  * define the content of the LoginInfoState
@@ -82,6 +83,7 @@ class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStat
   ctx: Context<typeof root> | undefined;
   // user context to be able to use permission store actions
   permissionsCtx: Context<typeof permissionsState> | undefined; //maybe use a function exported from the vuex-module similar to the handle error function
+  userCtx: Context<typeof userState> | undefined;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   $init(store: Store<any>): void {
@@ -100,11 +102,17 @@ class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStat
       if(!this.permissionsCtx && !this.ctx){
         // Add members to the users store
         this.ctx = root.context(modulesStore);
+      }
+      if(!this.permissionsCtx && this.ctx) {
         this.permissionsCtx = this.ctx.modules.permissionsState;
+      }
+      if(!this.userCtx && this.ctx) {
+        this.userCtx = this.ctx.modules.userState;
       }
       this.mutations.setLoggedIn(true);
       this.mutations.setLoggedInUser(username);
       this.mutations.setLoggedInUserId(loggedIn.res);
+      this.userCtx?.actions.retrieveUserById(loggedIn.res);
       this.permissionsCtx?.actions.retrievePermissions(loggedIn.res);
     }  else {
       handleErrors(loggedIn.errorMsg, this.errorState);

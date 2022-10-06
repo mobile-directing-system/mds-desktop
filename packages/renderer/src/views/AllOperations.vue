@@ -211,7 +211,7 @@
     return arr;
   }
 </script>
-<style>
+<style scoped>
   .bottomPartwithSidebar {
     display: flex;
     flex-wrap: wrap;
@@ -224,8 +224,5 @@
     flex-basis: 0;
     flex-grow: 999;
     min-inline-size: 75%;
-  }
-  ::-webkit-scrollbar {
-    display: none;
   }
 </style>
