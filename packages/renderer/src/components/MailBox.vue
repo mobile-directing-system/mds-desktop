@@ -16,18 +16,28 @@
               @click="selectedIntel = data.id"
             >
               <td class="table-data1">
-                <div class="mr-5">
+                <div class="mr-5 my-2.5 font-medium">
                   {{ users().get(data.created_by)?.username }}
                 </div>
               </td>
-              <td class="table-data2">
+              <td class="table-data2 my-2.5">
                 {{ printIntelHeading(data) }}
               </td>
-              <td class="table-data3">
-                <div class="ml-5">
+              <td class="table-data3 my-2.5">
+                <div class="ml-5 font-medium">
                   {{ printDate(data.created_at) }}
                 </div>
-              </td> 
+              </td>
+              <td class="table-data5 my-2.5">
+                <div class="ml-5">
+                  {{ printType(data) }}
+                </div>
+              </td>
+              <td class="table-data4 my-2.5">
+                <div class="ml-5 font-medium">
+                  {{ printImportance(data) }}
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -44,15 +54,34 @@
       class="overflow-x-hidden"
     >
       <div
-        class="flex justify-between mb-2 border-b-2 border-b-surface_dark"
+        class="flex-row pb-2 mb-10 border-b-2 border-b-surface_dark"
       >
-        <span>From: {{ users().get(intel().get(selectedIntel)?.created_by ?? '' )?.username }}</span>
-        <span>At: {{ printDate(intel().get(selectedIntel)?.created_at) }}</span>
+        <div class="w-full flex justify-between ">
+          <span>From: {{ users().get(intel().get(selectedIntel)?.created_by ?? '' )?.username }}</span>
+          <span>At: {{ printDate(intel().get(selectedIntel)?.created_at) }}</span>
+        </div>
+        <div class="w-full flex justify-between ">
+          <span>To: {{ printRecipient(intel().get(selectedIntel)) }}</span>
+          <span>Importance: {{ printImportance(intel().get(selectedIntel)) }}</span>
+          <span>Type: {{ printType(intel().get(selectedIntel)) }}</span>
+        </div>
       </div>
       <div
-        class="mb-2 border-b-2 border-b-surface_dark"
+        class="mb-2 pb-2 border-b-2 border-b-surface_dark"
       >
-        <span>{{ printIntelContent(intel().get(selectedIntel)) }}</span>
+        <span v-if="intel().get(selectedIntel)?.type === IntelType.plaintext_message">{{ printIntelContent(intel().get(selectedIntel)) }}</span>
+        <div
+          v-if="intel().get(selectedIntel)?.type === IntelType.analog_radio_message"
+          class="flex justify-between mb-2"
+        >
+          <span v-if="intel().get(selectedIntel)?.type === IntelType.analog_radio_message">{{ `Callsign: ${printIntelCallsign(intel().get(selectedIntel))}` }}</span>
+          <span v-if="intel().get(selectedIntel)?.type === IntelType.analog_radio_message">{{ `Channel: ${printIntelChannel(intel().get(selectedIntel))}` }}</span>
+        </div>
+        <span 
+          v-if="intel().get(selectedIntel)?.type === IntelType.analog_radio_message"
+          class="block mb-2"
+        >{{ `Subject: ${printIntelHeading(intel().get(selectedIntel))}` }}</span>
+        <span v-if="intel().get(selectedIntel)?.type === IntelType.analog_radio_message">{{ printIntelContent(intel().get(selectedIntel)) }}</span>
       </div>
       <div>
         <NormalButton
@@ -69,19 +98,21 @@
   import type { Intel, RadioContent, PlainTextContent } from '../../../types';
   import { IntelType } from '../constants';
   import { computed, onMounted, watch, ref } from 'vue';
-  import { useIntelState, useInAppNotificationState, useUserState } from '../store';
+  import { useIntelState, useInAppNotificationState, useUserState, useOperationsState } from '../store';
   import PaginationBar from './BasicComponents/PaginationBar.vue';
   import NormalButton from './BasicComponents/NormalButton.vue';
 
   const intelState = useIntelState();
   const notificationState = useInAppNotificationState();
   const userState = useUserState();
+  const operationsState = useOperationsState();
 
   const intelPage = computed(() => intelState.getters.page);
   const intel = computed(() => intelState.getters.intel);
   const intelTotal = computed(() => intelState.getters.total);
   const intelNotifications = computed(()=> notificationState.getters.intelNotifications);
   const users = computed(() => userState.getters.users);
+  const operations = computed(() => operationsState.getters.operations);
 
   const selectedIntel = ref('');
 
@@ -95,6 +126,7 @@
   watch(intelPage.value(), (curVal) => {
     for(const intel of curVal.values()) {
       userState.dispatch('retrieveUserById', intel.created_by);
+      operationsState.dispatch('retrieveOperation', intel.operation);
     }
   });
 
@@ -104,7 +136,10 @@
     }
   });
 
-  function printIntelHeading(intel: Intel):string {
+  function printIntelHeading(intel?: Intel):string {
+    if(!intel) {
+      return '';
+    }
     let heading = '';
 
     if(intel.type === IntelType.analog_radio_message) {
@@ -135,7 +170,21 @@
     }
   }
 
-  function printDate(date: Date|undefined): string {
+  function printIntelCallsign(intel?: Intel): string {
+    if(!intel) {
+      return '';
+    }
+    return (intel.content as RadioContent).callsign;
+  }
+
+  function printIntelChannel(intel?: Intel): string  {
+    if(!intel) {
+      return '';
+    }
+    return (intel.content as RadioContent).channel;
+  }
+
+  function printDate(date?: Date): string {
     if(!date) {
       return '';
     }
@@ -150,10 +199,46 @@
     return `${day}.${month}.${year} ${hour}:${minute}`;
   }
 
+  function printImportance(intel?: Intel): string {
+    if(!intel) {
+      return '';
+    }
+    if(intel.importance === 1000) {
+      return 'Standard';
+    } else if (intel.importance === 2000) {
+      return 'Instant';
+    } else if (intel.importance === 3000) {
+      return 'Lightning';
+    } else if (intel.importance === 4000) {
+      return 'Catastrophe';
+    } else {
+      return '';
+    }
+  }
+
+  function printType(intel?: Intel): string {
+    if(!intel) {
+      return '';
+    }
+    if(intel.type === IntelType.plaintext_message) {
+      return 'Plaintext Message';
+    } else if (intel.type === IntelType.analog_radio_message) {
+      return 'Analog Radio Message';
+    } else {
+      return '';
+    }
+  }
+
+  function printRecipient(intel?: Intel):string {
+    if(!intel) {
+      return '';
+    }
+    const opTitle = operations.value().get(intel.operation)?.title;
+    return opTitle ?? '';
+  }
+
 </script>
 <style scoped>
-  .mailbox-container {
-  }
   .table-data1 {
     white-space: nowrap;
   }
@@ -167,11 +252,12 @@
   .table-data3 {
     white-space: nowrap;
   }
-  .table-ellipsis {
-    display: block;
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
+
+  .table-data4 {
+    white-space: nowrap;
+  }
+
+  .table-data5 {
     white-space: nowrap;
   }
 </style>
