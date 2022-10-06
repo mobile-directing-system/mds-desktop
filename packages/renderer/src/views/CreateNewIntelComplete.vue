@@ -1,5 +1,11 @@
 <template>
-  <div>
+  <div class="flex flex-row">
+    <div class="w-1/2 border-r-primary border-r-2">
+      <h1 class="text-left text-4xl font-bold text-on_background my-10">
+        MailBox
+      </h1>
+      <MailBox class="m-3" />
+    </div>
     <div class=" bg-background ml-4 rounded-lg  my-10 w-max">
       <header class=" max-w-lg pb-10">
         <h1 class="  text-left text-4xl font-bold text-on_background">
@@ -293,6 +299,7 @@
   import SearchableSelect from '../components/BasicComponents/SearchableSelect.vue';
   import type {Ref} from 'vue';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
+import MailBox from '../components/MailBox.vue';
 
   const addressbookState = useAddressbookState();
   const operationsState = useOperationsState();
