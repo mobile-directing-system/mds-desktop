@@ -78,8 +78,9 @@
    * newer errors they are then displayed in the same way.
    */
   import {computed} from 'vue';
-  import type { InAppNotification } from '../../../../types';
+  import type { InAppNotification, PlainTextContent } from '../../../../types';
   import { useErrorState, useInAppNotificationState } from '../../store';
+  import { IntelType } from '../../constants';
 
   const errorState = useErrorState();
   const notificationState = useInAppNotificationState();
@@ -95,7 +96,16 @@
   }
   function printNotificiation(notification: InAppNotification):string {
     if(notification.type === 'intel-notification') {
-      return 'You got new Intel.';
+      if(notification.payload.intel_to_deliver.type === IntelType.plaintext_message) {
+        const content = (notification.payload.intel_to_deliver.content as PlainTextContent).text.slice(0, 60);
+        return `You got new plaintext intel: ${content.endsWith(' ')? content.substring(0, -1) : content}...`;
+      }
+      if(notification.payload.intel_to_deliver.type === IntelType.analog_radio_message) {
+        //fix this in the backend or in the backend comms code in the future
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const content = (notification.payload.intel_to_deliver.content as any).Head.slice(0, 50);
+        return `You got new analog radio intel: ${content.endsWith(' ')? content.substring(0, -1) : content}...`;
+      }
     }
     return '';
   }
