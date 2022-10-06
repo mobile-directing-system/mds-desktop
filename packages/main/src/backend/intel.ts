@@ -1,6 +1,7 @@
 import type { AxiosError } from 'axios';
 import {ref} from 'vue';
-import type { Intel, ErrorResult, IntelType} from '../../../types';
+import type { Intel, ErrorResult} from '../../../types';
+import type { IntelType } from '../../../renderer/src/constants';
 import Backend from './backendInstance';
 import { printAxiosError } from './backendInstance';
 
@@ -53,7 +54,7 @@ export async function retrieveIntel(intelId:string):Promise<ErrorResult<Intel>> 
         }
     }
 }
-export async function searchIntelByQuery(query: string, limit?: number, offset?: number):Promise<ErrorResult<Intel[]>> {
+export async function searchIntelByQuery(query:string, offset?:number, limit?:number):Promise<ErrorResult<Intel[]>> {
     try {
         //explicit use of != instead of !== as a != null is equivalent to a !== null | a !== undefined
         const response = await Backend.instance.get(`${endpoint}/search?${(query != null)? `&q=${query}` : ''}${(offset != null)? `&offset=${offset}` : ''}${(limit != null)? `&limit=${limit}` : ''}`);
