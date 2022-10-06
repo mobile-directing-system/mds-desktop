@@ -1,6 +1,7 @@
 import type{Intel, ErrorResult} from '../../types';
 import type { IntelType } from '../../renderer/src/constants';
 const { ipcRenderer } = require('electron');
+
 export async function createIntel(intel: Intel):Promise<ErrorResult<Intel>> {
     return ipcRenderer.invoke('createIntel', intel);
 }
@@ -17,8 +18,8 @@ export async function retrieveMultipleIntel(one_of_delivered_to_entries?: string
     return ipcRenderer.invoke('retrieveMultipleIntel', one_of_delivered_to_entries,one_of_delivery_for_entries,include_invalid,min_importance,intel_type,operationId,created_by_user_id, amount, offset, order_by, order_dir);
 }
 
-export async function searchIntelByQuery(query:string, amount?: number, offset?: number, orderBy?: string, orderDir?: string):Promise<ErrorResult<Intel[]>> {
-    return ipcRenderer.invoke('searchIntel',query, amount, offset, orderBy, orderDir );
+export async function searchIntelByQuery(query:string, amount?: number, offset?: number):Promise<ErrorResult<Intel[]>> {
+    return ipcRenderer.invoke('searchIntel',query, amount, offset);
 }
 
 export async function intelDeliveredAttempt(attepmtId:string):Promise<ErrorResult<boolean>> {

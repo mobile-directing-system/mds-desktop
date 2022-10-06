@@ -28,7 +28,6 @@ class ErrorState {
 class ErrorStateGetters extends Getters<ErrorState> {
   get errors() {
     return () => {
-      setTimeout;
       return this.state.errors;
     };
   }

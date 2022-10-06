@@ -58,15 +58,12 @@ class IntelStateGetters extends Getters<IntelState> {
         this.state.page.clear();
         this.state.intel.clear();
         intel.forEach((elem) => this.state.intel.set(elem.id, elem));
-        intel.forEach((elem) => this.state.page.set(elem.id, elem));
     }
     addIntel(intel: Intel[]) {
         intel.forEach((elem) => this.state.intel.set(elem.id, elem));
-        intel.forEach((elem) => this.state.page.set(elem.id, elem));
     }
     addOrUpdateIntel(intel: Intel){
         this.state.intel.set(intel.id, intel);
-        this.state.page.set(intel.id, intel);
     }
     setSearchResult(intel: Intel[]){
         this.state.searchResult.clear();

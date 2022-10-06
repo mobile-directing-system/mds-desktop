@@ -12,3 +12,5 @@ export type { Operation } from './Operation';
 export type { Group } from './Group';
 export type { AddressbookEntry, Channels, Channel, ChannelDetail, ChannelType } from './Addressbook';
 export type {Intel, PlainTextContent, RadioContent} from './Intel';
+export type { InAppNotification, IntelNotification } from './InAppNotification';
+
