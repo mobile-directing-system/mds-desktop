@@ -16,6 +16,9 @@ import Addressbook from '../views/AllAddressbookEntries.vue';
 import CreateNewAddressbookEntry from '../views/CreateNewAddressbookEntry.vue';
 import EditAddressbookEntry from '../views/EditAddressbookEntry.vue';
 
+import AllPermissions from '../views/AllPermissions.vue';
+import EditPermissions from '../views/EditPermissions.vue';
+
 import CreateNewIntel from '../views/CreateNewIntelComplete.vue';
 
 const routes:RouteRecordRaw[] = [
@@ -95,6 +98,18 @@ const routes:RouteRecordRaw[] = [
                 path: '/intel/create-new-intel-complete',
                 name: 'CreateIntelComplete',
                 component: CreateNewIntel,
+            },
+            {
+                path: '/permissions',
+                name: 'Permissions',
+                component: AllPermissions,
+                children: [
+                  {
+                    path: '/edit-permissions/:userId',
+                    name: 'EditCurrentUserPermissions',
+                    component: EditPermissions,
+                  },
+                ],
             },
         ],
     },

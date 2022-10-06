@@ -43,6 +43,21 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.UserUpdate}])? 'false':'true'"
           />
         </div>
+        <!-- is_active -->
+        <div class="mb-6 flex justify-between flex-row">
+          <label
+            for="update-user-is_active"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 "
+          >Active</label>
+          <input
+            id="update-user-is_active"
+            v-model="updatedUserActive"
+            class="bg-gray-50 border w-1/12 mr-40 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="checkbox"
+            :disabled="checkPermissions([{name: PermissionNames.UserSetActive}])? undefined:'true'"
+            :aria-disabled="checkPermissions([{name: PermissionNames.UserSetActive}])? 'false':'true'"
+          >
+        </div>
         <div class="flex justify-between">
           <!-- Update User Button -->
           <NormalButton
@@ -53,16 +68,6 @@
           >
             Update User
           </NormalButton>
-          <!-- Delete User Button -->
-          <NormalButton
-            id="update-user-delete-button"
-            class="ml-auto"
-            @click.prevent="deleteUser()"
-          >
-            Delete User
-          </NormalButton>
-        </div>
-        <div class=" pt-4 flex justify-between">
           <!-- Cancel Button -->
           <NormalButton
             id="update-user-cancel-button"
@@ -100,12 +105,14 @@
   const updatedUserFirstName = ref('');
   const updatedUserName = ref('');
   const updatedUserLastName = ref('');
+  const updatedUserActive = ref(false);
 
   //set refs with content of current user if it exists
   if(currentUser) {
     updatedUserFirstName.value = currentUser.first_name;
     updatedUserName.value = currentUser.username;
     updatedUserLastName.value = currentUser.last_name;
+    updatedUserActive.value = currentUser.is_active;
   }
 
   /**
@@ -117,18 +124,10 @@
         username: updatedUserName.value,
         first_name: updatedUserFirstName.value,
         last_name: updatedUserLastName.value,
-        is_active: true,
+        is_active: updatedUserActive.value,
         is_admin: false,
         pass: '',
       };
       userState.dispatch('updateUser', updatedUser);
-  }
-
-  /**
-   * function to delete the user. Click handler for the Delete User Button.
-   */
-  function deleteUser(){
-      userState.dispatch('deleteUserById', selectedUserID.toString());
-      router.push('/user');
   }
 </script>

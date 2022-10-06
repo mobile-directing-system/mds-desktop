@@ -1,6 +1,7 @@
 import type { AxiosError } from 'axios';
 import {ref} from 'vue';
-import type { Intel, ErrorResult, IntelType} from '../../../types';
+import type { Intel, ErrorResult} from '../../../types';
+import type { IntelType } from '../../../renderer/src/constants';
 import Backend from './backendInstance';
 import { printAxiosError } from './backendInstance';
 

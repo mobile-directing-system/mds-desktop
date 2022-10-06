@@ -22,6 +22,7 @@ class PermissionNames {
   public static readonly UserSetActive = 'user.set-active-state';
   public static readonly UserView = 'user.view';
   // Address Book Permissions
+  public static readonly AddressBookCreateEntry = 'logistics.address-book.entry.create.any';
   public static readonly AddressBookUpdateEntry = 'logistics.address-book.entry.update.any';
   public static readonly AddressBookDeleteEntry = 'logistics.address-book.entry.delete.any';
   public static readonly AddressBookViewEntry = 'logistics.address-book.entry.view.any';
