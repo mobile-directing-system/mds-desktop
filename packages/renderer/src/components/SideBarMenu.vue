@@ -1,5 +1,5 @@
 <template>
-  <div class=" flex min-h-screen pt-auto">
+  <div class=" flex pt-auto">
     <div class="bg-white text-blue-700 border-blue-700 border-r-2 w-1/5 min-w-fit py-3">
       <!-- SideBar -->
             
