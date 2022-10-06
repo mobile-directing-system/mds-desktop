@@ -1,12 +1,13 @@
+import type {IntelType} from '../renderer/src/constants/index';
 interface Intel {
     id: string,
     created_at: Date,
     created_by: string,
     operation: string,
     type: IntelType,
-    content: RadioContent[] | PlainTextContent[],
+    content: RadioContent | PlainTextContent,
     importance: number,
-    initail_deliver_to: string[],
+    initial_deliver_to: string[],
     search_text: string,
     is_valid: boolean
 }
@@ -22,9 +23,6 @@ interface PlainTextContent {
     text: string
 }
 
-declare enum IntelType {
-    analog_radio_message = 'analog-radio-message',
-    plaintext_message = 'plaintext-message'
-}
 
-export{Intel, RadioContent, PlainTextContent, IntelType};
+
+export{Intel, RadioContent, PlainTextContent};

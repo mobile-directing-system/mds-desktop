@@ -37,5 +37,6 @@ export { invalidateIntel } from './intel';
 export { searchIntelByQuery } from './intel';
 export { intelDeliveredAttempt } from './intel';
 export { intelDeliveredDelivery } from './intel';
+export { handleIncomingInAppNotifications } from './inAppNotification';
 export { createUser, updateUser, updateUserPassword, deleteUser, retrieveUsers, retrieveUser, searchUsers } from './users';
 

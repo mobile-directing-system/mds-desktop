@@ -16,7 +16,7 @@
 
         <div class=" px-16 ">
           <router-link
-            to="/main"
+            to="/intel/create-new-intel-complete"
             class=" px-3 hover:bg-primary hover:text-on_primary hover:rounded-lg hover:shadow-xl"
           >
             Intelligence
@@ -28,6 +28,14 @@
             class=" px-3 hover:bg-primary hover:text-on_primary hover:rounded-lg hover:shadow-xl"
           >
             Adressbook
+          </router-link>
+        </div>
+        <div class=" px-16">
+          <router-link
+            to="/mailbox"
+            class=" px-3 hover:bg-primary hover:text-on_primary hover:rounded-lg hover:shadow-xl"
+          >
+            Mailbox
           </router-link>
         </div>
         <!-- Settings -->

@@ -1,10 +1,14 @@
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
 import { invalidateIntel, createIntel, searchIntelByQuery, retrieveIntel, retrieveMultipleIntel, intelDeliveredAttempt} from '#preload';
-import type { Intel, IntelType,  ErrorResult } from '../../../../types';
+import type { Intel,  ErrorResult } from '../../../../types';
+import type { IntelType } from '/@/constants';
 import type { Context } from 'vuex-smart-module';
 import type { Store } from 'vuex';
 import { errorState, handleErrors } from './ErrorState';
 
+function undom(intel: Intel):Intel {
+    return {...intel, initial_deliver_to:[...intel.initial_deliver_to]};
+}
 /**
  * define content for IntelState
  */
@@ -54,15 +58,12 @@ class IntelStateGetters extends Getters<IntelState> {
         this.state.page.clear();
         this.state.intel.clear();
         intel.forEach((elem) => this.state.intel.set(elem.id, elem));
-        intel.forEach((elem) => this.state.page.set(elem.id, elem));
     }
     addIntel(intel: Intel[]) {
         intel.forEach((elem) => this.state.intel.set(elem.id, elem));
-        intel.forEach((elem) => this.state.page.set(elem.id, elem));
     }
     addOrUpdateIntel(intel: Intel){
         this.state.intel.set(intel.id, intel);
-        this.state.page.set(intel.id, intel);
     }
     setSearchResult(intel: Intel[]){
         this.state.searchResult.clear();
@@ -81,12 +82,12 @@ class IntelStateGetters extends Getters<IntelState> {
     $init(store: Store<any>):void {
         this.errorState = errorState.context(store);
     }
-    async clearEntries() {
+    async clearIntel() {
         this.mutations.setIntel([]);
         this.mutations.setPage([]);
     }
-    async createEntry(intel: Intel) {
-        const createdIntel:ErrorResult<Intel> = await createIntel(intel);
+    async createIntel(intel: Intel) {
+        const createdIntel:ErrorResult<Intel> = await createIntel(undom(intel));
         if(createdIntel.res && !createdIntel.error){
             this.mutations.addOrUpdateIntel(createdIntel.res);
         } else {
