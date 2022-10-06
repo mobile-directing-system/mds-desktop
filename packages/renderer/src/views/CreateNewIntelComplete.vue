@@ -325,9 +325,9 @@
     operationsState.dispatch('retrieveOperations', {amount: 100});
   });
 
-  watch(selectedOperationId, (curVal) => {
+  watch(selectedOperationId, async (curVal) => {
     if(curVal) {
-        operationsState.dispatch('retrieveOperationMembersById', curVal);
+        await operationsState.dispatch('retrieveOperationMembersById', curVal);
         userIsMember.value = isCurrentUserMember();
         console.log(userIsMember.value);
     }
