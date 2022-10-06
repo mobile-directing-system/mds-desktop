@@ -54,7 +54,7 @@ export async function retrieveIntel(intelId:string):Promise<ErrorResult<Intel>> 
         }
     }
 }
-export async function searchIntelByQuery(query:string, amount?: number, offset?: number, order_by?: string, order_dir?: string):Promise<ErrorResult<Intel[]>> {
+export async function searchIntelByQuery(query:string, offset?:number, limit?:number):Promise<ErrorResult<Intel[]>> {
     try {
         //explicit use of != instead of !== as a != null is equivalent to a !== null | a !== undefined
         const response = await Backend.instance.get(`${endpoint}/search?${(query != null)? `&q=${query}` : ''}${(offset != null)? `&offset=${offset}` : ''}${(limit != null)? `&limit=${limit}` : ''}`);
