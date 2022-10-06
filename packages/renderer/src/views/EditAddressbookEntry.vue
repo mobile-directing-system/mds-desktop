@@ -414,7 +414,7 @@
               label : newChannelLabel.value,
               priority : Number(newChannelPrio.value),
               min_importance : Number(newChannelMinImprotance.value),
-              timeout : Number(newChannelTimeout.value),
+              timeout : Number(newChannelTimeout.value)*1_000_000,
               type : newChannelType,
               details : newChannelDetails,
           };
@@ -511,7 +511,7 @@
       newChannelTypeValue.value = currentChannel.type;
       newChannelLabel.value = currentChannel.label;
       newChannelPrio.value = currentChannel.priority;
-      newChannelTimeout.value =currentChannel.timeout;
+      newChannelTimeout.value =currentChannel.timeout/1_000_000;
       newChannelMinImprotance.value = currentChannel.min_importance;
       if(currentChannel.details.email){
         newChannelDetailsValue.value = currentChannel.details.email;
