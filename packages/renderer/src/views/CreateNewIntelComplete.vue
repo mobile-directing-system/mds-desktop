@@ -61,12 +61,20 @@
               @search-change="handleOperationSelectionInput"
               @open="handleOperationSelectionInput('')"
             />
-            <NormalButton
-              v-if="selectedOperationId !=''"
-              @click.prevent="currentStep++"
-            >
-              Next
-            </NormalButton>
+            <div>
+              <div
+                v-if="!userIsMember"
+                class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+              >
+                You must be a member of the selected operation to continue.
+              </div>
+              <NormalButton
+                v-if="selectedOperationId !='' && userIsMember"
+                @click.prevent="currentStep++"
+              >
+                Next
+              </NormalButton>
+            </div>
           </div>
           <div
             v-if="currentStep===3"
@@ -194,6 +202,12 @@
                 @search-change="handleOperationSelectionInput"
                 @open="handleOperationSelectionInput('')"
               />
+              <div
+                v-if="!userIsMember"
+                class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+              >
+                You must be a member of the selected operation to continue.
+              </div>
               <SearchableSelect
                 v-if="selectedIntelTypeValue !=''"
                 v-model="Importance"
@@ -257,7 +271,8 @@
                 && analogRadioMessageHead != '')) 
               && (selectedOperationId != '') 
               && (addressbookIDs.length >0)
-              && currentStep ==5"
+              && currentStep ==5
+              && userIsMember"
             @click.prevent="createIntel()"
           >
             Send
@@ -269,8 +284,8 @@
 </template>
 
 <script lang="ts" setup>
-  import {ref, onMounted, computed} from 'vue';
-  import { useAddressbookState, useOperationsState, useIntelState } from '../store';
+  import {ref, onMounted, computed, watch} from 'vue';
+  import { useAddressbookState, useOperationsState, useIntelState, useLoginState } from '../store';
   import type { PlainTextContent, RadioContent, Intel} from '../../../types';  
   import type { IntelType } from '../constants';
   import FormInput from '../components/BasicComponents/FormInput.vue';
@@ -282,11 +297,14 @@
   const addressbookState = useAddressbookState();
   const operationsState = useOperationsState();
   const intelState = useIntelState();
+  const loginState = useLoginState();
   const selectedIntelTypeValue = ref('');
   var selectedIntelType:IntelType;
   const selectedOperationId = ref('');
   const addressbookIDs: Ref<string[]> = ref([]);
   const Importance = ref('');
+  const userIsMember = ref(true); 
+  const currentUserId = loginState.getters.loggedInUserId();
 
   const plaintextContent = ref('');
   const analogRadioMessageContent = ref('');
@@ -300,13 +318,32 @@
   const operationsSearchResultsArray = computed(() => {
     return InterableIteratorToArray(operationsSearchResults.value().values());
   });
-
+  const operationMembers = computed(() => operationsState.getters.members);
 
   onMounted(() =>{
     addressbookState.dispatch('retrieveEntries', {amount: 100});
     operationsState.dispatch('retrieveOperations', {amount: 100});
   });
+
+  watch(selectedOperationId, (curVal) => {
+    if(curVal) {
+        operationsState.dispatch('retrieveOperationMembersById', curVal);
+        userIsMember.value = isCurrentUserMember();
+        console.log(userIsMember.value);
+    }
+  });
   
+  function isCurrentUserMember():boolean{
+    console.log( operationMembers.value().get(selectedOperationId.value));
+    console.log(currentUserId);
+    const membersForSelected = operationMembers.value().get(selectedOperationId.value);
+    if(membersForSelected){
+      return membersForSelected.filter(x => x === currentUserId).length>0? true: false;
+    }else{
+      return false;
+    }
+  }
+
   function createIntel(){
     selectedIntelType = selectedIntelTypeValue.value as IntelType;
     if(selectedIntelType){
