@@ -173,7 +173,10 @@
         operation: updatedGroupOperationId.value? updatedGroupOperationId.value: undefined,
         members: checkPermissions([{name: PermissionNames.OperationMembersView}]) ? updatedGroupMemberIds.value : [],
       });
-      router.push('/groups');
+      updatedGroupTitle.value = '';
+      updatedGroupDescription.value = '';
+      updatedGroupOperationId.value = '';
+      updatedGroupMemberIds.value = [];
   }
 
   /**
