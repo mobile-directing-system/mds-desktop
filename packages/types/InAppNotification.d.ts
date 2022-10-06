@@ -14,7 +14,7 @@ interface IntelNotification {
     created_by: string,
     operation: string,
     type: IntelType,
-    content: RadioContent[] | PlainTextContent[],
+    content: RadioContent | PlainTextContent,
     importance: number,
   },
   delivery_attempt: {
