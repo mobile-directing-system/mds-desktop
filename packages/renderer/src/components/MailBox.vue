@@ -131,10 +131,10 @@
   });
 
   watch(intelNotifications.value(), () => {
-    if(cachedPageAmount && cachedPageOffset) {
+    if(cachedPageAmount !== undefined && cachedPageOffset !== undefined) {
       updatePage(cachedPageAmount, cachedPageOffset);
     }
-  });
+  }, {deep: true});
 
   function printIntelHeading(intel?: Intel):string {
     if(!intel) {
