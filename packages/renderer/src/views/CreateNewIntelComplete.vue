@@ -7,27 +7,49 @@
         </h1>        
       </header>
       <main>
-        <div class="flex">
-          <div class="m-4 w-80">
-            <!-- Intel Type -->
+        <div>
+          <div
+            v-if="currentStep===0"
+          >
+            <div>
+              <span class=" text-lg m-4">Select the Intel type:</span>
+            </div>
+            <div class=" m-4">
+              <NormalButton
+                @click.prevent="currentStep++; selectedIntelTypeValue = 'analog-radio-message'"
+              >
+                Analog Radio Message
+              </NormalButton>  
+            </div>
+            <div class=" m-4">
+              <NormalButton
+                @click.prevent="currentStep++; selectedIntelTypeValue = 'plaintext-message'"
+              >
+                Plaintext Message
+              </NormalButton>  
+            </div>
+          </div>
+          <div>
+            <div
+              v-if="currentStep===1"
+            >
+              <!-- Addressbook Selection -->
+              <AddressBookSelection 
+                id="Address-book-selection"
+                v-model="addressbookIDs"
+              />
+              <NormalButton
+                v-if="addressbookIDs.length >0"
+                @click.prevent="currentStep++"
+              >
+                Next
+              </NormalButton>
+            </div>
+          </div>
+          <div
+            v-if="currentStep===2"
+          >
             <SearchableSelect
-              v-model="selectedIntelTypeValue"
-              mode="single"
-              :options="['analog-radio-message', 'plaintext-message']"
-              :placeholder="'Intel type:'"
-              label="Select the Intel type"
-              :filter-results="true"
-              class="mb-3 w-50"
-            />
-        
-            <!-- Addressbook Selection -->
-            <AddressBookSelection 
-              v-if="selectedIntelTypeValue !=''"
-              id="Address-book-selection"
-              v-model="addressbookIDs"
-            />
-            <SearchableSelect
-              v-if="selectedIntelTypeValue !=''"
               v-model="selectedOperationId"
               mode="single"
               :options="operationsSearchResultsArray"
@@ -35,91 +57,213 @@
               label="title"
               value-prop="id"
               :filter-results="false"
+              class="mb-3"
               @search-change="handleOperationSelectionInput"
               @open="handleOperationSelectionInput('')"
             />
-            <SearchableSelect
-              v-if="selectedIntelTypeValue !=''"
-              v-model="Importance"
-              mode="single"
-              :options="['Standard', 'Instant', 'Lightning', 'Catastrophe']"
-              :placeholder="'Importance:'"
-              label="Select the importance"
-              :filter-results="true"
-              class="mb-3 w-50 mt-6"
-            />
-          </div>
-          <div class="m-4">
-            <!-- Content -->
-            <!-- Analog-radio-message content -->
-            <div 
-              v-if="selectedIntelTypeValue === 'analog-radio-message'"
+            <NormalButton
+              v-if="selectedOperationId !=''"
+              @click.prevent="currentStep++"
             >
-              <FormInput
-                id="channel"
-                v-model="analogRadioMessageChannel"
-                div-class="w-80"
-                label="Recieved over channel"
-              />
-              <FormInput
-                id="callsign"
-                v-model="analogRadioMessageCallsign"
-                div-class="w-80"
-                label="Sender callsign"
-              />
-              <FormInput
-                id="head"
-                v-model="analogRadioMessageHead"
-                div-class="w-80"
-                label="Message head"
-              />
+              Next
+            </NormalButton>
+          </div>
+          <div
+            v-if="currentStep===3"
+          >
+            <div class=" text-lg m-4">
+              <span>Select the Importance:</span>
+            </div>
+            <div class=" m-4">
+              <NormalButton
+                @click.prevent="currentStep++; Importance = 'Standard'"
+              >
+                Standard
+              </NormalButton>  
+            </div>
+            <div class=" m-4">
+              <NormalButton
+                @click.prevent="currentStep++; Importance = 'Instant'"
+              >
+                Instant
+              </NormalButton>
+            </div>
+            <div class=" m-4">
+              <NormalButton
+                @click.prevent="currentStep++; Importance = 'Lightning'"
+              >
+                Lightning
+              </NormalButton>
+            </div>
+            <div class=" m-4">
+              <NormalButton
+                @click.prevent="currentStep++; Importance = 'Catastrophe'"
+              >
+                Catastrophe
+              </NormalButton>
+            </div>
+          </div>  
+          <div
+            v-if="currentStep===4"
+          >
+            <div class="m-4">
+              <!-- Content -->
+              <!-- Analog-radio-message content -->
+              <div 
+                v-if="selectedIntelTypeValue === 'analog-radio-message'"
+              >
+                <FormInput
+                  id="channel"
+                  v-model="analogRadioMessageChannel"
+                  div-class="w-80"
+                  label="Recieved over channel"
+                />
+                <FormInput
+                  id="callsign"
+                  v-model="analogRadioMessageCallsign"
+                  div-class="w-80"
+                  label="Sender callsign"
+                />
+                <FormInput
+                  id="head"
+                  v-model="analogRadioMessageHead"
+                  div-class="w-80"
+                  label="Message head"
+                />
+                <textarea
+                  id="plaintextConent"
+                  v-model="analogRadioMessageContent"
+                  class="w-80"
+                  placeholder="Enter message content here:"
+                  rows="10"
+                />
+              </div>
+              <!-- Plaintext content -->
               <textarea
+                v-if="selectedIntelTypeValue === 'plaintext-message'"
                 id="plaintextConent"
-                v-model="analogRadioMessageContent"
+                v-model="plaintextContent"
                 class="w-80"
                 placeholder="Enter message content here:"
                 rows="10"
               />
             </div>
-            <!-- Plaintext content -->
-            <textarea
-              v-if="selectedIntelTypeValue === 'plaintext-message'"
-              id="plaintextConent"
-              v-model="plaintextContent"
-              class="w-80"
-              placeholder="Enter message content here:"
-              rows="10"
-            />
+            <NormalButton
+              v-if="((selectedIntelTypeValue == 'plaintext-message' && plaintextContent != '') 
+                || (selectedIntelTypeValue == 'analog-radio-message' 
+                  && analogRadioMessageCallsign != '' 
+                  && analogRadioMessageChannel != '' 
+                  && analogRadioMessageContent != '' 
+                  && analogRadioMessageHead != ''))" 
+              @click.prevent="currentStep++"
+            >
+              Next
+            </NormalButton>
           </div>
+          <div 
+            v-if="currentStep===5"
+            class="flex"
+          >
+            <div class="m-4 w-80">
+              <!-- Intel Type -->
+              <SearchableSelect
+                v-model="selectedIntelTypeValue"
+                mode="single"
+                :options="['analog-radio-message', 'plaintext-message']"
+                :placeholder="'Intel type:'"
+                label="Select the Intel type"
+                :filter-results="true"
+                class="mb-3 w-50"
+              />
+        
+              <!-- Addressbook Selection -->
+              <AddressBookSelection 
+                v-if="selectedIntelTypeValue !=''"
+                id="Address-book-selection"
+                v-model="addressbookIDs"
+              />
+              <SearchableSelect
+                v-if="selectedIntelTypeValue !=''"
+                v-model="selectedOperationId"
+                mode="single"
+                :options="operationsSearchResultsArray"
+                placeholder="Select an operation"
+                label="title"
+                value-prop="id"
+                :filter-results="false"
+                @search-change="handleOperationSelectionInput"
+                @open="handleOperationSelectionInput('')"
+              />
+              <SearchableSelect
+                v-if="selectedIntelTypeValue !=''"
+                v-model="Importance"
+                mode="single"
+                :options="['Standard', 'Instant', 'Lightning', 'Catastrophe']"
+                :placeholder="'Importance:'"
+                label="Select the importance"
+                :filter-results="true"
+                class="mb-3 w-50 mt-6"
+              />
+            </div>
+            <div class="m-4">
+              <!-- Content -->
+              <!-- Analog-radio-message content -->
+              <div 
+                v-if="selectedIntelTypeValue === 'analog-radio-message'"
+              >
+                <FormInput
+                  id="channel"
+                  v-model="analogRadioMessageChannel"
+                  div-class="w-80"
+                  label="Recieved over channel"
+                />
+                <FormInput
+                  id="callsign"
+                  v-model="analogRadioMessageCallsign"
+                  div-class="w-80"
+                  label="Sender callsign"
+                />
+                <FormInput
+                  id="head"
+                  v-model="analogRadioMessageHead"
+                  div-class="w-80"
+                  label="Message head"
+                />
+                <textarea
+                  id="plaintextConent"
+                  v-model="analogRadioMessageContent"
+                  class="w-80"
+                  placeholder="Enter message content here:"
+                  rows="10"
+                />
+              </div>
+              <!-- Plaintext content -->
+              <textarea
+                v-if="selectedIntelTypeValue === 'plaintext-message'"
+                id="plaintextConent"
+                v-model="plaintextContent"
+                class="w-80"
+                placeholder="Enter message content here:"
+                rows="10"
+              />
+            </div>
+          </div>
+          <NormalButton
+            v-if="((selectedIntelTypeValue == 'plaintext-message' && plaintextContent != '') 
+              || (selectedIntelTypeValue == 'analog-radio-message' 
+                && analogRadioMessageCallsign != '' 
+                && analogRadioMessageChannel != '' 
+                && analogRadioMessageContent != '' 
+                && analogRadioMessageHead != '')) 
+              && (selectedOperationId != '') 
+              && (addressbookIDs.length >0)
+              && currentStep ==5"
+            @click.prevent="createIntel()"
+          >
+            Send
+          </NormalButton>
         </div>
-        <NormalButton
-          v-if="((selectedIntelTypeValue == 'plaintext-message' && plaintextContent != '') 
-            || (selectedIntelTypeValue == 'analog-radio-message' 
-              && analogRadioMessageCallsign != '' 
-              && analogRadioMessageChannel != '' 
-              && analogRadioMessageContent != '' 
-              && analogRadioMessageHead != '')) 
-            && (selectedOperationId != '') 
-            && (addressbookIDs.length >0)"
-          @click="showConfirmModal=true"
-        >
-          Send
-        </NormalButton>
       </main>
-      <!-- Confirm Send Modal -->
-      <FloatingModal
-        :show-modal="showConfirmModal"
-        :title="'Confirm to send intel'"
-        class="p-10 text-xl"
-        @click="toggleShowSendModal()"
-      >
-        <span> Confirm to send Intel </span>
-        <NormalButton
-          @click="createIntel()"
-        >
-          Send
-        </NormalButton>
-      </FloatingModal>
     </div>
   </div>
 </template>
@@ -132,7 +276,6 @@
   import AddressBookSelection from '../components/AddressBookSelection.vue';
   import SearchableSelect from '../components/BasicComponents/SearchableSelect.vue';
   import type {Ref} from 'vue';
-  import FloatingModal from '../components/BasicComponents/FloatingModal.vue';
   import NormalButton from '../components/BasicComponents/NormalButton.vue';
 
   const addressbookState = useAddressbookState();
@@ -143,13 +286,14 @@
   const selectedOperationId = ref('');
   const addressbookIDs: Ref<string[]> = ref([]);
   const Importance = ref('');
-  const showConfirmModal = ref(false);
 
   const plaintextContent = ref('');
   const analogRadioMessageContent = ref('');
   const analogRadioMessageHead = ref('');
   const analogRadioMessageCallsign = ref(''); 
   const analogRadioMessageChannel = ref('');
+
+  const currentStep = ref(0);
 
   const operationsSearchResults = computed(() => operationsState.getters.searchResults);
   const operationsSearchResultsArray = computed(() => {
@@ -162,9 +306,6 @@
     operationsState.dispatch('retrieveOperations', {amount: 100});
   });
   
-  function toggleShowSendModal(){
-    showConfirmModal.value = false;
-  }
   function createIntel(){
     selectedIntelType = selectedIntelTypeValue.value as IntelType;
     if(selectedIntelType){
@@ -190,7 +331,6 @@
       };
       intelState.dispatch('createIntel',intelToCreate);
       clearValues();
-      toggleShowSendModal();
     }
   }
   function clearValues(){
@@ -203,6 +343,7 @@
     selectedOperationId.value = '';
     Importance.value = '';
     addressbookIDs.value = [];
+    currentStep.value = 0;
    }
 
   function handleOperationSelectionInput(query: string) {
