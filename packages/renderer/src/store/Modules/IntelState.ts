@@ -1,6 +1,7 @@
 import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smart-module';
 import { invalidateIntel, createIntel, searchIntelByQuery, retrieveIntel, retrieveMultipleIntel, intelDeliveredAttempt} from '#preload';
-import type { Intel, IntelType,  ErrorResult } from '../../../../types';
+import type { Intel,  ErrorResult } from '../../../../types';
+import type { IntelType } from '/@/constants';
 import type { Context } from 'vuex-smart-module';
 import type { Store } from 'vuex';
 import { errorState, handleErrors } from './ErrorState';

@@ -271,7 +271,8 @@
 <script lang="ts" setup>
   import {ref, onMounted, computed} from 'vue';
   import { useAddressbookState, useOperationsState, useIntelState } from '../store';
-  import type { PlainTextContent, RadioContent, Intel, IntelType} from '../../../types';  
+  import type { PlainTextContent, RadioContent, Intel} from '../../../types';  
+  import type { IntelType } from '../constants';
   import FormInput from '../components/BasicComponents/FormInput.vue';
   import AddressBookSelection from '../components/AddressBookSelection.vue';
   import SearchableSelect from '../components/BasicComponents/SearchableSelect.vue';

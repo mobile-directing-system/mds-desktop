@@ -11,4 +11,4 @@ export type { Permission } from './Permissions';
 export type { Operation } from './Operation';
 export type { Group } from './Group';
 export type { AddressbookEntry, Channels, Channel, ChannelDetail, ChannelType } from './Addressbook';
-export type {Intel, IntelType, PlainTextContent, RadioContent} from './Intel';
+export type {Intel, PlainTextContent, RadioContent} from './Intel';
