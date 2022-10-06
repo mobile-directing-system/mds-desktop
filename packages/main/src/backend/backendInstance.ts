@@ -14,7 +14,7 @@ import { WebSocket } from 'ws';
  */
 class Backend {
   instanceData:AxiosRequestConfig = {
-    baseURL: `http://${config.baseURL}:30080`,
+    baseURL: `http://${config.baseURL}`,
     timeout: 10000,
   };
   _backendInstance: AxiosInstance;
@@ -31,7 +31,7 @@ class Backend {
     });
   }
   connectWebsocket(token: string, tokenType: string) {
-    this._websocket = new WebSocket(`ws://${config.baseURL}:30080/ws/desktop-app`, {headers: {Authorization: `${tokenType} ${token}`}});
+    this._websocket = new WebSocket(`ws://${config.baseURL}/ws/desktop-app`, {headers: {Authorization: `${tokenType} ${token}`}});
   }
   disconnectWebsocket() {
     this._websocket?.close();
