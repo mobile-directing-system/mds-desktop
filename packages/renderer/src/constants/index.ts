@@ -48,4 +48,9 @@ class OrderBy {
   public static readonly UserIsAdmin = 'is_admin';
 }
 
-export { PermissionNames, OrderDir, OrderBy };
+class IntelType {
+  public static readonly analog_radio_message = 'analog-radio-message';
+  public static readonly plaintext_message = 'plaintext-message';
+}
+
+export { PermissionNames, OrderDir, OrderBy, IntelType };

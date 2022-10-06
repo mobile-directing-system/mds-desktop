@@ -7,6 +7,9 @@ import { operationsState, useOperationsState } from './Modules/OperationsState';
 import { groupState, useGroupState } from './Modules/GroupState';
 import { addressbookState, useAddressbookState} from './Modules/AddressbookState';
 import { channelState, useChannelState } from './Modules/ChannelState';
+import { intelState, useIntelState } from './Modules/IntelState';
+import { inAppNotificationState, useInAppNotificationState } from './Modules/InAppNotificationState';
+
 /**
  * define empty root state for the store to contain
  * the modules
@@ -21,6 +24,8 @@ export const root = new Module({
     groupState,
     addressbookState,
     channelState,
+    intelState,
+    inAppNotificationState,
   },
 });
 
@@ -35,4 +40,4 @@ export const modulesStore = createStore(
  * re-export useModule functions
  * to simplify the importation in .vue files
  */
-export { useLoginState, useUserState, usePermissionsState, useErrorState, useOperationsState, useGroupState, useAddressbookState, useChannelState };
+export { useLoginState, useUserState, usePermissionsState, useErrorState, useOperationsState, useGroupState, useAddressbookState, useChannelState, useIntelState, useInAppNotificationState };
