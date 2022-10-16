@@ -48,6 +48,11 @@ class OrderBy {
   public static readonly UserIsAdmin = 'is_admin';
   public static readonly GroupTitle = 'title';
   public static readonly GroupDescription = 'description';
+  public static readonly OperationTitle = 'title';
+  public static readonly OperationDescription = 'description';
+  public static readonly OperationStartTime = 'start';
+  public static readonly OperationEndtime = 'end';
+  public static readonly OperationIsArchived = 'is_archived';
 }
 
 class IntelType {
