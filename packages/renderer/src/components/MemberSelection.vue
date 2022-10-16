@@ -75,6 +75,7 @@
   </TableContainer>
   <!--Add Members Modal-->
   <FloatingModal
+    id="add-members-modal"
     :show-modal="showMembersModal"
     title="Select a User"
     @click="toggleMembersModal()"
@@ -91,6 +92,7 @@
     >
       <!-- Searchable Select for Members -->
       <SearchableSelect
+        :id="`${props.id}-add-members-select`"
         v-model="addMemberIds"
         :options="options"
         mode="tags"
@@ -104,6 +106,7 @@
       />
       <!-- Available Members Table -->
       <TableContainer
+        :id="`${props.id}-add-members-table`"
         :contents="usersPageArray"
         id-identifier="id"
       >

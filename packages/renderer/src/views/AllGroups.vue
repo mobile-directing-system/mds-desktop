@@ -85,7 +85,7 @@
   import { useGroupState, useOperationsState } from '../store';
   import {useRouter} from 'vue-router';
   import { usePermissions } from '../composables';
-  import { PermissionNames } from '../constants';
+  import { OrderBy, OrderDir, PermissionNames } from '../constants';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type { Group } from '../../../types';
 
@@ -111,7 +111,7 @@
    * @param offset offset beginning at which groups are retrieved
    */
   async function updatePage(amount: number, offset: number) {
-    await groupState.dispatch('retrieveGroups', {amount, offset});
+    await groupState.dispatch('retrieveGroups', {amount, offset, orderBy: OrderBy.GroupTitle, orderDir: OrderDir.Ascending});
     for(const group of groupPage.value().values()) {
       if(group.operation && checkPermissions([{name: PermissionNames.OperationViewAny}])) {
         operationsState.dispatch('retrieveOperation', group.operation );

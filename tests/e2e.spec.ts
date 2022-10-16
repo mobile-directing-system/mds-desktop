@@ -14,6 +14,11 @@ const updatedUsername = 'E2EUser2';
 const updatedFirstName = 'Test2';
 const updatedLastName = 'User2';
 
+const groupTitle = 'E2EGroup';
+const groupDescription = 'This is the E2E Test Group';
+
+const updatedGroupTitle = 'E2EGroup2';
+const updatedGroupDescription = 'This is the E2E Test Group2';
 
 beforeAll(async () => {
   electronApp = await electron.launch({args: ['.', '--mockedBackend']});
@@ -420,6 +425,116 @@ test('Deactivate created user and check if its deactivated', async() => {
   const updateUserActiveCheckbox2 = await page.$('#update-user-is_active', {strict: true});
   expect(updateUserActiveCheckbox2, 'Can\'t find update user is_active checkbox').toBeTruthy();
   expect(await updateUserActiveCheckbox2?.isChecked(), 'Is active checkbox for the created user not set to off').toBe(false);
+
+  await logout(page);
+});
+
+test('Create group and check in group table', async () => {
+  const page = await electronApp.firstWindow();
+  await loginAsUser(page);
+  await navigateToGroupsView(page);
+  await openCreateGroupsForm(page);
+  const createGroupTitleInput = await page.$('#create-group-title', {strict: true});
+  const createGroupDescriptionInput = await page.$('#create-group-description', {strict: true});
+  const createGroupOperationInput = await page.$('#create-group-description', {strict: true});
+  const createGroupMembersInput = await page.$('#create-group-add-members', {strict: true});
+
+  expect(createGroupTitleInput, 'Can\'t find create group title input').toBeTruthy();
+  expect(createGroupDescriptionInput, 'Can\'t find create group description input').toBeTruthy();
+  expect(createGroupOperationInput, 'Can\'t find create group operation input').toBeTruthy();
+  expect(createGroupMembersInput, 'Can\'t find create group members input').toBeTruthy();
+
+  await createGroupTitleInput?.fill(groupTitle);
+  await createGroupDescriptionInput?.fill(groupDescription);
+
+  //const createGroupAddMembersButton = await page.$('#create-group-add-members-add-members-button', {strict: true});
+  //expect(createGroupAddMembersButton, 'Can\'t find create group add members button').toBeTruthy();
+
+  //await createGroupAddMembersButton?.click();
+
+  //await page.waitForTimeout(10_000);
+  //const createGroupAdminTableData = (await page.$('#create-group-add-members', {strict: true}));
+  //expect(createGroupAdminTableData, 'Can\'t find create group admin table data').toBeTruthy();
+  //console.log(await createGroupAdminTableData?.innerHTML());
+  //const createGroupTestUser1TableData = (await page.$('#create-group-add-members >> tbody >> td', {strict: true}));
+  //console.log(createGroupTestUser1TableData);
+  //expect(createGroupTestUser1TableData, 'Can\'t find create group TestUser1 table data').toBeTruthy();
+
+  //const createGroupAddMembersModalCloseButton = await page.$('#add-members-modal-close-button', {strict: true});
+  //expect(createGroupAddMembersModalCloseButton, 'Can\'t find the add members modal close button').toBeTruthy();
+  //await createGroupAddMembersModalCloseButton?.click();
+
+  const createGroupCreateGroupButton = await page.$('#create-group-button', {strict: true});
+  expect(createGroupCreateGroupButton, 'Can\'t find create group create group button').toBeTruthy();
+  await createGroupCreateGroupButton?.click();
+  await leaveCreateGroupsForm(page);
+
+  const createdGroupCreatedGroupTitleTableData = await page.$(`#groups-table >> tbody >> td:has-text("${groupTitle}")`, {strict: true});
+  expect(createdGroupCreatedGroupTitleTableData, 'Can\'t find the created group table data for group title').toBeTruthy();
+  const createdGroupCreatedGroupDescriptionTableData = await page.$(`#groups-table >> tbody >> td:has-text("${groupDescription}")`, {strict: true});
+  expect(createdGroupCreatedGroupDescriptionTableData, 'Can\'t find the created group table data for group description').toBeTruthy();
+
+  await logout(page);
+});
+
+test('Check created group in update view', async () => {
+  const page = await electronApp.firstWindow();
+  await loginAsUser(page);
+  await navigateToGroupsView(page);
+  await openUpdateGroupForm(page, groupTitle);
+
+  const updateGroupTitleInput = await page.$('#update-group-title', {strict: true});
+  expect(updateGroupTitleInput, 'Can\'t find the updated group title input').toBeTruthy();
+  const updateGroupDescriptionInput = await page.$('#update-group-description', {strict: true});
+  expect(updateGroupDescriptionInput, 'Can\'t find the updated group description input').toBeTruthy();
+
+  expect(await updateGroupTitleInput?.inputValue(), 'Updated group title input value doesn\'t match created group title').toBe(groupTitle);
+  expect(await updateGroupDescriptionInput?.inputValue(), 'Updated group description input value doesn\'t match created group description').toBe(groupDescription);
+
+  await leaveUpdateGroupForm(page);
+  await logout(page);
+});
+
+test('Update created group and check in group table', async () => {
+  const page = await electronApp.firstWindow();
+  await loginAsUser(page);
+  await navigateToGroupsView(page);
+  await openUpdateGroupForm(page, groupTitle);
+
+  const updateGroupTitleInput = await page.$('#update-group-title', {strict: true});
+  expect(updateGroupTitleInput, 'Can\'t find the updated group title input').toBeTruthy();
+  const updateGroupDescriptionInput = await page.$('#update-group-description', {strict: true});
+  expect(updateGroupDescriptionInput, 'Can\'t find the updated group description input').toBeTruthy();
+
+  await updateGroupTitleInput?.fill(updatedGroupTitle);
+  await updateGroupDescriptionInput?.fill(updatedGroupDescription);
+
+  const updateGroupUpdateButton = await page.$('#update-group-update-button', {strict: true});
+  expect(updateGroupUpdateButton, 'Can\'t find the update group update button').toBeTruthy();
+  await updateGroupUpdateButton?.click();
+
+  const updatedGroupCreatedGroupTitleTableData = await page.$(`#groups-table >> tbody >> td:has-text("${updatedGroupTitle}")`, {strict: true});
+  expect(updatedGroupCreatedGroupTitleTableData, 'Can\'t find the updated group table data for group title').toBeTruthy();
+  const updatedGroupCreatedGroupDescriptionTableData = await page.$(`#groups-table >> tbody >> td:has-text("${updatedGroupDescription}")`, {strict: true});
+  expect(updatedGroupCreatedGroupDescriptionTableData, 'Can\'t find the updated group table data for group description').toBeTruthy();
+
+  await logout(page);
+});
+
+test('Delete created group and check deletion in group table', async () => {
+  const page = await electronApp.firstWindow();
+  await loginAsUser(page);
+  await navigateToGroupsView(page);
+  await openUpdateGroupForm(page, updatedGroupTitle);
+
+  const updateGroupDeleteButton = await page.$('#update-group-delete-button', {strict: true});
+  expect(updateGroupDeleteButton, 'Can\'t find update group delete button').toBeTruthy();
+  await updateGroupDeleteButton?.click();
+  
+  const deletedGroupTitleTableData = await page.$(`#groups-table >> tbody >> td:has-text("${updatedGroupTitle}")`, {strict: true});
+  expect(deletedGroupTitleTableData, 'Can find deleted group title table data, but sholdn\'t be able to').toBeFalsy();
+  const deletedGroupDescriptionTableData = await page.$(`#groups-table >> tbody >> td:has-text("${updatedGroupDescription}")`, {strict: true});
+  expect(deletedGroupDescriptionTableData, 'Can find deleted group description table data, but sholdn\'t be able to').toBeFalsy();
 
   await logout(page);
 });

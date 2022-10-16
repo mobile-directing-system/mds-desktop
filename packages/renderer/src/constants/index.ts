@@ -46,6 +46,8 @@ class OrderBy {
   public static readonly UserFirstName = 'first_name';
   public static readonly UserLastname = 'last_name';
   public static readonly UserIsAdmin = 'is_admin';
+  public static readonly GroupTitle = 'title';
+  public static readonly GroupDescription = 'description';
 }
 
 class IntelType {
