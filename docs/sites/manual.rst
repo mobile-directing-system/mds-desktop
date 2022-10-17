@@ -16,13 +16,13 @@ In the app users can be created, changed and deleted.
 To manage the users navigate to the users page by clicking of the Users link (**1**) in the sidebar.
 Be aware only users with the *user.view* permission are able click this link.
 
-.. image:: ../images/main_screen_users.png
+.. image:: ../images/main_screen_users_cropped.png
   :width: 600
   :alt: Navigate to the users page
 
 This will open the users page with a paginated table with all the users.
 
-.. image:: ../images/all_users_pagination_buttons_screen.png
+.. image:: ../images/all_users_pagination_buttons_screen_cropped.png
   :width: 600
   :alt: Use pagination on the users page
 
@@ -37,7 +37,7 @@ Creating Users
 To create users first click the *+* button (**1**) on the users page on top of the paginated table.
 Be aware only users with the *user.create* permission will be able to click this button.
 
-.. image:: ../images/all_users_create_button_screen.png
+.. image:: ../images/all_users_create_button_screen_cropped.png
   :width: 600
   :alt: Create user button
 
@@ -47,7 +47,7 @@ These are the username, first name, last name and password.
 After filling in this form click on the Create User button (**2**) to create a user with the provided data.
 If you want to cancel the user creation and return to the users page click the Cancel button (**3**).
 
-.. image:: ../images/create_user_marked.png
+.. image:: ../images/create_user_marked_cropped.png
   :width: 600
   :alt: Create User Form
 
@@ -56,7 +56,7 @@ Editing & Deleting Users
 
 To edit or delete users click on the user you want to change or delete in the paginated table (**1**).
 
-.. image:: ../images/all_users_edit_button_screen.png
+.. image:: ../images/all_users_edit_button_screen_cropped.png
   :width: 600
   :alt: Edit user button
 
@@ -68,7 +68,7 @@ If you want to delete the user click on the Delete User button (**3**).
 Be aware only users with the *user.delete* permission can delete users.
 If you want to don't want to change the user and want to return to the users page click the Cancel button (**4**).
 
-.. image:: ../images/edit_user_marked.png
+.. image:: ../images/edit_user_marked_cropped.png
   :width: 600
   :alt: Edit User Form
 
@@ -80,13 +80,13 @@ Instead of being deleted operations can be set to *archived*.
 To manage operations click on the operations link in the sidebar (**1**).
 Be aware only users with the *operation.view.any* permission can click this link.
 
-.. image:: ../images/main_screen_operations.png
+.. image:: ../images/main_screen_operations_cropped.png
   :width: 600
   :alt: Navigate to the operations page
 
 This will open the operations page with a paginated table with all operations.
 
-.. image:: ../images/all_operations_pagination_screen.png
+.. image:: ../images/all_operations_pagination_screen_cropped.png
   :width: 600
   :alt: Use pagination on the operations page
 
@@ -100,7 +100,7 @@ Creating Operations
 To create an operation click on the + button (**1**) on top of the paginated table.
 Be aware only users with the *operation.create* permission can click on this button.
 
-.. image:: ../images/all_operations_create_button_screen.png
+.. image:: ../images/all_operations_create_button_screen_cropped.png
   :width: 600
   :alt: Create operation button
 
@@ -113,7 +113,7 @@ Beware only users with the *operation.members.update* permission can add and rem
 If you want to create a operation with the provided data click on the Create Operation button (**2**).
 If you do not want to create a operation and instead return to the operations page click the Cancel button (**3**).
 
-.. image:: ../images/create_operation_marked.png
+.. image:: ../images/create_operation_marked_cropped.png
   :width: 600
   :alt: Create operation form
 
@@ -122,7 +122,7 @@ Editing Operations
 
 To change an operation click on the operation in the paginated table of operations you want to change (**1**).
 
-.. image:: ../images/all_operations_edit_button_screen.png
+.. image:: ../images/all_operations_edit_button_screen_cropped.png
   :width: 600
   :alt: Edit operation button
 
@@ -135,7 +135,7 @@ If you want to change the operation with you provided data click on the Update O
 Be aware that only users with the *operation.update* permission can click this button.
 If you do not want to change the operation and return to the operations page click on the Cancel Button (**3**).
 
-.. image:: ../images/edit_operation_marked.png
+.. image:: ../images/edit_operation_marked_cropped.png
   :width: 600
   :alt: Edit operation form
 
@@ -146,13 +146,13 @@ In the app groups can be created, updated and deleted.
 To manage groups click on the groups link in the sidebar (**1**)
 Be aware that only users with the *group.view* permission can click this link.
 
-.. image:: ../images/main_screen_groups.png
+.. image:: ../images/main_screen_groups_cropped.png
   :width: 600
   :alt: Navigate to the groups page
 
 This opens the groups page with a paginated table of all groups.
 
-.. image:: ../images/all_groups_pagination_screen.png
+.. image:: ../images/all_groups_pagination_screen_cropped.png
   :width: 600
   :alt: Use pagination on the groups page
 
@@ -166,7 +166,7 @@ Creating Groups
 To create a group click on the + button (**1**) on top of the paginated table.
 Be aware only users with the *group.create* permission can click on this button.
 
-.. image:: ../images/all_groups_create_button_screen.png
+.. image:: ../images/all_groups_create_button_screen_cropped.png
   :width: 600
   :alt: Create group button
 
@@ -179,7 +179,7 @@ If you have selected on associated operation only members of that operation can 
 If you want to create a group with the provided data click on the Create Group button (**2**).
 If you do not want to create a group and instead return to the group page click the Cancel button (**3**).
 
-.. image:: ../images/create_group_marked.png
+.. image:: ../images/create_group_marked_cropped.png
   :width: 600
   :alt: Create group form
 
@@ -188,7 +188,7 @@ Editing & Deleting Groups
 
 To change a group click on the group in the paginated table of groups you want to change (**1**).
 
-.. image:: ../images/all_groups_edit_button_screen.png
+.. image:: ../images/all_groups_edit_button_screen_cropped.png
   :width: 600
   :alt: Edit group button
 
@@ -202,7 +202,7 @@ If you want to delete the gorup click the Delete Group button (**3**).
 Be aware that only users with the *group.delete* permission can click this button.
 If you do not want to change the group and return to the groups page click on the Cancel Button (**4**).
 
-.. image:: ../images/edit_group_marked.png
+.. image:: ../images/edit_group_marked_cropped.png
   :width: 600
   :alt: Edit group form
 
