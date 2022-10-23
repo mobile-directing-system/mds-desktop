@@ -8,7 +8,7 @@ import type { intelState } from './IntelState';
 import { handleIncomingInAppNotifications } from '#preload';
 
 /**
- * define the content of the LoginInfoState
+ * define the content of the InAppNotificationState
  */
 class InAppNotificationState {
   inAppNotifications: InAppNotification[] = [];

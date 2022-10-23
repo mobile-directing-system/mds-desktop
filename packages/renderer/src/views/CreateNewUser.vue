@@ -43,6 +43,7 @@
         <div class=" pt-4 flex justify-between">
           <!-- Create User Button -->
           <NormalButton
+            v-if="firstName !== '' && userName !== '' && lastName !== '' && iPassword !== ''"
             id="create-user-button"
             class=""
             type="submit"

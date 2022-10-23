@@ -1,143 +1,145 @@
 <template>
-  <div
-    id="update-group-form"
-    class=" bg-white ml-4 max-w-lg rounded-lg  my-10"
-  >
-    <header class=" max-w-lg pb-10">
-      <h1 class="  text-left text-4xl font-bold text-on_background">
-        Group Information
-      </h1>        
-    </header>
-    <form class="w-100">
-      <main class="">
-        <!------- Title  ------>
-        <div class="mb-6">
-          <FormInput
-            id="update-group-title"
-            v-model="updatedGroupTitle"
-            div-class="w-80"
-            label="Title"
-            required
-            :disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? undefined:'true'"
-            :aria-disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? 'false':'true'"
-          />
-        </div>
-        <!------- Description  ------>
-        <div class="mb-6">
-          <FormInput
-            id="update-group-description"
-            v-model="updatedGroupDescription"
-            div-class="w-80"
-            label="Description"
-            :disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? undefined:'true'"
-            :aria-disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? 'false':'true'"
-          />
-        </div>
-        <!------- Operation  ------>
-        <div
-          v-if="!checkPermissions([{name: PermissionNames.OperationViewAny}])"
-          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
-        >
-          You lack the operation view permission, as such you cannot set or change the associated operation of the group.
-        </div>
-        <div 
-          v-if="checkPermissions([{name: PermissionNames.OperationViewAny}])"
-          class="mb-6 w-80"
-        >
-          <label
-            for="update-group-operations"
-            class="block mb-2 text-sm font-medium text-on_background"
-          >Select an Operation</label>
-          <SearchableSelect
-            id="update-group-operation"
-            v-model="updatedGroupOperationId"
-            :options="options"
-            :filter-results="false"
-            mode="single"
-            placeholder="Select operation"
-            label="title"
-            value-prop="id"
-            track-by="title"
-            :disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? undefined:true"
-            :aria-disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? 'false':'true'"
-            @search-change="handleOperationSelectionInput"
-            @open="handleOperationSelectionInput('')"
-          />
-        </div>
-        <div
-          v-if="!checkPermissions([{name: PermissionNames.OperationMembersView}]) && checkPermissions([{name: PermissionNames.OperationViewAny}])"
-          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
-        >
-          If an operation is selected no group member can be selected, as you are missing the operation members view permission to verify
-          that group members are also operation members. If you select group members and afterwards select an operation the group will
-          be created with no members.
-        </div>
-        <div
-          v-if="!checkPermissions([{name: PermissionNames.OperationMembersView}]) && !checkPermissions([{name: PermissionNames.OperationViewAny}]) && updatedGroupOperationId"
-          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
-        >
-          This group has an associated operation and you lack the permission to see its members, as such you cannot change the group members
-          as it can not be verified that they are operation members as well.
-        </div>
-        <div
-          v-if="!checkPermissions([{name: PermissionNames.UserView}])"
-          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
-        >
-          You cannot see the names of the group members, as you lack the users view permission. As such
-          you cannot change the group members.
-        </div>
-        <!-- Members -->
-        <div 
-          v-if="(!updatedGroupOperationId || checkPermissions([{name: PermissionNames.OperationMembersView}])) && checkPermissions([{name: PermissionNames.UserView}])"
-          class="mb-6"
-        >
-          <div
-            v-if="updatedGroupOperationId"
-            class="bg-error_superlight border-2 w-80 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
-          >
-            Only members of the selected operation can be members of this group.
+  <div>
+    <div
+      id="update-group-form"
+      class=" bg-white ml-4 max-w-lg rounded-lg  my-10"
+    >
+      <header class=" max-w-lg pb-10">
+        <h1 class="  text-left text-4xl font-bold text-on_background">
+          Group Information
+        </h1>        
+      </header>
+      <form class="w-100">
+        <main class="">
+          <!------- Title  ------>
+          <div class="mb-6">
+            <FormInput
+              id="update-group-title"
+              v-model="updatedGroupTitle"
+              div-class="w-80"
+              label="Title"
+              required
+              :disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? undefined:'true'"
+              :aria-disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? 'false':'true'"
+            />
           </div>
-          <MemberSelection
-            id="group-members"
-            v-model="updatedGroupMemberIds"
-            :include-ids="selectedOperationMembers"
-            :include="updatedGroupOperationId? true: false"
-            :disable-add-members="!checkPermissions([{name: PermissionNames.GroupUpdate}])"
-            :disable-remove-members="!checkPermissions([{name: PermissionNames.GroupUpdate}])"
-          />
-        </div>
-        <div class="flex justify-between">
-          <!-- Update Group Button -->
-          <NormalButton
-            v-if="updatedGroupTitle != ''"
-            id="update-group-update-button"
-            :disabled="!checkPermissions([{name: PermissionNames.GroupUpdate}])"
-            @click.prevent="editGroup()"
+          <!------- Description  ------>
+          <div class="mb-6">
+            <FormInput
+              id="update-group-description"
+              v-model="updatedGroupDescription"
+              div-class="w-80"
+              label="Description"
+              :disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? undefined:'true'"
+              :aria-disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? 'false':'true'"
+            />
+          </div>
+          <!------- Operation  ------>
+          <div
+            v-if="!checkPermissions([{name: PermissionNames.OperationViewAny}])"
+            class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
           >
-            Update Group
-          </NormalButton>
-          <!-- Delete Group Button -->
-          <NormalButton
-            id="update-group-delete-button"
-            class="ml-auto"
-            :disabled="!checkPermissions([{name: PermissionNames.GroupDelete}])"
-            @click.prevent="deleteGroup()"
+            You lack the operation view permission, as such you cannot set or change the associated operation of the group.
+          </div>
+          <div 
+            v-if="checkPermissions([{name: PermissionNames.OperationViewAny}])"
+            class="mb-6 w-80"
           >
-            Delete Group
-          </NormalButton>
-        </div>
-        <div class=" pt-4 flex justify-between">
-          <!-- Cancel Button -->
-          <NormalButton
-            id="update-group-cancel-button"
-            class=" ml-auto"
-            @click.prevent="router.push('/groups')"
+            <label
+              for="update-group-operations"
+              class="block mb-2 text-sm font-medium text-on_background"
+            >Select an Operation</label>
+            <SearchableSelect
+              id="update-group-operation"
+              v-model="updatedGroupOperationId"
+              :options="options"
+              :filter-results="false"
+              mode="single"
+              placeholder="Select operation"
+              label="title"
+              value-prop="id"
+              track-by="title"
+              :disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? undefined:true"
+              :aria-disabled="checkPermissions([{name: PermissionNames.GroupUpdate}])? 'false':'true'"
+              @search-change="handleOperationSelectionInput"
+              @open="handleOperationSelectionInput('')"
+            />
+          </div>
+          <div
+            v-if="!checkPermissions([{name: PermissionNames.OperationMembersView}]) && checkPermissions([{name: PermissionNames.OperationViewAny}])"
+            class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
           >
-            Cancel
-          </NormalButton>
-        </div>
-      </main>
-    </form>
+            If an operation is selected no group member can be selected, as you are missing the operation members view permission to verify
+            that group members are also operation members. If you select group members and afterwards select an operation the group will
+            be created with no members.
+          </div>
+          <div
+            v-if="!checkPermissions([{name: PermissionNames.OperationMembersView}]) && !checkPermissions([{name: PermissionNames.OperationViewAny}]) && updatedGroupOperationId"
+            class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+          >
+            This group has an associated operation and you lack the permission to see its members, as such you cannot change the group members
+            as it can not be verified that they are operation members as well.
+          </div>
+          <div
+            v-if="!checkPermissions([{name: PermissionNames.UserView}])"
+            class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+          >
+            You cannot see the names of the group members, as you lack the users view permission. As such
+            you cannot change the group members.
+          </div>
+          <!-- Members -->
+          <div 
+            v-if="(!updatedGroupOperationId || checkPermissions([{name: PermissionNames.OperationMembersView}])) && checkPermissions([{name: PermissionNames.UserView}])"
+            class="mb-6"
+          >
+            <div
+              v-if="updatedGroupOperationId"
+              class="bg-error_superlight border-2 w-80 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+            >
+              Only members of the selected operation can be members of this group.
+            </div>
+            <MemberSelection
+              id="group-members"
+              v-model="updatedGroupMemberIds"
+              :include-ids="selectedOperationMembers"
+              :include="updatedGroupOperationId? true: false"
+              :disable-add-members="!checkPermissions([{name: PermissionNames.GroupUpdate}])"
+              :disable-remove-members="!checkPermissions([{name: PermissionNames.GroupUpdate}])"
+            />
+          </div>
+          <div class="flex justify-between">
+            <!-- Update Group Button -->
+            <NormalButton
+              v-if="updatedGroupTitle != ''"
+              id="update-group-update-button"
+              :disabled="!checkPermissions([{name: PermissionNames.GroupUpdate}])"
+              @click.prevent="editGroup()"
+            >
+              Update Group
+            </NormalButton>
+            <!-- Delete Group Button -->
+            <NormalButton
+              id="update-group-delete-button"
+              class="ml-auto"
+              :disabled="!checkPermissions([{name: PermissionNames.GroupDelete}])"
+              @click.prevent="deleteGroup()"
+            >
+              Delete Group
+            </NormalButton>
+          </div>
+          <div class=" pt-4 flex justify-between">
+            <!-- Cancel Button -->
+            <NormalButton
+              id="update-group-cancel-button"
+              class=" ml-auto"
+              @click.prevent="router.push('/groups')"
+            >
+              Cancel
+            </NormalButton>
+          </div>
+        </main>
+      </form>
+    </div>
   </div>
 </template>
 <script lang="ts" setup>

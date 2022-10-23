@@ -1,120 +1,122 @@
 <template>
-  <div
-    id="update-operation-form" 
-    class=" bg-white ml-4 max-w-lg rounded-lg my-10"
-  >
-    <header class=" max-w-lg pb-10">
-      <h1 class="text-4xl font-bold text-black ">
-        Update Operation
-      </h1>        
-    </header>
-    <form class="w-80">
-      <main class="">
-        <!------- Title  ------>
-        <div class="mb-6">
-          <FormInput
-            id="update-operation-title"
-            v-model="updatedtitle"
-            label="Title"
-            required
-            :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
-            :aria-disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? 'false':'true'"
-          />
-        </div>
-        <!------- Description  ------>
-        <div class="mb-6">
-          <FormInput
-            id="update-operation-description"
-            v-model="updateddescription"
-            label="Description"
-            :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
-            :aria-disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? 'false':'true'"
-          />
-        </div>
-        <!------- start  ------>
-        <div class="mb-6">
-          <FormInput
-            id="update-operation-start"
-            v-model="updatedstart"
-            label="Start"
-            type="datetime-local"
-            required
-            :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
-            :aria-disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? 'false':'true'"
-          />
-        </div>
-        <!---- end --->
-        <div class="mb-6">
-          <FormInput
-            id="update-operation-end"
-            v-model="updatedend"
-            label="End"
-            type="datetime-local"
-            :min="updatedstart"
-            :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
-            :aria-disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? 'false':'true'"
-          />
-        </div>
-        <!-- Operation Member Selection -->
-        <div
-          v-if="!checkPermissions([{name: PermissionNames.OperationMembersView}])"
-          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
-        >
-          You lack the operation members view permission, as such you cannot see or change the operation members.
-        </div>
-        <div
-          v-if="!checkPermissions([{name: PermissionNames.UserView}])"
-          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
-        >
-          You lack the user view permission, as such you cannot add operation members.
-        </div>
-        <div
-          v-if="checkPermissions([{name: PermissionNames.OperationMembersView}])"
-          class="mb-6"
-        >
-          <MemberSelection
-            id="operation-members"
-            v-model="updatedOperationMemberIds"
-            :disable-add-members="!checkPermissions([{name: PermissionNames.OperationMembersUpdate}, {name: PermissionNames.UserView}])"
-            :disable-remove-members="!checkPermissions([{name: PermissionNames.OperationMembersUpdate}])"
-          />
-        </div>
-        <!---- archive --->
-        <div class="mb-6 flex justify-between flex-row">
-          <label
-            for="update-operation-is_archived"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 "
-          >Archive</label>
-          <input
-            id="update-operation-is_archived"
-            v-model="updatedisArchived"
-            class="bg-gray-50 border w-1/12 mr-40 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            type="checkbox"
-            :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
-            :aria-disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? 'false':'true'"
+  <div>
+    <div
+      id="update-operation-form" 
+      class="bg-white ml-4 max-w-lg rounded-lg my-10"
+    >
+      <header class=" max-w-lg pb-10">
+        <h1 class="text-4xl font-bold text-black ">
+          Update Operation
+        </h1>        
+      </header>
+      <form class="w-80">
+        <main class="">
+          <!------- Title  ------>
+          <div class="mb-6">
+            <FormInput
+              id="update-operation-title"
+              v-model="updatedtitle"
+              label="Title"
+              required
+              :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
+              :aria-disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? 'false':'true'"
+            />
+          </div>
+          <!------- Description  ------>
+          <div class="mb-6">
+            <FormInput
+              id="update-operation-description"
+              v-model="updateddescription"
+              label="Description"
+              :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
+              :aria-disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? 'false':'true'"
+            />
+          </div>
+          <!------- start  ------>
+          <div class="mb-6">
+            <FormInput
+              id="update-operation-start"
+              v-model="updatedstart"
+              label="Start"
+              type="datetime-local"
+              required
+              :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
+              :aria-disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? 'false':'true'"
+            />
+          </div>
+          <!---- end --->
+          <div class="mb-6">
+            <FormInput
+              id="update-operation-end"
+              v-model="updatedend"
+              label="End"
+              type="datetime-local"
+              :min="updatedstart"
+              :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
+              :aria-disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? 'false':'true'"
+            />
+          </div>
+          <!-- Operation Member Selection -->
+          <div
+            v-if="!checkPermissions([{name: PermissionNames.OperationMembersView}])"
+            class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
           >
-        </div>
-        <div class="flex justify-between">
-          <!-- Update Operation Button -->
-          <NormalButton 
-            v-if="updatedtitle != '' && updatedstart && (!updatedend || new Date(updatedstart) < new Date(updatedend))"
-            id="update-operation-update-button"
-            :disabled="!checkPermissions([{name: PermissionNames.OperationUpdate}])"
-            @click.prevent="editOperation()"
+            You lack the operation members view permission, as such you cannot see or change the operation members.
+          </div>
+          <div
+            v-if="!checkPermissions([{name: PermissionNames.UserView}])"
+            class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
           >
-            Update Operation
-          </NormalButton>
-          <!-- Cancel Button -->
-          <NormalButton
-            id="update-operation-cancel-button"
-            class=" ml-auto"
-            @click.prevent="router.push('/operation')"
+            You lack the user view permission, as such you cannot add operation members.
+          </div>
+          <div
+            v-if="checkPermissions([{name: PermissionNames.OperationMembersView}])"
+            class="mb-6"
           >
-            Cancel
-          </NormalButton>
-        </div>
-      </main>
-    </form>
+            <MemberSelection
+              id="operation-members"
+              v-model="updatedOperationMemberIds"
+              :disable-add-members="!checkPermissions([{name: PermissionNames.OperationMembersUpdate}, {name: PermissionNames.UserView}])"
+              :disable-remove-members="!checkPermissions([{name: PermissionNames.OperationMembersUpdate}])"
+            />
+          </div>
+          <!---- archive --->
+          <div class="mb-6 flex justify-between flex-row">
+            <label
+              for="update-operation-is_archived"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 "
+            >Archive</label>
+            <input
+              id="update-operation-is_archived"
+              v-model="updatedisArchived"
+              class="bg-gray-50 border w-1/12 mr-40 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              type="checkbox"
+              :disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? undefined:'true'"
+              :aria-disabled="checkPermissions([{name: PermissionNames.OperationUpdate}])? 'false':'true'"
+            >
+          </div>
+          <div class="flex justify-between">
+            <!-- Update Operation Button -->
+            <NormalButton 
+              v-if="updatedtitle != '' && updatedstart && (!updatedend || new Date(updatedstart) < new Date(updatedend))"
+              id="update-operation-update-button"
+              :disabled="!checkPermissions([{name: PermissionNames.OperationUpdate}])"
+              @click.prevent="editOperation()"
+            >
+              Update Operation
+            </NormalButton>
+            <!-- Cancel Button -->
+            <NormalButton
+              id="update-operation-cancel-button"
+              class=" ml-auto"
+              @click.prevent="router.push('/operation')"
+            >
+              Cancel
+            </NormalButton>
+          </div>
+        </main>
+      </form>
+    </div>
   </div>
 </template>
 
