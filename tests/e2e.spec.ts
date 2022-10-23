@@ -14,6 +14,23 @@ const updatedUsername = 'E2EUser2';
 const updatedFirstName = 'Test2';
 const updatedLastName = 'User2';
 
+const groupTitle = 'E2EGroup';
+const groupDescription = 'This is the E2E Test Group';
+
+const updatedGroupTitle = 'E2EGroup2';
+const updatedGroupDescription = 'This is the E2E Test Group2';
+
+const operationTitle = 'E2EOperation';
+const operationDescription = 'This is the E2E Test Operation';
+const operationStartTime = '2022-10-14T18:38';
+const operationEndTime = '2022-10-14T18:39';
+
+const updatedOperationTitle = 'E2EOperation2';
+const updatedOperationDescription = 'This is the E2E Test Operation2';
+const updatedOperationStartTime = '2022-10-14T19:38';
+const updatedOperationEndTime = '2022-10-14T19:39';
+const udpatedOperationStartTimePrettyPrinted = '14.10.2022 19:38';
+const udpatedOperationEndTimePrettyPrinted = '14.10.2022 19:39';
 
 beforeAll(async () => {
   electronApp = await electron.launch({args: ['.', '--mockedBackend']});
@@ -421,6 +438,241 @@ test('Deactivate created user and check if its deactivated', async() => {
   expect(updateUserActiveCheckbox2, 'Can\'t find update user is_active checkbox').toBeTruthy();
   expect(await updateUserActiveCheckbox2?.isChecked(), 'Is active checkbox for the created user not set to off').toBe(false);
 
+  await logout(page);
+});
+
+test('Create group and check in group table', async () => {
+  const page = await electronApp.firstWindow();
+  await loginAsUser(page);
+  await navigateToGroupsView(page);
+  await openCreateGroupsForm(page);
+  const createGroupTitleInput = await page.$('#create-group-title', {strict: true});
+  const createGroupDescriptionInput = await page.$('#create-group-description', {strict: true});
+  const createGroupOperationInput = await page.$('#create-group-description', {strict: true});
+  const createGroupMembersInput = await page.$('#create-group-add-members', {strict: true});
+
+  expect(createGroupTitleInput, 'Can\'t find create group title input').toBeTruthy();
+  expect(createGroupDescriptionInput, 'Can\'t find create group description input').toBeTruthy();
+  expect(createGroupOperationInput, 'Can\'t find create group operation input').toBeTruthy();
+  expect(createGroupMembersInput, 'Can\'t find create group members input').toBeTruthy();
+
+  await createGroupTitleInput?.fill(groupTitle);
+  await createGroupDescriptionInput?.fill(groupDescription);
+
+  //const createGroupAddMembersButton = await page.$('#create-group-add-members-add-members-button', {strict: true});
+  //expect(createGroupAddMembersButton, 'Can\'t find create group add members button').toBeTruthy();
+
+  //await createGroupAddMembersButton?.click();
+
+  //await page.waitForTimeout(10_000);
+  //const createGroupAdminTableData = (await page.$('#create-group-add-members', {strict: true}));
+  //expect(createGroupAdminTableData, 'Can\'t find create group admin table data').toBeTruthy();
+  //console.log(await createGroupAdminTableData?.innerHTML());
+  //const createGroupTestUser1TableData = (await page.$('#create-group-add-members >> tbody >> td', {strict: true}));
+  //console.log(createGroupTestUser1TableData);
+  //expect(createGroupTestUser1TableData, 'Can\'t find create group TestUser1 table data').toBeTruthy();
+
+  //const createGroupAddMembersModalCloseButton = await page.$('#add-members-modal-close-button', {strict: true});
+  //expect(createGroupAddMembersModalCloseButton, 'Can\'t find the add members modal close button').toBeTruthy();
+  //await createGroupAddMembersModalCloseButton?.click();
+
+  const createGroupCreateGroupButton = await page.$('#create-group-button', {strict: true});
+  expect(createGroupCreateGroupButton, 'Can\'t find create group create group button').toBeTruthy();
+  await createGroupCreateGroupButton?.click();
+  await leaveCreateGroupsForm(page);
+
+  const createdGroupCreatedGroupTitleTableData = await page.$(`#groups-table >> tbody >> td:has-text("${groupTitle}")`, {strict: true});
+  expect(createdGroupCreatedGroupTitleTableData, 'Can\'t find the created group table data for group title').toBeTruthy();
+  const createdGroupCreatedGroupDescriptionTableData = await page.$(`#groups-table >> tbody >> td:has-text("${groupDescription}")`, {strict: true});
+  expect(createdGroupCreatedGroupDescriptionTableData, 'Can\'t find the created group table data for group description').toBeTruthy();
+
+  await logout(page);
+});
+
+test('Check created group in update view', async () => {
+  const page = await electronApp.firstWindow();
+  await loginAsUser(page);
+  await navigateToGroupsView(page);
+  await openUpdateGroupForm(page, groupTitle);
+
+  const updateGroupTitleInput = await page.$('#update-group-title', {strict: true});
+  expect(updateGroupTitleInput, 'Can\'t find the updated group title input').toBeTruthy();
+  const updateGroupDescriptionInput = await page.$('#update-group-description', {strict: true});
+  expect(updateGroupDescriptionInput, 'Can\'t find the updated group description input').toBeTruthy();
+
+  expect(await updateGroupTitleInput?.inputValue(), 'Updated group title input value doesn\'t match created group title').toBe(groupTitle);
+  expect(await updateGroupDescriptionInput?.inputValue(), 'Updated group description input value doesn\'t match created group description').toBe(groupDescription);
+
+  await leaveUpdateGroupForm(page);
+  await logout(page);
+});
+
+test('Update created group and check in group table', async () => {
+  const page = await electronApp.firstWindow();
+  await loginAsUser(page);
+  await navigateToGroupsView(page);
+  await openUpdateGroupForm(page, groupTitle);
+
+  const updateGroupTitleInput = await page.$('#update-group-title', {strict: true});
+  expect(updateGroupTitleInput, 'Can\'t find the updated group title input').toBeTruthy();
+  const updateGroupDescriptionInput = await page.$('#update-group-description', {strict: true});
+  expect(updateGroupDescriptionInput, 'Can\'t find the updated group description input').toBeTruthy();
+
+  await updateGroupTitleInput?.fill(updatedGroupTitle);
+  await updateGroupDescriptionInput?.fill(updatedGroupDescription);
+
+  const updateGroupUpdateButton = await page.$('#update-group-update-button', {strict: true});
+  expect(updateGroupUpdateButton, 'Can\'t find the update group update button').toBeTruthy();
+  await updateGroupUpdateButton?.click();
+
+  const updatedGroupCreatedGroupTitleTableData = await page.$(`#groups-table >> tbody >> td:has-text("${updatedGroupTitle}")`, {strict: true});
+  expect(updatedGroupCreatedGroupTitleTableData, 'Can\'t find the updated group table data for group title').toBeTruthy();
+  const updatedGroupCreatedGroupDescriptionTableData = await page.$(`#groups-table >> tbody >> td:has-text("${updatedGroupDescription}")`, {strict: true});
+  expect(updatedGroupCreatedGroupDescriptionTableData, 'Can\'t find the updated group table data for group description').toBeTruthy();
+
+  await logout(page);
+});
+
+test('Delete created group and check deletion in group table', async () => {
+  const page = await electronApp.firstWindow();
+  await loginAsUser(page);
+  await navigateToGroupsView(page);
+  await openUpdateGroupForm(page, updatedGroupTitle);
+
+  const updateGroupDeleteButton = await page.$('#update-group-delete-button', {strict: true});
+  expect(updateGroupDeleteButton, 'Can\'t find update group delete button').toBeTruthy();
+  await updateGroupDeleteButton?.click();
+  
+  const deletedGroupTitleTableData = await page.$(`#groups-table >> tbody >> td:has-text("${updatedGroupTitle}")`, {strict: true});
+  expect(deletedGroupTitleTableData, 'Can find deleted group title table data, but sholdn\'t be able to').toBeFalsy();
+  const deletedGroupDescriptionTableData = await page.$(`#groups-table >> tbody >> td:has-text("${updatedGroupDescription}")`, {strict: true});
+  expect(deletedGroupDescriptionTableData, 'Can find deleted group description table data, but sholdn\'t be able to').toBeFalsy();
+
+  await logout(page);
+});
+
+test('Create operation and check creation in operations table', async () => {
+  const page = await electronApp.firstWindow();
+  await loginAsUser(page);
+  await navigateToOperationsView(page);
+  await openCreateOperationsForm(page);
+
+  const createOperationOperationTitleInput = await page.$('#create-operation-title', {strict: true});
+  const createOperationOperationDescriptionInput = await page.$('#create-operation-description', {strict: true});
+  const createOperationOperationStartInput = await page.$('#create-operation-start', {strict: true});
+  const createOperationOperationEndInput = await page.$('#create-operation-end', {strict: true});
+
+  expect(createOperationOperationTitleInput, 'Can\'t find the operation title input').toBeTruthy();
+  expect(createOperationOperationDescriptionInput, 'Can\'t find the operation title description').toBeTruthy();
+  expect(createOperationOperationStartInput, 'Can\'t find the operation start time input').toBeTruthy();
+  expect(createOperationOperationEndInput, 'Can\'t find the operation end time input').toBeTruthy();
+
+  await createOperationOperationTitleInput?.fill(operationTitle);
+  await createOperationOperationDescriptionInput?.fill(operationDescription);
+  await createOperationOperationStartInput?.fill(operationStartTime);
+  await createOperationOperationEndInput?.fill(operationEndTime);
+
+  const createOperactionCreateButton = await page.$('#create-operation-button', {strict: true});
+  expect(createOperactionCreateButton, 'Can\'t find create operation button').toBeTruthy();
+  await createOperactionCreateButton?.click();
+
+  const createdOperationTitleTableData = await page.$(`#operations-table >> td:has-text("${operationTitle}")`, {strict: true});
+  const createdOperationDescriptionTableData = await page.$(`#operations-table >> td:has-text("${operationDescription}")`, {strict: true});
+  const createdOperationStartTimeTableData = await page.$(`#operations-table >> td:has-text("${operationStartTime}")`, {strict: true});
+  const createdOperationEndTimeTableData = await page.$(`#operations-table >> td:has-text("${operationEndTime}")`, {strict: true});
+
+  expect(createdOperationTitleTableData, 'Can\'t find created operation title table data');
+  expect(createdOperationDescriptionTableData, 'Can\'t find created operation description table data');
+  expect(createdOperationStartTimeTableData, 'Can\'t find created operation start time table data');
+  expect(createdOperationEndTimeTableData, 'Can\'t find created operation end time table data');
+
+  await logout(page);
+});
+
+test('Create operation and check creation in operation update view', async () => {
+  const page = await electronApp.firstWindow();
+  await loginAsUser(page);
+  await navigateToOperationsView(page);
+  await openUpdateOperationForm(page, operationTitle);
+
+  const updateOperationTitleInput = await page.$('#update-operation-title', {strict: true});
+  const updateOperationDescriptionInput = await page.$('#update-operation-description', {strict: true});
+  const updateOperationStartTimeInput = await page.$('#update-operation-start', {strict: true});
+  const updateOperationEndTimeInput = await page.$('#update-operation-end', {strict: true});
+  const updateOperationIsArchivedInput = await page.$('#update-operation-is_archived', {strict: true});
+
+  expect(await updateOperationTitleInput?.inputValue(), 'Update operation title input value doesn\'t equal created opertion title').toBe(operationTitle);
+  expect(await updateOperationDescriptionInput?.inputValue(), 'Update operation description input value doesn\'t equal created opertion description').toBe(operationDescription);
+  expect(await updateOperationStartTimeInput?.inputValue(), 'Update operation start time input value doesn\'t equal created opertion start time').toBe(operationStartTime);
+  expect(await updateOperationEndTimeInput?.inputValue(), 'Update operation end time input value doesn\'t equal created opertion end time').toBe(operationEndTime);
+  expect(await updateOperationIsArchivedInput?.isChecked(), 'Update operation is archived input value doesn\'t equal created opertion is archived').toBe(false);
+
+  await logout(page);
+});
+
+test('Update operation and check change in operation table', async () => {
+  const page = await electronApp.firstWindow();
+  await loginAsUser(page);
+  await navigateToOperationsView(page);
+  await openUpdateOperationForm(page, operationTitle);
+
+  const updateOperationTitleInput = await page.$('#update-operation-title', {strict: true});
+  const updateOperationDescriptionInput = await page.$('#update-operation-description', {strict: true});
+  const updateOperationStartTimeInput = await page.$('#update-operation-start', {strict: true});
+  const updateOperationEndTimeInput = await page.$('#update-operation-end', {strict: true});
+
+  expect(updateOperationTitleInput, 'Can\'t find the update operation title input').toBeTruthy();
+  expect(updateOperationDescriptionInput, 'Can\'t find the update operation description input').toBeTruthy();
+  expect(updateOperationStartTimeInput, 'Can\'t find the update operation start time input').toBeTruthy();
+  expect(updateOperationEndTimeInput, 'Can\'t find the update operation end time input').toBeTruthy();
+
+  await updateOperationTitleInput?.fill(updatedOperationTitle);
+  await updateOperationDescriptionInput?.fill(updatedOperationDescription);
+  await updateOperationStartTimeInput?.fill(updatedOperationStartTime);
+  await updateOperationEndTimeInput?.fill(updatedOperationEndTime);
+
+  const updateOperationUpdateButton = await page.$('#update-operation-update-button', {strict: true});
+  expect(updateOperationUpdateButton, 'Can\'t find the update operation update button').toBeTruthy();
+  await updateOperationUpdateButton?.click();
+
+
+  const updatedOperationTitleTableData = await page.$(`#operations-table >> td:has-text("${updatedOperationTitle}")`, {strict: true});
+  const updatedOperationDescriptionTableData = await page.$(`#operations-table >> td:has-text("${updatedOperationDescription}")`, {strict: true});
+  const updatedOperationStartTimeTableData = await page.$(`#operations-table >> td:has-text("${udpatedOperationStartTimePrettyPrinted}")`, {strict: true});
+  const updatedOperationEndTimeTableData = await page.$(`#operations-table >> td:has-text("${udpatedOperationEndTimePrettyPrinted}")`, {strict: true});
+
+  expect(updatedOperationTitleTableData, 'Can\'t find table data for updated operation title').toBeTruthy();
+  expect(updatedOperationDescriptionTableData, 'Can\'t find table data for updated operation description').toBeTruthy();
+  expect(updatedOperationStartTimeTableData, 'Can\'t find table data for updated operation start time').toBeTruthy();
+  expect(updatedOperationEndTimeTableData, 'Can\'t find table data for updated operation end time').toBeTruthy();
+
+  await logout(page);
+});
+
+test('Set operation to archived and check change in operation update view', async () => {
+  const page = await electronApp.firstWindow();
+  await loginAsUser(page);
+  await navigateToOperationsView(page);
+  await openUpdateOperationForm(page, updatedOperationTitle);
+
+  const updateOperationIsArchivedInput = await page.$('#update-operation-is_archived', {strict: true});
+
+
+  expect(updateOperationIsArchivedInput, 'Can\'t find the update operation is archived input').toBeTruthy();
+
+  await updateOperationIsArchivedInput?.check();
+
+  const updateOperationUpdateButton = await page.$('#update-operation-update-button', {strict: true});
+  expect(updateOperationUpdateButton, 'Can\'t find the update operation update button').toBeTruthy();
+  await updateOperationUpdateButton?.click();
+
+  await openUpdateOperationForm(page, updatedOperationTitle);
+
+  const updateOperationUpdateIsArchivedInput2 = await page.$('#update-operation-is_archived', {strict: true});
+
+  expect(await updateOperationUpdateIsArchivedInput2?.isChecked(), 'Is archived is set false but should be set to true').toBe(true);
+
+  await leaveUpdateOperationForm(page);
   await logout(page);
 });
 

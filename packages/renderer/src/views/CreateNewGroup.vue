@@ -42,6 +42,7 @@
               class="block mb-2 text-sm font-medium text-on_background"
             >Select an Operation</label>
             <SearchableSelect
+              id="create-group-operation"
               v-model="updatedGroupOperationId"
               :options="operationsSearchResultsArray"
               mode="single"

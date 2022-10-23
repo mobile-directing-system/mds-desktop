@@ -164,10 +164,10 @@
         updateddescription.value = currentOperation.description;
       }
       if(currentOperation.start) {
-        updatedstart.value = currentOperation.start.toISOString().slice(0, 16);
+        updatedstart.value = printISODate(currentOperation.start);
       }
       if(currentOperation.end) {
-        updatedend.value = currentOperation.end.toISOString().slice(0, 16);
+        updatedend.value = printISODate(currentOperation.end);
       }
       updatedisArchived.value = currentOperation.is_archived;
     }
@@ -190,4 +190,19 @@
         }
         router.push('/operation');
     }
+
+    function printISODate(date?: Date): string {
+      if(!date) {
+        return '';
+      }
+      const year = new Intl.DateTimeFormat('en', {year: 'numeric'}).format(date);
+      const month = new Intl.DateTimeFormat('en', {month: '2-digit'}).format(date);
+      const day = new Intl.DateTimeFormat('en', {day: '2-digit'}).format(date);
+      const hour = new Intl.DateTimeFormat('en', {hour12: false, hour: '2-digit'}).format(date);
+      let minute = new Intl.DateTimeFormat('en', {minute: '2-digit'}).format(date);
+      if(minute.length === 1) {
+        minute = `0${minute}`;
+      }
+      return `${year}-${month}-${day}T${hour}:${minute}`;
+  }
 </script>
