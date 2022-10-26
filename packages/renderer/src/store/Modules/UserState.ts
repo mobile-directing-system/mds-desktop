@@ -18,9 +18,13 @@ function undom(user: User):User {
  * define the content of the UsersState
  */
 class UserState {
+  // map containing all retrieved users
   users: Map<string, User> = new Map<string, User>();
+  // map containing all users retrieved on the most recent page
   page: Map<string, User> = new Map<string, User>();
+  // map containing the search results from the users search endpoint
   searchResult: Map<string, User> = new Map<string, User>();
+  // total number of users retrievable
   total = 0;
 }
 

@@ -1,13 +1,16 @@
 <template>
   <div class="border-blue-700 border-l-2 pt-10">
+    <!-- Permission Heading -->
     <h1 class=" ml-4 text-3xl font-bold text-on_background mb-2">
       Edit Permissions
     </h1>
     <form class="divide-y ml-4">
       <div>
+        <!-- User Permission Section Heading -->
         <h1 class="text-1xl font-bold text-on_background">
           User Permissions
         </h1>
+        <!-- User View Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -24,6 +27,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- User Create Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -40,6 +44,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- User Update Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -56,6 +61,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- User Set Active Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -72,6 +78,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- User Set Admin Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -88,6 +95,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- User Update Password Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -106,9 +114,11 @@
         </div>
       </div>
       <div>
+        <!-- Operation Permission Section Heading -->
         <h1 class="text-1xl font-bold text-on_background">
           Operation Permissions
         </h1>
+        <!-- Operation View Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -125,6 +135,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- Operation Create Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -141,6 +152,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- Operation Update Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -157,6 +169,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- Operation View Members Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -173,6 +186,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- Operation Update Members Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -191,9 +205,11 @@
         </div>
       </div>
       <div>
+        <!-- Group Permissions Section Heading -->
         <h1 class="text-1xl font-bold text-on_background">
           Group Permissions
         </h1>
+        <!-- Group View Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -210,6 +226,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- Group Create Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -226,6 +243,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- Group Update Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -242,6 +260,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- Group Delete Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -260,9 +279,11 @@
         </div>
       </div>
       <div>
+        <!-- Permission Permissions Section Heading -->
         <h1 class="text-1xl font-bold text-on_background">
           Permission Permissions
         </h1>
+        <!-- Permission View Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -279,6 +300,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- Permission Update Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -297,9 +319,11 @@
         </div>
       </div>
       <div>
+        <!-- Addressbook Entry Permissions Section Heading -->
         <h1 class="text-1xl font-bold text-on_background">
           Address Book Entry Permissions
         </h1>
+        <!-- Addressbook Entry View Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -316,6 +340,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- Addressbook Entry Create Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -332,6 +357,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- Addressbook Entry Update Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -348,6 +374,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- Addressbook Entry Delete Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -366,9 +393,11 @@
         </div>
       </div>
       <div>
+        <!-- Intelligence Permissions Section Heading -->
         <h1 class="text-1xl font-bold text-on_background">
           Intelligence Permissions
         </h1>
+        <!-- Intelligence View Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -385,6 +414,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- Intelligence Create Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -401,6 +431,7 @@
             :aria-disabled="checkPermissions([{name: PermissionNames.PermissionsUpdate}])? 'false':'true'"
           >
         </div>
+        <!-- Intelligence Invalidate Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -419,9 +450,11 @@
         </div>
       </div>
       <div>
+        <!-- Other Permissions Section Heading -->
         <h1 class="text-1xl font-bold text-on_background">
           Other Permissions
         </h1>
+        <!-- Rebuild Search Index Permission Label and Checkbox -->
         <div class="flex justify-between">
           <label
             class="mb-1 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2 "
@@ -440,6 +473,7 @@
         </div>
       </div>
       <div class="flex justify-between gap-3 pt-1">
+        <!-- Update Permissions Button -->
         <NormalButton
           id="update-permissions-update-button"
           :disabled="!checkPermissions([{name: PermissionNames.PermissionsUpdate}])"
@@ -447,6 +481,7 @@
         >
           Update Permissions
         </NormalButton>
+        <!-- Cancel Edit Permissions View Button -->
         <NormalButton
           id="update-permissions-cancel-button"
           @click.prevent="leaveEditPermissions()"
@@ -468,6 +503,7 @@
 
   import type { Permission } from '../../../types';
 
+  // v-model
   const userViewPermission = ref(false);
   const userCreatePermission = ref(false);
   const userUpdatePermission = ref(false);
@@ -500,6 +536,7 @@
   const permissionsState = usePermissionsState();
   const selectedUserID = route.params.userId as string;
   const usersPermissions = computed(() => permissionsState.getters.getPermissions().get(selectedUserID));
+  // set v-models to the selected user permissions
   usersPermissions.value?.forEach((elem) => {
     if(elem.name === PermissionNames.UserView) {
       userViewPermission.value = true;
@@ -578,8 +615,12 @@
     }
   });
 
+  /**
+   * function to collect selected permissions and call the update permissions endpoint
+   */
   function updatePermissions() {
     const permissions:Permission[] = [];
+    // collect selected permissions
     if(userViewPermission.value) {
       permissions.push({name: PermissionNames.UserView});
     }
@@ -655,10 +696,15 @@
     if(otherRebuildSearchIndexPermission.value) {
       permissions.push({name: PermissionNames.SearchRebuildIndex});
     }
+    // call update permissions endpoint to set users permissions to new permissions
     permissionsState.dispatch('updateAllPermissions', {userId: selectedUserID, permissions});
+    // route back to the all permissions views
     router.push({name: 'Permissions'});
   }
 
+  /**
+   * function to leave the edit permissions view and return to the all permissions view
+   */
   function leaveEditPermissions() {
     router.push({name: 'Permissions'});
   }

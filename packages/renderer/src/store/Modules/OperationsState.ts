@@ -21,10 +21,15 @@ function undom(operation: Operation):Operation {
  * define the content of the OperationsState
  */
 class OperationsState {
+  // Map with all retrieved operations
   operations: Map<string, Operation> = new Map<string, Operation>();
+  // Map with all operation retrieved for the most recent page
   page: Map<string, Operation> = new Map<string, Operation>();
+  // Map with the results returned from the most recent call of the operation search endpoint
   searchResult: Map<string, Operation> = new Map<string, Operation>();
+  // Map with all operation members retrieved
   members: Map<string, string[]> = new Map<string, string[]>();
+  // Number of total operations retrievable
   total = 0;
 }
 

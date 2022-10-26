@@ -1,5 +1,7 @@
 <template>
+  <!-- Table Div -->
   <div class="table-fixed place-items-center mr-10">
+    <!-- Table -->
     <table 
       v-bind="$attrs"
       class=" border-spacing-2 w-full rounded-md overflow-hidden m-4"

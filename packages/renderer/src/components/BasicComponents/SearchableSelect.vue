@@ -58,7 +58,7 @@
     label?:string;                           // If options are objects, this string defines what object property is shown in the options list
     trackBy?: string;                        // If options are objects, this string defines what object property is searched
     valueProp?: string;                      // If options are objects, this string defines what object property is used as value for selected options
-    filterResults: boolean;
+    filterResults: boolean;                  // Disable builtin filtering of the options using the query string, to provide custom filtering yourself
     debounce?: number;                      // Defines the debouce time
     maxWait?: number;                       // Defines the maxWait during debounce
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

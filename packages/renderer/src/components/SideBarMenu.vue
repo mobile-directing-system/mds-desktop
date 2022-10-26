@@ -4,6 +4,7 @@
       <!-- SideBar -->
             
       <main>
+        <!-- Users Link -->
         <button
           v-if="checkPermissions([{name: PermissionNames.UserView}])"
           id="manage-users-button"
@@ -29,6 +30,7 @@
             <span class="text-2xl"> Users </span>
           </div>
         </button>
+        <!-- Operations Link -->
         <button
           v-if="checkPermissions([{name: PermissionNames.OperationViewAny}])"
           id="manage-operations-button"
@@ -54,6 +56,7 @@
             <span class="text-2xl"> Operations </span>
           </div>
         </button>
+        <!-- Groups Link -->
         <button
           v-if="checkPermissions([{name: PermissionNames.GroupView}])"
           id="manage-groups-button"
@@ -79,6 +82,7 @@
             <span class="text-2xl"> Groups </span>
           </div>
         </button>
+        <!-- Permissions Link -->
         <button
           v-if="checkPermissions([{name: PermissionNames.PermissionsView}, {name: PermissionNames.UserView}])"
           id="manage-permissions-button"

@@ -42,11 +42,11 @@
       :key="notification.notificationId"
       class="text-on_success_light bg-success_light rounded-lg shadow mb-1 flex items-center"
     >
-      <!-- Error Message -->
+      <!-- Notification Message -->
       <div class="ml-3 text-sm font-normal inline-flex w-72 max-w-xs overflow-x-hidden max-h-16">
         {{ printNotificiation(notification.inAppNotification) }}
       </div>
-      <!-- Close Error Button -->
+      <!-- Close Notification Button -->
       <button
         type="button"
         class="ml-auto mt-1 mb-1 mr-1 bg-success_light text-on_success_superlight hover:bg-success_dark rounded-lg focus:ring-2 focus:ring-success p-1.5 inline-flex h-8 w-8"
@@ -72,10 +72,11 @@
 </template>
 <script lang="ts" setup>
   /**
-   * This component that displays errors in the form of floating toasts at the top of the app.
-   * The oldest 3 errors in the error state are displayed. The toasts disappear after 10s or
-   * if they are manually closed using the x button on the toasts. If this happens and more
-   * newer errors they are then displayed in the same way.
+   * This component that displays errors and notifications in the form of floating toasts at the 
+   * top of the app. The oldest 3 errors and notifications displayed. Here errors have priority over
+   * notifications, so if there are 2 errors and 4 notifications, the 2 errors and 1 notification are
+   * displayed. The toasts disappear after 10s or if they are manually closed using the x button on 
+   * the toasts. If this happens and more newer errors they are then displayed in the same way.
    */
   import {computed} from 'vue';
   import type { InAppNotification, PlainTextContent } from '../../../../types';
@@ -95,12 +96,16 @@
     errorState.dispatch('removeError', errorId);
   }
   function printNotificiation(notification: InAppNotification):string {
+    // Switch between different notification types
     if(notification.type === 'intel-notification') {
+      // Switch between different payload types
       if(notification.payload.intel_to_deliver.type === IntelType.plaintext_message) {
+        // For plaintext payloads the first 60 characters are displayed
         const content = (notification.payload.intel_to_deliver.content as PlainTextContent).text.slice(0, 60);
         return `You got new plaintext intel: ${content.endsWith(' ')? content.substring(0, -1) : content}...`;
       }
       if(notification.payload.intel_to_deliver.type === IntelType.analog_radio_message) {
+        // For analog radio message display the first 60 characters of the subject
         //fix this in the backend or in the backend comms code in the future
         //eslint-disable-next-line @typescript-eslint/no-explicit-any
         const content = (notification.payload.intel_to_deliver.content as any).Head.slice(0, 50);
@@ -109,6 +114,10 @@
     }
     return '';
   }
+  /**
+   * function to remove Notifications from the shownNotification state including the timeout
+   * @param notificationId id of the notification to remove
+   */
   function removeNotification(notificationId: string) {
     notificationState.dispatch('removeShownNotification', notificationId);
   }

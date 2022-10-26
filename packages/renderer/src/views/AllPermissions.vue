@@ -134,10 +134,15 @@
     await buildPermissionStrings(userPage.value().values());
   }
 
+  // update the permission strings if the permissions are updated
   watch(permissions.value(), async () => {
     await buildPermissionStrings(userPage.value().values());
   });
 
+  /**
+   * function to generate permission strings to be shown in the users table
+   * @param users for which to build the permission strings
+   */
   async function buildPermissionStrings(users: IterableIterator<User>) {
     for(const user of users) {
       let userPermissionString = '';
@@ -147,6 +152,8 @@
       let addressbookPermissionString = '';
       let intelligencePermissionString = '';
       let otherPermissionString = '';
+
+      // loop over the permissions for each passed user
       permissions.value().get(user.id)?.forEach((elem) => {
         //set user permissions
         if(elem.name === PermissionNames.UserView) {
@@ -231,6 +238,8 @@
           otherPermissionString += 'Rebuild Search Index, ';
         }
       });
+
+      // trim string end to remove the trainling comma
       userPermissionString = userPermissionString === ''? userPermissionString : userPermissionString.substring(0, userPermissionString.length - 2);
       operationPermissionString = operationPermissionString === ''? operationPermissionString : operationPermissionString.substring(0, operationPermissionString.length - 2);
       groupPermissionString = groupPermissionString === ''? groupPermissionString : groupPermissionString.substring(0, groupPermissionString.length - 2);
@@ -238,6 +247,8 @@
       addressbookPermissionString = addressbookPermissionString === ''? addressbookPermissionString : addressbookPermissionString.substring(0, addressbookPermissionString.length - 2);
       intelligencePermissionString = intelligencePermissionString === ''? intelligencePermissionString : intelligencePermissionString.substring(0, intelligencePermissionString.length - 2);
       otherPermissionString = otherPermissionString === ''? otherPermissionString : otherPermissionString.substring(0, otherPermissionString.length - 2);
+
+      // set permissionsString to the maps to be shown
       userPermissionsStrings.value.set(user.id, userPermissionString);
       operationPermissionsStrings.value.set(user.id, operationPermissionString);
       groupPermissionsStrings.value.set(user.id, groupPermissionString);

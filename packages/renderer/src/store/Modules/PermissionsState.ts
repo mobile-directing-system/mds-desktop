@@ -22,6 +22,7 @@ function undom(permissions: Permission[]):Permission[] {
  * define the content of the LoginInfoState
  */
 class PermissionsState {
+  // map containing the retrieved permissions for users
   permissions: Map<string, Permission[]> = new Map();
 }
 

@@ -75,7 +75,7 @@
   interface Props {
     showModal: boolean; // boolean idicating whether or no the modal should be shown
     title: string;      // string containing the title for the modal displayed at the top
-    id?: string;
+    id?: string;        // id string to give the elems of this component unique id's for instrumentation in tests
   }
   const props = defineProps<Props>();
 

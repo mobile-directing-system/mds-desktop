@@ -2,6 +2,12 @@ import { Getters, Mutations, Actions, Module, createComposable } from 'vuex-smar
 import type { Context } from 'vuex-smart-module';
 import type { Error } from '../../../types/Error';
 
+/**
+ * function which can be imported in other states to handle errors by adding the error message
+ * to the error state, if it exists or a fixed default string if not.
+ * @param errorMsg string to add as the error message to the error state
+ * @param errorState error state to add the errors to
+ */
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function handleErrors(errorMsg?: string, errorState?:Context<Module<ErrorState, ErrorStateGetters, ErrorStateMutations, ErrorStateActions, {}>>) {
   if(errorState) {
@@ -18,7 +24,9 @@ export function handleErrors(errorMsg?: string, errorState?:Context<Module<Error
  * define the content of the ErrorState
  */
 class ErrorState {
+  // array with errors
   errors: Error[] = [];
+  // map for timeouts associated with errors
   timeouts: Map<string, number> = new Map<string, number>();
 }
 
@@ -47,11 +55,19 @@ class ErrorStateMutations extends Mutations<ErrorState> {
  * define actions for functions which change the state as a side effect.
  */
 class ErrorStateActions extends Actions<ErrorState, ErrorStateGetters, ErrorStateMutations, ErrorStateActions> {
+  /**
+   * function to add errors to the error state and to add associated timeouts
+   * @param errorMessage error message to put in the error
+   */
   async addError(errorMessage: string) {
     const errorId = crypto.randomUUID();
     this.mutations.addTimeout({errorId, timeoutHandler: window.setTimeout(() => this.actions.removeError(errorId), 10_000)});
     this.mutations.addError({errorId, errorMessage});
   }
+  /**
+   * function to remove errors and timeouts from their respective states
+   * @param errorId id of the error and associated timeout to remove
+   */
   async removeError(errorId: string) {
     this.mutations.removeTimeout(errorId);
     this.mutations.removeError(errorId);
