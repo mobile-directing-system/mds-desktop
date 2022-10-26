@@ -4,6 +4,8 @@
 * [MemberSelection](component-docs/memberSelection.md)
 * [SideBarMenu](component-docs/sideBarMenu.md)
 * [TopNavbar](component-docs/topNavbar.md)
+* [Mailbox](component-docs/mailbox.md)
+* [AddressBookSelection](component-docs/addressBookSelection.md)
 
 ## Basic Components
 
