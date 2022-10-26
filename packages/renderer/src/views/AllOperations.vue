@@ -83,10 +83,10 @@
             {{ data.description }}
           </template>
           <template #data3="{data}:{data:Operation}">
-            {{ data.start }}
+            {{ printDate(data.start) }}
           </template>
           <template #data4="{data}:{data:Operation}">
-            {{ data.end }}
+            {{ printDate(data.end) }}
           </template>
         </TableRow>
       </template>
@@ -127,10 +127,10 @@
             {{ data.description }}
           </template>
           <template #data3="{data}:{data:Operation}">
-            {{ data.start }}
+            {{ printDate(data.start) }}
           </template>
           <template #data4="{data}:{data:Operation}">
-            {{ data.end }}
+            {{ printDate(data.end) }}
           </template>
         </TableRow>
       </template>
@@ -156,7 +156,7 @@
   import {useOperationsState } from '../store';
   import {useRouter} from 'vue-router';
   import { usePermissions } from '../composables';
-  import { PermissionNames } from '../constants';
+  import { OrderBy, OrderDir, PermissionNames } from '../constants';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import type { Operation } from '../../../types';
   
@@ -184,7 +184,7 @@
    * @param offset offset beginning at which operations are retrieved
    */
   async function updatePage(amount: number, offset: number) {
-    await operationsState.dispatch('retrieveOperations', {amount, offset});
+    await operationsState.dispatch('retrieveOperations', {amount, offset, orderBy: OrderBy.OperationStartTime, orderDir: OrderDir.Descending});
   }
   watch(searchInput, (curVal) => {
     if(curVal) {
@@ -209,6 +209,20 @@
       arr.push(next.value);
     }
     return arr;
+  }
+  function printDate(date?: Date): string {
+    if(!date) {
+      return '';
+    }
+    const year = new Intl.DateTimeFormat('en', {year: 'numeric'}).format(date);
+    const month = new Intl.DateTimeFormat('en', {month: '2-digit'}).format(date);
+    const day = new Intl.DateTimeFormat('en', {day: '2-digit'}).format(date);
+    const hour = new Intl.DateTimeFormat('en', {hour12: false, hour: '2-digit'}).format(date);
+    let minute = new Intl.DateTimeFormat('en', {minute: '2-digit'}).format(date);
+    if(minute.length === 1) {
+      minute = `0${minute}`;
+    }
+    return `${day}.${month}.${year} ${hour}:${minute}`;
   }
 </script>
 <style scoped>

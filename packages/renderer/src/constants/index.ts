@@ -42,12 +42,23 @@ class OrderDir {
 
 // readonly strings for available order_by fields
 class OrderBy {
+  // OrderBy for Users
   public static readonly UserUsername = 'username';
   public static readonly UserFirstName = 'first_name';
   public static readonly UserLastname = 'last_name';
   public static readonly UserIsAdmin = 'is_admin';
+  // OrderBy for Groups
+  public static readonly GroupTitle = 'title';
+  public static readonly GroupDescription = 'description';
+  // OrderBy for Operations
+  public static readonly OperationTitle = 'title';
+  public static readonly OperationDescription = 'description';
+  public static readonly OperationStartTime = 'start';
+  public static readonly OperationEndtime = 'end';
+  public static readonly OperationIsArchived = 'is_archived';
 }
 
+// readonly strings for available intel types
 class IntelType {
   public static readonly analog_radio_message = 'analog-radio-message';
   public static readonly plaintext_message = 'plaintext-message';

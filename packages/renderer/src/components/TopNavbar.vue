@@ -4,7 +4,8 @@
       <div class="px-14 text-center font-extrabold text-4xl">
         MDS
       </div>
-      <div class=" flex justify-evenly text-2xl">   
+      <div class=" flex justify-evenly text-2xl">
+        <!-- Ressources Link -->
         <div class=" px-16">
           <router-link
             to="/main"
@@ -13,7 +14,7 @@
             Ressources
           </router-link>
         </div>
-
+        <!-- Intel Link -->
         <div class=" px-16 ">
           <router-link
             to="/intel/create-new-intel-complete"
@@ -22,6 +23,7 @@
             Intelligence
           </router-link>
         </div>
+        <!-- Addressbook Link -->
         <div class=" px-16 ">
           <router-link
             to="/addressbook"
@@ -30,6 +32,7 @@
             Adressbook
           </router-link>
         </div>
+        <!-- Mailbox Link -->
         <div class=" px-16">
           <router-link
             to="/mailbox"
@@ -64,6 +67,7 @@
         </button>
       </div>
     </div>
+    <!-- Settings Dropdown -->
     <div
       v-if="showDropdown"
       id="settings-dropdown"
@@ -92,10 +96,16 @@
 
   const showDropdown = ref(false);
 
+  /**
+   * function to toggle the settings dropdown
+   */
   function toggleDropdown() {
     showDropdown.value = !showDropdown.value;
   }
 
+  /**
+   * function to trigger the logout
+   */
   function logout() {
     loginState.dispatch('logout');
   }

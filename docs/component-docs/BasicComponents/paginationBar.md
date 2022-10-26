@@ -8,11 +8,12 @@ All passed attributes, which are no props, are passed to the containing `div`.
 
 ## Props
 
-| Name                     | Type     | Required | Default Value | Description                                           |
-| ------------------------ | -------- | -------- | ------------- | ----------------------------------------------------- |
-| totalRetrievableEntities | `number` | yes      | -             | the total amount of entities which could be retreived |
-| pageSize                 | `number` | yes      | -             | the amount of entities per page                       |
+| Name                     | Type     | Required | Default Value | Description                                                                                     |
+| ------------------------ | -------- | -------- | ------------- | ----------------------------------------------------------------------------------------------- |
+| totalRetrievableEntities | `number` | yes      | -             | the total amount of entities which could be retreived                                           |
+| pageSize                 | `number` | yes      | -             | the amount of entities per page                                                                 |
 | initialPage              | `number` | no       | undefined     | when passed the initialPage and not page 1 is considered when returning the pageSize and offset |
+| id                       | `string` | no       | undefined     | id for the container and to make button ids & span id unique                                    |
 
 ## Events
 

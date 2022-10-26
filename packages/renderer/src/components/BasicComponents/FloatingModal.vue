@@ -21,6 +21,7 @@
         >{{ props.title }}</span>
         <!-- Close Modal Button -->
         <NormalButton
+          :id="`${props.id}-close-button`"
           type="button"
           class="bg-background text-on_background hover:bg-surface_dark hover:text-on_surface_dark rounded-lg focus:ring-2 focus:ring-surface inline-flex p-0.5 h-4 w-4 m-1"
           :overwrite="true"
@@ -74,6 +75,7 @@
   interface Props {
     showModal: boolean; // boolean idicating whether or no the modal should be shown
     title: string;      // string containing the title for the modal displayed at the top
+    id?: string;        // id string to give the elems of this component unique id's for instrumentation in tests
   }
   const props = defineProps<Props>();
 

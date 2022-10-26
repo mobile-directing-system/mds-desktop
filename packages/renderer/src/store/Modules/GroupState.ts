@@ -21,8 +21,11 @@ function undom(group: Group):Group {
  * define the content of the LoginInfoState
  */
 class GroupState {
+  // Map with all retrieved groups
   groups: Map<string, Group> = new Map<string, Group>();
+  // Map with all groups retrived for the last page
   page: Map<string, Group> = new Map<string, Group>();
+  // total amount of retrievable groups
   total = 0;
 }
 

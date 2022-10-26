@@ -1,118 +1,121 @@
 <template>
-  <div
-    id="create-new-group-form"
-    class=" bg-background ml-4 max-w-lg rounded-lg  my-10"
-  >
-    <header class=" max-w-lg pb-10">
-      <h1 class="  text-left text-4xl font-bold text-on_background">
-        Create a new Group
-      </h1>        
-    </header>
-    <form class="w-100">
-      <main>
-        <!------- Title  ------>
-        <FormInput
-          id="create-group-title"
-          v-model="updatedGroupTitle"
-          div-class="w-80"
-          label="Title"
-          required
-        />
-        <!------- Description  ------>
-        <FormInput
-          id="create-group-description"
-          v-model="updatedGroupDescription"
-          div-class="w-80"
-          label="Description"
-        />
-        <!------- Operation  ------>
-        <div
-          v-if="!checkPermissions([{name: PermissionNames.OperationViewAny}])"
-          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
-        >
-          You lack the operation view permission, as such you cannot set or change the associated operation of the group.
-        </div>
-        <div 
-          v-if="checkPermissions([{name: PermissionNames.OperationViewAny}])"
-          class="mb-6 w-80"
-        >
-          <label
-            for="create-group-operation"
-            class="block mb-2 text-sm font-medium text-on_background"
-          >Select an Operation</label>
-          <SearchableSelect
-            v-model="updatedGroupOperationId"
-            :options="operationsSearchResultsArray"
-            mode="single"
-            placeholder="Select operation"
-            label="title"
-            value-prop="id"
-            :filter-results="false"
-            track-by="title"
-            @search-change="handleOperationSelectionInput"
-            @open="handleOperationSelectionInput('')"
+  <div>
+    <div
+      id="create-new-group-form"
+      class=" bg-background ml-4 max-w-lg rounded-lg  my-10"
+    >
+      <header class=" max-w-lg pb-10">
+        <h1 class="  text-left text-4xl font-bold text-on_background">
+          Create a new Group
+        </h1>        
+      </header>
+      <form class="w-100">
+        <main>
+          <!------- Title  ------>
+          <FormInput
+            id="create-group-title"
+            v-model="updatedGroupTitle"
+            div-class="w-80"
+            label="Title"
+            required
           />
-        </div>
-        <!-- Members -->
-        <div
-          v-if="!checkPermissions([{name: PermissionNames.OperationMembersView}]) && checkPermissions([{name: PermissionNames.OperationViewAny}])"
-          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
-        >
-          If an operation is selected no group member can be selected, as you are missing the operation members view permission to verify
-          that group members are also operation members. If you select group members and afterwards select an operation the group will
-          be created with no members.
-        </div>
-        <div
-          v-if="!checkPermissions([{name: PermissionNames.OperationMembersView}]) && !checkPermissions([{name: PermissionNames.OperationViewAny}]) && updatedGroupOperationId"
-          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
-        >
-          This group has an associated operation and you lack the permission to see its members, as such you cannot change the group members
-          as it can not be verified that they are operation members as well.
-        </div>
-        <div
-          v-if="!checkPermissions([{name: PermissionNames.UserView}])"
-          class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
-        >
-          You cannot see the names of the group members, as you lack the users view permission. As such
-          you cannot change the group members.
-        </div>
-        <div
-          v-if="(!updatedGroupOperationId || checkPermissions([{name: PermissionNames.OperationMembersView}])) && checkPermissions([{name: PermissionNames.UserView}])" 
-          class="mb-6"
-        >
+          <!------- Description  ------>
+          <FormInput
+            id="create-group-description"
+            v-model="updatedGroupDescription"
+            div-class="w-80"
+            label="Description"
+          />
+          <!------- Operation  ------>
           <div
-            v-if="updatedGroupOperationId"
-            class="bg-error_superlight border-2 w-80 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+            v-if="!checkPermissions([{name: PermissionNames.OperationViewAny}])"
+            class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
           >
-            Only members of the selected operation can be members of this group.
+            You lack the operation view permission, as such you cannot set or change the associated operation of the group.
           </div>
-          <MemberSelection
-            id="create-group-add-members"
-            v-model="updatedGroupMemberIds"
-            :include-ids="selectedOperationMembers"
-            :include="updatedGroupOperationId? true: false"
-          />
-        </div>
-        <div class="pt-4 flex justify-between">
-          <!-- Create Group Button -->
-          <NormalButton
-            v-if="updatedGroupTitle != ''"
-            id="create-group-button"
-            @click.prevent="createGroup()"
+          <div 
+            v-if="checkPermissions([{name: PermissionNames.OperationViewAny}])"
+            class="mb-6 w-80"
           >
-            Create Group
-          </NormalButton>
-          <!-- Cancel Button -->
-          <NormalButton
-            id="create-group-cancel-button"
-            class=" ml-auto"
-            @click.prevent="router.push('/groups')"
+            <label
+              for="create-group-operation"
+              class="block mb-2 text-sm font-medium text-on_background"
+            >Select an Operation</label>
+            <SearchableSelect
+              id="create-group-operation"
+              v-model="updatedGroupOperationId"
+              :options="operationsSearchResultsArray"
+              mode="single"
+              placeholder="Select operation"
+              label="title"
+              value-prop="id"
+              :filter-results="false"
+              track-by="title"
+              @search-change="handleOperationSelectionInput"
+              @open="handleOperationSelectionInput('')"
+            />
+          </div>
+          <!-- Members -->
+          <div
+            v-if="!checkPermissions([{name: PermissionNames.OperationMembersView}]) && checkPermissions([{name: PermissionNames.OperationViewAny}])"
+            class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
           >
-            Cancel
-          </NormalButton>
-        </div>
-      </main>
-    </form>
+            If an operation is selected no group member can be selected, as you are missing the operation members view permission to verify
+            that group members are also operation members. If you select group members and afterwards select an operation the group will
+            be created with no members.
+          </div>
+          <div
+            v-if="!checkPermissions([{name: PermissionNames.OperationMembersView}]) && !checkPermissions([{name: PermissionNames.OperationViewAny}]) && updatedGroupOperationId"
+            class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+          >
+            This group has an associated operation and you lack the permission to see its members, as such you cannot change the group members
+            as it can not be verified that they are operation members as well.
+          </div>
+          <div
+            v-if="!checkPermissions([{name: PermissionNames.UserView}])"
+            class="bg-error_superlight border-2 w-100 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+          >
+            You cannot see the names of the group members, as you lack the users view permission. As such
+            you cannot change the group members.
+          </div>
+          <div
+            v-if="(!updatedGroupOperationId || checkPermissions([{name: PermissionNames.OperationMembersView}])) && checkPermissions([{name: PermissionNames.UserView}])" 
+            class="mb-6"
+          >
+            <div
+              v-if="updatedGroupOperationId"
+              class="bg-error_superlight border-2 w-80 mb-6 p-1 border-error_dark text-on_error_superlight rounded"
+            >
+              Only members of the selected operation can be members of this group.
+            </div>
+            <MemberSelection
+              id="create-group-add-members"
+              v-model="updatedGroupMemberIds"
+              :include-ids="selectedOperationMembers"
+              :include="updatedGroupOperationId? true: false"
+            />
+          </div>
+          <div class="pt-4 flex justify-between">
+            <!-- Create Group Button -->
+            <NormalButton
+              v-if="updatedGroupTitle !== ''"
+              id="create-group-button"
+              @click.prevent="createGroup()"
+            >
+              Create Group
+            </NormalButton>
+            <!-- Cancel Button -->
+            <NormalButton
+              id="create-group-cancel-button"
+              class=" ml-auto"
+              @click.prevent="router.push('/groups')"
+            >
+              Cancel
+            </NormalButton>
+          </div>
+        </main>
+      </form>
+    </div>
   </div>
 </template>
 <script lang="ts" setup> 

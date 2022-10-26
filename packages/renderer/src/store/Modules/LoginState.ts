@@ -12,9 +12,13 @@ import type { userState } from './UserState';
  * define the content of the LoginInfoState
  */
 class LoginState {
+  // boolean indicating if a user is logged in
   loggedIn = false;
+  // boolean indicating if a user is currently logging in
   loggingIn = false;
+  // string with the username of the user logged in
   loggedInUser = '';
+  // id of the user logged in
   loggedInUserId = '';
 }
 
@@ -95,24 +99,30 @@ class LoginStateActions extends Actions<LoginState, LoginStateGetters, LoginStat
    * @param param0 {username, password} username and password to login with
    */
   async login({username, password}:{username:string, password:string}) {
+    // set logging in state to true to show login spinner
     await this.actions.setLoggingIn(true);
     const loggedIn:ErrorResult<string> = await login(username, password);
+    // set logging in state to false to hide login spinner
     await this.actions.setLoggingIn(false);
     if(loggedIn.res && !loggedIn.error) {
       if(!this.permissionsCtx && !this.ctx){
         // Add members to the users store
         this.ctx = root.context(modulesStore);
       }
+      // get permission store context
       if(!this.permissionsCtx && this.ctx) {
         this.permissionsCtx = this.ctx.modules.permissionsState;
       }
+      // get user store context
       if(!this.userCtx && this.ctx) {
         this.userCtx = this.ctx.modules.userState;
       }
       this.mutations.setLoggedIn(true);
       this.mutations.setLoggedInUser(username);
       this.mutations.setLoggedInUserId(loggedIn.res);
+      // retrieve user object for user which is logged in
       this.userCtx?.actions.retrieveUserById(loggedIn.res);
+      // retrieve permissions for the user which is logged in
       this.permissionsCtx?.actions.retrievePermissions(loggedIn.res);
     }  else {
       handleErrors(loggedIn.errorMsg, this.errorState);

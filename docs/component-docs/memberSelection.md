@@ -7,11 +7,14 @@ Passed attributes, which are not props, to this component won't work.
 
 ## Props
 
-| Name       | Type             | Required | Default Value | Description                                                    |
-| ---------- | ---------------- | -------- | ------------- | -------------------------------------------------------------- |
-| modelValue | `string[]`       | yes      | -             | v-model repsentation                                           |
-| includeIds | `string[]`       | no       | undefined     | array of selectable user ids                                   |
-| include    | `boolean`        | no       | undefined     | if set the includeIds array is processed                       |
+| Name                 | Type             | Required | Default Value | Description                                                    |
+| -------------------- | ---------------- | -------- | ------------- | -------------------------------------------------------------- |
+| modelValue           | `string[]`       | yes      | -             | v-model repsentation                                           |
+| includeIds           | `string[]`       | no       | undefined     | array of selectable user ids                                   |
+| include              | `boolean`        | no       | undefined     | if set the includeIds array is processed                       |
+| disableAddMembers    | `boolean`        | no       | undefined     | disable the add members button if set to true                  |
+| disableRemoveMembers | `boolean`        | no       | undefined     | disable the removing of members                                |
+| id                   | `string`         | no       | undefined     | id to make element id's of this component unique               |
 
 ## Events
 

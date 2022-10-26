@@ -38,12 +38,15 @@
         :row-data="rowData"
         :t-data-class="'p-2'"
       >
+        <!-- Username Column -->
         <template #data1="{data}:{data: string}">
           {{ users().get(data)?.username }}
         </template>
+        <!-- First Name Column -->
         <template #data2="{data}:{data: string}">
           {{ users().get(data)?.first_name }}
         </template>
+        <!-- Last Name Column -->
         <template #data3="{data}:{data: string}">
           {{ users().get(data)?.last_name }}
         </template>
@@ -75,6 +78,7 @@
   </TableContainer>
   <!--Add Members Modal-->
   <FloatingModal
+    id="add-members-modal"
     :show-modal="showMembersModal"
     title="Select a User"
     @click="toggleMembersModal()"
@@ -91,6 +95,7 @@
     >
       <!-- Searchable Select for Members -->
       <SearchableSelect
+        :id="`${props.id}-add-members-select`"
         v-model="addMemberIds"
         :options="options"
         mode="tags"
@@ -104,6 +109,7 @@
       />
       <!-- Available Members Table -->
       <TableContainer
+        :id="`${props.id}-add-members-table`"
         :contents="usersPageArray"
         id-identifier="id"
       >
@@ -128,12 +134,15 @@
             :identifier="rowData.id"
             @click="toggleId(rowData.id)"
           >
+            <!-- Username Column -->
             <template #data1="{data}:{data:User}">
               {{ data.username }}
             </template>
+            <!-- First Name Column -->
             <template #data2="{data}:{data:User}">
               {{ data.first_name }}
             </template>
+            <!-- Last Name Column -->
             <template #data3="{data}:{data:User}">
               {{ data.last_name }}
             </template>
@@ -216,6 +225,7 @@
   const addMemberIds: Ref<string[]> = ref([]);
   const arr: Ref<string[]> = ref([]);
   const options: Ref<(User | undefined)[]> = computed(() => {
+    // filter out options not included in the includeIds array if the include boolean is set
     if(props.include) {
       return union(usersSearchResultsArray.value, arr.value.map((elem) => users.value().get(elem)))?.filter((elem) => !props.modelValue.includes(elem?.id? elem?.id: '') && props.includeIds?.includes(elem?.id? elem.id : ''));
     } else {

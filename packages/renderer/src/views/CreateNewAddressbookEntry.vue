@@ -104,21 +104,28 @@
     return InterableIteratorToArray(usersSearchResults.value().values());
   });
 
+  // on mount retrieve the first 100 operations and users
   onMounted(() => {
       operationsState.dispatch('retrieveOperations', {amount : 100});
       userState.dispatch('retrieveUsers', {amount: 100});
   });
 
+  // if addedOperationId changes retrieve the selected operation
   watch(addedOperationId, (curVal) => {
     if(curVal) {
       operationsState.dispatch('retrieveOperationMembersById', curVal);
     }
   });
+  // if addedUserId changes retrieve the selected user
   watch(addedUserId, (curVal) => {
     if(curVal) {
       userState.dispatch('retrieveUserById', curVal);
     }
   });
+
+  /**
+   * function to create new addressbook entry object based on v-models and call the create addressbook entry endpoint
+   */
   function createAddressbookEntry(){
       const newEntry:AddressbookEntry =  {
           id:'',
@@ -131,6 +138,12 @@
       addressbookState.dispatch('retrieveEntries', {amount: 5, offset:0});
       router.push('/addressbook');
   }
+
+  /**
+     * function to convert IterableIterators to arrays to be used with e.g. searchable select component
+     * @param iter IterableIterator to be converted to an array
+     * @returns array with the same elements as the IterableIterator
+     */
   function InterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {
     const arr: T[] = [];
     // eslint-disable-next-line no-constant-condition
@@ -143,9 +156,19 @@
     }
     return arr;
   }
+
+  /**
+   * function to call the operation search endpoint with a query
+   * @param query which to pass to the operation search endpoint
+   */
   function handleOperationSelectionInput(query: string) {
     operationsState.dispatch('searchOperationsByQuery', {query, limit:10});
   }
+
+  /**
+   * function to call the user search endpoint with a query
+   * @param query which to pass to the user search endpoint
+   */
   function handleUserSelectionInput(query: string) {
     userState.dispatch('searchUsersByQuery', {query, limit:10});
   }

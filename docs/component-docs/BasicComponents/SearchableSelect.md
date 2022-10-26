@@ -16,16 +16,17 @@ the options prop must be an array.
 
 ## Props
 
-| Name        | Type                               | Required | Default Value | Description                            |
-| ----------- | ---------------------------------- | -------- | ------------- | -------------------------------------- |
-| mode        | `'tags' \| 'multiple' \| 'single' `| yes      | -             | Select the mode for the multiselect    |
-| placeholder | `string`                           | yes      | -             | Placeholder string for the multiselect |
-| label       | `string`                           | no       | undefined     | If options are objects, this string defines what object property is shown in the options list |
-| trackBy     | `string`                           | no       | label         | If options are objects, this string defines what object property is searched |
-| valueProp   | `string`                           | no       | undefined     | If options are objects, this string defines what object property is used as value for selected options |
-| debounce    | `string`                           | no       | undefined     | Defines the debouce time               |
-| maxWait     | `string`                           | no       | undefined     | Defines the maxWait during debounce    |
-| options     | `any []`                           | yes      | -             | Defines the options that are shown in the options list. Must be an array. |
+| Name          | Type                               | Required | Default Value | Description                            |
+| ------------- | ---------------------------------- | -------- | ------------- | -------------------------------------- |
+| mode          | `'tags' \| 'multiple' \| 'single' `| yes      | -             | Select the mode for the multiselect    |
+| placeholder   | `string`                           | yes      | -             | Placeholder string for the multiselect |
+| label         | `string`                           | no       | undefined     | If options are objects, this string defines what object property is shown in the options list |
+| trackBy       | `string`                           | no       | label         | If options are objects, this string defines what object property is searched |
+| valueProp     | `string`                           | no       | undefined     | If options are objects, this string defines what object property is used as value for selected options |
+| filterResults | `boolean`                          | no       | undefined     | Disable builtin filtering of the options using the query string, to provide custom filtering yourself |
+| debounce      | `string`                           | no       | undefined     | Defines the debouce time               |
+| maxWait       | `string`                           | no       | undefined     | Defines the maxWait during debounce    |
+| options       | `any []`                           | yes      | -             | Defines the options that are shown in the options list. Must be an array. |
 
 ## Events
 

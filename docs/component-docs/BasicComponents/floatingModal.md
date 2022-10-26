@@ -10,10 +10,11 @@ All passed attributes, which are not props, are passed to the div wrapping the p
 
 ## Props
 
-| Name       | Type             | Required | Default Value | Description                                                    |
-| ---------- | ---------------- | -------- | ------------- | -------------------------------------------------------------- |
-| showModal  | `boolean`        | yes      | -             | boolean idicating whether or no the modal should be shown      |
-| title      | `string`         | yes      | -             | string containing the title for the modal displayed at the top |
+| Name       | Type             | Required | Default Value | Description                                                                            |
+| ---------- | ---------------- | -------- | ------------- | -------------------------------------------------------------------------------------- |
+| showModal  | `boolean`        | yes      | -             | boolean idicating whether or no the modal should be shown                              |
+| title      | `string`         | yes      | -             | string containing the title for the modal displayed at the top                         |
+| id         | `string`         | no       | undefined     | id string to give the elems of this component unique id's for instrumentation in tests |
 
 ## Events
 

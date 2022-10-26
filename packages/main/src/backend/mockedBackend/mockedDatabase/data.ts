@@ -32,7 +32,7 @@ class MockDatabase {
     ]);
     //set of operations on startup. Generated with testDataGenerators/gen_operations.sh
     private readonly operations: Map<string, Operation> = new Map<string, Operation>([
-      ['4437f658-9f3c-48e1-96c6-3063cf238d9c', {id: '4437f658-9f3c-48e1-96c6-3063cf238d9c', title: 'TestOperation1', description: 'bWNJbexCLxJDfgHkyuAJ', start: new Date(1663505384000), end: new Date(1663509860000), is_archived: false}],
+      ['4437f658-9f3c-48e1-96c6-3063cf238d9c', {id: '4437f658-9f3c-48e1-96c6-3063cf238d9c', title: 'TestOperation1', description: 'bWNJbexCLxJDfgHkyuAJ', start: new Date(1665499900000), end: new Date(1665524950000), is_archived: false}],
       ['9bbc7fe6-5be3-4a4e-bf10-1b74123ee906', {id: '9bbc7fe6-5be3-4a4e-bf10-1b74123ee906', title: 'TestOperation2', description: 'XdkJJpZhAIGEBvhxHGPc', start: new Date(1663929299000), end: new Date(1663972340000), is_archived: true}],
       ['1baed006-c802-42fc-9a20-437946f0d0c9', {id: '1baed006-c802-42fc-9a20-437946f0d0c9', title: 'TestOperation3', description: 'yPwAdjLdDkETFoJdUEMc', start: new Date(1664834834000), end: new Date(1664876975000), is_archived: true}],
       ['64766930-86ff-4106-8e0d-cef0a1bbbb6b', {id: '64766930-86ff-4106-8e0d-cef0a1bbbb6b', title: 'TestOperation4', description: 'LNiPjuIVRQFTDIAbCqPq', start: new Date(1664474777000), end: new Date(1664482864000), is_archived: false}],

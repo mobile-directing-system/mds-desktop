@@ -6,6 +6,7 @@
           Addressbook Entries
         </h1>
         <div class="flex h-12 mt-3">
+          <!-- Addressbook Search Input -->
           <FormInput
             v-if="showSearch"
             id="prio"
@@ -13,6 +14,7 @@
             div-class=" ml-auto w-50 mr-3"
             label=""
           />
+          <!-- Addressbook Search Button -->
           <NormalButton
             class=" ml-auto mr-6"
             @click.prevent="showSearch=!showSearch; searchInput =''"
@@ -30,6 +32,7 @@
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             /></svg>
           </NormalButton>
+          <!-- Add Addressbook Button -->
           <NormalButton
             class=" ml-auto mr-6"
             @click.prevent="router.push('/create-new-addressbookentry')"
@@ -38,6 +41,7 @@
           </NormalButton>
         </div>
       </div>
+      <!-- Addressbook Searchresults Table -->
       <TableContainer
         v-if="searchInput != ''"
         :contents="entriesSearchResultsArray"
@@ -104,6 +108,7 @@
           </TableRow>
         </template>
       </TableContainer>
+      <!-- Addressbook Paginated Table -->
       <TableContainer
         v-if="searchInput === ''"
         :contents="addressbookEntryPage().values()"
@@ -170,6 +175,7 @@
           </TableRow>
         </template>
       </TableContainer>
+      <!-- Addressbook Table Pagination Bar -->
       <PaginationBar
         v-if="searchInput === ''"
         id="adressbook-table-pagination"
@@ -193,7 +199,7 @@
     import type { AddressbookEntry } from '../../../types';
     import FormInput from '../components/BasicComponents/FormInput.vue';
    
-
+    // load the first page of addressbook entries on mount
     onMounted(async () => {
         await addressbookState.dispatch('retrieveEntries', {amount: paginationAmount, offset: paginationPage.value * paginationAmount});
     });
@@ -211,61 +217,103 @@
     const showSearch = ref(false);
     const searchInput = ref('');
 
+    // handler for search input to trigger calling of the search endpoints
     watch(searchInput, (curVal) => {
     if(curVal) {
       handleEntrySelectionInput(curVal);
     }
-  });
-  const entriesSearchResults = computed(() => addressbookState.getters.searchResults);
-  const entriesSearchResultsArray = computed(() => {
-      return InterableIteratorToArray(entriesSearchResults.value().values());
-  });
-  function handleEntrySelectionInput(query: string) {
-    addressbookState.dispatch('searchEntryByQuery', {query, limit:5});
-  }
-  function InterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {
-      const arr: T[] = [];
-      // eslint-disable-next-line no-constant-condition
-      while(true) {
-        const next = iter.next();
-        if(next.done) {
-          break;
+    });
+    const entriesSearchResults = computed(() => addressbookState.getters.searchResults);
+    const entriesSearchResultsArray = computed(() => {
+        return InterableIteratorToArray(entriesSearchResults.value().values());
+    });
+
+    /**
+     * function to call the addressbook entry search endpoint
+     * @param query to pass to the search endpoint
+     */
+    function handleEntrySelectionInput(query: string) {
+      addressbookState.dispatch('searchEntryByQuery', {query, limit:5});
+    }
+
+    /**
+     * function to convert IterableIterators to arrays to be used with e.g. searchable select component
+     * @param iter IterableIterator to be converted to an array
+     * @returns array with the same elements as the IterableIterator
+     */
+    function InterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {
+        const arr: T[] = [];
+        // eslint-disable-next-line no-constant-condition
+        while(true) {
+          const next = iter.next();
+          if(next.done) {
+            break;
+          }
+          arr.push(next.value);
         }
-        arr.push(next.value);
+        return arr;
       }
-      return arr;
-    }
-  
-    async function updatePage(amount: number, offset: number) {
-        await addressbookState.dispatch('retrieveEntries', {amount, offset});
-    }
-    function selectRow(entryId: string){
-          router.push({name: 'EditCurrentAddressbookEntry', params:{ addressbookEntryID: entryId}});
-    }
-    function getUserName(id: string | undefined):string{
-      if(id && id != ''){
-        const currentUser = users.value().get(id);
-        if(currentUser){
-          return currentUser.first_name + ' ' +  currentUser.last_name;
+    
+      /**
+       * function to update the page when the pagination bar buttons are clicked
+       * @param amount of entries per page
+       * @param offset at which to start retrieving entries
+       */
+      async function updatePage(amount: number, offset: number) {
+          await addressbookState.dispatch('retrieveEntries', {amount, offset});
+      }
+
+      /**
+       * function to route to the edit page for a selected addressbook entry
+       * @param entryId of the entry for which to route to the edit page
+       */
+      function selectRow(entryId: string){
+            router.push({name: 'EditCurrentAddressbookEntry', params:{ addressbookEntryID: entryId}});
+      }
+
+      /**
+       * function to get a formated name of a user
+       * @param id of the user for which to get a formatted name
+       */
+      function getUserName(id: string | undefined):string{
+        if(id && id != ''){
+          const currentUser = users.value().get(id);
+          if(currentUser){
+            // if the user exists create and return the formatted name
+            return currentUser.first_name + ' ' +  currentUser.last_name;
+          }
+        }
+        return '';
+      }
+
+      /**
+       * function to get the title of an operation
+       * @param id of the operation for which to get the title
+       */
+      function getOperationName(id: string | undefined):string{
+        if(id && id != ''){
+          const currentOperation = operations.value().get(id);
+          if(currentOperation){
+            // if the operation exists return its title
+            return currentOperation.title;
+          }
+        }
+        return '';
+      }
+
+      /**
+       * function to delete an entry and update the page
+       * @param id of the entry to be deleted
+       */
+      function deleteEntry(id: string | undefined){
+        if(id && id != ''){
+          // delete entry
+          addressbookState.dispatch('deleteEntryById', id);
+          // delete all entries in the addressbook state
+          addressbookEntryPage.value().clear();
+          // update the page
+          updatePage(paginationAmount, paginationAmount *paginationPage.value);
         }
       }
-      return '';
-    }
-    function getOperationName(id: string | undefined):string{
-      if(id && id != ''){
-        const currentOperation = operations.value().get(id);
-        if(currentOperation){
-          return currentOperation.title;
-        }
-      }
-      return '';
-    }
-    function deleteEntry(id: string | undefined){
-      if(id && id != ''){
-        addressbookState.dispatch('deleteEntryById', id);
-        addressbookEntryPage.value().clear();
-        updatePage(paginationAmount, paginationAmount *paginationPage.value);
-      }
-    }
 </script>
 

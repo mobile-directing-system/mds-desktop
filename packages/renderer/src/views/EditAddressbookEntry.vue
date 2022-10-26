@@ -309,6 +309,7 @@
   import FormInput from '../components/BasicComponents/FormInput.vue';
   import SearchableSelect from '../components/BasicComponents/SearchableSelect.vue';
 
+  // on component mount retrieve the channels of the addressbook entry being editited
   onMounted(() => {
     channelState.dispatch('retrieveChannels', selectedAddressbookEntryId as string);} );
 
@@ -352,11 +353,14 @@
   const selectedChannelID = ref('');
   const currentChannel = ref();
 
+  //get channel object for given channel id when the selected channel id changes
   watch(selectedChannelID, (curVal) => {
     if(curVal){
       currentChannel.value = channels.value().get(curVal);
     }
   });
+
+  //if a channel is being created with the type forward-to-user retrieve the object for the user id in the channel details
   if( newChannelTypeValue.value == 'forward-to-user'){
     watch(newChannelDetailsValue, (curVal) => {
       if(curVal) {
@@ -364,12 +368,20 @@
       }
     });
   }
+
+  //set the v-models if the selectedAddressbookEntry exists
   if(selectedAddressbookEntry) {
     updatedLabel.value = selectedAddressbookEntry.label;
     updatedDescription.value = selectedAddressbookEntry.description;
     updatedUser.value = selectedAddressbookEntry.user ? selectedAddressbookEntry.user : '';
     updatedOperation.value = selectedAddressbookEntry.operation ? selectedAddressbookEntry.operation : '';
   }
+
+  /**
+   * function to get the channel details depending of the channel type
+   * @param channel of which to get the details
+   * @returns a string with the details
+   */
   function getChannelDetail(channel: Channel):string{
     switch(channel.type){
       case 'email':
@@ -400,10 +412,18 @@
           return '';
     }
   }
+
+  /**
+   * function to handle showing & hiding of the channel modal
+   */
   async function toggleShowModal() {
       showModalNewChannel.value = false;        
       resetValues();
   }
+
+  /**
+   * function to create a new channel object based on v-models and call the set channel endpoint
+   */
   async function createNewChannel() {
       newChannelType = newChannelTypeValue.value as ChannelType;
       setChannelDetailsAccordinly();
@@ -425,6 +445,11 @@
           resetValues();
       }
   }
+  /**
+   * function to convert IterableIterators to arrays to be used with e.g. searchable select component
+   * @param iter IterableIterator to be converted to an array
+   * @returns array with the same elements as the IterableIterator
+   */
   function InterableIteratorToArray<T>(iter:IterableIterator<T>):T[] {
     const arr: T[] = [];
     // eslint-disable-next-line no-constant-condition
@@ -437,6 +462,9 @@
     }
     return arr;
   }
+  /**
+   * funciton to reset the values of the v-models for creating new channels
+   */
   function resetValues() {
     newChannelType = undefined;
     newChannelTypeValue.value = '';
@@ -446,6 +474,10 @@
     newChannelTimeout.value =0;
     newChannelMinImprotance.value = 0;
   }
+
+  /**
+   * function to set the channel details v-model correctly depinding on the type held in the channel type v-model
+   */
   function setChannelDetailsAccordinly(){
     if(newChannelDetailsValue.value != ''){
       switch(newChannelTypeValue.value){
@@ -473,6 +505,9 @@
       }
     }
   }
+  /**
+   * function to create edited addressbook entry object and call the update entries endpoint
+   */
   function editCurrentAddressbookEntry(){
     if(selectedAddressbookEntry){
       selectedAddressbookEntry.label = updatedLabel.value;
@@ -491,7 +526,9 @@
       toggleShowModalEntry();
     }
   }
-  
+  /**
+   * function to show & hide the addressbook entry modal
+   */
   function toggleShowModalEntry(){
     if(selectedAddressbookEntry) {
         updatedLabel.value = selectedAddressbookEntry.label;
