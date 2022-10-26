@@ -57,7 +57,14 @@ extlinks = {
   "vuex-smart-module-github": ("https://github.com/ktsn/vuex-smart-module", "vuex-smart-module Github"),
   "electron-intro": ("https://www.electronjs.org/docs/latest", "Electron Introduction"),
   "vuepress-homepage": ("https://vuepress.vuejs.org/", "VuePress"),
-  "tailwindcss-colors": ("https://tailwindcss.com/docs/customizing-colors", "TailwindCSS Customizing Colors")
+  "tailwindcss-colors": ("https://tailwindcss.com/docs/customizing-colors", "TailwindCSS Customizing Colors"),
+  "ws": ("https://github.com/websockets/ws", "ws"),
+  "playwright": ("https://playwright.dev/", "Playwright"),
+  "vitest": ("https://vitest.dev/", "Vitest"),
+  "playwright-docs": ("https://playwright.dev/docs/intro", "Playwright Docs"),
+  "playwright-api": ("https://playwright.dev/docs/api/class-playwright", "Playwright API"),
+  "vitest-docs": ("https://vitest.dev/guide/", "Vitest Docs"),
+  "vitest-api": ("https://vitest.dev/api/", "Vitest API")
 }
 
 # Add any paths that contain templates here, relative to this directory.
