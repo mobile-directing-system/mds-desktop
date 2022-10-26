@@ -331,12 +331,13 @@ test('Create user and check if creation in users table', async () => {
   expect(createUserLastNameInput, 'Can\'t find create user last name input').toBeTruthy();
   const createUserPasswordInput = await page.$('#create-user-password', {strict: true});
   expect(createUserPasswordInput, 'Can\'t find create user password input').toBeTruthy();
-  const createUserButton = await page.$('#create-user-button', {strict: true});
-  expect(createUserButton, 'Can\'t find create user button').toBeTruthy();
   await createUserUsernameInput?.fill(username);
   await createUserFirstNameInput?.fill(firstName);
   await createUserLastNameInput?.fill(lastName);
   await createUserPasswordInput?.fill(password);
+
+  const createUserButton = await page.$('#create-user-button', {strict: true});
+  expect(createUserButton, 'Can\'t find create user button').toBeTruthy();
   await createUserButton?.click();
 
   await leaveCreateUsersForm(page);
