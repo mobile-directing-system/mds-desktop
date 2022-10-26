@@ -44,7 +44,8 @@ For routing we use :vue-router-homepage:`vue-router <>`.
 For state management of the UI we use :vuex-homepage:`vuex <>` with the :vuex-smart-module-homepage:`vuex-smart-module <>` to have TypeScript support.
 We use :lodash-homepage:`Lodash <>` as a utitlity library in the frontend.
 The vue app the UI uses :vite-homepage:`Vite <>` for building and bundling.
-The communication with the backend is implemented using :axios-homepage:`Axios <>`.
+The HTTP communication with the backend is implemented using :axios-homepage:`Axios <>` and the Weboscket communication with :ws:`ws <>`.
+The UI tests are done with :playwright:`Playwright <>` and :vitest:`Vitest <>`.
 
 Architecture
 ------------
@@ -104,6 +105,8 @@ Directory Structure of the Project
                                 # part of the app. Is here for build compatibility purposes
                                 # with the production build. Must be the same as the
                                 # packages/renderer/tailwind.config.js file
+    testDataGenerators          # directory with the bash scripts for generating the test data
+                                # for the mocked backend
     tests/                      # Contains E2E tests
     vitest.config.js            # Configuration for the vitest testing framework
     docs/make.bat               # Build the sphinx documentation on windows (run make.bat)
@@ -156,6 +159,47 @@ Directory Structure of the Project
                                             # vuex store & vuex modules
     packages/renderer/src/views/            # contains the pages routed through with the
                                             # router
+
+
+Websocket Connection
+--------------------
+
+The Websocket connection uses baseURL from the config plus ``/ws/desktop-app`` to connect to the backend.
+The incoming messages are handled in the ``.on('message', async (e) => {...});`` callback.
+When new channels and payload types are added these need to be handled in this callback.
+At the end such handling should call an ipcHandler which uses the ``BrowserWindow.webContents.send()`` method to communicate with the vue-app using ipc.
+The Prelude package should then export a function that takes a callback and registers it using ``ipcRenderer.on();`` for the correct event.
+This exported function can then be used to e.g. pass a callback from a state constructor that calls action on the state itself to register new objects, invalidate or delete old ones, etc.
+
+Mocked Backend
+--------------
+
+To be able to UI test the app without a running server we need a mocked backend implementation.
+This is achieved by having conditional exports in ``packages/main/src/backend/index.ts``.
+When the mockedBackend flag is set in the config the mocked version of tge backend communication functions are exported if not the real ones are exported.
+If no mocked function exists for a backend communication function, then the real one is exported regardless of if the flag is set or not.
+To work correctly both the mocked and real function have the same signature.
+
+For implementing the mocked backend we used maps and arrays to hold default hardcoded data and store dynamic data which is passed to the mockedBackend during the operation of the app with the mockedBackend flag set.
+When implementing new mocket backend parts orient yourself at the MDS-Server documentation which describes how the functions should behave in case of errors or wrong data etc.
+For generating the default data data generator bash scripts are available in the ``testDataGenerators`` directory.
+
+UI Testing
+----------
+
+For UI-Testing we use :vitest:`Vitest <>` to write the tests themselves and execute the tests.
+playwright:`Playwright <>` is used for instrumentation of the Electron App, so that the tests can start and interact with the electron application.
+To familiarize yourself with Playwright and Vitest we suggest you take a look at the :playwright-docs:`Playwright Docs <>` and :playwright-api:`Playwright API <>`, as well as the :vitest-docs:`Vitest Docs <>` and :vitest-api:`Vitest API <>`.
+
+For writing tests orient yourself at the existing UI-Tests.
+To write a new UI-Tests you need to first get the first window of the electron app, so the login window.
+So you need to login first.
+Then write your navigation \& test code.
+Lastly finish by logging out.
+It is nice if this is explicitly done, but if you don't do it it will be done regardless after every test if the state is still logged in.
+
+All the UI-Tests are defined in `tests/e2e.spec.ts`. This is done as we need the tests to be executed consecutively as they need the GUI and the GUI can only be started once.
+It is currently not possible to start two instances of the app and Vitest runs different ``.spec.ts`` files concurrently.
 
 Minimal Implementation for new Service
 --------------------------------------

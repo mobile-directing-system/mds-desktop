@@ -227,7 +227,8 @@ For routing we use <a class="reference external" href="https://router.vuejs.org/
 For state management of the UI we use <a class="reference external" href="https://vuex.vuejs.org/">vuex</a> with the <a class="reference external" href="https://www.npmjs.com/package/vuex-smart-module">vuex-smart-module</a> to have TypeScript support.
 We use <a class="reference external" href="https://lodash.com/">Lodash</a> as a utitlity library in the frontend.
 The vue app the UI uses <a class="reference external" href="https://vitejs.dev/">Vite</a> for building and bundling.
-The communication with the backend is implemented using <a class="reference external" href="https://axios-http.com/">Axios</a>.</p>
+The HTTP communication with the backend is implemented using <a class="reference external" href="https://axios-http.com/">Axios</a> and the Weboscket communication with <a class="reference external" href="https://github.com/websockets/ws">ws</a>.
+The UI tests are done with <a class="reference external" href="https://playwright.dev/">Playwright</a> and <a class="reference external" href="https://vitest.dev/">Vitest</a>.</p>
 </section>
 <section id="architecture">
 <h3>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">#</a></h3>
@@ -278,6 +279,8 @@ tailwind.config.js          <span class="c1"># Main TailwindCSS configuration. C
                             <span class="c1"># part of the app. Is here for build compatibility purposes</span>
                             <span class="c1"># with the production build. Must be the same as the</span>
                             <span class="c1"># packages/renderer/tailwind.config.js file</span>
+testDataGenerators          <span class="c1"># directory with the bash scripts for generating the test data</span>
+                            <span class="c1"># for the mocked backend</span>
 tests/                      <span class="c1"># Contains E2E tests</span>
 vitest.config.js            <span class="c1"># Configuration for the vitest testing framework</span>
 docs/make.bat               <span class="c1"># Build the sphinx documentation on windows (run make.bat)</span>
@@ -332,6 +335,40 @@ packages/renderer/src/views/            <span class="c1"># contains the pages ro
                                         <span class="c1"># router</span>
 </pre></div>
 </div>
+</section>
+<section id="websocket-connection">
+<h3>Websocket Connection<a class="headerlink" href="#websocket-connection" title="Permalink to this headline">#</a></h3>
+<p>The Websocket connection uses baseURL from the config plus <code class="docutils literal notranslate"><span class="pre">/ws/desktop-app</span></code> to connect to the backend.
+The incoming messages are handled in the <code class="docutils literal notranslate"><span class="pre">.on('message',</span> <span class="pre">async</span> <span class="pre">(e)</span> <span class="pre">=&gt;</span> <span class="pre">{...});</span></code> callback.
+When new channels and payload types are added these need to be handled in this callback.
+At the end such handling should call an ipcHandler which uses the <code class="docutils literal notranslate"><span class="pre">BrowserWindow.webContents.send()</span></code> method to communicate with the vue-app using ipc.
+The Prelude package should then export a function that takes a callback and registers it using <code class="docutils literal notranslate"><span class="pre">ipcRenderer.on();</span></code> for the correct event.
+This exported function can then be used to e.g. pass a callback from a state constructor that calls action on the state itself to register new objects, invalidate or delete old ones, etc.</p>
+</section>
+<section id="mocked-backend">
+<h3>Mocked Backend<a class="headerlink" href="#mocked-backend" title="Permalink to this headline">#</a></h3>
+<p>To be able to UI test the app without a running server we need a mocked backend implementation.
+This is achieved by having conditional exports in <code class="docutils literal notranslate"><span class="pre">packages/main/src/backend/index.ts</span></code>.
+When the mockedBackend flag is set in the config the mocked version of tge backend communication functions are exported if not the real ones are exported.
+If no mocked function exists for a backend communication function, then the real one is exported regardless of if the flag is set or not.
+To work correctly both the mocked and real function have the same signature.</p>
+<p>For implementing the mocked backend we used maps and arrays to hold default hardcoded data and store dynamic data which is passed to the mockedBackend during the operation of the app with the mockedBackend flag set.
+When implementing new mocket backend parts orient yourself at the MDS-Server documentation which describes how the functions should behave in case of errors or wrong data etc.
+For generating the default data data generator bash scripts are available in the <code class="docutils literal notranslate"><span class="pre">testDataGenerators</span></code> directory.</p>
+</section>
+<section id="ui-testing">
+<h3>UI Testing<a class="headerlink" href="#ui-testing" title="Permalink to this headline">#</a></h3>
+<p>For UI-Testing we use <a class="reference external" href="https://vitest.dev/">Vitest</a> to write the tests themselves and execute the tests.
+playwright:<cite>Playwright &lt;&gt;</cite> is used for instrumentation of the Electron App, so that the tests can start and interact with the electron application.
+To familiarize yourself with Playwright and Vitest we suggest you take a look at the <a class="reference external" href="https://playwright.dev/docs/intro">Playwright Docs</a> and <a class="reference external" href="https://playwright.dev/docs/api/class-playwright">Playwright API</a>, as well as the <a class="reference external" href="https://vitest.dev/guide/">Vitest Docs</a> and <a class="reference external" href="https://vitest.dev/api/">Vitest API</a>.</p>
+<p>For writing tests orient yourself at the existing UI-Tests.
+To write a new UI-Tests you need to first get the first window of the electron app, so the login window.
+So you need to login first.
+Then write your navigation &amp; test code.
+Lastly finish by logging out.
+It is nice if this is explicitly done, but if you don’t do it it will be done regardless after every test if the state is still logged in.</p>
+<p>All the UI-Tests are defined in <cite>tests/e2e.spec.ts</cite>. This is done as we need the tests to be executed consecutively as they need the GUI and the GUI can only be started once.
+It is currently not possible to start two instances of the app and Vitest runs different <code class="docutils literal notranslate"><span class="pre">.spec.ts</span></code> files concurrently.</p>
 </section>
 <section id="minimal-implementation-for-new-service">
 <h3>Minimal Implementation for new Service<a class="headerlink" href="#minimal-implementation-for-new-service" title="Permalink to this headline">#</a></h3>
@@ -475,6 +512,9 @@ The colors are appended to those designators using a <em>-</em>, so when the pri
 <li><a class="reference internal" href="#technologies">Technologies</a></li>
 <li><a class="reference internal" href="#architecture">Architecture</a></li>
 <li><a class="reference internal" href="#directory-structure-of-the-project">Directory Structure of the Project</a></li>
+<li><a class="reference internal" href="#websocket-connection">Websocket Connection</a></li>
+<li><a class="reference internal" href="#mocked-backend">Mocked Backend</a></li>
+<li><a class="reference internal" href="#ui-testing">UI Testing</a></li>
 <li><a class="reference internal" href="#minimal-implementation-for-new-service">Minimal Implementation for new Service</a></li>
 </ul>
 </li>
