@@ -3,7 +3,12 @@ import { addInAppNotification } from '../ipcHandlers';
 import type { InAppNotification } from '../../../types';
 
 export function setupWebsocketListeners() {
+  backendInstance.websocket?.on('ping', async () => {
+    console.log('ping');
+  });
+
   backendInstance.websocket?.on('message', async (e) => {
+    console.log('message received');
     const data = JSON.parse(e.toString());
     if(data.channel === 'in-app-notifier') {
       const notification = data.payload as InAppNotification;
