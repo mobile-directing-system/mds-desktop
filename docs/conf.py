@@ -35,36 +35,6 @@ extensions = [
 #Add external URLs
 
 extlinks = {
-  "vue-homepage": ("https://vuejs.org/", "Vue.js"),
-  "vite-homepage": ("https://vitejs.dev/", "Vite"),
-  "electron-homepage": ("https://www.electronjs.org/", "Electron"),
-  "vite-electron-builder-homepage": ("https://github.com/cawa-93/vite-electron-builder", "vite-electron-builder"),
-  "node-homepage": ("https://nodejs.org/en/", "Node.js"),
-  "npm-homepage": ("https://www.npmjs.com/", "npm"),
-  "vscode-homepage": ("https://code.visualstudio.com/", "VSCode"),
-  "node-installer": ("https://nodejs.org/en/download/", "Node.js Installer"),
-  "node-pm-installer": ("https://nodejs.org/en/download/package-manager/", "package manager"),
-  "tailwind-homepage": ("https://tailwindcss.com/", "tailwindcss"),
-  "vuex-homepage": ("https://vuex.vuejs.org/", "vuex"),
-  "vuex-smart-module-homepage": ("https://www.npmjs.com/package/vuex-smart-module", "vuex-smart-module"),
-  "vue-router-homepage": ("https://router.vuejs.org/", "vue-router"),
-  "flowbite-homepage": ("https://flowbite.com/", "Flowbite"),
-  "axios-homepage": ("https://axios-http.com/", "Axios"),
-  "lodash-homepage": ("https://lodash.com/", "Lodash"),
-  "vue-doc": ("https://vuejs.org/guide/introduction.html", "Vue.js Documentation"),
-  "vue-router-guide": ("https://router.vuejs.org/guide/", "vue-router Guide"),
-  "vuex-guide": ("https://vuex.vuejs.org/guide/", "vuex Guide"),
-  "vuex-smart-module-github": ("https://github.com/ktsn/vuex-smart-module", "vuex-smart-module Github"),
-  "electron-intro": ("https://www.electronjs.org/docs/latest", "Electron Introduction"),
-  "vuepress-homepage": ("https://vuepress.vuejs.org/", "VuePress"),
-  "tailwindcss-colors": ("https://tailwindcss.com/docs/customizing-colors", "TailwindCSS Customizing Colors"),
-  "ws": ("https://github.com/websockets/ws", "ws"),
-  "playwright": ("https://playwright.dev/", "Playwright"),
-  "vitest": ("https://vitest.dev/", "Vitest"),
-  "playwright-docs": ("https://playwright.dev/docs/intro", "Playwright Docs"),
-  "playwright-api": ("https://playwright.dev/docs/api/class-playwright", "Playwright API"),
-  "vitest-docs": ("https://vitest.dev/guide/", "Vitest Docs"),
-  "vitest-api": ("https://vitest.dev/api/", "Vitest API")
 }
 
 # Add any paths that contain templates here, relative to this directory.
