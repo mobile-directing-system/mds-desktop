@@ -75,7 +75,7 @@ export class OperationService {
       end: create.end,
       is_archived:create.is_archived,
     };
-    return this.netService.postJSON<NetCreated>('operations', body, {}).pipe(
+    return this.netService.postJSON<NetCreated>('/operations', body, {}).pipe(
       map((res: NetCreated): Operation => ({
         id: res.id,
         title: res.title,
@@ -109,7 +109,7 @@ export class OperationService {
       end: update.end,
       is_archived:update.is_archived,
     };
-    return this.netService.putJSON(urlJoin('operations', update.id), body, {});
+    return this.netService.putJSON(urlJoin('/operations', update.id), body, {});
   }
 
   /**
@@ -126,7 +126,7 @@ export class OperationService {
       is_archived:boolean;
     }
 
-    return this.netService.get<NetOperation>(urlJoin('operations', operationId),{}).pipe(
+    return this.netService.get<NetOperation>(urlJoin('/operations', operationId),{}).pipe(
       map((res: NetOperation): Operation => ({
         id: res.id,
         title: res.title,
@@ -168,7 +168,7 @@ export class OperationService {
           throw new MDSError(MDSErrorCode.AppError, 'unknown operation sort', {by: by});
       }
     });
-    return this.netService.get<NetPaginated<NetEntry>>('operations', nParams).pipe(
+    return this.netService.get<NetPaginated<NetEntry>>('/operations', nParams).pipe(
       map( (res: NetPaginated<NetEntry>): Paginated<Operation> => {
         return  paginatedFromNet(res, (nEntry: NetEntry): Operation => ({
           id: nEntry.id,
@@ -199,7 +199,7 @@ export class OperationService {
     const netParams = {
       ...netSearchParams(params)
     };
-    return this.netService.get<NetSearchResult<NetEntry>>(urlJoin('operations', 'search'), netParams).pipe(
+    return this.netService.get<NetSearchResult<NetEntry>>(urlJoin('/operations', 'search'), netParams).pipe(
       map((res: NetSearchResult<NetEntry>): SearchResult<Operation> => {
         return  searchResultFromNet(res, (nEntry: NetEntry): Operation => ({
           id: nEntry.id,
@@ -219,7 +219,7 @@ export class OperationService {
    * @param memberIds Ids of the users that shall be members.
    */
   updateOperationMembers(operationId: string, memberIds :string[]): Observable<void> {
-    return this.netService.putJSON(urlJoin('operations', operationId, 'members'), memberIds, {});
+    return this.netService.putJSON(urlJoin('/operations', operationId, 'members'), memberIds, {});
   }
 
   /**
@@ -249,7 +249,7 @@ export class OperationService {
           throw new MDSError(MDSErrorCode.AppError, 'unknown member sort', {by: by});
       }
     });
-    return this.netService.get<NetPaginated<NetEntry>>(urlJoin('operations', operationId, 'members'), nParams).pipe(
+    return this.netService.get<NetPaginated<NetEntry>>(urlJoin('/operations', operationId, 'members'), nParams).pipe(
       map((res: NetPaginated<NetEntry>): Paginated<User> => {
         return paginatedFromNet(res, (nEntry: NetEntry): User => ({
           id: nEntry.id,
