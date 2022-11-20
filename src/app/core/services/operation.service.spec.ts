@@ -42,16 +42,16 @@ describe('OperationService', () => {
       id: 'strange things',
       title: 'Cyber',
       description: 'bonk',
-      start: new Date(),
-      end: new Date(new Date().getDate() +1),
+      start: create.start,
+      end: create.end,
       is_archived: false,
     };
     const expectCreated: Operation = {
       id: 'strange things',
       title: 'Cyber',
       description: 'bonk',
-      start: new Date(),
-      end: new Date(new Date().getDate() +1),
+      start: create.start,
+      end: create.end,
       is_archived: false,
     };
 
@@ -65,8 +65,8 @@ describe('OperationService', () => {
       expect(postSpy).withContext('should perform correct next call').toHaveBeenCalledOnceWith('/operations', {
         title: 'Honky',
         description: 'Tonky',
-        start: new Date(),
-        end: new Date(new Date().getDate() +1),
+        start: create.start,
+        end: create.end,
         is_archived: false,
       }, {});
       expect(cbSpy ).withContext('should call next with correct value').toHaveBeenCalledOnceWith(expectCreated);
@@ -142,8 +142,8 @@ describe('OperationService', () => {
       id: operationId,
       title: 'Golden Eye',
       description: 'James Bond',
-      start: new Date(),
-      end: new Date(new Date().getDate() +1),
+      start:  netOperation.start,
+      end: netOperation.end,
       is_archived: false,
     };
 
@@ -208,16 +208,16 @@ describe('OperationService', () => {
           id: 'randoMcRandom',
           title: 'From Russia with love',
           description: 'James Bond',
-          start: new Date(),
-          end: new Date(new Date().getDate() +1),
+          start: netOperations[0].start,
+          end: netOperations[0].end,
           is_archived: false,
         },
         {
           id: 'evenMoreRandom',
           title: 'Live and let die',
           description: 'James Bond',
-          start: new Date(),
-          end: new Date(new Date().getDate() +1),
+          start: netOperations[1].start,
+          end: netOperations[1].end,
           is_archived: false,
         },
       ]));
@@ -294,16 +294,16 @@ describe('OperationService', () => {
           id: 'randoMcRandom',
           title: 'Goldfinger',
           description: 'James Bond',
-          start: new Date(),
-          end: new Date(new Date().getDate() + 1),
+          start: netOperations[0].start,
+          end: netOperations[0].end,
           is_archived: false,
         },
         {
           id: 'evenMoreRandom',
           title: 'Thunderball',
           description: 'James Bond',
-          start: new Date(),
-          end: new Date(new Date().getDate() + 1),
+          start: netOperations[1].start,
+          end: netOperations[1].end,
           is_archived: false,
         },
       ]));
