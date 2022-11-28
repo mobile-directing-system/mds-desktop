@@ -236,7 +236,7 @@ describe('OperationService', () => {
         spectator.service.getOperations(params).subscribe();
         tick();
 
-        expect(getSpy).withContext(`should map ${ appSort } to ${ netSort }`).toHaveBeenCalledOnceWith('/operations/search', testGenNetPaginationParams(params, netSort));
+        expect(getSpy).withContext(`should map ${ appSort } to ${ netSort }`).toHaveBeenCalledOnceWith('/operations', testGenNetPaginationParams(params, netSort));
       }));
     });
 
