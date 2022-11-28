@@ -1,0 +1,11 @@
+@use '@angular/material' as mat;
+@import 'src/styles';
+
+.login-window {
+  padding: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}

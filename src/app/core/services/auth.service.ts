@@ -3,6 +3,7 @@ import { NetService } from './net.service';
 import { finalize, Observable, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MDSError, MDSErrorCode } from '../util/errors';
+import { LocalStorageService } from './local-storage.service';
 
 /**
  * The user token returned when logging in.
@@ -26,7 +27,18 @@ export class AuthService {
    */
   private loggedInUserId?: string;
 
-  constructor(private netService: NetService) {
+  constructor(private netService: NetService, private lsService: LocalStorageService) {
+    // Assure server url set as otherwise we do not have anything to do.
+    if (lsService.getItem(LocalStorageService.TokenServerURL) === null) {
+      return;
+    }
+    // Check auth and redirect to login-page if not ok.
+    const authToken = lsService.getItem(LocalStorageService.TokenAuthToken);
+    const loggedInUserId = lsService.getItem(LocalStorageService.TokenLoggedInUserId);
+    if (authToken !== null && loggedInUserId !== null) {
+      this.applyAuthToken(authToken);
+      this.loggedInUserId = loggedInUserId;
+    }
   }
 
   /**
@@ -36,7 +48,7 @@ export class AuthService {
    */
   login(username: string, pass: string): Observable<boolean> {
     if (!!this.loggedInUserId) {
-      throw new MDSError(MDSErrorCode.AppError, 'user already logged in');
+      throw new MDSError(MDSErrorCode.AppError, 'user already logged in', { loggedInUserId: this.loggedInUserId });
     }
     return this.netService.postJSON<NetUserToken>('/login', {
       username: username,
@@ -45,14 +57,23 @@ export class AuthService {
       // Set user id.
       tap((token: NetUserToken) => {
         this.loggedInUserId = token.user_id;
+        this.lsService.setItem(LocalStorageService.TokenLoggedInUserId, token.user_id);
+        this.lsService.setItem(LocalStorageService.TokenAuthToken, token.access_token);
       }),
       // Set Authorization-header in net-service.
-      tap((token: NetUserToken) => {
-        const header = `${ token.token_type } ${ token.access_token }`;
-        this.netService.requestHeaders = this.netService.requestHeaders.set('Authorization', header);
-      }),
+      tap((token: NetUserToken) => (this.applyAuthToken(token.access_token))),
       map((_) => true),
     );
+  }
+
+  /**
+   * Applies the given access token to the net service.
+   * @param token The token.
+   * @private
+   */
+  private applyAuthToken(token: string): void {
+    const header = `Bearer ${ token }`;
+    this.netService.requestHeaders = this.netService.requestHeaders.set('Authorization', header);
   }
 
   /**
@@ -65,13 +86,22 @@ export class AuthService {
     return this.netService.post<void>('/logout', {}).pipe(
       // Delete Authorization-header form net-service.
       finalize(() => {
-        this.loggedInUserId = undefined
+        this.loggedInUserId = undefined;
         this.netService.requestHeaders = this.netService.requestHeaders.delete('Authorization');
+        this.lsService.removeItem(LocalStorageService.TokenAuthToken);
+        this.lsService.removeItem(LocalStorageService.TokenLoggedInUserId);
       }),
     );
   }
 
   loggedInUser(): string | undefined {
     return this.loggedInUserId;
+  }
+
+  clearLogin() {
+    if (!!this.loggedInUserId) {
+      this.logout();
+    }
+
   }
 }

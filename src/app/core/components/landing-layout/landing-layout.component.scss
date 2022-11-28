@@ -1,0 +1,39 @@
+@import 'src/styles';
+
+.view {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  background: rgba($dark-primary-text, 0.1);
+}
+
+.logo {
+  font-size: 4rem;
+}
+
+.outlet {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.change-server-url {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  text-align: center;
+  padding: .2rem;
+
+  a {
+    color: $dark-disabled-text;
+    text-decoration: none;
+  }
+
+  .hide {
+    display: none
+  }
+}

@@ -28,7 +28,7 @@ describe('NetService', () => {
 
   beforeEach(() => {
     spectator = createService();
-    spectator.service.baseUrl = url;
+    spectator.service.setBaseUrl(url);
   });
 
   it('should be created', () => {
