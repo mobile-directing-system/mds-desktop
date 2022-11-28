@@ -1,36 +1,39 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
-  <file id="ngi18n" original="ng.template">
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US" trgLang="de">
+  <file original="ng.template" id="ngi18n">
     <unit id="8943841646314786602">
       <notes>
         <note category="location">src/app/core/components/landing-layout/landing-layout.component.html:11</note>
       </notes>
-      <segment>
+      <segment state="initial">
         <source>Change server url</source>
+        <target>Server URL ändern</target>
       </segment>
     </unit>
     <unit id="5248717555542428023">
       <notes>
         <note category="location">src/app/features/auth/login-view/login-view.component.html:5</note>
       </notes>
-      <segment>
+      <segment state="initial">
         <source>Username</source>
+        <target>Benutzername</target>
       </segment>
     </unit>
     <unit id="1431416938026210429">
       <notes>
         <note category="location">src/app/features/auth/login-view/login-view.component.html:9</note>
       </notes>
-      <segment>
+      <segment state="initial">
         <source>Password</source>
+        <target>Passwort</target>
       </segment>
     </unit>
     <unit id="1908285951500318953">
       <notes>
         <note category="location">src/app/features/auth/login-view/login-view.component.html:13,14</note>
       </notes>
-      <segment>
+      <segment state="initial">
         <source>Login</source>
+        <target>Login</target>
       </segment>
     </unit>
     <unit id="612058855560391284">
@@ -38,24 +41,27 @@
         <note category="location">src/app/features/auth/login-view/login-view.component.ts:67</note>
         <note category="location">src/app/features/auth/login-view/login-view.component.ts:74</note>
       </notes>
-      <segment>
+      <segment state="initial">
         <source>Login failed.</source>
+        <target>Login fehlgeschlagen.</target>
       </segment>
     </unit>
     <unit id="4630695809547785290">
       <notes>
         <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:8,10</note>
       </notes>
-      <segment>
+      <segment state="initial">
         <source>Server URL required.</source>
+        <target>Server URL erforderlich.</target>
       </segment>
     </unit>
     <unit id="5554751421202024806">
       <notes>
         <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:11,13</note>
       </notes>
-      <segment>
+      <segment state="initial">
         <source>Invalid server URL.</source>
+        <target>Ungültige Server URL.</target>
       </segment>
     </unit>
     <unit id="5782776032868892761">
@@ -63,32 +69,36 @@
         <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.ts:40</note>
         <note category="description">notify that server url was set</note>
       </notes>
-      <segment>
+      <segment state="initial">
         <source>Server url set to <ph id="0" equiv="new_server_url" disp="newServerURL"/>.</source>
-      </segment>
-    </unit>
-    <unit id="3931485016991271704">
-      <notes>
-        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:6</note>
-      </notes>
-      <segment>
-        <source>URL for accessing the server, e.g. http://mds.my-server.net/server</source>
-      </segment>
-    </unit>
-    <unit id="lbApply">
-      <notes>
-        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:15</note>
-      </notes>
-      <segment>
-        <source>Apply</source>
+        <target>Server URL gesetzt auf <ph id="0" equiv="new_server_url" disp="newServerURL"/>.</target>
       </segment>
     </unit>
     <unit id="5975532227999286857">
       <notes>
         <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:5</note>
       </notes>
-      <segment>
+      <segment state="initial">
         <source>Server URL</source>
+        <target>Server URL</target>
+      </segment>
+    </unit>
+    <unit id="3931485016991271704">
+      <notes>
+        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:6</note>
+      </notes>
+      <segment state="initial">
+        <source>URL for accessing the server, e.g. http://mds.my-server.net/server</source>
+        <target>URL für Serverkommunikation, z.B. http://mds.my-server.net/server</target>
+      </segment>
+    </unit>
+    <unit id="lbApply">
+      <notes>
+        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:15</note>
+      </notes>
+      <segment state="initial">
+        <source>Apply</source>
+        <target>Anwenden</target>
       </segment>
     </unit>
   </file>

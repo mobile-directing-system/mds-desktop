@@ -4,11 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:de": "ng serve --configuration production",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "ng test --code-coverage --watch false --browsers=ChromeHeadlessCustom",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "i18n:extract": "ng extract-i18n"
   },
   "private": true,
   "dependencies": {
