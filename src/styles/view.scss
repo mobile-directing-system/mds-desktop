@@ -1,0 +1,12 @@
+:host {
+  flex-grow: 1;
+}
+
+.view {
+  padding: 10px;
+}
+
+.view-full {
+  @extend .view;
+  padding: 16px;
+}

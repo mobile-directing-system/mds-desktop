@@ -1,0 +1,11 @@
+@use '@angular/material' as mat;
+@import 'src/styles';
+
+.url-window {
+  width: 20rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}

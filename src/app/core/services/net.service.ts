@@ -5,6 +5,8 @@ import { catchError, map } from 'rxjs/operators';
 import { MDSError, MDSErrorCode } from '../util/errors';
 import { clean, createStoreRequestErrorFromHttp } from '../util/net';
 import { StoreRequestError, StoreRequestMethod } from '../util/store';
+import { Router } from '@angular/router';
+import { LocalStorageService } from './local-storage.service';
 
 /**
  * Used as a wrapper for {@link HttpClient} in order to provide centralized error handling, resource access
@@ -14,14 +16,32 @@ import { StoreRequestError, StoreRequestMethod } from '../util/store';
   providedIn: 'root',
 })
 export class NetService {
-  baseUrl?: string;
+  private baseUrl?: string;
   requestHeaders: HttpHeaders = new (HttpHeaders);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private lsService: LocalStorageService, private router: Router) {
+    const baseUrl = this.lsService.getItem(LocalStorageService.TokenServerURL);
+    if (baseUrl !== null) {
+      this.baseUrl = baseUrl;
+    }
   }
 
-  private static handleError(error: HttpErrorResponse, method: StoreRequestMethod, message?: string): StoreRequestError {
-    return createStoreRequestErrorFromHttp(error, method, message);
+  /**
+   * Sets the base url to the given one.
+   * @param url The new base url.
+   */
+  setBaseUrl(url: string): void {
+    this.baseUrl = url;
+    this.lsService.setItem(LocalStorageService.TokenServerURL, url);
+  }
+
+  private handleError(error: HttpErrorResponse, method: StoreRequestMethod, message?: string): StoreRequestError {
+    const e = createStoreRequestErrorFromHttp(error, method, message);
+    // Navigate to login page if unauthorized.
+    if (e.code === MDSErrorCode.Unauthorized) {
+      this.router.navigate(['/login']).then();
+    }
+    return e;
   }
 
   /**
@@ -52,6 +72,10 @@ export class NetService {
     };
   }
 
+  getBaseURL(): string | undefined {
+    return this.baseUrl;
+  }
+
   /**
    * Builds the url to use for performing http requests.
    * @param path The url path.
@@ -70,7 +94,7 @@ export class NetService {
       responseType: 'text',
       ...this.buildRequestOptions(params, null),
     }).pipe(
-      catchError((err: HttpErrorResponse) => throwError(() => NetService.handleError(err, StoreRequestMethod.Delete))),
+      catchError((err: HttpErrorResponse) => throwError(() => this.handleError(err, StoreRequestMethod.Delete))),
       map(() => void 0),
     );
   }
@@ -80,7 +104,7 @@ export class NetService {
       responseType: 'json',
       ...this.buildRequestOptions(params, null),
     }).pipe(
-      catchError((err: HttpErrorResponse) => throwError(() => NetService.handleError(err, StoreRequestMethod.Get))),
+      catchError((err: HttpErrorResponse) => throwError(() => this.handleError(err, StoreRequestMethod.Get))),
     );
   }
 
@@ -89,7 +113,7 @@ export class NetService {
       responseType: 'json',
       ...this.buildRequestOptions(params, 'application/json'),
     }).pipe(
-      catchError((err: HttpErrorResponse) => throwError(() => NetService.handleError(err, StoreRequestMethod.Post))),
+      catchError((err: HttpErrorResponse) => throwError(() => this.handleError(err, StoreRequestMethod.Post))),
     );
   }
 
@@ -98,7 +122,7 @@ export class NetService {
       responseType: 'json',
       ...this.buildRequestOptions(params, null),
     }).pipe(
-      catchError((err: HttpErrorResponse) => throwError(() => NetService.handleError(err, StoreRequestMethod.Post))),
+      catchError((err: HttpErrorResponse) => throwError(() => this.handleError(err, StoreRequestMethod.Post))),
     );
   }
 
@@ -107,7 +131,7 @@ export class NetService {
       ...this.buildRequestOptions(params, 'application/json'),
     }).pipe(
       catchError((err: HttpErrorResponse) => {
-        return throwError(() => NetService.handleError(err, StoreRequestMethod.Put));
+        return throwError(() => this.handleError(err, StoreRequestMethod.Put));
       }),
       map(() => void 0),
     );
