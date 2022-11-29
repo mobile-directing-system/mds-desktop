@@ -44,3 +44,10 @@ jobs:
         run: npm ci
       - name: Test
         run: npm run test:ci
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          env_vars: OS
+          fail_ci_if_error: true
+          files: coverage/mds-desktop/cobertura-coverage.xml
+          verbose: true
