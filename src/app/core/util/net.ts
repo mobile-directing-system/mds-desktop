@@ -173,7 +173,7 @@ export function netPaginationParams<T>(sParams: PaginationParams<T>, mapOrderBy:
   return {
     limit: sParams.limit,
     offset: sParams.offset,
-    order_by: !!sParams.orderBy ? mapOrderBy(sParams.orderBy) : undefined,
+    order_by: sParams.orderBy !== undefined ? mapOrderBy(sParams.orderBy) : undefined,
     order_dir: netOrderDir,
   };
 }
