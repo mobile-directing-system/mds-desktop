@@ -1,0 +1,8 @@
+<mat-drawer-container class="drawer-container">
+  <mat-drawer opened mode="side" *ngIf="sideNav" class="side-nav">
+    <ng-container *ngTemplateOutlet="sideNav"></ng-container>
+  </mat-drawer>
+  <mat-drawer-content class="drawer-content">
+    <ng-content></ng-content>
+  </mat-drawer-content>
+</mat-drawer-container>

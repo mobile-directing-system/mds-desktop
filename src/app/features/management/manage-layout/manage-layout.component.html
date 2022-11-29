@@ -1,0 +1,9 @@
+<app-view [sideNav]="sideNav">
+  <ng-template #sideNav>
+    <app-side-nav-title>Management</app-side-nav-title>
+    <app-side-nav-item icon="person" [link]="['/manage', 'users']">Users</app-side-nav-item>
+    <app-side-nav-item icon="group" [link]="['/manage', 'groups']">Groups</app-side-nav-item>
+    <app-side-nav-item icon="calendar_month" [link]="['/manage', 'operations']">Operations</app-side-nav-item>
+  </ng-template>
+  <router-outlet></router-outlet>
+</app-view>
