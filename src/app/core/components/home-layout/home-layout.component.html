@@ -1,1 +1,14 @@
-<p>home-layout works!</p>
+<div class="c">
+  <mat-toolbar>
+    <app-logo class="logo"></app-logo>
+    <div class="spacer"></div>
+    <div [routerLink]="['/mailbox']" class="menu-item selectable" routerLinkActive="active">Mailbox</div>
+    <div [routerLink]="['/intelligence']" class="menu-item selectable" routerLinkActive="active">Intelligence</div>
+    <div [routerLink]="['/resources']" class="menu-item selectable" routerLinkActive="active">Resources</div>
+    <div [routerLink]="['/logistics']" class="menu-item selectable" routerLinkActive="active">Logistics</div>
+    <app-profile class="profile"></app-profile>
+  </mat-toolbar>
+  <div class="outlet">
+    <router-outlet></router-outlet>
+  </div>
+</div>

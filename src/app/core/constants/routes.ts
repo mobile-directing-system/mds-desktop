@@ -3,6 +3,18 @@ import { LoginView } from '../../features/auth/login-view/login-view.component';
 import { LandingLayoutComponent } from '../components/landing-layout/landing-layout.component';
 import { SetServerURLView } from '../../features/auth/set-server-url-view/set-server-url-view.component';
 import { HomeLayoutComponent } from '../components/home-layout/home-layout.component';
+import { ManageLayoutComponent } from '../../features/management/manage-layout/manage-layout.component';
+import { UserManagementView } from '../../features/management/user-management-view/user-management-view.component';
+import { MailboxLayoutComponent } from '../../features/mailbox/mailbox-layout/mailbox-layout.component';
+import {
+  IntelligenceLayoutComponent,
+} from '../../features/intelligence/intelligence-layout/intelligence-layout.component';
+import { ResourcesLayoutComponent } from '../../features/resources/resources-layout/resources-layout.component';
+import { LogisticsLayoutComponent } from '../../features/logistics/logistics-layout/logistics-layout.component';
+import { GroupManagementView } from '../../features/management/group-management-view/group-management-view.component';
+import {
+  OperationManagementView,
+} from '../../features/management/operation-management-view/operation-management-view.component';
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -11,6 +23,42 @@ export const AppRoutes: Routes = [
   {
     path: '',
     component: HomeLayoutComponent,
+    children: [
+      {
+        path: 'manage',
+        component: ManageLayoutComponent,
+        children: [
+          {
+            path: 'users',
+            component: UserManagementView,
+          },
+          {
+            path: 'groups',
+            component: GroupManagementView,
+          },
+          {
+            path: 'operations',
+            component: OperationManagementView,
+          },
+        ],
+      },
+      {
+        path: 'mailbox',
+        component: MailboxLayoutComponent,
+      },
+      {
+        path: 'intelligence',
+        component: IntelligenceLayoutComponent,
+      },
+      {
+        path: 'resources',
+        component: ResourcesLayoutComponent,
+      },
+      {
+        path: 'logistics',
+        component: LogisticsLayoutComponent,
+      },
+    ],
   },
   {
     path: '',

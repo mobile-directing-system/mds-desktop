@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NetService } from './net.service';
-import { finalize, Observable, tap } from 'rxjs';
+import { BehaviorSubject, finalize, Observable, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MDSError, MDSErrorCode } from '../util/errors';
 import { LocalStorageService } from './local-storage.service';
@@ -22,10 +22,11 @@ interface NetUserToken {
 })
 export class AuthService {
   /**
-   * The id of the user when logged in.
+   * The id of the user when logged in. Set via {@link setLoggedInUserId}.
    * @private
    */
   private loggedInUserId?: string;
+  private _userChange = new BehaviorSubject<string | undefined>(undefined);
 
   constructor(private netService: NetService, private lsService: LocalStorageService) {
     // Assure server url set as otherwise we do not have anything to do.
@@ -37,8 +38,13 @@ export class AuthService {
     const loggedInUserId = lsService.getItem(LocalStorageService.TokenLoggedInUserId);
     if (authToken !== null && loggedInUserId !== null) {
       this.applyAuthToken(authToken);
-      this.loggedInUserId = loggedInUserId;
+      this.setLoggedInUserId(loggedInUserId);
     }
+  }
+
+  private setLoggedInUserId(newId: string | undefined): void {
+    this.loggedInUserId = newId;
+    this._userChange.next(newId);
   }
 
   /**
@@ -56,12 +62,13 @@ export class AuthService {
     }, {}).pipe(
       // Set user id.
       tap((token: NetUserToken) => {
-        this.loggedInUserId = token.user_id;
+        this.setLoggedInUserId(token.user_id);
         this.lsService.setItem(LocalStorageService.TokenLoggedInUserId, token.user_id);
         this.lsService.setItem(LocalStorageService.TokenAuthToken, token.access_token);
       }),
       // Set Authorization-header in net-service.
       tap((token: NetUserToken) => (this.applyAuthToken(token.access_token))),
+      // Notify of new logged in user.
       map((_) => true),
     );
   }
@@ -86,7 +93,7 @@ export class AuthService {
     return this.netService.post<void>('/logout', {}).pipe(
       // Delete Authorization-header form net-service.
       finalize(() => {
-        this.loggedInUserId = undefined;
+        this.setLoggedInUserId(undefined);
         this.netService.requestHeaders = this.netService.requestHeaders.delete('Authorization');
         this.lsService.removeItem(LocalStorageService.TokenAuthToken);
         this.lsService.removeItem(LocalStorageService.TokenLoggedInUserId);
@@ -98,10 +105,16 @@ export class AuthService {
     return this.loggedInUserId;
   }
 
+  /**
+   * Returns an observable that receives the user id when the logged-in user changes.
+   */
+  userChange(): Observable<string | undefined> {
+    return this._userChange.asObservable();
+  }
+
   clearLogin() {
     if (!!this.loggedInUserId) {
       this.logout();
     }
-
   }
 }

@@ -1,0 +1,11 @@
+<div class="profile" [matMenuTriggerFor]="profileMenu">
+  <mat-icon>account_circle</mat-icon>
+</div>
+
+<mat-menu #profileMenu="matMenu" xPosition="after">
+  <ng-template matMenuContent>
+    <span mat-menu-item disabled>{{assembleProfileName() ?? 'User not logged in.'}}</span>
+    <button mat-menu-item [routerLink]="['/manage']">MDS Management</button>
+    <button mat-menu-item (click)="logout()" i18n>Log out</button>
+  </ng-template>
+</mat-menu>
