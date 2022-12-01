@@ -1,5 +1,8 @@
 name: Angular
-on: [ pull_request, push ]
+on:
+  push:
+  pull_request:
+    types: [ opened, synchronize, reopened, locked ]
 
 jobs:
   build:
