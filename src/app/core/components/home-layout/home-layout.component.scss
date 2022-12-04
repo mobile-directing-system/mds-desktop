@@ -1,0 +1,44 @@
+@import 'src/styles/corporate';
+
+.c {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: $bg;
+}
+
+.logo {
+  font-size: .2rem;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.menu-item {
+  margin: .5rem;
+  padding: .05rem .5rem;
+  border-radius: 4px;
+
+  &.selectable {
+    color: $dark-disabled-text;
+    cursor: pointer;
+
+    &:hover {
+      color: $dark-secondary-text;
+    }
+
+    &.active {
+      color: lighten($dark-primary-text, 10%);
+      background-color: lighten($dark-disabled-text, 80%);
+    }
+  }
+}
+
+.profile {
+  margin-left: 2rem;
+}
+
+.outlet {
+  flex: 1;
+}

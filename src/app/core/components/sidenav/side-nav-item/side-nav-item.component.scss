@@ -1,0 +1,26 @@
+@import 'src/styles/corporate';
+
+.item {
+  width: available;
+  padding: .4em 2em;
+  display: flex;
+  gap: .8em;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lighten($dark-primary-text, 91%);
+  }
+
+  &.active {
+    background-color: lighten($dark-primary-text, 87%);
+  }
+}
+
+h3 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+mat-icon {
+  vertical-align: center;
+}

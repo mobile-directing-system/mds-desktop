@@ -1,0 +1,18 @@
+@import 'src/styles/corporate';
+@import 'src/styles/view';
+
+.drawer-container {
+  height: 100%;
+  width: 100vw;
+}
+
+.drawer-content {
+  @extend .view;
+  min-width: 75%;
+}
+
+.side-nav {
+  background-color: lighten($dark-primary-text, 94%);
+  max-width: 35%;
+  width: 15rem;
+}

@@ -9,6 +9,10 @@ import { HomeLayoutComponent } from './components/home-layout/home-layout.compon
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { AngularMaterialModule } from './util/angular-material.module';
 import { ShowLoadingOverlayDirective } from './directives/show-loading-overlay.directive';
+import { ViewComponent } from './components/view/view.component';
+import { SideNavItemComponent } from './components/sidenav/side-nav-item/side-nav-item.component';
+import { SideNavTitleComponent } from './components/sidenav/side-nav-title/side-nav-title.component';
+import { ProfileComponent } from './components/home-layout/profile/profile.component';
 
 
 @NgModule({
@@ -19,6 +23,10 @@ import { ShowLoadingOverlayDirective } from './directives/show-loading-overlay.d
     HomeLayoutComponent,
     LoadingOverlayComponent,
     ShowLoadingOverlayDirective,
+    ViewComponent,
+    SideNavItemComponent,
+    SideNavTitleComponent,
+    ProfileComponent,
   ],
   exports: [
     LogoComponent,
@@ -26,6 +34,9 @@ import { ShowLoadingOverlayDirective } from './directives/show-loading-overlay.d
     FormsModule,
     ReactiveFormsModule,
     ShowLoadingOverlayDirective,
+    ViewComponent,
+    SideNavItemComponent,
+    SideNavTitleComponent,
   ],
   imports: [
     CommonModule,
