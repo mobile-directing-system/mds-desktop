@@ -16,10 +16,18 @@ import { FeaturesModule } from './features/features.module';
 import { CoreModule } from './core/core.module';
 import { LocalStorageService } from './core/services/local-storage.service';
 import { netLoginInit } from './core/util/app-init';
+import { CreateUserView} from './features/create-user-view/create-user-view.component';
+import { UpdateUserView } from './features/update-user-view/update-user-view.component';
+import { CreateOperationViewComponent } from './features/create-operation-view/create-operation-view.component';
+import { UpdateOperationViewComponent } from './features/update-operation-view/update-operation-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    CreateUserView,
+    UpdateUserView,
+    CreateOperationViewComponent,
+    UpdateOperationViewComponent,
   ],
   imports: [
     BrowserModule,

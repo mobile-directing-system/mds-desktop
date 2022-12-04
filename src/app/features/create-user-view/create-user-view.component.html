@@ -1,0 +1,29 @@
+<div class="view">
+  <div class="create-user-view" [appShowLoadingOverlay]="creatingUser.loadingChange() | async">
+    <form (submit)="createUser()" class="example-form">
+      <mat-form-field>
+        <mat-label i18n>Username</mat-label>
+        <input matInput [formControl]="form.controls.username">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>First Name</mat-label>
+        <input matInput [formControl]="form.controls.first_name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>Last Name</mat-label>
+        <input matInput [formControl]="form.controls.last_name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>Initial password</mat-label>
+        <input matInput [formControl]="form.controls.pass">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>Is Admin</mat-label>
+        <mat-checkbox [formControl]="form.controls.is_admin"/>
+      </mat-form-field>
+      <button mat-button type="submit" [disabled]="!allowCreation || (creatingUser.loadingChange() | async)" i18n>
+        Create User
+      </button>
+    </form>
+  </div>
+</div>
