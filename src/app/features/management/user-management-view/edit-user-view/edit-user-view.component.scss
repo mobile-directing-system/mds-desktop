@@ -1,0 +1,16 @@
+@use '../../../../../../node_modules/@angular/material/index' as mat;
+@import '../../../../../styles';
+
+.update-user-view {
+  padding: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-row {
+  display: flex;
+  flex-direction: row;
+}

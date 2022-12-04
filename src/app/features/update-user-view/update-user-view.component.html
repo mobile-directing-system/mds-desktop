@@ -1,0 +1,29 @@
+<div class="view">
+  <div class="update-user-view" [appShowLoadingOverlay]="updatingUser.loadingChange() | async">
+    <form (submit)="updateUser()" class="example-form">
+      <mat-form-field>
+        <mat-label i18n>Username</mat-label>
+        <input matInput [formControl]="form.controls.username">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>First Name</mat-label>
+        <input matInput [formControl]="form.controls.first_name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>Last Name</mat-label>
+        <input matInput [formControl]="form.controls.last_name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>Is Admin</mat-label>
+        <mat-checkbox [formControl]="form.controls.is_admin"/>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label i18n>Is Active</mat-label>
+        <mat-checkbox [formControl]="form.controls.is_active"/>
+      </mat-form-field>
+      <button mat-button type="submit" [disabled]="!allowCreation || (updatingUser.loadingChange() | async)" i18n>
+        Update User
+      </button>
+    </form>
+  </div>
+</div>
