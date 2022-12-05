@@ -3,6 +3,13 @@ import { LoginView } from '../../features/auth/login-view/login-view.component';
 import { LandingLayoutComponent } from '../components/landing-layout/landing-layout.component';
 import { SetServerURLView } from '../../features/auth/set-server-url-view/set-server-url-view.component';
 import { HomeLayoutComponent } from '../components/home-layout/home-layout.component';
+import { EditUserView } from '../../features/management/user-management-view/edit-user-view/edit-user-view.component';
+import {
+  UpdateUserPasswordView,
+} from '../../features/management/user-management-view/update-user-password-view/update-user-password-view.component';
+import {
+  CreateUserView,
+} from '../../features/management/user-management-view/create-user-view/create-user-view.component';
 import { ManageLayoutComponent } from '../../features/management/manage-layout/manage-layout.component';
 import { UserManagementView } from '../../features/management/user-management-view/user-management-view.component';
 import { MailboxLayoutComponent } from '../../features/mailbox/mailbox-layout/mailbox-layout.component';
@@ -31,6 +38,18 @@ export const AppRoutes: Routes = [
           {
             path: 'users',
             component: UserManagementView,
+          },
+          {
+            path: 'users/create',
+            component: CreateUserView,
+          },
+          {
+            path: 'users/:id',
+            component: EditUserView,
+          },
+          {
+            path: 'users/:id/update-pass',
+            component: UpdateUserPasswordView,
           },
           {
             path: 'groups',
