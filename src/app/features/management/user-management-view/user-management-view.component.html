@@ -41,7 +41,7 @@
     </ng-container>
 
     <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
-    <tr (click)="editUser(asUser(row).id)" *matRowDef="let row; columns: columnsToDisplay"
+    <tr (click)="navigateToUser(asUser(row).id)" *matRowDef="let row; columns: columnsToDisplay"
         [ngClass]="{'inactive-user': !asUser(row).isActive}" class="clickable"
         mat-row></tr>
 
