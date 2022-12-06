@@ -9,6 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "ng test --code-coverage --watch false --browsers=ChromeHeadlessCustom",
+    "locale:check": "ng build --configuration locale-check",
     "lint": "ng lint",
     "i18n:extract": "ng extract-i18n"
   },
