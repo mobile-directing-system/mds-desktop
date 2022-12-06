@@ -91,5 +91,13 @@
         <source>Server URL</source>
       </segment>
     </unit>
+    <unit id="7507948636555938109">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/profile/profile.component.html:9</note>
+      </notes>
+      <segment>
+        <source>Log out</source>
+      </segment>
+    </unit>
   </file>
 </xliff>
