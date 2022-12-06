@@ -83,6 +83,9 @@
               "localize": [
                 "de"
               ]
+            },
+            "locale-check": {
+              "i18nMissingTranslation": "error"
             }
           },
           "defaultConfiguration": "production"
