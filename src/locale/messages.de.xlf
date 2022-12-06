@@ -101,5 +101,14 @@
         <target>Anwenden</target>
       </segment>
     </unit>
+    <unit id="7507948636555938109">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/profile/profile.component.html:9</note>
+      </notes>
+      <segment state="initial">
+        <source>Log out</source>
+        <target>Abmelden</target>
+      </segment>
+    </unit>
   </file>
 </xliff>
