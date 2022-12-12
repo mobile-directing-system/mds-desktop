@@ -1,0 +1,11 @@
+<mat-form-field class="search-term">
+  <mat-label i18n>Quick search</mat-label>
+  <input matInput type="text" [formControl]="searchTermFC">
+  <button (click)="clear()"
+          *ngIf="searchTermFC.value !== ''"
+          aria-label="Clear search term."
+          mat-icon-button
+          matSuffix>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>

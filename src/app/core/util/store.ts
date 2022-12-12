@@ -1,9 +1,21 @@
 import { MDSError, MDSErrorCode } from './errors';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Sort } from '@angular/material/sort';
 
 export enum OrderDir {
   Asc = 'asc',
   Desc = 'desc',
+}
+
+export function orderDirFromSort(sort: Sort): OrderDir | undefined {
+  switch (sort.direction) {
+    case 'asc':
+      return OrderDir.Asc;
+    case 'desc':
+      return OrderDir.Desc;
+    case '':
+      return undefined;
+  }
 }
 
 export class StoreRequestError extends MDSError {
@@ -33,7 +45,7 @@ export enum StoreRequestMethod {
   Put = 'put'
 }
 
-export interface PaginationParams<T> {
+export class PaginationParams<T> {
   /**
    * The maximum amount of entries to be retrieved.
    */
@@ -43,14 +55,74 @@ export interface PaginationParams<T> {
    * offset of 5 means that the amount {@link limit} of entries is retrieved starting from the 6th one.
    */
   offset: number;
+  private _orderBy?: T;
   /**
    * The attribute to order by.
    */
-  orderBy?: T;
+  get orderBy(): T | undefined {
+    return this._orderBy;
+  }
+
+  private _orderDir?: OrderDir;
   /**
    * The order direction.
    */
-  orderDir?: OrderDir;
+  get orderDir(): OrderDir | undefined {
+    return this._orderDir;
+  }
+
+  constructor(limit: number, offset: number, orderBy?: T, orderDir?: OrderDir) {
+    this.limit = limit;
+    this.offset = offset;
+    this.applyOrderBy(orderBy, orderDir);
+  }
+
+  static from<T>(from: {
+    limit: number,
+    offset: number,
+    orderBy?: T,
+    orderDir?: OrderDir,
+  }): PaginationParams<T> {
+    return new PaginationParams(from.limit, from.offset, from.orderBy, from.orderDir);
+  }
+
+  clone(): PaginationParams<T> {
+    return new PaginationParams<T>(this.limit, this.offset, this.orderBy, this.orderDir);
+  }
+
+  /**
+   * Applies the given values. If new order direction is not set, order-by will not be set as well.
+   * @param newOrderBy New value for {@link orderBy} (if {@link newOrderDir} is not `undefined`.
+   * @param newOrderDir New value for {@link orderDir}.
+   */
+  applyOrderBy(newOrderBy: T | undefined, newOrderDir: OrderDir | undefined) {
+    this._orderBy = newOrderDir === undefined ? undefined : newOrderBy;
+    this._orderDir = newOrderDir;
+  }
+
+  mapOrderBy<N>(mapOrderBy: (from: T) => N | undefined): PaginationParams<N> {
+    let orderBy: N | undefined = undefined;
+    if (this._orderBy !== undefined) {
+      orderBy = mapOrderBy(this._orderBy);
+    }
+    const p = new PaginationParams<N>(this.limit, this.offset);
+    p._orderBy = orderBy;
+    p._orderDir = this._orderDir;
+    return p;
+  }
+}
+
+/**
+ * Creates {@link SearchParams} from limit and offset in {@link PaginationParams} as well as the given query.
+ * @param from Pagination params use limit and offset from.
+ * @param query The search query.
+ */
+export function createSearchParams(from: PaginationParams<any>, query: string): SearchParams {
+  return {
+    limit: from.limit,
+    offset: from.offset,
+    query: query,
+  };
 }
 
 /**
@@ -124,6 +196,12 @@ export class Paginated<T> {
       retrieved: this.retrieved,
       total: this.total,
     });
+  }
+
+  toPaginationParams(): PaginationParams<string> {
+    const p = new PaginationParams<string>(this.limit, this.offset);
+    p.applyOrderBy(this.orderedBy, this.orderDir);
+    return p;
   }
 }
 
@@ -206,6 +284,15 @@ export class SearchResult<T> {
       offset: this.offset,
       processingTime: this.processingTime,
       query: this.query,
+    });
+  }
+
+  toPaginated(): Paginated<T> {
+    return new Paginated<T>(this.hits, {
+      limit: this.limit,
+      offset: this.offset,
+      total: this.estimatedTotalHits,
+      retrieved: this.hits.length,
     });
   }
 }

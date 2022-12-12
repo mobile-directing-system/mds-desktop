@@ -15,7 +15,8 @@ import { AppRoutes } from './core/constants/routes';
 import { FeaturesModule } from './features/features.module';
 import { CoreModule } from './core/core.module';
 import { LocalStorageService } from './core/services/local-storage.service';
-import { netLoginInit } from './core/util/app-init';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { matPaginatorInternationalization, netLoginInit } from './core/util/app-init';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,12 @@ import { netLoginInit } from './core/util/app-init';
       provide: APP_INITIALIZER,
       useFactory: netLoginInit,
       deps: [NetService, AuthService, Router],
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: matPaginatorInternationalization,
+      deps: [MatPaginatorIntl],
       multi: true,
     },
   ],

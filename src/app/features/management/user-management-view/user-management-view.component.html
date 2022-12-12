@@ -1,1 +1,49 @@
-<p>user-management works!</p>
+<h1 i18n>Users</h1>
+
+<app-heading-hint i18n>Create, manage and edit users.</app-heading-hint>
+
+<!--Actions.-->
+<app-list-action-bar [end]="search">
+  <button mat-button i18n (click)="createUser()">Create User</button>
+  <ng-template #search>
+    <app-quick-search (search)="searchChange($event)"></app-quick-search>
+  </ng-template>
+</app-list-action-bar>
+<!--Table.-->
+<app-paginated-list #list (page)="page($event)" [data]="loadedUsers">
+  <table (matSortChange)="sortChange($event)" [appShowLoadingOverlay]="retrieving.loadingChange() | async"
+         [dataSource]="list.dataSource"
+         aria-label="User list"
+         mat-table
+         matSort>
+
+    <ng-container matColumnDef="lastName">
+      <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="lastName">Last name</th>
+      <td *matCellDef="let row" mat-cell>{{ asUser(row).lastName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="firstName">First name</th>
+      <td *matCellDef="let row" mat-cell>{{ asUser(row).firstName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="username">Username</th>
+      <td *matCellDef="let row" mat-cell>{{ asUser(row).username }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="props">
+      <th *matHeaderCellDef mat-header-cell scope="col"></th>
+      <td *matCellDef="let row" mat-cell>
+        <mat-icon *ngIf="asUser(row).isAdmin" i18n-matTooltip matTooltip="Administrator">engineering</mat-icon>
+        <mat-icon *ngIf="!asUser(row).isActive" i18n-matTooltip matTooltip="Inactive">disabled_by_default</mat-icon>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
+    <tr (click)="editUser(asUser(row).id)" *matRowDef="let row; columns: columnsToDisplay"
+        [ngClass]="{'inactive-user': !asUser(row).isActive}" class="clickable"
+        mat-row></tr>
+
+  </table>
+</app-paginated-list>

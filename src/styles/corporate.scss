@@ -1,5 +1,6 @@
 $dark-primary-text: rgba(black, 0.87);
 $dark-secondary-text: rgba(black, 0.54);
+$dark-subsidiary-text: rgba(black, 0.54);
 $dark-disabled-text: rgba(black, 0.38);
 $dark-dividers: rgba(black, 0.12);
 $dark-focused: rgba(black, 0.12);
@@ -11,6 +12,7 @@ $light-focused: rgba(white, 0.12);
 $bg: #fafafa;
 
 $mds-desktop-primary-palette: (
+  20: #f7f8ff, // Manual.
   50: #e8eafd,
   100: #c5caf8,
   200: #9da7f4,

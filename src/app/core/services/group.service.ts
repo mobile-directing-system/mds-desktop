@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {NetService} from './net.service';
-import {CreateGroup, Group} from "../model/group";
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {Paginated, PaginationParams} from '../util/store';
+import { Injectable } from '@angular/core';
+import { NetService } from './net.service';
+import { CreateGroup, Group } from '../model/group';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Paginated, PaginationParams } from '../util/store';
 import { NetPaginated, NetPaginationParams, netPaginationParams, paginatedFromNet } from '../util/net';
-import {MDSError, MDSErrorCode} from '../util/errors';
+import { MDSError, MDSErrorCode } from '../util/errors';
 import urlJoin from 'url-join';
 
 /**

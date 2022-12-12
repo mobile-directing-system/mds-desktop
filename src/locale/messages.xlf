@@ -12,6 +12,7 @@
     <unit id="5248717555542428023">
       <notes>
         <note category="location">src/app/features/auth/login-view/login-view.component.html:5</note>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:31</note>
       </notes>
       <segment>
         <source>Username</source>
@@ -97,6 +98,119 @@
       </notes>
       <segment>
         <source>Log out</source>
+      </segment>
+    </unit>
+    <unit id="2046391739963920580">
+      <notes>
+        <note category="location">src/app/core/components/quick-search/quick-search.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Quick search</source>
+      </segment>
+    </unit>
+    <unit id="2149300564474427551">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:38</note>
+      </notes>
+      <segment>
+        <source>Administrator</source>
+      </segment>
+    </unit>
+    <unit id="2468239074984100046">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Create, manage and edit users.</source>
+      </segment>
+    </unit>
+    <unit id="3586674587150281199">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:21</note>
+      </notes>
+      <segment>
+        <source>Last name</source>
+      </segment>
+    </unit>
+    <unit id="4131502629887927598">
+      <notes>
+        <note category="location">src/app/core/util/app-init.ts:27</note>
+      </notes>
+      <segment>
+        <source>0 of <ph id="0" equiv="total" disp="length"/></source>
+      </segment>
+    </unit>
+    <unit id="4213264276527500323">
+      <notes>
+        <note category="location">src/app/core/util/app-init.ts:32</note>
+      </notes>
+      <segment>
+        <source><ph id="0" equiv="from" disp="startIndex + 1"/> - <ph id="1" equiv="to" disp="endIndex"/> of <ph id="2" equiv="total" disp="length"/></source>
+      </segment>
+    </unit>
+    <unit id="4555457172864212828">
+      <notes>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:4</note>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:1</note>
+      </notes>
+      <segment>
+        <source>Users</source>
+      </segment>
+    </unit>
+    <unit id="4743002849260529978">
+      <notes>
+        <note category="location">src/app/core/util/app-init.ts:24</note>
+      </notes>
+      <segment>
+        <source>Items per page:</source>
+      </segment>
+    </unit>
+    <unit id="5342432350421167093">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:26</note>
+      </notes>
+      <segment>
+        <source>First name</source>
+      </segment>
+    </unit>
+    <unit id="5891941941917080206">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:7</note>
+      </notes>
+      <segment>
+        <source>Create User</source>
+      </segment>
+    </unit>
+    <unit id="5944812089887969249">
+      <notes>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:5</note>
+      </notes>
+      <segment>
+        <source>Groups</source>
+      </segment>
+    </unit>
+    <unit id="7457179823984196306">
+      <notes>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:6</note>
+      </notes>
+      <segment>
+        <source>Operations</source>
+      </segment>
+    </unit>
+    <unit id="7615147220727762615">
+      <notes>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Management</source>
+      </segment>
+    </unit>
+    <unit id="1859131936150262113">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:39</note>
+      </notes>
+      <segment>
+        <source>Inactive</source>
       </segment>
     </unit>
   </file>

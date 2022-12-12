@@ -1,4 +1,15 @@
+@use '@angular/material' as mat;
+@import 'src/styles/corporate';
+
 ._loading-overlay-backdrop {
   pointer-events: none;
   backdrop-filter: brightness(0.95);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+tr.clickable:hover {
+  background-color: mat.get-color-from-palette($mds-desktop-primary-palette, 20);
 }

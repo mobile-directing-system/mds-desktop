@@ -2,16 +2,17 @@ import { OrderDir, Paginated, PaginationParams } from '../util/store';
 import { NetOrderDir, NetPaginated, NetPaginationParams, netPaginationParams } from '../util/net';
 
 /**
- * Generates random {@link PaginationParams} with the given order-by for {@link PaginationParams.orderBy}.
+ * Generates random {@link PaginationParams} with the given order-by for {@link
+  * PaginationParams.orderBy}.
  * @param orderBy The order-by field to set because of not being randomly generated.
  */
 export function testGenRandomPaginationParams<O>(orderBy?: O): PaginationParams<O> {
-  return {
-    limit: Math.floor(Math.random() * 100),
-    offset: Math.floor(Math.random() * 100),
-    orderBy: orderBy,
-    orderDir: Math.random() > 0.5 ? OrderDir.Asc : OrderDir.Desc,
-  };
+  return new PaginationParams<O>(
+    Math.floor(Math.random() * 100),
+    Math.floor(Math.random() * 100),
+    orderBy,
+    Math.random() > 0.5 ? OrderDir.Asc : OrderDir.Desc,
+  );
 }
 
 /**
