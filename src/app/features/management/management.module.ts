@@ -13,6 +13,10 @@ import {
   UpdateUserPasswordView,
 } from './user-management-view/update-user-password-view/update-user-password-view.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
+import { UserManagementView } from './user-management-view/user-management-view.component';
+import { GroupManagementView } from './group-management-view/group-management-view.component';
+import { OperationManagementView } from './operation-management-view/operation-management-view.component';
 
 
 @NgModule({
