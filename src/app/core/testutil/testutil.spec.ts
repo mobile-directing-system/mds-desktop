@@ -6,9 +6,9 @@ import { MailboxLayoutComponent } from '../../features/mailbox/mailbox-layout/ma
 import { LandingLayoutComponent } from '../components/landing-layout/landing-layout.component';
 import { SetServerURLView } from '../../features/auth/set-server-url-view/set-server-url-view.component';
 import { LoginView } from '../../features/auth/login-view/login-view.component';
-import { clearRoutesFor } from './testutil';
+import { clearRouteComponentsExcept, clearRouteComponentsFor } from './testutil';
 
-describe('clearRoutesFor', () => {
+describe('clearRouteComponentsFor', () => {
   it('should clear correctly', () => {
     const routes: Routes = [
       {
@@ -98,7 +98,103 @@ describe('clearRoutesFor', () => {
         ],
       },
     ];
-    const got = clearRoutesFor(routes, '/manage/users');
+    const got = clearRouteComponentsFor(routes, '/manage/users');
+    expect(got).toEqual(expectCleared);
+  });
+});
+
+
+describe('clearRouteComponentsExcept', () => {
+  it('should clear correctly', () => {
+    const routes: Routes = [
+      {
+        path: '',
+        component: HomeLayoutComponent,
+        children: [
+          {
+            path: 'manage',
+            component: ManageLayoutComponent,
+            children: [
+              {
+                path: 'users',
+                component: UserManagementView,
+                children: [
+                  {
+                    path: 'wales',
+                    component: UserManagementView,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            path: 'mailbox',
+            component: MailboxLayoutComponent,
+          },
+        ],
+      },
+      {
+        path: '',
+        component: LandingLayoutComponent,
+        children: [
+          {
+            path: 'set-server-url',
+            component: SetServerURLView,
+          },
+          {
+            path: 'login',
+            component: LoginView,
+          },
+        ],
+      },
+    ];
+    const expectCleared: Route[] = [
+      {
+        path: '',
+        component: undefined,
+        children: [
+          {
+            path: 'manage',
+            component: undefined,
+            children: [
+              {
+                path: 'users',
+                component: UserManagementView,
+                children: [
+                  {
+                    path: 'wales',
+                    component: undefined,
+                    children: [],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            path: 'mailbox',
+            component: undefined,
+            children: [],
+          },
+        ],
+      },
+      {
+        path: '',
+        component: undefined,
+        children: [
+          {
+            path: 'set-server-url',
+            component: undefined,
+            children: [],
+          },
+          {
+            path: 'login',
+            component: undefined,
+            children: [],
+          },
+        ],
+      },
+    ];
+    const got = clearRouteComponentsExcept(routes, '/manage/users');
     expect(got).toEqual(expectCleared);
   });
 });

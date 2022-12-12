@@ -3,7 +3,7 @@ import { byTextContent, createRoutingFactory, SpectatorRouting } from '@ngneat/s
 import { CoreModule } from '../../../core/core.module';
 import { Router } from '@angular/router';
 import { AppRoutes } from '../../../core/constants/routes';
-import { clearRoutesFor } from '../../../core/testutil/testutil';
+import { clearRouteComponentsExcept } from '../../../core/testutil/testutil';
 
 describe('ManagementLayoutComponent', () => {
   let spectator: SpectatorRouting<ManageLayoutComponent>;
@@ -13,7 +13,7 @@ describe('ManagementLayoutComponent', () => {
       CoreModule,
     ],
     stubsEnabled: false,
-    routes: clearRoutesFor(AppRoutes, '/manage'),
+    routes: clearRouteComponentsExcept(AppRoutes, '/manage'),
   });
 
   beforeEach(async () => {
