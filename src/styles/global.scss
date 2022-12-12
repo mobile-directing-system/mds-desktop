@@ -9,7 +9,3 @@
 .clickable {
   cursor: pointer;
 }
-
-tr.clickable:hover {
-  background-color: mat.get-color-from-palette($mds-desktop-primary-palette, 20);
-}

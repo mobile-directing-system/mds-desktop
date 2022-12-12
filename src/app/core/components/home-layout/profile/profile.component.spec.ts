@@ -197,7 +197,7 @@ describe('ProfileComponent.integration', () => {
     });
 
     it('should create', async () => {
-      expect(spectator.query('.mat-menu-panel .mat-menu-item')).toBeVisible();
+      expect(spectator.query('.mat-mdc-menu-panel .mat-mdc-menu-item')).toBeVisible();
     });
 
     it('should show currently logged-in user', async () => {
