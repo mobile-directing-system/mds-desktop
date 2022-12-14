@@ -1,0 +1,13 @@
+<!--Table.-->
+<div class="table">
+  <ng-content></ng-content>
+</div>
+<!--Pagination.-->
+<div class="paginator">
+  <mat-paginator [length]="total"
+                 [pageIndex]="getCurrentPageIndex()"
+                 [pageSize]="pagination.limit"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

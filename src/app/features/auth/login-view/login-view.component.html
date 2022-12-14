@@ -1,11 +1,11 @@
 <div class="view">
   <div class="login-window" [appShowLoadingOverlay]="loggingIn.loadingChange() | async">
     <form (submit)="login()" class="example-form">
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label i18n>Username</mat-label>
         <input matInput [formControl]="form.controls.username">
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label i18n>Password</mat-label>
         <input matInput type="password" [formControl]="form.controls.pass">
       </mat-form-field>

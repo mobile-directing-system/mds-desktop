@@ -13,6 +13,14 @@ import { ViewComponent } from './components/view/view.component';
 import { SideNavItemComponent } from './components/sidenav/side-nav-item/side-nav-item.component';
 import { SideNavTitleComponent } from './components/sidenav/side-nav-title/side-nav-title.component';
 import { ProfileComponent } from './components/home-layout/profile/profile.component';
+import { PaginatedListComponent } from './components/paginated-list/paginated-list.component';
+import { HeadingHintComponent } from './components/heading-hint/heading-hint.component';
+import { ListActionBarComponent } from './components/list-action-bar/list-action-bar.component';
+import { QuickSearchComponent } from './components/quick-search/quick-search.component';
+import {
+  SearchableMultiChipEntityInputComponent,
+} from './components/searchable-multi-chip-input-field/searchable-multi-chip-entity-input.component';
+import { LoadingDotsComponent } from './components/loading-dots/loading-dots.component';
 
 
 @NgModule({
@@ -27,6 +35,12 @@ import { ProfileComponent } from './components/home-layout/profile/profile.compo
     SideNavItemComponent,
     SideNavTitleComponent,
     ProfileComponent,
+    PaginatedListComponent,
+    HeadingHintComponent,
+    ListActionBarComponent,
+    QuickSearchComponent,
+    SearchableMultiChipEntityInputComponent,
+    LoadingDotsComponent,
   ],
   exports: [
     LogoComponent,
@@ -37,6 +51,12 @@ import { ProfileComponent } from './components/home-layout/profile/profile.compo
     ViewComponent,
     SideNavItemComponent,
     SideNavTitleComponent,
+    PaginatedListComponent,
+    HeadingHintComponent,
+    ListActionBarComponent,
+    QuickSearchComponent,
+    LoadingOverlayComponent,
+    SearchableMultiChipEntityInputComponent,
   ],
   imports: [
     CommonModule,

@@ -1,10 +1,10 @@
 <div class="view">
   <div class="url-window">
     <form (ngSubmit)="apply()" class="example-form">
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label i18n>Server URL</mat-label>
-        <mat-hint i18n>URL for accessing the server, e.g. http://mds.my-server.net/server</mat-hint>
-        <input matInput [formControl]="serverURLFC">
+        <mat-hint i18n>URL for accessing the server</mat-hint>
+        <input [formControl]="serverURLFC" i18n-placeholder matInput placeholder="e.g. https://mds.my-server.net/server">
         <mat-error *ngIf="serverURLFC.errors && serverURLFC.errors['required']" i18n>
           Server URL required.
         </mat-error>

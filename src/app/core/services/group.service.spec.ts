@@ -1,7 +1,7 @@
 import { GroupFilter, GroupService, GroupSort } from './group.service';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { NetService } from './net.service';
-import { Group, CreateGroup } from '../model/group';
+import { CreateGroup, Group } from '../model/group';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import {
@@ -10,8 +10,9 @@ import {
   testGenPaginatedFromNet,
   testGenRandomPaginationParams,
 } from '../testutil/test-pagination';
-import createSpy = jasmine.createSpy;
 import { OperationSort } from './operation.service';
+import { PaginationParams } from '../util/store';
+import createSpy = jasmine.createSpy;
 
 describe('GroupService', () => {
   let spectator: SpectatorService<GroupService>;
@@ -250,7 +251,7 @@ describe('GroupService', () => {
       forOperation: filter.forOperation,
       excludeGlobal: filter.forOperation,
     };
-    const netPaginatedFilter = testGenNetPaginated(netParams, undefined, netGroups);
+    const netPaginatedFilter = testGenNetPaginated(PaginationParams.from(netParams), undefined, netGroups);
     const netPaginated = testGenNetPaginated(params, undefined, netGroups);
 
     it('should return correct group list upon retrieval, with filter active', fakeAsync(() => {
@@ -261,7 +262,7 @@ describe('GroupService', () => {
       tick();
 
       expect(getSpy).toHaveBeenCalledOnceWith('/groups', {
-        ...testGenNetPaginationParams(netParams, undefined),
+        ...testGenNetPaginationParams(PaginationParams.from(netParams), undefined),
         userId: 'Ms.MoneyPenny',
         forOperation: 'Gustav Graves',
         excludeGlobal: undefined,

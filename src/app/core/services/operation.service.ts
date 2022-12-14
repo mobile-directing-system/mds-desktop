@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {NetService} from './net.service';
-import {CreateOperation, Operation} from "../model/operation";
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {Paginated, PaginationParams, SearchParams, SearchResult} from '../util/store';
+import { Injectable } from '@angular/core';
+import { NetService } from './net.service';
+import { CreateOperation, Operation } from '../model/operation';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Paginated, PaginationParams, SearchParams, SearchResult } from '../util/store';
 import {
   NetPaginated,
   netPaginationParams,
@@ -12,9 +12,9 @@ import {
   paginatedFromNet,
   searchResultFromNet,
 } from '../util/net';
-import {MDSError, MDSErrorCode} from '../util/errors';
+import { MDSError, MDSErrorCode } from '../util/errors';
 import urlJoin from 'url-join';
-import {User} from "../model/user";
+import { User } from '../model/user';
 
 /**
  * Fields for sorting operations.

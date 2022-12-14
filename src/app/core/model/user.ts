@@ -54,3 +54,20 @@ export interface User {
    */
   isActive: boolean;
 }
+
+/**
+ * Returns first and last name of the user as formatted string, if set. Otherwise, the username is returned.
+ * @param u The user to return the name of.
+ * @param includeUsername Whether to always include the username. This will add the username in brackets to first and
+ *   last name.
+ */
+export function nameOfUser(u: User, includeUsername?: boolean): string {
+  if (u.firstName !== '' && u.lastName !== '') {
+    let s = `${ u.firstName } ${ u.lastName }`;
+    if (includeUsername) {
+      s += ` (${ u.username })`;
+    }
+    return s;
+  }
+  return u.username;
+}

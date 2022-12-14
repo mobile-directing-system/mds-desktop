@@ -12,6 +12,7 @@
     <unit id="5248717555542428023">
       <notes>
         <note category="location">src/app/features/auth/login-view/login-view.component.html:5</note>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:31</note>
       </notes>
       <segment state="initial">
         <source>Username</source>
@@ -83,15 +84,6 @@
         <target>Server URL</target>
       </segment>
     </unit>
-    <unit id="3931485016991271704">
-      <notes>
-        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:6</note>
-      </notes>
-      <segment state="initial">
-        <source>URL for accessing the server, e.g. http://mds.my-server.net/server</source>
-        <target>URL für Serverkommunikation, z.B. http://mds.my-server.net/server</target>
-      </segment>
-    </unit>
     <unit id="lbApply">
       <notes>
         <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:15</note>
@@ -108,6 +100,151 @@
       <segment state="initial">
         <source>Log out</source>
         <target>Abmelden</target>
+      </segment>
+    </unit>
+    <unit id="2046391739963920580">
+      <notes>
+        <note category="location">src/app/core/components/quick-search/quick-search.component.html:2</note>
+      </notes>
+      <segment state="initial">
+        <source>Quick search</source>
+        <target>Schnellsuche</target>
+      </segment>
+    </unit>
+    <unit id="4743002849260529978">
+      <notes>
+        <note category="location">src/app/core/util/app-init.ts:24</note>
+      </notes>
+      <segment state="initial">
+        <source>Items per page:</source>
+        <target>Einträge pro Seite:</target>
+      </segment>
+    </unit>
+    <unit id="4131502629887927598">
+      <notes>
+        <note category="location">src/app/core/util/app-init.ts:27</note>
+      </notes>
+      <segment state="initial">
+        <source>0 of <ph id="0" equiv="total" disp="length"/></source>
+        <target>0 von <ph id="0" equiv="total" disp="length"/></target>
+      </segment>
+    </unit>
+    <unit id="4213264276527500323">
+      <notes>
+        <note category="location">src/app/core/util/app-init.ts:32</note>
+      </notes>
+      <segment state="initial">
+        <source><ph id="0" equiv="from" disp="startIndex + 1"/> - <ph id="1" equiv="to" disp="endIndex"/> of <ph id="2" equiv="total" disp="length"/></source>
+        <target><ph id="0" equiv="from" disp="startIndex + 1"/> - <ph id="1" equiv="to" disp="endIndex"/> von <ph id="2" equiv="total" disp="length"/></target>
+      </segment>
+    </unit>
+    <unit id="4555457172864212828">
+      <notes>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:4</note>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:1</note>
+      </notes>
+      <segment state="initial">
+        <source>Users</source>
+        <target>Benutzer</target>
+      </segment>
+    </unit>
+    <unit id="2468239074984100046">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:3</note>
+      </notes>
+      <segment state="initial">
+        <source>Create, manage and edit users.</source>
+        <target>Erstellen, verwalten und bearbeiten Sie Benutzer.</target>
+      </segment>
+    </unit>
+    <unit id="5891941941917080206">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:7</note>
+      </notes>
+      <segment state="initial">
+        <source>Create User</source>
+        <target>Benutzer erstellen</target>
+      </segment>
+    </unit>
+    <unit id="3586674587150281199">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:21</note>
+      </notes>
+      <segment state="initial">
+        <source>Last name</source>
+        <target>Nachname</target>
+      </segment>
+    </unit>
+    <unit id="5342432350421167093">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:26</note>
+      </notes>
+      <segment state="initial">
+        <source>First name</source>
+        <target>Vorname</target>
+      </segment>
+    </unit>
+    <unit id="2149300564474427551">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:38</note>
+      </notes>
+      <segment state="initial">
+        <source>Administrator</source>
+        <target>Administrator</target>
+      </segment>
+    </unit>
+    <unit id="7615147220727762615">
+      <notes>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:3</note>
+      </notes>
+      <segment state="initial">
+        <source>Management</source>
+        <target>Management</target>
+      </segment>
+    </unit>
+    <unit id="5944812089887969249">
+      <notes>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:5</note>
+      </notes>
+      <segment state="initial">
+        <source>Groups</source>
+        <target>Gruppen</target>
+      </segment>
+    </unit>
+    <unit id="7457179823984196306">
+      <notes>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:6</note>
+      </notes>
+      <segment state="initial">
+        <source>Operations</source>
+        <target>Einsätze</target>
+      </segment>
+    </unit>
+    <unit id="1859131936150262113">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:39</note>
+      </notes>
+      <segment state="initial">
+        <source>Inactive</source>
+        <target>Inaktiv</target>
+      </segment>
+    </unit>
+    <unit id="8086405223858773229">
+      <notes>
+        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:6</note>
+      </notes>
+      <segment state="initial">
+        <source>URL for accessing the server</source>
+        <target>URL für Serverkommunikation</target>
+      </segment>
+    </unit>
+    <unit id="6872707229089240366">
+      <notes>
+        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:7</note>
+      </notes>
+      <segment state="initial">
+        <source>e.g. https://mds.my-server.net/server</source>
+        <target>z.B. https://mds.mein-server.net/server</target>
       </segment>
     </unit>
   </file>

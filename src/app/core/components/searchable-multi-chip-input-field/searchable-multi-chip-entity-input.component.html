@@ -1,0 +1,41 @@
+<mat-form-field>
+  <mat-label *ngIf="label !== undefined">{{label}}</mat-label>
+  <!--Chips.-->
+  <mat-chip-grid #chipGrid>
+    <mat-chip-row *ngFor="let entity of selectedEntities" (removed)="remove(entity)" [disabled]="searchFC.disabled">
+      <!--Display chip content.-->
+      <ng-container *ngIf="!!entity.v">
+        <ng-container *ngIf="chipTemplate">
+          <ng-container [ngTemplateOutletContext]="{entity: entity.v}" [ngTemplateOutlet]="chipTemplate"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="!chipTemplate">{{ entity.id }}</ng-container>
+      </ng-container>
+      <!--Display loading dots.-->
+      <ng-container *ngIf="!entity.v">
+        <app-loading-dots></app-loading-dots>
+      </ng-container>
+      <button matChipRemove>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip-row>
+    <!--Input.-->
+    <input #entityInput
+           [formControl]="searchFC"
+           [matAutocomplete]="auto"
+           [matChipInputFor]="chipGrid"
+           [placeholder]="placeholder"/>
+    <!--Autocomplete.-->
+    <mat-autocomplete #auto="matAutocomplete"
+                      autoActiveFirstOption
+                      (optionSelected)="addEntity($event.option.value)">
+      <mat-option *ngFor="let suggestion of suggestions | async" [value]="suggestion">
+        <ng-container *ngIf="suggestionTemplate">
+          <ng-container [ngTemplateOutletContext]="{entity: suggestion}"
+                        [ngTemplateOutlet]="suggestionTemplate"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="!suggestionTemplate">{{ suggestion.id }}</ng-container>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-chip-grid>
+</mat-form-field>
+{{searchFC.disabled}}

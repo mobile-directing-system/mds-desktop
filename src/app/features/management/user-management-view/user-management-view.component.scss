@@ -1,0 +1,6 @@
+@use 'sass:map';
+@import 'src/styles/corporate';
+
+.inactive-user > * {
+  color: map.get($mds-desktop-warn-palette, 500);
+}

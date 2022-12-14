@@ -11,7 +11,7 @@ import {
   RendererFactory2,
 } from '@angular/core';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Subscription } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import {
   Overlay,
   OverlayContainer,
@@ -27,6 +27,11 @@ import { LoadingOverlayComponent } from '../components/loading-overlay/loading-o
 import { Directionality } from '@angular/cdk/bidi';
 import { DOCUMENT, Location } from '@angular/common';
 import { Platform } from '@angular/cdk/platform';
+
+/**
+ * Delay for showing the overlay.
+ */
+const AttachDelayMS = 500;
 
 export class DynamicOverlay extends Overlay {
   private readonly _dynamicOverlayContainer: DynamicOverlayContainer;
@@ -144,28 +149,34 @@ export class ShowLoadingOverlayDirective implements OnDestroy {
     }
   }
 
+  private s?: Subscription;
+
   private attachLoader() {
-    const overlayContainer = new DynamicOverlayContainer(this._document, this._platform);
-    overlayContainer.setContainerElement(this.elementRef.nativeElement);
-    this.overlay = new DynamicOverlay(
-      this.scrollStrategyOptions,
-      overlayContainer,
-      this._componentFactoryResolver,
-      this._positionBuilder,
-      this._keyboardDispatcher,
-      this._injector,
-      this._ngZone,
-      this._document,
-      this._directionality,
-      this.rendererFactory,
-      this.location,
-      this.clickOutsideDispatcher,
-    );
-    this.overlayRef = this.overlay.createWithDefaultConfig(this.elementRef.nativeElement);
-    this.overlayRef.attach(new ComponentPortal(LoadingOverlayComponent));
+    this.s = timer(AttachDelayMS).subscribe(() => {
+      this.overlayRef?.detach();
+      const overlayContainer = new DynamicOverlayContainer(this._document, this._platform);
+      overlayContainer.setContainerElement(this.elementRef.nativeElement);
+      this.overlay = new DynamicOverlay(
+        this.scrollStrategyOptions,
+        overlayContainer,
+        this._componentFactoryResolver,
+        this._positionBuilder,
+        this._keyboardDispatcher,
+        this._injector,
+        this._ngZone,
+        this._document,
+        this._directionality,
+        this.rendererFactory,
+        this.location,
+        this.clickOutsideDispatcher,
+      );
+      this.overlayRef = this.overlay.createWithDefaultConfig(this.elementRef.nativeElement);
+      this.overlayRef.attach(new ComponentPortal(LoadingOverlayComponent));
+    });
   }
 
   private detachLoader() {
-    this.overlayRef?.detach();
+    this.s?.unsubscribe();
+    this.overlayRef?.detach()
   }
 }
