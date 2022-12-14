@@ -84,15 +84,6 @@
         <target>Server URL</target>
       </segment>
     </unit>
-    <unit id="3931485016991271704">
-      <notes>
-        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:6</note>
-      </notes>
-      <segment state="initial">
-        <source>URL for accessing the server, e.g. http://mds.my-server.net/server</source>
-        <target>URL für Serverkommunikation, z.B. http://mds.my-server.net/server</target>
-      </segment>
-    </unit>
     <unit id="lbApply">
       <notes>
         <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:15</note>
@@ -236,6 +227,24 @@
       <segment state="initial">
         <source>Inactive</source>
         <target>Inaktiv</target>
+      </segment>
+    </unit>
+    <unit id="8086405223858773229">
+      <notes>
+        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:6</note>
+      </notes>
+      <segment state="initial">
+        <source>URL for accessing the server</source>
+        <target>URL für Serverkommunikation</target>
+      </segment>
+    </unit>
+    <unit id="6872707229089240366">
+      <notes>
+        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:7</note>
+      </notes>
+      <segment state="initial">
+        <source>e.g. https://mds.my-server.net/server</source>
+        <target>z.B. https://mds.mein-server.net/server</target>
       </segment>
     </unit>
   </file>

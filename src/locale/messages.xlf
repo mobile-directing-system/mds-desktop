@@ -68,14 +68,6 @@
         <source>Server url set to <ph id="0" equiv="new_server_url" disp="newServerURL"/>.</source>
       </segment>
     </unit>
-    <unit id="3931485016991271704">
-      <notes>
-        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:6</note>
-      </notes>
-      <segment>
-        <source>URL for accessing the server, e.g. http://mds.my-server.net/server</source>
-      </segment>
-    </unit>
     <unit id="lbApply">
       <notes>
         <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:15</note>
@@ -211,6 +203,22 @@
       </notes>
       <segment>
         <source>Inactive</source>
+      </segment>
+    </unit>
+    <unit id="6872707229089240366">
+      <notes>
+        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:7</note>
+      </notes>
+      <segment>
+        <source>e.g. https://mds.my-server.net/server</source>
+      </segment>
+    </unit>
+    <unit id="8086405223858773229">
+      <notes>
+        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:6</note>
+      </notes>
+      <segment>
+        <source>URL for accessing the server</source>
       </segment>
     </unit>
   </file>
