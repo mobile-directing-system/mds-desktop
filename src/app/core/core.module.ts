@@ -17,6 +17,10 @@ import { PaginatedListComponent } from './components/paginated-list/paginated-li
 import { HeadingHintComponent } from './components/heading-hint/heading-hint.component';
 import { ListActionBarComponent } from './components/list-action-bar/list-action-bar.component';
 import { QuickSearchComponent } from './components/quick-search/quick-search.component';
+import {
+  SearchableMultiChipEntityInputComponent,
+} from './components/searchable-multi-chip-input-field/searchable-multi-chip-entity-input.component';
+import { LoadingDotsComponent } from './components/loading-dots/loading-dots.component';
 
 
 @NgModule({
@@ -35,6 +39,8 @@ import { QuickSearchComponent } from './components/quick-search/quick-search.com
     HeadingHintComponent,
     ListActionBarComponent,
     QuickSearchComponent,
+    SearchableMultiChipEntityInputComponent,
+    LoadingDotsComponent,
   ],
   exports: [
     LogoComponent,
@@ -50,6 +56,7 @@ import { QuickSearchComponent } from './components/quick-search/quick-search.com
     ListActionBarComponent,
     QuickSearchComponent,
     LoadingOverlayComponent,
+    SearchableMultiChipEntityInputComponent,
   ],
   imports: [
     CommonModule,
