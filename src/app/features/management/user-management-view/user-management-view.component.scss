@@ -1,6 +1,6 @@
-@use '@angular/material' as mat;
-@import 'src/styles';
+@use 'sass:map';
+@import 'src/styles/corporate';
 
 .inactive-user > * {
-  color: mat.get-color-from-palette($mds-desktop-warn, 500);
+  color: map.get($mds-desktop-warn-palette, 500);
 }

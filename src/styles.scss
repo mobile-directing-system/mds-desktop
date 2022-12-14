@@ -27,8 +27,8 @@
 $mds-desktop-primary: mat.define-palette($mds-desktop-primary-palette);
 $mds-desktop-accent: mat.define-palette($mds-desktop-complementary-palette);
 
-$mds-desktop-danger: mat.define-palette(mat.$red-palette);
-$mds-desktop-warn: mat.define-palette(mat.$orange-palette);
+$mds-desktop-danger: mat.define-palette($mds-desktop-danger-palette);
+$mds-desktop-warn: mat.define-palette($mds-desktop-warn-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
