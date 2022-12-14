@@ -6,6 +6,7 @@
     "start": "ng serve",
     "start:de": "ng serve --configuration development-de",
     "build": "ng build",
+    "build:de": "ng build --configuration production-de",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "ng test --code-coverage --watch false --browsers=ChromeHeadlessCustom",
