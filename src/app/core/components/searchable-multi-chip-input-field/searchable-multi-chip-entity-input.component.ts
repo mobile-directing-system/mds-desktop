@@ -37,6 +37,7 @@ export interface SelectedEntity<Id, T extends Identifiable<Id>> {
  * @example Example for multi-member-selection.
  * <app-searchable-multi-chip-entity-input-field
  *   [chipTemplate]="chip"
+ *   [errorTemplate]="errors"
  *   [formControl]="memberFC"
  *   [retrieve]="getUserById.bind(this)"
  *   [search]="searchUser.bind(this)"
@@ -50,6 +51,11 @@ export interface SelectedEntity<Id, T extends Identifiable<Id>> {
  *   <ng-template #suggestion let-entity='entity'>
  *     {{asUser(entity).firstName}} {{asUser(entity).lastName}} <span
  *   class="username">({{asUser(entity).lastName}})</span>
+ *   </ng-template>
+ *   <ng-template #errors>
+ *     <mat-error *ngIf="memberFC.errors && memberFC.errors['minlength']" i18n>
+ *       At least {{memberFC.errors['minlength'].requiredLength }} required.
+ *     </mat-error>
  *   </ng-template>
  * </app-searchable-multi-chip-entity-input-field>
  */
@@ -98,6 +104,10 @@ export class SearchableMultiChipEntityInputComponent<Id, T extends Identifiable<
    * Template for displaying suggestions.
    */
   @Input() suggestionTemplate?: TemplateRef<any>;
+  /**
+   * Template for displaying validation errors.
+   */
+  @Input() errorTemplate?: TemplateRef<any>;
 
   /**
    * For some magical reasons, we need direct ref as seen in example

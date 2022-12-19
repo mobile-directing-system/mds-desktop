@@ -14,6 +14,7 @@ import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { AngularMaterialModule } from '../../util/angular-material.module';
 import Spy = jasmine.Spy;
 
 interface SampleData {
@@ -526,6 +527,7 @@ describe('SearchableMultiChipEntityInputComponent', () => {
   template: `
     <app-searchable-multi-chip-entity-input-field
       [chipTemplate]="chip"
+      [errorTemplate]="errors"
       [formControl]="fc"
       [retrieve]="getByID.bind(this)"
       [search]="search.bind(this)"
@@ -538,6 +540,9 @@ describe('SearchableMultiChipEntityInputComponent', () => {
       </ng-template>
       <ng-template #suggestion let-entity='entity'>
         {{asSD(entity).a}}
+      </ng-template>
+      <ng-template #errors>
+        <mat-error *ngIf="fc.errors">Invalid value.</mat-error>
       </ng-template>
     </app-searchable-multi-chip-entity-input-field>`,
 })
@@ -561,6 +566,7 @@ describe('SearchableMultiChipEntityInputComponent.integration', () => {
   let host: TestHostComponent;
   const createComponent = createComponentFactory<TestHostComponent>({
     ...genFactoryOptions(),
+    imports: [CoreModule, AngularMaterialModule],
     component: TestHostComponent,
   });
   let harnessLoader: HarnessLoader;
@@ -673,5 +679,15 @@ describe('SearchableMultiChipEntityInputComponent.integration', () => {
     const optionTexts = await Promise.all(options.map(o => o.getText()));
 
     expect(optionTexts).toEqual(suggestions.map(s => s.a));
+  }));
+
+  it('should display errors using template', fakeAsync(async () => {
+    host.fc.setErrors({ 'charge': 'stair' });
+
+    spectator.detectComponentChanges();
+    tick();
+    await spectator.fixture.whenStable();
+
+    expect(spectator.query(byTextContent('Invalid value.', { selector: 'mat-error' }))).toBeVisible();
   }));
 });

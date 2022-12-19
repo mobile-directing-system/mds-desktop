@@ -37,4 +37,8 @@
       </mat-option>
     </mat-autocomplete>
   </mat-chip-grid>
+  <!--Errors.-->
+  <ng-container *ngIf="errorTemplate">
+    <ng-container *ngTemplateOutlet="errorTemplate"></ng-container>
+  </ng-container>
 </mat-form-field>
