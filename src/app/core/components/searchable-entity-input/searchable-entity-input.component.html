@@ -1,0 +1,42 @@
+<mat-form-field [floatLabel]="selectedEntityId !== undefined ? 'always' : 'auto'">
+  <mat-label *ngIf="label !== undefined">{{label}}</mat-label>
+  <!--Input.-->
+  <input #entityInput
+         [formControl]="searchFC"
+         [matAutocomplete]="auto"
+         [ngClass]="{hidden: selectedEntityId !== undefined}"
+         [placeholder]="placeholder"
+         matInput/>
+  <!--Autocomplete.-->
+  <mat-autocomplete #auto="matAutocomplete"
+                    autoActiveFirstOption
+                    (optionSelected)="selectEntity($event.option.value)">
+    <mat-option *ngFor="let suggestion of suggestions | async" [value]="suggestion">
+      <ng-container *ngIf="suggestionTemplate">
+        <ng-container [ngTemplateOutletContext]="{entity: suggestion}"
+                      [ngTemplateOutlet]="suggestionTemplate"></ng-container>
+      </ng-container>
+      <ng-container *ngIf="!suggestionTemplate">{{ suggestion.id }}</ng-container>
+    </mat-option>
+  </mat-autocomplete>
+  <!--When entity selected.-->
+  <div *ngIf="selectedEntityId !== undefined" class="entity-display">
+    <!--Display value when available.-->
+    <ng-container *ngIf="!!selectedEntityValue">
+      <ng-container *ngIf="displayTemplate">
+        <ng-container [ngTemplateOutletContext]="{entity: selectedEntityValue}"
+                      [ngTemplateOutlet]="displayTemplate"></ng-container>
+      </ng-container>
+      <ng-container *ngIf="!displayTemplate">{{ selectedEntityId }}</ng-container>
+    </ng-container>
+    <!--Display loading dots when value is unavailable.-->
+    <ng-container *ngIf="!selectedEntityValue">
+      <app-loading-dots class="loading-dots"></app-loading-dots>
+    </ng-container>
+    <mat-icon class="clear-entity" (click)="clearSelectedEntity()">close</mat-icon>
+  </div>
+  <!--Errors.-->
+  <ng-container *ngIf="searchFC.touched && errorTemplate">
+    <ng-container *ngTemplateOutlet="errorTemplate"></ng-container>
+  </ng-container>
+</mat-form-field>
