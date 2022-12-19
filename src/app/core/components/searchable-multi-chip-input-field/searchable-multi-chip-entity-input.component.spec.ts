@@ -344,7 +344,10 @@ describe('SearchableMultiChipEntityInputComponent', () => {
     });
 
     it('should ignore a retrieved entity when it got removed', fakeAsync(() => {
-      retrieveSpy.and.returnValue(of(entities[0]));
+      retrieveSpy.and.callFake(() => {
+        component.selectedEntities.splice(1);
+        return of(entities[0]);
+      });
       component.writeValue(ids);
       component.selectedEntities.splice(1);
 
