@@ -1,51 +1,45 @@
 import { Component, ElementRef, forwardRef, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Identifiable } from '../../util/misc';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormControl,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator,
+  Validators,
+} from '@angular/forms';
 import {
   BehaviorSubject,
   debounceTime,
   EMPTY,
   filter,
-  forkJoin,
   Observable,
   startWith,
   Subscription,
   switchMap,
   tap,
 } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { MDSError, MDSErrorCode } from '../../util/errors';
+import { map } from 'rxjs/operators';
+import { Identifiable } from '../../util/misc';
 
 /**
- * Container which holds an optional value. {@link id} is used for retrieving value when writing value in
- * {@link SearchableMultiChipEntityInputComponent}.
- */
-export interface SelectedEntity<Id, T extends Identifiable<Id>> {
-  /**
-   * Identifies the entity.
-   */
-  id: Id,
-  /**
-   * Value of the entity.
-   */
-  v?: T;
-}
-
-/**
- * Form control for selecting multiple entities via search.
+ * Form control for selecting an entity via search.
  *
- * @example Example for multi-member-selection.
- * <app-searchable-multi-chip-entity-input-field
- *   [chipTemplate]="chip"
+ * @example Example for user-selection.
+ * <app-searchable-entity-input
+ *   [displayTemplate]="display"
  *   [errorTemplate]="errors"
  *   [formControl]="memberFC"
  *   [retrieve]="getUserById.bind(this)"
  *   [search]="searchUser.bind(this)"
+ *   [required]="true"
  *   [suggestionTemplate]="suggestion"
  *   class="app-edit-input-large"
- *   label="Members"
- *   placeholder="Add member...">
- *   <ng-template #chip let-entity='entity'>
+ *   label="Owner"
+ *   placeholder="Search owner...">
+ *   <ng-template #display let-entity='entity'>
  *     {{asUser(entity).firstName}} {{asUser(entity).lastName}}
  *   </ng-template>
  *   <ng-template #suggestion let-entity='entity'>
@@ -53,25 +47,32 @@ export interface SelectedEntity<Id, T extends Identifiable<Id>> {
  *   class="username">({{asUser(entity).lastName}})</span>
  *   </ng-template>
  *   <ng-template #errors>
- *     <mat-error *ngIf="memberFC.errors && memberFC.errors['minlength']" i18n>
- *       At least {{memberFC.errors['minlength'].requiredLength }} required.
- *     </mat-error>
+ *     <app-errors *ngIf="memberFC.errors">
+ *       <mat-error *ngIf="memberFC.errors['required']" i18n>
+ *         Required.
+ *       </mat-error>
+ *     </app-errors>
  *   </ng-template>
- * </app-searchable-multi-chip-entity-input-field>
+ * </app-searchable-entity-input>
  */
 @Component({
-  selector: 'app-searchable-multi-chip-entity-input-field',
-  templateUrl: './searchable-multi-chip-entity-input.component.html',
-  styleUrls: ['./searchable-multi-chip-entity-input.component.scss'],
+  selector: 'app-searchable-entity-input',
+  templateUrl: './searchable-entity-input.component.html',
+  styleUrls: ['./searchable-entity-input.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SearchableMultiChipEntityInputComponent),
+      useExisting: forwardRef(() => SearchableEntityInputComponent),
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: SearchableEntityInputComponent,
       multi: true,
     },
   ],
 })
-export class SearchableMultiChipEntityInputComponent<Id, T extends Identifiable<Id>> implements OnInit, OnDestroy, ControlValueAccessor {
+export class SearchableEntityInputComponent<Id, T extends Identifiable<Id>> implements OnInit, OnDestroy, ControlValueAccessor, Validator {
   /**
    * Debounce time for search input.
    */
@@ -84,6 +85,7 @@ export class SearchableMultiChipEntityInputComponent<Id, T extends Identifiable<
    * Placeholder for the form field.
    */
   @Input() placeholder = '';
+  @Input() required = false;
   /**
    * Function for retrieving search results for the given term (current input).
    */
@@ -93,13 +95,18 @@ export class SearchableMultiChipEntityInputComponent<Id, T extends Identifiable<
    */
   @Input() retrieve?: (id: Id) => Observable<T>;
   /**
+   * Form control for accessing validation errors.
+   */
+  @Input() formControl?: FormControl;
+  /**
    * Currently selected entities.
    */
-  selectedEntities: SelectedEntity<Id, T>[] = [];
+  selectedEntityId?: Id;
+  selectedEntityValue?: T;
   /**
-   * Template for displaying chips.
+   * Template for displaying the selected entity.
    */
-  @Input() chipTemplate?: TemplateRef<any>;
+  @Input() displayTemplate?: TemplateRef<any>;
   /**
    * Template for displaying suggestions.
    */
@@ -136,16 +143,20 @@ export class SearchableMultiChipEntityInputComponent<Id, T extends Identifiable<
       // Ignore other types. Required because of selecting a suggestion leading to setting the value automatically in
       // the search form control.
       filter(v => typeof v === 'string'),
-      // Ignore null-values. These are set when a suggestion is selected in order to clear suggestions until the user
-      // types the next search term.
+      // Ignore null-values. These are set when a suggestion is selected in order to clear them.
       filter(v => v !== null),
-      tap(() => this.notifyOnTouched()),
+      tap(() => {
+        this.notifyOnTouched();
+      }),
       // Debounce in order to void too many search requests.
-      debounceTime(SearchableMultiChipEntityInputComponent.SearchDebounceTimeMS),
+      debounceTime(SearchableEntityInputComponent.SearchDebounceTimeMS),
       // Initial value for first suggestions.
       startWith(''),
       switchMap(v => v === null ? EMPTY : this.refreshSuggestions(v)),
     ).subscribe());
+    if (this.required) {
+      this.searchFC.addValidators(Validators.required);
+    }
   }
 
   /**
@@ -158,58 +169,36 @@ export class SearchableMultiChipEntityInputComponent<Id, T extends Identifiable<
       throw new MDSError(MDSErrorCode.AppError, 'missing search function');
     }
     return this.search(searchTerm).pipe(
-      tap(newSuggestions => {
-        const deduplicatedFromSelected: T[] = newSuggestions.filter(suggestion =>
-          !this.selectedEntities.find(alreadySelected => alreadySelected.id === suggestion.id));
-        this.suggestions.next(deduplicatedFromSelected);
-      }),
+      tap(newSuggestions => this.suggestions.next(newSuggestions)),
       map(_ => void 0),
     );
   }
 
   /**
-   * Adds the given entity to the list of selected ones and clears search.
-   * @param entity The entity to add (must not have already been added).
+   * Selects the given entity clears search.
+   * @param entity The entity to select.
    * @private
    */
-  addEntity(entity: T): void {
+  selectEntity(entity: T): void {
     if (this.searchFC.disabled) {
       throw new MDSError(MDSErrorCode.AppError, 'form control is disabled');
     }
-    if (this.selectedEntities.find(e => e.id === entity.id)) {
-      throw new MDSError(MDSErrorCode.AppError, 'duplicate entry', {
-        entityId: entity.id,
-        entity: entity,
-      });
-    }
     this.suggestions.next([]);
-    const toPush: SelectedEntity<Id, T> = {
-      id: entity.id,
-      v: entity,
-    };
-    this.selectedEntities.push(toPush);
+    this.selectedEntityId = entity.id;
+    this.selectedEntityValue = entity;
     this.notifyOnChange();
-    this.clearSearch();
   }
 
   /**
-   * Removes the given entity from selected ones.
-   * @param entityToRemove The entity to remove.
+   * Clears the selected entity.
    */
-  remove(entityToRemove: SelectedEntity<Id, T>): void {
+  clearSelectedEntity(): void {
     if (this.searchFC.disabled) {
       throw new MDSError(MDSErrorCode.AppError, 'form control is disabled');
     }
-    // Remove from selected ones.
-    const index = this.selectedEntities.indexOf(entityToRemove);
-    if (index === -1) {
-      throw new MDSError(MDSErrorCode.AppError, 'entity to remove not found in selected ones', {
-        entityToRemove: entityToRemove,
-        selectedEntities: this.selectedEntities,
-      });
-    }
-    this.selectedEntities.splice(index, 1);
-
+    this.selectedEntityId = undefined;
+    this.selectedEntityValue = undefined;
+    this.clearSearch();
     this.notifyOnChange();
     this.searchFC.setValue('');
   }
@@ -226,11 +215,11 @@ export class SearchableMultiChipEntityInputComponent<Id, T extends Identifiable<
     this.searchInput.nativeElement.value = '';
   }
 
-  private onChangeListeners: ((ids: Id[]) => void)[] = [];
+  private onChangeListeners: ((id: Id | null) => void)[] = [];
   private onTouchedListeners: (() => void)[] = [];
 
   private notifyOnChange(): void {
-    this.onChangeListeners.forEach(l => l(this.selectedEntities.map(e => e.id)));
+    this.onChangeListeners.forEach(l => l(this.selectedEntityId !== undefined ? this.selectedEntityId : null));
   }
 
   private notifyOnTouched(): void {
@@ -258,39 +247,45 @@ export class SearchableMultiChipEntityInputComponent<Id, T extends Identifiable<
   }
 
   /**
-   * Used in order to satisfy {@link ControlValueAccessor}. Initial values only contain entity ids. These are added to
-   * selected ones and their values retrieved via {@link retrieve}.
-   * @param ids
+   * Used in order to satisfy {@link ControlValueAccessor}. Initial values only contains entity id, which is set and
+   * its value retrieved via {@link retrieve}.
+   * @param id The id of the selected entity.
    */
-  writeValue(ids: Id[]): void {
+  writeValue(id: Id | null): void {
     this.suggestions.next([]);
-    this.selectedEntities = ids.map((id: Id): SelectedEntity<Id, T> => ({ id: id }));
-    this.loadSelectedEntityValues();
+    this.selectedEntityId = id !== null ? id : undefined;
+    this.loadSelectedEntityValue();
   }
 
   private loadingSubscription?: Subscription;
 
   /**
-   * Loads entity values via {@link retrieve} for all selected entities, not having {@link SelectedEntity.v} set.
+   * Loads the entity value via {@link retrieve} for the selected entity, when {@link selectedEntityValue} is not set.
    * @private
    */
-  private loadSelectedEntityValues(): void {
+  private loadSelectedEntityValue(): void {
     this.loadingSubscription?.unsubscribe();
-    this.loadingSubscription = forkJoin(this.selectedEntities.filter(e => !e.v).map(entityToRetrieveValueFor => {
-      // Check inside map function because of the linter not liking it being on the outside as this is a callback
-      // function.
-      if (!this.retrieve) {
-        throw new MDSError(MDSErrorCode.AppError, 'missing retrieve function');
+    if (this.selectedEntityId === undefined) {
+      this.loadingSubscription = undefined;
+      return;
+    }
+    if (!this.retrieve) {
+      throw new MDSError(MDSErrorCode.AppError, 'missing retrieve function');
+    }
+    this.loadingSubscription = this.retrieve(this.selectedEntityId).subscribe(retrievedValue => {
+      if (this.selectedEntityId !== retrievedValue.id) {
+        return;
       }
-      return this.retrieve(entityToRetrieveValueFor.id).pipe(tap(retrievedValue => {
-        // Apply result.
-        const entityRef = this.selectedEntities.find(e => e === entityToRetrieveValueFor);
-        if (!entityRef) {
-          // Maybe the element got removed during retrieval.
-          return;
-        }
-        entityRef.v = retrievedValue;
-      }));
-    })).subscribe();
+      this.selectedEntityValue = retrievedValue;
+    });
+  }
+
+  validate(control: AbstractControl): ValidationErrors | null {
+    if (this.required && this.selectedEntityId === undefined) {
+      return {
+        required: true,
+      };
+    }
+    return null;
   }
 }

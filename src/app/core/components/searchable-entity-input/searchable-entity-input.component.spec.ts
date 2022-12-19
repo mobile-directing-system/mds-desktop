@@ -1,13 +1,8 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 
-import {
-  SearchableMultiChipEntityInputComponent,
-  SelectedEntity,
-} from './searchable-multi-chip-entity-input.component';
 import { byTextContent, createComponentFactory, Spectator, SpectatorOptions } from '@ngneat/spectator';
 import { CoreModule } from '../../core.module';
 import { Observable, of } from 'rxjs';
-import { Identifiable } from '../../util/misc';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
@@ -15,6 +10,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { AngularMaterialModule } from '../../util/angular-material.module';
+import { SearchableEntityInputComponent } from './searchable-entity-input.component';
 import Spy = jasmine.Spy;
 
 interface SampleData {
@@ -22,9 +18,9 @@ interface SampleData {
   a: string
 }
 
-function genFactoryOptions(): SpectatorOptions<SearchableMultiChipEntityInputComponent<string, SampleData>> {
+function genFactoryOptions(): SpectatorOptions<SearchableEntityInputComponent<string, SampleData>> {
   return {
-    component: SearchableMultiChipEntityInputComponent,
+    component: SearchableEntityInputComponent,
     imports: [
       CoreModule,
       NoopAnimationsModule,
@@ -32,55 +28,23 @@ function genFactoryOptions(): SpectatorOptions<SearchableMultiChipEntityInputCom
   };
 }
 
-describe('SearchableMultiChipEntityInputComponent', () => {
-  let spectator: Spectator<SearchableMultiChipEntityInputComponent<string, SampleData>>;
-  let component: SearchableMultiChipEntityInputComponent<string, SampleData>;
-  const createComponent = createComponentFactory<SearchableMultiChipEntityInputComponent<string, SampleData>>({
+describe('SearchableEntityInputComponent', () => {
+  let spectator: Spectator<SearchableEntityInputComponent<string, SampleData>>;
+  let component: SearchableEntityInputComponent<string, SampleData>;
+  const createComponent = createComponentFactory<SearchableEntityInputComponent<string, SampleData>>({
     ...genFactoryOptions(),
   });
   let harnessLoader: HarnessLoader;
   let retrieveSpy: Spy;
   let searchSpy: Spy;
-  let selectedEntities: SelectedEntity<string, SampleData>[] = [];
 
   beforeEach(fakeAsync(() => {
     retrieveSpy = jasmine.createSpy('retrieve');
     searchSpy = jasmine.createSpy('search').and.returnValue(of([]));
-    selectedEntities = [
-      {
-        id: 'pack',
-        v: {
-          id: 'pack',
-          a: 'hello',
-        },
-      },
-      {
-        id: 'sand',
-        v: {
-          id: 'sand',
-          a: 'world',
-        },
-      },
-      {
-        id: 'quick',
-        v: {
-          id: 'quick',
-          a: '!',
-        },
-      },
-      {
-        id: 'forget',
-        v: {
-          id: 'forget',
-          a: '',
-        },
-      },
-    ];
     spectator = createComponent({
       props: {
         retrieve: retrieveSpy,
         search: searchSpy,
-        selectedEntities: selectedEntities,
       },
     });
     component = spectator.component;
@@ -97,7 +61,7 @@ describe('SearchableMultiChipEntityInputComponent', () => {
 
       // @ts-ignore
       component.searchFC.setValue({ hello: 'world' });
-      tick(SearchableMultiChipEntityInputComponent.SearchDebounceTimeMS);
+      tick(SearchableEntityInputComponent.SearchDebounceTimeMS);
 
       expect(searchSpy).not.toHaveBeenCalled();
     }));
@@ -106,7 +70,7 @@ describe('SearchableMultiChipEntityInputComponent', () => {
       searchSpy.calls.reset();
 
       component.searchFC.setValue(null);
-      tick(SearchableMultiChipEntityInputComponent.SearchDebounceTimeMS);
+      tick(SearchableEntityInputComponent.SearchDebounceTimeMS);
 
       expect(searchSpy).not.toHaveBeenCalled();
     }));
@@ -117,7 +81,7 @@ describe('SearchableMultiChipEntityInputComponent', () => {
       component.registerOnTouched(onTouchedSpy);
 
       component.searchFC.setValue('promise');
-      tick(SearchableMultiChipEntityInputComponent.SearchDebounceTimeMS);
+      tick(SearchableEntityInputComponent.SearchDebounceTimeMS);
 
       expect(onTouchedSpy).toHaveBeenCalled();
     }));
@@ -126,9 +90,9 @@ describe('SearchableMultiChipEntityInputComponent', () => {
       searchSpy.calls.reset();
       component.searchFC.setValue('promise');
 
-      tick(SearchableMultiChipEntityInputComponent.SearchDebounceTimeMS / 2);
+      tick(SearchableEntityInputComponent.SearchDebounceTimeMS / 2);
       expect(searchSpy).not.toHaveBeenCalled();
-      tick(SearchableMultiChipEntityInputComponent.SearchDebounceTimeMS / 2);
+      tick(SearchableEntityInputComponent.SearchDebounceTimeMS / 2);
       expect(searchSpy).toHaveBeenCalled();
     }));
 
@@ -148,11 +112,11 @@ describe('SearchableMultiChipEntityInputComponent', () => {
       expect(() => {
         component.search = undefined;
         component.searchFC.setValue(searchTerm);
-        tick(SearchableMultiChipEntityInputComponent.SearchDebounceTimeMS);
+        tick(SearchableEntityInputComponent.SearchDebounceTimeMS);
       }).toThrowError();
     }));
 
-    it('should not apply already selected entities', fakeAsync(() => {
+    it('should apply entities', fakeAsync(() => {
       const suggestions: SampleData[] = [
         {
           id: 'until',
@@ -171,86 +135,46 @@ describe('SearchableMultiChipEntityInputComponent', () => {
           a: 'count',
         },
       ];
-      component.selectedEntities = [suggestions[0], suggestions[2]];
       searchSpy.and.returnValue(of(suggestions));
 
       component.searchFC.setValue('');
-      tick(SearchableMultiChipEntityInputComponent.SearchDebounceTimeMS);
+      tick(SearchableEntityInputComponent.SearchDebounceTimeMS);
 
-      expect(component.suggestions.getValue()).toEqual([suggestions[1], suggestions[3]]);
+      expect(component.suggestions.getValue()).toEqual(suggestions);
     }));
   });
 
-  describe('addEntity', () => {
-    const entityToAdd: SampleData = {
+  describe('selectEntity', () => {
+    const entityToSelect: SampleData = {
       id: 'hit',
       a: 'touch',
     };
 
-    beforeEach(() => {
-      component.selectedEntities = [
-        {
-          id: 'preach',
-          v: {
-            id: 'preach',
-            a: 'hello',
-          },
-        },
-        {
-          id: 'soften',
-          v: {
-            id: 'soften',
-            a: 'world',
-          },
-        },
-        {
-          id: 'nephew',
-          v: {
-            id: 'nephew',
-            a: '!',
-          },
-        },
-      ];
-    });
-
     it('should throw an error when disabled', () => {
       component.searchFC.disable();
       expect(() => {
-        component.addEntity(entityToAdd);
-      }).toThrowError();
-    });
-
-    it('should throw an error on duplicate entry', () => {
-      expect(() => {
-        component.addEntity(component.selectedEntities[1].v!);
+        component.selectEntity(entityToSelect);
       }).toThrowError();
     });
 
     it('should clear suggestions', () => {
-      component.addEntity(entityToAdd);
+      component.selectEntity(entityToSelect);
       expect(component.suggestions.getValue()).toEqual([]);
     });
 
-    it('should add the new entity', () => {
-      component.addEntity(entityToAdd);
-      expect(component.selectedEntities).toContain({
-        id: entityToAdd.id,
-        v: entityToAdd,
-      });
+    it('should set the new entity', () => {
+      component.selectEntity(entityToSelect);
+      expect(component.selectedEntityId).toEqual(entityToSelect.id);
+      expect(component.selectedEntityValue).toEqual(entityToSelect);
     });
 
     it('should notify about changed value', () => {
       const notifySpy = jasmine.createSpy();
       component.registerOnChange(notifySpy);
 
-      component.addEntity(entityToAdd);
+      component.selectEntity(entityToSelect);
 
-      expect(notifySpy).toHaveBeenCalledOnceWith(component.selectedEntities.map(e => e.id));
-    });
-
-    it('should clear current search input', () => {
-      component.addEntity(entityToAdd);
-      expect(component.searchFC.value).toBeNull();
+      expect(notifySpy).toHaveBeenCalledOnceWith(component.selectedEntityId);
     });
   });
 
@@ -260,20 +184,15 @@ describe('SearchableMultiChipEntityInputComponent', () => {
       a: 'example',
     };
 
-    it('should clear current search input', () => {
-      component.addEntity(entity);
-      expect(component.searchFC.value).toBeNull();
-    });
-
     it('should throw an error when native element ref for search input is missing', () => {
       component.searchInput = undefined;
       expect(() => {
-        component.addEntity(entity);
+        component.clearSelectedEntity();
       }).toThrowError();
     });
 
     it('should clear native element of search input', () => {
-      component.addEntity(entity);
+      component.selectEntity(entity);
       expect(component.searchInput?.nativeElement.value).toEqual('');
     });
   });
@@ -289,7 +208,7 @@ describe('SearchableMultiChipEntityInputComponent', () => {
   });
 
   describe('writeValue', () => {
-    const ids = ['than', 'whom', 'bad'];
+    const id = 'whom';
 
     beforeEach(() => {
       searchSpy.calls.reset();
@@ -298,41 +217,26 @@ describe('SearchableMultiChipEntityInputComponent', () => {
     });
 
     it('should clear suggestions', () => {
-      component.writeValue(ids);
+      component.writeValue(id);
       expect(component.suggestions.getValue()).toEqual([]);
     });
 
-    it('should replace selected entities', () => {
-      component.writeValue(ids);
-      expect(component.selectedEntities.map(e => e.id)).toEqual(ids);
+    it('should replace selected entity', () => {
+      component.writeValue(id);
+      expect(component.selectedEntityId).toEqual(id);
     });
 
-    it('should load entity values', () => {
-      component.writeValue(ids);
-      expect(retrieveSpy).toHaveBeenCalledTimes(ids.length);
+    it('should load entity value', () => {
+      component.writeValue(id);
+      expect(retrieveSpy).toHaveBeenCalledOnceWith(id);
     });
   });
 
-  describe('loadSelectedEntityValues', () => {
-    const entities: SampleData[] = [
-      {
-        id: 'pack',
-        a: 'pack',
-      },
-      {
-        id: 'sand',
-        a: 'sand',
-      },
-      {
-        id: 'quick',
-        a: 'quick',
-      },
-      {
-        id: 'forget',
-        a: 'forget',
-      },
-    ];
-    const ids = entities.map(e => e.id);
+  describe('loadSelectedEntityValue', () => {
+    const entity: SampleData = {
+      id: 'pack',
+      a: 'pack',
+    };
 
     beforeEach(() => {
       retrieveSpy.calls.reset();
@@ -340,72 +244,73 @@ describe('SearchableMultiChipEntityInputComponent', () => {
 
     it('should throw an error when no retrieve function is set', () => {
       component.retrieve = undefined;
-      expect(() => component.writeValue(ids)).toThrowError();
+      expect(() => component.writeValue(entity.id)).toThrowError();
     });
 
-    it('should ignore a retrieved entity when it got removed', fakeAsync(() => {
+    it('should ignore the retrieved entity when it was cleared', fakeAsync(() => {
       retrieveSpy.and.callFake(() => {
-        component.selectedEntities.splice(1);
-        return of(entities[0]);
+        component.selectedEntityId = undefined;
+        return of(entity);
       });
-      component.writeValue(ids);
-      component.selectedEntities.splice(1);
+      component.writeValue(entity.id);
 
-      expect(retrieveSpy).toHaveBeenCalledTimes(ids.length);
-      expect(component.selectedEntities).not.toContain(entities[0]);
+      expect(retrieveSpy).toHaveBeenCalledTimes(1);
+      expect(component.selectedEntityValue).not.toEqual(entity);
     }));
 
-    it('should set values for retrieved entities', fakeAsync(() => {
-      retrieveSpy.and.returnValues(...entities.map(e => of(e)));
-      component.writeValue(ids);
+    it('should ignore the retrieved entity when another one was selected', fakeAsync(() => {
+      retrieveSpy.and.callFake(() => {
+        component.selectedEntityId = 'choice';
+        return of(entity);
+      });
+      component.writeValue(entity.id);
+
+      expect(retrieveSpy).toHaveBeenCalledTimes(1);
+      expect(component.selectedEntityValue).not.toEqual(entity);
+    }));
+
+    it('should set value of retrieved entity', fakeAsync(() => {
+      retrieveSpy.and.returnValue(of(entity));
+      component.writeValue(entity.id);
       tick();
 
-      expect(retrieveSpy).toHaveBeenCalledTimes(ids.length);
-      expect(component.selectedEntities).toEqual(entities.map(e => ({
-        id: e.id,
-        v: {
-          id: e.id,
-          a: e.id,
-        },
-      })));
+      expect(component.selectedEntityValue).toEqual(entity);
     }));
   });
 
-  describe('remove', () => {
-    const toRemove: Identifiable<string> = {
-      id: 'whom',
+  describe('clearSelectedEntity', () => {
+    const selectedEntity: SampleData = {
+      id: 'ocean',
+      a: 'log',
     };
+
     beforeEach(() => {
-      component.selectedEntities.push({ id: 'width' });
-      component.selectedEntities.push(toRemove);
+      component.selectedEntityId = selectedEntity.id;
+      component.selectedEntityValue = selectedEntity;
     });
 
     it('should throw an error when form control is disabled', () => {
       component.setDisabledState(true);
-      expect(() => component.remove(toRemove)).toThrowError();
+      expect(() => component.clearSelectedEntity()).toThrowError();
     });
 
-    it('should throw an error when element was not found', () => {
-      expect(() => component.remove({ id: 'courage' })).toThrowError();
-    });
-
-    it('should remove the element from selected ones', () => {
-      expect(component.selectedEntities).toContain(toRemove);
-      component.remove(toRemove);
-      expect(component.selectedEntities).not.toContain(toRemove);
+    it('should clear the element', () => {
+      component.clearSelectedEntity();
+      expect(component.selectedEntityId).toBeFalsy();
+      expect(component.selectedEntityValue).toBeFalsy();
     });
 
     it('should notify about changed value', () => {
       const notifySpy = jasmine.createSpy();
       component.registerOnChange(notifySpy);
 
-      component.remove(toRemove);
+      component.clearSelectedEntity();
 
-      expect(notifySpy).toHaveBeenCalledOnceWith(spectator.component.selectedEntities.map(e => e.id));
+      expect(notifySpy).toHaveBeenCalledOnceWith(null);
     });
 
     it('should clear search input', () => {
-      component.remove(toRemove);
+      component.clearSelectedEntity();
       expect(component.searchFC.value).toEqual('');
     });
   });
@@ -436,55 +341,67 @@ describe('SearchableMultiChipEntityInputComponent', () => {
       expect(spectator.query('mat-label')).toHaveText(component.label);
     });
 
-    it('should not display chips when no entities are selected', async () => {
-      component.selectedEntities = [];
+    it('should not display value when no entities are selected', async () => {
+      component.selectedEntityId = undefined;
+      component.selectedEntityValue = undefined;
       spectator.detectChanges();
       await spectator.fixture.whenStable();
 
-      expect(spectator.query('mat-chip-row')).not.toBeVisible();
+      expect(spectator.query('.entity-display')).not.toBeVisible();
     });
 
-    it('should display chips when entities are selected', async () => {
-      component.selectedEntities = [
-        { id: 'persuade' },
-        { id: 'tune' },
-        { id: 'insure' },
-        { id: 'glory' },
-      ];
+    it('should display value when entity is selected', async () => {
+      const selectedEntity: SampleData = {
+        id: 'office',
+        a: 'human',
+      };
+      component.selectedEntityId = selectedEntity.id;
+      component.selectedEntityValue = selectedEntity;
+
       spectator.detectChanges();
       await spectator.fixture.whenStable();
 
-      expect(spectator.queryAll('mat-chip-row').length).toEqual(component.selectedEntities.length);
+      expect(spectator.query(byTextContent(selectedEntity.id, {
+        exact: false,
+        selector: 'div',
+      }))).toBeVisible();
     });
 
-    it('should display loading dots when entities are loading', async () => {
-      // Clear values.
-      component.selectedEntities = component.selectedEntities.map(e => ({
-        ...e,
-        v: undefined,
-      }));
+    it('should display loading dots when entity value is loading', async () => {
+      component.selectedEntityId = 'effort';
+      component.selectedEntityValue = undefined;
+
       spectator.detectChanges();
       await spectator.fixture.whenStable();
 
-      expect(spectator.queryAll('app-loading-dots').length).toEqual(component.selectedEntities.length);
+      expect(spectator.query('app-loading-dots')).toBeVisible();
     });
 
-    it('should display cancel buttons for chips', async () => {
-      expect(spectator.queryAll('mat-icon').length).toEqual(component.selectedEntities.length);
-      expect(spectator.query('mat-icon')).toHaveText('cancel');
+    it('should display clear button', async () => {
+      component.selectedEntityId = 'effort';
+
+      spectator.detectChanges();
+      await spectator.fixture.whenStable();
+
+      expect(spectator.query('mat-icon')).toBeVisible();
+      expect(spectator.query('mat-icon')).toHaveText('close');
     });
 
-    it('should remove when clicking cancel button in chip', () => {
-      const removeSpy = spyOn(component, 'remove');
-      spectator.click(byTextContent('cancel', { selector: 'mat-icon' }));
-      expect(removeSpy).toHaveBeenCalledTimes(1);
+    it('should clear when clicking cancel button for selected', async () => {
+      const clearSpy = spyOn(component, 'clearSelectedEntity');
+      component.selectedEntityId = 'effort';
+      spectator.detectChanges();
+      await spectator.fixture.whenStable();
+
+      spectator.click(byTextContent('close', { selector: 'mat-icon' }));
+      expect(clearSpy).toHaveBeenCalledTimes(1);
     });
 
     describe('suggestions', () => {
       const suggestions: SampleData[] = [
         {
           id: 'marry',
-          a: 'blow',
+          a: 'aloud',
         },
         {
           id: 'nature',
@@ -499,7 +416,7 @@ describe('SearchableMultiChipEntityInputComponent', () => {
 
       it('should display suggestions for autocomplete', fakeAsync(async () => {
         spectator.typeInElement('hello', 'input');
-        tick(SearchableMultiChipEntityInputComponent.SearchDebounceTimeMS);
+        tick(SearchableEntityInputComponent.SearchDebounceTimeMS);
 
         const autocomplete = await harnessLoader.getHarness(MatAutocompleteHarness);
         expect(autocomplete).toBeTruthy();
@@ -510,9 +427,9 @@ describe('SearchableMultiChipEntityInputComponent', () => {
         expect(optionTexts).toEqual(suggestions.map(s => s.id));
       }));
 
-      it('should add entity on suggestion selection', fakeAsync(async () => {
+      it('should select entity on suggestion selection', fakeAsync(async () => {
         spectator.typeInElement('hello', 'input');
-        tick(SearchableMultiChipEntityInputComponent.SearchDebounceTimeMS);
+        tick(SearchableEntityInputComponent.SearchDebounceTimeMS);
 
         const autocomplete = await harnessLoader.getHarness(MatAutocompleteHarness);
         tick();
@@ -520,7 +437,8 @@ describe('SearchableMultiChipEntityInputComponent', () => {
         await options[0].click();
         tick();
 
-        expect(component.selectedEntities.map(e => e.v)).toContain(suggestions[0]);
+        expect(component.selectedEntityId).toEqual(suggestions[0].id);
+        expect(component.selectedEntityValue).toEqual(suggestions[0]);
       }));
     });
   });
@@ -528,17 +446,18 @@ describe('SearchableMultiChipEntityInputComponent', () => {
 
 @Component({
   template: `
-    <app-searchable-multi-chip-entity-input-field
-      [chipTemplate]="chip"
+    <app-searchable-entity-input
+      [displayTemplate]="display"
       [errorTemplate]="errors"
       [formControl]="fc"
+      required="true"
       [retrieve]="getByID.bind(this)"
       [search]="search.bind(this)"
       [suggestionTemplate]="suggestion"
       class="app-edit-input-large"
-      label="Members"
-      placeholder="Add member...">
-      <ng-template #chip let-entity='entity'>
+      label="Owner"
+      placeholder="Search owner...">
+      <ng-template #display let-entity='entity'>
         {{asSD(entity).a}}
       </ng-template>
       <ng-template #suggestion let-entity='entity'>
@@ -547,10 +466,10 @@ describe('SearchableMultiChipEntityInputComponent', () => {
       <ng-template #errors>
         <mat-error *ngIf="fc.errors">Invalid value.</mat-error>
       </ng-template>
-    </app-searchable-multi-chip-entity-input-field>`,
+    </app-searchable-entity-input>`,
 })
 class TestHostComponent {
-  fc = new FormControl<string[]>([]);
+  fc = new FormControl<string | null>(null);
 
   @Input() getByID: (id: string) => Observable<SampleData> = () => {
     throw new Error('missing get-by-id fn');
@@ -564,7 +483,7 @@ class TestHostComponent {
   }
 }
 
-describe('SearchableMultiChipEntityInputComponent.integration', () => {
+describe('SearchableEntityInputComponent.integration', () => {
   let spectator: Spectator<TestHostComponent>;
   let host: TestHostComponent;
   const createComponent = createComponentFactory<TestHostComponent>({
@@ -575,28 +494,16 @@ describe('SearchableMultiChipEntityInputComponent.integration', () => {
   let harnessLoader: HarnessLoader;
   let retrieveSpy: Spy;
   let searchSpy: Spy;
-  let selectedEntities: SelectedEntity<string, SampleData>[] = [];
+  let entity: SampleData;
   let suggestions: SampleData[] = [];
 
   beforeEach(async () => {
     retrieveSpy = jasmine.createSpy('retrieve');
     searchSpy = jasmine.createSpy('search').and.returnValue(of([]));
-    selectedEntities = [
-      {
-        id: 'pack',
-        v: {
-          id: 'pack',
-          a: 'hello',
-        },
-      },
-      {
-        id: 'sand',
-        v: {
-          id: 'sand',
-          a: 'world',
-        },
-      },
-    ];
+    entity = {
+      id: 'pack',
+      a: 'hello',
+    };
     suggestions = [
       {
         id: 'angle',
@@ -625,35 +532,31 @@ describe('SearchableMultiChipEntityInputComponent.integration', () => {
 
   it('should apply form control value', fakeAsync(async () => {
     retrieveSpy.calls.reset();
-    selectedEntities.forEach(e => {
-      retrieveSpy.withArgs(e.id).and.returnValue(of(e.v));
-    });
-    host.fc.setValue(selectedEntities.map(e => e.id));
+    retrieveSpy.and.returnValue(of(entity));
+    host.fc.setValue(entity.id);
     tick();
     await spectator.fixture.whenStable();
 
     // Bug in Angular Material.
     spectator.click('input');
 
-    expect(retrieveSpy).withContext('should have called retrieve').toHaveBeenCalledTimes(selectedEntities.length);
-    expect(spectator.queryAll('mat-chip-row').length).toEqual(selectedEntities.length);
+    expect(retrieveSpy).withContext('should have called retrieve').toHaveBeenCalledOnceWith(entity.id);
   }));
 
-  it('should display chip with template', fakeAsync(async () => {
-    const e = selectedEntities[0];
+  it('should display entity with display-template', fakeAsync(async () => {
     retrieveSpy.calls.reset();
-    retrieveSpy.and.returnValue(of(e.v));
-    host.fc.setValue([e.id]);
+    retrieveSpy.and.returnValue(of(entity));
+    host.fc.setValue(entity.id);
     tick();
     await spectator.fixture.whenStable();
 
     // Bug in Angular Material.
     spectator.click('input');
 
-    expect(spectator.query(byTextContent(e.v!.a, {
+    expect(spectator.query(byTextContent(entity.a, {
       exact: false,
-      selector: 'mat-chip-row',
-    }))).withContext(`should display entity value '${ e.v!.a }' in chip with template`).toBeVisible();
+      selector: 'div',
+    }))).toBeVisible();
   }));
 
   it('should call for suggestions', fakeAsync(() => {
@@ -662,7 +565,7 @@ describe('SearchableMultiChipEntityInputComponent.integration', () => {
     searchSpy.and.returnValue(of(suggestions));
 
     spectator.typeInElement(term, 'input');
-    tick(SearchableMultiChipEntityInputComponent.SearchDebounceTimeMS);
+    tick(SearchableEntityInputComponent.SearchDebounceTimeMS);
 
     expect(searchSpy).toHaveBeenCalledOnceWith(term);
   }));
@@ -673,7 +576,7 @@ describe('SearchableMultiChipEntityInputComponent.integration', () => {
     searchSpy.and.returnValue(of(suggestions));
 
     spectator.typeInElement(term, 'input');
-    tick(SearchableMultiChipEntityInputComponent.SearchDebounceTimeMS);
+    tick(SearchableEntityInputComponent.SearchDebounceTimeMS);
     await spectator.fixture.whenStable();
 
     const autocomplete = await harnessLoader.getHarness(MatAutocompleteHarness);
@@ -685,7 +588,9 @@ describe('SearchableMultiChipEntityInputComponent.integration', () => {
   }));
 
   it('should display errors using template', fakeAsync(async () => {
-    host.fc.setErrors({ 'charge': 'stair' });
+    // Touch.
+    spectator.focus('input');
+    spectator.focus('mat-form-field')
 
     spectator.detectComponentChanges();
     tick();

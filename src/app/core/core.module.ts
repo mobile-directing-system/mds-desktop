@@ -21,6 +21,8 @@ import {
   SearchableMultiChipEntityInputComponent,
 } from './components/searchable-multi-chip-input-field/searchable-multi-chip-entity-input.component';
 import { LoadingDotsComponent } from './components/loading-dots/loading-dots.component';
+import { SearchableEntityInputComponent } from './components/searchable-entity-input/searchable-entity-input.component';
+import { ErrorsComponent } from './components/errors/errors.component';
 
 
 @NgModule({
@@ -41,6 +43,8 @@ import { LoadingDotsComponent } from './components/loading-dots/loading-dots.com
     QuickSearchComponent,
     SearchableMultiChipEntityInputComponent,
     LoadingDotsComponent,
+    SearchableEntityInputComponent,
+    ErrorsComponent,
   ],
   exports: [
     LogoComponent,
@@ -57,6 +61,8 @@ import { LoadingDotsComponent } from './components/loading-dots/loading-dots.com
     QuickSearchComponent,
     LoadingOverlayComponent,
     SearchableMultiChipEntityInputComponent,
+    SearchableEntityInputComponent,
+    ErrorsComponent,
   ],
   imports: [
     CommonModule,

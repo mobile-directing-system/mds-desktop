@@ -1,0 +1,32 @@
+@import 'src/styles/corporate.scss';
+
+mat-form-field {
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+.entity-display {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+mat-icon.clear-entity {
+  cursor: pointer;
+
+  &:hover {
+    color: $dark-secondary-text;
+  }
+}
+
+.loading-dots {
+  align-self: center;
+}
+
+:host {
+  display: block;
+}
