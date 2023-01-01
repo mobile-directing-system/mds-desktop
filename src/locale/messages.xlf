@@ -12,6 +12,7 @@
     <unit id="5248717555542428023">
       <notes>
         <note category="location">src/app/features/auth/login-view/login-view.component.html:5</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:77</note>
         <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:5</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:5</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:31</note>
@@ -104,6 +105,7 @@
     </unit>
     <unit id="2149300564474427551">
       <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:84</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:38</note>
       </notes>
       <segment>
@@ -120,6 +122,7 @@
     </unit>
     <unit id="3586674587150281199">
       <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:67</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:21</note>
       </notes>
       <segment>
@@ -161,6 +164,7 @@
     </unit>
     <unit id="5342432350421167093">
       <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:72</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:26</note>
       </notes>
       <segment>
@@ -178,6 +182,7 @@
     </unit>
     <unit id="5944812089887969249">
       <notes>
+        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:1</note>
         <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:5</note>
       </notes>
       <segment>
@@ -203,6 +208,7 @@
     </unit>
     <unit id="1859131936150262113">
       <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:85</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:39</note>
       </notes>
       <segment>
@@ -251,6 +257,8 @@
     </unit>
     <unit id="2330577642930707695">
       <notes>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:54,55</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:104,105</note>
         <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:35,36</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:29,30</note>
         <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:14,15</note>
@@ -410,7 +418,7 @@
     </unit>
     <unit id="1241348629231510663">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:37,36</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:36</note>
       </notes>
       <segment>
         <source>End</source>
@@ -450,6 +458,9 @@
     </unit>
     <unit id="4902817035128594900">
       <notes>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:12</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:12</note>
+        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:23</note>
         <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:26</note>
       </notes>
       <segment>
@@ -466,6 +477,9 @@
     </unit>
     <unit id="5701618810648052610">
       <notes>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:5</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:5</note>
+        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:18</note>
         <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:21</note>
       </notes>
       <segment>
@@ -478,6 +492,99 @@
       </notes>
       <segment>
         <source>Create Operation</source>
+      </segment>
+    </unit>
+    <unit id="1155679422702437698">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:38,39</note>
+      </notes>
+      <segment>
+        <source>Add Members</source>
+      </segment>
+    </unit>
+    <unit id="1243614560979208707">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:2,3</note>
+      </notes>
+      <segment>
+        <source>Group: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/></source>
+      </segment>
+    </unit>
+    <unit id="1283895920974679461">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:28</note>
+      </notes>
+      <segment>
+        <source>Operation</source>
+      </segment>
+    </unit>
+    <unit id="1512712705645664720">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.ts:67</note>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.ts:73</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.ts:119</note>
+      </notes>
+      <segment>
+        <source>Group creation failed.</source>
+      </segment>
+    </unit>
+    <unit id="2978800622836475330">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:15,16</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:15,16</note>
+      </notes>
+      <segment>
+        <source>Description is required.</source>
+      </segment>
+    </unit>
+    <unit id="3695400929536588338">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:8,9</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:8,9</note>
+      </notes>
+      <segment>
+        <source>Title is required.</source>
+      </segment>
+    </unit>
+    <unit id="4643671691415114219">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:2</note>
+        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:7</note>
+      </notes>
+      <segment>
+        <source>Create Group</source>
+      </segment>
+    </unit>
+    <unit id="5673725231002148994">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Create, manage and edit groups.</source>
+      </segment>
+    </unit>
+    <unit id="7170240979381321210">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:61,62</note>
+      </notes>
+      <segment>
+        <source>Create Group</source>
+      </segment>
+    </unit>
+    <unit id="7833496345174091535">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:108,109</note>
+      </notes>
+      <segment>
+        <source>Update Group</source>
+      </segment>
+    </unit>
+    <unit id="7165302310980913730">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:92</note>
+      </notes>
+      <segment>
+        <source>Remove Member</source>
       </segment>
     </unit>
   </file>

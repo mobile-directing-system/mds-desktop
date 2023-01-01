@@ -1,0 +1,15 @@
+@import 'src/styles/forms';
+
+form {
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+.memberAdditionAndAddButton{
+  display: flex;
+  flex-direction: row;
+  #parent * {
+    margin-inside: 4rem;
+  }
+}
