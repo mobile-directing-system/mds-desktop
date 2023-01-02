@@ -3,7 +3,6 @@ import { User } from '../../../model/user';
 import { of, Subscription, switchMap } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
 import { UserService } from '../../../services/user.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +14,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   private s: Subscription[] = [];
 
-  constructor(private authService: AuthService, private userService: UserService, private router: Router) {
+  constructor(private authService: AuthService, private userService: UserService) {
   }
 
   ngOnDestroy(): void {
@@ -56,12 +55,5 @@ export class ProfileComponent implements OnInit, OnDestroy {
       }
     }
     return s.join(' ');
-  }
-
-  /**
-   * Logs out the user and navigates to login page.
-   */
-  logout(): void {
-    this.authService.logout().subscribe(() => this.router.navigate(['/login']).then());
   }
 }

@@ -1,4 +1,3 @@
-import { Routes } from '@angular/router';
 import { LoginView } from '../../features/auth/login-view/login-view.component';
 import { LandingLayoutComponent } from '../components/landing-layout/landing-layout.component';
 import { SetServerURLView } from '../../features/auth/set-server-url-view/set-server-url-view.component';
@@ -22,6 +21,8 @@ import { GroupManagementView } from '../../features/management/group-management-
 import {
   OperationManagementView,
 } from '../../features/management/operation-management-view/operation-management-view.component';
+import { LogoutView } from '../../features/auth/logout-view/logout-view.component';
+import { Routes } from '@angular/router';
 import {
   CreateGroupView,
 } from '../../features/management/group-management-view/create-group-view/create-group-view.component';
@@ -118,6 +119,10 @@ export const AppRoutes: Routes = [
       {
         path: 'login',
         component: LoginView,
+      },
+      {
+        path: 'logout',
+        component: LogoutView,
       },
     ],
   },

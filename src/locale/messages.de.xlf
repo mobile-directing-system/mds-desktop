@@ -857,5 +857,14 @@
         <target>Mitglieder hinzufügen</target>
       </segment>
     </unit>
+    <unit id="7393468163947639901">
+      <notes>
+        <note category="location">src/app/features/auth/logout-view/logout-view.component.html:2</note>
+      </notes>
+      <segment state="initial">
+        <source>Logging you out...</source>
+        <target>Sie werden ausgeloggt...</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

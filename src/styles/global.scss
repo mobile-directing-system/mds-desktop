@@ -21,3 +21,9 @@
 .clickable {
   cursor: pointer;
 }
+
+.action-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}

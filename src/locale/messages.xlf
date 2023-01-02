@@ -736,5 +736,13 @@
         <source>Add members</source>
       </segment>
     </unit>
+    <unit id="7393468163947639901">
+      <notes>
+        <note category="location">src/app/features/auth/logout-view/logout-view.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Logging you out...</source>
+      </segment>
+    </unit>
   </file>
 </xliff>

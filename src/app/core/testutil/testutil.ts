@@ -18,8 +18,12 @@ export function clearRouteComponentsFor(routes: Route[], path: string): Route[] 
     let newPath = path;
     if (path.length > 0 && route.path == '') {
       newRoute.component = undefined;
+      newRoute.canActivate = undefined;
+      newRoute.canActivateChild = undefined;
     } else if (route.path === currentSegment) {
       newRoute.component = undefined;
+      newRoute.canActivate = undefined;
+      newRoute.canActivateChild = undefined;
       newPath = path.substring(currentSegment.length);
     }
     if (!!route.children) {
@@ -57,6 +61,8 @@ function clearRouteComponentsExceptRec(routes: Route[], exceptPath: string, last
     // Clear if not except-path.
     if (currentPath !== exceptPath) {
       newRoute.component = undefined;
+      newRoute.canActivate = undefined;
+      newRoute.canActivateChild = undefined;
     }
     if (!!route.children) {
       newRoute.children?.push(...clearRouteComponentsExceptRec(route.children, exceptPath, currentPath));
