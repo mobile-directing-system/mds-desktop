@@ -11,23 +11,23 @@ import urlJoin from 'url-join';
 /**
  * Fields for sorting {@link Group}s.
  */
-export enum GroupSort{
+export enum GroupSort {
   ByTitle,
   ByDescription,
 }
 
-export interface GroupFilter{
+export interface GroupFilter {
   orderBy?: GroupSort,
   userId?: string,
   forOperation?: string,
-  excludeGlobal?:boolean,
+  excludeGlobal?: boolean,
 }
 
 /**
  * Service for group management. Allows creation, manipulation and retrieval of groups.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GroupService {
 
@@ -61,7 +61,7 @@ export class GroupService {
       members: create.members,
     };
     return this.netService.postJSON<NetCreated>('/groups', body, {}).pipe(
-      map((res:NetCreated): Group => ({
+      map((res: NetCreated): Group => ({
         id: res.id,
         title: res.title,
         description: res.description,
@@ -98,15 +98,15 @@ export class GroupService {
    * Deletes the given group.
    * @param groupId Id of the group to delete.
    */
-  deleteGroupById(groupId: string): Observable<void>{
-    return this.netService.delete(urlJoin('/groups', groupId),{});
+  deleteGroupById(groupId: string): Observable<void> {
+    return this.netService.delete(urlJoin('/groups', groupId), {});
   }
 
   /**
    * Retrieves the group with the given id.
    * @param groupId The id of the group to be retrieved.
    */
-  getGroupById(groupId: string): Observable<Group>{
+  getGroupById(groupId: string): Observable<Group> {
     interface NetGroup {
       id: string;
       title: string;
@@ -116,7 +116,7 @@ export class GroupService {
     }
 
     return this.netService.get<NetGroup>(urlJoin('/groups', groupId), {}).pipe(
-      map((res:NetGroup):Group => ({
+      map((res: NetGroup): Group => ({
         id: res.id,
         title: res.title,
         description: res.description,
@@ -129,9 +129,9 @@ export class GroupService {
   /**
    * Retrieves paginated {@link Group} list.
    * @param params Params for pagination.
-   * @param filter Filter for result.
+   * @param filters Filters for retrieval.
    */
-  getGroups(params: PaginationParams<GroupSort>, filter: GroupFilter): Observable<Paginated<Group>> {
+  getGroups(params: PaginationParams<GroupSort>, filters: GroupFilter): Observable<Paginated<Group>> {
     interface NetEntry {
       id: string;
       title: string;
@@ -139,28 +139,29 @@ export class GroupService {
       operation?: string;
       members: string[];
     }
-    interface NetParams extends NetPaginationParams{
+
+    interface NetParams extends NetPaginationParams {
       orderBy?: GroupSort,
       userId?: string,
       forOperation?: string,
-      excludeGlobal?:boolean,
+      excludeGlobal?: boolean,
     }
 
-    const nParams: NetParams = netPaginationParams(params,(by:GroupSort)=> {
+    const nParams: NetParams = netPaginationParams(params, (by: GroupSort) => {
       switch (by) {
         case GroupSort.ByTitle:
           return 'title';
         case GroupSort.ByDescription:
-          return  'description';
+          return 'description';
         default:
-          throw new MDSError(MDSErrorCode.AppError, 'unknown group sort', {by: by})
+          throw new MDSError(MDSErrorCode.AppError, 'unknown group sort', { by: by });
       }
     });
-    nParams.userId = filter.userId;
-    nParams.forOperation = filter.forOperation;
-    nParams.excludeGlobal = filter.excludeGlobal;
+    nParams.userId = filters.userId;
+    nParams.forOperation = filters.forOperation;
+    nParams.excludeGlobal = filters.excludeGlobal;
 
-    return this.netService.get<NetPaginated<NetEntry>>('/groups',nParams).pipe(
+    return this.netService.get<NetPaginated<NetEntry>>('/groups', nParams).pipe(
       map((res: NetPaginated<NetEntry>): Paginated<Group> => {
         return paginatedFromNet(res, (nEntry: NetEntry): Group => ({
           id: nEntry.id,
