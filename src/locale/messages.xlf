@@ -187,6 +187,7 @@
     <unit id="7457179823984196306">
       <notes>
         <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:6</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:1</note>
       </notes>
       <segment>
         <source>Operations</source>
@@ -405,6 +406,78 @@
       </notes>
       <segment>
         <source>Create</source>
+      </segment>
+    </unit>
+    <unit id="1241348629231510663">
+      <notes>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:37,36</note>
+      </notes>
+      <segment>
+        <source>End</source>
+      </segment>
+    </unit>
+    <unit id="1562584780596394495">
+      <notes>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:43</note>
+      </notes>
+      <segment>
+        <source>Archived</source>
+      </segment>
+    </unit>
+    <unit id="2519536460151870844">
+      <notes>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Create, manage and edit operations.</source>
+      </segment>
+    </unit>
+    <unit id="2617770989260729968">
+      <notes>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:49</note>
+      </notes>
+      <segment>
+        <source>Currently active</source>
+      </segment>
+    </unit>
+    <unit id="4328253427834278164">
+      <notes>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:46</note>
+      </notes>
+      <segment>
+        <source>Planned in the future</source>
+      </segment>
+    </unit>
+    <unit id="4902817035128594900">
+      <notes>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:26</note>
+      </notes>
+      <segment>
+        <source>Description</source>
+      </segment>
+    </unit>
+    <unit id="5162686434580248853">
+      <notes>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:31</note>
+      </notes>
+      <segment>
+        <source>Start</source>
+      </segment>
+    </unit>
+    <unit id="5701618810648052610">
+      <notes>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:21</note>
+      </notes>
+      <segment>
+        <source>Title</source>
+      </segment>
+    </unit>
+    <unit id="9131063577527940964">
+      <notes>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:7</note>
+      </notes>
+      <segment>
+        <source>Create Operation</source>
       </segment>
     </unit>
   </file>

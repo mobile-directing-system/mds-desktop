@@ -1,1 +1,63 @@
-<p>operation-management-view works!</p>
+<h1 i18n>Operations</h1>
+
+<app-heading-hint i18n>Create, manage and edit operations.</app-heading-hint>
+
+<!--Actions.-->
+<app-list-action-bar [end]="search">
+  <button mat-button i18n (click)="createOperation()">Create Operation</button>
+  <ng-template #search>
+    <app-quick-search (search)="searchChange($event)"></app-quick-search>
+  </ng-template>
+</app-list-action-bar>
+<!--Table.-->
+<app-paginated-list #list (page)="page($event)" [data]="loadedOperations">
+  <table (matSortChange)="sortChange($event)" [appShowLoadingOverlay]="retrieving.loadingChange() | async"
+         [dataSource]="list.dataSource"
+         aria-label="Operation list"
+         mat-table
+         matSort>
+
+    <ng-container matColumnDef="title">
+      <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="title">Title</th>
+      <td *matCellDef="let row" mat-cell>{{ asOperation(row).title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="description">Description</th>
+      <td *matCellDef="let row" class="operation-description" mat-cell>{{ asOperation(row).description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="start">
+      <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="start">Start</th>
+      <td *matCellDef="let row" mat-cell>{{ asOperation(row).start | date }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="end">
+      <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="end">End</th>
+      <td *matCellDef="let row" mat-cell>{{ asOperation(row).end | date }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="props">
+      <th *matHeaderCellDef mat-header-cell scope="col"></th>
+      <td *matCellDef="let row" mat-cell>
+        <mat-icon *ngIf="asOperation(row).is_archived" i18n-matTooltip matTooltip="Archived">
+          inventory
+        </mat-icon>
+        <mat-icon *ngIf="isOperationInFuture(asOperation(row))" i18n-matTooltip matTooltip="Planned in the future">
+          pending_actions
+        </mat-icon>
+        <mat-icon *ngIf="isOperationActive(asOperation(row))" i18n-matTooltip matTooltip="Currently active">
+          double_arrow
+        </mat-icon>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
+    <tr (click)="navigateToOperation(asOperation(row).id)"
+        *matRowDef="let row; columns: columnsToDisplay"
+        [ngClass]="{ 'archived': asOperation(row).is_archived, 'clickable': !asOperation(row).is_archived, 'planned': isOperationInFuture(asOperation(row)), 'active': isOperationActive(asOperation(row)) }"
+        class="operation"
+        mat-row></tr>
+
+  </table>
+</app-paginated-list>

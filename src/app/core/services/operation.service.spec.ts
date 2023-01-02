@@ -35,7 +35,7 @@ describe('OperationService', () => {
       title: 'Honky',
       description: 'Tonky',
       start: new Date(),
-      end: new Date(new Date().getDate() +1),
+      end: new Date(new Date().getDate() + 1),
       is_archived: false,
     };
     const netCreated = {
@@ -55,11 +55,11 @@ describe('OperationService', () => {
       is_archived: false,
     };
 
-    it('should create an operation correctly', fakeAsync( () => {
+    it('should create an operation correctly', fakeAsync(() => {
       const postSpy = spectator.inject(NetService).postJSON.and.returnValue(of(netCreated));
       const cbSpy = createSpy();
 
-      spectator.service.createOperation(create).subscribe({next: cbSpy});
+      spectator.service.createOperation(create).subscribe({ next: cbSpy });
       tick();
 
       expect(postSpy).withContext('should perform correct next call').toHaveBeenCalledOnceWith('/operations', {
@@ -69,7 +69,7 @@ describe('OperationService', () => {
         end: create.end,
         is_archived: false,
       }, {});
-      expect(cbSpy ).withContext('should call next with correct value').toHaveBeenCalledOnceWith(expectCreated);
+      expect(cbSpy).withContext('should call next with correct value').toHaveBeenCalledOnceWith(expectCreated);
     }));
 
     it('should call error on net call fail', fakeAsync(() => {
@@ -84,8 +84,8 @@ describe('OperationService', () => {
 
       expect(postSpy).toHaveBeenCalledTimes(1);
       expect(cbSpy).withContext('should call error').toHaveBeenCalledTimes(1);
-    }))
-  })
+    }));
+  });
 
   describe('updateOperation', () => {
     const update: Operation = {
@@ -93,7 +93,7 @@ describe('OperationService', () => {
       title: 'no more',
       description: 'honky tonky',
       start: new Date(),
-      end: new Date(new Date().getDate() +1),
+      end: new Date(new Date().getDate() + 1),
       is_archived: false,
     };
 
@@ -103,7 +103,7 @@ describe('OperationService', () => {
       spectator.service.updateOperation(update).subscribe();
       tick();
 
-      expect(putSpy).withContext('should perform correct net call').toHaveBeenCalledOnceWith('/operations/strange_things',{
+      expect(putSpy).withContext('should perform correct net call').toHaveBeenCalledOnceWith('/operations/strange_things', {
         id: update.id,
         title: update.title,
         description: update.description,
@@ -129,20 +129,20 @@ describe('OperationService', () => {
   });
 
   describe('getOperationById', () => {
-    const operationId = 'randoMcRandom'
+    const operationId = 'randoMcRandom';
     const netOperation = {
       id: operationId,
-      title: "dirt",
-      description: "sleep",
+      title: 'dirt',
+      description: 'sleep',
       start: new Date(),
-      end: new Date(new Date().getDate() +1),
+      end: new Date(new Date().getDate() + 1),
       is_archived: false,
     };
     const expectOperation: Operation = {
       id: operationId,
       title: 'dirt',
       description: 'sleep',
-      start:  netOperation.start,
+      start: netOperation.start,
       end: netOperation.end,
       is_archived: false,
     };
@@ -151,7 +151,7 @@ describe('OperationService', () => {
       const getSpy = spectator.inject(NetService).get.and.returnValue(of(netOperation));
       const cbSpy = createSpy();
 
-      spectator.service.getOperationById(operationId).subscribe({next: cbSpy});
+      spectator.service.getOperationById(operationId).subscribe({ next: cbSpy });
       tick();
 
       expect(getSpy).withContext('should perform correct net call').toHaveBeenCalledOnceWith('/operations/randoMcRandom', {});
@@ -177,45 +177,50 @@ describe('OperationService', () => {
     const netOperations = [
       {
         id: 'randoMcRandom',
-        title: "relation",
-        description: "abroad",
+        title: 'relation',
+        description: 'abroad',
         start: new Date(),
-        end: new Date(new Date().getDate() +1),
+        end: new Date(new Date().getDate() + 1),
         is_archived: false,
       },
       {
         id: 'evenMoreRandom',
-        title: "relation",
+        title: 'relation',
         description: 'abroad',
         start: new Date(),
-        end: new Date(new Date().getDate() +1),
+        end: new Date(new Date().getDate() + 1),
         is_archived: false,
       },
     ];
     const params = testGenRandomPaginationParams<OperationSort>();
-    const netPaginated = testGenNetPaginated(params,undefined, netOperations);
+    const netPaginated = testGenNetPaginated(params, undefined, netOperations);
 
     it('should return correct operation list upon retrieval', fakeAsync(() => {
       const getSpy = spectator.inject(NetService).get.and.returnValue(of(netPaginated));
       const cbSpy = createSpy();
 
-      spectator.service.getOperations(params).subscribe({next:cbSpy});
+      spectator.service.getOperations(params, {}).subscribe({ next: cbSpy });
       tick();
 
-      expect(getSpy).toHaveBeenCalledOnceWith('/operations', testGenNetPaginationParams(params, undefined));
-      expect(cbSpy).toHaveBeenCalledOnceWith(testGenPaginatedFromNet<Operation>(netPaginated,undefined,[
+      expect(getSpy).toHaveBeenCalledOnceWith('/operations', {
+        ...testGenNetPaginationParams(params, undefined),
+        only_ongoing: undefined,
+        include_archived: undefined,
+        for_user: undefined,
+      });
+      expect(cbSpy).toHaveBeenCalledOnceWith(testGenPaginatedFromNet<Operation>(netPaginated, undefined, [
         {
           id: 'randoMcRandom',
-          title: "relation",
-          description: "abroad",
+          title: 'relation',
+          description: 'abroad',
           start: netOperations[0].start,
           end: netOperations[0].end,
           is_archived: false,
         },
         {
           id: 'evenMoreRandom',
-          title: "relation",
-          description: "abroad",
+          title: 'relation',
+          description: 'abroad',
           start: netOperations[1].start,
           end: netOperations[1].end,
           is_archived: false,
@@ -228,17 +233,22 @@ describe('OperationService', () => {
       [OperationSort.ByDescription, 'description'],
       [OperationSort.ByStart, 'start'],
       [OperationSort.ByEnd, 'end'],
-      [OperationSort.ByIsArchived,'is_archived'],
+      [OperationSort.ByIsArchived, 'is_archived'],
     ]).forEach((netSort, appSort) => {
       it(`should map order-by ${ OperationSort[appSort] } to ${ netSort }`, fakeAsync(() => {
         const params = testGenRandomPaginationParams<OperationSort>(appSort);
         const netPaginated = testGenNetPaginated(params, netSort, []);
         const getSpy = spectator.inject(NetService).get.and.returnValue(of(netPaginated));
 
-        spectator.service.getOperations(params).subscribe();
+        spectator.service.getOperations(params, {}).subscribe();
         tick();
 
-        expect(getSpy).withContext(`should map ${ appSort } to ${ netSort }`).toHaveBeenCalledOnceWith('/operations', testGenNetPaginationParams(params, netSort));
+        expect(getSpy).withContext(`should map ${ appSort } to ${ netSort }`).toHaveBeenCalledOnceWith('/operations', {
+          ...testGenNetPaginationParams(params, netSort),
+          only_ongoing: undefined,
+          include_archived: undefined,
+          for_user: undefined,
+        });
       }));
     });
 
@@ -246,7 +256,7 @@ describe('OperationService', () => {
       const putSpy = spectator.inject(NetService).get.and.returnValue(throwError(() => new Error('sad life')));
       const cbSpy = createSpy();
 
-      spectator.service.getOperations(params).subscribe({
+      spectator.service.getOperations(params, {}).subscribe({
         next: () => fail('should fail'),
         error: cbSpy,
       });
@@ -261,20 +271,20 @@ describe('OperationService', () => {
     const netOperations = [
       {
         id: 'randoMcRandom',
-        title: "pink",
-        description: "sow",
+        title: 'pink',
+        description: 'sow',
         start: new Date(),
         end: new Date(new Date().getDate() + 1),
         is_archived: false,
       },
       {
         id: 'evenMoreRandom',
-        title: "stay",
-        description: "steady",
+        title: 'stay',
+        description: 'steady',
         start: new Date(),
         end: new Date(new Date().getDate() + 1),
         is_archived: false,
-      }
+      },
     ];
     const params = testGenRandomSearchParams();
     const netSearchResult = testGenNetSearchResult(params, netOperations);
@@ -283,11 +293,14 @@ describe('OperationService', () => {
       const getSpy = spectator.inject(NetService).get.and.returnValue(of(netSearchResult));
       const cbSpy = createSpy();
 
-      spectator.service.searchOperations(params).subscribe({next: cbSpy});
+      spectator.service.searchOperations(params, {}).subscribe({ next: cbSpy });
       tick();
 
       expect(getSpy).toHaveBeenCalledOnceWith('/operations/search', {
         ...netSearchParams(params),
+        only_ongoing: undefined,
+        include_archived: undefined,
+        for_user: undefined,
       });
       expect(cbSpy).toHaveBeenCalledOnceWith(testGenSearchResultFromNet<Operation>(netSearchResult, [
         {
@@ -313,7 +326,7 @@ describe('OperationService', () => {
       const putSpy = spectator.inject(NetService).get.and.returnValue(throwError(() => new Error('get bonked')));
       const cbSpy = createSpy();
 
-      spectator.service.searchOperations(params).subscribe({
+      spectator.service.searchOperations(params, {}).subscribe({
         next: () => fail('should fail'),
         error: cbSpy,
       });
@@ -327,7 +340,7 @@ describe('OperationService', () => {
   describe('updateOperationMembers', () => {
     const update = [
       'randoMcRandom',
-      'evenMoreRandom'
+      'evenMoreRandom',
     ];
     const operationId = 'theMostRandom';
 
@@ -339,7 +352,7 @@ describe('OperationService', () => {
 
       expect(putSpy).withContext('should perform correct net call').toHaveBeenCalledOnceWith('/operations/theMostRandom/members', [
         'randoMcRandom',
-        'evenMoreRandom'
+        'evenMoreRandom',
       ], {});
     }));
 
@@ -359,7 +372,7 @@ describe('OperationService', () => {
   });
 
   describe('getOperationMembers', () => {
-    const operationId = 'randoMcRandom'
+    const operationId = 'randoMcRandom';
     const netUsers = [
       {
         id: 'barber',
@@ -385,7 +398,7 @@ describe('OperationService', () => {
       const getSpy = spectator.inject(NetService).get.and.returnValue(of(netPaginated));
       const cbSpy = createSpy();
 
-      spectator.service.getOperationMembers(operationId, params).subscribe({next: cbSpy});
+      spectator.service.getOperationMembers(operationId, params).subscribe({ next: cbSpy });
       tick();
 
       expect(getSpy).toHaveBeenCalledOnceWith('/operations/randoMcRandom/members', testGenNetPaginationParams(params, undefined));
@@ -430,7 +443,7 @@ describe('OperationService', () => {
       const getSpy = spectator.inject(NetService).get.and.returnValue(throwError(() => new Error('get bonked')));
       const cbSpy = createSpy();
 
-      spectator.service.getOperationMembers(operationId,params).subscribe({
+      spectator.service.getOperationMembers(operationId, params).subscribe({
         next: () => fail('should fail'),
         error: cbSpy,
       });

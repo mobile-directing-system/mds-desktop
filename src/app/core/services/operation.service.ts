@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Paginated, PaginationParams, SearchParams, SearchResult } from '../util/store';
 import {
   NetPaginated,
+  NetPaginationParams,
   netPaginationParams,
   netSearchParams,
   NetSearchResult,
@@ -25,6 +26,15 @@ export enum OperationSort {
   ByStart,
   ByEnd,
   ByIsArchived
+}
+
+/**
+ * Filters for operation-list-retrieval.
+ */
+export interface OperationFilters {
+  onlyOngoing?: boolean;
+  includeArchived?: boolean;
+  forUser?: string;
 }
 
 /**
@@ -142,8 +152,9 @@ export class OperationService {
   /**
    * Retrieves a paginated operation list sorted by the given params.
    * @param params The pagination parameters.
+   * @param filters Filters for retrieval.
    */
-  getOperations(params: PaginationParams<OperationSort>): Observable<Paginated<Operation>> {
+  getOperations(params: PaginationParams<OperationSort>, filters: OperationFilters): Observable<Paginated<Operation>> {
     interface NetEntry {
       id: string,
       title: string;
@@ -153,7 +164,13 @@ export class OperationService {
       is_archived: boolean;
     }
 
-    const nParams = netPaginationParams(params, (by: OperationSort) => {
+    interface NetParams extends NetPaginationParams {
+      only_ongoing?: boolean;
+      include_archived?: boolean;
+      for_user?: string;
+    }
+
+    const nParams: NetParams = netPaginationParams(params, (by: OperationSort) => {
       switch (by) {
         case OperationSort.ByTitle:
           return 'title';
@@ -169,14 +186,17 @@ export class OperationService {
           throw new MDSError(MDSErrorCode.AppError, 'unknown operation sort', { by: by });
       }
     });
+    nParams.only_ongoing = filters.onlyOngoing;
+    nParams.include_archived = filters.includeArchived;
+    nParams.for_user = filters.forUser;
     return this.netService.get<NetPaginated<NetEntry>>('/operations', nParams).pipe(
       map((res: NetPaginated<NetEntry>): Paginated<Operation> => {
         return paginatedFromNet(res, (nEntry: NetEntry): Operation => ({
           id: nEntry.id,
           title: nEntry.title,
           description: nEntry.description,
-          start: nEntry.start,
-          end: nEntry.end,
+          start: new Date(nEntry.start),
+          end: nEntry.end !== undefined ? new Date(nEntry.end) : undefined,
           is_archived: nEntry.is_archived,
         }));
       }),
@@ -186,8 +206,9 @@ export class OperationService {
   /**
    * Searches operations using the given parameters.
    * @param params The search parameters.
+   * @param filters Filters for retrieval.
    */
-  searchOperations(params: SearchParams): Observable<SearchResult<Operation>> {
+  searchOperations(params: SearchParams, filters: OperationFilters): Observable<SearchResult<Operation>> {
     interface NetEntry {
       id: string,
       title: string;
@@ -197,8 +218,17 @@ export class OperationService {
       is_archived: boolean;
     }
 
-    const netParams = {
+    interface NetParams extends NetPaginationParams {
+      only_ongoing?: boolean;
+      include_archived?: boolean;
+      for_user?: string;
+    }
+
+    const netParams: NetParams = {
       ...netSearchParams(params),
+      only_ongoing: filters.onlyOngoing,
+      include_archived: filters.includeArchived,
+      for_user: filters.forUser,
     };
     return this.netService.get<NetSearchResult<NetEntry>>(urlJoin('/operations', 'search'), netParams).pipe(
       map((res: NetSearchResult<NetEntry>): SearchResult<Operation> => {
@@ -206,8 +236,8 @@ export class OperationService {
           id: nEntry.id,
           title: nEntry.title,
           description: nEntry.description,
-          start: nEntry.start,
-          end: nEntry.end,
+          start: new Date(nEntry.start),
+          end: nEntry.end !== undefined ? new Date(nEntry.end) : undefined,
           is_archived: nEntry.is_archived,
         }));
       }),

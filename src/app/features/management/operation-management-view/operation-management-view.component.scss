@@ -1,0 +1,16 @@
+@use 'sass:map';
+@import 'src/styles/corporate';
+@import 'src/styles/tables';
+
+.operation-description {
+  text-overflow: ellipsis;
+  max-width: 30vw;
+}
+
+.operation.archived > * {
+  color: $dark-disabled-text;
+}
+
+.operation.active > * {
+  color: map.get($mds-desktop-success-palette, 700);
+}
