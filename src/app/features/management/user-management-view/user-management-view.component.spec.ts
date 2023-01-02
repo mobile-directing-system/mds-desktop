@@ -135,6 +135,14 @@ describe('UserManagementView', () => {
     expect(spectator.inject(UserService).searchUsers).toHaveBeenCalledOnceWith(expectSearchParams, true);
   }));
 
+  describe('createUser', () => {
+    it('should navigate to create-user-view', () => {
+      spectator.router.navigate = createSpy().and.resolveTo();
+      component.createUser();
+      expect(spectator.router.navigate).toHaveBeenCalledOnceWith(['create'], { relativeTo: spectator.activatedRouteStub });
+    });
+  });
+
   describe('fixture', () => {
     beforeEach(fakeAsync(async () => {
       spectator.detectComponentChanges();
@@ -282,11 +290,11 @@ describe('UserManagementView', () => {
     }));
 
     it('calling edit user to navigate to edit user view', fakeAsync(async () => {
-      spectator.router.navigate = createSpy().and.resolveTo()
+      spectator.router.navigate = createSpy().and.resolveTo();
       const sampleUser: User = {
-        id: "draw",
-        firstName: "term",
-        lastName: "valuable",
+        id: 'draw',
+        firstName: 'term',
+        lastName: 'valuable',
         username: 'busy',
         isActive: true,
         isAdmin: false,
@@ -301,7 +309,7 @@ describe('UserManagementView', () => {
         exact: false,
         selector: 'tr',
       }));
-      expect(spectator.router.navigate).toHaveBeenCalledWith([sampleUser.id], { relativeTo:  spectator.activatedRouteStub  });
+      expect(spectator.router.navigate).toHaveBeenCalledWith([sampleUser.id], { relativeTo: spectator.activatedRouteStub });
     }));
 
     describe('order-by', () => {
@@ -345,6 +353,15 @@ describe('UserManagementView', () => {
           expect(spectator.inject(UserService).getUsers).withContext('third').toHaveBeenCalledWith(expectParams);
         });
       });
+    });
+
+    it('should navigate to create-user-route when create button is clicked', () => {
+      const createUserSpy = spyOn(component, 'createUser');
+      spectator.click(byTextContent('Create user', {
+        exact: false,
+        selector: 'button',
+      }));
+      expect(createUserSpy).toHaveBeenCalledOnceWith();
     });
   });
 });
