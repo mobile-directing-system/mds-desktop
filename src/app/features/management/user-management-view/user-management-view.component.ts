@@ -7,6 +7,7 @@ import { EMPTY } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Loader } from '../../../core/util/loader';
 import { MDSError, MDSErrorCode } from '../../../core/util/errors';
+import { ActivatedRoute, Router } from '@angular/router';
 
 /**
  * View with user list.
@@ -27,7 +28,7 @@ export class UserManagementView {
    */
   retrieving = new Loader();
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router, private route:ActivatedRoute) {
   }
 
   refresh(): void {
@@ -43,11 +44,12 @@ export class UserManagementView {
     }).subscribe(result => (this.loadedUsers = result));
   }
 
-  editUser(userId: string): void {
-    console.log(`edit user ${ userId }`);
+  navigateToUser(userId: string) {
+    this.router.navigate([userId], { relativeTo: this.route }).then();
   }
 
-  createUser(): void {
+  createUser() {
+    this.router.navigate(['create'], { relativeTo: this.route }).then();
   }
 
   /**

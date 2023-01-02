@@ -15,6 +15,7 @@ import { of } from 'rxjs';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { ManagementModule } from '../management.module';
 import { Sort } from '@angular/material/sort';
+import createSpy = jasmine.createSpy;
 
 describe('UserManagementView', () => {
   let spectator: SpectatorRouting<UserManagementView>;
@@ -133,6 +134,14 @@ describe('UserManagementView', () => {
     const expectSearchParams: SearchParams = createSearchParams(component.pagination, term);
     expect(spectator.inject(UserService).searchUsers).toHaveBeenCalledOnceWith(expectSearchParams, true);
   }));
+
+  describe('createUser', () => {
+    it('should navigate to create-user-view', () => {
+      spectator.router.navigate = createSpy().and.resolveTo();
+      component.createUser();
+      expect(spectator.router.navigate).toHaveBeenCalledOnceWith(['create'], { relativeTo: spectator.activatedRouteStub });
+    });
+  });
 
   describe('fixture', () => {
     beforeEach(fakeAsync(async () => {
@@ -272,12 +281,35 @@ describe('UserManagementView', () => {
       spectator.detectComponentChanges();
       await spectator.fixture.whenStable();
 
-      const editSpy = spyOn(component, 'editUser');
+      const navigateSpy = spyOn(component, 'navigateToUser');
       spectator.click(byTextContent(sampleUser.lastName, {
         exact: false,
         selector: 'tr',
       }));
-      expect(editSpy).toHaveBeenCalledOnceWith(sampleUser.id);
+      expect(navigateSpy).toHaveBeenCalledOnceWith(sampleUser.id);
+    }));
+
+    it('calling edit user to navigate to edit user view', fakeAsync(async () => {
+      spectator.router.navigate = createSpy().and.resolveTo();
+      const sampleUser: User = {
+        id: 'draw',
+        firstName: 'term',
+        lastName: 'valuable',
+        username: 'busy',
+        isActive: true,
+        isAdmin: false,
+      };
+      spectator.inject(UserService).getUsers.and.returnValue(of(samplePaginatedUsers.changeResultType([sampleUser])));
+      component.refresh();
+      tick();
+      spectator.detectComponentChanges();
+      await spectator.fixture.whenStable();
+
+      spectator.click(byTextContent(sampleUser.username, {
+        exact: false,
+        selector: 'tr',
+      }));
+      expect(spectator.router.navigate).toHaveBeenCalledWith([sampleUser.id], { relativeTo: spectator.activatedRouteStub });
     }));
 
     describe('order-by', () => {
@@ -321,6 +353,15 @@ describe('UserManagementView', () => {
           expect(spectator.inject(UserService).getUsers).withContext('third').toHaveBeenCalledWith(expectParams);
         });
       });
+    });
+
+    it('should navigate to create-user-route when create button is clicked', () => {
+      const createUserSpy = spyOn(component, 'createUser');
+      spectator.click(byTextContent('Create user', {
+        exact: false,
+        selector: 'button',
+      }));
+      expect(createUserSpy).toHaveBeenCalledOnceWith();
     });
   });
 });

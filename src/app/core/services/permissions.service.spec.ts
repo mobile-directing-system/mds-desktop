@@ -36,7 +36,7 @@ describe('PermissionService', () => {
         options: undefined,
       },
     ];
-    const userId = 'AViewToAKill';
+    const userId = "city";
 
     it('should set permissions for a user correctly', fakeAsync(() => {
       const putSpy = spectator.inject(NetService).putJSON.and.returnValue(of(undefined));
@@ -77,7 +77,7 @@ describe('PermissionService', () => {
   });
 
   describe('retrievePermission', () => {
-    const userId = 'TheLivingDaylight';
+    const userId = "head";
     const expectPermissions: Permission[] = [
       {
         name: PermissionName.PermissionsUpdate,

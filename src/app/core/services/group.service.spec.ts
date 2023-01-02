@@ -31,30 +31,30 @@ describe('GroupService', () => {
 
   describe('createGroup', () => {
     const create: CreateGroup = {
-      title: 'You only Live Twice',
-      description: 'James Bond',
-      operation: 'Dr.No',
+      title: 'noise',
+      description: 'effect',
+      operation: 'rotten',
       members: [
-        'Ms.Moneypenny',
+        'gate',
       ],
     };
     const netCreated = {
-      id: '1967',
-      title: 'You only Live Twice',
-      description: 'James Bond',
-      operation: 'Dr.No',
+      id: 'h9Try',
+      title: 'noise',
+      description: 'effect',
+      operation: 'rotten',
       members: [
-        'Ms.Moneypenny',
+        'gate',
       ],
     };
 
     const expectCreated: Group = {
-      id: '1967',
-      title: 'You only Live Twice',
-      description: 'James Bond',
-      operation: 'Dr.No',
+      id: 'h9Try',
+      title: 'noise',
+      description: 'effect',
+      operation: 'rotten',
       members: [
-        'Ms.Moneypenny',
+        'gate',
       ],
     };
 
@@ -75,7 +75,7 @@ describe('GroupService', () => {
     }));
 
     it('should call error on net call fail', fakeAsync(() => {
-      const postSpy = spectator.inject(NetService).postJSON.and.returnValue(throwError(() => new Error('well well Mr. Bond')));
+      const postSpy = spectator.inject(NetService).postJSON.and.returnValue(throwError(() => new Error('something went wrong')));
       const cbSpy = createSpy();
 
       spectator.service.createGroup(create).subscribe({
@@ -92,11 +92,11 @@ describe('GroupService', () => {
   describe('updateGroup', () => {
     const update: Group = {
       id: '1969',
-      title: 'On her Majesties Secret Service',
-      description: 'James Bond',
-      operation: 'Dr.No',
+      title: 'alone',
+      description: 'inch',
+      operation: 'travel',
       members: [
-        'Ms.Moneypenny',
+        'slippery',
       ],
     };
 
@@ -116,7 +116,7 @@ describe('GroupService', () => {
     }));
 
     it('should call error on net call fail', fakeAsync(() => {
-      const putSpy = spectator.inject(NetService).putJSON.and.returnValue(throwError(() => new Error('well well Mr. Bond')));
+      const putSpy = spectator.inject(NetService).putJSON.and.returnValue(throwError(() => new Error('something went wrong')));
       const cbSpy = createSpy();
 
       spectator.service.updateGroup(update).subscribe({
@@ -131,23 +131,23 @@ describe('GroupService', () => {
   });
 
   describe('getGroupById', () => {
-    const groupId = '1971';
+    const groupId = 'o8f';
     const netUser = {
       id: groupId,
-      title: 'Diamond are Forever',
-      description: 'James Bond',
-      operation: 'Dr.No',
+      title: 'former',
+      description: 'bravery',
+      operation: 'joint',
       members: [
-        'Ms.Moneypenny',
+        'succeed',
       ],
     };
     const expectUser: Group = {
       id: groupId,
-      title: 'Diamond are Forever',
-      description: 'James Bond',
-      operation: 'Dr.No',
+      title: 'former',
+      description: 'bravery',
+      operation: 'joint',
       members: [
-        'Ms.Moneypenny',
+        'succeed',
       ],
     };
 
@@ -158,12 +158,12 @@ describe('GroupService', () => {
       spectator.service.getGroupById(groupId).subscribe({ next: cbSpy });
       tick();
 
-      expect(getSpy).withContext('should perform correct net call').toHaveBeenCalledOnceWith('/groups/1971', {});
+      expect(getSpy).withContext('should perform correct net call').toHaveBeenCalledOnceWith('/groups/o8f', {});
       expect(cbSpy).withContext('should call next with correct value').toHaveBeenCalledOnceWith(expectUser);
     }));
 
     it('should call error on net call fail', fakeAsync(() => {
-      const putSpy = spectator.inject(NetService).get.and.returnValue(throwError(() => new Error('well well Mr. Bond')));
+      const putSpy = spectator.inject(NetService).get.and.returnValue(throwError(() => new Error('something went wrong')));
       const cbSpy = createSpy();
 
       spectator.service.getGroupById(groupId).subscribe({
@@ -178,7 +178,7 @@ describe('GroupService', () => {
   });
 
   describe('deleteGroupById', () => {
-    const groupId = '1969';
+    const groupId = '68s';
 
     it('should delete a group correctly', fakeAsync(() => {
       const deleteSpy = spectator.inject(NetService).delete.and.returnValue(of(undefined));
@@ -186,11 +186,11 @@ describe('GroupService', () => {
       spectator.service.deleteGroupById(groupId).subscribe();
       tick();
 
-      expect(deleteSpy).withContext('should perform correct net call').toHaveBeenCalledOnceWith('/groups/1969', {});
+      expect(deleteSpy).withContext('should perform correct net call').toHaveBeenCalledOnceWith('/groups/68s', {});
     }));
 
     it('should call error on net call fail', fakeAsync(() => {
-      const deleteSpy = spectator.inject(NetService).delete.and.returnValue(throwError(() => new Error('well well Mr. Bond')));
+      const deleteSpy = spectator.inject(NetService).delete.and.returnValue(throwError(() => new Error('something went wrong')));
       const cbSpy = createSpy();
 
       spectator.service.deleteGroupById(groupId).subscribe({
@@ -207,40 +207,40 @@ describe('GroupService', () => {
   describe('getGroups', () => {
     const netGroups = [
       {
-        id: 'Pierce',
-        title: 'Die another Day',
-        description: 'James Bond',
-        operation: 'Gustav Graves',
+        id: 'want',
+        title: 'tin',
+        description: 'float',
+        operation: 'speak',
         members: [
-          'Ms.MoneyPenny',
-          '007',
+          'play',
+          'moment',
         ],
       },
       {
-        id: 'Brosnan',
-        title: 'The World is not enough',
-        description: 'James Bond',
-        operation: 'Valentin Zukovsky',
+        id: 'crack',
+        title: 'corn',
+        description: 'director',
+        operation: 'precious',
         members: [
-          '007',
+          'play',
         ],
       },
       {
-        id: 'PierceBrosnan',
-        title: 'Tomorrow never Dies',
-        description: 'James Bond',
-        operation: 'Gustav Graves',
+        id: 'package',
+        title: 'rice',
+        description: 'towel',
+        operation: 'lesson',
         members: [
-          'Ms.MoneyPenny',
-          '007',
+          'play',
+          'moment',
         ],
       },
     ];
 
     const params = testGenRandomPaginationParams<GroupSort>();
     const filter: GroupFilter = {
-      userId: 'Ms.MoneyPenny',
-      forOperation: 'Gustav Graves',
+      userId: 'play',
+      forOperation: 'speak',
     };
     const netParams = {
       orderBy: params.orderBy,
@@ -263,38 +263,38 @@ describe('GroupService', () => {
 
       expect(getSpy).toHaveBeenCalledOnceWith('/groups', {
         ...testGenNetPaginationParams(PaginationParams.from(netParams), undefined),
-        userId: 'Ms.MoneyPenny',
-        forOperation: 'Gustav Graves',
+        userId: 'play',
+        forOperation: 'speak',
         excludeGlobal: undefined,
       });
       expect(cbSpy).toHaveBeenCalledOnceWith(testGenPaginatedFromNet<Group>(netPaginatedFilter, undefined, [
         {
-          id: 'Pierce',
-          title: 'Die another Day',
-          description: 'James Bond',
-          operation: 'Gustav Graves',
+          id: 'want',
+          title: 'tin',
+          description: 'float',
+          operation: 'speak',
           members: [
-            'Ms.MoneyPenny',
-            '007',
+            'play',
+            'moment',
           ],
         },
         {
-          id: 'Brosnan',
-          title: 'The World is not enough',
-          description: 'James Bond',
-          operation: 'Valentin Zukovsky',
+          id: 'crack',
+          title: 'corn',
+          description: 'director',
+          operation: 'precious',
           members: [
-            '007',
+            'play',
           ],
         },
         {
-          id: 'PierceBrosnan',
-          title: 'Tomorrow never Dies',
-          description: 'James Bond',
-          operation: 'Gustav Graves',
+          id: 'package',
+          title: 'rice',
+          description: 'towel',
+          operation: 'lesson',
           members: [
-            'Ms.MoneyPenny',
-            '007',
+            'play',
+            'moment',
           ],
         },
       ]));
@@ -315,32 +315,32 @@ describe('GroupService', () => {
       });
       expect(cbSpy).toHaveBeenCalledOnceWith(testGenPaginatedFromNet<Group>(netPaginated, undefined, [
         {
-          id: 'Pierce',
-          title: 'Die another Day',
-          description: 'James Bond',
-          operation: 'Gustav Graves',
+          id: 'want',
+          title: 'tin',
+          description: 'float',
+          operation: 'speak',
           members: [
-            'Ms.MoneyPenny',
-            '007',
+            'play',
+            'moment',
           ],
         },
         {
-          id: 'Brosnan',
-          title: 'The World is not enough',
-          description: 'James Bond',
-          operation: 'Valentin Zukovsky',
+          id: 'crack',
+          title: 'corn',
+          description: 'director',
+          operation: 'precious',
           members: [
-            '007',
+            'play',
           ],
         },
         {
-          id: 'PierceBrosnan',
-          title: 'Tomorrow never Dies',
-          description: 'James Bond',
-          operation: 'Gustav Graves',
+          id: 'package',
+          title: 'rice',
+          description: 'towel',
+          operation: 'lesson',
           members: [
-            'Ms.MoneyPenny',
-            '007',
+            'play',
+            'moment',
           ],
         },
       ]));

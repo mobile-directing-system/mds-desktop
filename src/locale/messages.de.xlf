@@ -12,6 +12,8 @@
     <unit id="5248717555542428023">
       <notes>
         <note category="location">src/app/features/auth/login-view/login-view.component.html:5</note>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:5</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:5</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:31</note>
       </notes>
       <segment state="initial">
@@ -159,6 +161,7 @@
     </unit>
     <unit id="5891941941917080206">
       <notes>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:2</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:7</note>
       </notes>
       <segment state="initial">
@@ -245,6 +248,211 @@
       <segment state="initial">
         <source>e.g. https://mds.my-server.net/server</source>
         <target>z.B. https://mds.mein-server.net/server</target>
+      </segment>
+    </unit>
+    <unit id="9081239727073547463">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:8,9</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:8,9</note>
+      </notes>
+      <segment state="initial">
+        <source>Username is required.</source>
+        <target>Benutzername erforderlich.</target>
+      </segment>
+    </unit>
+    <unit id="6028371114637047813">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:12</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:12</note>
+      </notes>
+      <segment state="initial">
+        <source>First Name</source>
+        <target>Vorname</target>
+      </segment>
+    </unit>
+    <unit id="3191375468946657151">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:15,16</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:15,16</note>
+      </notes>
+      <segment state="initial">
+        <source>First name is required.</source>
+        <target>Vorname ist erforderlich.</target>
+      </segment>
+    </unit>
+    <unit id="4407559560004943843">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:19</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:19</note>
+      </notes>
+      <segment state="initial">
+        <source>Last Name</source>
+        <target>Nachname</target>
+      </segment>
+    </unit>
+    <unit id="2689115924213512946">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:22,23</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:22,23</note>
+      </notes>
+      <segment state="initial">
+        <source>Last name is required.</source>
+        <target>Nachname ist erforderlich.</target>
+      </segment>
+    </unit>
+    <unit id="623221856807203436">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:26</note>
+      </notes>
+      <segment state="initial">
+        <source>Initial Password</source>
+        <target>Initiales Passwort</target>
+      </segment>
+    </unit>
+    <unit id="2161528641772974097">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:29,30</note>
+      </notes>
+      <segment state="initial">
+        <source>Password is required.</source>
+        <target>Passwort ist erforderlich.</target>
+      </segment>
+    </unit>
+    <unit id="2330577642930707695">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:35,36</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:29,30</note>
+        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:14,15</note>
+      </notes>
+      <segment state="initial">
+        <source>Cancel</source>
+        <target>Abbrechen</target>
+      </segment>
+    </unit>
+    <unit id="6104401008203737027">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.ts:69</note>
+      </notes>
+      <segment state="initial">
+        <source>User creation failed.</source>
+        <target>Nutzer erstellen fehlgeschlagen.</target>
+      </segment>
+    </unit>
+    <unit id="1481645236299803925">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:32,33</note>
+      </notes>
+      <segment state="initial">
+        <source>Change Password</source>
+        <target>Passwort ändern</target>
+      </segment>
+    </unit>
+    <unit id="760085743178726328">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.ts:94</note>
+      </notes>
+      <segment state="initial">
+        <source>Updating user failed.</source>
+        <target>Nutzer aktualisieren fehlgeschlagen.</target>
+      </segment>
+    </unit>
+    <unit id="3277520558587299577">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:2</note>
+      </notes>
+      <segment state="initial">
+        <source>Update Password</source>
+        <target>Passwort aktualisieren</target>
+      </segment>
+    </unit>
+    <unit id="1221596867309460035">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:6</note>
+      </notes>
+      <segment state="initial">
+        <source>New Password</source>
+        <target>Neues Passwort</target>
+      </segment>
+    </unit>
+    <unit id="5424016037871909683">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:9,10</note>
+      </notes>
+      <segment state="initial">
+        <source>New password is required.</source>
+        <target>Neues Passwort ist erforderlich.</target>
+      </segment>
+    </unit>
+    <unit id="1558069880513305355">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:17,18</note>
+      </notes>
+      <segment state="initial">
+        <source>Update Password</source>
+        <target>Passwort aktualisieren</target>
+      </segment>
+    </unit>
+    <unit id="6072990007630394552">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.ts:58</note>
+      </notes>
+      <segment state="initial">
+        <source>Updating password failed.</source>
+        <target>Passwort aktualisieren fehlgeschlagen.</target>
+      </segment>
+    </unit>
+    <unit id="5009437026549898623">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.ts:65</note>
+      </notes>
+      <segment state="initial">
+        <source>User created successfully.</source>
+        <target>Benutzer erfolgreich anglegt.</target>
+      </segment>
+    </unit>
+    <unit id="247214804822900420">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:2,3</note>
+      </notes>
+      <segment state="initial">
+        <source>User: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.firstName.value}}"/> <ph id="1" equiv="INTERPOLATION_1" disp="{{form.controls.lastName.value}}"/></source>
+        <target>Benutzer: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.firstName}}"/> <ph id="1" equiv="INTERPOLATION_1" disp="{{form.controls.lastName}}"/></target>
+      </segment>
+    </unit>
+    <unit id="6284119778725231733">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:25</note>
+      </notes>
+      <segment state="initial">
+        <source>Is Admin</source>
+        <target>Admin</target>
+      </segment>
+    </unit>
+    <unit id="8204176479746810612">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:26</note>
+      </notes>
+      <segment state="initial">
+        <source>Active</source>
+        <target>Aktiv</target>
+      </segment>
+    </unit>
+    <unit id="7941428823403788384">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:39,40</note>
+      </notes>
+      <segment state="initial">
+        <source>Create</source>
+        <target>Erstellen</target>
+      </segment>
+    </unit>
+    <unit id="3620188369327429839">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:35,36</note>
+      </notes>
+      <segment state="initial">
+        <source>Save</source>
+        <target>Speichern</target>
       </segment>
     </unit>
   </file>

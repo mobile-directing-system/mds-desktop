@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import { BehaviorSubject, delay, finalize, Observable, of, Subscription, switchMap, tap } from 'rxjs';
 
 export class Loader {
@@ -11,6 +12,11 @@ export class Loader {
    * @private
    */
   private inProgress = 0;
+  private boundFormGroups: FormGroup[] = [];
+
+  bindFormGroup(fg: FormGroup): void {
+    this.boundFormGroups.push(fg);
+  }
 
   /**
    * Emits the current loading state.
@@ -23,8 +29,10 @@ export class Loader {
     const lastWasLoading = this.loadingChangeSubject.getValue();
     if (lastWasLoading && this.inProgress === 0) {
       this.loadingChangeSubject.next(false);
+      this.boundFormGroups.forEach(fg => fg.enable());
     } else if (!lastWasLoading && this.inProgress > 0) {
       this.loadingChangeSubject.next(true);
+      this.boundFormGroups.forEach(fg => fg.disable());
     }
   }
 

@@ -1,19 +1,19 @@
-import {MemberSort, OperationService, OperationSort} from './operation.service';
-import {createServiceFactory, SpectatorService} from '@ngneat/spectator';
-import {NetService} from './net.service';
-import {fakeAsync, tick} from '@angular/core/testing';
-import {of, throwError} from 'rxjs';
+import { MemberSort, OperationService, OperationSort } from './operation.service';
+import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
+import { NetService } from './net.service';
+import { fakeAsync, tick } from '@angular/core/testing';
+import { of, throwError } from 'rxjs';
 import {
   testGenNetPaginated,
   testGenNetPaginationParams,
   testGenPaginatedFromNet,
   testGenRandomPaginationParams,
 } from '../testutil/test-pagination';
-import {CreateOperation, Operation} from "../model/operation";
+import { CreateOperation, Operation } from '../model/operation';
+import { testGenNetSearchResult, testGenRandomSearchParams, testGenSearchResultFromNet } from '../testutil/test-search';
+import { netSearchParams } from '../util/net';
+import { User } from '../model/user';
 import createSpy = jasmine.createSpy;
-import {testGenNetSearchResult, testGenRandomSearchParams, testGenSearchResultFromNet} from "../testutil/test-search";
-import {netSearchParams} from "../util/net";
-import {User} from "../model/user";
 
 describe('OperationService', () => {
   let spectator: SpectatorService<OperationService>;
@@ -132,16 +132,16 @@ describe('OperationService', () => {
     const operationId = 'randoMcRandom'
     const netOperation = {
       id: operationId,
-      title: 'Golden Eye',
-      description: 'James Bond',
+      title: "dirt",
+      description: "sleep",
       start: new Date(),
       end: new Date(new Date().getDate() +1),
       is_archived: false,
     };
     const expectOperation: Operation = {
       id: operationId,
-      title: 'Golden Eye',
-      description: 'James Bond',
+      title: 'dirt',
+      description: 'sleep',
       start:  netOperation.start,
       end: netOperation.end,
       is_archived: false,
@@ -177,16 +177,16 @@ describe('OperationService', () => {
     const netOperations = [
       {
         id: 'randoMcRandom',
-        title: 'From Russia with love',
-        description: 'James Bond',
+        title: "relation",
+        description: "abroad",
         start: new Date(),
         end: new Date(new Date().getDate() +1),
         is_archived: false,
       },
       {
         id: 'evenMoreRandom',
-        title: 'Live and let die',
-        description: 'James Bond',
+        title: "relation",
+        description: 'abroad',
         start: new Date(),
         end: new Date(new Date().getDate() +1),
         is_archived: false,
@@ -206,16 +206,16 @@ describe('OperationService', () => {
       expect(cbSpy).toHaveBeenCalledOnceWith(testGenPaginatedFromNet<Operation>(netPaginated,undefined,[
         {
           id: 'randoMcRandom',
-          title: 'From Russia with love',
-          description: 'James Bond',
+          title: "relation",
+          description: "abroad",
           start: netOperations[0].start,
           end: netOperations[0].end,
           is_archived: false,
         },
         {
           id: 'evenMoreRandom',
-          title: 'Live and let die',
-          description: 'James Bond',
+          title: "relation",
+          description: "abroad",
           start: netOperations[1].start,
           end: netOperations[1].end,
           is_archived: false,
@@ -261,16 +261,16 @@ describe('OperationService', () => {
     const netOperations = [
       {
         id: 'randoMcRandom',
-        title: 'Goldfinger',
-        description: 'James Bond',
+        title: "pink",
+        description: "sow",
         start: new Date(),
         end: new Date(new Date().getDate() + 1),
         is_archived: false,
       },
       {
         id: 'evenMoreRandom',
-        title: 'Thunderball',
-        description: 'James Bond',
+        title: "stay",
+        description: "steady",
         start: new Date(),
         end: new Date(new Date().getDate() + 1),
         is_archived: false,
@@ -292,16 +292,16 @@ describe('OperationService', () => {
       expect(cbSpy).toHaveBeenCalledOnceWith(testGenSearchResultFromNet<Operation>(netSearchResult, [
         {
           id: 'randoMcRandom',
-          title: 'Goldfinger',
-          description: 'James Bond',
+          title: 'pink',
+          description: 'sow',
           start: netOperations[0].start,
           end: netOperations[0].end,
           is_archived: false,
         },
         {
           id: 'evenMoreRandom',
-          title: 'Thunderball',
-          description: 'James Bond',
+          title: 'stay',
+          description: 'steady',
           start: netOperations[1].start,
           end: netOperations[1].end,
           is_archived: false,

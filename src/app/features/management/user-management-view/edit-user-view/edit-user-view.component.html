@@ -1,0 +1,39 @@
+<div class="view" [appShowLoadingOverlay]="updatingUser.loadingChange() | async">
+  <h1 i18n>User: {{form.controls.firstName.value}} {{form.controls.lastName.value}}</h1>
+  <form (submit)="updateUser()">
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>Username</mat-label>
+      <input matInput [formControl]="form.controls.username">
+      <mat-error *ngIf="form.controls.username.errors && form.controls.username.errors['required']" i18n>
+        Username is required.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>First Name</mat-label>
+      <input matInput [formControl]="form.controls.firstName">
+      <mat-error *ngIf="form.controls.firstName.errors && form.controls.firstName.errors['required']" i18n>
+        First name is required.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>Last Name</mat-label>
+      <input matInput [formControl]="form.controls.lastName">
+      <mat-error *ngIf="form.controls.lastName.errors && form.controls.lastName.errors['required']" i18n>
+        Last name is required.
+      </mat-error>
+    </mat-form-field>
+    <mat-checkbox [formControl]="form.controls.isAdmin" i18n>Is Admin</mat-checkbox>
+    <mat-checkbox [formControl]="form.controls.isActive" i18n>Active</mat-checkbox>
+    <div>
+      <button mat-button type="button" (click)="close()" i18n>
+        Cancel
+      </button>
+      <button mat-button type="button" class="button-middle" (click)="changePassword()" i18n>
+        Change Password
+      </button>
+      <button mat-button color="primary" type="submit" [disabled]="!form.valid" i18n>
+        Save
+      </button>
+    </div>
+  </form>
+</div>
