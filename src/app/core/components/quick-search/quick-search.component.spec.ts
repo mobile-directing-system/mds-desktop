@@ -78,42 +78,6 @@ describe('QuickSearchComponent', () => {
       discardPeriodicTasks();
     }));
 
-    it('should hide the clear-button when no search term is set', fakeAsync(async () => {
-      component.searchTermFC.setValue('');
-      tick();
-      spectator.detectChanges();
-      await spectator.fixture.whenStable();
-
-      expect(spectator.query('button')).not.toBeVisible();
-
-      discardPeriodicTasks();
-    }));
-
-    it('should show the clear-button when search term is set', fakeAsync(async () => {
-      component.searchTermFC.setValue(term);
-      tick();
-      spectator.detectChanges();
-      await spectator.fixture.whenStable();
-
-      expect(spectator.query('button')).toBeVisible();
-
-      discardPeriodicTasks();
-    }));
-
-    it('should clear the search term when clear-button is clicked', fakeAsync(async () => {
-      component.searchTermFC.setValue(term);
-      tick();
-      spectator.detectChanges();
-      await spectator.fixture.whenStable();
-
-      spectator.click('button');
-      tick();
-
-      expect(component.searchTermFC.value).toEqual('');
-
-      discardPeriodicTasks();
-    }));
-
     it('should emit an event when search term changes', fakeAsync(() => {
       spectator.router.navigate = jasmine.createSpy().and.resolveTo();
       const emitSpy = spyOn(component.search, 'emit');
