@@ -141,10 +141,9 @@ export class GroupService {
     }
 
     interface NetParams extends NetPaginationParams {
-      orderBy?: GroupSort,
-      userId?: string,
-      forOperation?: string,
-      excludeGlobal?: boolean,
+      by_user?: string,
+      for_operation?: string,
+      exclude_global?: boolean,
     }
 
     const nParams: NetParams = netPaginationParams(params, (by: GroupSort) => {
@@ -157,9 +156,9 @@ export class GroupService {
           throw new MDSError(MDSErrorCode.AppError, 'unknown group sort', { by: by });
       }
     });
-    nParams.userId = filters.userId;
-    nParams.forOperation = filters.forOperation;
-    nParams.excludeGlobal = filters.excludeGlobal;
+    nParams.by_user = filters.userId;
+    nParams.for_operation = filters.forOperation;
+    nParams.exclude_global = filters.excludeGlobal;
 
     return this.netService.get<NetPaginated<NetEntry>>('/groups', nParams).pipe(
       map((res: NetPaginated<NetEntry>): Paginated<Group> => {
