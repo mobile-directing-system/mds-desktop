@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {NetService} from "./net.service";
-import {Permission} from "../model/permissions";
-import {Observable} from "rxjs";
-import urlJoin from "url-join";
-import {map} from "rxjs/operators";
+import { NetService } from './net.service';
+import { Permission } from '../model/permissions';
+import { Observable } from 'rxjs';
+import urlJoin from 'url-join';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PermissionService {
 
@@ -26,7 +26,7 @@ export class PermissionService {
    * Retrieve permissions of the given user.
    * @param userId Id of the user to retrieve permissions for.
    */
-  getPermissionsByUser(userId: string):Observable<Permission[]>{
+  getPermissionsByUser(userId: string): Observable<Permission[]> {
     interface NetPermission {
       name: string,
       options?: object
@@ -34,14 +34,14 @@ export class PermissionService {
 
     return this.netService.get<NetPermission[]>(urlJoin('/permissions', 'user', userId), {}).pipe(
       map((res: NetPermission[]): Permission[] => {
-        return res.map(resVal => {
-          return {
-            name: resVal.name,
-            options: resVal.options
-          }
-        })
-        }
-      )
-    )
+          return res.map(resVal => {
+            return {
+              name: resVal.name,
+              options: resVal.options,
+            };
+          });
+        },
+      ),
+    );
   }
 }
