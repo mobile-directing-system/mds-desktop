@@ -263,9 +263,9 @@ describe('GroupService', () => {
 
       expect(getSpy).toHaveBeenCalledOnceWith('/groups', {
         ...testGenNetPaginationParams(PaginationParams.from(netParams), undefined),
-        userId: 'play',
-        forOperation: 'speak',
-        excludeGlobal: undefined,
+        by_user: 'play',
+        for_operation: 'speak',
+        exclude_global: undefined,
       });
       expect(cbSpy).toHaveBeenCalledOnceWith(testGenPaginatedFromNet<Group>(netPaginatedFilter, undefined, [
         {
@@ -309,9 +309,9 @@ describe('GroupService', () => {
 
       expect(getSpy).toHaveBeenCalledOnceWith('/groups', {
         ...testGenNetPaginationParams(params, undefined),
-        userId: undefined,
-        forOperation: undefined,
-        excludeGlobal: undefined,
+        by_user: undefined,
+        for_operation: undefined,
+        exclude_global: undefined,
       });
       expect(cbSpy).toHaveBeenCalledOnceWith(testGenPaginatedFromNet<Group>(netPaginated, undefined, [
         {
@@ -360,9 +360,9 @@ describe('GroupService', () => {
 
         expect(getSpy).withContext(`should map ${ appSort } to ${ netSort }`).toHaveBeenCalledOnceWith('/groups', {
           ...testGenNetPaginationParams(params, netSort),
-          userId: undefined,
-          forOperation: undefined,
-          excludeGlobal: undefined,
+          by_user: undefined,
+          for_operation: undefined,
+          exclude_global: undefined,
         });
       }));
     });

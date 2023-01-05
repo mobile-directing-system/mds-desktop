@@ -37,7 +37,7 @@ describe('CreateUserView', () => {
     spectator.detectChanges();
   });
 
-  it('should go to /users/ when click on close', () => fakeAsync(() => {
+  it('should go to /users/ when click on close', fakeAsync(() => {
     spectator.click(byTextContent('Cancel', { selector: 'button' }));
     tick();
     expect(spectator.router.navigate).toHaveBeenCalledOnceWith(['..'], { relativeTo: spectator.activatedRouteStub });

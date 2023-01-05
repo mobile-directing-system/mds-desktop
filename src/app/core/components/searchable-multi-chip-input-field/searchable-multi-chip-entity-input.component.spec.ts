@@ -1,4 +1,4 @@
-import { fakeAsync, tick } from '@angular/core/testing';
+import { discardPeriodicTasks, fakeAsync, flush, tick } from '@angular/core/testing';
 
 import {
   SearchableMultiChipEntityInputComponent,
@@ -654,6 +654,9 @@ describe('SearchableMultiChipEntityInputComponent.integration', () => {
       exact: false,
       selector: 'mat-chip-row',
     }))).withContext(`should display entity value '${ e.v!.a }' in chip with template`).toBeVisible();
+    tick();
+    flush();
+    discardPeriodicTasks();
   }));
 
   it('should call for suggestions', fakeAsync(() => {
