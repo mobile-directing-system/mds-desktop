@@ -1,0 +1,67 @@
+<div [appShowLoadingOverlay]="creatingOperation.loadingChange() | async">
+  <h1 i18n>Create Operation</h1>
+  <form (submit)="createOperation()">
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>Title</mat-label>
+      <input matInput [formControl]="form.controls.title">
+      <mat-error *ngIf="form.controls.title.errors && form.controls.title.errors['required']" i18n>
+        Title is required.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>Description</mat-label>
+      <input matInput [formControl]="form.controls.description">
+      <mat-error *ngIf="form.controls.description.errors && form.controls.description.errors['required']" i18n>
+        Description is required.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label i18n>Choose a start date</mat-label>
+      <mtx-datetimepicker #datetimePickerStart
+                          [type]="'time'"
+                          [mode]="'landscape'"
+                          [multiYearSelector]="false"
+                          [startView]="'month'"
+                          [twelvehour]="false"
+                          [timeInterval]="1"
+                          [touchUi]="false"
+                          [timeInput]="true"
+      ></mtx-datetimepicker>
+      <input matInput [mtxDatetimepicker]="datetimePickerStart" [formControl]="form.controls.start" required>
+      <mtx-datetimepicker-toggle [for]="datetimePickerStart" matSuffix></mtx-datetimepicker-toggle>
+      <mat-error *ngIf="form.controls.start.errors && form.controls.start.errors['required']" i18n>
+        Start is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label i18n>Choose an end date</mat-label>
+      <mtx-datetimepicker #datetimePickerEnd
+                          [type]="'datetime'"
+                          [mode]="'landscape'"
+                          [multiYearSelector]="false"
+                          [startView]="'month'"
+                          [twelvehour]="false"
+                          [timeInterval]="1"
+                          [touchUi]="false"
+                          [timeInput]="true"
+      ></mtx-datetimepicker>
+      <input [mtxDatetimepicker]="datetimePickerEnd" [formControl]="form.controls.end" matInput>
+      <mtx-datetimepicker-toggle [for]="datetimePickerEnd" matSuffix></mtx-datetimepicker-toggle>
+      <mat-error *ngIf="form.controls.title.errors" i18n>
+        End date must be past start date.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-checkbox [formControl]="form.controls.isArchived">Archived</mat-checkbox>
+    <div class="button-row">
+      <button mat-button type="button" (click)="close()" i18n>
+        Cancel
+      </button>
+      <button mat-button color="primary" type="submit"
+              [disabled]="!form.valid" i18n>
+        Create Operation
+      </button>
+    </div>
+  </form>
+</div>

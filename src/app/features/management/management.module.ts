@@ -13,6 +13,7 @@ import {
   UpdateUserPasswordView,
 } from './user-management-view/update-user-password-view/update-user-password-view.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     RouterOutlet,
     RouterLinkWithHref,
+    MatNativeDateModule
   ],
 })
 export class ManagementModule {

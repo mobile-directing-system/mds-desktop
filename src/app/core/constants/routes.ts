@@ -22,6 +22,9 @@ import { GroupManagementView } from '../../features/management/group-management-
 import {
   OperationManagementView,
 } from '../../features/management/operation-management-view/operation-management-view.component';
+import {
+  CreateOperationViewComponent,
+} from '../../features/management/operation-management-view/create-operation-view/create-operation-view.component';
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -59,6 +62,10 @@ export const AppRoutes: Routes = [
             path: 'operations',
             component: OperationManagementView,
           },
+          {
+            path: 'operations/create',
+            component: CreateOperationViewComponent,
+          }
         ],
       },
       {
