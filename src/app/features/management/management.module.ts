@@ -15,6 +15,7 @@ import {
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateGroupView } from './group-management-view/create-group-view/create-group-view.component';
 import { EditGroupView } from './group-management-view/edit-group-view/edit-group-view.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { EditGroupView } from './group-management-view/edit-group-view/edit-grou
     ReactiveFormsModule,
     RouterOutlet,
     RouterLinkWithHref,
+    MatNativeDateModule
   ],
 })
 export class ManagementModule {
