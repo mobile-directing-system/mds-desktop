@@ -178,7 +178,7 @@ export class Paginated<T> {
     this.offset = details.offset;
     this.orderedBy = details.orderedBy;
     this.orderDir = details.orderDir;
-    this.retrieved = details.retrieved ?? entries.length;
+    this.retrieved = details?.retrieved ?? entries.length;
   }
 
   /**

@@ -46,7 +46,7 @@ import { LocalPaginatedListComponent } from './components/local-paginated-list/l
     LoadingDotsComponent,
     SearchableEntityInputComponent,
     ErrorsComponent,
-    LocalPaginatedListComponent,
+    LocalPaginatedListComponent
   ],
   exports: [
     LogoComponent,

@@ -4,9 +4,9 @@ import { MDSErrorCode } from './errors';
 import {
   OrderDir,
   Paginated,
+  PaginationParams,
   SearchParams,
   SearchResult,
-  PaginationParams,
   StoreRequestError,
   StoreRequestMethod,
 } from './store';
@@ -149,6 +149,8 @@ export function paginatedFromNet<N, S>(netPaginated: NetPaginated<N>, mappingFn:
     retrieved: netPaginated.retrieved,
     total: netPaginated.total,
   });
+  console.log(list)
+  console.log(netPaginated)
   return list.changeResultType(list.entries.map(mappingFn));
 }
 

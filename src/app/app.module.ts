@@ -17,20 +17,13 @@ import { CoreModule } from './core/core.module';
 import { LocalStorageService } from './core/services/local-storage.service';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { matPaginatorInternationalization, netLoginInit } from './core/util/app-init';
-import {
-  EditOperationViewComponent,
-} from './features/management/operation-management-view/edit-operation-view/edit-operation-view.component';
-import {
-  CreateOperationViewComponent,
-} from './features/management/operation-management-view/create-operation-view/create-operation-view.component';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
-import { MTX_DATETIME_FORMATS, MtxNativeDatetimeModule } from '@ng-matero/extensions/core';
+import { MtxNativeDatetimeModule } from '@ng-matero/extensions/core';
+import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EditOperationViewComponent,
-    CreateOperationViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +37,7 @@ import { MTX_DATETIME_FORMATS, MtxNativeDatetimeModule } from '@ng-matero/extens
     FeaturesModule,
     MtxDatetimepickerModule,
     MtxNativeDatetimeModule,
+    MtxMomentDatetimeModule
   ],
   providers: [
     NetService,
@@ -61,30 +55,6 @@ import { MTX_DATETIME_FORMATS, MtxNativeDatetimeModule } from '@ng-matero/extens
       useFactory: matPaginatorInternationalization,
       deps: [MatPaginatorIntl],
       multi: true,
-    },
-
-    {
-      provide: MTX_DATETIME_FORMATS,
-      useValue: {
-        parse: {
-          dateInput: 'YYYY-MM-DD',
-          monthInput: 'MMMM',
-          yearInput: 'YYYY',
-          timeInput: 'HH:mm',
-          datetimeInput: 'YYYY-MM-DD HH:mm',
-        },
-        display: {
-          dateInput: 'YYYY-MM-DD',
-          monthInput: 'MMMM',
-          yearInput: 'YYYY',
-          timeInput: 'HH:mm',
-          datetimeInput: 'YYYY-MM-DD HH:mm',
-          monthYearLabel: 'YYYY MMMM',
-          dateA11yLabel: 'LL',
-          monthYearA11yLabel: 'MMMM YYYY',
-          popupHeaderDateLabel: 'MMM DD, ddd',
-        },
-      },
     },
   ],
   bootstrap: [AppComponent],

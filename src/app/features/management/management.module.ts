@@ -14,7 +14,14 @@ import {
 } from './user-management-view/update-user-password-view/update-user-password-view.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import {
+  CreateOperationViewComponent,
+} from './operation-management-view/create-operation-view/create-operation-view.component';
+import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
+import { MtxNativeDatetimeModule } from '@ng-matero/extensions/core';
+import {
+  EditOperationViewComponent,
+} from './operation-management-view/edit-operation-view/edit-operation-view.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +32,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     CreateUserView,
     EditUserView,
     UpdateUserPasswordView,
+    CreateOperationViewComponent,
+    EditOperationViewComponent,
   ],
   imports: [
     CoreModule,
@@ -33,7 +42,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     ReactiveFormsModule,
     RouterOutlet,
     RouterLinkWithHref,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MtxDatetimepickerModule,
+    MtxNativeDatetimeModule,
   ],
 })
 export class ManagementModule {

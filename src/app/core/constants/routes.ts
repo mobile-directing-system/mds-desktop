@@ -25,6 +25,9 @@ import {
 import {
   CreateOperationViewComponent,
 } from '../../features/management/operation-management-view/create-operation-view/create-operation-view.component';
+import {
+  EditOperationViewComponent,
+} from '../../features/management/operation-management-view/edit-operation-view/edit-operation-view.component';
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -65,6 +68,10 @@ export const AppRoutes: Routes = [
           {
             path: 'operations/create',
             component: CreateOperationViewComponent,
+          },
+          {
+            path: 'operations/:operationId',
+            component: EditOperationViewComponent,
           }
         ],
       },
