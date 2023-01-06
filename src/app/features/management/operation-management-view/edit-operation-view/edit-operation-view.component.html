@@ -1,0 +1,138 @@
+<div class="view" [appShowLoadingOverlay]="updatingOperation.loadingChange() | async">
+  <h1 i18n>Operation: {{form.controls.title.value}}</h1>
+  <form (submit)="updateOperation()">
+<!--    Title.-->
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>Title</mat-label>
+      <input matInput [formControl]="form.controls.title">
+      <mat-error *ngIf="form.controls.title.errors && form.controls.title.errors['required']" i18n>
+        Title is required.
+      </mat-error>
+    </mat-form-field>
+    <!--Description.-->
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>Description</mat-label>
+      <input matInput [formControl]="form.controls.description">
+    </mat-form-field>
+
+    <!--Start date.-->
+    <mat-form-field>
+      <mat-label i18n>Choose a start date</mat-label>
+      <mtx-datetimepicker #datetimePickerStart
+                          [type]="'datetime'"
+                          [mode]="'landscape'"
+                          [multiYearSelector]="false"
+                          [startView]="'month'"
+                          [twelvehour]="false"
+                          [timeInterval]="1"
+                          [touchUi]="false"
+                          [timeInput]="true"
+      ></mtx-datetimepicker>
+      <input [mtxDatetimepicker]="datetimePickerStart" [formControl]="form.controls.start"  type="datetimeInput" matInput required>
+      <mtx-datetimepicker-toggle [for]="datetimePickerStart" matSuffix></mtx-datetimepicker-toggle>
+      <mat-error *ngIf="form.controls.start.errors && form.controls.start.errors['required']" i18n>
+        Start is required.
+      </mat-error>
+    </mat-form-field>
+    <!--End date.-->
+    <mat-form-field>
+      <mat-label i18n>Choose an end date</mat-label>
+      <mtx-datetimepicker #datetimePickerEnd
+                          [type]="'datetime'"
+                          [mode]="'landscape'"
+                          [multiYearSelector]="false"
+                          [startView]="'month'"
+                          [twelvehour]="false"
+                          [timeInterval]="1"
+                          [touchUi]="false"
+                          [timeInput]="true"
+      ></mtx-datetimepicker>
+      <input [mtxDatetimepicker]="datetimePickerEnd" [formControl]="form.controls.end" matInput>
+      <mtx-datetimepicker-toggle [for]="datetimePickerEnd" matSuffix></mtx-datetimepicker-toggle>
+      <mat-error *ngIf="form.controls.title.errors" i18n>
+        End date must be past start date.
+      </mat-error>
+    </mat-form-field>
+    <!--Archived.-->
+    <mat-checkbox [formControl]="form.controls.isArchived">Archived</mat-checkbox>
+    <!--Members table.-->
+    <h2>Members</h2>
+    <div class="memberAdditionAndAddButton">
+      <app-searchable-multi-chip-entity-input-field
+        [chipTemplate]="chip"
+        [formControl]="membersToAddForm"
+        [retrieve]="getUserById.bind(this)"
+        [search]="searchUsers.bind(this)"
+        [suggestionTemplate]="memberSuggestion"
+        i18n-label label="Members"
+        i18n-placeholder placeholder="Add member..."
+        class="app-edit-input-large">
+        <ng-template #chip let-entity='entity'>
+          {{asUser(entity).firstName}} {{asUser(entity).lastName}}
+        </ng-template>
+        <ng-template #memberSuggestion let-entity='entity'>
+          {{asUser(entity).firstName}} {{asUser(entity).lastName}} <span
+          class="username">({{asUser(entity).lastName}})</span>
+        </ng-template>
+      </app-searchable-multi-chip-entity-input-field>
+
+      <button *ngIf="membersToAddForm.value.length !== 0"
+        mat-button class="app-edit-input-tinier" type="button" i18n
+        (click)="addMembers()">
+        Add Members
+      </button>
+    </div>
+
+    <app-local-paginated-list
+      [data]="operationMembers" #membersList>
+      <table (matSortChange)="memberSortChange($event)" [appShowLoadingOverlay]="updatingOperation.loadingChange() | async"
+             [dataSource]="membersList.dataSource"
+             aria-label="User list"
+             mat-table
+             matSort>
+        <ng-container matColumnDef="lastName">
+          <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="lastName">Last name</th>
+          <td *matCellDef="let row" mat-cell>{{ asUser(row).lastName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="firstName">
+          <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="firstName">First name</th>
+          <td *matCellDef="let row" mat-cell>{{ asUser(row).firstName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="username">
+          <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="username">Username</th>
+          <td *matCellDef="let row" mat-cell>{{ asUser(row).username }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="props">
+          <th *matHeaderCellDef mat-header-cell scope="col"></th>
+          <td *matCellDef="let row" mat-cell>
+            <mat-icon *ngIf="asUser(row).isAdmin" i18n-matTooltip matTooltip="Administrator">engineering</mat-icon>
+            <mat-icon *ngIf="!asUser(row).isActive" i18n-matTooltip matTooltip="Inactive">disabled_by_default</mat-icon>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="remove">
+          <th *matHeaderCellDef mat-header-cell scope="col"></th>
+          <td *matCellDef="let row" mat-cell>
+            <mat-icon i18n-matTooltip matTooltip="Remove Member" (click)="removeMember(asUser(row).id)">remove</mat-icon>
+          </td>
+        </ng-container>
+        <tr *matHeaderRowDef="columnsToDisplayForMemberTable" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: columnsToDisplayForMemberTable"
+            [ngClass]="{'inactive-user': !asUser(row).isActive}"
+            mat-row></tr>
+      </table>
+    </app-local-paginated-list>
+    <div class="button-row">
+      <button mat-button type="button" (click)="close()" i18n>
+        Cancel
+      </button>
+      <button mat-button color="primary" type="submit"
+              [disabled]="!form.valid" i18n>
+        Update
+      </button>
+    </div>
+  </form>
+</div>
