@@ -1,0 +1,6 @@
+<app-paginated-list (page)="page($event)"
+                    [data]="getData()"
+                    [listId]="listId"
+                    [pageSizeOptions]="pageSizeOptions">
+  <ng-content></ng-content>
+</app-paginated-list>
