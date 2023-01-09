@@ -1,13 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Paginated, PaginationParams } from '../../util/store';
 import { MatTableDataSource } from '@angular/material/table';
+import { SimpleChangesTyped } from '../../util/misc';
 
+/**
+ * Paginated list that uses an array of data and does not request data fetching.
+ */
 @Component({
   selector: 'app-local-paginated-list',
   templateUrl: './local-paginated-list.component.html',
   styleUrls: ['./local-paginated-list.component.scss'],
 })
-export class LocalPaginatedListComponent<EntryT> {
+export class LocalPaginatedListComponent<EntryT> implements OnChanges {
   // Inspections suppressed, because of needed fixed numbers for page size options.
   // noinspection MagicNumberJS
   /**
@@ -34,6 +38,10 @@ export class LocalPaginatedListComponent<EntryT> {
 
   page(page: PaginationParams<string>): void {
     this.pagination = page;
+    this.refreshDataSource();
+  }
+
+  private refreshDataSource(): void {
     this.dataSource.data = this.getData().entries;
   }
 
@@ -53,5 +61,11 @@ export class LocalPaginatedListComponent<EntryT> {
     paginated.total = this.data.length;
     paginated.retrieved = paginated.entries.length;
     return paginated;
+  }
+
+  ngOnChanges(changes: SimpleChangesTyped<LocalPaginatedListComponent<EntryT>>): void {
+    if (changes.data) {
+      this.refreshDataSource();
+    }
   }
 }
