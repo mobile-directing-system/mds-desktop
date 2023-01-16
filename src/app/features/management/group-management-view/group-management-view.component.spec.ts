@@ -11,6 +11,8 @@ import { OrderDir, Paginated, PaginationParams } from '../../../core/util/store'
 import { fakeAsync, tick } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { Sort } from '@angular/material/sort';
+import { AccessControlService } from '../../../core/services/access-control.service';
+import { AccessControlMockService } from '../../../core/services/access-control-mock.service';
 
 describe('GroupManagementView', () => {
   let spectator: SpectatorRouting<GroupManagementView>;
@@ -20,6 +22,12 @@ describe('GroupManagementView', () => {
     imports: [
       CoreModule,
       ManagementModule,
+    ],
+    providers: [
+      {
+        provide: AccessControlService,
+        useExisting: AccessControlMockService,
+      },
     ],
     mocks: [
       UserService,
@@ -83,7 +91,7 @@ describe('GroupManagementView', () => {
     {
       group: sampleGroups[2],
       operation: sampleOperation,
-    }
+    },
   ];
 
   const samplePaginatedGroups: Paginated<Group> = new Paginated<Group>(sampleGroups, {
@@ -239,7 +247,7 @@ describe('GroupManagementView', () => {
         }));
         expect(spectator.router.navigate).toHaveBeenCalledWith([sampleGroup.id], { relativeTo: spectator.activatedRouteStub });
       }));
-    })
+    });
 
     describe('order-by', () => {
       const tests: {
@@ -277,5 +285,14 @@ describe('GroupManagementView', () => {
         });
       });
     });
+  });
+
+  it('should hide create button when missing appropriate permissions', async () => {
+    spectator.inject(AccessControlMockService).setNoAdminAndGranted([]);
+    await spectator.fixture.whenStable();
+    expect(spectator.query(byTextContent('Create group', {
+      exact: false,
+      selector: 'button',
+    }))).toBeVisible();
   });
 });

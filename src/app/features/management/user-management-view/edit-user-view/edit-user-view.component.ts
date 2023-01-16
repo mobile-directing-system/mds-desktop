@@ -2,10 +2,17 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Loader } from '../../../../core/util/loader';
 import { NotificationService } from '../../../../core/services/notification.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MDSError, MDSErrorCode } from '../../../../core/util/errors';
-import { Subscription } from 'rxjs';
+import { combineLatest, Observable, Subscription, switchMap, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../core/services/user.service';
+import { ViewPermissionsPermission } from '../../../../core/permissions/permissions';
+import {
+  SetUserActiveStatePermission,
+  SetUserAdminPermission,
+  UpdateUserPassPermission,
+  UpdateUserPermission,
+} from '../../../../core/permissions/users';
+import { AccessControlService } from '../../../../core/services/access-control.service';
 
 /**
  *  View for updating a user.
@@ -16,7 +23,6 @@ import { UserService } from '../../../../core/services/user.service';
   styleUrls: ['./edit-user-view.component.scss'],
 })
 export class EditUserView implements OnInit, OnDestroy {
-
   /**
    * Loader for when updating a user and awaiting the response.
    */
@@ -34,7 +40,8 @@ export class EditUserView implements OnInit, OnDestroy {
   id = '';
 
   constructor(private userService: UserService, private notificationService: NotificationService, private fb: FormBuilder,
-              private router: Router, private route: ActivatedRoute) {
+              private acService: AccessControlService, private router: Router, private route: ActivatedRoute) {
+    this.form.disable();
   }
 
   ngOnDestroy(): void {
@@ -43,48 +50,49 @@ export class EditUserView implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Get id of current user from router path.
-    this.s.push(this.route.params.subscribe(params => {
-      this.id = params['userId'];
-      this.updatingUser.load(this.userService.getUserById(this.id)).subscribe(u => {
-        this.form.patchValue({
-          username: u.username,
-          firstName: u.firstName,
-          lastName: u.lastName,
-          isAdmin: u.isAdmin,
-          isActive: u.isActive,
+    this.s.push(this.route.params.pipe(
+      switchMap(params => {
+        this.id = params['userId'];
+        this.form.disable();
+        return combineLatest({
+          user: this.updatingUser.load(this.userService.getUserById(this.id)),
+          isUpdateGranted: this.acService.isGranted([UpdateUserPermission()]),
+          isSetAdminGranted: this.acService.isGranted([SetUserAdminPermission()]),
+          isSetActiveStateGranted: this.acService.isGranted([SetUserActiveStatePermission()]),
         });
-      });
-    }));
+      }),
+      tap(result => {
+        this.form.patchValue({
+          username: result.user.username,
+          firstName: result.user.firstName,
+          lastName: result.user.lastName,
+          isAdmin: result.user.isAdmin,
+          isActive: result.user.isActive,
+        });
+        if (!result.isUpdateGranted) {
+          // Keep everything disabled.
+          return;
+        }
+        this.form.enable();
+        if (!result.isSetAdminGranted) {
+          this.form.controls.isAdmin.disable();
+        }
+        if (!result.isSetActiveStateGranted) {
+          this.form.controls.isActive.disable();
+        }
+      }),
+    ).subscribe());
   }
 
   updateUser(): void {
-    const username = this.form.value.username;
-    if (username === undefined) {
-      throw new MDSError(MDSErrorCode.AppError, 'username-control is not set');
-    }
-    const isActive = this.form.value.isActive;
-    if (isActive === undefined) {
-      throw new MDSError(MDSErrorCode.AppError, 'is-active-control is not set');
-    }
-    const firstName = this.form.value.firstName;
-    if (firstName === undefined) {
-      throw new MDSError(MDSErrorCode.AppError, 'first-name-control is not set');
-    }
-    const lastName = this.form.value.lastName;
-    if (lastName === undefined) {
-      throw new MDSError(MDSErrorCode.AppError, 'last-name-control is not set');
-    }
-    const isAdmin = this.form.value.isAdmin;
-    if (isAdmin === undefined) {
-      throw new MDSError(MDSErrorCode.AppError, 'is-admin-control is not set');
-    }
+    const v = this.form.getRawValue();
     this.userService.updateUser({
       id: this.id,
-      username: username,
-      firstName: firstName,
-      lastName: lastName,
-      isAdmin: isAdmin,
-      isActive: isActive,
+      username: v.username,
+      firstName: v.firstName,
+      lastName: v.lastName,
+      isAdmin: v.isAdmin,
+      isActive: v.isActive,
     }).subscribe({
       next: _ => {
         this.close();
@@ -108,5 +116,19 @@ export class EditUserView implements OnInit, OnDestroy {
    */
   navigateToPermissions(): void {
     this.router.navigate(['permissions'], { relativeTo: this.route }).then();
+  }
+
+  /**
+   * True when updating user passwords is granted.
+   */
+  isUpdatePassGranted(): Observable<boolean> {
+    return this.acService.isGranted([UpdateUserPassPermission()]);
+  }
+
+  /**
+   * True when viewing permissions is granted.
+   */
+  isViewPermissionsGranted(): Observable<boolean> {
+    return this.acService.isGranted([ViewPermissionsPermission()]);
   }
 }

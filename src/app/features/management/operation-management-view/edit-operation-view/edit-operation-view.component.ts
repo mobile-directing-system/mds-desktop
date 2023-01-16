@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Loader } from '../../../../core/util/loader';
-import { forkJoin, Observable, Subscription, switchMap, tap } from 'rxjs';
+import { combineLatest, forkJoin, Observable, Subscription, switchMap, tap } from 'rxjs';
 import { NotificationService } from '../../../../core/services/notification.service';
 import { AbstractControl, FormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,8 +10,10 @@ import { Sort } from '@angular/material/sort';
 import { MDSError, MDSErrorCode } from '../../../../core/util/errors';
 import { UserService, UserSort } from '../../../../core/services/user.service';
 import { SearchResult, sortStrings } from '../../../../core/util/store';
-import { map } from 'rxjs/operators';
 import * as moment from 'moment';
+import { UpdateOperationMembersPermission, UpdateOperationPermission } from '../../../../core/permissions/operations';
+import { AccessControlService } from '../../../../core/services/access-control.service';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -37,7 +39,14 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
    */
   operationMembers: User[] = [];
 
-  columnsToDisplayForMemberTable = ['lastName', 'firstName', 'username', 'props'];
+  columnsToDisplayForMemberTable = ['lastName', 'firstName', 'username', 'props', 'remove'];
+
+
+  constructor(private operationService: OperationService, private userService: UserService,
+              private notificationService: NotificationService, private fb: FormBuilder,
+              private acService: AccessControlService, private router: Router, private route: ActivatedRoute) {
+    this.form.disable();
+  }
 
   ngOnDestroy(): void {
     this.s.forEach(s => s.unsubscribe());
@@ -48,47 +57,45 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
       // Get operation with the id from the current route.
       switchMap(params => {
         this.operationId = params['operationId'];
-        return this.operationService.getOperationById(this.operationId);
+        this.form.disable();
+        return this.loader.load(combineLatest({
+          operation: this.operationService.getOperationById(this.operationId),
+          operationMembers: this.operationService.getOperationMembers(this.operationId),
+          isUpdateGranted: this.isUpdateGranted(),
+        }));
       }),
-      tap(operation => {
+      tap(result => {
         // Update form values.
         this.form.patchValue({
-          title: operation.title,
-          description: operation.description,
-          isArchived: operation.is_archived,
+          title: result.operation.title,
+          description: result.operation.description,
+          isArchived: result.operation.is_archived,
         });
-        let operationStart = new Date(operation.start);
+        let operationStart = new Date(result.operation.start);
         this.form.controls.start.patchValue(moment(operationStart));
-        if (operation.end) {
-          let operationEnd = new Date(operation!.end);
+        if (result.operation.end) {
+          let operationEnd = new Date(result.operation!.end);
           this.form.controls.end.patchValue(moment(operationEnd));
         }
+        this.operationMembers = result.operationMembers;
+        this.form.controls.members.patchValue(result.operationMembers.map(member => member.id));
+        if (!result.isUpdateGranted) {
+          // Keep everything disabled.
+          return;
+        }
+        this.form.enable();
       })).subscribe());
 
-    // Get members of the current operation.
-    this.s.push(this.operationService.getOperationMembers(this.operationId).pipe(
-      tap(members => {
+    // When members changes also update the table.
+    this.s.push(this.form.controls.members.valueChanges.pipe(
+      switchMap(members => {
         this.operationMembers = [];
-        this.operationMembers = members;
+        return this.loader.load(forkJoin(members.map(memberId => this.userService.getUserById(memberId))));
       }),
-      map(members => {
-        this.form.controls.members.patchValue(members.map(member => member.id));
-      }),
+      tap(retrievedMemberDetails => this.operationMembers = retrievedMemberDetails),
     ).subscribe());
 
-    // When members changes also update the table.
-    this.s.push(
-      this.form.controls.members.valueChanges.pipe(
-        switchMap(members => {
-          this.operationMembers = [];
-          return forkJoin(members.map(memberId => this.userService.getUserById(memberId)));
-        }),
-        tap(currentGroupMembers => {
-          this.operationMembers = currentGroupMembers;
-        }),
-      ).subscribe());
-
-    this.s.push(this.form.controls.start.valueChanges.pipe(tap(newStartDate => {
+    this.s.push(this.form.controls.start.valueChanges.pipe(tap(_ => {
       this.form.controls.end.updateValueAndValidity();
     })).subscribe());
   }
@@ -101,12 +108,7 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
     isArchived: this.fb.nonNullable.control<boolean>(false, [Validators.required]),
     members: this.fb.nonNullable.control<string[]>([]),
   });
-
   membersToAddForm = this.fb.nonNullable.control<string[]>([]);
-
-  constructor(private operationService: OperationService, private userService: UserService, private notificationService: NotificationService, private fb: FormBuilder,
-              private router: Router, private route: ActivatedRoute) {
-  }
 
   updateOperation(): void {
     const title = this.form.value.title;
@@ -264,5 +266,9 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
    */
   close(): void {
     this.router.navigate(['..'], { relativeTo: this.route }).then();
+  }
+
+  isUpdateGranted(): Observable<boolean> {
+    return this.acService.isGranted([UpdateOperationPermission(), UpdateOperationMembersPermission()]);
   }
 }

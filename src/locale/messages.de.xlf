@@ -100,6 +100,7 @@
     <unit id="7507948636555938109">
       <notes>
         <note category="location">src/app/core/components/home-layout/profile/profile.component.html:9</note>
+        <note category="location">src/app/core/components/missing-permissions-view/missing-permissions-view.component.html:4</note>
       </notes>
       <segment state="initial">
         <source>Log out</source>
@@ -144,7 +145,6 @@
     </unit>
     <unit id="4555457172864212828">
       <notes>
-        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:4</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:24</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:1</note>
       </notes>
@@ -227,7 +227,6 @@
     </unit>
     <unit id="7457179823984196306">
       <notes>
-        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:6</note>
         <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:1</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:88</note>
       </notes>
@@ -359,7 +358,7 @@
     </unit>
     <unit id="1481645236299803925">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:32,33</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:37,38</note>
       </notes>
       <segment state="initial">
         <source>Change Password</source>
@@ -471,7 +470,7 @@
     <unit id="3620188369327429839">
       <notes>
         <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:171,172</note>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:38,39</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:48,49</note>
       </notes>
       <segment state="initial">
         <source>Save</source>
@@ -862,6 +861,24 @@
         <target>Mitglieder hinzufügen</target>
       </segment>
     </unit>
+    <unit id="763483268749037337">
+      <notes>
+        <note category="location">src/app/core/components/missing-permissions-view/missing-permissions-view.component.html:1</note>
+      </notes>
+      <segment state="initial">
+        <source>You are missing permissions to access the requested resource.</source>
+        <target>Ihnen fehlen Berechtigungen, um auf die angefragte Ressource zuzugreifen.</target>
+      </segment>
+    </unit>
+    <unit id="8890553633144307762">
+      <notes>
+        <note category="location">src/app/core/components/missing-permissions-view/missing-permissions-view.component.html:3</note>
+      </notes>
+      <segment state="initial">
+        <source>Back</source>
+        <target>Zurück</target>
+      </segment>
+    </unit>
     <unit id="7393468163947639901">
       <notes>
         <note category="location">src/app/features/auth/logout-view/logout-view.component.html:2</note>
@@ -1107,7 +1124,7 @@
     </unit>
     <unit id="5265020118967515341">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:35,36</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:45,46</note>
       </notes>
       <segment state="initial">
         <source>Permissions</source>
@@ -1139,6 +1156,33 @@
       <segment state="initial">
         <source>Intel</source>
         <target>Intel</target>
+      </segment>
+    </unit>
+    <unit id="3488583301572536241">
+      <notes>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:9</note>
+      </notes>
+      <segment state="initial">
+        <source>Users</source>
+        <target>Nutzer</target>
+      </segment>
+    </unit>
+    <unit id="6173425432294670559">
+      <notes>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:15</note>
+      </notes>
+      <segment state="initial">
+        <source>Groups</source>
+        <target>Gruppen</target>
+      </segment>
+    </unit>
+    <unit id="8705640949204819723">
+      <notes>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:20,21</note>
+      </notes>
+      <segment state="initial">
+        <source>Operations</source>
+        <target>Einsätze</target>
       </segment>
     </unit>
   </file>

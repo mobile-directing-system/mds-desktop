@@ -9,14 +9,23 @@ import { User } from '../../../../core/model/user';
 import { Operation } from '../../../../core/model/operation';
 import { EditGroupView } from './edit-group-view.component';
 import { Group } from '../../../../core/model/group';
-import { fakeAsync, tick } from '@angular/core/testing';
+import { fakeAsync, flush, tick } from '@angular/core/testing';
 import { SearchResult } from '../../../../core/util/store';
+import { AccessControlService } from '../../../../core/services/access-control.service';
+import { AccessControlMockService } from '../../../../core/services/access-control-mock.service';
+import { PermissionName } from '../../../../core/permissions/permissions';
 
 function genFactoryOptions(): SpectatorRoutingOptions<EditGroupView> {
   return {
     component: EditGroupView,
     imports: [
       ManagementModule,
+    ],
+    providers: [
+      {
+        provide: AccessControlService,
+        useExisting: AccessControlMockService,
+      },
     ],
     mocks: [
       NotificationService,
@@ -41,13 +50,13 @@ describe('EditGroupView', () => {
     id: 'defend',
     title: 'open',
     description: 'match',
-    operation: 'drop',
+    operation: 'skirt',
     members: ['fly', 'glass'],
   };
   const title = 'straw';
   const description = 'egg';
   const operationId = 'skirt';
-  const members = ['fly', 'glass', 'combine'];
+  let members: string[];
   const sampleUserData: User[] = [
     {
       id: 'fly',
@@ -90,8 +99,14 @@ describe('EditGroupView', () => {
       is_archived: false,
     },
   ];
+  const allPermissions = [
+    { name: PermissionName.ViewUser },
+    { name: PermissionName.ViewGroup },
+    { name: PermissionName.UpdateGroup },
+  ];
 
   beforeEach(async () => {
+    members = ['fly', 'glass', 'combine'];
     spectator = createComponent();
     component = spectator.component;
     spectator.router.navigate = jasmine.createSpy().and.callFake(spectator.router.navigate).and.resolveTo();
@@ -124,6 +139,38 @@ describe('EditGroupView', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should disable form without update-permissions', fakeAsync(() => {
+    spectator.inject(AccessControlMockService).setNoAdminAndGranted(allPermissions.filter(p => p.name != PermissionName.UpdateGroup));
+    spectator.setRouteParam('', '');
+    tick();
+    expect(component.form.disabled).toBeTrue();
+  }));
+
+  it('should show member-adding', async () => {
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+
+    expect(spectator.query('.member-adding')).toBeVisible();
+  });
+
+  it('should hide member-adding without update-permissions', async () => {
+    spectator.inject(AccessControlMockService).setNoAdminAndGranted(allPermissions.filter(p => p.name != PermissionName.UpdateGroup));
+    spectator.setRouteParam('', '');
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+
+    expect(spectator.query('.member-adding')).not.toBeVisible();
+  });
+
+  it('should hide member-adding without update-permissions', async () => {
+    spectator.inject(AccessControlMockService).setNoAdminAndGranted(allPermissions.filter(p => p.name != PermissionName.UpdateGroup));
+    spectator.setRouteParam('', '');
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+
+    expect(spectator.query('.member-adding')).not.toBeVisible();
+  });
+
   it('should go to /groups/ when click close', fakeAsync(() => {
     spectator.click(byTextContent('Cancel', { selector: 'button' }));
     tick();
@@ -141,16 +188,18 @@ describe('EditGroupView', () => {
     expect(component.form.valid).toBeFalse();
   }));
 
-  it('should allow group update with empty description', fakeAsync(() => {
+  it('should allow group update with empty description', async () => {
+    await spectator.fixture.whenStable();
     component.form.setValue({
       title: title,
       description: '',
       operation: null,
       members: members,
     });
-    tick();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
     expect(component.form.valid).toBeTrue();
-  }));
+  });
 
   describe('updateGroup', () => {
     it('should fail without title', fakeAsync(() => {
@@ -274,39 +323,46 @@ describe('EditGroupView', () => {
   });
 
   describe('memberValidation for group with operation to only include members of operation', () => {
-    it('should disable form if group contains members that are not member of the selected operation', fakeAsync(() => {
+    it('should disable form if group contains members that are not member of the selected operation', fakeAsync(async () => {
+      await spectator.fixture.whenStable();
       component.form.setValue({
         title: title,
         description: description,
         operation: 'drop',
         members: members,
       });
-      tick();
+      spectator.detectChanges();
+      await spectator.fixture.whenStable();
 
       expect(spectator.inject(OperationService).getOperationMembers).toHaveBeenCalledWith('drop');
       expect(component.form.valid).toBeFalse();
     }));
 
-    it('should allow groupUpdate with any members if no operation was set', fakeAsync(() => {
+    it('should allow group update with any members if no operation was set', fakeAsync(async () => {
+      await spectator.fixture.whenStable();
       component.form.setValue({
         title: title,
         description: description,
         operation: null,
         members: members,
       });
-      tick();
+      spectator.detectComponentChanges();
+      await spectator.fixture.whenStable();
 
       expect(component.form.valid).toBeTrue();
     }));
 
-    it('should allow group update if all members are also members of the selected operation', fakeAsync(() => {
+    it('should allow group update if all members are also members of the selected operation', fakeAsync(async () => {
+      await spectator.fixture.whenStable();
       component.form.setValue({
         title: title,
         description: description,
         operation: 'skirt',
         members: members,
       });
-      tick();
+      spectator.detectComponentChanges();
+      await spectator.fixture.whenStable();
+
       expect(spectator.inject(OperationService).getOperationMembers).toHaveBeenCalledWith('skirt');
       expect(component.form.valid).toBeTrue();
     }));
@@ -360,6 +416,36 @@ describe('EditGroupView', () => {
         }))).withContext(`should show group attribute ${ expectAttribute } from group ${ expectMember.id }`).toBeVisible();
       });
     });
+  }));
+
+  it('should show remove-icons in member list', async () => {
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+    component.form.patchValue({
+      members: members,
+    });
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+
+    expect(spectator.query(byTextContent('close', {
+      exact: false,
+      selector: 'mat-icon',
+    }))).toBeVisible();
+  });
+
+  it('should hide remove-icons in member list without update permissions', fakeAsync(async () => {
+    spectator.inject(AccessControlMockService).setNoAdminAndGranted(allPermissions.filter(p => p.name != PermissionName.UpdateGroup));
+    component.form.patchValue({
+      members: members,
+    });
+    tick();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+
+    expect(spectator.query(byTextContent('close', {
+      exact: false,
+      selector: 'mat-icon',
+    }))).not.toBeVisible();
   }));
 
   describe('addMembers button', () => {
@@ -431,6 +517,9 @@ describe('EditGroupView', () => {
       members: members,
     });
     tick();
+    flush();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
     spectator.detectComponentChanges();
     await spectator.fixture.whenStable();
 
@@ -446,6 +535,8 @@ describe('EditGroupView', () => {
     }));
 
     tick();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
     spectator.detectComponentChanges();
     await spectator.fixture.whenStable();
     spyOn(component, 'updateGroup');

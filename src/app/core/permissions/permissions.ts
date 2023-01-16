@@ -126,3 +126,24 @@ export interface Permission {
  * @constructor
  */
 export type PermissionMatcher = (granted: Permission[]) => Observable<boolean> | boolean
+
+
+/**
+ * Allows setting permissions for users.
+ * @constructor
+ */
+export function UpdatePermissionPermission(): PermissionMatcher {
+  return granted => {
+    return granted.some(p => p.name === PermissionName.UpdatePermissions);
+  };
+}
+
+/**
+ * Allows viewing permissions for users.
+ * @constructor
+ */
+export function ViewPermissionsPermission(): PermissionMatcher {
+  return granted => {
+    return granted.some(p => p.name === PermissionName.ViewPermissions);
+  };
+}

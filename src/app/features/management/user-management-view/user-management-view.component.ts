@@ -3,11 +3,13 @@ import { createSearchParams, orderDirFromSort, Paginated, PaginationParams } fro
 import { UserService, UserSort } from '../../../core/services/user.service';
 import { User } from '../../../core/model/user';
 import { Sort } from '@angular/material/sort';
-import { EMPTY } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Loader } from '../../../core/util/loader';
 import { MDSError, MDSErrorCode } from '../../../core/util/errors';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AccessControlService } from '../../../core/services/access-control.service';
+import { CreateUserPermission } from '../../../core/permissions/users';
 
 /**
  * View with user list.
@@ -28,7 +30,8 @@ export class UserManagementView {
    */
   retrieving = new Loader();
 
-  constructor(private userService: UserService, private router: Router, private route:ActivatedRoute) {
+  constructor(private userService: UserService, private acService: AccessControlService, private router: Router,
+              private route: ActivatedRoute) {
   }
 
   refresh(): void {
@@ -95,5 +98,9 @@ export class UserManagementView {
   searchChange(term: string): void {
     this.search = term;
     this.refresh();
+  }
+
+  isCreateGranted(): Observable<boolean> {
+    return this.acService.isGranted([CreateUserPermission()])
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NetService } from './net.service';
-import { BehaviorSubject, finalize, Observable, tap } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, finalize, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { MDSError, MDSErrorCode } from '../util/errors';
 import { LocalStorageService } from './local-storage.service';
 
@@ -54,12 +54,14 @@ export class AuthService {
    */
   login(username: string, pass: string): Observable<boolean> {
     if (!!this.loggedInUserId) {
-      throw new MDSError(MDSErrorCode.AppError, 'user already logged in', { loggedInUserId: this.loggedInUserId });
+      this.logout();
     }
-    return this.netService.postJSON<NetUserToken>('/login', {
-      username: username,
-      pass: pass,
-    }, {}).pipe(
+    return (!!this.loggedInUserId ? this.logout() : of(void 0)).pipe(
+      catchError(() => of(void 0)), // Ignore.
+      switchMap(() => this.netService.postJSON<NetUserToken>('/login', {
+        username: username,
+        pass: pass,
+      }, {})),
       // Set user id.
       tap((token: NetUserToken) => {
         this.setLoggedInUserId(token.user_id);
@@ -69,7 +71,7 @@ export class AuthService {
       // Set Authorization-header in net-service.
       tap((token: NetUserToken) => (this.applyAuthToken(token.access_token))),
       // Notify of new logged in user.
-      map((_) => true),
+      map(() => true),
     );
   }
 

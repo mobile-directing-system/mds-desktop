@@ -7,12 +7,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService, UserSort } from '../../../../core/services/user.service';
 import { OperationService } from '../../../../core/services/operation.service';
 import { MDSError, MDSErrorCode } from '../../../../core/util/errors';
-import { forkJoin, Observable, of, Subscription, switchMap, tap } from 'rxjs';
+import { combineLatest, forkJoin, Observable, of, Subscription, switchMap, tap } from 'rxjs';
 import { User } from '../../../../core/model/user';
 import { Operation } from '../../../../core/model/operation';
 import { SearchResult, sortStrings } from '../../../../core/util/store';
 import { map } from 'rxjs/operators';
 import { Sort } from '@angular/material/sort';
+import { AccessControlService } from '../../../../core/services/access-control.service';
+import { UpdateGroupPermission } from '../../../../core/permissions/groups';
 
 @Component({
   selector: 'app-edit-group-view',
@@ -37,6 +39,12 @@ export class EditGroupView implements OnInit, OnDestroy {
    */
   groupMembers: User [] = [];
 
+  constructor(private groupService: GroupService, private notificationService: NotificationService, private fb: FormBuilder,
+              private router: Router, private route: ActivatedRoute, private userService: UserService,
+              private acService: AccessControlService, private operationService: OperationService) {
+    this.form.disable();
+  };
+
   ngOnDestroy(): void {
     this.s.forEach(s => s.unsubscribe());
   }
@@ -47,26 +55,34 @@ export class EditGroupView implements OnInit, OnDestroy {
       switchMap(params => {
         this.groupId = params['groupId'];
         this.groupMembers = [];
-        return this.loader.load(this.groupService.getGroupById(this.groupId));
-      }),
-      // Patch the form values.
-      tap((currentGroup) => {
-        this.form.patchValue({
-          title: currentGroup.title,
-          description: currentGroup.description,
-          operation: currentGroup.operation,
-          members: currentGroup.members,
+        this.form.disable();
+        return combineLatest({
+          group: this.loader.load(this.groupService.getGroupById(this.groupId)),
+          isUpdateGranted: this.isUpdateGranted(),
         });
       }),
+      // Patch the form values.
+      tap(result => {
+        this.form.patchValue({
+          title: result.group.title,
+          description: result.group.description,
+          operation: result.group.operation,
+          members: result.group.members,
+        });
+        if (!result.isUpdateGranted) {
+          // Keep everything disabled.
+          return;
+        }
+        this.form.enable();
+      }),
       // Retrieve the user-data for all members.
-      switchMap(currentGroup => forkJoin(currentGroup.members.map(memberId => this.loader.load(this.userService.getUserById(memberId))))),
+      switchMap(result => forkJoin(result.group.members.map(memberId => this.loader.load(this.userService.getUserById(memberId))))),
       // Add the users to the members array.
       tap(currentGroupMembers => {
         this.groupMembers = currentGroupMembers;
       }),
     ).subscribe());
 
-    // Push value-change-subscription for memberIds.
     this.s.push(
       // Whenever members in form changes retrieve the user-data for the ids within.
       this.form.controls.members.valueChanges.pipe(
@@ -79,18 +95,12 @@ export class EditGroupView implements OnInit, OnDestroy {
         }),
       ).subscribe());
 
-    this.s.push(
-      this.membersToAddForm.valueChanges.subscribe(() => {
-          this.form.controls.operation.updateValueAndValidity();
-        },
-      ),
-    );
-    this.s.push(
-      this.form.controls.members.valueChanges.subscribe(() => {
-          this.form.controls.operation.updateValueAndValidity();
-        },
-      ),
-    );
+    this.s.push(this.membersToAddForm.valueChanges.subscribe(() => {
+      this.form.controls.operation.updateValueAndValidity();
+    }));
+    this.s.push(this.form.controls.members.valueChanges.subscribe(() => {
+      this.form.controls.operation.updateValueAndValidity();
+    }));
   }
 
   form = this.fb.nonNullable.group({
@@ -104,10 +114,6 @@ export class EditGroupView implements OnInit, OnDestroy {
   });
 
   membersToAddForm = this.fb.nonNullable.control<string[]>([]);
-
-  constructor(private groupService: GroupService, private notificationService: NotificationService, private fb: FormBuilder,
-              private router: Router, private route: ActivatedRoute, private userService: UserService, private operationService: OperationService) {
-  };
 
   updateGroup(): void {
     const title = this.form.value.title;
@@ -194,11 +200,11 @@ export class EditGroupView implements OnInit, OnDestroy {
   }
 
   asUser(entity: User): User {
-    return entity as User;
+    return entity;
   }
 
   asOperation(entity: Operation): Operation {
-    return entity as Operation;
+    return entity;
   }
 
   /**
@@ -273,21 +279,21 @@ export class EditGroupView implements OnInit, OnDestroy {
    * Validates whether the group members are also members of the selected operation.
    */
   groupMembersMustBeOperationMemberValidator(): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      // Validate if Form already initialized.
+    return (_: AbstractControl): Observable<ValidationErrors | null> => {
       if (!this.form?.controls) {
         return of(null);
       }
       const groupMemberIds = this.form.controls.members.getRawValue();
-      if (!control.value) {
+      const operationId = this.form.controls.operation.getRawValue();
+      if (!operationId) {
         return of(null);
       }
-      return this.operationService.getOperationMembers(control.value).pipe(
+      return this.operationService.getOperationMembers(operationId).pipe(
         map((operationMembers: User[]) => {
           return operationMembers.map(operationMember => operationMember.id);
         }),
         map(operationMemberIds => {
-          return this.validateNoSameValuesInBothArrays(groupMemberIds, operationMemberIds) ? { groupMembersNotPartOfOperation: true } : null;
+          return this.someOfANotInB(groupMemberIds, operationMemberIds) ? { groupMembersNotPartOfOperation: true } : null;
         }),
       );
     };
@@ -310,7 +316,7 @@ export class EditGroupView implements OnInit, OnDestroy {
           return operationMembers.map(operationMember => operationMember.id);
         }),
         map(operationMemberIds => {
-          return this.validateNoSameValuesInBothArrays(groupMembersToAddIds, operationMemberIds) ? { groupMembersNotPartOfOperation: true } : null;
+          return this.someOfANotInB(groupMembersToAddIds, operationMemberIds) ? { groupMembersNotPartOfOperation: true } : null;
         }),
       );
     };
@@ -321,10 +327,14 @@ export class EditGroupView implements OnInit, OnDestroy {
    * @param arrA The array that is supposed to contain no values of the second array.
    * @param arrB The array that contains all allowed values for the first array.
    */
-  validateNoSameValuesInBothArrays(arrA: string[], arrB: string[]): boolean {
-    let filteredArr = arrA.filter(function(groupMemberId: string) {
+  someOfANotInB(arrA: string[], arrB: string[]): boolean {
+    let notInBList = arrA.filter(function(groupMemberId: string) {
       return !arrB.includes(groupMemberId);
     });
-    return filteredArr.length > 0;
+    return notInBList.length > 0;
+  }
+
+  isUpdateGranted(): Observable<boolean> {
+    return this.acService.isGranted([UpdateGroupPermission()]);
   }
 }

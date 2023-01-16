@@ -9,6 +9,8 @@ import { fakeAsync, tick } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { CoreModule } from '../../../../core/core.module';
+import { AccessControlService } from '../../../../core/services/access-control.service';
+import { AccessControlMockService } from '../../../../core/services/access-control-mock.service';
 import createSpy = jasmine.createSpy;
 import Spy = jasmine.Spy;
 import anything = jasmine.anything;
@@ -20,6 +22,12 @@ function genFactoryOptions(): SpectatorRoutingOptions<EditUserPermissionsView> {
     mocks: [
       UserService,
       PermissionService,
+    ],
+    providers: [
+      {
+        provide: AccessControlService,
+        useExisting: AccessControlMockService,
+      },
     ],
     detectChanges: false,
   };
@@ -33,6 +41,10 @@ describe('EditUserPermissionsView', () => {
   });
   let user: User;
   let granted: Permission[];
+  const allPermissions: Permission[] = [
+    { name: PermissionName.ViewPermissions },
+    { name: PermissionName.UpdatePermissions },
+  ];
 
   beforeEach(fakeAsync(async () => {
     user = {
@@ -163,7 +175,7 @@ describe('EditUserPermissionsView', () => {
       expect(navigateSpy).toHaveBeenCalledOnceWith(['..'], { relativeTo: spectator.activatedRouteStub });
     }));
 
-    it('should not lose unsupported permissions on update', fakeAsync(() => {
+    it('should not loose unsupported permissions on update', fakeAsync(async () => {
       const newUserId = 'realize';
       const newGranted: Permission[] = [
         { name: PermissionName.UpdateUser },
@@ -176,12 +188,25 @@ describe('EditUserPermissionsView', () => {
       tick();
 
       component.save();
+      tick();
 
       expect(spectator.inject(PermissionService).setPermissionsForUser).toHaveBeenCalledOnceWith(anything(), newGranted);
     }));
   });
 
+  it('should disable form when missing permissions', fakeAsync(() => {
+    spectator.inject(AccessControlMockService).setNoAdminAndGranted(allPermissions.filter(p => p.name !== PermissionName.UpdatePermissions));
+    spectator.setRouteParam('', '')
+    tick();
+    expect(component.form?.disabled).toBeTrue();
+  }));
+
   describe('fixture', () => {
+    beforeEach(async () => {
+      spectator.detectComponentChanges();
+      await spectator.fixture.whenStable();
+    })
+
     it('should display an informational notice for admin users', async () => {
       component.user = {
         ...user,

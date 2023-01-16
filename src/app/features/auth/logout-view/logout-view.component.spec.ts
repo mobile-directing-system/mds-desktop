@@ -25,6 +25,7 @@ describe('LogoutView', () => {
     spectator.router.navigate = navigateSpy;
 
     spectator.detectChanges();
+    await spectator.fixture.whenStable();
   });
 
   it('should create', () => {

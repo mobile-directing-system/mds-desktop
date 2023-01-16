@@ -28,6 +28,7 @@ import { ShowLoadingDotsDirective } from './directives/show-loading-dots.directi
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { MtxNativeDatetimeModule } from '@ng-matero/extensions/core';
 import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
+import { MissingPermissionsView } from './components/missing-permissions-view/missing-permissions-view.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
     ErrorsComponent,
     LocalPaginatedListComponent,
     ShowLoadingDotsDirective,
+    MissingPermissionsView,
   ],
   exports: [
     LogoComponent,

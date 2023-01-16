@@ -4,7 +4,7 @@
 
 <!--Actions.-->
 <app-list-action-bar>
-  <button mat-button i18n (click)="createGroup()">Create Group</button>
+  <button (click)="createGroup()" *ngIf="isCreateGranted() | async" i18n mat-button>Create Group</button>
 </app-list-action-bar>
 <!--Table.-->
 <app-paginated-list #list (page)="page($event)" [data]="loadedGroupTableData">
@@ -27,7 +27,7 @@
     <ng-container matColumnDef="operation">
       <th *matHeaderCellDef i18n mat-header-cell>Operation</th>
       <td *matCellDef="let row" mat-cell
-          [appShowLoadingDots]="retrievingOperations.loadingChange() | async">{{getOperationTitleFromGroupTableContent(asGroupTableContent(row))}}</td>
+          [appShowLoadingDots]="retrieving.loadingChange() | async">{{getOperationTitleFromGroupTableContent(asGroupTableContent(row))}}</td>
     </ng-container>
 
     <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>

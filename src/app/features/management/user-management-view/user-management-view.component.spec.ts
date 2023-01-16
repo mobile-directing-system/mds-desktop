@@ -15,6 +15,8 @@ import { of } from 'rxjs';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { ManagementModule } from '../management.module';
 import { Sort } from '@angular/material/sort';
+import { AccessControlService } from '../../../core/services/access-control.service';
+import { AccessControlMockService } from '../../../core/services/access-control-mock.service';
 import createSpy = jasmine.createSpy;
 
 describe('UserManagementView', () => {
@@ -28,6 +30,12 @@ describe('UserManagementView', () => {
     ],
     mocks: [
       UserService,
+    ],
+    providers: [
+      {
+        provide: AccessControlService,
+        useExisting: AccessControlMockService,
+      },
     ],
     detectChanges: false,
   });
@@ -362,6 +370,22 @@ describe('UserManagementView', () => {
         selector: 'button',
       }));
       expect(createUserSpy).toHaveBeenCalledOnceWith();
+    });
+
+    it('should show create button', () => {
+      expect(spectator.query(byTextContent('Create user', {
+        exact: false,
+        selector: 'button',
+      }))).toBeVisible();
+    });
+
+    it('should hide create button when missing appropriate permissions', async () => {
+      spectator.inject(AccessControlMockService).setNoAdminAndGranted([]);
+      await spectator.fixture.whenStable();
+      expect(spectator.query(byTextContent('Create user', {
+        exact: false,
+        selector: 'button',
+      }))).toBeVisible();
     });
   });
 });

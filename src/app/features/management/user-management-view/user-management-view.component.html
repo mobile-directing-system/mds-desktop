@@ -4,7 +4,7 @@
 
 <!--Actions.-->
 <app-list-action-bar [end]="search">
-  <button mat-button i18n (click)="createUser()">Create User</button>
+  <button mat-button i18n (click)="createUser()" *ngIf="isCreateGranted() | async">Create User</button>
   <ng-template #search>
     <app-quick-search (search)="searchChange($event)"></app-quick-search>
   </ng-template>

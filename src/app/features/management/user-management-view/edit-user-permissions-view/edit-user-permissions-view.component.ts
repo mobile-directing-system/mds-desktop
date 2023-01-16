@@ -1,14 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Loader } from '../../../../core/util/loader';
 import { User } from '../../../../core/model/user';
-import { combineLatest, Subscription, switchMap } from 'rxjs';
+import { combineLatest, Subscription, switchMap, take } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../core/services/user.service';
 import { PermissionService } from '../../../../core/services/permission.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Permission, PermissionName } from '../../../../core/permissions/permissions';
+import { Permission, PermissionName, UpdatePermissionPermission } from '../../../../core/permissions/permissions';
 import { getEnumKeyByValue } from '../../../../core/util/misc';
 import { MDSError, MDSErrorCode } from '../../../../core/util/errors';
+import { AccessControlService } from '../../../../core/services/access-control.service';
 
 /**
  * View for editing permissions of a user.
@@ -32,8 +33,8 @@ export class EditUserPermissionsView implements OnInit, OnDestroy {
 
   private s: Subscription[] = [];
 
-  constructor(private userService: UserService, private permissionService: PermissionService, private fb: FormBuilder,
-              private router: Router, private route: ActivatedRoute) {
+  constructor(private userService: UserService, private permissionService: PermissionService, private acService: AccessControlService,
+              private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -46,6 +47,7 @@ export class EditUserPermissionsView implements OnInit, OnDestroy {
           user: this.userService.getUserById(userId),
           // Retrieve user permissions.
           permissions: this.permissionService.getPermissionsByUser(userId),
+          isUpdateGranted: this.acService.isGranted([UpdatePermissionPermission()]).pipe(take(1)),
         }));
       }),
     ).subscribe(result => {
@@ -70,6 +72,9 @@ export class EditUserPermissionsView implements OnInit, OnDestroy {
       });
       // Create final form.
       this.form = this.fb.group(formControls);
+      if (!result.isUpdateGranted) {
+        this.form.disable();
+      }
     }));
   }
 

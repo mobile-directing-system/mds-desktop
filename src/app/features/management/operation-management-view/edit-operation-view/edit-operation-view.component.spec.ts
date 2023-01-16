@@ -11,6 +11,9 @@ import { UserService, UserSort } from '../../../../core/services/user.service';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { SearchResult } from '../../../../core/util/store';
 import * as moment from 'moment';
+import { AccessControlService } from '../../../../core/services/access-control.service';
+import { AccessControlMockService } from '../../../../core/services/access-control-mock.service';
+import { PermissionName } from '../../../../core/permissions/permissions';
 
 function genFactoryOptions(): SpectatorRoutingOptions<EditOperationViewComponent> {
   return {
@@ -18,6 +21,12 @@ function genFactoryOptions(): SpectatorRoutingOptions<EditOperationViewComponent
     imports: [
       ManagementModule,
       CoreModule,
+    ],
+    providers: [
+      {
+        provide: AccessControlService,
+        useExisting: AccessControlMockService,
+      },
     ],
     mocks: [
       NotificationService,
@@ -101,6 +110,13 @@ describe('EditOperationViewComponent', () => {
       isAdmin: false,
     },
   ];
+  const allPermissions = [
+    { name: PermissionName.ViewUser },
+    { name: PermissionName.ViewAnyOperation },
+    { name: PermissionName.ViewOperationMembers },
+    { name: PermissionName.UpdateOperation },
+    { name: PermissionName.UpdateOperationMembers },
+  ];
 
   beforeEach(async () => {
     spectator = createComponent();
@@ -125,6 +141,38 @@ describe('EditOperationViewComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should disable form without update-permissions', fakeAsync(() => {
+    spectator.inject(AccessControlMockService).setNoAdminAndGranted(allPermissions.filter(p => p.name != PermissionName.UpdateOperation));
+    spectator.setRouteParam('', '');
+    tick();
+    expect(component.form.disabled).toBeTrue();
+  }));
+
+  it('should show member-adding', async () => {
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+
+    expect(spectator.query('.member-adding')).toBeVisible();
+  });
+
+  it('should hide member-adding without update-permissions', async () => {
+    spectator.inject(AccessControlMockService).setNoAdminAndGranted(allPermissions.filter(p => p.name != PermissionName.UpdateOperation));
+    spectator.setRouteParam('', '');
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+
+    expect(spectator.query('.member-adding')).not.toBeVisible();
+  });
+
+  it('should hide member-adding without update-permissions', async () => {
+    spectator.inject(AccessControlMockService).setNoAdminAndGranted(allPermissions.filter(p => p.name != PermissionName.UpdateOperation));
+    spectator.setRouteParam('', '');
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+
+    expect(spectator.query('.member-adding')).not.toBeVisible();
+  });
+
   it('should go to /operations/ when click on close', fakeAsync(() => {
     spectator.click(byTextContent('Cancel', { selector: 'button' }));
     tick();
@@ -144,7 +192,8 @@ describe('EditOperationViewComponent', () => {
     expect(component.form.valid).toBeFalse();
   }));
 
-  it('should allow operation update with empty description', fakeAsync(() => {
+  it('should allow operation update with empty description', fakeAsync(async () => {
+    await spectator.fixture.whenStable();
     component.form.setValue({
       title: title,
       description: '',
@@ -153,11 +202,13 @@ describe('EditOperationViewComponent', () => {
       isArchived: isArchived,
       members: members,
     });
-    tick();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
     expect(component.form.valid).toBeTrue();
   }));
 
-  it('should disable operation update without valid end date 1', fakeAsync(() => {
+  it('should disable operation update without valid end date 1', fakeAsync(async () => {
+    await spectator.fixture.whenStable();
     component.form.setValue({
       title: title,
       description: description,
@@ -166,7 +217,8 @@ describe('EditOperationViewComponent', () => {
       isArchived: isArchived,
       members: members,
     });
-    tick();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
     expect(component.form.valid).toBeFalse();
   }));
 
@@ -196,7 +248,8 @@ describe('EditOperationViewComponent', () => {
     expect(component.form.valid).toBeFalse();
   }));
 
-  it('should allow operation update with all valid values 1', fakeAsync(() => {
+  it('should allow operation update with all valid values 1', fakeAsync(async () => {
+    await spectator.fixture.whenStable();
     component.form.patchValue({
       title: title,
       description: description,
@@ -205,11 +258,13 @@ describe('EditOperationViewComponent', () => {
       isArchived: isArchived,
       members: members,
     });
-    tick();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
     expect(component.form.valid).toBeTrue();
   }));
 
-  it('should allow operation update with all valid values 2', fakeAsync(() => {
+  it('should allow operation update with all valid values 2', fakeAsync(async () => {
+    await spectator.fixture.whenStable();
     component.form.setValue({
       title: title,
       description: description,
@@ -218,11 +273,13 @@ describe('EditOperationViewComponent', () => {
       isArchived: isArchived,
       members: members,
     });
-    tick();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
     expect(component.form.valid).toBeTrue();
   }));
 
-  it('should allow operation update with all valid values 3', fakeAsync(() => {
+  it('should allow operation update with all valid values 3', fakeAsync(async () => {
+    await spectator.fixture.whenStable();
     component.form.setValue({
       title: title,
       description: description,
@@ -231,12 +288,15 @@ describe('EditOperationViewComponent', () => {
       isArchived: isArchived,
       members: members,
     });
-    tick();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
     expect(component.form.valid).toBeTrue();
   }));
 
   describe('searchUsers', () => {
-    it('should call UserService and return correct value that does not contain users, that are not already members of the group', fakeAsync(async () => {
+    it('should call user-service and return correct value that does not contain users, that are not already members of the group', fakeAsync(async () => {
+      spectator.detectComponentChanges();
+      await spectator.fixture.whenStable();
       const result = await firstValueFrom(component.searchUsers(''));
       expect(result).toEqual([sampleUserData[2]]);
 
@@ -272,6 +332,36 @@ describe('EditOperationViewComponent', () => {
       expect(component.form.controls.members.value).toEqual(['combine', 'glass', 'fly']);
     }));
   });
+
+
+  it('should show remove-icons in member list', fakeAsync(async () => {
+    component.form.patchValue({
+      members: members,
+    });
+    tick();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+
+    expect(spectator.query(byTextContent('close', {
+      exact: false,
+      selector: 'mat-icon',
+    }))).toBeVisible();
+  }));
+
+  it('should hide remove-icons in member list without update permissions', fakeAsync(async () => {
+    spectator.inject(AccessControlMockService).setNoAdminAndGranted(allPermissions.filter(p => p.name != PermissionName.UpdateOperation));
+    component.form.patchValue({
+      members: members,
+    });
+    tick();
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
+
+    expect(spectator.query(byTextContent('close', {
+      exact: false,
+      selector: 'mat-icon',
+    }))).not.toBeVisible();
+  }));
 
   describe('addMembers button', () => {
     it('should be visible if membersToAddForm contains values', fakeAsync(async () => {
@@ -418,7 +508,13 @@ describe('EditOperationViewComponent', () => {
       },
     ];
     tests.forEach(tt => {
+      beforeEach(async () => {
+        await spectator.fixture.whenStable();
+      });
+
       it(`should order by ${ tt.column } correctly`, fakeAsync(async () => {
+        spectator.inject(OperationService).getOperationMembers.reset();
+        spectator.inject(OperationService).getOperationMembers.and.returnValue(of(sampleUserData));
         component.form.setValue({
           title: title,
           description: description,
@@ -428,12 +524,15 @@ describe('EditOperationViewComponent', () => {
           members: members,
         });
         tick();
+
+        spectator.detectChanges();
         await spectator.fixture.whenStable();
         const columnHeader = byTextContent(tt.column, {
           exact: false,
           selector: 'tr th',
         });
         spectator.click(columnHeader);
+        spectator.detectComponentChanges();
         await spectator.fixture.whenStable();
         expect(component.operationMembers[0].id === 'combine').toBeTrue();
         spectator.click(columnHeader);

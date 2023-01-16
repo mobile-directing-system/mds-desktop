@@ -11,7 +11,7 @@ import { AuthService } from './core/services/auth.service';
 import { UserService } from './core/services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
-import { AppRoutes } from './core/constants/routes';
+import { SecuredAppRoutes } from './core/constants/routes';
 import { FeaturesModule } from './features/features.module';
 import { CoreModule } from './core/core.module';
 import { LocalStorageService } from './core/services/local-storage.service';
@@ -29,7 +29,7 @@ import { matPaginatorInternationalization, netLoginInit } from './core/util/app-
     AngularMaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(AppRoutes),
+    RouterModule.forRoot(SecuredAppRoutes),
     CoreModule,
     FeaturesModule,
   ],
