@@ -102,4 +102,11 @@ export class EditUserView implements OnInit, OnDestroy {
   changePassword() {
     this.router.navigate(['update-pass'], { relativeTo: this.route }).then();
   }
+
+  /**
+   * Navigates to the permissions-view for the user for checking and setting permissions.
+   */
+  navigateToPermissions(): void {
+    this.router.navigate(['permissions'], { relativeTo: this.route }).then();
+  }
 }

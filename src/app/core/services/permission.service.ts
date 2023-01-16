@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NetService } from './net.service';
-import { Permission } from '../model/permissions';
+import { Permission } from '../permissions/permissions';
 import { Observable } from 'rxjs';
 import urlJoin from 'url-join';
 import { map } from 'rxjs/operators';

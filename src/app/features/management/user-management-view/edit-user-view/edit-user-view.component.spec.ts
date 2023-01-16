@@ -236,9 +236,26 @@ describe('EditUserView', () => {
     expect(component.updateUser).toHaveBeenCalledOnceWith();
   }));
 
-  it('should navigate to update-user-pass view when change password button is pressed.', fakeAsync(async () => {
+  it('should navigate to update-user-pass view when change password button is pressed', fakeAsync(async () => {
     spectator.click(byTextContent('Change Password', { selector: 'button' }));
     tick();
     expect(spectator.router.navigate).toHaveBeenCalledOnceWith(['update-pass'], { relativeTo: spectator.activatedRouteStub });
   }));
+
+  it('should show permissions button', () => {
+    expect(spectator.query(byTextContent('Permissions', { selector: 'button' }))).toBeVisible();
+  });
+
+  it('should navigate to permissions-view when permissions button is clicked', () => {
+    const navigateSpy = spyOn(component, 'navigateToPermissions');
+    spectator.click(byTextContent('Permissions', { selector: 'button' }));
+    expect(navigateSpy).toHaveBeenCalledOnceWith();
+  });
+
+  describe('navigateToPermissions', () => {
+    it('should navigate to permissions view.', fakeAsync(() => {
+      component.navigateToPermissions()
+      expect(spectator.router.navigate).toHaveBeenCalledOnceWith(['permissions'], { relativeTo: spectator.activatedRouteStub });
+    }));
+  })
 });

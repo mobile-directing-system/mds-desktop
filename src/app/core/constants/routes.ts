@@ -35,6 +35,9 @@ import {
 import {
   EditOperationViewComponent,
 } from '../../features/management/operation-management-view/edit-operation-view/edit-operation-view.component';
+import {
+  EditUserPermissionsView,
+} from '../../features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component';
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -59,6 +62,10 @@ export const AppRoutes: Routes = [
           {
             path: 'users/:userId',
             component: EditUserView,
+          },
+          {
+            path: 'users/:userId/permissions',
+            component: EditUserPermissionsView,
           },
           {
             path: 'users/:userId/update-pass',

@@ -1,7 +1,7 @@
 import { PermissionService } from './permission.service';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { NetService } from './net.service';
-import { Permission, PermissionName } from '../model/permissions';
+import { Permission, PermissionName } from '../permissions/permissions';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import createSpy = jasmine.createSpy;
@@ -24,15 +24,15 @@ describe('PermissionService', () => {
   describe('setPermissionsFor', () => {
     const permissionsToBeSet: Permission[] = [
       {
-        name: PermissionName.PermissionsUpdate,
+        name: PermissionName.UpdatePermissions,
         options: undefined,
       },
       {
-        name: PermissionName.GroupCreate,
+        name: PermissionName.CreateGroup,
         options: undefined,
       },
       {
-        name: PermissionName.IntelCreate,
+        name: PermissionName.CreateIntel,
         options: undefined,
       },
     ];
@@ -47,15 +47,15 @@ describe('PermissionService', () => {
       expect(putSpy).withContext('should perform correct net call').toHaveBeenCalledOnceWith('/permissions/user/' + userId,
         [
           {
-            name: PermissionName.PermissionsUpdate,
+            name: PermissionName.UpdatePermissions,
             options: undefined,
           },
           {
-            name: PermissionName.GroupCreate,
+            name: PermissionName.CreateGroup,
             options: undefined,
           },
           {
-            name: PermissionName.IntelCreate,
+            name: PermissionName.CreateIntel,
             options: undefined,
           },
         ], {});
@@ -80,15 +80,15 @@ describe('PermissionService', () => {
     const userId = 'head';
     const expectPermissions: Permission[] = [
       {
-        name: PermissionName.PermissionsUpdate,
+        name: PermissionName.UpdatePermissions,
         options: undefined,
       },
       {
-        name: PermissionName.GroupCreate,
+        name: PermissionName.CreateGroup,
         options: undefined,
       },
       {
-        name: PermissionName.IntelCreate,
+        name: PermissionName.CreateIntel,
         options: undefined,
       },
     ];

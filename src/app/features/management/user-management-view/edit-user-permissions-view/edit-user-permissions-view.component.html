@@ -1,0 +1,175 @@
+<div class="view" [appShowLoadingOverlay]="loader.loadingChange() | async">
+  <h1 *ngIf="user" i18n>User: {{user.firstName}} {{user.lastName}}</h1>
+  <form *ngIf="form && user" (submit)="save()" [formGroup]="form">
+    <mat-card *ngIf="user.isAdmin" class="admin-notice">
+      <mat-card-content i18n>
+        This user is an admin and therefore indirectly granted all permissions.
+      </mat-card-content>
+    </mat-card>
+    <!--Permissions.-->
+    <h2 i18n>Permissions</h2>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.ViewPermissions"
+      [permissionName]="PermissionName.ViewPermissions"
+      i18n>
+      View permissions
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.UpdatePermissions"
+      [permissionName]="PermissionName.UpdatePermissions"
+      i18n>
+      Set permissions
+    </app-simple-permission-control>
+    <!--Users.-->
+    <h2 i18n>Users</h2>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.ViewUser"
+      [permissionName]="PermissionName.ViewUser"
+      i18n>
+      View user
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.CreateUser"
+      [permissionName]="PermissionName.CreateUser"
+      i18n>
+      Create user
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.UpdateUser"
+      [permissionName]="PermissionName.UpdateUser"
+      i18n>
+      Update user
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.UpdateUserPass"
+      [permissionName]="PermissionName.UpdateUserPass"
+      i18n>
+      Update user password
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.SetUserAdmin"
+      [permissionName]="PermissionName.SetUserAdmin"
+      i18n>
+      Grant admin privileges
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.SetUserActiveState"
+      [permissionName]="PermissionName.SetUserActiveState"
+      i18n>
+      (De)Activate user
+    </app-simple-permission-control>
+    <!--Groups.-->
+    <h2 i18n>Groups</h2>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.ViewGroup"
+      [permissionName]="PermissionName.ViewGroup"
+      i18n>
+      View group
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.CreateGroup"
+      [permissionName]="PermissionName.CreateGroup"
+      i18n>
+      Create group
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.UpdateGroup"
+      [permissionName]="PermissionName.UpdateGroup"
+      i18n>
+      Update group
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.DeleteGroup"
+      [permissionName]="PermissionName.DeleteGroup"
+      i18n>
+      Delete group
+    </app-simple-permission-control>
+    <!--Operations.-->
+    <h2 i18n>Operations</h2>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.ViewAnyOperation"
+      [permissionName]="PermissionName.ViewAnyOperation"
+      i18n>
+      View any operation
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.CreateOperation"
+      [permissionName]="PermissionName.CreateOperation"
+      i18n>
+      Create operation
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.UpdateOperation"
+      [permissionName]="PermissionName.UpdateOperation"
+      i18n>
+      Update operation
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.ViewOperationMembers"
+      [permissionName]="PermissionName.ViewOperationMembers"
+      i18n>
+      View operation members
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.UpdateOperationMembers"
+      [permissionName]="PermissionName.UpdateOperationMembers"
+      i18n>
+      Update operation members
+    </app-simple-permission-control>
+    <!--Address book.-->
+    <h2 i18n>Address book</h2>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.ViewAnyAddressBookEntry"
+      [permissionName]="PermissionName.ViewAnyAddressBookEntry"
+      i18n>
+      View any address book entry
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.CreateAnyAddressBookEntry"
+      [permissionName]="PermissionName.CreateAnyAddressBookEntry"
+      i18n>
+      Create any address book entry
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.UpdateAnyAddressBookEntry"
+      [permissionName]="PermissionName.UpdateAnyAddressBookEntry"
+      i18n>
+      Update any address book entry
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.DeleteAnyAddressBookEntry"
+      [permissionName]="PermissionName.DeleteAnyAddressBookEntry"
+      i18n>
+      Delete any address book entry
+    </app-simple-permission-control>
+    <!--Intel.-->
+    <h2 i18n>Intel</h2>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.ViewAnyIntel"
+      [permissionName]="PermissionName.ViewAnyIntel"
+      i18n>
+      View any intel
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.CreateIntel"
+      [permissionName]="PermissionName.CreateIntel"
+      i18n>
+      Create intel
+    </app-simple-permission-control>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.InvalidateIntel"
+      [permissionName]="PermissionName.InvalidateIntel"
+      i18n>
+      Invalidate intel
+    </app-simple-permission-control>
+    <!--Actions.-->
+    <div>
+      <button mat-button type="button" (click)="close()" i18n>
+        Close
+      </button>
+      <button mat-button color="primary" type="submit" [disabled]="!form.valid" i18n>
+        Save
+      </button>
+    </div>
+  </form>
+</div>

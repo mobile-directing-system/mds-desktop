@@ -1,107 +1,109 @@
+import { Observable } from 'rxjs';
+
 /**
  * Defines all Permissions.
  */
-export enum PermissionName{
+export enum PermissionName {
   /**
    * Allows setting permissions for users.
    */
-  PermissionsUpdate = 'permissions.update',
+  UpdatePermissions = 'permissions.update',
   /**
    * Allows retrieving permissions of users.
    */
-  PermissionsView = 'permissions.view',
+  ViewPermissions = 'permissions.view',
   /**
    * Allows creating address book entries, that can also be global or associated to foreign users.
    * This also includes associating entries with operations, the target user or the requesting client is not part of.
    */
-  AddressBookCreateAny = 'logistics.address-book.entry.create.any',
+  CreateAnyAddressBookEntry = 'logistics.address-book.entry.create.any',
   /**
    * Allows updating address book entries, that can also be global or associated to foreign users.
    * This also includes associating entries with operations, the target user or the requesting client is not part of.
    */
-  AddressBookUpdateAny = 'logistics.address-book.entry.update.any',
+  UpdateAnyAddressBookEntry = 'logistics.address-book.entry.update.any',
   /**
    * Allows deletion of address book entries, that can also be global or associated to foreign users.
    * This also includes associating entries with operations, the requesting client is not part of.
    */
-  AddressBookDeleteAny = 'logistics.address-book.entry.delete.any',
+  DeleteAnyAddressBookEntry = 'logistics.address-book.entry.delete.any',
   /**
    * Allows retrieval of all address book entries, including that can also be global or associated to foreign users.
    * This also includes associating entries with operations, the requesting client is not part of.
    */
-  AddressBookViewAny = 'logistics.address-book.entry.view.any',
+  ViewAnyAddressBookEntry = 'logistics.address-book.entry.view.any',
   /**
    * Allows creating groups.
    */
-  GroupCreate = 'group.create',
+  CreateGroup = 'group.create',
   /**
    * Allows updating groups.
    */
-  GroupUpdate = 'group.update',
+  UpdateGroup = 'group.update',
   /**
    * Allows deleting groups.
    */
-  GroupDelete = 'group.delete',
+  DeleteGroup = 'group.delete',
   /**
    * Allows retrieval of groups.
    */
-  GroupView = 'group.view',
+  ViewGroup = 'group.view',
   /**
    * Allows creating intel.
    */
-  IntelCreate = 'intelligence.intel.create',
+  CreateIntel = 'intelligence.intel.create',
   /**
    * Allows invalidating intel.
    */
-  IntelInvalidate = 'intelligence.intel.invalidate',
+  InvalidateIntel = 'intelligence.intel.invalidate',
   /**
    * Allows to view intel.
    */
-  IntelViewAny = 'intelligence.intel.view.any',
+  ViewAnyIntel = 'intelligence.intel.view.any',
   /**
    * Allows to retrieve operations.
    */
-  OperationViewAny = 'operation.view.any',
+  ViewAnyOperation = 'operation.view.any',
   /**
    * Allows to create operations.
    */
-  OperationCreate = 'operation.create',
+  CreateOperation = 'operation.create',
   /**
    * Allows to update operations.
    */
-  OperationUpdate = 'operation.update',
+  UpdateOperation = 'operation.update',
   /**
    * Allows to retrieve the members of an operation.
    */
-  OperationMembersView = 'operation.members.view',
+  ViewOperationMembers = 'operation.members.view',
   /**
    * Allows to update the members of an operation.
    */
-  OperationMembersUpdate = 'operation.members.update',
+  UpdateOperationMembers = 'operation.members.update',
   /**
    * Allows to create users.
    */
-  UserCreate = 'user.create',
+  CreateUser = 'user.create',
   /**
    * Allows to set users inactive.
    */
-  UserSetActiveState = 'user.set-active-state',
+  SetUserActiveState = 'user.set-active-state',
   /**
    * Allows to set a user as admin.
    */
-  UserSetAdmin = 'user.set-admin',
+  SetUserAdmin = 'user.set-admin',
   /**
    * Allows to update a user.
    */
-  UserUpdate = 'user.update',
+  UpdateUser = 'user.update',
   /**
    * Allows to update the password of a user.
    */
-  UserUpdatePass = 'user.update-pass',
+  UpdateUserPass = 'user.update-pass',
   /**
    * Allows to retrieve users.
    */
-  UserView = 'user.view',
+  ViewUser = 'user.view',
 }
 
 /**
@@ -111,9 +113,16 @@ export interface Permission {
   /**
    * Name of the permission.
    */
-  name : string,
+  name: string,
   /**
    * Additional options.
    */
   options?: object,
 }
+
+/**
+ * Returns `true` when permission is granted.
+ * @param granted Granted permissions, the matcher might use for checking.
+ * @constructor
+ */
+export type PermissionMatcher = (granted: Permission[]) => Observable<boolean> | boolean

@@ -24,6 +24,11 @@ import { MtxNativeDatetimeModule } from '@ng-matero/extensions/core';
 import {
   EditOperationViewComponent,
 } from './operation-management-view/edit-operation-view/edit-operation-view.component';
+import {
+  EditUserPermissionsView,
+} from './user-management-view/edit-user-permissions-view/edit-user-permissions-view.component';
+import { SimplePermissionControlComponent } from './user-management-view/edit-user-permissions-view/simple-permission-control/simple-permission-control.component';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +41,8 @@ import {
     CreateUserView,
     EditUserView,
     UpdateUserPasswordView,
+    EditUserPermissionsView,
+    SimplePermissionControlComponent,
     CreateOperationView,
     EditOperationViewComponent,
   ],
