@@ -1,4 +1,4 @@
-<div class="view" [appShowLoadingOverlay]="updatingUser.loadingChange() | async">
+<div class="view" [appShowLoadingOverlay]="loader.loadingChange() | async">
   <h1 i18n>User: {{form.controls.firstName.value}} {{form.controls.lastName.value}}</h1>
   <form (submit)="updateUser()">
     <mat-form-field class="app-edit-input">

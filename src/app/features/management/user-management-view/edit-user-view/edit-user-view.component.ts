@@ -26,7 +26,7 @@ export class EditUserView implements OnInit, OnDestroy {
   /**
    * Loader for when updating a user and awaiting the response.
    */
-  updatingUser = new Loader();
+  loader = new Loader();
 
   form = this.fb.nonNullable.group({
     username: this.fb.nonNullable.control<string>('', [Validators.required]),
@@ -55,7 +55,7 @@ export class EditUserView implements OnInit, OnDestroy {
         this.id = params['userId'];
         this.form.disable();
         return combineLatest({
-          user: this.updatingUser.load(this.userService.getUserById(this.id)),
+          user: this.loader.load(this.userService.getUserById(this.id)),
           isUpdateGranted: this.acService.isGranted([UpdateUserPermission()]),
           isSetAdminGranted: this.acService.isGranted([SetUserAdminPermission()]),
           isSetActiveStateGranted: this.acService.isGranted([SetUserActiveStatePermission()]),
@@ -86,14 +86,14 @@ export class EditUserView implements OnInit, OnDestroy {
 
   updateUser(): void {
     const v = this.form.getRawValue();
-    this.userService.updateUser({
+    this.loader.load(this.userService.updateUser({
       id: this.id,
       username: v.username,
       firstName: v.firstName,
       lastName: v.lastName,
       isAdmin: v.isAdmin,
       isActive: v.isActive,
-    }).subscribe({
+    })).subscribe({
       next: _ => {
         this.close();
       },
