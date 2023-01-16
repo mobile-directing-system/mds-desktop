@@ -38,15 +38,6 @@ export interface OperationFilters {
 }
 
 /**
- * Fields for sorting members of an operation.
- */
-export enum MemberSort {
-  ByUsername,
-  ByFirstName,
-  ByLastName
-}
-
-/**
  * Service for operation management, manipulation and retrieval of  operations.
  */
 @Injectable({
@@ -254,11 +245,10 @@ export class OperationService {
   }
 
   /**
-   * Returns a paginated list of users with the given params, that are member of the given operation.
+   * Returns a list of users, that are member of the given operation.
    * @param operationId Id of the operation.
-   * @param params Params for pagination.
    */
-  getOperationMembers(operationId: string, params: PaginationParams<MemberSort>): Observable<Paginated<User>> {
+  getOperationMembers(operationId: string): Observable<User[]> {
     interface NetEntry {
       id: string;
       username: string;
@@ -268,28 +258,18 @@ export class OperationService {
       is_active: boolean;
     }
 
-    const nParams = netPaginationParams(params, (by: MemberSort) => {
-      switch (by) {
-        case MemberSort.ByUsername:
-          return 'username';
-        case MemberSort.ByFirstName:
-          return 'first_name';
-        case MemberSort.ByLastName:
-          return 'last_name';
-        default:
-          throw new MDSError(MDSErrorCode.AppError, 'unknown member sort', { by: by });
-      }
-    });
-    return this.netService.get<NetPaginated<NetEntry>>(urlJoin('/operations', operationId, 'members'), nParams).pipe(
-      map((res: NetPaginated<NetEntry>): Paginated<User> => {
-        return paginatedFromNet(res, (nEntry: NetEntry): User => ({
-          id: nEntry.id,
-          username: nEntry.username,
-          firstName: nEntry.first_name,
-          lastName: nEntry.last_name,
-          isAdmin: nEntry.is_admin,
-          isActive: nEntry.is_active,
-        }));
+    return this.netService.get<NetEntry[]>(urlJoin('/operations', operationId, 'members'), {}).pipe(
+      map((netEntries: NetEntry[]): User[] => {
+        return netEntries.map((netEntry: NetEntry): User => {
+          return {
+            id: netEntry.id,
+            username: netEntry.username,
+            firstName: netEntry.first_name,
+            lastName: netEntry.last_name,
+            isAdmin: netEntry.is_admin,
+            isActive: netEntry.is_active,
+          };
+        });
       }),
     );
   }
