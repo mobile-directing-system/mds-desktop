@@ -35,7 +35,7 @@ export class EditUserView implements OnInit, OnDestroy {
 
   constructor(private userService: UserService, private notificationService: NotificationService, private fb: FormBuilder,
               private router: Router, private route: ActivatedRoute) {
-    this.updatingUser.bindFormGroup(this.form);
+    this.form.disable();
   }
 
   ngOnDestroy(): void {
