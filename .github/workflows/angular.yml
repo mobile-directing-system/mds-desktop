@@ -9,12 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'npm'
+
       - name: Install dependencies
         run: npm ci
+
       - name: Build
         run: npm run build
 
@@ -24,12 +27,15 @@ jobs:
       - build
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'npm'
+
       - name: Install dependencies
         run: npm ci
+
       - name: Lint
         run: npm run lint
 
@@ -39,14 +45,49 @@ jobs:
       - build
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'npm'
+
       - name: Install dependencies
         run: npm ci
+
       - name: Test
-        run: npm run test:ci
+        id: test
+        run: |
+          npm run test:ci 2>&1 | tee test.log
+          result_code=${PIPESTATUS[0]}
+          echo "::set-output name=test-log::$(cat test.log)"
+          exit $result_code
+
+      - name: Check for silent errors
+        uses: actions-ecosystem/action-regex-match@v2
+        id: regex-silent-errors
+        with:
+          text: ${{ steps.test.outputs.test-log }}
+          regex: "^'Error', "
+
+      - name: Fail on silent errors
+        if: ${{ steps.regex-silent-errors.match != '' }}
+        run: |
+          echo "Silent errors detected in test step.\nMatch: ${{ steps.regex-silent-errors.match }}"
+          exit 1
+
+      - name: Check for silent stack traces
+        uses: actions-ecosystem/action-regex-match@v2
+        id: regex-silent-stack-traces
+        with:
+          text: ${{ steps.test.outputs.test-log }}
+          regex: "^\\s\\s\\s\\sat (.+) \\(http://localhost"
+
+      - name: Fail on silent stack traces
+        if: ${{ steps.regex-silent-stack-traces.match != '' }}
+        run: |
+          echo "Silent stack traces detected in test step.\nMatch: ${{ steps.regex-silent-stack-traces.match }}"
+          exit 1
+
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
@@ -61,12 +102,15 @@ jobs:
       - build
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'npm'
+
       - name: Install dependencies
         run: npm ci
+
       - name: Check translations
         run: npm run locale:check
 
@@ -76,11 +120,14 @@ jobs:
       - build
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'npm'
+
       - name: Install dependencies
         run: npm ci
+
       - name: Build
         run: npm run build
