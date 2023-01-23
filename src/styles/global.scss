@@ -5,6 +5,10 @@
   backdrop-filter: brightness(0.95);
 }
 
+._loading-dots-backdrop {
+  pointer-events: none;
+}
+
 .clickable {
   cursor: pointer;
 }

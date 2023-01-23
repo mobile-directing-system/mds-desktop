@@ -24,6 +24,7 @@ import { LoadingDotsComponent } from './components/loading-dots/loading-dots.com
 import { SearchableEntityInputComponent } from './components/searchable-entity-input/searchable-entity-input.component';
 import { ErrorsComponent } from './components/errors/errors.component';
 import { LocalPaginatedListComponent } from './components/local-paginated-list/local-paginated-list.component';
+import { ShowLoadingDotsDirective } from './directives/show-loading-dots.directive';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { LocalPaginatedListComponent } from './components/local-paginated-list/l
     SearchableEntityInputComponent,
     ErrorsComponent,
     LocalPaginatedListComponent,
+    ShowLoadingDotsDirective,
   ],
   exports: [
     LogoComponent,
@@ -66,6 +68,7 @@ import { LocalPaginatedListComponent } from './components/local-paginated-list/l
     SearchableEntityInputComponent,
     ErrorsComponent,
     LocalPaginatedListComponent,
+    ShowLoadingDotsDirective,
   ],
   imports: [
     CommonModule,
