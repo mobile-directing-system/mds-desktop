@@ -126,13 +126,13 @@ export class EditGroupView implements OnInit, OnDestroy {
     if (members === undefined) {
       throw new MDSError(MDSErrorCode.AppError, 'members control is not set.');
     }
-    this.groupService.updateGroup({
+    this.loader.load(this.groupService.updateGroup({
       id: this.groupId,
       title: title,
       description: description,
       operation: operation === null ? undefined : operation,
       members: members,
-    }).subscribe({
+    })).subscribe({
       next: _ => {
         this.close();
       },
