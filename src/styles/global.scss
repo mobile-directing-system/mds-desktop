@@ -2,7 +2,6 @@
 
 ._loading-overlay-backdrop {
   pointer-events: none;
-  //backdrop-filter: brightness(0.95);
   animation: _loading-overlay-backdrop-fade-in 300ms .4s forwards;
 }
 
