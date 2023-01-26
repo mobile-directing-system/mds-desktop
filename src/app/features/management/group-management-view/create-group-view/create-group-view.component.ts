@@ -32,7 +32,7 @@ export class CreateGroupView implements OnInit, OnDestroy {
   form = this.fb.nonNullable.group({
     title: this.fb.nonNullable.control<string>('', [Validators.required]),
     description: this.fb.nonNullable.control<string>(''),
-    operation: this.fb.nonNullable.control<string | undefined>(undefined, [], [this.groupMembersMustBeOperationMemberValidator()]),
+    operation: this.fb.nonNullable.control<string | null>(null, [], [this.groupMembersMustBeOperationMemberValidator()]),
     members: this.fb.nonNullable.control<string[]>([]),
   });
 
@@ -68,7 +68,7 @@ export class CreateGroupView implements OnInit, OnDestroy {
     this.creatingGroup.load(this.groupService.createGroup({
       title: title,
       description: description,
-      operation: operation,
+      operation: operation ?? undefined,
       members: members,
     })).subscribe({
       next: _ => {

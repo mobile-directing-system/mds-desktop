@@ -203,8 +203,14 @@ describe('EditGroupView', () => {
   });
 
   describe('searchUsers', () => {
-    it('should call UserService and return correct value that does not contain users, that are not already members of the group', fakeAsync(async () => {
-      component.form.controls.members.patchValue(['fly', 'glass']);
+    it('should call user-service and return user-list including only users, not being members of the group', fakeAsync(async () => {
+      component.form.setValue({
+        title: title,
+        description: description,
+        operation: null,
+        members: ['fly', 'glass'],
+      });
+      tick();
       const result = await firstValueFrom(component.searchUsers(''));
       expect(result).toEqual([sampleUserData[2]]);
 
@@ -215,7 +221,7 @@ describe('EditGroupView', () => {
       }, false);
     }));
 
-    it('should call UserService and return correct value', fakeAsync(async () => {
+    it('should call user-service and return correct value', fakeAsync(async () => {
       component.form.controls.members.patchValue([]);
       tick();
       const result = await firstValueFrom(component.searchUsers(''));
@@ -243,11 +249,18 @@ describe('EditGroupView', () => {
 
   describe('addMembers', () => {
     it('should only add members that are not already a member of the group', fakeAsync(() => {
+      component.form.setValue({
+        title: title,
+        description: description,
+        operation: null,
+        members: ['combine', 'glass'],
+      });
       component.membersToAddForm.patchValue(['combine', 'fly']);
       tick();
       component.addMembers();
+      tick();
 
-      expect(component.form.controls.members.value).toEqual(['fly', 'glass', 'combine']);
+      expect(component.form.controls.members.value).toEqual(['fly', 'combine', 'glass']);
     }));
   });
 
@@ -303,7 +316,7 @@ describe('EditGroupView', () => {
     component.form.setValue({
       title: '',
       description: '',
-      operation: operationId,
+      operation: null,
       members: [],
     });
     tick();
@@ -357,16 +370,16 @@ describe('EditGroupView', () => {
       expect(byTextContent('Add Members', {
         exact: false,
         selector: 'button',
-      })).toBeVisible()
+      })).toBeVisible();
     }));
 
     it('should not be visible if membersToAddForm contains no values', fakeAsync(async () => {
-      component.membersToAddForm.patchValue([])
+      component.membersToAddForm.patchValue([]);
       await spectator.fixture.whenStable();
       expect(spectator.query(byTextContent('Add Members', {
         exact: false,
         selector: 'button',
-      }))).not.toBeVisible()
+      }))).not.toBeVisible();
     }));
   });
 
@@ -396,16 +409,15 @@ describe('EditGroupView', () => {
           operation: operationId,
           members: members,
         });
-        await spectator.fixture.whenStable();
+        spectator.detectComponentChanges();
+        tick();
         const columnHeader = byTextContent(tt.column, {
           exact: false,
           selector: 'tr th',
         });
         spectator.click(columnHeader);
-        await spectator.fixture.whenStable();
         expect(component.groupMembers[0].id === 'combine').toBeTrue();
         spectator.click(columnHeader);
-        await spectator.fixture.whenStable();
         expect(component.groupMembers[0].id === 'glass').toBeTrue();
       }));
     });

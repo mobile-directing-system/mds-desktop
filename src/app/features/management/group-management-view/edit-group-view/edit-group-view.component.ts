@@ -96,7 +96,7 @@ export class EditGroupView implements OnInit, OnDestroy {
   form = this.fb.nonNullable.group({
     title: this.fb.nonNullable.control<string>('', [Validators.required]),
     description: this.fb.nonNullable.control<string>(''),
-    operation: this.fb.control<string | undefined>(undefined, [], [
+    operation: this.fb.control<string | null>(null, [], [
       this.groupMembersMustBeOperationMemberValidator(),
       this.groupMembersToAddMustBeOperationMemberValidator(),
     ]),
@@ -130,7 +130,7 @@ export class EditGroupView implements OnInit, OnDestroy {
       id: this.groupId,
       title: title,
       description: description,
-      operation: operation === null ? undefined : operation,
+      operation: operation ?? undefined,
       members: members,
     })).subscribe({
       next: _ => {
@@ -229,7 +229,7 @@ export class EditGroupView implements OnInit, OnDestroy {
     this.s.push(this.loader.load(forkJoin(memberIdsToAdd.map(memberId => this.userService.getUserById(memberId))))
       .subscribe(membersToAdd => {
         this.groupMembers = [...membersToAdd, ...this.groupMembers];
-        this.form.controls.members.value.push(...memberIdsToAdd);
+        this.form.controls.members.setValue(this.groupMembers.map(m => m.id));
       }));
     this.membersToAddForm.patchValue([]);
   }

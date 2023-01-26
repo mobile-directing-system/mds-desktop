@@ -233,14 +233,17 @@ describe('CreateGroupView', () => {
     component.form.setValue({
       title: '',
       description: '',
-      operation: '',
+      operation: null,
       members: [],
     });
-    tick();
     spectator.detectComponentChanges();
+    tick();
     await spectator.fixture.whenStable();
 
-    expect(spectator.query(byTextContent('Create', { selector: 'button' }))).toBeDisabled();
+    expect(spectator.query(byTextContent('Create', {
+      exact: false,
+      selector: 'button',
+    }))).toBeDisabled();
   }));
 
   it('should enable create group button when creation is allowed', fakeAsync(async () => {
