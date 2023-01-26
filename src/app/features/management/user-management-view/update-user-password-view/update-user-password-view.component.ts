@@ -31,7 +31,6 @@ export class UpdateUserPasswordView implements OnInit, OnDestroy {
 
   constructor(private userService: UserService, private notificationService: NotificationService, private fb: FormBuilder,
               private router: Router, private route: ActivatedRoute) {
-    this.updatingUserPass.bindFormGroup(this.form);
   }
 
   ngOnDestroy() {
