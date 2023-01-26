@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'MDS Desktop'
-copyright = '2022, Yves Haas, Laurin Todt, Lennart Altenhof'
-author = 'Yves Haas, Laurin Todt, Lennart Altenhof'
+copyright = '2022, Laurin Todt, Lennart Altenhof'
+author = 'Laurin Todt, Lennart Altenhof'
 
 
 # -- General configuration ---------------------------------------------------

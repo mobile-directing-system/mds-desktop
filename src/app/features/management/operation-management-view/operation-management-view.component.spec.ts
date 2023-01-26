@@ -15,6 +15,8 @@ import { of } from 'rxjs';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { ManagementModule } from '../management.module';
 import { Sort } from '@angular/material/sort';
+import { AccessControlMockService } from '../../../core/services/access-control-mock.service';
+import { AccessControlService } from '../../../core/services/access-control.service';
 import createSpy = jasmine.createSpy;
 import anything = jasmine.anything;
 
@@ -26,6 +28,12 @@ describe('OperationManagementView', () => {
     imports: [
       CoreModule,
       ManagementModule,
+    ],
+    providers: [
+      {
+        provide: AccessControlService,
+        useExisting: AccessControlMockService,
+      },
     ],
     mocks: [
       OperationService,
@@ -374,5 +382,14 @@ describe('OperationManagementView', () => {
       }));
       expect(createOperationSpy).toHaveBeenCalledOnceWith();
     });
+  });
+
+  it('should hide create button when missing appropriate permissions', async () => {
+    spectator.inject(AccessControlMockService).setNoAdminAndGranted([]);
+    await spectator.fixture.whenStable();
+    expect(spectator.query(byTextContent('Create operation', {
+      exact: false,
+      selector: 'button',
+    }))).toBeVisible();
   });
 });

@@ -9,6 +9,7 @@ import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { ProfileComponent } from './profile.component';
+import { clearRouteComponentsExcept } from '../../../testutil/testutil';
 
 function genFactoryOptions(): SpectatorRoutingOptions<ProfileComponent> {
   return {
@@ -21,7 +22,7 @@ function genFactoryOptions(): SpectatorRoutingOptions<ProfileComponent> {
       UserService,
     ],
     detectChanges: false,
-    routes: AppRoutes,
+    routes: clearRouteComponentsExcept(AppRoutes, ''),
   };
 }
 
@@ -66,28 +67,6 @@ describe('ProfileComponent', () => {
 
       expect(spectator.inject(UserService).getUserById).not.toHaveBeenCalled();
       expect(spectator.component.loggedInUser).toEqual(undefined);
-    }));
-  });
-
-  describe('logout', () => {
-    it('should log out correctly', fakeAsync(() => {
-      spectator.inject(AuthService).logout.and.returnValue(of(void 0));
-      spectator.inject(Router).navigate.and.resolveTo();
-
-      spectator.component.logout();
-      tick();
-
-      expect(spectator.inject(AuthService).logout).toHaveBeenCalledOnceWith();
-    }));
-
-    it('should navigate to login-page after logging out', fakeAsync(() => {
-      spectator.inject(AuthService).logout.and.returnValue(of(void 0));
-      spectator.inject(Router).navigate.and.resolveTo();
-
-      spectator.component.logout();
-      tick();
-
-      expect(spectator.inject(Router).navigate).toHaveBeenCalledOnceWith(['/login']);
     }));
   });
 
@@ -225,13 +204,19 @@ describe('ProfileComponent.integration', () => {
       });
     });
 
-    it('should log out when log-out-button is clicked', () => {
-      const logOutSelector = byTextContent('Log out', { selector: 'button' });
-      const logoutSpy = spyOn(spectator.component, 'logout');
+    describe('logout menu item', () => {
+      const itemSelector = byTextContent('Log out', { selector: 'button' });
 
-      logOutSelector.execute(overlayContainer)[0].click();
+      it('should show', async () => {
+        expect(itemSelector.execute(overlayContainer)).toBeVisible();
+      });
 
-      expect(logoutSpy).toHaveBeenCalledOnceWith();
+      it('should navigate to logout when clicked', async () => {
+        itemSelector.execute(overlayContainer)[0].click();
+        await spectator.fixture.whenStable();
+
+        expect(spectator.inject(Router).url).toEqual('/logout');
+      });
     });
   });
 });

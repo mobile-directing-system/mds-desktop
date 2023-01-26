@@ -1,4 +1,3 @@
-import { Routes } from '@angular/router';
 import { LoginView } from '../../features/auth/login-view/login-view.component';
 import { LandingLayoutComponent } from '../components/landing-layout/landing-layout.component';
 import { SetServerURLView } from '../../features/auth/set-server-url-view/set-server-url-view.component';
@@ -22,6 +21,10 @@ import { GroupManagementView } from '../../features/management/group-management-
 import {
   OperationManagementView,
 } from '../../features/management/operation-management-view/operation-management-view.component';
+import { LogoutView } from '../../features/auth/logout-view/logout-view.component';
+import { PermissionGuard, PermissionGuardedRoute } from '../guards/permission.guard';
+import { CreateUserPermission, UpdateUserPassPermission, ViewUserPermission } from '../permissions/users';
+import { MissingPermissionsView } from '../components/missing-permissions-view/missing-permissions-view.component';
 import {
   CreateGroupView,
 } from '../../features/management/group-management-view/create-group-view/create-group-view.component';
@@ -34,11 +37,21 @@ import {
 import {
   EditOperationViewComponent,
 } from '../../features/management/operation-management-view/edit-operation-view/edit-operation-view.component';
+import {
+  EditUserPermissionsView,
+} from '../../features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component';
+import { ViewPermissionsPermission } from '../permissions/permissions';
+import { CreateGroupPermission, ViewGroupPermission } from '../permissions/groups';
+import {
+  CreateOperationPermission,
+  ViewAnyOperationPermission,
+  ViewOperationMembersPermission,
+} from '../permissions/operations';
 
 /**
  * Routes for usage in {@link AppModule}.
  */
-export const AppRoutes: Routes = [
+export const AppRoutes: PermissionGuardedRoute[] = [
   {
     path: '',
     component: HomeLayoutComponent,
@@ -50,43 +63,84 @@ export const AppRoutes: Routes = [
           {
             path: 'users',
             component: UserManagementView,
+            data: {
+              requirePermissions: [ViewUserPermission()],
+            },
           },
           {
             path: 'users/create',
             component: CreateUserView,
+            data: {
+              requirePermissions: [CreateUserPermission()],
+            },
           },
           {
             path: 'users/:userId',
             component: EditUserView,
+            data: {
+              requirePermissions: [ViewUserPermission()],
+            },
+          },
+          {
+            path: 'users/:userId/permissions',
+            component: EditUserPermissionsView,
+            data: {
+              requirePermissions: [ViewUserPermission(), ViewPermissionsPermission()],
+            },
           },
           {
             path: 'users/:userId/update-pass',
             component: UpdateUserPasswordView,
+            data: {
+              requirePermissions: [ViewUserPermission(), UpdateUserPassPermission()],
+            },
           },
           {
             path: 'groups',
             component: GroupManagementView,
+            data: {
+              requirePermissions: [ViewGroupPermission()],
+            },
           },
           {
             path: 'groups/create',
             component: CreateGroupView,
+            data: {
+              requirePermissions: [CreateGroupPermission(), ViewUserPermission()],
+            },
           },
           {
             path: 'groups/:groupId',
             component: EditGroupView,
+            data: {
+              requirePermissions: [ViewGroupPermission()],
+            },
           },
           {
             path: 'operations',
             component: OperationManagementView,
+            data: {
+              requirePermissions: [ViewAnyOperationPermission()],
+            },
           },
           {
             path: 'operations/create',
             component: CreateOperationView,
+            data: {
+              requirePermissions: [CreateOperationPermission()],
+            },
           },
           {
             path: 'operations/:operationId',
             component: EditOperationViewComponent,
-          }
+            data: {
+              requirePermissions: [
+                ViewUserPermission(),
+                ViewAnyOperationPermission(),
+                ViewOperationMembersPermission(),
+              ],
+            },
+          },
         ],
       },
       {
@@ -116,9 +170,22 @@ export const AppRoutes: Routes = [
         component: SetServerURLView,
       },
       {
+        path: 'missing-permissions',
+        component: MissingPermissionsView,
+      },
+      {
         path: 'login',
         component: LoginView,
+      },
+      {
+        path: 'logout',
+        component: LogoutView,
       },
     ],
   },
 ];
+
+export const SecuredAppRoutes = AppRoutes.map(r => ({
+  ...r,
+  canActivateChild: [PermissionGuard],
+}));

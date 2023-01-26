@@ -56,14 +56,20 @@ describe('clearRouteComponentsFor', () => {
       {
         path: '',
         component: undefined,
+        canActivate: undefined,
+        canActivateChild: undefined,
         children: [
           {
             path: 'manage',
             component: undefined,
+            canActivate: undefined,
+            canActivateChild: undefined,
             children: [
               {
                 path: 'users',
                 component: undefined,
+                canActivate: undefined,
+                canActivateChild: undefined,
                 children: [
                   {
                     path: 'wales',
@@ -84,6 +90,8 @@ describe('clearRouteComponentsFor', () => {
       {
         path: '',
         component: undefined,
+        canActivate: undefined,
+        canActivateChild: undefined,
         children: [
           {
             path: 'set-server-url',
@@ -152,10 +160,14 @@ describe('clearRouteComponentsExcept', () => {
       {
         path: '',
         component: undefined,
+        canActivate: undefined,
+        canActivateChild: undefined,
         children: [
           {
             path: 'manage',
             component: undefined,
+            canActivate: undefined,
+            canActivateChild: undefined,
             children: [
               {
                 path: 'users',
@@ -164,6 +176,8 @@ describe('clearRouteComponentsExcept', () => {
                   {
                     path: 'wales',
                     component: undefined,
+                    canActivate: undefined,
+                    canActivateChild: undefined,
                     children: [],
                   },
                 ],
@@ -173,6 +187,8 @@ describe('clearRouteComponentsExcept', () => {
           {
             path: 'mailbox',
             component: undefined,
+            canActivate: undefined,
+            canActivateChild: undefined,
             children: [],
           },
         ],
@@ -180,15 +196,21 @@ describe('clearRouteComponentsExcept', () => {
       {
         path: '',
         component: undefined,
+        canActivate: undefined,
+        canActivateChild: undefined,
         children: [
           {
             path: 'set-server-url',
             component: undefined,
+            canActivate: undefined,
+            canActivateChild: undefined,
             children: [],
           },
           {
             path: 'login',
             component: undefined,
+            canActivate: undefined,
+            canActivateChild: undefined,
             children: [],
           },
         ],

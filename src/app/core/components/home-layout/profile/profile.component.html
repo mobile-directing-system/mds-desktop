@@ -4,8 +4,8 @@
 
 <mat-menu #profileMenu="matMenu" xPosition="after">
   <ng-template matMenuContent>
-    <span mat-menu-item disabled>{{assembleProfileName() ?? 'User not logged in.'}}</span>
-    <button mat-menu-item [routerLink]="['/manage']">MDS Management</button>
-    <button mat-menu-item (click)="logout()" i18n>Log out</button>
+    <span disabled mat-menu-item>{{assembleProfileName() ?? 'User not logged in.'}}</span>
+    <button [routerLink]="['/manage']" mat-menu-item>MDS Management</button>
+    <button [routerLink]="['/logout']" i18n mat-menu-item>Log out</button>
   </ng-template>
 </mat-menu>

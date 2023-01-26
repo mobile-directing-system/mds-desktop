@@ -91,6 +91,7 @@
     <unit id="7507948636555938109">
       <notes>
         <note category="location">src/app/core/components/home-layout/profile/profile.component.html:9</note>
+        <note category="location">src/app/core/components/missing-permissions-view/missing-permissions-view.component.html:4</note>
       </notes>
       <segment>
         <source>Log out</source>
@@ -150,7 +151,7 @@
     </unit>
     <unit id="4555457172864212828">
       <notes>
-        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:4</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:24</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:1</note>
       </notes>
       <segment>
@@ -188,6 +189,7 @@
       <notes>
         <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:1</note>
         <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:5</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:62</note>
       </notes>
       <segment>
         <source>Groups</source>
@@ -195,8 +197,8 @@
     </unit>
     <unit id="7457179823984196306">
       <notes>
-        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:6</note>
         <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:1</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:88</note>
       </notes>
       <segment>
         <source>Operations</source>
@@ -246,7 +248,7 @@
     </unit>
     <unit id="1481645236299803925">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:32,33</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:37,38</note>
       </notes>
       <segment>
         <source>Change Password</source>
@@ -377,10 +379,11 @@
     </unit>
     <unit id="247214804822900420">
       <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:2,3</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:2,3</note>
       </notes>
       <segment>
-        <source>User: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.firstName.value}}"/> <ph id="1" equiv="INTERPOLATION_1" disp="{{form.controls.lastName.value}}"/></source>
+        <source>User: <ph id="0" equiv="INTERPOLATION" disp="{{user.firstName}}"/> <ph id="1" equiv="INTERPOLATION_1" disp="{{user.lastName}}"/></source>
       </segment>
     </unit>
     <unit id="5009437026549898623">
@@ -409,7 +412,8 @@
     </unit>
     <unit id="3620188369327429839">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:35,36</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:171,172</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:48,49</note>
       </notes>
       <segment>
         <source>Save</source>
@@ -736,5 +740,294 @@
         <source>Add members</source>
       </segment>
     </unit>
+    <unit id="7393468163947639901">
+      <notes>
+        <note category="location">src/app/features/auth/logout-view/logout-view.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Logging you out...</source>
+      </segment>
+    </unit>
+    <unit id="1084185553555601352">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:111,112</note>
+      </notes>
+      <segment>
+        <source>View operation members</source>
+      </segment>
+    </unit>
+    <unit id="1262853421734429816">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:47,48</note>
+      </notes>
+      <segment>
+        <source>Update user password</source>
+      </segment>
+    </unit>
+    <unit id="1397367236021319842">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:35,36</note>
+      </notes>
+      <segment>
+        <source>Create user</source>
+      </segment>
+    </unit>
+    <unit id="2006249854662541346">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:163,164</note>
+      </notes>
+      <segment>
+        <source>Invalidate intel</source>
+      </segment>
+    </unit>
+    <unit id="2141107198366258842">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:15,16</note>
+      </notes>
+      <segment>
+        <source>View permissions</source>
+      </segment>
+    </unit>
+    <unit id="2194749592615669638">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:29,30</note>
+      </notes>
+      <segment>
+        <source>View user</source>
+      </segment>
+    </unit>
+    <unit id="2524155554502788709">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:93,94</note>
+      </notes>
+      <segment>
+        <source>View any operation</source>
+      </segment>
+    </unit>
+    <unit id="2955752891888522689">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:41,42</note>
+      </notes>
+      <segment>
+        <source>Update user</source>
+      </segment>
+    </unit>
+    <unit id="3024148990071937145">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:53,54</note>
+      </notes>
+      <segment>
+        <source>Grant admin privileges</source>
+      </segment>
+    </unit>
+    <unit id="3974253861479915513">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:6,7</note>
+      </notes>
+      <segment>
+        <source>This user is an admin and therefore indirectly granted all permissions.</source>
+      </segment>
+    </unit>
+    <unit id="416927273325597932">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:21,22</note>
+      </notes>
+      <segment>
+        <source>Set permissions</source>
+      </segment>
+    </unit>
+    <unit id="4380665952308222234">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:59,60</note>
+      </notes>
+      <segment>
+        <source>(De)Activate user</source>
+      </segment>
+    </unit>
+    <unit id="4635161069054306636">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:85,86</note>
+      </notes>
+      <segment>
+        <source>Delete group</source>
+      </segment>
+    </unit>
+    <unit id="4780513354353360625">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:125,126</note>
+      </notes>
+      <segment>
+        <source>View any address book entry</source>
+      </segment>
+    </unit>
+    <unit id="493679773485810593">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:79,80</note>
+      </notes>
+      <segment>
+        <source>Update group</source>
+      </segment>
+    </unit>
+    <unit id="5133200523459705531">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:67,68</note>
+      </notes>
+      <segment>
+        <source>View group</source>
+      </segment>
+    </unit>
+    <unit id="5171896764639180140">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:131,132</note>
+      </notes>
+      <segment>
+        <source>Create any address book entry</source>
+      </segment>
+    </unit>
+    <unit id="5265020118967515341">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:45,46</note>
+      </notes>
+      <segment>
+        <source>Permissions</source>
+      </segment>
+    </unit>
+    <unit id="5375995439209157844">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:105,106</note>
+      </notes>
+      <segment>
+        <source>Update operation</source>
+      </segment>
+    </unit>
+    <unit id="5547981558491672240">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:168,169</note>
+      </notes>
+      <segment>
+        <source>Close</source>
+      </segment>
+    </unit>
+    <unit id="5581588744689339912">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:73,74</note>
+      </notes>
+      <segment>
+        <source>Create group</source>
+      </segment>
+    </unit>
+    <unit id="5763505564851880614">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:143,144</note>
+      </notes>
+      <segment>
+        <source>Delete any address book entry</source>
+      </segment>
+    </unit>
+    <unit id="6542906208341279692">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:157,158</note>
+      </notes>
+      <segment>
+        <source>Create intel</source>
+      </segment>
+    </unit>
+    <unit id="7183369261710848043">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:151,152</note>
+      </notes>
+      <segment>
+        <source>View any intel</source>
+      </segment>
+    </unit>
+    <unit id="7359118621257933263">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:137,138</note>
+      </notes>
+      <segment>
+        <source>Update any address book entry</source>
+      </segment>
+    </unit>
+    <unit id="7655881037072776703">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:117,118</note>
+      </notes>
+      <segment>
+        <source>Update operation members</source>
+      </segment>
+    </unit>
+    <unit id="775957762658704246">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:99,100</note>
+      </notes>
+      <segment>
+        <source>Create operation</source>
+      </segment>
+    </unit>
+    <unit id="6754575033428839801">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:146</note>
+      </notes>
+      <segment>
+        <source>Intel</source>
+      </segment>
+    </unit>
+    <unit id="7314814725704332646">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:10</note>
+      </notes>
+      <segment>
+        <source>Permissions</source>
+      </segment>
+    </unit>
+    <unit id="7316788515989911343">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:120</note>
+      </notes>
+      <segment>
+        <source>Address book</source>
+      </segment>
+    </unit>
+    <unit id="763483268749037337">
+      <notes>
+        <note category="location">src/app/core/components/missing-permissions-view/missing-permissions-view.component.html:1</note>
+      </notes>
+      <segment>
+        <source>You are missing permissions to access the requested resource.</source>
+      </segment>
+    </unit>
+    <unit id="8890553633144307762">
+      <notes>
+        <note category="location">src/app/core/components/missing-permissions-view/missing-permissions-view.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Back</source>
+      </segment>
+    </unit>
+    <unit id="3488583301572536241">
+      <notes>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:9</note>
+      </notes>
+      <segment>
+        <source>Users</source>
+      </segment>
+    </unit>
+    <unit id="6173425432294670559">
+      <notes>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:15</note>
+      </notes>
+      <segment>
+        <source>Groups</source>
+      </segment>
+    </unit>
+    <unit id="8705640949204819723">
+      <notes>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:20,21</note>
+      </notes>
+      <segment>
+        <source>Operations</source>
+      </segment>
+    </unit>
   </file>
 </xliff>
+

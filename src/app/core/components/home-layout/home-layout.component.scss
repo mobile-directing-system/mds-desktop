@@ -7,6 +7,12 @@
   background-color: $bg;
 }
 
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: 64px !important;
+  min-height: 64px !important;
+  max-height: 64px !important;
+}
+
 .logo {
   font-size: .2rem;
 }

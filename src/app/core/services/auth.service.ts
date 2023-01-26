@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NetService } from './net.service';
-import { BehaviorSubject, finalize, Observable, tap } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, finalize, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { MDSError, MDSErrorCode } from '../util/errors';
 import { LocalStorageService } from './local-storage.service';
 
@@ -53,23 +53,24 @@ export class AuthService {
    * @param pass The user's password in plaintext.
    */
   login(username: string, pass: string): Observable<boolean> {
-    if (!!this.loggedInUserId) {
-      throw new MDSError(MDSErrorCode.AppError, 'user already logged in', { loggedInUserId: this.loggedInUserId });
-    }
-    return this.netService.postJSON<NetUserToken>('/login', {
-      username: username,
-      pass: pass,
-    }, {}).pipe(
-      // Set user id.
+    return (!!this.loggedInUserId ? this.logout() : of(void 0)).pipe(
+      catchError(() => of(void 0)), // Ignore.
+      switchMap(() => this.netService.postJSON<NetUserToken>('/login', {
+        username: username,
+        pass: pass,
+      }, {})),
       tap((token: NetUserToken) => {
-        this.setLoggedInUserId(token.user_id);
+        // Save user id and token.
         this.lsService.setItem(LocalStorageService.TokenLoggedInUserId, token.user_id);
         this.lsService.setItem(LocalStorageService.TokenAuthToken, token.access_token);
+        // Set Authorization-header in net-service.
+        this.applyAuthToken(token.access_token);
+        // Set user id and notify. This needs to happen after applying the token as subscribers might use the
+        // net-service immediately.
+        this.setLoggedInUserId(token.user_id);
       }),
-      // Set Authorization-header in net-service.
-      tap((token: NetUserToken) => (this.applyAuthToken(token.access_token))),
-      // Notify of new logged in user.
-      map((_) => true),
+      // Success.
+      map(() => true),
     );
   }
 

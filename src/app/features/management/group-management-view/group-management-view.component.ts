@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { orderDirFromSort, Paginated, PaginationParams } from '../../../core/util/store';
-import { EMPTY } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { Loader } from '../../../core/util/loader';
 import { GroupService, GroupSort } from '../../../core/services/group.service';
 import { Group } from '../../../core/model/group';
@@ -10,6 +10,9 @@ import { Sort } from '@angular/material/sort';
 import { Operation } from '../../../core/model/operation';
 import { OperationService } from '../../../core/services/operation.service';
 import { map } from 'rxjs/operators';
+import { AccessControlService } from '../../../core/services/access-control.service';
+import { ViewUserPermission } from '../../../core/permissions/users';
+import { CreateGroupPermission } from '../../../core/permissions/groups';
 
 /**
  * Interface to contain the group as well as it's associated operation.
@@ -29,11 +32,11 @@ export class GroupManagementView {
   pagination?: PaginationParams<GroupSort>;
   loadedGroupTableData?: Paginated<GroupTableRowContent>;
 
-  constructor(private router: Router, private route: ActivatedRoute, private groupService: GroupService, private operationService: OperationService) {
+  constructor(private router: Router, private route: ActivatedRoute, private groupService: GroupService,
+              private acService: AccessControlService, private operationService: OperationService) {
   }
 
   retrieving = new Loader();
-  retrievingOperations = new Loader()
 
   refresh(): void {
     this.retrieving.loadFrom(() => {
@@ -54,7 +57,7 @@ export class GroupManagementView {
               if (!group.operation) {
                 tableEntry.operation = null;
               } else {
-                this.retrievingOperations.load(this.operationService.getOperationById(group.operation)).subscribe(operation => tableEntry.operation = operation);
+                this.retrieving.load(this.operationService.getOperationById(group.operation)).subscribe(operation => tableEntry.operation = operation);
               }
               return tableEntry;
             }), {
@@ -127,5 +130,9 @@ export class GroupManagementView {
     }
     this.pagination.applyOrderBy(GroupManagementView.mapOrderBy(sort.active), orderDirFromSort(sort));
     this.refresh();
+  }
+
+  isCreateGranted(): Observable<boolean> {
+    return this.acService.isGranted([CreateGroupPermission(), ViewUserPermission()]);
   }
 }

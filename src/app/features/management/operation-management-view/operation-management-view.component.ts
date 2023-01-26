@@ -4,10 +4,12 @@ import { OperationService, OperationSort } from '../../../core/services/operatio
 import { Operation } from '../../../core/model/operation';
 import { Loader } from '../../../core/util/loader';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MDSError, MDSErrorCode } from '../../../core/util/errors';
 import { Sort } from '@angular/material/sort';
+import { AccessControlService } from '../../../core/services/access-control.service';
+import { CreateOperationPermission } from '../../../core/permissions/operations';
 
 /**
  * View with operation list.
@@ -29,7 +31,8 @@ export class OperationManagementView {
    */
   retrieving = new Loader();
 
-  constructor(private operationService: OperationService, private router: Router, private route: ActivatedRoute) {
+  constructor(private operationService: OperationService, private acService: AccessControlService,
+              private router: Router, private route: ActivatedRoute) {
   }
 
   refresh(): void {
@@ -121,5 +124,9 @@ export class OperationManagementView {
       return true;
     }
     return operation.end > new Date();
+  }
+
+  isCreateGranted(): Observable<boolean> {
+    return this.acService.isGranted([CreateOperationPermission()]);
   }
 }

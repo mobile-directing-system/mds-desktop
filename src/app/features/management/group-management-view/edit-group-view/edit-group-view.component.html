@@ -41,7 +41,7 @@
     <!--Members.-->
     <h2 i18n>Members</h2>
 
-    <div class="member-adding">
+    <div *ngIf="isUpdateGranted() | async" class="member-adding">
       <app-searchable-multi-chip-entity-input-field
         [chipTemplate]="chip"
         [formControl]="membersToAddForm"
@@ -100,7 +100,10 @@
         <ng-container matColumnDef="remove">
           <th *matHeaderCellDef mat-header-cell scope="col"></th>
           <td *matCellDef="let row" mat-cell>
-            <mat-icon i18n-matTooltip matTooltip="Remove Member" (click)="removeMember(asUser(row).id)">close
+            <mat-icon
+              *ngIf="isUpdateGranted() | async"
+              i18n-matTooltip matTooltip="Remove Member"
+              (click)="removeMember(asUser(row).id)">close
             </mat-icon>
           </td>
         </ng-container>
