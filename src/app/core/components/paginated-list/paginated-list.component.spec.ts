@@ -104,7 +104,7 @@ describe('PaginatedListComponent', () => {
     expect(component.pagination.orderDir).toEqual(OrderDir.Asc);
   }));
 
-  it('set pagination params from page-change event', () => {
+  it('should set pagination params from page-change event', () => {
     spectator.router.navigate = jasmine.createSpy().and.resolveTo();
     const e = new PageEvent();
     e.pageSize = 302;
