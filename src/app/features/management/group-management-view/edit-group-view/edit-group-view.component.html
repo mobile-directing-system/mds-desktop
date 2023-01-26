@@ -39,7 +39,7 @@
       </ng-template>
     </app-searchable-entity-input>
     <!--Members.-->
-    <h2>Members</h2>
+    <h2 i18n>Members</h2>
 
     <div class="member-adding">
       <app-searchable-multi-chip-entity-input-field
@@ -48,8 +48,7 @@
         [retrieve]="getUserById.bind(this)"
         [search]="searchUsers.bind(this)"
         [suggestionTemplate]="memberSuggestion"
-        i18n-label label="Members"
-        i18n-placeholder placeholder="Add member..."
+        i18n-label label="Add members"
         class="app-edit-input-large">
         <ng-template #chip let-entity='entity'>
           {{asUser(entity).firstName}} {{asUser(entity).lastName}}

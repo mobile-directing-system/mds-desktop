@@ -25,7 +25,7 @@
       [search]="searchOperations.bind(this)"
       [suggestionTemplate]="suggestion"
       class="app-edit-input-large"
-      i18n-label label= "Operation"
+      i18n-label label="Operation"
       i18n-placeholder placeholder="Search operation...">
       <ng-template #display let-entity='entity'>
         {{asOperation(entity).title}}
@@ -43,13 +43,13 @@
       [suggestionTemplate]="suggestionM"
       [errorTemplate]="operationError"
       class="app-edit-input-large"
-      i18n-label label="Members"
+      i18n-label label="Add members"
       i18n-placeholder placeholder="Add member...">
       <ng-template #chip let-entity='entity'>
         {{asUser(entity).firstName}} {{asUser(entity).lastName}}
       </ng-template>
       <ng-template #suggestionM let-entity='entity'>
-         {{asUser(entity).firstName}} {{asUser(entity).lastName}} <span
+        {{asUser(entity).firstName}} {{asUser(entity).lastName}} <span
         class="username">({{asUser(entity).lastName}})</span>
       </ng-template>
     </app-searchable-multi-chip-entity-input-field>
