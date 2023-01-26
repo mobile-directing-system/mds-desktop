@@ -34,14 +34,7 @@ export class Loader {
    * @param o The Observable that performs some loading operation.
    */
   load<T>(o: Observable<T>): Observable<T> {
-    this.inProgress++;
-    this.emitLoadingChangeIfRequired();
-    return o.pipe(
-      finalize(() => {
-        this.inProgress--;
-        this.emitLoadingChangeIfRequired();
-      }),
-    );
+    return this.loadFrom(() => o);
   }
 
   /**

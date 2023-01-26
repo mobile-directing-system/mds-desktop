@@ -69,6 +69,7 @@ import { ShowLoadingDotsDirective } from './directives/show-loading-dots.directi
     ErrorsComponent,
     LocalPaginatedListComponent,
     ShowLoadingDotsDirective,
+    LoadingDotsComponent,
   ],
   imports: [
     CommonModule,

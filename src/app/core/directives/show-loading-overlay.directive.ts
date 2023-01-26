@@ -1,12 +1,7 @@
 import { Directive, Input, OnDestroy } from '@angular/core';
-import { Subscription, timer } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { LoadingOverlayComponent } from '../components/loading-overlay/loading-overlay.component';
 import { LoadingOverlay } from './loading-overlay';
-
-/**
- * Delay for showing the overlay.
- */
-const AttachDelayMS = 500;
 
 /**
  * Directive for showing a loader overlay for components.
@@ -34,9 +29,7 @@ export class ShowLoadingOverlayDirective extends LoadingOverlay implements OnDes
 
   private attachLoader() {
     this.s?.unsubscribe();
-    this.s = timer(AttachDelayMS).subscribe(() => {
-      super.attach(overlay => overlay.createWithBackdrop('_loading-overlay-backdrop'), LoadingOverlayComponent);
-    });
+    super.attach(overlay => overlay.createWithBackdrop('_loading-overlay-backdrop'), LoadingOverlayComponent);
   }
 
   private detachLoader() {

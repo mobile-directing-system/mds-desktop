@@ -6,32 +6,42 @@
   gap: .2em;
 }
 
+$initial-delay: 200ms;
+$opacity-low: .1;
+$transform-low: scale(.01);
+
 .dot {
   background-color: lighten($dark-disabled-text, 40);
   margin-right: 5%;
   width: .5em;
   height: .5em;
   border-radius: 100%;
+  opacity: $opacity-low;
+  transform: $transform-low;
   animation: pulse 1.4s ease infinite;
 
+  &:nth-child(1) {
+    animation-delay: $initial-delay + 0ms;
+  }
+
   &:nth-child(2) {
-    animation-delay: 200ms;
+    animation-delay: $initial-delay + 200ms;
   }
 
   &:nth-child(3) {
     margin-right: 0;
-    animation-delay: 400ms;
+    animation-delay: $initial-delay + 400ms;
   }
 }
 
 @keyframes pulse {
-  0%, 60%, 100% {
-    opacity: 1;
-    transform: scale(1);
+  0%, 100% {
+    opacity: $opacity-low;
+    transform: scale(.01);
   }
 
-  30% {
-    opacity: .1;
-    transform: scale(.01);
+  30%, 60% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
