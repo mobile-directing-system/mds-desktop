@@ -48,8 +48,8 @@
       ></mtx-datetimepicker>
       <input [mtxDatetimepicker]="datetimePickerEnd" [formControl]="form.controls.end" matInput>
       <mtx-datetimepicker-toggle [for]="datetimePickerEnd" matSuffix></mtx-datetimepicker-toggle>
-      <mat-error *ngIf="form.controls.title.errors" i18n>
-        End date must be past start date.
+      <mat-error *ngIf="form.controls.end.errors" i18n>
+        End date must be after start date.
       </mat-error>
     </mat-form-field>
 
