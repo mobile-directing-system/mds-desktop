@@ -17,9 +17,6 @@ import { CoreModule } from './core/core.module';
 import { LocalStorageService } from './core/services/local-storage.service';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { matPaginatorInternationalization, netLoginInit } from './core/util/app-init';
-import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
-import { MtxNativeDatetimeModule } from '@ng-matero/extensions/core';
-import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -35,9 +32,6 @@ import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
     RouterModule.forRoot(AppRoutes),
     CoreModule,
     FeaturesModule,
-    MtxDatetimepickerModule,
-    MtxNativeDatetimeModule,
-    MtxMomentDatetimeModule
   ],
   providers: [
     NetService,

@@ -6,12 +6,15 @@ import { OperationService } from '../../../../core/services/operation.service';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { CoreModule } from '../../../../core/core.module';
+import * as moment from 'moment';
+import { FeaturesModule } from '../../../features.module';
 
 
 function genFactoryOptions(): SpectatorRoutingOptions<CreateOperationView> {
   return {
     component: CreateOperationView,
     imports: [
+      FeaturesModule,
       ManagementModule,
       CoreModule,
     ],
@@ -30,12 +33,12 @@ describe('CreateOperationViewComponent', () => {
 
   const title = 'spring';
   const description = 'step';
-  const startDate = new Date(2024, 9, 9, 12, 0, 0, 0);
-  const endDateSmallerThanStartDate = new Date(2024, 8, 8, 12, 0, 0, 0);
-  const endDateGreaterThanStartDate = new Date(2024, 10, 10, 12, 0, 0, 0);
-  const endDateExactlyEqualToStartDate = new Date(2024, 9, 9, 12, 0, 0, 0);
-  const endDateWithEqualDateButSmallerTime = new Date(2024, 9, 9, 11, 0, 0, 0);
-  const endDateWithEqualDateButGreaterTime = new Date(2024, 9, 9, 14, 0, 0, 0);
+  const startDate = moment(new Date(2024, 9, 9, 12, 0, 0, 0));
+  const endDateSmallerThanStartDate = moment(new Date(2024, 8, 8, 12, 0, 0, 0));
+  const endDateGreaterThanStartDate = moment(new Date(2024, 10, 10, 12, 0, 0, 0));
+  const endDateExactlyEqualToStartDate = moment(new Date(2024, 9, 9, 12, 0, 0, 0));
+  const endDateWithEqualDateButSmallerTime = moment(new Date(2024, 9, 9, 11, 0, 0, 0));
+  const endDateWithEqualDateButGreaterTime = moment(new Date(2024, 9, 9, 14, 0, 0, 0));
   const isArchived = false;
 
   beforeEach(async () => {
@@ -193,8 +196,8 @@ describe('CreateOperationViewComponent', () => {
         id: 'thank',
         title: title,
         description: description,
-        start: startDate,
-        end: endDateGreaterThanStartDate,
+        start: startDate.toDate(),
+        end: endDateGreaterThanStartDate.toDate(),
         is_archived: isArchived,
       }));
 
@@ -204,8 +207,8 @@ describe('CreateOperationViewComponent', () => {
       expect(spectator.inject(OperationService).createOperation).toHaveBeenCalledOnceWith({
         title: title,
         description: description,
-        start: startDate,
-        end: endDateGreaterThanStartDate,
+        start: startDate.toDate(),
+        end: endDateGreaterThanStartDate.toDate(),
         is_archived: isArchived,
       });
     }));
@@ -233,7 +236,7 @@ describe('CreateOperationViewComponent', () => {
       expect(spectator.inject(OperationService).createOperation).toHaveBeenCalledOnceWith({
         title: title,
         description: description,
-        start: startDate,
+        start: startDate.toDate(),
         end: undefined,
         is_archived: isArchived,
       });

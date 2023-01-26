@@ -10,6 +10,7 @@ import { firstValueFrom, of } from 'rxjs';
 import { UserService, UserSort } from '../../../../core/services/user.service';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { SearchResult } from '../../../../core/util/store';
+import * as moment from 'moment';
 
 function genFactoryOptions(): SpectatorRoutingOptions<EditOperationViewComponent> {
   return {
@@ -46,12 +47,12 @@ describe('EditOperationViewComponent', () => {
 
   const title = 'spring';
   const description = 'step';
-  const startDate = new Date(2024, 9, 9, 12, 0, 0, 0);
-  const endDateSmallerThanStartDate = new Date(2024, 8, 8, 12, 0, 0, 0);
-  const endDateGreaterThanStartDate = new Date(2024, 10, 10, 12, 0, 0, 0);
-  const endDateExactlyEqualToStartDate = new Date(2024, 9, 9, 12, 0, 0, 0);
-  const endDateWithEqualDateButSmallerTime = new Date(2024, 9, 9, 11, 0, 0, 0);
-  const endDateWithEqualDateButGreaterTime = new Date(2024, 9, 9, 14, 0, 0, 0);
+  const startDate = moment(new Date(2024, 9, 9, 12, 0, 0, 0));
+  const endDateSmallerThanStartDate = moment(new Date(2024, 8, 8, 12, 0, 0, 0));
+  const endDateGreaterThanStartDate = moment(new Date(2024, 10, 10, 12, 0, 0, 0));
+  const endDateExactlyEqualToStartDate = moment(new Date(2024, 9, 9, 12, 0, 0, 0));
+  const endDateWithEqualDateButSmallerTime = moment(new Date(2024, 9, 9, 11, 0, 0, 0));
+  const endDateWithEqualDateButGreaterTime = moment(new Date(2024, 9, 9, 14, 0, 0, 0));
   const isArchived = false;
 
   const originalOperationMembers = [
@@ -389,8 +390,8 @@ describe('EditOperationViewComponent', () => {
         id: sampleOp.id,
         title: title,
         description: description,
-        start: startDate,
-        end: endDateWithEqualDateButGreaterTime,
+        start: startDate.toDate(),
+        end: endDateWithEqualDateButGreaterTime.toDate(),
         is_archived: isArchived,
       });
 

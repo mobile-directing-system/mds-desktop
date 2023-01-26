@@ -25,6 +25,9 @@ import { SearchableEntityInputComponent } from './components/searchable-entity-i
 import { ErrorsComponent } from './components/errors/errors.component';
 import { LocalPaginatedListComponent } from './components/local-paginated-list/local-paginated-list.component';
 import { ShowLoadingDotsDirective } from './directives/show-loading-dots.directive';
+import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
+import { MtxNativeDatetimeModule } from '@ng-matero/extensions/core';
+import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
 
 
 @NgModule({
@@ -77,6 +80,10 @@ import { ShowLoadingDotsDirective } from './directives/show-loading-dots.directi
     FormsModule,
     ReactiveFormsModule,
     AngularMaterialModule,
+    // Datetime picker (do not change order!).
+    MtxDatetimepickerModule,
+    MtxNativeDatetimeModule,
+    MtxMomentDatetimeModule,
   ],
 })
 export class CoreModule {

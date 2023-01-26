@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MDSError, MDSErrorCode } from '../../../../core/util/errors';
 import { OperationService } from '../../../../core/services/operation.service';
 import { Subscription } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-create-operation-view',
@@ -18,11 +19,6 @@ export class CreateOperationView implements OnInit, OnDestroy {
   private s: Subscription[] = [];
 
   /**
-   * The currently selected starting date for the operation.
-   */
-  currentStartDate: Date = new Date();
-
-  /**
    * Loader for when creating a new operation and awaiting the response.
    */
   creatingOperation = new Loader();
@@ -32,17 +28,14 @@ export class CreateOperationView implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.s.push(this.form.controls.start.valueChanges.subscribe( newStartDate => {
-      this.currentStartDate = newStartDate;
-      this.form.controls.end.updateValueAndValidity();
-    }));
+    this.s.push(this.form.controls.start.valueChanges.subscribe(() => this.form.controls.end.updateValueAndValidity()));
   }
 
   form = this.fb.nonNullable.group({
     title: this.fb.nonNullable.control<string>('', [Validators.required]),
     description: this.fb.nonNullable.control<string>(''),
-    start: this.fb.nonNullable.control<Date>(new Date(), [Validators.required]),
-    end: this.fb.nonNullable.control<Date | undefined>(undefined, [this.validateEndDate()]),
+    start: this.fb.nonNullable.control<moment.Moment>(moment(), [Validators.required]),
+    end: this.fb.control<moment.Moment | null>(null, [this.validateEndDate()]),
     isArchived: this.fb.nonNullable.control<boolean>(false, [Validators.required]),
   });
 
@@ -67,13 +60,13 @@ export class CreateOperationView implements OnInit, OnDestroy {
     const end = this.form.value.end;
     const isArchived = this.form.value.isArchived;
     if (isArchived === undefined) {
-      throw new MDSError(MDSErrorCode.AppError, 'isArchived-control is not set');
+      throw new MDSError(MDSErrorCode.AppError, 'is-archived-control is not set');
     }
     this.creatingOperation.load(this.operationService.createOperation({
       title: title,
       description: description,
-      start: start,
-      end: end,
+      start: start.toDate(),
+      end: end?.toDate(),
       is_archived: isArchived,
     })).subscribe({
       next: _ => {
@@ -90,11 +83,12 @@ export class CreateOperationView implements OnInit, OnDestroy {
    * Validates whether the selected end date is past the selected start date.
    */
   validateEndDate(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (!control.value) {
+    return (_: AbstractControl): ValidationErrors | null => {
+      const end = this.form?.controls.end.getRawValue();
+      if (!end) {
         return null;
       }
-      if (control.value.getTime() >  this.currentStartDate.getTime()) {
+      if (end.isAfter(this.form.controls.start.getRawValue())) {
         return null;
       } else {
         return { isValidEndDate: true };

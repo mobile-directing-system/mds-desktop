@@ -11,6 +11,7 @@ import { MDSError, MDSErrorCode } from '../../../../core/util/errors';
 import { UserService, UserSort } from '../../../../core/services/user.service';
 import { SearchResult, sortStrings } from '../../../../core/util/store';
 import { map } from 'rxjs/operators';
+import * as moment from 'moment';
 
 
 @Component({
@@ -21,24 +22,16 @@ import { map } from 'rxjs/operators';
 export class EditOperationViewComponent implements OnInit, OnDestroy {
 
   loader = new Loader();
-
-  /**
-   * Currently selected start date of the operation.
-   */
-  currentStartDate: Date = new Date();
-
   /**
    * Loader for when retrieving members of the operation.
    */
   retrieving = new Loader();
 
   private s: Subscription[] = [];
-
   /**
    * Id of the current operation.
    */
   operationId = '';
-
   /**
    * Contains user data of the current operation members.
    */
@@ -65,11 +58,10 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
           isArchived: operation.is_archived,
         });
         let operationStart = new Date(operation.start);
-        this.currentStartDate = operationStart;
-        this.form.controls.start.patchValue(operationStart);
+        this.form.controls.start.patchValue(moment(operationStart));
         if (operation.end) {
           let operationEnd = new Date(operation!.end);
-          this.form.controls.end.patchValue(operationEnd);
+          this.form.controls.end.patchValue(moment(operationEnd));
         }
       })).subscribe());
 
@@ -97,7 +89,6 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
       ).subscribe());
 
     this.s.push(this.form.controls.start.valueChanges.pipe(tap(newStartDate => {
-      this.currentStartDate = newStartDate;
       this.form.controls.end.updateValueAndValidity();
     })).subscribe());
   }
@@ -105,8 +96,8 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
   form = this.fb.nonNullable.group({
     title: this.fb.nonNullable.control<string>('', [Validators.required]),
     description: this.fb.nonNullable.control<string>(''),
-    start: this.fb.nonNullable.control<Date>(new Date(), [Validators.required]),
-    end: this.fb.nonNullable.control<Date | undefined>(undefined, [this.validateEndDate()]),
+    start: this.fb.nonNullable.control<moment.Moment>(moment(), [Validators.required]),
+    end: this.fb.control<moment.Moment | null>(null, [this.validateEndDate()]),
     isArchived: this.fb.nonNullable.control<boolean>(false, [Validators.required]),
     members: this.fb.nonNullable.control<string[]>([]),
   });
@@ -142,8 +133,8 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
       id: this.operationId,
       title: title,
       description: description,
-      start: start,
-      end: end,
+      start: start.toDate(),
+      end: end?.toDate(),
       is_archived: isArchived,
     }).pipe(
       switchMap(() => this.operationService.updateOperationMembers(this.operationId, this.form.controls.members.value)),
@@ -228,11 +219,11 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
    * Validates whether the selected end date is past the selected start date.
    */
   validateEndDate(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (!control.value) {
+    return (_: AbstractControl): ValidationErrors | null => {
+      if (!this.form?.controls.end.getRawValue()) {
         return null;
       }
-      if (control.value.getTime() > this.currentStartDate.getTime()) {
+      if (this.form.controls.end.getRawValue()?.isAfter(this.form.controls.start.getRawValue())) {
         return null;
       } else {
         return { isValidEndDate: true };
@@ -253,7 +244,7 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
    * membersToAdd.
    */
   addMembers() {
-    let currentMemberIds = this.form.controls.members.getRawValue()
+    let currentMemberIds = this.form.controls.members.getRawValue();
     // Filter members to add to the form control to only contain ids, that are not already part of members.
     let memberIdsToAdd = this.membersToAddForm.value.filter(memberId => !currentMemberIds.includes(memberId));
     this.s.push(this.loader.load(forkJoin(memberIdsToAdd.map(memberId => this.userService.getUserById(memberId))))
