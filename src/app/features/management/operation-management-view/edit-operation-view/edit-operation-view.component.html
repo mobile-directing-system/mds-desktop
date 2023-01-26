@@ -17,7 +17,7 @@
 
     <!--Start date.-->
     <mat-form-field class="app-edit-input">
-      <mat-label i18n>Choose a start date</mat-label>
+      <mat-label i18n>Start date</mat-label>
       <mtx-datetimepicker #datetimePickerStart
                           [type]="'datetime'"
                           [mode]="'landscape'"
@@ -37,7 +37,7 @@
     </mat-form-field>
     <!--End date.-->
     <mat-form-field class="app-edit-input">
-      <mat-label i18n>Choose an end date</mat-label>
+      <mat-label i18n>End date</mat-label>
       <mtx-datetimepicker #datetimePickerEnd
                           [type]="'datetime'"
                           [mode]="'landscape'"
@@ -55,9 +55,9 @@
       </mat-error>
     </mat-form-field>
     <!--Archived.-->
-    <mat-checkbox [formControl]="form.controls.isArchived">Archived</mat-checkbox>
+    <mat-checkbox [formControl]="form.controls.isArchived" i18n>Archived</mat-checkbox>
     <!--Members table.-->
-    <h2>Members</h2>
+    <h2 i18n>Operation Members</h2>
     <div class="member-adding">
       <app-searchable-multi-chip-entity-input-field
         [chipTemplate]="chip"
@@ -65,8 +65,7 @@
         [retrieve]="getUserById.bind(this)"
         [search]="searchUsers.bind(this)"
         [suggestionTemplate]="memberSuggestion"
-        i18n-label label="Members"
-        i18n-placeholder placeholder="Add member..."
+        i18n-label label="Add members"
         class="app-edit-input-large">
         <ng-template #chip let-entity='entity'>
           {{asUser(entity).firstName}} {{asUser(entity).lastName}}

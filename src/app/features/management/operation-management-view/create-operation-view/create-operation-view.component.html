@@ -16,7 +16,7 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field class="app-edit-input">
-      <mat-label i18n>Choose a start date</mat-label>
+      <mat-label i18n>Start date</mat-label>
       <mtx-datetimepicker #datetimePickerStart
                           [type]="'datetime'"
                           [mode]="'landscape'"
@@ -35,7 +35,7 @@
     </mat-form-field>
 
     <mat-form-field class="app-edit-input">
-      <mat-label i18n>Choose an end date</mat-label>
+      <mat-label i18n>End date</mat-label>
       <mtx-datetimepicker #datetimePickerEnd
                           [type]="'datetime'"
                           [mode]="'landscape'"
@@ -53,7 +53,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-checkbox [formControl]="form.controls.isArchived">Archived</mat-checkbox>
+    <mat-checkbox [formControl]="form.controls.isArchived" i18n>Archived</mat-checkbox>
     <div class="button-row">
       <button mat-button type="button" (click)="close()" i18n>
         Cancel

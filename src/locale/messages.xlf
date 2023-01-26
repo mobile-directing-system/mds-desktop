@@ -12,8 +12,8 @@
     <unit id="5248717555542428023">
       <notes>
         <note category="location">src/app/features/auth/login-view/login-view.component.html:5</note>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:88</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:104</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:89</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:105</note>
         <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:5</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:5</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:31</note>
@@ -106,8 +106,8 @@
     </unit>
     <unit id="2149300564474427551">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:95</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:111</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:96</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:112</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:38</note>
       </notes>
       <segment>
@@ -124,8 +124,8 @@
     </unit>
     <unit id="3586674587150281199">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:78</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:94</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:79</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:95</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:21</note>
       </notes>
       <segment>
@@ -167,8 +167,8 @@
     </unit>
     <unit id="5342432350421167093">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:83</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:99</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:84</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:100</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:26</note>
       </notes>
       <segment>
@@ -212,8 +212,8 @@
     </unit>
     <unit id="1859131936150262113">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:96</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:112</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:97</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:113</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:39</note>
       </notes>
       <segment>
@@ -263,9 +263,9 @@
     <unit id="2330577642930707695">
       <notes>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:64,65</note>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:117,118</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:118,119</note>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:59,60</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:130,131</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:132,133</note>
         <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:35,36</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:29,30</note>
         <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:14,15</note>
@@ -320,7 +320,7 @@
     </unit>
     <unit id="6072990007630394552">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.ts:58</note>
+        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.ts:57</note>
       </notes>
       <segment>
         <source>Updating password failed.</source>
@@ -361,7 +361,7 @@
     </unit>
     <unit id="760085743178726328">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.ts:94</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.ts:93</note>
       </notes>
       <segment>
         <source>Updating user failed.</source>
@@ -427,7 +427,7 @@
     </unit>
     <unit id="1241348629231510663">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:36</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:37,36</note>
       </notes>
       <segment>
         <source>End</source>
@@ -435,6 +435,8 @@
     </unit>
     <unit id="1562584780596394495">
       <notes>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:56</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:58</note>
         <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:43</note>
       </notes>
       <segment>
@@ -517,18 +519,9 @@
         <source>Add Members</source>
       </segment>
     </unit>
-    <unit id="2118814476764444488">
-      <notes>
-        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:38</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:39</note>
-      </notes>
-      <segment>
-        <source>Choose an end date</source>
-      </segment>
-    </unit>
     <unit id="229735695122793954">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.ts:153</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.ts:143</note>
       </notes>
       <segment>
         <source>Operation updated successfully.</source>
@@ -536,7 +529,7 @@
     </unit>
     <unit id="2571539791936033085">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.ts:80</note>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.ts:73</note>
       </notes>
       <segment>
         <source>Operation created successfully.</source>
@@ -555,7 +548,7 @@
     <unit id="3092880857721570149">
       <notes>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:33,34</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:34,35</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:35,36</note>
       </notes>
       <segment>
         <source>Start is required.</source>
@@ -572,13 +565,13 @@
         <source>Title is required.</source>
       </segment>
     </unit>
-    <unit id="3978136533144765751">
+    <unit id="2813596695204835456">
       <notes>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:52,53</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:53,54</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:54,55</note>
       </notes>
       <segment>
-        <source>End date must be past start date.</source>
+        <source>End date must be after start date.</source>
       </segment>
     </unit>
     <unit id="3999003596543849763">
@@ -591,7 +584,7 @@
     </unit>
     <unit id="5266935633882771143">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.ts:157</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.ts:147</note>
       </notes>
       <segment>
         <source>Updating operation failed.</source>
@@ -599,8 +592,8 @@
     </unit>
     <unit id="7165302310980913730">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:103</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:119</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:104</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:120</note>
       </notes>
       <segment>
         <source>Remove Member</source>
@@ -608,19 +601,10 @@
     </unit>
     <unit id="7948767415506862382">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.ts:84</note>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.ts:77</note>
       </notes>
       <segment>
         <source>Operation creation failed.</source>
-      </segment>
-    </unit>
-    <unit id="939906546658952278">
-      <notes>
-        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:19</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:20</note>
-      </notes>
-      <segment>
-        <source>Choose a start date</source>
       </segment>
     </unit>
     <unit id="1243614560979208707">
@@ -676,8 +660,8 @@
     </unit>
     <unit id="2592690450389009216">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:121,122</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:134,135</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:122,123</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:136,137</note>
       </notes>
       <segment>
         <source>Update</source>
@@ -704,7 +688,6 @@
       <notes>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:47</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:52</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:68</note>
       </notes>
       <segment>
         <source>Add member...</source>
@@ -712,12 +695,45 @@
     </unit>
     <unit id="4691887509600985309">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:46</note>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:51</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:67</note>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:47,46</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:52,51</note>
       </notes>
       <segment>
         <source>Members</source>
+      </segment>
+    </unit>
+    <unit id="126074860850048964">
+      <notes>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:38</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:40</note>
+      </notes>
+      <segment>
+        <source>End date</source>
+      </segment>
+    </unit>
+    <unit id="8801252524063904279">
+      <notes>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:60</note>
+      </notes>
+      <segment>
+        <source>Operation Members</source>
+      </segment>
+    </unit>
+    <unit id="888341446683346521">
+      <notes>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:19</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:20</note>
+      </notes>
+      <segment>
+        <source>Start date</source>
+      </segment>
+    </unit>
+    <unit id="1589749564133337410">
+      <notes>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:68</note>
+      </notes>
+      <segment>
+        <source>Add members</source>
       </segment>
     </unit>
   </file>
