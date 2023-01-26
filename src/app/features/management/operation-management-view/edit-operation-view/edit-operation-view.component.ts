@@ -115,7 +115,6 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
 
   constructor(private operationService: OperationService, private userService: UserService, private notificationService: NotificationService, private fb: FormBuilder,
               private router: Router, private route: ActivatedRoute) {
-    this.loader.bindFormGroup(this.form);
   }
 
   updateOperation(): void {

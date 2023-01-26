@@ -60,19 +60,20 @@
         </ng-template>
       </app-searchable-multi-chip-entity-input-field>
       <button *ngIf="membersToAddForm.value.length !== 0"
-        mat-button class="app-edit-input-tinier" type="button" i18n
-        (click)="addMembers()">
+              mat-button class="app-edit-input-tinier" type="button" i18n
+              (click)="addMembers()">
         Add Members
       </button>
     </div>
 
     <app-local-paginated-list
       [data]="groupMembers" #memberList>
-      <table (matSortChange)="memberSortChange($event)" [appShowLoadingOverlay]="loader.loadingChange() | async"
-             [dataSource]="memberList.dataSource"
-             aria-label="User list"
-             mat-table
-             matSort>
+      <table
+        (matSortChange)="memberSortChange($event)"
+        [dataSource]="memberList.dataSource"
+        aria-label="User list"
+        mat-table
+        matSort>
 
         <ng-container matColumnDef="lastName">
           <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="lastName">Last name</th>
