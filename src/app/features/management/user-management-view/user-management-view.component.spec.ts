@@ -289,7 +289,7 @@ describe('UserManagementView', () => {
       expect(navigateSpy).toHaveBeenCalledOnceWith(sampleUser.id);
     }));
 
-    it('calling edit user to navigate to edit user view', fakeAsync(async () => {
+    it('should navigate to edit user view when clicking row', fakeAsync(async () => {
       spectator.router.navigate = createSpy().and.resolveTo();
       const sampleUser: User = {
         id: 'draw',

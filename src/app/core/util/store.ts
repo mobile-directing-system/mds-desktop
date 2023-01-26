@@ -7,6 +7,21 @@ export enum OrderDir {
   Desc = 'desc',
 }
 
+
+/**
+ * Sorts the given list with the given parameters.
+ * @param list The list to sort.
+ * @param sort The sorting.
+ * @param selector The selector for which the array shall be sorted.
+ */
+export function sortStrings<T>(list: T[], sort: Sort, selector: (from: T) => string): void {
+  if (orderDirFromSort(sort) === OrderDir.Asc) {
+    list.sort((a, b) => selector(a).localeCompare(selector(b)));
+  } else {
+    list.sort((a, b) => selector(b).localeCompare(selector(a)));
+  }
+}
+
 export function orderDirFromSort(sort: Sort): OrderDir | undefined {
   switch (sort.direction) {
     case 'asc':
@@ -178,7 +193,7 @@ export class Paginated<T> {
     this.offset = details.offset;
     this.orderedBy = details.orderedBy;
     this.orderDir = details.orderDir;
-    this.retrieved = details.retrieved ?? entries.length;
+    this.retrieved = details?.retrieved ?? entries.length;
   }
 
   /**

@@ -22,6 +22,18 @@ import { GroupManagementView } from '../../features/management/group-management-
 import {
   OperationManagementView,
 } from '../../features/management/operation-management-view/operation-management-view.component';
+import {
+  CreateGroupView,
+} from '../../features/management/group-management-view/create-group-view/create-group-view.component';
+import {
+  EditGroupView,
+} from '../../features/management/group-management-view/edit-group-view/edit-group-view.component';
+import {
+  CreateOperationView,
+} from '../../features/management/operation-management-view/create-operation-view/create-operation-view.component';
+import {
+  EditOperationViewComponent,
+} from '../../features/management/operation-management-view/edit-operation-view/edit-operation-view.component';
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -56,9 +68,25 @@ export const AppRoutes: Routes = [
             component: GroupManagementView,
           },
           {
+            path: 'groups/create',
+            component: CreateGroupView,
+          },
+          {
+            path: 'groups/:groupId',
+            component: EditGroupView,
+          },
+          {
             path: 'operations',
             component: OperationManagementView,
           },
+          {
+            path: 'operations/create',
+            component: CreateOperationView,
+          },
+          {
+            path: 'operations/:operationId',
+            component: EditOperationViewComponent,
+          }
         ],
       },
       {

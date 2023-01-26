@@ -1,0 +1,74 @@
+<div class="view" [appShowLoadingOverlay]="creatingGroup.loadingChange() | async">
+  <h1 i18n>Create Group</h1>
+  <form (submit)="createGroup()" class="example-form">
+    <!--Title.-->
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>Title</mat-label>
+      <input matInput [formControl]="form.controls.title">
+      <mat-error *ngIf="form.controls.title.errors && form.controls.title.errors['required']" i18n>
+        Title is required.
+      </mat-error>
+    </mat-form-field>
+    <!--Description.-->
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>Description</mat-label>
+      <textarea matInput [formControl]="form.controls.description"></textarea>
+      <mat-error *ngIf="form.controls.description.errors && form.controls.description.errors['required']" i18n>
+        Description is required.
+      </mat-error>
+    </mat-form-field>
+    <!--Operation.-->
+    <app-searchable-entity-input
+      [displayTemplate]="display"
+      [formControl]="form.controls.operation"
+      [retrieve]="getOperationById.bind(this)"
+      [search]="searchOperations.bind(this)"
+      [suggestionTemplate]="suggestion"
+      class="app-edit-input-large"
+      i18n-label label="Operation"
+      i18n-placeholder placeholder="Search operation...">
+      <ng-template #display let-entity='entity'>
+        {{asOperation(entity).title}}
+      </ng-template>
+      <ng-template #suggestion let-entity='entity'>
+        {{asOperation(entity).title}}
+      </ng-template>
+    </app-searchable-entity-input>
+    <!--Members.-->
+    <app-searchable-multi-chip-entity-input-field
+      [chipTemplate]="chip"
+      [formControl]="form.controls.members"
+      [retrieve]="getUserById.bind(this)"
+      [search]="searchUsers.bind(this)"
+      [suggestionTemplate]="suggestionM"
+      [errorTemplate]="operationError"
+      class="app-edit-input-large"
+      i18n-label label="Add members"
+      i18n-placeholder placeholder="Add member...">
+      <ng-template #chip let-entity='entity'>
+        {{asUser(entity).firstName}} {{asUser(entity).lastName}}
+      </ng-template>
+      <ng-template #suggestionM let-entity='entity'>
+        {{asUser(entity).firstName}} {{asUser(entity).lastName}} <span
+        class="username">({{asUser(entity).lastName}})</span>
+      </ng-template>
+    </app-searchable-multi-chip-entity-input-field>
+    <ng-template #operationError>
+      <mat-error *ngIf="form.controls.operation.errors" i18n>
+        All group members must be members of the selected operation.
+      </mat-error>
+    </ng-template>
+
+    <div class="button-row">
+      <button mat-button type="button" (click)="cancel()" i18n>
+        Cancel
+      </button>
+      <button
+        [disabled]="!form.valid || (creatingGroup.loadingChange() | async)" color="primary" i18n
+        mat-button
+        type="submit">
+        Create
+      </button>
+    </div>
+  </form>
+</div>

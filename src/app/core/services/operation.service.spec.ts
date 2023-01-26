@@ -1,4 +1,4 @@
-import { MemberSort, OperationService, OperationSort } from './operation.service';
+import { OperationService, OperationSort } from './operation.service';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { NetService } from './net.service';
 import { fakeAsync, tick } from '@angular/core/testing';
@@ -12,7 +12,6 @@ import {
 import { CreateOperation, Operation } from '../model/operation';
 import { testGenNetSearchResult, testGenRandomSearchParams, testGenSearchResultFromNet } from '../testutil/test-search';
 import { netSearchParams } from '../util/net';
-import { User } from '../model/user';
 import createSpy = jasmine.createSpy;
 
 describe('OperationService', () => {
@@ -391,18 +390,16 @@ describe('OperationService', () => {
         is_active: false,
       },
     ];
-    const params = testGenRandomPaginationParams<MemberSort>();
-    const netPaginated = testGenNetPaginated(params, undefined, netUsers);
 
     it('should return the correct user list upon retrieval', fakeAsync(() => {
-      const getSpy = spectator.inject(NetService).get.and.returnValue(of(netPaginated));
+      const getSpy = spectator.inject(NetService).get.and.returnValue(of(netUsers));
       const cbSpy = createSpy();
 
-      spectator.service.getOperationMembers(operationId, params).subscribe({ next: cbSpy });
+      spectator.service.getOperationMembers(operationId).subscribe({ next: cbSpy });
       tick();
 
-      expect(getSpy).toHaveBeenCalledOnceWith('/operations/randoMcRandom/members', testGenNetPaginationParams(params, undefined));
-      expect(cbSpy).toHaveBeenCalledOnceWith(testGenPaginatedFromNet<User>(netPaginated, undefined, [
+      expect(getSpy).toHaveBeenCalledOnceWith('/operations/randoMcRandom/members', {});
+      expect(cbSpy).toHaveBeenCalledOnceWith([
         {
           id: 'barber',
           username: 'spade',
@@ -419,31 +416,14 @@ describe('OperationService', () => {
           isAdmin: true,
           isActive: false,
         },
-      ]));
+      ]);
     }));
-
-    new Map<MemberSort, string>([
-      [MemberSort.ByUsername, 'username'],
-      [MemberSort.ByFirstName, 'first_name'],
-      [MemberSort.ByLastName, 'last_name'],
-    ]).forEach((netSort, appSort) => {
-      it(`should map order-by ${ MemberSort[appSort] } to ${ netSort }`, fakeAsync(() => {
-        const params = testGenRandomPaginationParams<MemberSort>(appSort);
-        const netPaginated = testGenNetPaginated(params, netSort, []);
-        const getSpy = spectator.inject(NetService).get.and.returnValue(of(netPaginated));
-
-        spectator.service.getOperationMembers(operationId, params).subscribe();
-        tick();
-
-        expect(getSpy).withContext(`should map ${ appSort } to ${ netSort }`).toHaveBeenCalledOnceWith('/operations/randoMcRandom/members', testGenNetPaginationParams(params, netSort));
-      }));
-    });
 
     it('should call error on net call fail', fakeAsync(() => {
       const getSpy = spectator.inject(NetService).get.and.returnValue(throwError(() => new Error('get bonked')));
       const cbSpy = createSpy();
 
-      spectator.service.getOperationMembers(operationId, params).subscribe({
+      spectator.service.getOperationMembers(operationId).subscribe({
         next: () => fail('should fail'),
         error: cbSpy,
       });

@@ -4,9 +4,9 @@ import { MDSErrorCode } from './errors';
 import {
   OrderDir,
   Paginated,
+  PaginationParams,
   SearchParams,
   SearchResult,
-  PaginationParams,
   StoreRequestError,
   StoreRequestMethod,
 } from './store';
