@@ -21,7 +21,7 @@ import { Sort } from '@angular/material/sort';
 })
 export class EditGroupView implements OnInit, OnDestroy {
 
-  updatingGroup = new Loader();
+  loader = new Loader();
 
   /**
    * Id of the currently loaded group.
@@ -47,7 +47,7 @@ export class EditGroupView implements OnInit, OnDestroy {
       switchMap(params => {
         this.groupId = params['groupId'];
         this.groupMembers = [];
-        return this.updatingGroup.load(this.groupService.getGroupById(this.groupId));
+        return this.loader.load(this.groupService.getGroupById(this.groupId));
       }),
       // Patch the form values.
       tap((currentGroup) => {
@@ -59,7 +59,7 @@ export class EditGroupView implements OnInit, OnDestroy {
         });
       }),
       // Retrieve the user-data for all members.
-      switchMap(currentGroup => forkJoin(currentGroup.members.map(memberId => this.updatingGroup.load(this.userService.getUserById(memberId))))),
+      switchMap(currentGroup => forkJoin(currentGroup.members.map(memberId => this.loader.load(this.userService.getUserById(memberId))))),
       // Add the users to the members array.
       tap(currentGroupMembers => {
         this.groupMembers = currentGroupMembers;
@@ -72,7 +72,7 @@ export class EditGroupView implements OnInit, OnDestroy {
       this.form.controls.members.valueChanges.pipe(
         switchMap(members => {
           this.groupMembers = [];
-          return forkJoin(members.map(memberId => this.updatingGroup.load(this.userService.getUserById(memberId))));
+          return forkJoin(members.map(memberId => this.loader.load(this.userService.getUserById(memberId))));
         }),
         tap(currentGroupMembers => {
           this.groupMembers = currentGroupMembers;
@@ -226,10 +226,11 @@ export class EditGroupView implements OnInit, OnDestroy {
     let memberIdsToAdd = this.membersToAddForm.value.filter(function(memberId) {
       return !currentMemberIds.includes(memberId);
     });
-    this.s.push(forkJoin(memberIdsToAdd.map(memberId => this.userService.getUserById(memberId))).subscribe(membersToAdd => {
-      this.groupMembers = [...membersToAdd, ...this.groupMembers];
-      this.form.controls.members.value.push(...memberIdsToAdd);
-    }));
+    this.s.push(this.loader.load(forkJoin(memberIdsToAdd.map(memberId => this.userService.getUserById(memberId))))
+      .subscribe(membersToAdd => {
+        this.groupMembers = [...membersToAdd, ...this.groupMembers];
+        this.form.controls.members.value.push(...memberIdsToAdd);
+      }));
     this.membersToAddForm.patchValue([]);
   }
 

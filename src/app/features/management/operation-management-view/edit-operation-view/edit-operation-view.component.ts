@@ -20,7 +20,7 @@ import { map } from 'rxjs/operators';
 })
 export class EditOperationViewComponent implements OnInit, OnDestroy {
 
-  updatingOperation = new Loader();
+  loader = new Loader();
 
   /**
    * Currently selected start date of the operation.
@@ -115,7 +115,7 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
 
   constructor(private operationService: OperationService, private userService: UserService, private notificationService: NotificationService, private fb: FormBuilder,
               private router: Router, private route: ActivatedRoute) {
-    this.updatingOperation.bindFormGroup(this.form);
+    this.loader.bindFormGroup(this.form);
   }
 
   updateOperation(): void {
@@ -139,7 +139,7 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
     if (isArchived === undefined) {
       throw new MDSError(MDSErrorCode.AppError, 'isArchived-control is not set');
     }
-    this.updatingOperation.load(this.operationService.updateOperation({
+    this.loader.load(this.operationService.updateOperation({
       id: this.operationId,
       title: title,
       description: description,
@@ -259,10 +259,11 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
     let memberIdsToAdd = this.membersToAddForm.value.filter(function(memberId) {
       return !currentMemberIds.includes(memberId);
     });
-    this.s.push(forkJoin(memberIdsToAdd.map(memberId => this.userService.getUserById(memberId))).subscribe(membersToAdd => {
-      this.operationMembers = [...membersToAdd, ...this.operationMembers];
-      this.form.controls.members.value.push(...memberIdsToAdd);
-    }));
+    this.s.push(this.loader.load(forkJoin(memberIdsToAdd.map(memberId => this.userService.getUserById(memberId))))
+      .subscribe(membersToAdd => {
+        this.operationMembers = [...membersToAdd, ...this.operationMembers];
+        this.form.controls.members.value.push(...memberIdsToAdd);
+      }));
     this.membersToAddForm.patchValue([]);
   }
 

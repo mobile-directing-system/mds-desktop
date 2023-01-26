@@ -1,4 +1,4 @@
-<div class="view" [appShowLoadingOverlay]="updatingGroup.loadingChange() | async">
+<div class="view" [appShowLoadingOverlay]="loader.loadingChange() | async">
   <h1 i18n>Group: {{form.controls.title.value}}</h1>
   <form (submit)="updateGroup()">
     <mat-form-field class="app-edit-input">
@@ -68,7 +68,7 @@
 
     <app-local-paginated-list
       [data]="groupMembers" #memberList>
-      <table (matSortChange)="memberSortChange($event)" [appShowLoadingOverlay]="updatingGroup.loadingChange() | async"
+      <table (matSortChange)="memberSortChange($event)" [appShowLoadingOverlay]="loader.loadingChange() | async"
              [dataSource]="memberList.dataSource"
              aria-label="User list"
              mat-table
@@ -117,7 +117,7 @@
         Cancel
       </button>
       <button mat-button color="primary" type="submit"
-              [disabled]="!form.valid || (updatingGroup.loadingChange() | async)" i18n>
+              [disabled]="!form.valid || (loader.loadingChange() | async)" i18n>
         Update
       </button>
     </div>

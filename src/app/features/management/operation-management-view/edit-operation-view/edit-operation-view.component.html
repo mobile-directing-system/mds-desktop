@@ -1,4 +1,4 @@
-<div class="view" [appShowLoadingOverlay]="updatingOperation.loadingChange() | async">
+<div class="view" [appShowLoadingOverlay]="loader.loadingChange() | async">
   <h1 i18n>Operation: {{form.controls.title.value}}</h1>
   <form (submit)="updateOperation()">
 <!--    Title.-->
@@ -85,7 +85,7 @@
 
     <app-local-paginated-list
       [data]="operationMembers" #membersList>
-      <table (matSortChange)="memberSortChange($event)" [appShowLoadingOverlay]="updatingOperation.loadingChange() | async"
+      <table (matSortChange)="memberSortChange($event)" [appShowLoadingOverlay]="loader.loadingChange() | async"
              [dataSource]="membersList.dataSource"
              aria-label="User list"
              mat-table
