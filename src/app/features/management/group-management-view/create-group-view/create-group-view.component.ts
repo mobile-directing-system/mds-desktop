@@ -21,7 +21,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './create-group-view.component.html',
   styleUrls: ['./create-group-view.component.scss'],
 })
-export class CreateGroupView implements OnInit, OnDestroy{
+export class CreateGroupView implements OnInit, OnDestroy {
   /**
    * Loader for when creating a new group and awaiting the response.
    */
@@ -65,12 +65,12 @@ export class CreateGroupView implements OnInit, OnDestroy{
     if (members === undefined) {
       throw new MDSError(MDSErrorCode.AppError, 'members control is not set.');
     }
-    this.groupService.createGroup({
+    this.creatingGroup.load(this.groupService.createGroup({
       title: title,
       description: description,
       operation: operation,
       members: members,
-    }).subscribe({
+    })).subscribe({
       next: _ => {
         this.cancel();
       },
