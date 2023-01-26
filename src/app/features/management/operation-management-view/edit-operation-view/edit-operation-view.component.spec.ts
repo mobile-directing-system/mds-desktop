@@ -262,11 +262,13 @@ describe('EditOperationViewComponent', () => {
 
   describe('addMembers', () => {
     it('should only add members that are not already a member of the operation', fakeAsync(() => {
+      component.form.controls.members.patchValue(['glass', 'fly']);
       component.membersToAddForm.patchValue(['combine', 'fly']);
       tick();
       component.addMembers();
+      tick();
 
-      expect(component.form.controls.members.value).toEqual(['fly', 'glass', 'combine']);
+      expect(component.form.controls.members.value).toEqual(['combine', 'glass', 'fly']);
     }));
   });
 
@@ -278,16 +280,16 @@ describe('EditOperationViewComponent', () => {
       expect(byTextContent('Add Members', {
         exact: false,
         selector: 'button',
-      })).toBeVisible()
+      })).toBeVisible();
     }));
 
     it('should not be visible if membersToAddForm contains no values', fakeAsync(async () => {
-      component.membersToAddForm.patchValue([])
+      component.membersToAddForm.patchValue([]);
       await spectator.fixture.whenStable();
       expect(spectator.query(byTextContent('Add Members', {
         exact: false,
         selector: 'button',
-      }))).not.toBeVisible()
+      }))).not.toBeVisible();
     }));
   });
 

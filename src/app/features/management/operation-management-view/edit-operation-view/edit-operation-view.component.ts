@@ -253,15 +253,13 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
    * membersToAdd.
    */
   addMembers() {
-    let currentMemberIds = this.operationMembers.map(member => member.id);
-    //Filter members to add form to only contain ids, that are not already part of members.
-    let memberIdsToAdd = this.membersToAddForm.value.filter(function(memberId) {
-      return !currentMemberIds.includes(memberId);
-    });
+    let currentMemberIds = this.form.controls.members.getRawValue()
+    // Filter members to add to the form control to only contain ids, that are not already part of members.
+    let memberIdsToAdd = this.membersToAddForm.value.filter(memberId => !currentMemberIds.includes(memberId));
     this.s.push(this.loader.load(forkJoin(memberIdsToAdd.map(memberId => this.userService.getUserById(memberId))))
       .subscribe(membersToAdd => {
         this.operationMembers = [...membersToAdd, ...this.operationMembers];
-        this.form.controls.members.value.push(...memberIdsToAdd);
+        this.form.controls.members.setValue([...memberIdsToAdd, ...this.form.controls.members.getRawValue()]);
       }));
     this.membersToAddForm.patchValue([]);
   }
