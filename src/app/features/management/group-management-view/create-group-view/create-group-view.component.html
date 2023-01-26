@@ -64,10 +64,9 @@
         Cancel
       </button>
       <button
-        mat-button color="primary" type="submit"
-        [disabled]="!form.valid || (creatingGroup.loadingChange() | async)"
-        i18n
-      >
+        [disabled]="!form.valid || (creatingGroup.loadingChange() | async)" color="primary" i18n
+        mat-button
+        type="submit">
         Create
       </button>
     </div>

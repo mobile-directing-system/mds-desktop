@@ -58,9 +58,9 @@
           class="username">({{asUser(entity).lastName}})</span>
         </ng-template>
       </app-searchable-multi-chip-entity-input-field>
-      <button *ngIf="membersToAddForm.value.length !== 0"
-              mat-button class="app-edit-input-tinier" type="button" i18n
-              (click)="addMembers()">
+      <button (click)="addMembers()"
+              *ngIf="membersToAddForm.value.length !== 0" class="app-edit-input-smaller" i18n mat-button
+              type="button">
         Add Members
       </button>
     </div>
