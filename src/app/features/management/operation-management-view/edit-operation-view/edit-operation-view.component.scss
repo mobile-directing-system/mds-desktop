@@ -8,6 +8,7 @@ form {
 .member-adding{
   display: flex;
   flex-direction: row;
+  gap: .6em;
   #parent * {
     margin-inside: 4rem;
   }
