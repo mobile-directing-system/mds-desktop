@@ -1,0 +1,46 @@
+<div class = view>
+  <h1 i18n>Address Book Entries</h1>
+
+  <app-heading-hint i18n>Create, manage and edit address book entries</app-heading-hint>
+
+  <!--Actions.-->
+  <app-list-action-bar>
+    <button mat-button i18n (click)="createAddressBookEntry()">Create Entry</button>
+  </app-list-action-bar>
+  <!--Table.-->
+  <app-paginated-list #list (page)="page($event)" [data]="loadedAddressBookEntryTableData">
+    <table (matSortChange)="sortChange($event)" [appShowLoadingOverlay]="retrieving.loadingChange() | async"
+           [dataSource]="list.dataSource"
+           aria-label="AddressBookEntry list"
+           mat-table
+           matSort>
+
+      <ng-container matColumnDef="label">
+        <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="byLabel">Label</th>
+        <td *matCellDef="let row" mat-cell>{{ asAddressBookEntryTableContent(row).entry.label }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="byDescription">Description</th>
+        <td *matCellDef="let row" mat-cell>{{ asAddressBookEntryTableContent(row).entry.description }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="operation">
+        <th *matHeaderCellDef i18n mat-header-cell>Operation</th>
+        <td *matCellDef="let row" mat-cell
+            [appShowLoadingDots]="retrievingOperation.loadingChange() | async">{{getOperationTitleFromAddressBookEntryTableContent(asAddressBookEntryTableContent(row))}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="user">
+        <th *matHeaderCellDef i18n mat-header-cell>User</th>
+        <td *matCellDef="let row" mat-cell>{{getUserDescriptionFromAddressBookEntryTableContent(asAddressBookEntryTableContent(row))}}</td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
+      <tr (click)="navigateToAddressBookEntry(asAddressBookEntryTableContent(row).entry.id)" *matRowDef="let row; columns: columnsToDisplay"
+          class="clickable" mat-row></tr>
+
+    </table>
+  </app-paginated-list>
+
+</div>

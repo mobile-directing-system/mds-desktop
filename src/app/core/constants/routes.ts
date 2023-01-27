@@ -16,7 +16,6 @@ import {
   IntelligenceLayoutComponent,
 } from '../../features/intelligence/intelligence-layout/intelligence-layout.component';
 import { ResourcesLayoutComponent } from '../../features/resources/resources-layout/resources-layout.component';
-import { LogisticsLayoutComponent } from '../../features/logistics/logistics-layout/logistics-layout.component';
 import { GroupManagementView } from '../../features/management/group-management-view/group-management-view.component';
 import {
   OperationManagementView,
@@ -38,6 +37,16 @@ import {
   EditOperationViewComponent,
 } from '../../features/management/operation-management-view/edit-operation-view/edit-operation-view.component';
 import {
+  AddressBookEntryLogisticsView,
+} from '../../features/logistics/addressbook-logistics-view/addressbook-logistics-view.component';
+import {
+  CreateAddressBookLogisticsView,
+} from '../../features/logistics/addressbook-logistics-view/create-address-book-logistics-view/create-address-book-logistics-view.component';
+import { LogisticsLayoutComponent } from '../../features/logistics/logistics-layout/logistics-layout.component';
+import {
+  EditAddressBookLogisticsView,
+} from '../../features/logistics/addressbook-logistics-view/edit-address-book-logistics-view/edit-address-book-logistics-view.component';
+import {
   EditUserPermissionsView,
 } from '../../features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component';
 import { ViewPermissionsPermission } from '../permissions/permissions';
@@ -47,6 +56,11 @@ import {
   ViewAnyOperationPermission,
   ViewOperationMembersPermission,
 } from '../permissions/operations';
+import {
+  CreateAddressBookEntryPermission,
+  UpdateAddressBookEntryPermission,
+  ViewAddressBookEntryPermission,
+} from '../permissions/addressBookEntries';
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -158,6 +172,41 @@ export const AppRoutes: PermissionGuardedRoute[] = [
       {
         path: 'logistics',
         component: LogisticsLayoutComponent,
+        children: [
+          {
+            path: 'address-book',
+            component: AddressBookEntryLogisticsView,
+            data: {
+              requirePermissions: [
+                ViewAddressBookEntryPermission(),
+                ViewUserPermission(),
+                ViewAnyOperationPermission(),
+              ],
+            },
+          },
+          {
+            path: 'address-book/create',
+            component: CreateAddressBookLogisticsView,
+            data: {
+              requirePermissions: [
+                CreateAddressBookEntryPermission(),
+                ViewUserPermission(),
+                ViewAnyOperationPermission(),
+              ],
+            },
+          },
+          {
+            path: 'address-book/:entryId',
+            component: EditAddressBookLogisticsView,
+            data: {
+              requirePermissions: [
+                UpdateAddressBookEntryPermission(),
+                ViewUserPermission(),
+                ViewAnyOperationPermission(),
+              ],
+            },
+          }
+        ]
       },
     ],
   },

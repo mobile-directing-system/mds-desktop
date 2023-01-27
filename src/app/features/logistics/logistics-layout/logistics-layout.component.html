@@ -1,1 +1,12 @@
-<p>logistics-layout works!</p>
+<app-view [sideNav]="sideNav">
+  <ng-template #sideNav>
+    <app-side-nav-title i18n>Logistics</app-side-nav-title>
+    <app-side-nav-item
+      *ngIf="(isViewAddressBookEntriesGranted()) | async"
+      [link]="['/logistics', 'address-book']"
+      i18n
+      icon="import_contacts">Address Book Entries
+    </app-side-nav-item>
+  </ng-template>
+  <router-outlet></router-outlet>
+</app-view>
