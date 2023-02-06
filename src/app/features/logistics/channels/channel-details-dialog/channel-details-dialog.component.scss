@@ -1,0 +1,11 @@
+@import 'src/styles/forms';
+
+form .row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+form mat-divider {
+  margin-bottom: 1em;
+}

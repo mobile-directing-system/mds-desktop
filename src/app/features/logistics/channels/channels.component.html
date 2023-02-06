@@ -1,0 +1,47 @@
+<div class="action-bar">
+  <button (click)="newChannel()" [disabled]="disableCreate || loading" i18n mat-button>
+    New Channel
+  </button>
+</div>
+<table
+  [appShowLoadingOverlay]="loading"
+  [dataSource]="channelsDataSource"
+  aria-label="Channel list"
+  mat-table>
+
+  <ng-container matColumnDef="label">
+    <th *matHeaderCellDef i18n mat-header-cell>Label</th>
+    <td *matCellDef="let row" mat-cell>{{ asChannel(row).label }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="type">
+    <th *matHeaderCellDef i18n mat-header-cell>Type</th>
+    <td *matCellDef="let row" mat-cell>
+      <app-channel-type-inline [channelType]="asChannel(row).type"></app-channel-type-inline>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="priority">
+    <th *matHeaderCellDef i18n mat-header-cell>Priority</th>
+    <td *matCellDef="let row" mat-cell>{{ asChannel(row).priority }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="minImportance">
+    <th *matHeaderCellDef i18n mat-header-cell>Min Importance</th>
+    <td *matCellDef="let row" mat-cell>
+      <app-importance-inline [importance]="asChannel(row).minImportance"></app-importance-inline>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="timeout">
+    <th *matHeaderCellDef i18n mat-header-cell>Timeout</th>
+    <td *matCellDef="let row" mat-cell>{{ asChannel(row).timeout | duration:'long' }}</td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: columnsToDisplay"
+      [ngClass]="{clickable: !disabled}"
+      (click)="!disabled && openChannel(asChannel(row))"
+      mat-row></tr>
+
+</table>

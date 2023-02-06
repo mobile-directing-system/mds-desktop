@@ -8,6 +8,7 @@ import { of } from 'rxjs';
 import { User } from '../../model/user';
 import { Router } from '@angular/router';
 import { AppRoutes } from '../../constants/routes';
+import { clearRouteComponentsExcept } from '../../testutil/testutil';
 
 function genFactoryOptions(): SpectatorRoutingOptions<HomeLayoutComponent> {
   return {
@@ -20,7 +21,7 @@ function genFactoryOptions(): SpectatorRoutingOptions<HomeLayoutComponent> {
       UserService,
     ],
     detectChanges: false,
-    routes: AppRoutes,
+    routes: clearRouteComponentsExcept(AppRoutes, '/'),
   };
 }
 

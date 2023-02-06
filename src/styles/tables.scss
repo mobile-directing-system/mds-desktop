@@ -1,5 +1,5 @@
 @import 'corporate';
 
-.mat-mdc-row:hover .mat-mdc-cell {
+.mat-mdc-row.clickable:hover .mat-mdc-cell {
   background-color: $table-row-hover;
 }

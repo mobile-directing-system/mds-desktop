@@ -1,3 +1,15 @@
+form .form-column {
+  display: flex;
+  flex-direction: column;
+}
+
+form .form-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
 .app-edit-input-large {
   width: 33rem;
 }

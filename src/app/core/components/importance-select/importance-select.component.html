@@ -1,0 +1,9 @@
+<mat-select (valueChange)="selectImportance($event)" [disabled]="disabled" [value]="value">
+  <mat-select-trigger>
+    <app-importance-inline [hideTooltip]="true" [importance]="value"></app-importance-inline>
+  </mat-select-trigger>
+  <mat-option *ngFor="let importance of availableImportance"
+              [value]="importance">
+    <app-importance-inline [hideTooltip]="true" [importance]="importance"></app-importance-inline>
+  </mat-option>
+</mat-select>

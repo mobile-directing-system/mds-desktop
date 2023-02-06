@@ -29,6 +29,14 @@ import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { MtxNativeDatetimeModule } from '@ng-matero/extensions/core';
 import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
 import { MissingPermissionsView } from './components/missing-permissions-view/missing-permissions-view.component';
+import { DurationPipe } from './pipes/duration.pipe';
+import { ImportanceInlineComponent } from './components/importance-inline/importance-inline.component';
+import { ChannelTypeInlineComponent } from './components/channel-type-inline/channel-type-inline.component';
+import { DeleteConfirmButtonComponent } from './components/delete-confirm-button/delete-confirm-button.component';
+import { DeleteConfirmDialog } from './components/delete-confirm-dialog/delete-confirm-dialog.component';
+import { ImportanceSelectComponent } from './components/importance-select/importance-select.component';
+import { ChannelTypeSelectComponent } from './components/channel-type-select/channel-type-select.component';
+import { DurationPickerComponent } from './components/duration-picker/duration-picker.component';
 
 
 @NgModule({
@@ -54,6 +62,14 @@ import { MissingPermissionsView } from './components/missing-permissions-view/mi
     LocalPaginatedListComponent,
     ShowLoadingDotsDirective,
     MissingPermissionsView,
+    DurationPipe,
+    ImportanceInlineComponent,
+    ChannelTypeInlineComponent,
+    DeleteConfirmButtonComponent,
+    DeleteConfirmDialog,
+    ChannelTypeSelectComponent,
+    ImportanceSelectComponent,
+    DurationPickerComponent,
   ],
   exports: [
     LogoComponent,
@@ -75,6 +91,14 @@ import { MissingPermissionsView } from './components/missing-permissions-view/mi
     LocalPaginatedListComponent,
     ShowLoadingDotsDirective,
     LoadingDotsComponent,
+    DurationPipe,
+    ImportanceInlineComponent,
+    ChannelTypeInlineComponent,
+    DeleteConfirmButtonComponent,
+    ChannelTypeSelectComponent,
+    ImportanceSelectComponent,
+    DurationPickerComponent,
+    AngularMaterialModule,
   ],
   imports: [
     CommonModule,

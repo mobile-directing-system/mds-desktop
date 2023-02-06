@@ -27,3 +27,8 @@
   flex-direction: row;
   gap: 1rem;
 }
+
+.mat-mdc-dialog-actions app-delete-confirm-button {
+  // To replicate behavior with native mat-mdc-buttons.
+  margin-left: 8px;
+}

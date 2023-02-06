@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>Confirm</h1>
+<mat-dialog-content>{{ message }}</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="close(false)">Cancel</button>
+  <button mat-button (click)="close(true)" color="warn">{{ deleteLabel }}</button>
+</mat-dialog-actions>

@@ -16,6 +16,7 @@ import { FeaturesModule } from './features/features.module';
 import { CoreModule } from './core/core.module';
 import { LocalStorageService } from './core/services/local-storage.service';
 import { MatPaginatorIntl } from '@angular/material/paginator';
+import 'moment-duration-format';
 import { matPaginatorInternationalization, netLoginInit } from './core/util/app-init';
 
 @NgModule({
