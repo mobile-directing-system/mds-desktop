@@ -12,7 +12,7 @@
     <unit id="5248717555542428023">
       <notes>
         <note category="location">src/app/features/auth/login-view/login-view.component.html:5</note>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:89</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:88</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:105</note>
         <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:5</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:5</note>
@@ -107,7 +107,7 @@
     </unit>
     <unit id="2149300564474427551">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:96</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:95</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:112</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:38</note>
       </notes>
@@ -125,7 +125,7 @@
     </unit>
     <unit id="3586674587150281199">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:79</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:78</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:95</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:21</note>
       </notes>
@@ -168,7 +168,7 @@
     </unit>
     <unit id="5342432350421167093">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:84</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:83</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:100</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:26</note>
       </notes>
@@ -188,7 +188,6 @@
     <unit id="5944812089887969249">
       <notes>
         <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:1</note>
-        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:5</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:62</note>
       </notes>
       <segment>
@@ -214,7 +213,7 @@
     </unit>
     <unit id="1859131936150262113">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:97</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:96</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:113</note>
         <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:39</note>
       </notes>
@@ -265,9 +264,9 @@
     <unit id="2330577642930707695">
       <notes>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:64,65</note>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:118,119</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:120,121</note>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:59,60</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:132,133</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:135,136</note>
         <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:35,36</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:29,30</note>
         <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:14,15</note>
@@ -363,7 +362,7 @@
     </unit>
     <unit id="760085743178726328">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.ts:93</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.ts:101</note>
       </notes>
       <segment>
         <source>Updating user failed.</source>
@@ -421,7 +420,7 @@
     </unit>
     <unit id="7941428823403788384">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:71,72</note>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:70,71</note>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:63,64</note>
         <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:39,40</note>
       </notes>
@@ -516,7 +515,7 @@
     </unit>
     <unit id="1155679422702437698">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:65,66</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:64,65</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:82,83</note>
       </notes>
       <segment>
@@ -525,7 +524,7 @@
     </unit>
     <unit id="229735695122793954">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.ts:143</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.ts:145</note>
       </notes>
       <segment>
         <source>Operation updated successfully.</source>
@@ -588,7 +587,7 @@
     </unit>
     <unit id="5266935633882771143">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.ts:147</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.ts:149</note>
       </notes>
       <segment>
         <source>Updating operation failed.</source>
@@ -596,8 +595,8 @@
     </unit>
     <unit id="7165302310980913730">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:104</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:120</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:105</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:122</note>
       </notes>
       <segment>
         <source>Remove Member</source>
@@ -656,7 +655,7 @@
     </unit>
     <unit id="1161198591600004816">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.ts:140</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.ts:146</note>
       </notes>
       <segment>
         <source>Updating group failed.</source>
@@ -664,8 +663,8 @@
     </unit>
     <unit id="2592690450389009216">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:122,123</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:136,137</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:124,125</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:139,140</note>
       </notes>
       <segment>
         <source>Update</source>
@@ -691,7 +690,6 @@
     <unit id="3291437606661186188">
       <notes>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:47</note>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:52</note>
       </notes>
       <segment>
         <source>Add member...</source>
@@ -699,8 +697,7 @@
     </unit>
     <unit id="4691887509600985309">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:47,46</note>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:52,51</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:42</note>
       </notes>
       <segment>
         <source>Members</source>
@@ -734,6 +731,8 @@
     </unit>
     <unit id="1589749564133337410">
       <notes>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:46</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:51</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:68</note>
       </notes>
       <segment>
@@ -1028,6 +1027,199 @@
         <source>Operations</source>
       </segment>
     </unit>
+    <unit id="2085611136494552870">
+      <notes>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:17</note>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:36</note>
+      </notes>
+      <segment>
+        <source>Not set</source>
+      </segment>
+    </unit>
+    <unit id="2734022681675842051">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:25</note>
+      </notes>
+      <segment>
+        <source>Priority</source>
+      </segment>
+    </unit>
+    <unit id="314315645942131479">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/radio-channel-details/radio-channel-details.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Info</source>
+      </segment>
+    </unit>
+    <unit id="4077520913910941990">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:13</note>
+      </notes>
+      <segment>
+        <source>Label</source>
+      </segment>
+    </unit>
+    <unit id="4467323362722952678">
+      <notes>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:13</note>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:32</note>
+      </notes>
+      <segment>
+        <source>Unknown</source>
+      </segment>
+    </unit>
+    <unit id="5002013608403252995">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/radio-channel-details/radio-channel-details.component.html:4</note>
+      </notes>
+      <segment>
+        <source>Channel, frequency, call-name...</source>
+      </segment>
+    </unit>
+    <unit id="5037087188394157831">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:30</note>
+      </notes>
+      <segment>
+        <source>Min Importance</source>
+      </segment>
+    </unit>
+    <unit id="5042044684614360469">
+      <notes>
+        <note category="location">src/app/core/components/delete-confirm-dialog/delete-confirm-dialog.component.ts:16</note>
+      </notes>
+      <segment>
+        <source>Do you really want to delete this entity?</source>
+      </segment>
+    </unit>
+    <unit id="5549841090450425281">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Channel - <ph id="0" equiv="INTERPOLATION" disp="{{ form.controls.label.value }}"/></source>
+      </segment>
+    </unit>
+    <unit id="5853287764718196763">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/in-app-notification-channel-details/in-app-notification-channel-details.component.html:1</note>
+      </notes>
+      <segment>
+        <source>Nothing to configure for in-app notifications.</source>
+      </segment>
+    </unit>
+    <unit id="5956316725115867558">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:37</note>
+      </notes>
+      <segment>
+        <source>Timeout</source>
+      </segment>
+    </unit>
+    <unit id="7022070615528435141">
+      <notes>
+        <note category="location">src/app/core/components/delete-confirm-dialog/delete-confirm-dialog.component.ts:20</note>
+      </notes>
+      <segment>
+        <source>Delete</source>
+      </segment>
+    </unit>
+    <unit id="8341057228987784101">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:2,4</note>
+      </notes>
+      <segment>
+        <source>New Channel</source>
+      </segment>
+    </unit>
+    <unit id="8650499415827640724">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:18</note>
+      </notes>
+      <segment>
+        <source>Type</source>
+      </segment>
+    </unit>
+    <unit id="8782767546165933649">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Unnamed Channel</source>
+      </segment>
+    </unit>
+    <unit id="channel-type-in-app-notification">
+      <notes>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:5</note>
+        <note category="location">src/app/core/model/channel.ts:89</note>
+      </notes>
+      <segment>
+        <source>In-App Notification</source>
+      </segment>
+    </unit>
+    <unit id="channel-type-radio">
+      <notes>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:9</note>
+        <note category="location">src/app/core/model/channel.ts:91</note>
+      </notes>
+      <segment>
+        <source>Radio</source>
+      </segment>
+    </unit>
+    <unit id="importance-low">
+      <notes>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:12</note>
+        <note category="location">src/app/core/model/importance.ts:29</note>
+      </notes>
+      <segment>
+        <source>Low</source>
+      </segment>
+    </unit>
+    <unit id="importance-national-emergency">
+      <notes>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:28</note>
+        <note category="location">src/app/core/model/importance.ts:37</note>
+      </notes>
+      <segment>
+        <source>National Emergency</source>
+      </segment>
+    </unit>
+    <unit id="importance-none">
+      <notes>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:8</note>
+        <note category="location">src/app/core/model/importance.ts:27</note>
+      </notes>
+      <segment>
+        <source>None</source>
+      </segment>
+    </unit>
+    <unit id="importance-regular">
+      <notes>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:16</note>
+        <note category="location">src/app/core/model/importance.ts:31</note>
+      </notes>
+      <segment>
+        <source>Regular</source>
+      </segment>
+    </unit>
+    <unit id="importance-strike">
+      <notes>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:24</note>
+        <note category="location">src/app/core/model/importance.ts:35</note>
+      </notes>
+      <segment>
+        <source>Strike</source>
+      </segment>
+    </unit>
+    <unit id="importance-urgent">
+      <notes>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:20</note>
+        <note category="location">src/app/core/model/importance.ts:33</note>
+      </notes>
+      <segment>
+        <source>Urgent</source>
+      </segment>
+    </unit>
   </file>
 </xliff>
-

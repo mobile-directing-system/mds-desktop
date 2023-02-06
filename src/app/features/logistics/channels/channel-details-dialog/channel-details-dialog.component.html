@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>
+  <span *ngIf="form.controls.label.value !== ''" i18n>Channel - {{ form.controls.label.value }}</span>
+  <span *ngIf="form.controls.label.value === ''" i18n>Unnamed Channel</span>
+</h2>
+<mat-dialog-content>
+  <form class="from-column" (submit)="closeSubmit()">
+    <div class="form-row">
+      <!--Label.-->
+      <mat-form-field class="app-edit-input">
+        <mat-label>Label</mat-label>
+        <input matInput [formControl]="form.controls.label">
+      </mat-form-field>
+      <!--Channel type.-->
+      <mat-form-field class="app-edit-input">
+        <mat-label>Channel Type</mat-label>
+        <app-channel-type-select [formControl]="form.controls.type"></app-channel-type-select>
+      </mat-form-field>
+      <!--Importance.-->
+      <mat-form-field class="app-edit-input">
+        <mat-label>Min Importance</mat-label>
+        <app-importance-select [formControl]="form.controls.minImportance"></app-importance-select>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <!--Priority.-->
+      <mat-form-field class="app-edit-input">
+        <mat-label>Priority</mat-label>
+        <input matInput type="number" [formControl]="form.controls.priority">
+      </mat-form-field>
+      <!--Timeout.-->
+      <mat-form-field class="app-edit-input">
+        <mat-label>Timeout</mat-label>
+        <app-duration-picker [formControl]="form.controls.timeout"></app-duration-picker>
+      </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <!--Channel details.-->
+    <ng-container [ngSwitch]="form.controls.type.value">
+      <app-in-app-notification-channel-details
+        *ngSwitchCase="ChannelType.InAppNotification"
+        [formControl]="form.controls.details"></app-in-app-notification-channel-details>
+      <app-radio-channel-details
+        *ngSwitchCase="ChannelType.Radio"
+        [formControl]="form.controls.details"></app-radio-channel-details>
+      <span *ngSwitchDefault>{{ form.controls.type.value }}?</span>
+    </ng-container>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="close(undefined)">Cancel</button>
+  <app-delete-confirm-button
+    (deleteConfirmed)="closeDelete()"
+    *ngIf="!data.create">
+    Delete
+  </app-delete-confirm-button>
+  <button (click)="closeSubmit()" [disabled]="!form.valid" color="primary" mat-button type="submit">Submit</button>
+</mat-dialog-actions>

@@ -1,0 +1,85 @@
+@use 'sass:map';
+@import 'src/styles/corporate';
+
+:host {
+  display: block;
+}
+
+.importance {
+  > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    mat-icon {
+      margin-right: .2em;
+    }
+  }
+
+  .none {
+    color: map.get($mds-desktop-font-palette, 600)
+  }
+
+  .low {
+    color: map.get($mds-desktop-primary-palette, 400)
+  }
+
+  .regular {
+    color: map.get($mds-desktop-primary-palette, 400)
+  }
+
+  .urgent {
+    color: map.get($mds-desktop-warn-palette, 900)
+  }
+
+  .strike {
+    animation: strike 1.2s infinite;
+  }
+
+  .national-emergency {
+    color: map.get($mds-desktop-danger-palette, 900);
+    animation: national-emergency .6s infinite;
+  }
+
+  .unknown {
+  }
+
+  .not-set {
+  }
+}
+
+$strike-base: map.get($mds-desktop-danger-palette, A700);
+$strike-flash: map.get($mds-desktop-warn-palette, 500);
+
+@keyframes strike {
+  0% {
+    color: $strike-base;
+  }
+  60% {
+    color: $strike-base;
+  }
+  70% {
+    color: $strike-flash;
+  }
+  80% {
+    color: $strike-base;
+  }
+  90% {
+    color: $strike-flash;
+  }
+  100% {
+    color: $strike-base;
+  }
+}
+
+@keyframes national-emergency {
+  20% {
+    color: map.get($mds-desktop-danger-palette, 900);
+  }
+  50% {
+    color: rgba(0, 0, 0, 0);
+  }
+  100% {
+    color: map.get($mds-desktop-danger-palette, 900);
+  }
+}

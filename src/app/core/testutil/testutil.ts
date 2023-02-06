@@ -1,4 +1,6 @@
 import { Route } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
+import { of } from 'rxjs';
 
 /**
  * Clears all components in the given {@link Route} list for the given path. This is required for tests where parent
@@ -70,4 +72,14 @@ function clearRouteComponentsExceptRec(routes: Route[], exceptPath: string, last
     cleared.push(newRoute);
   });
   return cleared;
+}
+
+/**
+ * Creates a new {@link MatDialogRef} that returns the given value on {@link MatDialogRef.afterClosed}.
+ * @param result
+ */
+export function newMatDialogRefMock<T>(result: T | undefined): jasmine.SpyObj<MatDialogRef<any>> {
+  return jasmine.createSpyObj({
+    afterClosed: of(result),
+  });
 }

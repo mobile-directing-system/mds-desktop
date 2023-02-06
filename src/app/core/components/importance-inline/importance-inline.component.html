@@ -1,0 +1,39 @@
+<ng-container [ngSwitch]="importance">
+  <div
+    [matTooltip]="hideTooltip ? '' : 'Importance: ' + (importance?.toString() ?? 'undefined')"
+    class="importance"
+    matTooltipShowDelay="350">
+    <div *ngSwitchCase="Importance.None" class="none">
+      <mat-icon fontSet="material-icons-outlined">exposure_zero</mat-icon>
+      <span i18n="@@importance-none">None</span>
+    </div>
+    <div *ngSwitchCase="Importance.Low" class="low">
+      <mat-icon fontSet="material-icons-outlined">lens</mat-icon>
+      <span i18n="@@importance-low">Low</span>
+    </div>
+    <div *ngSwitchCase="Importance.Regular" class="regular">
+      <mat-icon>trip_origin</mat-icon>
+      <span i18n="@@importance-regular">Regular</span>
+    </div>
+    <div *ngSwitchCase="Importance.Urgent" class="urgent">
+      <mat-icon>warning</mat-icon>
+      <span i18n="@@importance-urgent">Urgent</span>
+    </div>
+    <div *ngSwitchCase="Importance.Strike" class="strike">
+      <mat-icon>electric_bolt</mat-icon>
+      <span i18n="@@importance-strike">Strike</span>
+    </div>
+    <div *ngSwitchCase="Importance.NationalEmergency" class="national-emergency">
+      <mat-icon>emergency</mat-icon>
+      <span i18n="@@importance-national-emergency">National Emergency</span>
+    </div>
+    <div *ngSwitchDefault class="unknown">
+      <mat-icon>help_outline</mat-icon>
+      <span i18n>Unknown</span>
+    </div>
+    <div *ngSwitchCase="undefined" class="not-set">
+      <mat-icon>help_outline</mat-icon>
+      <span i18n>Not set</span>
+    </div>
+  </div>
+</ng-container>
