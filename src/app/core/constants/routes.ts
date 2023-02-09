@@ -37,15 +37,15 @@ import {
   EditOperationViewComponent,
 } from '../../features/management/operation-management-view/edit-operation-view/edit-operation-view.component';
 import {
-  AddressBookEntryLogisticsView,
-} from '../../features/logistics/addressbook-logistics-view/addressbook-logistics-view.component';
+  AddressBookEntryListView,
+} from '../../features/logistics/address-book-entry-list-view/address-book-entry-list-view.component';
 import {
-  CreateAddressBookLogisticsView,
-} from '../../features/logistics/addressbook-logistics-view/create-address-book-logistics-view/create-address-book-logistics-view.component';
+  CreateAddressBookEntryView,
+} from '../../features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component';
 import { LogisticsLayoutComponent } from '../../features/logistics/logistics-layout/logistics-layout.component';
 import {
-  EditAddressBookLogisticsView,
-} from '../../features/logistics/addressbook-logistics-view/edit-address-book-logistics-view/edit-address-book-logistics-view.component';
+  EditAddressBookEntryView,
+} from '../../features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component';
 import {
   EditUserPermissionsView,
 } from '../../features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component';
@@ -175,7 +175,7 @@ export const AppRoutes: PermissionGuardedRoute[] = [
         children: [
           {
             path: 'address-book',
-            component: AddressBookEntryLogisticsView,
+            component: AddressBookEntryListView,
             data: {
               requirePermissions: [
                 ViewAddressBookEntryPermission(),
@@ -186,7 +186,7 @@ export const AppRoutes: PermissionGuardedRoute[] = [
           },
           {
             path: 'address-book/create',
-            component: CreateAddressBookLogisticsView,
+            component: CreateAddressBookEntryView,
             data: {
               requirePermissions: [
                 CreateAddressBookEntryPermission(),
@@ -197,7 +197,7 @@ export const AppRoutes: PermissionGuardedRoute[] = [
           },
           {
             path: 'address-book/:entryId',
-            component: EditAddressBookLogisticsView,
+            component: EditAddressBookEntryView,
             data: {
               requirePermissions: [
                 UpdateAddressBookEntryPermission(),

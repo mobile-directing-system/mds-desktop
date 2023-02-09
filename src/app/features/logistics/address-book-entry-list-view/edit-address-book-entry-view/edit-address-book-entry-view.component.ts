@@ -17,11 +17,11 @@ import { MDSError, MDSErrorCode } from '../../../../core/util/errors';
  * View to edit an existing {@link AddressBookEntry}
  */
 @Component({
-  selector: 'app-edit-address-book-logistics-view',
-  templateUrl: './edit-address-book-logistics-view.component.html',
-  styleUrls: ['./edit-address-book-logistics-view.component.scss'],
+  selector: 'app-edit-address-book-entry-view',
+  templateUrl: './edit-address-book-entry-view.component.html',
+  styleUrls: ['./edit-address-book-entry-view.component.scss'],
 })
-export class EditAddressBookLogisticsView implements OnInit, OnDestroy {
+export class EditAddressBookEntryView implements OnInit, OnDestroy {
 
   loader = new Loader();
   entryId = '';

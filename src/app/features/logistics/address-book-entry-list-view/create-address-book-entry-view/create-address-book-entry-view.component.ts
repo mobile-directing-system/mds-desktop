@@ -17,11 +17,11 @@ import { MDSError, MDSErrorCode } from '../../../../core/util/errors';
  * View to create a new {@link AddressBookEntry}.
  */
 @Component({
-  selector: 'app-create-address-book-logistics-view',
-  templateUrl: './create-address-book-logistics-view.component.html',
-  styleUrls: ['./create-address-book-logistics-view.component.scss']
+  selector: 'app-create-address-book-entry-view',
+  templateUrl: './create-address-book-entry-view.component.html',
+  styleUrls: ['./create-address-book-entry-view.component.scss'],
 })
-export class CreateAddressBookLogisticsView {
+export class CreateAddressBookEntryView {
   creatingAddressBookEntry = new Loader();
 
   form = this.fb.nonNullable.group({
@@ -29,10 +29,10 @@ export class CreateAddressBookLogisticsView {
     description: this.fb.nonNullable.control<string>(''),
     operation: this.fb.nonNullable.control<string | null>(null),
     user: this.fb.nonNullable.control<string | null>(null),
-  })
+  });
 
   constructor(private addressBookService: AddressBookService, private notificationService: NotificationService, private fb: FormBuilder,
-    private router: Router, private route: ActivatedRoute, private userService: UserService, private operationService: OperationService) {
+              private router: Router, private route: ActivatedRoute, private userService: UserService, private operationService: OperationService) {
   }
 
   createEntry(): void {

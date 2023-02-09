@@ -17,11 +17,11 @@ export interface AddressBookEntryTableRowContent {
 }
 
 @Component({
-  selector: 'app-addressbook-logistics-view',
-  templateUrl: './addressbook-logistics-view.component.html',
-  styleUrls: ['./addressbook-logistics-view.component.scss'],
+  selector: 'app-address-book-entry-list-view',
+  templateUrl: './address-book-entry-list-view.component.html',
+  styleUrls: ['./address-book-entry-list-view.component.scss'],
 })
-export class AddressBookEntryLogisticsView {
+export class AddressBookEntryListView {
   columnsToDisplay = ['label', 'description', 'operation', 'user'];
   pagination?: PaginationParams<AddressBookEntrySort>;
   loadedAddressBookEntryTableData?: Paginated<AddressBookEntryTableRowContent>;
@@ -74,7 +74,7 @@ export class AddressBookEntryLogisticsView {
   }
 
   page(pagination: PaginationParams<string>): void {
-    this.pagination = pagination.mapOrderBy(AddressBookEntryLogisticsView.mapOrderBy);
+    this.pagination = pagination.mapOrderBy(AddressBookEntryListView.mapOrderBy);
     this.refresh();
   }
 
@@ -113,7 +113,7 @@ export class AddressBookEntryLogisticsView {
     if (!this.pagination) {
       return;
     }
-    this.pagination.applyOrderBy(AddressBookEntryLogisticsView.mapOrderBy(sort.active), orderDirFromSort(sort));
+    this.pagination.applyOrderBy(AddressBookEntryListView.mapOrderBy(sort.active), orderDirFromSort(sort));
     this.refresh();
   }
 }

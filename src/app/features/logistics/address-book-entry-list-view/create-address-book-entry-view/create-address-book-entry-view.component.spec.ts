@@ -1,4 +1,4 @@
-import { CreateAddressBookLogisticsView } from './create-address-book-logistics-view.component';
+import { CreateAddressBookEntryView } from './create-address-book-entry-view.component';
 import { byTextContent, createRoutingFactory, SpectatorRouting, SpectatorRoutingOptions } from '@ngneat/spectator';
 import { NotificationService } from '../../../../core/services/notification.service';
 import { UserService } from '../../../../core/services/user.service';
@@ -11,9 +11,9 @@ import { firstValueFrom, of, throwError } from 'rxjs';
 import { SearchResult } from '../../../../core/util/store';
 import { fakeAsync, tick } from '@angular/core/testing';
 
-function genFactoryOptions(): SpectatorRoutingOptions<CreateAddressBookLogisticsView> {
+function genFactoryOptions(): SpectatorRoutingOptions<CreateAddressBookEntryView> {
   return {
-    component: CreateAddressBookLogisticsView,
+    component: CreateAddressBookEntryView,
     imports: [
       LogisticsModule,
     ],
@@ -28,8 +28,8 @@ function genFactoryOptions(): SpectatorRoutingOptions<CreateAddressBookLogistics
 }
 
 describe('CreateAddressBookLogisticsView', () => {
-  let component: CreateAddressBookLogisticsView;
-  let spectator: SpectatorRouting<CreateAddressBookLogisticsView>;
+  let component: CreateAddressBookEntryView;
+  let spectator: SpectatorRouting<CreateAddressBookEntryView>;
   const createComponent = createRoutingFactory(genFactoryOptions());
 
   const label = 'pipe';

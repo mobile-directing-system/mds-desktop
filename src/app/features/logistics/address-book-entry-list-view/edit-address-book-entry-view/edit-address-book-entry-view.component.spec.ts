@@ -1,6 +1,6 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 
-import { EditAddressBookLogisticsView } from './edit-address-book-logistics-view.component';
+import { EditAddressBookEntryView } from './edit-address-book-entry-view.component';
 import { byTextContent, createRoutingFactory, SpectatorRouting, SpectatorRoutingOptions } from '@ngneat/spectator';
 import { LogisticsModule } from '../../logistics.module';
 import { NotificationService } from '../../../../core/services/notification.service';
@@ -12,9 +12,9 @@ import { Operation } from '../../../../core/model/operation';
 import { firstValueFrom, of, throwError } from 'rxjs';
 import { SearchResult } from '../../../../core/util/store';
 
-function genFactoryOptions(): SpectatorRoutingOptions<EditAddressBookLogisticsView> {
+function genFactoryOptions(): SpectatorRoutingOptions<EditAddressBookEntryView> {
   return {
-    component: EditAddressBookLogisticsView,
+    component: EditAddressBookEntryView,
     imports: [
       LogisticsModule,
     ],
@@ -32,8 +32,8 @@ function genFactoryOptions(): SpectatorRoutingOptions<EditAddressBookLogisticsVi
 }
 
 describe('EditAddressBookLogisticsView', () => {
-  let component: EditAddressBookLogisticsView;
-  let spectator: SpectatorRouting<EditAddressBookLogisticsView>;
+  let component: EditAddressBookEntryView;
+  let spectator: SpectatorRouting<EditAddressBookEntryView>;
   const createComponent = createRoutingFactory(genFactoryOptions());
 
   const label = 'pipe';

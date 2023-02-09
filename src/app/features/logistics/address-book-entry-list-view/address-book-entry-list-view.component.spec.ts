@@ -1,4 +1,4 @@
-import { AddressBookEntryLogisticsView, AddressBookEntryTableRowContent } from './addressbook-logistics-view.component';
+import { AddressBookEntryListView, AddressBookEntryTableRowContent } from './address-book-entry-list-view.component';
 import { byTextContent, createRoutingFactory, SpectatorRouting } from '@ngneat/spectator';
 import { OperationService } from '../../../core/services/operation.service';
 import { CoreModule } from '../../../core/core.module';
@@ -13,10 +13,10 @@ import { LogisticsModule } from '../logistics.module';
 
 
 describe('AddressBookEntryLogisticsView', () => {
-  let component: AddressBookEntryLogisticsView;
-  let spectator: SpectatorRouting<AddressBookEntryLogisticsView>;
+  let component: AddressBookEntryListView;
+  let spectator: SpectatorRouting<AddressBookEntryListView>;
   const createComponent = createRoutingFactory({
-    component: AddressBookEntryLogisticsView,
+    component: AddressBookEntryListView,
     imports: [
       CoreModule,
       LogisticsModule,
