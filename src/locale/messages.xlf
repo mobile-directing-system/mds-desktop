@@ -264,7 +264,7 @@
     <unit id="2330577642930707695">
       <notes>
         <note category="location">src/app/features/logistics/addressbook-logistics-view/create-address-book-logistics-view/create-address-book-logistics-view.component.html:55,56</note>
-        <note category="location">src/app/features/logistics/addressbook-logistics-view/edit-address-book-logistics-view/edit-address-book-logistics-view.component.html:72,73</note>
+        <note category="location">src/app/features/logistics/addressbook-logistics-view/edit-address-book-logistics-view/edit-address-book-logistics-view.component.html:55,56</note>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:64,65</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:120,121</note>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:59,60</note>
@@ -380,12 +380,11 @@
     </unit>
     <unit id="247214804822900420">
       <notes>
-        <note category="location">src/app/features/logistics/addressbook-logistics-view/edit-address-book-logistics-view/edit-address-book-logistics-view.component.html:57,58</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:2,3</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:2,3</note>
       </notes>
       <segment>
-        <source>User: <ph id="0" equiv="INTERPOLATION" disp="{{userDetails.lastName}}"/> <ph id="1" equiv="INTERPOLATION_1" disp="{{userDetails.firstName}}"/></source>
+        <source>User: <ph id="0" equiv="INTERPOLATION" disp="{{user.firstName}}"/> <ph id="1" equiv="INTERPOLATION_1" disp="{{user.lastName}}"/></source>
       </segment>
     </unit>
     <unit id="5009437026549898623">
@@ -425,7 +424,6 @@
       <notes>
         <note category="location">src/app/features/logistics/addressbook-logistics-view/create-address-book-logistics-view/create-address-book-logistics-view.component.html:61,62</note>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:70,71</note>
-        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:70,71</note>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:63,64</note>
         <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:39,40</note>
       </notes>
@@ -435,7 +433,7 @@
     </unit>
     <unit id="1241348629231510663">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:36</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:37,36</note>
       </notes>
       <segment>
         <source>End</source>
@@ -674,9 +672,7 @@
     </unit>
     <unit id="2592690450389009216">
       <notes>
-        <note category="location">src/app/features/logistics/addressbook-logistics-view/edit-address-book-logistics-view/edit-address-book-logistics-view.component.html:78,79</note>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:124,125</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:139,140</note>
+        <note category="location">src/app/features/logistics/addressbook-logistics-view/edit-address-book-logistics-view/edit-address-book-logistics-view.component.html:61,62</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:124,125</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:139,140</note>
       </notes>
@@ -1074,17 +1070,10 @@
         <note category="location">src/app/features/logistics/addressbook-logistics-view/addressbook-logistics-view.component.html:19</note>
         <note category="location">src/app/features/logistics/addressbook-logistics-view/create-address-book-logistics-view/create-address-book-logistics-view.component.html:6</note>
         <note category="location">src/app/features/logistics/addressbook-logistics-view/edit-address-book-logistics-view/edit-address-book-logistics-view.component.html:6</note>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:13</note>
       </notes>
       <segment>
         <source>Label</source>
-      </segment>
-    </unit>
-    <unit id="4122829044011436473">
-      <notes>
-        <note category="location">src/app/features/logistics/addressbook-logistics-view/edit-address-book-logistics-view/edit-address-book-logistics-view.component.html:62,63</note>
-      </notes>
-      <segment>
-        <source>Lastname: <ph id="0" equiv="INTERPOLATION" disp="{{userDetails.lastName}}"/> </source>
       </segment>
     </unit>
     <unit id="4496775740135012216">
@@ -1093,22 +1082,6 @@
       </notes>
       <segment>
         <source>Create Address Book Entry</source>
-      </segment>
-    </unit>
-    <unit id="6253225827219722709">
-      <notes>
-        <note category="location">src/app/features/logistics/addressbook-logistics-view/edit-address-book-logistics-view/edit-address-book-logistics-view.component.html:59,60</note>
-      </notes>
-      <segment>
-        <source>Firstname: <ph id="0" equiv="INTERPOLATION" disp="{{userDetails.firstName}}"/> </source>
-      </segment>
-    </unit>
-    <unit id="8640491660010681609">
-      <notes>
-        <note category="location">src/app/features/logistics/addressbook-logistics-view/edit-address-book-logistics-view/edit-address-book-logistics-view.component.html:65,66</note>
-      </notes>
-      <segment>
-        <source>Username: <ph id="0" equiv="INTERPOLATION" disp="{{userDetails.username}}"/> </source>
       </segment>
     </unit>
     <unit id="872015140095767450">
@@ -1200,14 +1173,6 @@
       </notes>
       <segment>
         <source>Info</source>
-      </segment>
-    </unit>
-    <unit id="4077520913910941990">
-      <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:13</note>
-      </notes>
-      <segment>
-        <source>Label</source>
       </segment>
     </unit>
     <unit id="4467323362722952678">
