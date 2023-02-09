@@ -8,6 +8,8 @@ import { of } from 'rxjs';
 import { User } from '../../model/user';
 import { Router } from '@angular/router';
 import { AppRoutes } from '../../constants/routes';
+import { AccessControlService } from '../../services/access-control.service';
+import { AccessControlMockService } from '../../services/access-control-mock.service';
 import { clearRouteComponentsExcept } from '../../testutil/testutil';
 
 function genFactoryOptions(): SpectatorRoutingOptions<HomeLayoutComponent> {
@@ -19,6 +21,12 @@ function genFactoryOptions(): SpectatorRoutingOptions<HomeLayoutComponent> {
     mocks: [
       AuthService,
       UserService,
+    ],
+    providers: [
+      {
+        provide: AccessControlService,
+        useExisting: AccessControlMockService,
+      },
     ],
     detectChanges: false,
     routes: clearRouteComponentsExcept(AppRoutes, '/'),

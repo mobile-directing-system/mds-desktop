@@ -143,7 +143,7 @@ export class PaginatedListComponent<EntryT> implements OnInit, OnDestroy, OnChan
    * @private
    */
   private emitPage(): void {
-    this.page.emit(this.pagination);
+    setTimeout(() => this.page.emit(this.pagination))
   }
 
   /**

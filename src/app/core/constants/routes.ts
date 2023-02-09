@@ -16,7 +16,6 @@ import {
   IntelligenceLayoutComponent,
 } from '../../features/intelligence/intelligence-layout/intelligence-layout.component';
 import { ResourcesLayoutComponent } from '../../features/resources/resources-layout/resources-layout.component';
-import { LogisticsLayoutComponent } from '../../features/logistics/logistics-layout/logistics-layout.component';
 import { GroupManagementView } from '../../features/management/group-management-view/group-management-view.component';
 import {
   OperationManagementView,
@@ -38,6 +37,16 @@ import {
   EditOperationViewComponent,
 } from '../../features/management/operation-management-view/edit-operation-view/edit-operation-view.component';
 import {
+  AddressBookEntryListView,
+} from '../../features/logistics/address-book-entry-list-view/address-book-entry-list-view.component';
+import {
+  CreateAddressBookEntryView,
+} from '../../features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component';
+import { LogisticsLayoutComponent } from '../../features/logistics/logistics-layout/logistics-layout.component';
+import {
+  EditAddressBookEntryView,
+} from '../../features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component';
+import {
   EditUserPermissionsView,
 } from '../../features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component';
 import { ViewPermissionsPermission } from '../permissions/permissions';
@@ -47,6 +56,11 @@ import {
   ViewAnyOperationPermission,
   ViewOperationMembersPermission,
 } from '../permissions/operations';
+import {
+  CreateAddressBookEntryPermission,
+  UpdateAddressBookEntryPermission,
+  ViewAddressBookEntryPermission,
+} from '../permissions/addressBookEntries';
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -158,6 +172,41 @@ export const AppRoutes: PermissionGuardedRoute[] = [
       {
         path: 'logistics',
         component: LogisticsLayoutComponent,
+        children: [
+          {
+            path: 'address-book',
+            component: AddressBookEntryListView,
+            data: {
+              requirePermissions: [
+                ViewAddressBookEntryPermission(),
+                ViewUserPermission(),
+                ViewAnyOperationPermission(),
+              ],
+            },
+          },
+          {
+            path: 'address-book/create',
+            component: CreateAddressBookEntryView,
+            data: {
+              requirePermissions: [
+                CreateAddressBookEntryPermission(),
+                ViewUserPermission(),
+                ViewAnyOperationPermission(),
+              ],
+            },
+          },
+          {
+            path: 'address-book/:entryId',
+            component: EditAddressBookEntryView,
+            data: {
+              requirePermissions: [
+                UpdateAddressBookEntryPermission(),
+                ViewUserPermission(),
+                ViewAnyOperationPermission(),
+              ],
+            },
+          }
+        ]
       },
     ],
   },

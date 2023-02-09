@@ -1,0 +1,67 @@
+<div class="view" [appShowLoadingOverlay]="creatingAddressBookEntry.loadingChange() | async">
+  <h1 i18n>Create Address Book Entry</h1>
+  <form (submit)="createEntry()" class="form-column">
+    <!--Label.-->
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>Label</mat-label>
+      <input matInput [formControl]="form.controls.label">
+      <mat-error *ngIf="form.controls.label.errors && form.controls.label.errors['required']" i18n>
+        Label is required.
+      </mat-error>
+    </mat-form-field>
+    <!--Description.-->
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>Description</mat-label>
+      <textarea matInput [formControl]="form.controls.description"></textarea>
+    </mat-form-field>
+    <!--Operation.-->
+    <app-searchable-entity-input
+      [displayTemplate]="displayOperation"
+      [formControl]="form.controls.operation"
+      [retrieve]="getOperationById.bind(this)"
+      [search]="searchOperations.bind(this)"
+      [suggestionTemplate]="suggestionOperation"
+      class="app-edit-input-large"
+      i18n-label label="Operation"
+      i18n-placeholder placeholder="Search operation...">
+      <ng-template #displayOperation let-entity='entity'>
+        {{asOperation(entity).title}}
+      </ng-template>
+      <ng-template #suggestionOperation let-entity='entity'>
+        {{asOperation(entity).title}}
+      </ng-template>
+    </app-searchable-entity-input>
+
+    <!--User.-->
+    <app-searchable-entity-input
+      [displayTemplate]="displayUser"
+      [formControl]="form.controls.user"
+      [retrieve]="getUserById.bind(this)"
+      [search]="searchUsers.bind(this)"
+      [suggestionTemplate]="suggestionUser"
+      class="app-edit-input-large"
+      i18n-label label="User"
+      i18n-placeholder placeholder="Search user...">
+      <ng-template #displayUser let-entity='entity'>
+        {{asUser(entity).lastName}} {{asUser(entity).firstName}}
+      </ng-template>
+      <ng-template #suggestionUser let-entity='entity'>
+        {{asUser(entity).lastName}} {{asUser(entity).firstName}}  ({{asUser(entity).username}})
+      </ng-template>
+    </app-searchable-entity-input>
+
+    <div class="action-bar">
+      <button mat-button type="button" (click)="cancel()" i18n>
+        Cancel
+      </button>
+      <button
+        [disabled]="!form.valid || (creatingAddressBookEntry.loadingChange() | async)"
+        color="primary"
+        i18n
+        mat-button
+        type="submit">
+        Create
+      </button>
+    </div>
+  </form>
+</div>

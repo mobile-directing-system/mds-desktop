@@ -263,6 +263,8 @@
     </unit>
     <unit id="2330577642930707695">
       <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:55,56</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:62,63</note>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:64,65</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:120,121</note>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:59,60</note>
@@ -420,6 +422,7 @@
     </unit>
     <unit id="7941428823403788384">
       <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:63,64</note>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:70,71</note>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:63,64</note>
         <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:39,40</note>
@@ -440,7 +443,7 @@
       <notes>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:56</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:58</note>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:43</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:45</note>
       </notes>
       <segment>
         <source>Archived</source>
@@ -456,7 +459,7 @@
     </unit>
     <unit id="2617770989260729968">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:49</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:51</note>
       </notes>
       <segment>
         <source>Currently active</source>
@@ -464,7 +467,7 @@
     </unit>
     <unit id="4328253427834278164">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:46</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:48</note>
       </notes>
       <segment>
         <source>Planned in the future</source>
@@ -472,6 +475,9 @@
     </unit>
     <unit id="4902817035128594900">
       <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:29</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:14</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:14</note>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:14</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:12</note>
         <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:23</note>
@@ -620,6 +626,9 @@
     </unit>
     <unit id="1283895920974679461">
       <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:34</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:25</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:25</note>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:28</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:27</note>
         <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:28</note>
@@ -663,6 +672,7 @@
     </unit>
     <unit id="2592690450389009216">
       <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:71,72</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:124,125</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:139,140</note>
       </notes>
@@ -680,6 +690,8 @@
     </unit>
     <unit id="2725499532293844250">
       <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:26</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:26</note>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:29</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:28</note>
       </notes>
@@ -1027,6 +1039,117 @@
         <source>Operations</source>
       </segment>
     </unit>
+    <unit id="1733705102982766446">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Address Book Entries</source>
+      </segment>
+    </unit>
+    <unit id="2365695266522758926">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.ts:51</note>
+      </notes>
+      <segment>
+        <source>Address book entry creation failed.</source>
+      </segment>
+    </unit>
+    <unit id="2392488717875840729">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:44</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:44,43</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:44,43</note>
+      </notes>
+      <segment>
+        <source>User</source>
+      </segment>
+    </unit>
+    <unit id="4077520913910941990">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:24</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:6</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:6</note>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:13</note>
+      </notes>
+      <segment>
+        <source>Label</source>
+      </segment>
+    </unit>
+    <unit id="4496775740135012216">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Create Address Book Entry</source>
+      </segment>
+    </unit>
+    <unit id="872015140095767450">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.ts:102</note>
+      </notes>
+      <segment>
+        <source>Updating address book entry failed.</source>
+      </segment>
+    </unit>
+    <unit id="9023787216859143413">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:44</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:44</note>
+      </notes>
+      <segment>
+        <source>Search user...</source>
+      </segment>
+    </unit>
+    <unit id="918029365747744094">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:8</note>
+      </notes>
+      <segment>
+        <source>Create Entry</source>
+      </segment>
+    </unit>
+    <unit id="9198068988902166479">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:2,3</note>
+      </notes>
+      <segment>
+        <source>Address Book Entry: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.label.getRawValue()}}"/></source>
+      </segment>
+    </unit>
+    <unit id="2881007568281222797">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:4</note>
+      </notes>
+      <segment>
+        <source>Create, manage and edit address book entries.</source>
+      </segment>
+    </unit>
+    <unit id="3315840889578225127">
+      <notes>
+        <note category="location">src/app/features/logistics/logistics-layout/logistics-layout.component.html:8,9</note>
+      </notes>
+      <segment>
+        <source>Address Book Entries</source>
+      </segment>
+    </unit>
+    <unit id="3891569230075043049">
+      <notes>
+        <note category="location">src/app/features/logistics/logistics-layout/logistics-layout.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Logistics</source>
+      </segment>
+    </unit>
+    <unit id="1360954096804522853">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:9,10</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:9,10</note>
+      </notes>
+      <segment>
+        <source>Label is required.</source>
+      </segment>
+    </unit>
     <unit id="2085611136494552870">
       <notes>
         <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:17</note>
@@ -1050,14 +1173,6 @@
       </notes>
       <segment>
         <source>Info</source>
-      </segment>
-    </unit>
-    <unit id="4077520913910941990">
-      <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:13</note>
-      </notes>
-      <segment>
-        <source>Label</source>
       </segment>
     </unit>
     <unit id="4467323362722952678">
@@ -1219,6 +1334,14 @@
       </notes>
       <segment>
         <source>Urgent</source>
+      </segment>
+    </unit>
+    <unit id="6660925946511264619">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:65,66</note>
+      </notes>
+      <segment>
+        <source>Delete</source>
       </segment>
     </unit>
   </file>

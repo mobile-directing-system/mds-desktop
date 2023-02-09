@@ -56,8 +56,8 @@ export class OperationService {
     interface NetCreate {
       title: string;
       description: string;
-      start: Date;
-      end?: Date;
+      start: string;
+      end?: string;
       is_archived: boolean;
     }
 
@@ -65,16 +65,16 @@ export class OperationService {
       id: string,
       title: string;
       description: string;
-      start: Date;
-      end?: Date;
+      start: string;
+      end?: string;
       is_archived: boolean;
     }
 
     const body: NetCreate = {
       title: create.title,
       description: create.description,
-      start: create.start,
-      end: create.end,
+      start: create.start.toISOString(),
+      end: create.end?.toISOString(),
       is_archived: create.is_archived,
     };
     return this.netService.postJSON<NetCreated>('/operations', body, {}).pipe(
@@ -82,8 +82,8 @@ export class OperationService {
         id: res.id,
         title: res.title,
         description: res.description,
-        start: res.start,
-        end: res.end,
+        start: new Date(Date.parse(res.start)),
+        end: res.end ? new Date(Date.parse(res.end)) : undefined,
         is_archived: res.is_archived,
       })),
     );
@@ -98,8 +98,8 @@ export class OperationService {
       id: string,
       title: string;
       description: string;
-      start: Date;
-      end?: Date;
+      start: string;
+      end?: string;
       is_archived: boolean;
     }
 
@@ -107,8 +107,8 @@ export class OperationService {
       id: update.id,
       title: update.title,
       description: update.description,
-      start: update.start,
-      end: update.end,
+      start: update.start.toISOString(),
+      end: update.end?.toISOString(),
       is_archived: update.is_archived,
     };
     return this.netService.putJSON(urlJoin('/operations', update.id), body, {});
@@ -123,8 +123,8 @@ export class OperationService {
       id: string,
       title: string;
       description: string;
-      start: Date;
-      end?: Date;
+      start: string;
+      end?: string;
       is_archived: boolean;
     }
 
@@ -133,8 +133,8 @@ export class OperationService {
         id: res.id,
         title: res.title,
         description: res.description,
-        start: res.start,
-        end: res.end,
+        start: new Date(Date.parse(res.start)),
+        end: res.end ? new Date(Date.parse(res.end)) : undefined,
         is_archived: res.is_archived,
       })),
     );
@@ -150,8 +150,8 @@ export class OperationService {
       id: string,
       title: string;
       description: string;
-      start: Date;
-      end?: Date;
+      start: string;
+      end?: string;
       is_archived: boolean;
     }
 
@@ -186,8 +186,8 @@ export class OperationService {
           id: nEntry.id,
           title: nEntry.title,
           description: nEntry.description,
-          start: new Date(nEntry.start),
-          end: nEntry.end !== undefined ? new Date(nEntry.end) : undefined,
+          start: new Date(Date.parse(nEntry.start)),
+          end: nEntry.end ? new Date(Date.parse(nEntry.end)) : undefined,
           is_archived: nEntry.is_archived,
         }));
       }),
@@ -204,8 +204,8 @@ export class OperationService {
       id: string,
       title: string;
       description: string;
-      start: Date;
-      end?: Date;
+      start: string;
+      end?: string;
       is_archived: boolean;
     }
 
@@ -227,8 +227,8 @@ export class OperationService {
           id: nEntry.id,
           title: nEntry.title,
           description: nEntry.description,
-          start: new Date(nEntry.start),
-          end: nEntry.end !== undefined ? new Date(nEntry.end) : undefined,
+          start: new Date(Date.parse(nEntry.start)),
+          end: nEntry.end ? new Date(Date.parse(nEntry.end)) : undefined,
           is_archived: nEntry.is_archived,
         }));
       }),
