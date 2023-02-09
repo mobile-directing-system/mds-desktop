@@ -426,7 +426,7 @@
       </notes>
       <segment state="initial">
         <source>User created successfully.</source>
-        <target>Benutzer erfolgreich anglegt.</target>
+        <target>Benutzer erfolgreich angelegt.</target>
       </segment>
     </unit>
     <unit id="247214804822900420">
@@ -775,7 +775,7 @@
     </unit>
     <unit id="2592690450389009216">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:61,62</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:64,65</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:124,125</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:139,140</note>
       </notes>
@@ -1419,7 +1419,7 @@
       </notes>
       <segment state="initial">
         <source>Address Book Entries</source>
-        <target>Addressbucheinträge</target>
+        <target>Adressbucheinträge</target>
       </segment>
     </unit>
     <unit id="2881007568281222797">
@@ -1469,7 +1469,7 @@
       </notes>
       <segment state="initial">
         <source>Create Address Book Entry</source>
-        <target>Addressbucheintrag Erstellen</target>
+        <target>Adressbucheintrag Erstellen</target>
       </segment>
     </unit>
     <unit id="9023787216859143413">
@@ -1488,7 +1488,7 @@
       </notes>
       <segment state="initial">
         <source>Address book entry creation failed.</source>
-        <target>Erstellen eines Addressbucheintrags fehlgeschlagen.</target>
+        <target>Erstellen eines Adressbucheintrags fehlgeschlagen.</target>
       </segment>
     </unit>
     <unit id="9198068988902166479">
@@ -1497,16 +1497,16 @@
       </notes>
       <segment state="initial">
         <source>Address Book Entry: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.label.getRawValue()}}"/></source>
-        <target>Addressbucheintrag: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.label.getRawValue()}}"/></target>
+        <target>Adressbucheintrag: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.label.getRawValue()}}"/></target>
       </segment>
     </unit>
     <unit id="872015140095767450">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.ts:106</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.ts:92</note>
       </notes>
       <segment state="initial">
         <source>Updating address book entry failed.</source>
-        <target>Addressbucheintrag aktualisieren fehlgeschlagen.</target>
+        <target>Adressbucheintrag aktualisieren fehlgeschlagen.</target>
       </segment>
     </unit>
     <unit id="3891569230075043049">
@@ -1524,7 +1524,7 @@
       </notes>
       <segment state="initial">
         <source>Address Book Entries</source>
-        <target>Addressbucheinträge</target>
+        <target>Adressbucheinträge</target>
       </segment>
     </unit>
     <unit id="1360954096804522853">
@@ -1535,6 +1535,15 @@
       <segment state="initial">
         <source>Label is required.</source>
         <target>Kennung ist erforderlich.</target>
+      </segment>
+    </unit>
+    <unit id="6660925946511264619">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:58,59</note>
+      </notes>
+      <segment state="initial">
+        <source>Delete</source>
+        <target>Löschen</target>
       </segment>
     </unit>
   </file>

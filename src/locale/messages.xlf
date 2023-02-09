@@ -672,7 +672,7 @@
     </unit>
     <unit id="2592690450389009216">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:61,62</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:64,65</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:124,125</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:139,140</note>
       </notes>
@@ -1086,7 +1086,7 @@
     </unit>
     <unit id="872015140095767450">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.ts:106</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.ts:92</note>
       </notes>
       <segment>
         <source>Updating address book entry failed.</source>
@@ -1334,6 +1334,14 @@
       </notes>
       <segment>
         <source>Urgent</source>
+      </segment>
+    </unit>
+    <unit id="6660925946511264619">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:58,59</note>
+      </notes>
+      <segment>
+        <source>Delete</source>
       </segment>
     </unit>
   </file>

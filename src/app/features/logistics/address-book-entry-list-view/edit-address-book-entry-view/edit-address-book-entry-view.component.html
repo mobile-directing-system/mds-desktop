@@ -1,6 +1,6 @@
 <div class="view" [appShowLoadingOverlay]="loader.loadingChange() | async">
   <h1 i18n>Address Book Entry: {{form.controls.label.getRawValue()}}</h1>
-  <form (submit)="updateEntry()" class="example-form">
+  <form [formGroup]="form" (ngSubmit)="updateEntry()">
     <!--Label.-->
     <mat-form-field class="app-edit-input">
       <mat-label i18n>Label</mat-label>
@@ -51,9 +51,12 @@
     </app-searchable-entity-input>
 
     <div class="action-bar">
-      <button mat-button type="button" (click)="cancel()" i18n>
+      <button (click)="close()" i18n mat-button type="button">
         Cancel
       </button>
+      <app-delete-confirm-button (deleteConfirmed)="delete()" i18n>
+        Delete
+      </app-delete-confirm-button>
       <button
         [disabled]="!form.valid || (loader.loadingChange() | async)" color="primary" i18n
         mat-button

@@ -11,6 +11,10 @@ import { User } from '../../../../core/model/user';
 import { Operation } from '../../../../core/model/operation';
 import { firstValueFrom, of, throwError } from 'rxjs';
 import { SearchResult } from '../../../../core/util/store';
+import { MatDialog } from '@angular/material/dialog';
+import { newMatDialogRefMock } from '../../../../core/testutil/testutil';
+import { Router } from '@angular/router';
+import anything = jasmine.anything;
 
 function genFactoryOptions(): SpectatorRoutingOptions<EditAddressBookEntryView> {
   return {
@@ -23,6 +27,7 @@ function genFactoryOptions(): SpectatorRoutingOptions<EditAddressBookEntryView> 
       AddressBookService,
       UserService,
       OperationService,
+      MatDialog,
     ],
     params: {
       entryId: 'develop',
@@ -104,7 +109,7 @@ describe('EditAddressBookLogisticsView', () => {
       description: description,
       operation: operationId,
       user: userId,
-    }))
+    }));
     spectator.detectChanges();
   });
 
@@ -207,5 +212,19 @@ describe('EditAddressBookLogisticsView', () => {
 
       expect(component.updateEntry).toHaveBeenCalledOnceWith();
     }));
+
+    it('should delete the entry when delete button is clicked', async () => {
+      spectator.inject(MatDialog).open.and.returnValue(newMatDialogRefMock(true));
+      spectator.inject(AddressBookService).deleteAddressBookEntry.and.returnValue(of(void 0));
+
+      spectator.click(byTextContent('Delete', {
+        exact: false,
+        selector: 'button',
+      }));
+      await spectator.fixture.whenStable();
+
+      expect(spectator.inject(AddressBookService).deleteAddressBookEntry).toHaveBeenCalledOnceWith('develop');
+      expect(spectator.inject(Router).navigate).toHaveBeenCalledOnceWith(['..'], anything())
+    });
   });
 });

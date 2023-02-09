@@ -11,7 +11,7 @@ import { User } from '../../../../core/model/user';
 import { Operation } from '../../../../core/model/operation';
 import { map } from 'rxjs/operators';
 import { SearchResult } from '../../../../core/util/store';
-import { MDSError, MDSErrorCode } from '../../../../core/util/errors';
+import { AddressBookEntry } from '../../../../core/model/addressbookEntry';
 
 /**
  * View to edit an existing {@link AddressBookEntry}
@@ -57,15 +57,15 @@ export class EditAddressBookEntryView implements OnInit, OnDestroy {
     this.s.push(
       this.form.controls.user.valueChanges.pipe(
         switchMap(userId => {
-          if (!userId){
+          if (!userId) {
             return of(null);
           }
           return this.userService.getUserById(userId);
-        })
+        }),
       ).subscribe(userDetails => {
         this.userDetails = userDetails;
-      })
-    )
+      }),
+    );
   }
 
   form = this.fb.nonNullable.group({
@@ -76,31 +76,17 @@ export class EditAddressBookEntryView implements OnInit, OnDestroy {
   });
 
   updateEntry(): void {
-    const label = this.form.value.label;
-    if (label === undefined) {
-      throw new MDSError(MDSErrorCode.AppError, 'label control is not set.');
-    }
-    const description = this.form.value.description;
-    if (description === undefined) {
-      throw new MDSError(MDSErrorCode.AppError, 'description control is not set.');
-    }
-    const operation = this.form.value.operation;
-    if (operation === undefined) {
-      throw new MDSError(MDSErrorCode.AppError, 'operation control is not set.');
-    }
-    const user = this.form.value.user;
-    if (user === undefined) {
-      throw new MDSError(MDSErrorCode.AppError, 'user control is not set.');
-    }
-    this.loader.load(this.addressBookService.updateAddressBookEntry({
+    const fv = this.form.getRawValue();
+    const entry: AddressBookEntry = {
       id: this.entryId,
-      label: label,
-      description: description,
-      operation: operation ?? undefined,
-      user: user ?? undefined,
-    })).subscribe({
+      label: fv.label,
+      description: fv.description,
+      operation: fv.operation ?? undefined,
+      user: fv.user ?? undefined,
+    };
+    this.loader.load(this.addressBookService.updateAddressBookEntry(entry)).subscribe({
       next: _ => {
-        this.cancel();
+        this.close();
       },
       error: _ => {
         this.notificationService.notifyUninvasiveShort($localize`Updating address book entry failed.`);
@@ -147,7 +133,15 @@ export class EditAddressBookEntryView implements OnInit, OnDestroy {
       }));
   }
 
-  cancel() {
+  close() {
     this.router.navigate(['..'], { relativeTo: this.route }).then();
+  }
+
+  delete(): void {
+    this.loader.take(this.addressBookService.deleteAddressBookEntry(this.entryId)
+      .subscribe(() => {
+        this.notificationService.notifyUninvasiveShort(`Address book entry deleted.`);
+        this.close();
+      }));
   }
 }
