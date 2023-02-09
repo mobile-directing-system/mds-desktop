@@ -1117,12 +1117,12 @@
         <source>Address Book Entry: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.label.getRawValue()}}"/></source>
       </segment>
     </unit>
-    <unit id="989078588424862280">
+    <unit id="2881007568281222797">
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:4</note>
       </notes>
       <segment>
-        <source>Create, manage and edit address book entries</source>
+        <source>Create, manage and edit address book entries.</source>
       </segment>
     </unit>
     <unit id="3315840889578225127">

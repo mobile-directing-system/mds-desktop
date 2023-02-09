@@ -1422,13 +1422,13 @@
         <target>Addressbucheinträge</target>
       </segment>
     </unit>
-    <unit id="989078588424862280">
+    <unit id="2881007568281222797">
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:4</note>
       </notes>
       <segment state="initial">
-        <source>Create, manage and edit address book entries</source>
-        <target>Erstellen, verwalten und bearbeiten von Adressbucheinträgen</target>
+        <source>Create, manage and edit address book entries.</source>
+        <target>Erstellen, verwalten und bearbeiten von Adressbucheinträgen.</target>
       </segment>
     </unit>
     <unit id="918029365747744094">
