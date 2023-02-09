@@ -29,12 +29,14 @@
 
     <ng-container matColumnDef="start">
       <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="start">Start</th>
-      <td *matCellDef="let row" mat-cell>{{ asOperation(row).start | date }}</td>
+      <td *matCellDef="let row" mat-cell>{{ asOperation(row).start | date:'medium' }}</td>
     </ng-container>
 
     <ng-container matColumnDef="end">
       <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="end">End</th>
-      <td *matCellDef="let row" mat-cell>{{ asOperation(row).end | date }}</td>
+      <td *matCellDef="let row" mat-cell>
+        <span *ngIf="!!asOperation(row).end">{{ asOperation(row).end | date:'medium' }}</span>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="props">

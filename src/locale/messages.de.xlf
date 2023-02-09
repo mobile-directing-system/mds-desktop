@@ -551,7 +551,7 @@
       <notes>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:56</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:58</note>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:43</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:45</note>
       </notes>
       <segment state="initial">
         <source>Archived</source>
@@ -560,7 +560,7 @@
     </unit>
     <unit id="4328253427834278164">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:46</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:48</note>
       </notes>
       <segment state="initial">
         <source>Planned in the future</source>
@@ -569,7 +569,7 @@
     </unit>
     <unit id="2617770989260729968">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:49</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:51</note>
       </notes>
       <segment state="initial">
         <source>Currently active</source>

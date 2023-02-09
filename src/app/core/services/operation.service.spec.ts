@@ -41,8 +41,8 @@ describe('OperationService', () => {
       id: 'strange things',
       title: 'Cyber',
       description: 'bonk',
-      start: create.start,
-      end: create.end,
+      start: create.start.toISOString(),
+      end: create.end?.toISOString(),
       is_archived: false,
     };
     const expectCreated: Operation = {
@@ -64,8 +64,8 @@ describe('OperationService', () => {
       expect(postSpy).withContext('should perform correct next call').toHaveBeenCalledOnceWith('/operations', {
         title: 'Honky',
         description: 'Tonky',
-        start: create.start,
-        end: create.end,
+        start: create.start.toISOString(),
+        end: create.end?.toISOString(),
         is_archived: false,
       }, {});
       expect(cbSpy).withContext('should call next with correct value').toHaveBeenCalledOnceWith(expectCreated);
@@ -106,8 +106,8 @@ describe('OperationService', () => {
         id: update.id,
         title: update.title,
         description: update.description,
-        start: update.start,
-        end: update.end,
+        start: update.start.toISOString(),
+        end: update.end?.toISOString(),
         is_archived: update.is_archived,
       }, {});
     }));
@@ -133,16 +133,16 @@ describe('OperationService', () => {
       id: operationId,
       title: 'dirt',
       description: 'sleep',
-      start: new Date(),
-      end: new Date(new Date().getDate() + 1),
+      start: new Date().toISOString(),
+      end: new Date(new Date().getDate() + 1).toISOString(),
       is_archived: false,
     };
     const expectOperation: Operation = {
       id: operationId,
       title: 'dirt',
       description: 'sleep',
-      start: netOperation.start,
-      end: netOperation.end,
+      start: new Date(Date.parse(netOperation.start)),
+      end: new Date(Date.parse(netOperation.end)),
       is_archived: false,
     };
 
@@ -178,16 +178,16 @@ describe('OperationService', () => {
         id: 'randoMcRandom',
         title: 'relation',
         description: 'abroad',
-        start: new Date(),
-        end: new Date(new Date().getDate() + 1),
+        start: new Date().toISOString(),
+        end: new Date(new Date().getDate() + 1).toISOString(),
         is_archived: false,
       },
       {
         id: 'evenMoreRandom',
         title: 'relation',
         description: 'abroad',
-        start: new Date(),
-        end: new Date(new Date().getDate() + 1),
+        start: new Date().toISOString(),
+        end: new Date(new Date().getDate() + 1).toISOString(),
         is_archived: false,
       },
     ];
@@ -212,16 +212,16 @@ describe('OperationService', () => {
           id: 'randoMcRandom',
           title: 'relation',
           description: 'abroad',
-          start: netOperations[0].start,
-          end: netOperations[0].end,
+          start: new Date(Date.parse(netOperations[0].start)),
+          end: new Date(Date.parse(netOperations[0].end)),
           is_archived: false,
         },
         {
           id: 'evenMoreRandom',
           title: 'relation',
           description: 'abroad',
-          start: netOperations[1].start,
-          end: netOperations[1].end,
+          start: new Date(Date.parse(netOperations[1].start)),
+          end: new Date(Date.parse(netOperations[1].end)),
           is_archived: false,
         },
       ]));
@@ -272,16 +272,16 @@ describe('OperationService', () => {
         id: 'randoMcRandom',
         title: 'pink',
         description: 'sow',
-        start: new Date(),
-        end: new Date(new Date().getDate() + 1),
+        start: new Date().toISOString(),
+        end: new Date(new Date().getDate() + 1).toISOString(),
         is_archived: false,
       },
       {
         id: 'evenMoreRandom',
         title: 'stay',
         description: 'steady',
-        start: new Date(),
-        end: new Date(new Date().getDate() + 1),
+        start: new Date().toISOString(),
+        end: new Date(new Date().getDate() + 1).toISOString(),
         is_archived: false,
       },
     ];
@@ -306,16 +306,16 @@ describe('OperationService', () => {
           id: 'randoMcRandom',
           title: 'pink',
           description: 'sow',
-          start: netOperations[0].start,
-          end: netOperations[0].end,
+          start: new Date(Date.parse(netOperations[0].start)),
+          end: new Date(Date.parse(netOperations[0].end)),
           is_archived: false,
         },
         {
           id: 'evenMoreRandom',
           title: 'stay',
           description: 'steady',
-          start: netOperations[1].start,
-          end: netOperations[1].end,
+          start: new Date(Date.parse(netOperations[1].start)),
+          end: new Date(Date.parse(netOperations[1].end)),
           is_archived: false,
         },
       ]));
