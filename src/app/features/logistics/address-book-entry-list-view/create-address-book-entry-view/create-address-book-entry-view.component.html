@@ -50,12 +50,14 @@
       </ng-template>
     </app-searchable-entity-input>
 
-    <div class="button-row">
+    <div class="action-bar">
       <button mat-button type="button" (click)="cancel()" i18n>
         Cancel
       </button>
       <button
-        [disabled]="!form.valid || (creatingAddressBookEntry.loadingChange() | async)" color="primary" i18n
+        [disabled]="!form.valid || (creatingAddressBookEntry.loadingChange() | async)"
+        color="primary"
+        i18n
         mat-button
         type="submit">
         Create

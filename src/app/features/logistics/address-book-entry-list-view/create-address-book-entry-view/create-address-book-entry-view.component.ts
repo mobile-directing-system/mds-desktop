@@ -11,7 +11,7 @@ import { User } from '../../../../core/model/user';
 import { map } from 'rxjs/operators';
 import { SearchResult } from '../../../../core/util/store';
 import { Operation } from '../../../../core/model/operation';
-import { MDSError, MDSErrorCode } from '../../../../core/util/errors';
+import { AddressBookEntry, CreateAddressBookEntry } from '../../../../core/model/addressbookEntry';
 
 /**
  * View to create a new {@link AddressBookEntry}.
@@ -36,28 +36,14 @@ export class CreateAddressBookEntryView {
   }
 
   createEntry(): void {
-    const label = this.form.value.label;
-    if (label === undefined) {
-      throw new MDSError(MDSErrorCode.AppError, 'label control is not set.');
-    }
-    const description = this.form.value.description;
-    if (description === undefined) {
-      throw new MDSError(MDSErrorCode.AppError, 'description control is not set.');
-    }
-    const operation = this.form.value.operation;
-    if (operation === undefined) {
-      throw new MDSError(MDSErrorCode.AppError, 'operation control is not set.');
-    }
-    const user = this.form.value.user;
-    if (user === undefined) {
-      throw new MDSError(MDSErrorCode.AppError, 'user control is not set.');
-    }
-    this.creatingAddressBookEntry.load(this.addressBookService.createAddressBookEntry({
-      label: label,
-      description: description,
-      operation: operation ?? undefined,
-      user: user ?? undefined,
-    })).subscribe({
+    const fv = this.form.getRawValue();
+    const create: CreateAddressBookEntry = {
+      label: fv.label,
+      description: fv.description,
+      operation: fv.operation ?? undefined,
+      user: fv.user ?? undefined,
+    };
+    this.creatingAddressBookEntry.load(this.addressBookService.createAddressBookEntry(create)).subscribe({
       next: _ => {
         this.cancel();
       },
@@ -100,10 +86,9 @@ export class CreateAddressBookEntryView {
         limit: 5,
         offset: 0,
       }, {},
-    ).pipe(
-      map((res: SearchResult<Operation>): Operation[] => {
-        return res.hits;
-      }));
+    ).pipe(map((res: SearchResult<Operation>): Operation[] => {
+      return res.hits;
+    }));
   }
 
   cancel() {
