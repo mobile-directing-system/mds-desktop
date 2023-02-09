@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, of, Subscription, switchMap } from 'rxjs';
+import { forkJoin, Observable, of, Subscription, switchMap } from 'rxjs';
 import { AddressBookService } from '../../../../core/services/addressbook.service';
 import { NotificationService } from '../../../../core/services/notification.service';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -12,6 +12,8 @@ import { Operation } from '../../../../core/model/operation';
 import { map } from 'rxjs/operators';
 import { SearchResult } from '../../../../core/util/store';
 import { AddressBookEntry } from '../../../../core/model/addressbookEntry';
+import { Channel } from '../../../../core/model/channel';
+import { ChannelService } from '../../../../core/services/channel.service';
 
 /**
  * View to edit an existing {@link AddressBookEntry}
@@ -28,10 +30,19 @@ export class EditAddressBookEntryView implements OnInit, OnDestroy {
   s: Subscription[] = [];
   userDetails: User | undefined | null;
 
-  constructor(private addressBookService: AddressBookService, private notificationService: NotificationService, private fb: FormBuilder,
-              private router: Router, private route: ActivatedRoute, private userService: UserService, private operationService: OperationService) {
-  }
+  form = this.fb.nonNullable.group({
+    label: this.fb.nonNullable.control<string>('', Validators.required),
+    description: this.fb.nonNullable.control<string>(''),
+    operation: this.fb.nonNullable.control<string | null>(null),
+    user: this.fb.nonNullable.control<string | null>(null),
+    channels: this.fb.nonNullable.control<Channel[]>([]),
+  });
 
+  constructor(private addressBookService: AddressBookService, private notificationService: NotificationService,
+              private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
+              private userService: UserService, private operationService: OperationService,
+              private channelService: ChannelService) {
+  }
 
   ngOnDestroy(): void {
     this.s.forEach(s => s.unsubscribe());
@@ -41,17 +52,20 @@ export class EditAddressBookEntryView implements OnInit, OnDestroy {
     this.s.push(this.route.params.pipe(
       switchMap(params => {
         this.entryId = params['entryId'];
-        return this.loader.load(this.addressBookService.getAddressBookEntryById(this.entryId));
+        return forkJoin({
+          entry: this.loader.load(this.addressBookService.getAddressBookEntryById(this.entryId)),
+          channels: this.loader.load(this.channelService.getChannelsByAddressBookEntry(this.entryId)),
+        });
       }),
-    ).subscribe(currentEntry => {
-      // patch the details of the current Entry.
+    ).subscribe(result => {
       this.form.patchValue({
-        label: currentEntry.label,
-        description: currentEntry.description,
-        operation: currentEntry.operation,
-        user: currentEntry.user,
+        label: result.entry.label,
+        description: result.entry.description,
+        operation: result.entry.operation,
+        user: result.entry.user,
+        channels: result.channels,
       });
-      this.userDetails = currentEntry.userDetails;
+      this.userDetails = result.entry.userDetails;
     }));
 
     this.s.push(
@@ -68,13 +82,6 @@ export class EditAddressBookEntryView implements OnInit, OnDestroy {
     );
   }
 
-  form = this.fb.nonNullable.group({
-    label: this.fb.nonNullable.control<string>('', Validators.required),
-    description: this.fb.nonNullable.control<string>(''),
-    operation: this.fb.nonNullable.control<string | null>(null),
-    user: this.fb.nonNullable.control<string | null>(null),
-  });
-
   updateEntry(): void {
     const fv = this.form.getRawValue();
     const entry: AddressBookEntry = {
@@ -84,7 +91,10 @@ export class EditAddressBookEntryView implements OnInit, OnDestroy {
       operation: fv.operation ?? undefined,
       user: fv.user ?? undefined,
     };
-    this.loader.load(this.addressBookService.updateAddressBookEntry(entry)).subscribe({
+    this.loader.load(forkJoin({
+      entry: this.addressBookService.updateAddressBookEntry(entry),
+      channels: this.channelService.updateChannelsByAddressBookEntry(this.entryId, fv.channels)
+    })).subscribe({
       next: _ => {
         this.close();
       },

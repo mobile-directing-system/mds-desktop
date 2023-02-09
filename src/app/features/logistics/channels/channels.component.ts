@@ -67,6 +67,7 @@ export class ChannelsComponent extends CustomControlValueAccessor<Channel[]> {
       switch (result.action) {
         case 'delete':
           this.writeValue(this.value.filter(c => c.id !== channel.id));
+          this.notifyOnChange();
           return;
         case 'submit':
           this.writeValue(this.value.map((c => {
@@ -75,6 +76,7 @@ export class ChannelsComponent extends CustomControlValueAccessor<Channel[]> {
             }
             return c;
           })));
+          this.notifyOnChange();
           return;
         default:
           throw new MDSError(MDSErrorCode.AppError, 'unsupported action', { result });
@@ -102,6 +104,7 @@ export class ChannelsComponent extends CustomControlValueAccessor<Channel[]> {
         throw new MDSError(MDSErrorCode.AppError, 'unsupported action', { result });
       }
       this.writeValue([result.channel, ...this.value]);
+      this.notifyOnChange();
     });
   }
 }

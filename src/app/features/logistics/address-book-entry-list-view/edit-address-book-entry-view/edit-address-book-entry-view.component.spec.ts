@@ -14,6 +14,10 @@ import { SearchResult } from '../../../../core/util/store';
 import { MatDialog } from '@angular/material/dialog';
 import { newMatDialogRefMock } from '../../../../core/testutil/testutil';
 import { Router } from '@angular/router';
+import { ChannelService } from '../../../../core/services/channel.service';
+import { Channel, ChannelType } from '../../../../core/model/channel';
+import { Importance } from '../../../../core/model/importance';
+import * as moment from 'moment';
 import anything = jasmine.anything;
 
 function genFactoryOptions(): SpectatorRoutingOptions<EditAddressBookEntryView> {
@@ -25,6 +29,7 @@ function genFactoryOptions(): SpectatorRoutingOptions<EditAddressBookEntryView> 
     mocks: [
       NotificationService,
       AddressBookService,
+      ChannelService,
       UserService,
       OperationService,
       MatDialog,
@@ -45,6 +50,19 @@ describe('EditAddressBookLogisticsView', () => {
   const description = 'remark';
   const operationId = 'parcel';
   const userId = 'hard';
+  const channels: Channel[] = [
+    {
+      entry: 'develop',
+      label: 'replace',
+      type: ChannelType.Radio,
+      priority: 24,
+      minImportance: Importance.Regular,
+      timeout: moment.duration({ seconds: 45 }),
+      details: {
+        info: 'critic',
+      },
+    },
+  ];
 
   const sampleUserData: User[] = [
     {
@@ -110,6 +128,7 @@ describe('EditAddressBookLogisticsView', () => {
       operation: operationId,
       user: userId,
     }));
+    spectator.inject(ChannelService).getChannelsByAddressBookEntry.and.returnValue(of(channels));
     spectator.detectChanges();
   });
 
@@ -140,16 +159,54 @@ describe('EditAddressBookLogisticsView', () => {
       });
     }));
 
+    it('should update channels correctly', fakeAsync(() => {
+      component.form.patchValue({
+        label: label,
+        description: description,
+        operation: operationId,
+        user: userId,
+        channels: channels,
+      });
+      tick();
+
+      spectator.inject(AddressBookService).updateAddressBookEntry.and.returnValue(of(void 0));
+
+      component.updateEntry();
+      tick();
+      expect(spectator.inject(ChannelService).updateChannelsByAddressBookEntry)
+        .toHaveBeenCalledOnceWith(component.entryId, channels);
+    }));
+
     it('should should show error when updating address book entry failed', fakeAsync(() => {
       component.form.setValue({
         label: label,
         description: description,
         operation: operationId,
         user: userId,
+        channels: [],
       });
       tick();
 
       spectator.inject(AddressBookService).updateAddressBookEntry.and.returnValue(throwError(() => ({})));
+      spectator.inject(ChannelService).updateChannelsByAddressBookEntry.and.returnValue(of(void 0));
+
+      component.updateEntry();
+      tick();
+      expect(spectator.inject(NotificationService).notifyUninvasiveShort).toHaveBeenCalled();
+    }));
+
+    it('should should show error when updating channels failed', fakeAsync(() => {
+      component.form.setValue({
+        label: label,
+        description: description,
+        operation: operationId,
+        user: userId,
+        channels: [],
+      });
+      tick();
+
+      spectator.inject(AddressBookService).updateAddressBookEntry.and.returnValue(of(void 0));
+      spectator.inject(ChannelService).updateChannelsByAddressBookEntry.and.returnValue(throwError(() => ({})));
 
       component.updateEntry();
       tick();
@@ -189,6 +246,7 @@ describe('EditAddressBookLogisticsView', () => {
         description: description,
         operation: operationId,
         user: userId,
+        channels: channels,
       });
       tick();
       spectator.detectComponentChanges();
@@ -202,6 +260,7 @@ describe('EditAddressBookLogisticsView', () => {
         description: description,
         operation: operationId,
         user: userId,
+        channels: channels,
       });
       tick();
       spectator.detectComponentChanges();
@@ -224,7 +283,7 @@ describe('EditAddressBookLogisticsView', () => {
       await spectator.fixture.whenStable();
 
       expect(spectator.inject(AddressBookService).deleteAddressBookEntry).toHaveBeenCalledOnceWith('develop');
-      expect(spectator.inject(Router).navigate).toHaveBeenCalledOnceWith(['..'], anything())
+      expect(spectator.inject(Router).navigate).toHaveBeenCalledOnceWith(['..'], anything());
     });
   });
 });

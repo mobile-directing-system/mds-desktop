@@ -50,6 +50,13 @@
       </ng-template>
     </app-searchable-entity-input>
 
+    <!--Channels.-->
+    <app-channels
+      *ngIf="entryId !== ''"
+      [entryId]="entryId"
+      [formControl]="form.controls.channels"
+    ></app-channels>
+
     <div class="action-bar">
       <button (click)="close()" i18n mat-button type="button">
         Cancel
