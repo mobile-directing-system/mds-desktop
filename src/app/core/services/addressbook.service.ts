@@ -46,6 +46,21 @@ interface NetUser {
 }
 
 /**
+ * Maps {@link NetUser} to {@link User}.
+ * @param net The user to map.
+ */
+function userFromNet(net: NetUser): User {
+  return {
+    id: net.id,
+    username: net.username,
+    firstName: net.first_name,
+    lastName: net.last_name,
+    isAdmin: net.is_admin,
+    isActive: net.is_active,
+  };
+}
+
+/**
  * Service for address book entry management. Allows creation, manipulation and retrieval of address book entries.
  */
 @Injectable({
@@ -54,20 +69,6 @@ interface NetUser {
 export class AddressBookService {
 
   constructor(private netService: NetService) {
-  }
-
-  private mapNetUserToUser(netUser: NetUser | undefined): User | undefined {
-    if (!netUser) {
-      return undefined;
-    }
-    return {
-      id: netUser.id,
-      username: netUser.username,
-      firstName: netUser.first_name,
-      lastName: netUser.last_name,
-      isAdmin: netUser.is_admin,
-      isActive: netUser.is_active,
-    };
   }
 
   /**
@@ -105,7 +106,7 @@ export class AddressBookService {
         description: res.description,
         operation: res.operation,
         user: res.user,
-        userDetails: this.mapNetUserToUser(res.user_details),
+        userDetails: res.user_details ? userFromNet(res.user_details) : undefined,
       })),
     );
   }
@@ -163,7 +164,7 @@ export class AddressBookService {
         description: res.description,
         operation: res.operation,
         user: res.user,
-        userDetails: this.mapNetUserToUser(res.user_details),
+        userDetails: res.user_details ? userFromNet(res.user_details) : undefined,
       })),
     );
   }
@@ -202,7 +203,7 @@ export class AddressBookService {
       }
     });
     nParams.by_user = filters.byUser;
-    nParams.visible_by =filters.visibleBy;
+    nParams.visible_by = filters.visibleBy;
     nParams.include_for_inactive_users = filters.includeForInActiveUsers;
     nParams.exclude_global = filters.excludeGlobal;
     nParams.for_operation = filters.forOperation;
@@ -215,7 +216,7 @@ export class AddressBookService {
           description: nEntry.description,
           operation: nEntry.operation,
           user: nEntry.user,
-          userDetails: this.mapNetUserToUser(nEntry.user_details),
+          userDetails: nEntry.user_details ? userFromNet(nEntry.user_details) : undefined,
         }));
       }),
     );
@@ -251,19 +252,19 @@ export class AddressBookService {
       exclude_global: filters.excludeGlobal,
       visible_by: filters.visibleBy,
       include_for_inactive_users: filters.includeForInActiveUsers,
-    }
+    };
 
     return this.netService.get<NetSearchResult<NetEntry>>(urlJoin('/address-book', 'entries', 'search'), netParams).pipe(
-      map((res:NetSearchResult<NetEntry>): SearchResult<AddressBookEntry> => {
+      map((res: NetSearchResult<NetEntry>): SearchResult<AddressBookEntry> => {
         return searchResultFromNet(res, (nEntry: NetEntry): AddressBookEntry => ({
           id: nEntry.id,
           label: nEntry.label,
           description: nEntry.description,
           operation: nEntry.operation,
           user: nEntry.user,
-          userDetails: this.mapNetUserToUser(nEntry.user_details),
-        }))
-      })
-    )
+          userDetails: nEntry.user_details ? userFromNet(nEntry.user_details) : undefined,
+        }));
+      }),
+    );
   }
 }
