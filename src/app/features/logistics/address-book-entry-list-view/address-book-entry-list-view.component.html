@@ -8,9 +8,13 @@
     <button mat-button i18n (click)="createAddressBookEntry()">Create Entry</button>
   </app-list-action-bar>
   <!--Table.-->
-  <app-paginated-list #list (page)="page($event)" [data]="loadedAddressBookEntryTableData">
+  <app-paginated-list
+    #list
+    (page)="page($event)"
+    [data]="addressBookEntryRows"
+    [appShowLoadingOverlay]="retrieving.loadingChange() | async">
     <table
-      (matSortChange)="sortChange($event)" [appShowLoadingOverlay]="retrieving.loadingChange() | async"
+      (matSortChange)="sortChange($event)"
       [dataSource]="list.dataSource"
       aria-label="Address book entry list"
       mat-table
@@ -18,28 +22,32 @@
 
       <ng-container matColumnDef="label">
         <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="byLabel">Label</th>
-        <td *matCellDef="let row" mat-cell>{{ asAddressBookEntryTableContent(row).entry.label }}</td>
+        <td *matCellDef="let row" mat-cell>{{ asAddressBookEntryRow(row).entry.label }}</td>
       </ng-container>
 
       <ng-container matColumnDef="description">
         <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="byDescription">Description</th>
-        <td *matCellDef="let row" mat-cell>{{ asAddressBookEntryTableContent(row).entry.description }}</td>
+        <td *matCellDef="let row" mat-cell>{{ asAddressBookEntryRow(row).entry.description }}</td>
       </ng-container>
 
       <ng-container matColumnDef="operation">
         <th *matHeaderCellDef i18n mat-header-cell>Operation</th>
         <td *matCellDef="let row" mat-cell
-            [appShowLoadingDots]="retrievingOperation.loadingChange() | async">{{getOperationTitleFromAddressBookEntryTableContent(asAddressBookEntryTableContent(row))}}</td>
+            [appShowLoadingDots]="retrievingOperation.loadingChange() | async">
+          <span *ngIf="asAddressBookEntryRow(row).operation; let operation">
+            {{ operation.title }}
+          </span>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="user">
         <th *matHeaderCellDef i18n mat-header-cell>User</th>
         <td *matCellDef="let row"
-            mat-cell>{{getUserDescriptionFromAddressBookEntryTableContent(asAddressBookEntryTableContent(row))}}</td>
+            mat-cell>{{ formatRowUser(asAddressBookEntryRow(row)) }}</td>
       </ng-container>
 
       <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
-      <tr (click)="navigateToAddressBookEntry(asAddressBookEntryTableContent(row).entry.id)"
+      <tr (click)="navigateToAddressBookEntry(asAddressBookEntryRow(row).entry.id)"
           *matRowDef="let row; columns: columnsToDisplay"
           class="clickable" mat-row></tr>
 

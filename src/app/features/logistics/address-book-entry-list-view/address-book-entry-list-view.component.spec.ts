@@ -1,4 +1,4 @@
-import { AddressBookEntryListView, AddressBookEntryTableRowContent } from './address-book-entry-list-view.component';
+import { AddressBookEntryListView, AddressBookEntryRow } from './address-book-entry-list-view.component';
 import { byTextContent, createRoutingFactory, SpectatorRouting } from '@ngneat/spectator';
 import { OperationService } from '../../../core/services/operation.service';
 import { CoreModule } from '../../../core/core.module';
@@ -75,7 +75,7 @@ describe('AddressBookEntryLogisticsView', () => {
       is_archived: false,
     };
 
-  const sampleAddressBookEntryTableRowContent: AddressBookEntryTableRowContent[] = [
+  const sampleAddressBookEntryTableRowContent: AddressBookEntryRow[] = [
     {
       entry: sampleEntries[0],
       operation: sampleOperation,
@@ -97,7 +97,7 @@ describe('AddressBookEntryLogisticsView', () => {
     offset: 0,
   });
 
-  const samplePaginatedAddressBookEntryTableRowContent: Paginated<AddressBookEntryTableRowContent> = new Paginated<AddressBookEntryTableRowContent>(sampleAddressBookEntryTableRowContent, {
+  const samplePaginatedAddressBookEntryTableRowContent: Paginated<AddressBookEntryRow> = new Paginated<AddressBookEntryRow>(sampleAddressBookEntryTableRowContent, {
     limit: 3,
     retrieved: 3,
     total: 42,
@@ -119,7 +119,7 @@ describe('AddressBookEntryLogisticsView', () => {
   });
 
   it('should load entries', () => {
-    expect(component.loadedAddressBookEntryTableData).toEqual(samplePaginatedAddressBookEntryTableRowContent);
+    expect(component.addressBookEntryRows).toEqual(samplePaginatedAddressBookEntryTableRowContent);
   });
 
   it('should refresh correctly on page-event', fakeAsync(() => {
@@ -193,11 +193,11 @@ describe('AddressBookEntryLogisticsView', () => {
   it('should show address book entry attributes in table', () => {
     sampleEntries.forEach(expectEntry => {
       let attributes: string[] = [expectEntry.label, expectEntry.description];
-      if(expectEntry.operation) {
+      if (expectEntry.operation) {
         attributes.push(sampleOperation.title);
       }
-      if(expectEntry.userDetails) {
-        attributes.push(expectEntry.userDetails.lastName + ' ' + expectEntry.userDetails.firstName + ' (' + expectEntry.userDetails.username + ')')
+      if (expectEntry.userDetails) {
+        attributes.push(expectEntry.userDetails.lastName + ' ' + expectEntry.userDetails.firstName + ' (' + expectEntry.userDetails.username + ')');
       }
       attributes.forEach(expectAttribute => {
         expect(byTextContent(expectAttribute, {
@@ -212,7 +212,7 @@ describe('AddressBookEntryLogisticsView', () => {
     const sampleEntry: AddressBookEntry = {
       id: 'pour',
       label: 'adopt',
-      description: 'enter'
+      description: 'enter',
     };
 
     spectator.inject(AddressBookService).getAddressBookEntries.and.returnValue(of(samplePaginatedEntries.changeResultType([sampleEntry])));

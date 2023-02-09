@@ -6,12 +6,11 @@ import { AddressBookEntry } from '../../../core/model/addressbookEntry';
 import { Operation } from '../../../core/model/operation';
 import { orderDirFromSort, Paginated, PaginationParams } from '../../../core/util/store';
 import { Loader } from '../../../core/util/loader';
-import { EMPTY } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MDSError, MDSErrorCode } from '../../../core/util/errors';
 import { Sort } from '@angular/material/sort';
 
-export interface AddressBookEntryTableRowContent {
+export interface AddressBookEntryRow {
   entry: AddressBookEntry,
   operation: Operation | null | undefined
 }
@@ -24,7 +23,7 @@ export interface AddressBookEntryTableRowContent {
 export class AddressBookEntryListView {
   columnsToDisplay = ['label', 'description', 'operation', 'user'];
   pagination?: PaginationParams<AddressBookEntrySort>;
-  loadedAddressBookEntryTableData?: Paginated<AddressBookEntryTableRowContent>;
+  addressBookEntryRows?: Paginated<AddressBookEntryRow>;
 
   constructor(private router: Router, private route: ActivatedRoute, private addressBookService: AddressBookService, private operationService: OperationService) {
   }
@@ -33,36 +32,34 @@ export class AddressBookEntryListView {
   retrievingOperation = new Loader();
 
   refresh(): void {
-    this.retrieving.loadFrom(() => {
-      if (!this.pagination) {
-        return EMPTY;
-      }
-      return this.addressBookService.getAddressBookEntries(this.pagination, {}).pipe(
-        map(paginatedEntries => {
-          return new Paginated<AddressBookEntryTableRowContent>(
-            paginatedEntries.entries.map(entry => {
-              let tableEntry: AddressBookEntryTableRowContent = {
-                entry: entry,
-                operation: undefined,
-              };
-              if (!entry.operation) {
-                tableEntry.operation = null;
-              } else {
-                this.retrievingOperation.load(this.operationService.getOperationById(entry.operation)).subscribe(operation => tableEntry.operation = operation);
-              }
-              return tableEntry;
-            }), {
-              // Pagination details stay the same, since no extra entries where retrieved.
-              retrieved: paginatedEntries.retrieved,
-              limit: paginatedEntries.limit,
-              offset: paginatedEntries.offset,
-              total: paginatedEntries.total,
-              orderedBy: paginatedEntries.orderedBy,
-              orderDir: paginatedEntries.orderDir,
-            });
-        }),
-      );
-    }).subscribe(paginatedAddressBookEntryTableRowContent => this.loadedAddressBookEntryTableData = paginatedAddressBookEntryTableRowContent);
+    if (!this.pagination) {
+      return;
+    }
+    this.retrieving.take(this.addressBookService.getAddressBookEntries(this.pagination, {}).pipe(
+      map(paginatedEntries => {
+        return new Paginated<AddressBookEntryRow>(
+          paginatedEntries.entries.map(entry => {
+            let tableEntry: AddressBookEntryRow = {
+              entry: entry,
+              operation: undefined,
+            };
+            if (!entry.operation) {
+              tableEntry.operation = null;
+            } else {
+              this.retrievingOperation.load(this.operationService.getOperationById(entry.operation)).subscribe(operation => tableEntry.operation = operation);
+            }
+            return tableEntry;
+          }), {
+            // Pagination details stay the same, since no extra entries where retrieved.
+            retrieved: paginatedEntries.retrieved,
+            limit: paginatedEntries.limit,
+            offset: paginatedEntries.offset,
+            total: paginatedEntries.total,
+            orderedBy: paginatedEntries.orderedBy,
+            orderDir: paginatedEntries.orderDir,
+          });
+      }),
+    ).subscribe(paginatedRows => this.addressBookEntryRows = paginatedRows), 'entry-retrieval');
   }
 
   navigateToAddressBookEntry(addressBookEntryId: string): void {
@@ -78,22 +75,16 @@ export class AddressBookEntryListView {
     this.refresh();
   }
 
-  asAddressBookEntryTableContent(addressBookTableContent: AddressBookEntryTableRowContent): AddressBookEntryTableRowContent {
+  asAddressBookEntryRow(addressBookTableContent: AddressBookEntryRow): AddressBookEntryRow {
     return addressBookTableContent;
   }
 
-  getOperationTitleFromAddressBookEntryTableContent(addressBookTableContent: AddressBookEntryTableRowContent): string {
-    if (!addressBookTableContent.operation) {
+  formatRowUser(addressBookTableContent: AddressBookEntryRow): string {
+    if (!addressBookTableContent.entry.user || !addressBookTableContent.entry.userDetails) {
       return '';
     }
-    return addressBookTableContent.operation.title;
-  }
-
-  getUserDescriptionFromAddressBookEntryTableContent(addressBookTableContent: AddressBookEntryTableRowContent): string {
-    if(!addressBookTableContent.entry.user || !addressBookTableContent.entry.userDetails) {
-      return '';
-    }
-    return  addressBookTableContent.entry.userDetails.lastName + ' ' + addressBookTableContent.entry.userDetails.firstName + ' (' + addressBookTableContent.entry.userDetails.username + ')';
+    const userDetails = addressBookTableContent.entry.userDetails;
+    return userDetails.lastName + ' ' + userDetails.firstName + ' (' + userDetails.username + ')';
   }
 
   private static mapOrderBy(s: string): AddressBookEntrySort | undefined {
