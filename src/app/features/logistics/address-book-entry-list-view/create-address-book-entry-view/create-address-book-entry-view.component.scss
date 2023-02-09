@@ -1,12 +1,2 @@
-@import '../../../../../styles/forms';
-
-form {
-  display: flex;
-  flex-direction: column;
-  overflow: visible;
-}
-
-.view{
-  margin-right: 1rem;
-  margin-left: 1rem;
-}
+@import 'src/styles/forms';
+@import 'src/styles/view';

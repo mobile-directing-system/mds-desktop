@@ -1,6 +1,6 @@
 <div class="view" [appShowLoadingOverlay]="loader.loadingChange() | async">
   <h1 i18n>Address Book Entry: {{form.controls.label.getRawValue()}}</h1>
-  <form [formGroup]="form" (ngSubmit)="updateEntry()">
+  <form [formGroup]="form" (ngSubmit)="updateEntry()" class="form-column">
     <!--Label.-->
     <mat-form-field class="app-edit-input">
       <mat-label i18n>Label</mat-label>
