@@ -37,6 +37,7 @@ import { DeleteConfirmDialog } from './components/delete-confirm-dialog/delete-c
 import { ImportanceSelectComponent } from './components/importance-select/importance-select.component';
 import { ChannelTypeSelectComponent } from './components/channel-type-select/channel-type-select.component';
 import { DurationPickerComponent } from './components/duration-picker/duration-picker.component';
+import { FKeyToolbarComponent } from './components/f-key-toolbar/f-key-toolbar.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { DurationPickerComponent } from './components/duration-picker/duration-p
     ChannelTypeSelectComponent,
     ImportanceSelectComponent,
     DurationPickerComponent,
+    FKeyToolbarComponent,
   ],
   exports: [
     LogoComponent,
@@ -99,6 +101,7 @@ import { DurationPickerComponent } from './components/duration-picker/duration-p
     ImportanceSelectComponent,
     DurationPickerComponent,
     AngularMaterialModule,
+    FKeyToolbarComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,13 @@
+<div class="tool-bar">
+  <div class="key-box" *ngFor="let n of hotKeyNumbers">
+    <div>
+      <div class="key-content">
+        {{suggestions.length >= n+1 ? suggestions[n].suggestionText : '-'}}
+      </div>
+      <span class="key-desc" i18n>
+        F{{n+1}}
+      </span>
+    </div>
+    <mat-divider [vertical]="true" style="height: auto"></mat-divider>
+  </div>
+</div>
