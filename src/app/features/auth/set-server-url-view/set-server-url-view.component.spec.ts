@@ -48,12 +48,12 @@ describe('SetServerURLView', () => {
 
     component.ngOnInit();
 
-    expect(component.serverURLFC.value).toEqual(serverURL);
+    expect(component.serverUrlFC.value).toEqual(serverURL);
   });
 
   describe('apply', () => {
     beforeEach(() => {
-      component.serverURLFC.setValue(serverURL);
+      component.serverUrlFC.setValue(serverURL);
     });
 
     it('should apply the base url to net service', () => {
@@ -97,7 +97,7 @@ describe('SetServerURLView.integration', () => {
   });
 
   it('should disable the apply-button when an incorrect url was entered', fakeAsync(async () => {
-    component.serverURLFC.setValue('invalid url');
+    component.serverUrlFC.setValue('invalid url');
     tick();
     spectator.detectComponentChanges();
     await spectator.fixture.whenStable();
@@ -106,7 +106,7 @@ describe('SetServerURLView.integration', () => {
   }));
 
   it('should enable the apply-button when a correct url was entered', fakeAsync(async () => {
-    component.serverURLFC.setValue(serverURL);
+    component.serverUrlFC.setValue(serverURL);
     tick();
     spectator.detectComponentChanges();
     await spectator.fixture.whenStable();
@@ -115,7 +115,7 @@ describe('SetServerURLView.integration', () => {
   }));
 
   it('should apply when apply-button is clicked', fakeAsync(async () => {
-    component.serverURLFC.setValue(serverURL);
+    component.serverUrlFC.setValue(serverURL);
     const applySpy = spyOn(component, 'apply');
     tick();
     spectator.detectComponentChanges();

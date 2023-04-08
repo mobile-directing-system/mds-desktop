@@ -4,15 +4,15 @@
       <mat-form-field appearance="outline">
         <mat-label i18n>Server URL</mat-label>
         <mat-hint i18n>URL for accessing the server</mat-hint>
-        <input [formControl]="serverURLFC" i18n-placeholder matInput placeholder="e.g. https://mds.my-server.net/server">
-        <mat-error *ngIf="serverURLFC.errors && serverURLFC.errors['required']" i18n>
+        <input [formControl]="serverUrlFC" i18n-placeholder matInput placeholder="e.g. https://mds.my-server.net/server">
+        <mat-error *ngIf="serverUrlFC.errors && serverUrlFC.errors['required']" i18n>
           Server URL required.
         </mat-error>
-        <mat-error *ngIf="serverURLFC.errors && serverURLFC.errors['pattern']" i18n>
+        <mat-error *ngIf="serverUrlFC.errors && serverUrlFC.errors['pattern']" i18n>
           Invalid server URL.
         </mat-error>
       </mat-form-field>
-      <button mat-button type="submit" [disabled]="serverURLFC.invalid" i18n="@@lbApply">Apply</button>
+      <button mat-button type="submit" [disabled]="serverUrlFC.invalid" i18n="@@lbApply">Apply</button>
     </form>
   </div>
 </div>
