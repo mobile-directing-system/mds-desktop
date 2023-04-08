@@ -11,7 +11,7 @@ import { User } from '../../../../core/model/user';
 import { Operation } from '../../../../core/model/operation';
 import { map } from 'rxjs/operators';
 import { SearchResult } from '../../../../core/util/store';
-import { AddressBookEntry } from '../../../../core/model/addressbookEntry';
+import { AddressBookEntry } from '../../../../core/model/address-book-entry';
 import { Channel } from '../../../../core/model/channel';
 import { ChannelService } from '../../../../core/services/channel.service';
 

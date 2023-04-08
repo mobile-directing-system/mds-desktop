@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NetService } from './net.service';
-import { AddressBookEntry, CreateAddressBookEntry } from '../model/addressbookEntry';
+import { AddressBookEntry, CreateAddressBookEntry } from '../model/address-book-entry';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
 import urlJoin from 'url-join';

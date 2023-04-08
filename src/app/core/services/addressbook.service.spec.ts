@@ -1,7 +1,7 @@
 import { AddressBookEntrySort, AddressBookService } from './addressbook.service';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { NetService } from './net.service';
-import { AddressBookEntry, CreateAddressBookEntry } from '../model/addressbookEntry';
+import { AddressBookEntry, CreateAddressBookEntry } from '../model/address-book-entry';
 import { User } from '../model/user';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
