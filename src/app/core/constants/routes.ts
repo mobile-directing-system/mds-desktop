@@ -60,7 +60,7 @@ import {
   CreateAddressBookEntryPermission,
   UpdateAddressBookEntryPermission,
   ViewAddressBookEntryPermission,
-} from '../permissions/addressBookEntries';
+} from '../permissions/address-book-entries';
 
 /**
  * Routes for usage in {@link AppModule}.
