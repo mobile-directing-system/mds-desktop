@@ -75,7 +75,7 @@ export class OperationService {
       description: create.description,
       start: create.start.toISOString(),
       end: create.end?.toISOString(),
-      is_archived: create.is_archived,
+      is_archived: create.isArchived,
     };
     return this.netService.postJSON<NetCreated>('/operations', body, {}).pipe(
       map((res: NetCreated): Operation => ({
@@ -84,7 +84,7 @@ export class OperationService {
         description: res.description,
         start: new Date(Date.parse(res.start)),
         end: res.end ? new Date(Date.parse(res.end)) : undefined,
-        is_archived: res.is_archived,
+        isArchived: res.is_archived,
       })),
     );
   }
@@ -109,7 +109,7 @@ export class OperationService {
       description: update.description,
       start: update.start.toISOString(),
       end: update.end?.toISOString(),
-      is_archived: update.is_archived,
+      is_archived: update.isArchived,
     };
     return this.netService.putJSON(urlJoin('/operations', update.id), body, {});
   }
@@ -135,7 +135,7 @@ export class OperationService {
         description: res.description,
         start: new Date(Date.parse(res.start)),
         end: res.end ? new Date(Date.parse(res.end)) : undefined,
-        is_archived: res.is_archived,
+        isArchived: res.is_archived,
       })),
     );
   }
@@ -188,7 +188,7 @@ export class OperationService {
           description: nEntry.description,
           start: new Date(Date.parse(nEntry.start)),
           end: nEntry.end ? new Date(Date.parse(nEntry.end)) : undefined,
-          is_archived: nEntry.is_archived,
+          isArchived: nEntry.is_archived,
         }));
       }),
     );
@@ -229,7 +229,7 @@ export class OperationService {
           description: nEntry.description,
           start: new Date(Date.parse(nEntry.start)),
           end: nEntry.end ? new Date(Date.parse(nEntry.end)) : undefined,
-          is_archived: nEntry.is_archived,
+          isArchived: nEntry.is_archived,
         }));
       }),
     );

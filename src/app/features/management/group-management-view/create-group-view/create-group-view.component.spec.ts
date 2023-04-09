@@ -68,7 +68,7 @@ describe('CreateGroupView', () => {
     title: 'roof',
     description: 'temple',
     start: new Date(),
-    is_archived: false,
+    isArchived: false,
   };
 
   beforeEach(async () => {

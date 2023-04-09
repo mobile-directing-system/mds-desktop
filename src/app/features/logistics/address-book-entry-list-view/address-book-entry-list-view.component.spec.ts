@@ -72,7 +72,7 @@ describe('AddressBookEntryLogisticsView', () => {
       title: 'person',
       description: 'belong',
       start: new Date(2022, 9, 9),
-      is_archived: false,
+      isArchived: false,
     };
 
   const sampleAddressBookEntryTableRowContent: AddressBookEntryRow[] = [
