@@ -1,0 +1,10 @@
+@import 'src/styles/corporate';
+
+.operation {
+  font-size: .7em;
+  color: $dark-disabled-text;
+
+  &:hover {
+    color: $dark-secondary-text;
+  }
+}

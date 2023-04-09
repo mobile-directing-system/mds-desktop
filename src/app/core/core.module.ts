@@ -37,6 +37,12 @@ import { DeleteConfirmDialog } from './components/delete-confirm-dialog/delete-c
 import { ImportanceSelectComponent } from './components/importance-select/importance-select.component';
 import { ChannelTypeSelectComponent } from './components/channel-type-select/channel-type-select.component';
 import { DurationPickerComponent } from './components/duration-picker/duration-picker.component';
+import {
+  WorkspaceOperationSelectorComponent,
+} from './components/home-layout/workspace-operation-selector/workspace-operation-selector.component';
+import {
+  SelectWorkspaceOperationDialog,
+} from './components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component';
 
 
 @NgModule({
@@ -70,6 +76,8 @@ import { DurationPickerComponent } from './components/duration-picker/duration-p
     ChannelTypeSelectComponent,
     ImportanceSelectComponent,
     DurationPickerComponent,
+    WorkspaceOperationSelectorComponent,
+    SelectWorkspaceOperationDialog,
   ],
   exports: [
     LogoComponent,
