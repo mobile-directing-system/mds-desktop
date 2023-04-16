@@ -53,6 +53,7 @@ describe('EditAddressBookLogisticsView', () => {
   const channels: Channel[] = [
     {
       entry: 'develop',
+      isActive: true,
       label: 'replace',
       type: ChannelType.Radio,
       priority: 24,

@@ -18,6 +18,7 @@ import { MatSelectHarness } from '@angular/material/select/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { formatEditDuration } from '../../../../core/components/duration-picker/duration-picker.component';
 import { newMatDialogRefMock } from '../../../../core/testutil/testutil';
+import { MatSlideToggleHarness } from '@angular/material/slide-toggle/testing';
 
 describe('ChannelDetailsDialog', () => {
   let spectator: Spectator<ChannelDetailsDialog>;
@@ -37,6 +38,7 @@ describe('ChannelDetailsDialog', () => {
       channel: {
         id: 'cake',
         entry: 'clever',
+        isActive: true,
         label: 'valley',
         type: ChannelType.Radio,
         timeout: moment.duration({ hours: 1 }),
@@ -317,6 +319,45 @@ describe('ChannelDetailsDialog', () => {
     });
   });
 
+  describe('is-active form field', () => {
+    let toggle: MatSlideToggleHarness;
+
+    beforeEach(async () => {
+      const toggleElem = spectator.query(byTextContent('Active', {
+        exact: false,
+        selector: 'mat-slide-toggle',
+      }));
+      if (!toggleElem) {
+        fail('could not locate slide-toggle');
+        return;
+      }
+      toggleElem.classList.add('TEST_SELECT');
+      const tmpToggle = await harnessLoader.getHarnessOrNull(MatSlideToggleHarness.with({
+        selector: '.TEST_SELECT',
+      }));
+      if (!tmpToggle) {
+        fail('could not get toggle-harness');
+        return;
+      }
+      toggle = tmpToggle;
+    });
+
+    it('should display value', async () => {
+      const isChecked = await toggle.isChecked();
+      expect(isChecked).toBeTrue();
+    });
+
+    it('should set is-active to true if checked', async () => {
+      await toggle.check();
+      expect(component.form.getRawValue().isActive).toBeTrue();
+    });
+
+    it('should set is-active to false if unchecked', async () => {
+      await toggle.uncheck();
+      expect(component.form.getRawValue().isActive).toBeFalse();
+    });
+  });
+
   describe('channel details', () => {
     const tests: {
       channelType: ChannelType;
@@ -359,6 +400,7 @@ describe('ChannelDetailsDialog', () => {
       channel: {
         id: dialogData.channel.id,
         entry: 'separate',
+        isActive: true,
         label: 'jump',
         type: ChannelType.Radio,
         timeout: moment.duration({ seconds: 3 }),

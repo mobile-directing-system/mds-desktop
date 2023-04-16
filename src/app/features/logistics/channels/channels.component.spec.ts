@@ -27,6 +27,7 @@ describe('ChannelsComponent', () => {
     {
       id: 'omission',
       entry: entryId,
+      isActive: true,
       label: 'defeat',
       type: ChannelType.InAppNotification,
       priority: 50,
@@ -37,6 +38,7 @@ describe('ChannelsComponent', () => {
     {
       id: 'popular',
       entry: entryId,
+      isActive: true,
       label: 'continue',
       type: ChannelType.Radio,
       priority: 40,
@@ -49,6 +51,7 @@ describe('ChannelsComponent', () => {
     {
       id: 'pour',
       entry: entryId,
+      isActive: true,
       label: 'inquire',
       type: ChannelType.Radio,
       priority: 10,
@@ -149,6 +152,7 @@ describe('ChannelsComponent', () => {
     it('should add channel on submit-action', () => {
       const create: Channel = {
         entry: entryId,
+        isActive: true,
         label: 'sing',
         type: ChannelType.Radio,
         priority: 100,
@@ -227,6 +231,30 @@ describe('ChannelsComponent', () => {
         selector: 'tr',
       }));
       expect(openChannelSpy).toHaveBeenCalledOnceWith(sampleChannels[1]);
+    });
+
+    it('should show active-state when active', async () => {
+      component.channelsDataSource.data = component.channelsDataSource.data.map(c => ({
+        ...c,
+        isActive: true,
+      }));
+
+      spectator.detectChanges();
+      await spectator.fixture.whenStable();
+
+      expect(spectator.query('div.active-indicator')).toBeVisible();
+    });
+
+    it('should show active-state when inactive', async () => {
+      component.channelsDataSource.data = component.channelsDataSource.data.map(c => ({
+        ...c,
+        isActive: false,
+      }));
+
+      spectator.detectChanges();
+      await spectator.fixture.whenStable();
+
+      expect(spectator.query('div.active-indicator')).toBeVisible();
     });
   });
 });

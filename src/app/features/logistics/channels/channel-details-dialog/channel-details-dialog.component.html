@@ -33,6 +33,10 @@
         <app-duration-picker [formControl]="form.controls.timeout"></app-duration-picker>
       </mat-form-field>
     </div>
+    <div class="form-row">
+      <!--Is active.-->
+      <mat-slide-toggle [formControl]="form.controls.isActive">Active</mat-slide-toggle>
+    </div>
     <mat-divider></mat-divider>
     <!--Channel details.-->
     <ng-container [ngSwitch]="form.controls.type.value">

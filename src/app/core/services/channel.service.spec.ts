@@ -29,6 +29,7 @@ describe('ChannelService', () => {
       const net: NetChannel = {
         id: 'ray',
         entry: 'forgive',
+        is_active: true,
         label: 'leg',
         type: 'in-app-notification',
         priority: 200,
@@ -39,6 +40,7 @@ describe('ChannelService', () => {
       const app: InAppNotificationChannel = {
         id: 'ray',
         entry: 'forgive',
+        isActive: true,
         label: 'leg',
         type: ChannelType.InAppNotification,
         priority: 200,
@@ -62,6 +64,7 @@ describe('ChannelService', () => {
       const net: NetChannel = {
         id: 'ray',
         entry: 'forgive',
+        is_active: false,
         label: 'leg',
         type: ChannelType.Radio,
         priority: 200,
@@ -74,6 +77,7 @@ describe('ChannelService', () => {
       const app: RadioChannel = {
         id: 'ray',
         entry: 'forgive',
+        isActive: false,
         label: 'leg',
         type: ChannelType.Radio,
         priority: 200,
@@ -102,6 +106,7 @@ describe('ChannelService', () => {
       {
         id: 'queen',
         entry: entryId,
+        is_active: true,
         label: 'rejoice',
         type: ChannelType.Radio,
         priority: 200,
@@ -114,6 +119,7 @@ describe('ChannelService', () => {
       {
         id: 'object',
         entry: entryId,
+        is_active: false,
         label: 'every',
         type: ChannelType.InAppNotification,
         priority: 50,
@@ -126,6 +132,7 @@ describe('ChannelService', () => {
       {
         id: 'queen',
         entry: entryId,
+        isActive: true,
         label: 'rejoice',
         type: ChannelType.Radio,
         priority: 200,
@@ -140,6 +147,7 @@ describe('ChannelService', () => {
       {
         id: 'object',
         entry: entryId,
+        isActive: false,
         label: 'every',
         type: ChannelType.InAppNotification,
         priority: 50,
@@ -184,6 +192,7 @@ describe('ChannelService', () => {
       {
         id: 'queen',
         entry: entryId,
+        isActive: false,
         label: 'rejoice',
         type: ChannelType.Radio,
         priority: 200,
@@ -198,6 +207,7 @@ describe('ChannelService', () => {
       {
         id: 'object',
         entry: entryId,
+        isActive: true,
         label: 'every',
         type: ChannelType.InAppNotification,
         priority: 50,
@@ -212,6 +222,7 @@ describe('ChannelService', () => {
       {
         id: 'queen',
         entry: entryId,
+        is_active: false,
         label: 'rejoice',
         type: ChannelType.Radio,
         priority: 200,
@@ -224,6 +235,7 @@ describe('ChannelService', () => {
       {
         id: 'object',
         entry: entryId,
+        is_active: true,
         label: 'every',
         type: ChannelType.InAppNotification,
         priority: 50,
