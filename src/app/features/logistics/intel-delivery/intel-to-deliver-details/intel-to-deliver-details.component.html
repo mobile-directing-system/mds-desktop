@@ -1,0 +1,47 @@
+<div class="frame">
+  <div class="none-selected" *ngIf="(getSelected() | async) === undefined" i18n>No intel delivery selected.</div>
+  <div class="selected" *ngIf="getSelected() | async; let selected">
+    <div class="intel-importance">
+      <app-importance-inline [importance]="selected.delivery.intel.importance"></app-importance-inline>
+    </div>
+    <div class="subject">
+      <span [appShowLoadingDots]="selected.intel === undefined">
+        <app-intel-type-inline [intelType]="selected.intel.type" *ngIf="selected.intel"></app-intel-type-inline>
+        <app-hidden *ngIf="selected.intel === null" [width]="10" i18n>
+          Intel id: {{ selected.delivery.intel.id }}
+        </app-hidden>
+      </span>
+      <span [appShowLoadingDots]="selected.operation === undefined">
+        <span
+          *ngIf="selected.operation"
+          [matTooltipShowDelay]="350"
+          i18n-matTooltip
+          matTooltip="Operation associated with the intel">({{ selected.operation.title }})</span>
+        <app-hidden *ngIf="selected.operation === null" [width]="10" i18n>
+          Operation id: {{ selected.delivery.intel.operation }}
+        </app-hidden>
+      </span>
+    </div>
+    <div class="intel-creation-timestamp">
+      {{ selected.delivery.intel.createdAt | date:'medium' }}
+      ({{ fromNow(selected.delivery.intel.createdAt) }})
+    </div>
+    <div class="from-to">
+      <span [appShowLoadingDots]="selected.intelCreator === undefined">
+        <span *ngIf="selected.intelCreator">{{ formatIntelCreatorName(selected.intelCreator) }}</span>
+        <app-hidden *ngIf="selected.intelCreator === null" [width]="10"></app-hidden>
+      </span>
+      <mat-icon>arrow_right</mat-icon>
+      <span [appShowLoadingDots]="selected.recipientEntry === undefined">
+        <span *ngIf="selected.recipientEntry">{{ selected.recipientEntry.label }}</span>
+        <app-hidden *ngIf="selected.recipientEntry === null" [width]="10"></app-hidden>
+      </span>
+    </div>
+    <div class="intel-summary">
+      <span [appShowLoadingDots]="selected.intel === undefined">
+        <app-intel-summary *ngIf="selected.intel" [intel]="selected.intel"></app-intel-summary>
+        <app-hidden *ngIf="selected.intel === null" [width]="10"></app-hidden>
+      </span>
+    </div>
+  </div>
+</div>

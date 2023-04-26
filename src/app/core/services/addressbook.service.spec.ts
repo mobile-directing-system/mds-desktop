@@ -249,6 +249,7 @@ describe('AddressBookService', () => {
         exclude_global: undefined,
         visible_by: undefined,
         include_for_inactive_users: undefined,
+        auto_delivery_enabled: undefined,
       });
       expect(cbSpy).toHaveBeenCalledOnceWith(testGenPaginatedFromNet<AddressBookEntry>(netPaginated, undefined, [
         {
@@ -289,6 +290,7 @@ describe('AddressBookService', () => {
           exclude_global: undefined,
           visible_by: undefined,
           include_for_inactive_users: undefined,
+          auto_delivery_enabled: undefined,
         });
       }));
 

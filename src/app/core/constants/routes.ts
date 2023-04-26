@@ -61,6 +61,9 @@ import {
   UpdateAddressBookEntryPermission,
   ViewAddressBookEntryPermission,
 } from '../permissions/address-book-entries';
+import {
+  IntelDeliveryView,
+} from '../../features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component';
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -205,8 +208,12 @@ export const AppRoutes: PermissionGuardedRoute[] = [
                 ViewAnyOperationPermission(),
               ],
             },
-          }
-        ]
+          },
+        ],
+      },
+      {
+        path: 'intel-delivery',
+        component: IntelDeliveryView,
       },
     ],
   },

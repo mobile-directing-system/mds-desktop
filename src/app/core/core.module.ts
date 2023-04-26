@@ -43,6 +43,13 @@ import {
 import {
   SelectWorkspaceOperationDialog,
 } from './components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component';
+import { HiddenComponent } from './components/hidden/hidden.component';
+import { IntelTypeInlineComponent } from './components/intel-type-inline/intel-type-inline.component';
+import { IntelSummaryComponent } from './components/intel-summary/intel-summary.component';
+import {
+  PlainTextMessageSummaryComponent,
+} from './components/intel-summary/plain-text-message-summary/plain-text-message-summary.component';
+import { AnalogRadioMessageSummaryComponent } from './components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component';
 
 
 @NgModule({
@@ -78,6 +85,11 @@ import {
     DurationPickerComponent,
     WorkspaceOperationSelectorComponent,
     SelectWorkspaceOperationDialog,
+    HiddenComponent,
+    IntelTypeInlineComponent,
+    IntelSummaryComponent,
+    PlainTextMessageSummaryComponent,
+    AnalogRadioMessageSummaryComponent,
   ],
   exports: [
     LogoComponent,
@@ -107,6 +119,9 @@ import {
     ImportanceSelectComponent,
     DurationPickerComponent,
     AngularMaterialModule,
+    HiddenComponent,
+    IntelTypeInlineComponent,
+    IntelSummaryComponent,
   ],
   imports: [
     CommonModule,

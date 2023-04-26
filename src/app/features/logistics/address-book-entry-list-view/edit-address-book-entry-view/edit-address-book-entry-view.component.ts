@@ -14,6 +14,8 @@ import { SearchResult } from '../../../../core/util/store';
 import { AddressBookEntry } from '../../../../core/model/address-book-entry';
 import { Channel } from '../../../../core/model/channel';
 import { ChannelService } from '../../../../core/services/channel.service';
+import { AccessControlService } from '../../../../core/services/access-control.service';
+import { ManageIntelDelivery } from '../../../../core/permissions/intel-delivery';
 
 /**
  * View to edit an existing {@link AddressBookEntry}
@@ -41,7 +43,7 @@ export class EditAddressBookEntryView implements OnInit, OnDestroy {
   constructor(private addressBookService: AddressBookService, private notificationService: NotificationService,
               private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
               private userService: UserService, private operationService: OperationService,
-              private channelService: ChannelService) {
+              private channelService: ChannelService, private acService: AccessControlService) {
   }
 
   ngOnDestroy(): void {
@@ -153,5 +155,9 @@ export class EditAddressBookEntryView implements OnInit, OnDestroy {
         this.notificationService.notifyUninvasiveShort(`Address book entry deleted.`);
         this.close();
       }));
+  }
+
+  isManageAutoIntelDeliveryEnabled(): Observable<boolean> {
+    return this.acService.isGranted([ManageIntelDelivery()])
   }
 }

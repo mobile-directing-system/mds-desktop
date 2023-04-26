@@ -34,6 +34,7 @@ export interface AddressBookEntryFilters {
   excludeGlobal?: boolean,
   visibleBy?: string,
   includeForInActiveUsers?: boolean,
+  autoDeliveryEnabled?: boolean,
 }
 
 interface NetUser {
@@ -190,6 +191,7 @@ export class AddressBookService {
       exclude_global?: boolean,
       visible_by?: string,
       include_for_inactive_users?: boolean,
+      auto_delivery_enabled?: boolean;
     }
 
     const nParams: NetParams = netPaginationParams(params, (by: AddressBookEntrySort) => {
@@ -207,6 +209,7 @@ export class AddressBookService {
     nParams.include_for_inactive_users = filters.includeForInActiveUsers;
     nParams.exclude_global = filters.excludeGlobal;
     nParams.for_operation = filters.forOperation;
+    nParams.auto_delivery_enabled = filters.autoDeliveryEnabled;
 
     return this.netService.get<NetPaginated<NetEntry>>(urlJoin('/address-book', 'entries'), nParams).pipe(
       map((res: NetPaginated<NetEntry>): Paginated<AddressBookEntry> => {
@@ -266,5 +269,30 @@ export class AddressBookService {
         }));
       }),
     );
+  }
+
+  /**
+   * Checks whether auto intel delivery is enabled for the address book entry with the given id.
+   * @param entryId The id of the address book entry to check.
+   */
+  isAutoIntelDeliveryEnabledForAddressBookEntry(entryId: string): Observable<boolean> {
+    return this.netService.getText(urlJoin('/address-book', 'entries', entryId, 'auto-intel-delivery'), {})
+      .pipe(map(res => res === 'true'));
+  }
+
+  /**
+   * Enables auto intel delivery for the address book entry with the given id.
+   * @param entryId The id of the address book entry to enable auto intel delivery for.
+   */
+  enableAutoIntelDeliveryForAddressBookEntry(entryId: string): Observable<void> {
+    return this.netService.post<void>(urlJoin('/address-book', 'entries', entryId, 'auto-intel-delivery', 'enable'), {});
+  }
+
+  /**
+   * Disabled auto intel delivery for the address book entry with the given id.
+   * @param entryId The id of the address book entry to disable auto intel delivery for.
+   */
+  disableAutoIntelDeliveryForAddressBookEntry(entryId: string): Observable<void> {
+    return this.netService.post<void>(urlJoin('/address-book', 'entries', entryId, 'auto-intel-delivery', 'disable'), {});
   }
 }

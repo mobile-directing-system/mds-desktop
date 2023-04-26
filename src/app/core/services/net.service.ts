@@ -105,6 +105,15 @@ export class NetService {
     );
   }
 
+  getText(path: string, params: object): Observable<string> {
+    return this.http.get(this.buildUrl(path), {
+      responseType: 'text',
+      ...this.buildRequestOptions(params, null),
+    }).pipe(
+      catchError((err: HttpErrorResponse) => throwError(() => this.handleError(err, StoreRequestMethod.Get))),
+    );
+  }
+
   postJSON<T>(path: string, body: object, params: object): Observable<T> {
     return this.http.post<T>(this.buildUrl(path), clean(body), {
       responseType: 'json',

@@ -1,0 +1,10 @@
+@use 'sass:map';
+@import 'src/styles/corporate';
+
+.realtime {
+  color: map.get($mds-desktop-danger-palette, 800);
+
+  &.realtime--ok {
+    color: map.get($mds-desktop-success-palette, 800);
+  }
+}

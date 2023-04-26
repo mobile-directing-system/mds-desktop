@@ -1,0 +1,31 @@
+<div class="frame">
+  <div *ngIf="(getSelected() | async) === undefined" class="no-attempts" i18n>No intel delivery selected.</div>
+  <div *ngIf="(getSelected() | async); let selected" [appShowLoadingOverlay]="selected.attempts === undefined">
+    <app-hidden *ngIf="selected.attempts === null" [width]="10"></app-hidden>
+    <ng-container *ngIf="selected.attempts">
+      <div *ngIf="selected.attempts.length === 0" class="no-attempts" i18n>No delivery attempts, yet.</div>
+      <ng-container *ngIf="selected.attempts.length > 0">
+        <ng-container *ngFor="let attempt of selected.attempts; let i = index">
+          <mat-divider *ngIf="i !== 0"></mat-divider>
+          <div class="attempt">
+            <div class="timestamp">
+              <div>
+                {{ attempt.createdAt | date:'short' }}
+                ({{ fromNow(attempt.createdAt) }})
+              </div>
+              <div i18n>
+                Marked as failed after: {{ attemptFailedAfter(attempt.createdAt, attempt.statusTS) | duration }}
+              </div>
+            </div>
+            <div *ngIf="!getChannelOfSelected(selected, attempt.channel)" [appShowLoadingDots]="true"></div>
+            <ng-container *ngIf="getChannelOfSelected(selected, attempt.channel); let channel">
+              <app-channel-type-inline [channelType]="channel.type" class="channel-type"></app-channel-type-inline>
+              <div class="channel-label">{{ channel.label }}</div>
+            </ng-container>
+            <div *ngIf="attempt.note !== undefined" class="attempt-note">{{ attempt.note }}</div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

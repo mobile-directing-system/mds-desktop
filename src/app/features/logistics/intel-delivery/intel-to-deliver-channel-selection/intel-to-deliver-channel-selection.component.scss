@@ -1,0 +1,35 @@
+$spacing: .7em;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+}
+
+.c {
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing;
+}
+
+.hint {
+  margin-top: .2em;
+  position: absolute;
+  right: 0;
+}
+
+.channels {
+  display: flex;
+  flex-direction: column;
+  gap: .7em;
+  width: 100%;
+
+  > {
+    flex-grow: 1;
+  }
+}
+
+h3 {
+  margin: 0;
+}

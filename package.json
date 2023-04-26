@@ -39,6 +39,7 @@
     "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
     "ng-extract-i18n-merge": "^2.4.0",
+    "ng-mocks": "^14.10.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "url-join": "^5.0.0",

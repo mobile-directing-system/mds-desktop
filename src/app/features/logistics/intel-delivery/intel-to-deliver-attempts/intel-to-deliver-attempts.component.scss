@@ -1,0 +1,41 @@
+@use 'sass:map';
+@import 'src/styles/corporate';
+
+:host {
+  display: block;
+}
+
+.frame {
+  overflow: scroll;
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 40vh;
+  background-color: $bg-light;
+  border: solid 2px map.get($mds-desktop-font-palette, 400);
+}
+
+.no-attempts {
+  padding: 12px;
+}
+
+.attempt {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: .3em;
+
+  .timestamp {
+    color: map.get($mds-desktop-font-palette, 600);
+  }
+
+  .channel-type {
+  }
+
+  .channel-label {
+    font-weight: 500;
+  }
+
+  .attempt-note {
+    color: map.get($mds-desktop-danger-palette, 900);
+  }
+}

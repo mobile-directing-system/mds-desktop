@@ -1,12 +1,13 @@
 import { SetServerURLView } from './set-server-url-view.component';
-import { createRoutingFactory, SpectatorRouting, SpectatorRoutingOptions } from '@ngneat/spectator';
+import { createRoutingFactory, mockProvider, SpectatorRouting, SpectatorRoutingOptions } from '@ngneat/spectator';
 import { AuthModule } from '../auth.module';
-import { NetService } from '../../../core/services/net.service';
 import { NotificationService } from '../../../core/services/notification.service';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { AppRoutes } from '../../../core/constants/routes';
 import { AuthService } from '../../../core/services/auth.service';
 import { fakeAsync, tick } from '@angular/core/testing';
+import { ConfigService } from '../../../core/services/config.service';
+import { Observable, of } from 'rxjs';
 
 function genFactoryOptions(): SpectatorRoutingOptions<SetServerURLView> {
   return {
@@ -14,8 +15,14 @@ function genFactoryOptions(): SpectatorRoutingOptions<SetServerURLView> {
     imports: [
       AuthModule,
     ],
+    providers: [
+      mockProvider(ConfigService, {
+        get serverUrl(): Observable<string | null> {
+          return of(serverURL);
+        },
+      }),
+    ],
     mocks: [
-      NetService,
       AuthService,
       NotificationService,
       LocalStorageService,
@@ -25,12 +32,13 @@ function genFactoryOptions(): SpectatorRoutingOptions<SetServerURLView> {
   };
 }
 
+const serverURL = 'http://dinner:1234';
+
 describe('SetServerURLView', () => {
   let spectator: SpectatorRouting<SetServerURLView>;
   let component: SetServerURLView;
   const createComponent = createRoutingFactory(genFactoryOptions());
 
-  const serverURL = 'http://dinner:1234';
   let navigateSpy: jasmine.Spy;
 
   beforeEach(() => {
@@ -56,9 +64,9 @@ describe('SetServerURLView', () => {
       component.serverUrlFC.setValue(serverURL);
     });
 
-    it('should apply the base url to net service', () => {
+    it('should apply the base url to config service', () => {
       component.apply();
-      expect(spectator.inject(NetService).setBaseUrl).toHaveBeenCalledOnceWith(serverURL);
+      expect(spectator.inject(ConfigService).setServerUrl).toHaveBeenCalledOnceWith(serverURL);
     });
 
     it('should navigate to login page after apply', () => {
@@ -92,7 +100,10 @@ describe('SetServerURLView.integration', () => {
     navigateSpy = spyOn(spectator.router, 'navigate').and.resolveTo();
   });
 
-  it('should disable the apply-button when no url was entered', () => {
+  it('should disable the apply-button when no url was entered', async () => {
+    component.serverUrlFC.setValue('');
+    spectator.detectComponentChanges();
+    await spectator.fixture.whenStable();
     expect(spectator.query('form button')).toBeDisabled();
   });
 

@@ -1,0 +1,51 @@
+@use 'sass:map';
+@import 'src/styles/corporate';
+
+:host {
+  display: block;
+}
+
+.c {
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+  background-color: $bg-light;
+  width: 100%;
+  box-shadow: -3px 3px 6px map.get($mds-desktop-font-palette, 300);
+  border: transparent 3px solid;
+
+  &.highlight {
+    animation: animatedHighlightBorder 400ms ease alternate infinite;
+  }
+}
+
+.channel-meta {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@keyframes animatedHighlightBorder {
+  0%, 40% {
+    border-color: map.get($mds-desktop-primary-palette, 400);
+  }
+  100% {
+    border-color: map.get($mds-desktop-primary-palette, 100);
+  }
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .label {
+    font-size: .7em;
+    color: map.get($mds-desktop-font-palette, 600);
+  }
+}
+
+.not-recommended {
+  color: map.get($mds-desktop-font-palette, 600);
+}

@@ -20,6 +20,6 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="cancel()">Cancel</button>
-  <button (click)="apply()" [disabled]="!operationFC.valid" color="primary" mat-button type="submit">Submit</button>
+  <button (click)="cancel()" i18n mat-button>Cancel</button>
+  <button (click)="apply()" [disabled]="!operationFC.valid" color="primary" i18n mat-button type="submit">Submit</button>
 </mat-dialog-actions>
