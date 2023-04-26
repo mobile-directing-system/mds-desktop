@@ -433,7 +433,7 @@
     </unit>
     <unit id="1241348629231510663">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:37,36</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:36</note>
       </notes>
       <segment>
         <source>End</source>
@@ -1339,6 +1339,7 @@
     <unit id="6660925946511264619">
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:65,66</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:127,128</note>
       </notes>
       <segment>
         <source>Delete</source>
