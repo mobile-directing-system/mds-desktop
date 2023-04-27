@@ -1,10 +1,11 @@
 import { NetService } from './net.service';
-import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
+import { createServiceFactory, mockProvider, SpectatorService } from '@ngneat/spectator';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { of, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StatusCodes } from 'http-status-codes';
 import { fakeAsync, tick } from '@angular/core/testing';
+import { ConfigService } from './config.service';
 import anything = jasmine.anything;
 import createSpy = jasmine.createSpy;
 
@@ -23,12 +24,17 @@ describe('NetService', () => {
   const createService = createServiceFactory({
     service: NetService,
     imports: [HttpClientTestingModule],
-    providers: [],
+    providers: [
+      mockProvider(ConfigService, {
+        get serverUrl(): Observable<string | null> {
+          return of(url);
+        },
+      }),
+    ],
   });
 
   beforeEach(() => {
     spectator = createService();
-    spectator.service.setBaseUrl(url);
   });
 
   it('should be created', () => {

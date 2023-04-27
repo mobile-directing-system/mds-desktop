@@ -1,0 +1,12 @@
+<div
+  class="c clickable"
+  [appShowLoadingDots]="loader.loadingChange() | async"
+  (click)="selectOperation()"
+  i18n-matTooltip
+  matTooltipShowDelay=350
+  matTooltip="Currently selected operation for workspace. Click to change.">
+  <div class="operation" *ngIf="operation">{{ operation.title }}</div>
+  <div class="operation none" *ngIf="!operation" i18n>
+    Click to select operation.
+  </div>
+</div>

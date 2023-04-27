@@ -198,7 +198,7 @@ describe('CreateOperationViewComponent', () => {
         description: description,
         start: startDate.toDate(),
         end: endDateGreaterThanStartDate.toDate(),
-        is_archived: isArchived,
+        isAchived: isArchived,
       }));
 
       component.createOperation();
@@ -209,7 +209,7 @@ describe('CreateOperationViewComponent', () => {
         description: description,
         start: startDate.toDate(),
         end: endDateGreaterThanStartDate.toDate(),
-        is_archived: isArchived,
+        isArchived: isArchived,
       });
     }));
 
@@ -227,7 +227,7 @@ describe('CreateOperationViewComponent', () => {
         title: title,
         description: description,
         start: startDate,
-        is_archived: isArchived,
+        isArchived: isArchived,
       }));
 
       component.createOperation();
@@ -238,7 +238,7 @@ describe('CreateOperationViewComponent', () => {
         description: description,
         start: startDate.toDate(),
         end: undefined,
-        is_archived: isArchived,
+        isArchived: isArchived,
       });
     }));
 

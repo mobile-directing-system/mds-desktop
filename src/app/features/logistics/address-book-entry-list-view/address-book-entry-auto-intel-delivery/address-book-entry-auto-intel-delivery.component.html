@@ -1,0 +1,16 @@
+<div class="c" [appShowLoadingOverlay]="loader.loadingChange() | async">
+  <p class="indicator enabled" *ngIf="isAutoIntelDeliveryEnabled">
+    <mat-icon>directions</mat-icon>
+    <span i18n>Auto Intel Delivery is enabled.</span>
+    <button (click)="disable()" i18n mat-button type="button">
+      Disable Now
+    </button>
+  </p>
+  <p class="indicator disabled" *ngIf="!isAutoIntelDeliveryEnabled">
+    <mat-icon>directions</mat-icon>
+    <span i18n>Auto Intel Delivery is disabled.</span>
+    <button (click)="enable()" i18n mat-button type="button">
+      Enable Now
+    </button>
+  </p>
+</div>

@@ -37,6 +37,7 @@ export class ChannelDetailsDialog {
   form = this.fb.group({
     id: this.data.channel.id,
     entry: this.data.channel.entry,
+    isActive: this.fb.nonNullable.control<boolean>(this.data.channel.isActive),
     label: this.fb.nonNullable.control<string>(this.data.channel.label, Validators.required),
     type: this.fb.nonNullable.control<ChannelType>(this.data.channel.type),
     priority: this.fb.nonNullable.control<number>(this.data.channel.priority),
@@ -72,6 +73,7 @@ export class ChannelDetailsDialog {
     const channel: ChannelBase = {
       id: v.id ?? undefined,
       entry: v.entry!,
+      isActive: v.isActive,
       label: v.label,
       type: v.type,
       minImportance: v.minImportance,

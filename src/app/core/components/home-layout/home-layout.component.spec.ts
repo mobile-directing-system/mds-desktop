@@ -11,6 +11,7 @@ import { AppRoutes } from '../../constants/routes';
 import { AccessControlService } from '../../services/access-control.service';
 import { AccessControlMockService } from '../../services/access-control-mock.service';
 import { clearRouteComponentsExcept } from '../../testutil/testutil';
+import { OperationService } from '../../services/operation.service';
 
 function genFactoryOptions(): SpectatorRoutingOptions<HomeLayoutComponent> {
   return {
@@ -18,15 +19,16 @@ function genFactoryOptions(): SpectatorRoutingOptions<HomeLayoutComponent> {
     imports: [
       CoreModule,
     ],
-    mocks: [
-      AuthService,
-      UserService,
-    ],
     providers: [
       {
         provide: AccessControlService,
         useExisting: AccessControlMockService,
       },
+    ],
+    mocks: [
+      AuthService,
+      UserService,
+      OperationService,
     ],
     detectChanges: false,
     routes: clearRouteComponentsExcept(AppRoutes, '/'),

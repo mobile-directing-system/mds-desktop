@@ -2,6 +2,8 @@
   <mat-toolbar>
     <app-logo class="logo"></app-logo>
     <div class="spacer"></div>
+    <app-workspace-operation-selector></app-workspace-operation-selector>
+    <div class="spacer"></div>
     <div [routerLink]="['/mailbox']" class="menu-item selectable" routerLinkActive="active">Mailbox</div>
     <div [routerLink]="['/intelligence']" class="menu-item selectable" routerLinkActive="active">Intelligence</div>
     <div [routerLink]="['/resources']" class="menu-item selectable" routerLinkActive="active">Resources</div>

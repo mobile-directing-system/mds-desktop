@@ -1,0 +1,19 @@
+@use 'sass:map';
+@import 'src/styles/corporate';
+
+:host {
+  display: inline-block;
+}
+
+.c {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 1.2em;
+  overflow: hidden;
+}
+
+.block {
+  width: 1em;
+  height: 1.2em;
+  background-color: map.get($mds-desktop-font-palette, 200);
+}

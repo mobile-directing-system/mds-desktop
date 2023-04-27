@@ -18,3 +18,6 @@ export function getEnumKeyByValue<T extends { [index: string]: string }>(myEnum:
   let keys = Object.keys(myEnum).filter(x => myEnum[x] == enumValue);
   return keys.length > 0 ? keys[0] : null;
 }
+
+export type PENDING_INDICATOR = string;
+export const PENDING: PENDING_INDICATOR = '+<+>+PENDING+<+>+' + new Date().getTime();

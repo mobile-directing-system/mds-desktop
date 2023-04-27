@@ -27,6 +27,10 @@ export interface ChannelBase {
    */
   entry: string;
   /**
+   * Whether the channel is active and available for intel delivery.
+   */
+  isActive: boolean;
+  /**
    * Human-readable label of the channel.
    */
   label: string;
@@ -95,6 +99,7 @@ export function localizeChannelType(t: ChannelType): string {
 export function defaultChannel(entryId: string): Channel {
   const c: RadioChannel = {
     entry: entryId,
+    isActive: true,
     label: '',
     type: ChannelType.Radio,
     minImportance: Importance.None,

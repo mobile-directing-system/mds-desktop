@@ -2,7 +2,7 @@ import { AddressBookEntryListView, AddressBookEntryRow } from './address-book-en
 import { byTextContent, createRoutingFactory, SpectatorRouting } from '@ngneat/spectator';
 import { OperationService } from '../../../core/services/operation.service';
 import { CoreModule } from '../../../core/core.module';
-import { AddressBookEntry } from '../../../core/model/addressbookEntry';
+import { AddressBookEntry } from '../../../core/model/address-book-entry';
 import { Operation } from '../../../core/model/operation';
 import { OrderDir, Paginated, PaginationParams } from '../../../core/util/store';
 import { fakeAsync, tick } from '@angular/core/testing';
@@ -72,7 +72,7 @@ describe('AddressBookEntryLogisticsView', () => {
       title: 'person',
       description: 'belong',
       start: new Date(2022, 9, 9),
-      is_archived: false,
+      isArchived: false,
     };
 
   const sampleAddressBookEntryTableRowContent: AddressBookEntryRow[] = [

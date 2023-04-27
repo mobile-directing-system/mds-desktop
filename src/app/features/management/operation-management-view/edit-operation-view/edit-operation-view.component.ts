@@ -69,12 +69,12 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
         this.form.patchValue({
           title: result.operation.title,
           description: result.operation.description,
-          isArchived: result.operation.is_archived,
+          isArchived: result.operation.isArchived,
         });
         let operationStart = new Date(result.operation.start);
         this.form.controls.start.patchValue(moment(operationStart));
         if (result.operation.end) {
-          let operationEnd = new Date(result.operation!.end);
+          let operationEnd = new Date(result.operation.end);
           this.form.controls.end.patchValue(moment(operationEnd));
         }
         this.operationMembers = result.operationMembers;
@@ -137,7 +137,7 @@ export class EditOperationViewComponent implements OnInit, OnDestroy {
       description: description,
       start: start.toDate(),
       end: end?.toDate(),
-      is_archived: isArchived,
+      isArchived: isArchived,
     }).pipe(
       switchMap(() => this.operationService.updateOperationMembers(this.operationId, this.form.controls.members.value)),
     )).subscribe({

@@ -6,7 +6,7 @@ import { MDSError, MDSErrorCode } from '../util/errors';
 import { clean, createStoreRequestErrorFromHttp } from '../util/net';
 import { StoreRequestError, StoreRequestMethod } from '../util/store';
 import { Router } from '@angular/router';
-import { LocalStorageService } from './local-storage.service';
+import { ConfigService } from './config.service';
 
 /**
  * Used as a wrapper for {@link HttpClient} in order to provide centralized error handling, resource access
@@ -19,20 +19,14 @@ export class NetService {
   private baseUrl?: string;
   requestHeaders: HttpHeaders = new (HttpHeaders);
 
-  constructor(private http: HttpClient, private lsService: LocalStorageService, private router: Router) {
-    const baseUrl = this.lsService.getItem(LocalStorageService.TokenServerURL);
-    if (baseUrl !== null) {
-      this.baseUrl = baseUrl;
-    }
-  }
-
-  /**
-   * Sets the base url to the given one.
-   * @param url The new base url.
-   */
-  setBaseUrl(url: string): void {
-    this.baseUrl = url;
-    this.lsService.setItem(LocalStorageService.TokenServerURL, url);
+  constructor(private http: HttpClient, private configService: ConfigService, private router: Router) {
+    configService.serverUrl.subscribe(serverUrl => {
+      if (serverUrl === null) {
+        this.baseUrl = undefined;
+      } else {
+        this.baseUrl = serverUrl;
+      }
+    });
   }
 
   private handleError(error: HttpErrorResponse, method: StoreRequestMethod, message?: string): StoreRequestError {
@@ -65,7 +59,10 @@ export class NetService {
    * @param contentType The content type of the request.
    * @private
    */
-  private buildRequestOptions(params: object, contentType: string | null): { headers: HttpHeaders, params: HttpParams } {
+  private buildRequestOptions(params: object, contentType: string | null): {
+    headers: HttpHeaders,
+    params: HttpParams
+  } {
     return {
       headers: this.buildHeaders(contentType),
       params: new HttpParams({ fromObject: clean(params) }),
@@ -102,6 +99,15 @@ export class NetService {
   get<T>(path: string, params: object): Observable<T> {
     return this.http.get<T>(this.buildUrl(path), {
       responseType: 'json',
+      ...this.buildRequestOptions(params, null),
+    }).pipe(
+      catchError((err: HttpErrorResponse) => throwError(() => this.handleError(err, StoreRequestMethod.Get))),
+    );
+  }
+
+  getText(path: string, params: object): Observable<string> {
+    return this.http.get(this.buildUrl(path), {
+      responseType: 'text',
       ...this.buildRequestOptions(params, null),
     }).pipe(
       catchError((err: HttpErrorResponse) => throwError(() => this.handleError(err, StoreRequestMethod.Get))),

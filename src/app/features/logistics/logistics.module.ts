@@ -23,6 +23,8 @@ import {
 import {
   InAppNotificationChannelDetailsComponent,
 } from './channels/channel-details-dialog/in-app-notification-channel-details/in-app-notification-channel-details.component';
+import { IntelDeliveryModule } from './intel-delivery/intel-delivery.module';
+import { AddressBookEntryAutoIntelDeliveryComponent } from './address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component';
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import {
     ChannelDetailsDialog,
     RadioChannelDetailsComponent,
     InAppNotificationChannelDetailsComponent,
+    AddressBookEntryAutoIntelDeliveryComponent,
   ],
   imports: [
     CommonModule,
@@ -50,6 +53,7 @@ import {
     CommonModule,
     CoreModule,
     AngularMaterialModule,
+    IntelDeliveryModule,
   ],
 })
 export class LogisticsModule {

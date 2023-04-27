@@ -1,0 +1,48 @@
+<div
+  (focus)="isFocused = true"
+  (focusout)="selected = undefined; isFocused = false"
+  (keydown.arrowDown)="selectNext(); $event.stopPropagation()"
+  (keydown.arrowLeft)="selectPrev(); $event.stopPropagation()"
+  (keydown.arrowRight)="selectNext(); $event.stopPropagation()"
+  (keydown.arrowUp)="selectPrev(); $event.stopPropagation()"
+  (keydown.enter)="deliver()"
+  [appShowLoadingOverlay]="loader.loadingChange() | async"
+  autofocus
+  class="c"
+  tabindex="0">
+  <div *ngIf="deliveryId === undefined">
+    No intel delivery selected.
+  </div>
+  <ng-container *ngIf="deliveryId !== undefined">
+    <div (click)="selectFirst()" *ngIf="!isFocused" class="hint clickable" i18n>
+      Keyboard selection suspended. Click here to enable.
+    </div>
+    <div (click)="selectFirst()" *ngIf="isFocused" class="hint" i18n>
+      Select channel with arrow keys. Confirm with ENTER.
+    </div>
+    <h3 i18n>Recommended:</h3>
+    <div [appShowLoadingOverlay]="recommendedChannels === undefined" class="channels">
+      <ng-container *ngIf="recommendedChannels !== undefined">
+        <span *ngIf="recommendedChannels.length === 0" i18n>No recommended channels available for delivery.</span>
+        <app-deliver-channel
+          (click)="select(channel.channel.id); deliver()"
+          (mouseenter)="!this.isFocused && select(channel.channel.id)"
+          *ngFor="let channel of recommendedChannels; let i = index"
+          [channel]="channel"
+          [highlight]="isFocused && channel.channel.id === selected"></app-deliver-channel>
+      </ng-container>
+    </div>
+    <h3 i18n>Others:</h3>
+    <div [appShowLoadingOverlay]="otherChannels === undefined" class="channels">
+      <ng-container *ngIf="otherChannels !== undefined">
+        <span *ngIf="otherChannels.length === 0" i18n>No other channels available for delivery.</span>
+        <app-deliver-channel
+          (click)="select(channel.channel.id); deliver()"
+          (mouseenter)="!this.isFocused && select(channel.channel.id)"
+          *ngFor="let channel of otherChannels; let i = index"
+          [channel]="channel"
+          [highlight]="isFocused && channel.channel.id === selected"></app-deliver-channel>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

@@ -47,7 +47,7 @@ describe('OperationManagementView', () => {
       description: 'give',
       start: new Date('2001-01-01'),
       end: new Date('2001-01-02'),
-      is_archived: true,
+      isArchived: true,
     },
     {
       id: 'music',
@@ -55,7 +55,7 @@ describe('OperationManagementView', () => {
       description: '',
       start: new Date('2002-01-01'),
       end: undefined,
-      is_archived: false,
+      isArchived: false,
     },
     {
       id: 'apply',
@@ -63,7 +63,7 @@ describe('OperationManagementView', () => {
       description: 'urgent',
       start: new Date('2023-01-01'),
       end: new Date('2023-01-02'),
-      is_archived: false,
+      isArchived: false,
     },
   ];
   const samplePaginatedOperations: Paginated<Operation> = new Paginated<Operation>(sampleOperations, {
@@ -127,7 +127,7 @@ describe('OperationManagementView', () => {
       description: 'water',
       start: new Date('2023-01-02'),
       end: undefined,
-      is_archived: false,
+      isArchived: false,
     };
     spectator.inject(OperationService).searchOperations.and.returnValue(of(new SearchResult([sampleOperation], {
       limit: 2,
@@ -204,7 +204,7 @@ describe('OperationManagementView', () => {
         description: 'water',
         start: new Date('2020-01-02'),
         end: undefined,
-        is_archived: true,
+        isArchived: true,
       };
       spectator.inject(OperationService).getOperations.and.returnValue(of(samplePaginatedOperations.changeResultType([inactiveOperation])));
       component.refresh();
@@ -232,7 +232,7 @@ describe('OperationManagementView', () => {
         description: 'water',
         start: startTS,
         end: undefined,
-        is_archived: true,
+        isArchived: true,
       };
       spectator.inject(OperationService).getOperations.and.returnValue(of(samplePaginatedOperations.changeResultType([inactiveOperation])));
       component.refresh();
@@ -262,7 +262,7 @@ describe('OperationManagementView', () => {
         description: 'water',
         start: startTS,
         end: endTS,
-        is_archived: false,
+        isArchived: false,
       };
       spectator.inject(OperationService).getOperations.and.returnValue(of(samplePaginatedOperations.changeResultType([regularOperation])));
       component.refresh();
@@ -288,7 +288,7 @@ describe('OperationManagementView', () => {
         description: 'water',
         start: new Date('2023-01-02'),
         end: undefined,
-        is_archived: false,
+        isArchived: false,
       };
       spectator.inject(OperationService).getOperations.and.returnValue(of(samplePaginatedOperations.changeResultType([sampleOperation])));
       component.refresh();
@@ -312,7 +312,7 @@ describe('OperationManagementView', () => {
         description: 'water',
         start: new Date('2023-01-02'),
         end: undefined,
-        is_archived: false,
+        isArchived: false,
       };
       spectator.inject(OperationService).getOperations.and.returnValue(of(samplePaginatedOperations.changeResultType([sampleOperation])));
       component.refresh();

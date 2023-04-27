@@ -162,6 +162,14 @@
       i18n>
       Invalidate intel
     </app-simple-permission-control>
+    <!--Intel delivery.-->
+    <h2 i18n>Intel Delivery</h2>
+    <app-simple-permission-control
+      [formControlName]="PermissionName.ManageIntelDelivery"
+      [permissionName]="PermissionName.ManageIntelDelivery"
+      i18n>
+      Manage Intel Delivery
+    </app-simple-permission-control>
     <!--Actions.-->
     <div class="action-bar">
       <button mat-button type="button" (click)="close()" i18n>

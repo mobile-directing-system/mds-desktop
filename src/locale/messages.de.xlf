@@ -75,8 +75,8 @@
         <note category="description">notify that server url was set</note>
       </notes>
       <segment state="initial">
-        <source>Server url set to <ph id="0" equiv="new_server_url" disp="newServerURL"/>.</source>
-        <target>Server URL gesetzt auf <ph id="0" equiv="new_server_url" disp="newServerURL"/>.</target>
+        <source>Server url set to <ph id="0" equiv="new_server_url" disp="newServerUrl"/>.</source>
+        <target>Server URL gesetzt auf<ph id="0" equiv="new_server_url" disp="newServerURL"/>.</target>
       </segment>
     </unit>
     <unit id="5975532227999286857">
@@ -131,7 +131,7 @@
       </notes>
       <segment state="initial">
         <source>0 of <ph id="0" equiv="total" disp="length"/></source>
-        <target>0 von <ph id="0" equiv="total" disp="length"/></target>
+        <target>0 von <ph id="0" equiv="total" disp="length"/> </target>
       </segment>
     </unit>
     <unit id="4213264276527500323">
@@ -140,7 +140,7 @@
       </notes>
       <segment state="initial">
         <source><ph id="0" equiv="from" disp="startIndex + 1"/> - <ph id="1" equiv="to" disp="endIndex"/> of <ph id="2" equiv="total" disp="length"/></source>
-        <target><ph id="0" equiv="from" disp="startIndex + 1"/> - <ph id="1" equiv="to" disp="endIndex"/> von <ph id="2" equiv="total" disp="length"/></target>
+        <target> <ph id="0" equiv="from" disp="startIndex + 1"/> - <ph id="1" equiv="to" disp="endIndex"/> von <ph id="2" equiv="total" disp="length"/> </target>
       </segment>
     </unit>
     <unit id="4555457172864212828">
@@ -334,7 +334,7 @@
     <unit id="2330577642930707695">
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:55,56</note>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:62,63</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:66,67</note>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:64,65</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:120,121</note>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:59,60</note>
@@ -436,7 +436,7 @@
       </notes>
       <segment state="initial">
         <source>User: <ph id="0" equiv="INTERPOLATION" disp="{{user.firstName}}"/> <ph id="1" equiv="INTERPOLATION_1" disp="{{user.lastName}}"/></source>
-        <target>Benutzer: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.firstName}}"/> <ph id="1" equiv="INTERPOLATION_1" disp="{{form.controls.lastName}}"/></target>
+        <target>Benutzer: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.firstName}}"/> <ph id="1" equiv="INTERPOLATION_1" disp="{{form.controls.lastName}}"/> </target>
       </segment>
     </unit>
     <unit id="6284119778725231733">
@@ -450,6 +450,7 @@
     </unit>
     <unit id="8204176479746810612">
       <notes>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:18</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:26</note>
       </notes>
       <segment state="initial">
@@ -471,7 +472,7 @@
     </unit>
     <unit id="3620188369327429839">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:171,172</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:179,180</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:48,49</note>
       </notes>
       <segment state="initial">
@@ -621,7 +622,7 @@
       </notes>
       <segment state="initial">
         <source>Group: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/></source>
-        <target>Gruppe: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/></target>
+        <target>Gruppe: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/> </target>
       </segment>
     </unit>
     <unit id="1155679422702437698">
@@ -644,9 +645,11 @@
     </unit>
     <unit id="1283895920974679461">
       <notes>
+        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:11</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:34</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:25</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:25</note>
+        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:16</note>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:28</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:27</note>
         <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:28</note>
@@ -732,7 +735,7 @@
       </notes>
       <segment state="initial">
         <source>Operation: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/></source>
-        <target>Einsatz: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/></target>
+        <target>Einsatz: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/> </target>
       </segment>
     </unit>
     <unit id="1155679422702437698">
@@ -775,7 +778,7 @@
     </unit>
     <unit id="2592690450389009216">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:71,72</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:75,76</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:124,125</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:139,140</note>
       </notes>
@@ -804,6 +807,7 @@
     </unit>
     <unit id="2725499532293844250">
       <notes>
+        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:12</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:26</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:26</note>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:29</note>
@@ -1126,7 +1130,7 @@
     </unit>
     <unit id="5547981558491672240">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:168,169</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:176,177</note>
       </notes>
       <segment state="initial">
         <source>Close</source>
@@ -1199,7 +1203,7 @@
     <unit id="channel-type-in-app-notification">
       <notes>
         <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:5</note>
-        <note category="location">src/app/core/model/channel.ts:89</note>
+        <note category="location">src/app/core/model/channel.ts:93</note>
       </notes>
       <segment state="initial">
         <source>In-App Notification</source>
@@ -1209,7 +1213,7 @@
     <unit id="channel-type-radio">
       <notes>
         <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:9</note>
-        <note category="location">src/app/core/model/channel.ts:91</note>
+        <note category="location">src/app/core/model/channel.ts:95</note>
       </notes>
       <segment state="initial">
         <source>Radio</source>
@@ -1220,6 +1224,7 @@
       <notes>
         <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:13</note>
         <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:32</note>
+        <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:16</note>
       </notes>
       <segment state="initial">
         <source>Unknown</source>
@@ -1230,6 +1235,7 @@
       <notes>
         <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:17</note>
         <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:36</note>
+        <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:20</note>
       </notes>
       <segment state="initial">
         <source>Not set</source>
@@ -1320,7 +1326,7 @@
       </notes>
       <segment state="initial">
         <source>Channel - <ph id="0" equiv="INTERPOLATION" disp="{{ form.controls.label.value }}"/></source>
-        <target>Kanal - <ph id="0" equiv="INTERPOLATION" disp="{{ form.controls.label.value }}"/></target>
+        <target>Kanal - <ph id="0" equiv="INTERPOLATION" disp="{{ form.controls.label.value }}"/> </target>
       </segment>
     </unit>
     <unit id="8782767546165933649">
@@ -1379,7 +1385,7 @@
     </unit>
     <unit id="8650499415827640724">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:18</note>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:26</note>
       </notes>
       <segment state="initial">
         <source>Type</source>
@@ -1388,7 +1394,8 @@
     </unit>
     <unit id="2734022681675842051">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:25</note>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:33</note>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:12</note>
       </notes>
       <segment state="initial">
         <source>Priority</source>
@@ -1397,7 +1404,8 @@
     </unit>
     <unit id="5037087188394157831">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:30</note>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:38</note>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:20</note>
       </notes>
       <segment state="initial">
         <source>Min Importance</source>
@@ -1406,7 +1414,8 @@
     </unit>
     <unit id="5956316725115867558">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:37</note>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:45</note>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:16</note>
       </notes>
       <segment state="initial">
         <source>Timeout</source>
@@ -1446,6 +1455,7 @@
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:6</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:6</note>
         <note category="location">src/app/features/logistics/channels/channels.component.html:13</note>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:8</note>
       </notes>
       <segment state="initial">
         <source>Label</source>
@@ -1497,12 +1507,12 @@
       </notes>
       <segment state="initial">
         <source>Address Book Entry: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.label.getRawValue()}}"/></source>
-        <target>Adressbucheintrag: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.label.getRawValue()}}"/></target>
+        <target>Adressbucheintrag: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.label.getRawValue()}}"/> </target>
       </segment>
     </unit>
     <unit id="872015140095767450">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.ts:102</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.ts:104</note>
       </notes>
       <segment state="initial">
         <source>Updating address book entry failed.</source>
@@ -1518,9 +1528,9 @@
         <target>Verwaltung</target>
       </segment>
     </unit>
-    <unit id="3315840889578225127">
+    <unit id="2813434146158055036">
       <notes>
-        <note category="location">src/app/features/logistics/logistics-layout/logistics-layout.component.html:8,9</note>
+        <note category="location">src/app/features/logistics/logistics-layout/logistics-layout.component.html:9,10</note>
       </notes>
       <segment state="initial">
         <source>Address Book Entries</source>
@@ -1539,11 +1549,579 @@
     </unit>
     <unit id="6660925946511264619">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:65,66</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:69,70</note>
       </notes>
       <segment state="initial">
         <source>Delete</source>
         <target>Löschen</target>
+      </segment>
+    </unit>
+    <unit id="6897556149900065265">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:1</note>
+      </notes>
+      <segment state="initial">
+        <source>Select workspace operation</source>
+        <target>Einsatzauswahl</target>
+      </segment>
+    </unit>
+    <unit id="6508120659907084246">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/workspace-operation-selector.component.html:7</note>
+      </notes>
+      <segment state="initial">
+        <source>Currently selected operation for workspace. Click to change.</source>
+        <target>Aktuell ausgewählter Einsatz für diese Arbeitsumgebung. Klicken, um zu ändern.</target>
+      </segment>
+    </unit>
+    <unit id="3095333197718374378">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/workspace-operation-selector.component.html:10,11</note>
+      </notes>
+      <segment state="initial">
+        <source>Click to select operation.</source>
+        <target>Klicken, um einen Einsatz auszuwählen.</target>
+      </segment>
+    </unit>
+    <unit id="6521912326611189962">
+      <notes>
+        <note category="location">src/app/features/logistics/logistics-layout/logistics-layout.component.html:16,18</note>
+      </notes>
+      <segment state="initial">
+        <source>Intel Delivery <pc id="0" equivStart="START_TAG_MAT_ICON" equivEnd="CLOSE_TAG_MAT_ICON" type="other" dispStart="&lt;mat-icon class=&quot;icon-suffix-small&quot;&gt;" dispEnd="&lt;/mat-icon&gt;">open_in_new</pc></source>
+        <target>Intelzustellung <pc id="0" equivStart="START_TAG_MAT_ICON" equivEnd="CLOSE_TAG_MAT_ICON" type="other" dispStart="&lt;mat-icon class=&quot;icon-suffix-small&quot;&gt;" dispEnd="&lt;/mat-icon&gt;">open_in_new</pc> </target>
+      </segment>
+    </unit>
+    <unit id="1324352416087573030">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:166</note>
+      </notes>
+      <segment state="initial">
+        <source>Intel Delivery</source>
+        <target>Intelzustellung</target>
+      </segment>
+    </unit>
+    <unit id="1556790495823358787">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:171,172</note>
+      </notes>
+      <segment state="initial">
+        <source>Manage Intel Delivery</source>
+        <target>Intelzustellung kontrollieren</target>
+      </segment>
+    </unit>
+    <unit id="996392855508119363">
+      <notes>
+        <note category="location">src/app/core/components/hidden/hidden.component.html:5</note>
+      </notes>
+      <segment state="initial">
+        <source>Hidden</source>
+        <target>Versteckt</target>
+      </segment>
+    </unit>
+    <unit id="3957104034487106247">
+      <notes>
+        <note category="location">src/app/core/components/intel-summary/intel-summary.component.html:10</note>
+      </notes>
+      <segment state="initial">
+        <source>Unknown intel type</source>
+        <target>Unbekannter Intel-Typ</target>
+      </segment>
+    </unit>
+    <unit id="8861844397105042477">
+      <notes>
+        <note category="location">src/app/core/components/intel-summary/intel-summary.component.html:14</note>
+      </notes>
+      <segment state="initial">
+        <source>Missing intel information</source>
+        <target>Fehlende Intel-Details.</target>
+      </segment>
+    </unit>
+    <unit id="intelType-plain-text-message">
+      <notes>
+        <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:8</note>
+      </notes>
+      <segment state="initial">
+        <source>Plain-text Message</source>
+        <target>Klartext Nachricht</target>
+      </segment>
+    </unit>
+    <unit id="intelType-analog-radio-message">
+      <notes>
+        <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:12</note>
+      </notes>
+      <segment state="initial">
+        <source>Analog Radio Message</source>
+        <target>Analog-Funk Nachricht</target>
+      </segment>
+    </unit>
+    <unit id="7240532014248635304">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.html:4</note>
+      </notes>
+      <segment state="initial">
+        <source>Auto Intel Delivery is enabled.</source>
+        <target>Auto-Intel-Zustellung ist aktiviert.</target>
+      </segment>
+    </unit>
+    <unit id="7056360524244234265">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.html:6,7</note>
+      </notes>
+      <segment state="initial">
+        <source>Disable Now</source>
+        <target>Jetzt deaktivieren</target>
+      </segment>
+    </unit>
+    <unit id="4788215378402402752">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.html:11</note>
+      </notes>
+      <segment state="initial">
+        <source>Auto Intel Delivery is disabled.</source>
+        <target>Auto-Intel-Zustellung ist deaktiviert.</target>
+      </segment>
+    </unit>
+    <unit id="3192247086533582747">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.html:13,14</note>
+      </notes>
+      <segment state="initial">
+        <source>Enable Now</source>
+        <target>Jetzt aktivieren</target>
+      </segment>
+    </unit>
+    <unit id="7337574145907490264">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.ts:47</note>
+      </notes>
+      <segment state="initial">
+        <source>Auto Intel Delivery for this entry is now enabled.</source>
+        <target>Auto-Intel-Zustellung ist für diesen Eintrag jetzt aktiviert.</target>
+      </segment>
+    </unit>
+    <unit id="1326584312169948709">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.ts:58</note>
+      </notes>
+      <segment state="initial">
+        <source>Auto Intel Delivery for this entry is now disabled.</source>
+        <target>Auto-Intel-Zustellung ist für diesen Eintrag jetzt deaktiviert.</target>
+      </segment>
+    </unit>
+    <unit id="6378747169231297519">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:1</note>
+      </notes>
+      <segment state="initial">
+        <source>Confirm cancellation</source>
+        <target>Abbruch bestätigen</target>
+      </segment>
+    </unit>
+    <unit id="8463221083755539381">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:3,6</note>
+      </notes>
+      <segment state="initial">
+        <source>Do you really want to cancel the delivery? This will also cancel all active delivery attempts. If you want to cancel the delivery, please provide information below.</source>
+        <target>Möchten Sie die Zustellung wirklich abbrechen? Dies bricht auch alle aktiven Zustellungsversuche ab. Wenn Sie dies wirklich tun wollen, dann geben Sie unten bitte weitere Informationen zu Ihrer Entscheidung an.</target>
+      </segment>
+    </unit>
+    <unit id="2514977068213191529">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:8</note>
+      </notes>
+      <segment state="initial">
+        <source>Mark delivery as successful</source>
+        <target>Zustellung als erfolgreich markieren</target>
+      </segment>
+    </unit>
+    <unit id="4388879716045736175">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:11</note>
+      </notes>
+      <segment state="initial">
+        <source>Note</source>
+        <target>Notiz</target>
+      </segment>
+    </unit>
+    <unit id="6604849199707156712">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:16</note>
+      </notes>
+      <segment state="initial">
+        <source>Explain why the delivery was cancelled.</source>
+        <target>Erklären Sie, warum die Zustellung abgebrochen wurde.</target>
+      </segment>
+    </unit>
+    <unit id="6924818567014384939">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:19,22</note>
+      </notes>
+      <segment state="initial">
+        <source>Selected delivery changed. In order to prevent unintended cancelling of a delivery, you must close the dialog, review the selected delivery and try again.</source>
+        <target>Die gewählte Zustellung hat sich geändert. Um ungewollte Änderungen zu vermeiden, müssen Sie den Dialog schließen, die Änderung prüfen und es nochmal versuchen.</target>
+      </segment>
+    </unit>
+    <unit id="5543329497352362801">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:25</note>
+      </notes>
+      <segment state="initial">
+        <source>Don&apos;t cancel</source>
+        <target>Nicht abbrechen</target>
+      </segment>
+    </unit>
+    <unit id="9178182467454450952">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:26</note>
+      </notes>
+      <segment state="initial">
+        <source>Confirm</source>
+        <target>Bestätigen</target>
+      </segment>
+    </unit>
+    <unit id="1381592311007231590">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:4</note>
+      </notes>
+      <segment state="initial">
+        <source>Channel type</source>
+        <target>Kanal-Typ</target>
+      </segment>
+    </unit>
+    <unit id="3318253074943304111">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:25,27</note>
+      </notes>
+      <segment state="initial">
+        <source>Minimum importance not satisfied.</source>
+        <target>Minimale Wichtigkeit nicht gegeben.</target>
+      </segment>
+    </unit>
+    <unit id="8779994653903382762">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:28,30</note>
+      </notes>
+      <segment state="initial">
+        <source>Failed attempt at <ph id="0" equiv="INTERPOLATION" disp="{{ channel.details.attempt.createdAt | date:&apos;medium&apos; }}"/>.</source>
+        <target>Fehlgeschlagener Versuch am<ph id="0" equiv="INTERPOLATION" disp="{{ channel.details.attempt.createdAt | date:&apos;medium&apos; }}"/> .</target>
+      </segment>
+    </unit>
+    <unit id="2867253902287405242">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:31,33</note>
+      </notes>
+      <segment state="initial">
+        <source>Channel marked as inactive.</source>
+        <target>Kanal als inaktiv markiert.</target>
+      </segment>
+    </unit>
+    <unit id="7507439656779414767">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-status/intel-delivery-status.component.html:3,5</note>
+      </notes>
+      <segment state="initial">
+        <source>No realtime updates (no connection)</source>
+        <target>Keine Echtzeit-Updates (keine Verbindung)</target>
+      </segment>
+    </unit>
+    <unit id="1252975380380555860">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-status/intel-delivery-status.component.html:7,9</note>
+      </notes>
+      <segment state="initial">
+        <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span class=&quot;realtime realtime--ok&quot;&gt;" dispEnd="&lt;/span&gt;">Realtime</pc> updates for <ph id="1" equiv="INTERPOLATION" disp="{{ subscribedOperations.length }}"/> operation(s).</source>
+        <target><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span class=&quot;realtime realtime--ok&quot;&gt;" dispEnd="&lt;/span&gt;">Echtzeit</pc>-Updates für <ph id="1" equiv="INTERPOLATION" disp="{{ subscribedOperations.length }}"/> Einsatz.</target>
+      </segment>
+    </unit>
+    <unit id="5556579166957234680">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-status/intel-delivery-status.component.html:10</note>
+      </notes>
+      <segment state="initial">
+        <source>Open intel deliveries:</source>
+        <target>Offene Intel-Zustellungen:</target>
+      </segment>
+    </unit>
+    <unit id="5666906448529967607">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-status/intel-delivery-status.component.html:15</note>
+      </notes>
+      <segment state="initial">
+        <source>Warning: Manual intel delivery is meant to be performed by only one person at a time.</source>
+        <target>Warnung: Die manuelle Intel-Zustellung sollte nur von einer Person gleichzeitig bedient werden.</target>
+      </segment>
+    </unit>
+    <unit id="3244478074612290092">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:17</note>
+      </notes>
+      <segment state="initial">
+        <source>Past delivery attempts:</source>
+        <target>Vergangene Zustellungsversuche:</target>
+      </segment>
+    </unit>
+    <unit id="6913985416235046011">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:24</note>
+      </notes>
+      <segment state="initial">
+        <source>Cancel delivery</source>
+        <target>Zustellung abbrechen</target>
+      </segment>
+    </unit>
+    <unit id="3711878318833148750">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:30,31</note>
+      </notes>
+      <segment state="initial">
+        <source>View recipient</source>
+        <target>Empfänger anzeigen</target>
+      </segment>
+    </unit>
+    <unit id="8440770642617655682">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.ts:85</note>
+      </notes>
+      <segment state="initial">
+        <source>Intel delivery cancelled.</source>
+        <target>Intel-Zustellung abgebrochen.</target>
+      </segment>
+    </unit>
+    <unit id="6735232392328456585">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-attempts/intel-to-deliver-attempts.component.html:2</note>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-details/intel-to-deliver-details.component.html:2</note>
+      </notes>
+      <segment state="initial">
+        <source>No intel delivery selected.</source>
+        <target>Keine Intel-Zustellung ausgewählt.</target>
+      </segment>
+    </unit>
+    <unit id="4549773563555782103">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-attempts/intel-to-deliver-attempts.component.html:6</note>
+      </notes>
+      <segment state="initial">
+        <source>No delivery attempts, yet.</source>
+        <target>Bis jetzt keine Zustellungsversuche.</target>
+      </segment>
+    </unit>
+    <unit id="3265646491227170237">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-attempts/intel-to-deliver-attempts.component.html:17,18</note>
+      </notes>
+      <segment state="initial">
+        <source>Marked as failed after: <ph id="0" equiv="INTERPOLATION" disp="{{ attemptFailedAfter(attempt.createdAt, attempt.statusTS) | duration }}"/> </source>
+        <target>Als fehlgeschlagen markiert nach: <ph id="0" equiv="INTERPOLATION" disp="{{ attemptFailedAfter(attempt.createdAt, attempt.statusTS) | duration }}"/> </target>
+      </segment>
+    </unit>
+    <unit id="5695831684206293253">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:18,19</note>
+      </notes>
+      <segment state="initial">
+        <source>Keyboard selection suspended. Click here to enable.</source>
+        <target>Tastaturauswahl pausiert. Klicken zum Aktivieren.</target>
+      </segment>
+    </unit>
+    <unit id="6163254812569741732">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:21,22</note>
+      </notes>
+      <segment state="initial">
+        <source>Select channel with arrow keys. Confirm with ENTER.</source>
+        <target>Kanal-Auswahl mit Pfeiltasten. Bestätigen mit ENTER.</target>
+      </segment>
+    </unit>
+    <unit id="1691441506559935070">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:23</note>
+      </notes>
+      <segment state="initial">
+        <source>Recommended:</source>
+        <target>Empfohlen:</target>
+      </segment>
+    </unit>
+    <unit id="3536162210726760140">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:26</note>
+      </notes>
+      <segment state="initial">
+        <source>No recommended channels available for delivery.</source>
+        <target>Keine empfohlenen Kanäle für Zustellung verfügbar.</target>
+      </segment>
+    </unit>
+    <unit id="3501355854670445847">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:35</note>
+      </notes>
+      <segment state="initial">
+        <source>Others:</source>
+        <target>Andere:</target>
+      </segment>
+    </unit>
+    <unit id="4480823431167495579">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:38</note>
+      </notes>
+      <segment state="initial">
+        <source>No other channels available for delivery.</source>
+        <target>Keine anderen Kanäle für Zustellung verfügbar.</target>
+      </segment>
+    </unit>
+    <unit id="6074000751994236114">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-details/intel-to-deliver-details.component.html:11,12</note>
+      </notes>
+      <segment state="initial">
+        <source>Intel id: <ph id="0" equiv="INTERPOLATION" disp="{{ selected.delivery.intel.id }}"/> </source>
+        <target>Intel ID: <ph id="0" equiv="INTERPOLATION" disp="{{ selected.delivery.intel.id }}"/> </target>
+      </segment>
+    </unit>
+    <unit id="8189002981351101741">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-details/intel-to-deliver-details.component.html:19</note>
+      </notes>
+      <segment state="initial">
+        <source>Operation associated with the intel</source>
+        <target>Mit Intel assoziierter Einsatz</target>
+      </segment>
+    </unit>
+    <unit id="5587443221678456037">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-details/intel-to-deliver-details.component.html:21,22</note>
+      </notes>
+      <segment state="initial">
+        <source>Operation id: <ph id="0" equiv="INTERPOLATION" disp="{{ selected.delivery.intel.operation }}"/> </source>
+        <target>Einsatz ID: <ph id="0" equiv="INTERPOLATION" disp="{{ selected.delivery.intel.operation }}"/> </target>
+      </segment>
+    </unit>
+    <unit id="1520049505561836231">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:10</note>
+      </notes>
+      <segment state="initial">
+        <source>Created at</source>
+        <target>Erstellt am</target>
+      </segment>
+    </unit>
+    <unit id="5203279511751768967">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:26</note>
+      </notes>
+      <segment state="initial">
+        <source>From</source>
+        <target>Von</target>
+      </segment>
+    </unit>
+    <unit id="1640609344969975994">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:38</note>
+      </notes>
+      <segment state="initial">
+        <source>To</source>
+        <target>An</target>
+      </segment>
+    </unit>
+    <unit id="5533441977056773945">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:50</note>
+      </notes>
+      <segment state="initial">
+        <source>Intel type</source>
+        <target>Intel-Typ</target>
+      </segment>
+    </unit>
+    <unit id="6019305939828737244">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:63</note>
+      </notes>
+      <segment state="initial">
+        <source>Importance</source>
+        <target>Wichtigkeit</target>
+      </segment>
+    </unit>
+    <unit id="6480637826590791425">
+      <notes>
+        <note category="location">src/app/core/services/web-socket.service.ts:88</note>
+      </notes>
+      <segment state="initial">
+        <source>WebSocket connection error</source>
+        <target>WebSocket Verbindungsfehler</target>
+      </segment>
+    </unit>
+    <unit id="2159130950882492111">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:23</note>
+      </notes>
+      <segment state="initial">
+        <source>Cancel</source>
+        <target>Abbrechen</target>
+      </segment>
+    </unit>
+    <unit id="935187492052582731">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:24</note>
+      </notes>
+      <segment state="initial">
+        <source>Submit</source>
+        <target>Bestätigen</target>
+      </segment>
+    </unit>
+    <unit id="8632433842489123268">
+      <notes>
+        <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:2</note>
+      </notes>
+      <segment state="initial">
+        <source>Callsign:</source>
+        <target>Rufname:</target>
+      </segment>
+    </unit>
+    <unit id="1130610467579985996">
+      <notes>
+        <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:3</note>
+      </notes>
+      <segment state="initial">
+        <source>Head:</source>
+        <target>Kopfzeile:</target>
+      </segment>
+    </unit>
+    <unit id="3487000124762334468">
+      <notes>
+        <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:4</note>
+      </notes>
+      <segment state="initial">
+        <source>Channel:</source>
+        <target>Kanal:</target>
+      </segment>
+    </unit>
+    <unit id="1395787838997214663">
+      <notes>
+        <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:5</note>
+      </notes>
+      <segment state="initial">
+        <source>Content:</source>
+        <target>Inhalt:</target>
+      </segment>
+    </unit>
+    <unit id="3996222233708051585">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:3</note>
+      </notes>
+      <segment state="initial">
+        <source>Most important:</source>
+        <target>Am wichtigsten:</target>
+      </segment>
+    </unit>
+    <unit id="7856130762394583508">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:7</note>
+      </notes>
+      <segment state="initial">
+        <source>Oldest:</source>
+        <target>Am ältesten:</target>
       </segment>
     </unit>
   </file>

@@ -14,6 +14,14 @@
     <td *matCellDef="let row" mat-cell>{{ asChannel(row).label }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="isActive">
+    <th *matHeaderCellDef i18n mat-header-cell>Active</th>
+    <td *matCellDef="let row" mat-cell>
+      <div *ngIf="asChannel(row).isActive" class="active-indicator active-indicator--active"></div>
+      <div *ngIf="!asChannel(row).isActive" class="active-indicator active-indicator--inactive"></div>
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="type">
     <th *matHeaderCellDef i18n mat-header-cell>Type</th>
     <td *matCellDef="let row" mat-cell>

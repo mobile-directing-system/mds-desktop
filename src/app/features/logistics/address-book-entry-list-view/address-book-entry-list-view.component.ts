@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddressBookEntrySort, AddressBookService } from '../../../core/services/addressbook.service';
 import { OperationService } from '../../../core/services/operation.service';
-import { AddressBookEntry } from '../../../core/model/addressbookEntry';
+import { AddressBookEntry } from '../../../core/model/address-book-entry';
 import { Operation } from '../../../core/model/operation';
 import { orderDirFromSort, Paginated, PaginationParams } from '../../../core/util/store';
 import { Loader } from '../../../core/util/loader';

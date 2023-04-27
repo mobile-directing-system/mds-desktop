@@ -5,7 +5,16 @@
       *ngIf="(isViewAddressBookEntriesGranted()) | async"
       [link]="['/logistics', 'address-book']"
       i18n
-      icon="import_contacts">Address Book Entries
+      icon="import_contacts">
+      Address Book Entries
+    </app-side-nav-item>
+    <app-side-nav-item
+      *ngIf="(isViewAddressBookEntriesGranted()) | async"
+      [link]="['/intel-delivery']"
+      i18n
+      icon="directions">
+      Intel Delivery
+      <mat-icon class="icon-suffix-small">open_in_new</mat-icon>
     </app-side-nav-item>
   </ng-template>
   <router-outlet></router-outlet>

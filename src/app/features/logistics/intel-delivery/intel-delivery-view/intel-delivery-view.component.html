@@ -1,0 +1,36 @@
+<div class="c view">
+  <div class="column open-intel-deliveries">
+    <div i18n>Most important:</div>
+    <app-open-intel-deliveries-table
+      (deliverySelected)="selectOpenIntelDelivery($event)"
+      [openIntelDeliveries]="openIntelDeliveriesByImportance() | async"></app-open-intel-deliveries-table>
+    <div i18n>Oldest:</div>
+    <app-open-intel-deliveries-table
+      (deliverySelected)="selectOpenIntelDelivery($event)"
+      [openIntelDeliveries]="openIntelDeliveriesByAge() | async"></app-open-intel-deliveries-table>
+    <app-intel-delivery-status></app-intel-delivery-status>
+  </div>
+  <div class="column intel-to-deliver">
+    <app-intel-to-deliver-details></app-intel-to-deliver-details>
+    <div class="delivery">
+      <div class="delivery-attempts">
+        <h3 i18n>Past delivery attempts:</h3>
+        <app-intel-to-deliver-attempts></app-intel-to-deliver-attempts>
+      </div>
+      <div class="channel-selection">
+        <app-intel-to-deliver-channel-selection></app-intel-to-deliver-channel-selection>
+        <!--Actions.-->
+        <div class="delivery-actions action-bar" *ngIf="selected">
+          <button (click)="cancelSelectedDelivery()" i18n mat-button type="button">Cancel delivery</button>
+          <button
+            [routerLink]="['/logistics', 'address-book', selected.delivery.delivery.to]"
+            i18n
+            mat-button
+            type="button">
+            View recipient
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

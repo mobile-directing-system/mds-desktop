@@ -67,7 +67,7 @@ export class CreateOperationView implements OnInit, OnDestroy {
       description: description,
       start: start.toDate(),
       end: end?.toDate(),
-      is_archived: isArchived,
+      isArchived: isArchived,
     })).subscribe({
       next: _ => {
         this.notificationService.notifyUninvasiveShort($localize`Operation created successfully.`);

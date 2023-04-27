@@ -27,6 +27,7 @@ export class AuthService {
    */
   private loggedInUserId?: string;
   private _userChange = new BehaviorSubject<string | undefined>(undefined);
+  private _authTokenChange = new BehaviorSubject<string | undefined>(undefined);
 
   constructor(private netService: NetService, private lsService: LocalStorageService) {
     // Assure server url set as otherwise we do not have anything to do.
@@ -82,6 +83,7 @@ export class AuthService {
   private applyAuthToken(token: string): void {
     const header = `Bearer ${ token }`;
     this.netService.requestHeaders = this.netService.requestHeaders.set('Authorization', header);
+    this._authTokenChange.next(token)
   }
 
   /**
@@ -95,6 +97,7 @@ export class AuthService {
       // Delete Authorization-header form net-service.
       finalize(() => {
         this.setLoggedInUserId(undefined);
+        this._authTokenChange.next(undefined)
         this.netService.requestHeaders = this.netService.requestHeaders.delete('Authorization');
         this.lsService.removeItem(LocalStorageService.TokenAuthToken);
         this.lsService.removeItem(LocalStorageService.TokenLoggedInUserId);
@@ -111,6 +114,13 @@ export class AuthService {
    */
   userChange(): Observable<string | undefined> {
     return this._userChange.asObservable();
+  }
+
+  /**
+   * Returns an observable that receives the authentication token when changed.
+   */
+  authTokenChange(): Observable<string | undefined> {
+    return this._authTokenChange.asObservable();
   }
 
   clearLogin() {

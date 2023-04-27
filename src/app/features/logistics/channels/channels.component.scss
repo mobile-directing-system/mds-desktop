@@ -1,1 +1,18 @@
+@use 'sass:map';
+@import 'src/styles/corporate';
 @import 'src/styles/tables';
+
+.active-indicator {
+  width: 1em;
+  height: 1em;
+  background-color: gray;
+  border-radius: 1em;
+
+  &.active-indicator--active {
+    background-color: map.get($mds-desktop-success-palette, 600);
+  }
+
+  &.active-indicator--inactive {
+    background-color: map.get($mds-desktop-danger-palette, 800);
+  }
+}
