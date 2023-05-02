@@ -1,0 +1,13 @@
+@import 'src/styles/forms';
+
+form {
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+.multiple-form{
+  display: flex;
+  flex-direction: column;
+  gap: .6em;
+}

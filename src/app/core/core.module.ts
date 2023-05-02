@@ -37,6 +37,7 @@ import { DeleteConfirmDialog } from './components/delete-confirm-dialog/delete-c
 import { ImportanceSelectComponent } from './components/importance-select/importance-select.component';
 import { ChannelTypeSelectComponent } from './components/channel-type-select/channel-type-select.component';
 import { DurationPickerComponent } from './components/duration-picker/duration-picker.component';
+import { MatStepperModule } from '@angular/material/stepper';
 import {
   WorkspaceOperationSelectorComponent,
 } from './components/home-layout/workspace-operation-selector/workspace-operation-selector.component';
@@ -49,7 +50,9 @@ import { IntelSummaryComponent } from './components/intel-summary/intel-summary.
 import {
   PlainTextMessageSummaryComponent,
 } from './components/intel-summary/plain-text-message-summary/plain-text-message-summary.component';
-import { AnalogRadioMessageSummaryComponent } from './components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component';
+import {
+  AnalogRadioMessageSummaryComponent,
+} from './components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component';
 
 
 @NgModule({
@@ -133,6 +136,7 @@ import { AnalogRadioMessageSummaryComponent } from './components/intel-summary/a
     MtxDatetimepickerModule,
     MtxNativeDatetimeModule,
     MtxMomentDatetimeModule,
+    MatStepperModule,
   ],
 })
 export class CoreModule {

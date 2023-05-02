@@ -434,7 +434,7 @@
     </unit>
     <unit id="1241348629231510663">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:37,36</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:36</note>
       </notes>
       <segment>
         <source>End</source>
@@ -1014,6 +1014,9 @@
     <unit id="8890553633144307762">
       <notes>
         <note category="location">src/app/core/components/missing-permissions-view/missing-permissions-view.component.html:3</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:63</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:87</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:101</note>
       </notes>
       <segment>
         <source>Back</source>
@@ -1354,6 +1357,231 @@
         <source>Delete</source>
       </segment>
     </unit>
+    <unit id="1012788843982935709">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:33,35</note>
+      </notes>
+      <segment>
+        <source>Head is required.</source>
+      </segment>
+    </unit>
+    <unit id="1600546907793893756">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:96,98</note>
+      </notes>
+      <segment>
+        <source>Importance is required.</source>
+      </segment>
+    </unit>
+    <unit id="1636701572518005081">
+      <notes>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:10</note>
+      </notes>
+      <segment>
+        <source>Choose a context</source>
+      </segment>
+    </unit>
+    <unit id="1652218416869979294">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:5</note>
+      </notes>
+      <segment>
+        <source>Intel Type</source>
+      </segment>
+    </unit>
+    <unit id="1828723992081381720">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:10,12</note>
+      </notes>
+      <segment>
+        <source>Intel type is required.</source>
+      </segment>
+    </unit>
+    <unit id="2053523035231858643">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:23</note>
+      </notes>
+      <segment>
+        <source>Callsign</source>
+      </segment>
+    </unit>
+    <unit id="2159130950882492111">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:23</note>
+        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:30</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="2168018587334986318">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:8,10</note>
+        <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:7,9</note>
+      </notes>
+      <segment>
+        <source>Analog Radio Message</source>
+      </segment>
+    </unit>
+    <unit id="2644662487244441749">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:57,59</note>
+      </notes>
+      <segment>
+        <source>Text is required.</source>
+      </segment>
+    </unit>
+    <unit id="3299719390830582413">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:5,7</note>
+        <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:4,6</note>
+      </notes>
+      <segment>
+        <source>Plain Text Message</source>
+      </segment>
+    </unit>
+    <unit id="3495585784674914530">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:41,43</note>
+      </notes>
+      <segment>
+        <source>Channel is required.</source>
+      </segment>
+    </unit>
+    <unit id="3885497195825665706">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:15</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:64</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:88</note>
+      </notes>
+      <segment>
+        <source>Next</source>
+      </segment>
+    </unit>
+    <unit id="4161176881257288804">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:31</note>
+      </notes>
+      <segment>
+        <source>Head</source>
+      </segment>
+    </unit>
+    <unit id="4266864201796016633">
+      <notes>
+        <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Intel in Creation</source>
+      </segment>
+    </unit>
+    <unit id="5462361983940693567">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:39</note>
+      </notes>
+      <segment>
+        <source>Channel</source>
+      </segment>
+    </unit>
+    <unit id="5577987272356825897">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:25,27</note>
+      </notes>
+      <segment>
+        <source>Callsign is required.</source>
+      </segment>
+    </unit>
+    <unit id="6019305939828737244">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:94</note>
+        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:63</note>
+      </notes>
+      <segment>
+        <source>Importance</source>
+      </segment>
+    </unit>
+    <unit id="6162693758764653365">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:55</note>
+      </notes>
+      <segment>
+        <source>Text</source>
+      </segment>
+    </unit>
+    <unit id="6205355627445317276">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:47</note>
+      </notes>
+      <segment>
+        <source>Content</source>
+      </segment>
+    </unit>
+    <unit id="6223909137047684293">
+      <notes>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:14</note>
+      </notes>
+      <segment>
+        <source>Intel Generators</source>
+      </segment>
+    </unit>
+    <unit id="6962699013778688473">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:102</note>
+      </notes>
+      <segment>
+        <source>Continue</source>
+      </segment>
+    </unit>
+    <unit id="7806919353578821914">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:49,51</note>
+      </notes>
+      <segment>
+        <source>Content is required.</source>
+      </segment>
+    </unit>
+    <unit id="8365674988775051590">
+      <notes>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:20,22</note>
+      </notes>
+      <segment>
+        <source>Empty Intel</source>
+      </segment>
+    </unit>
+    <unit id="8502337056684895182">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:20,24</note>
+        <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:19,23</note>
+      </notes>
+      <segment>
+        <source>To: <pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span *ngFor=&quot;let addressBookEntryId of createIntel.initialDeliverTo&quot;&gt;" dispEnd="&lt;/span&gt;"><ph id="1" equiv="INTERPOLATION" disp="{{intelCreationService.getLoadedAddressBookEntryById(addressBookEntryId) ? intelCreationService.getLoadedAddressBookEntryById(addressBookEntryId)!.label : &apos;&apos;}}"/></pc></source>
+      </segment>
+    </unit>
+    <unit id="8844804275730553009">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:7</note>
+      </notes>
+      <segment>
+        <source>Plain Text Message</source>
+      </segment>
+    </unit>
+    <unit id="9140544690687942988">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:8</note>
+      </notes>
+      <segment>
+        <source>Analog Radio Message</source>
+      </segment>
+    </unit>
+    <unit id="9178182467454450952">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:1</note>
+        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:31</note>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:26</note>
+      </notes>
+      <segment>
+        <source>Confirm</source>
+      </segment>
+    </unit>
     <unit id="1324352416087573030">
       <notes>
         <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:166</note>
@@ -1618,14 +1846,6 @@
         <source>Keyboard selection suspended. Click here to enable.</source>
       </segment>
     </unit>
-    <unit id="6019305939828737244">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:63</note>
-      </notes>
-      <segment>
-        <source>Importance</source>
-      </segment>
-    </unit>
     <unit id="6074000751994236114">
       <notes>
         <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-details/intel-to-deliver-details.component.html:11,12</note>
@@ -1755,14 +1975,6 @@
         <source>Missing intel information</source>
       </segment>
     </unit>
-    <unit id="9178182467454450952">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:26</note>
-      </notes>
-      <segment>
-        <source>Confirm</source>
-      </segment>
-    </unit>
     <unit id="996392855508119363">
       <notes>
         <note category="location">src/app/core/components/hidden/hidden.component.html:5</note>
@@ -1811,14 +2023,6 @@
         <source>Content:</source>
       </segment>
     </unit>
-    <unit id="2159130950882492111">
-      <notes>
-        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:23</note>
-      </notes>
-      <segment>
-        <source>Cancel</source>
-      </segment>
-    </unit>
     <unit id="3487000124762334468">
       <notes>
         <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:4</note>
@@ -1857,6 +2061,22 @@
       </notes>
       <segment>
         <source>Submit</source>
+      </segment>
+    </unit>
+    <unit id="7783591557067224321">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:76</note>
+      </notes>
+      <segment>
+        <source>Add address book entries</source>
+      </segment>
+    </unit>
+    <unit id="940160377118654830">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:77</note>
+      </notes>
+      <segment>
+        <source>Add address book entries...</source>
       </segment>
     </unit>
   </file>
