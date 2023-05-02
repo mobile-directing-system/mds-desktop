@@ -545,4 +545,11 @@ describe('EditGroupView', () => {
 
     expect(component.updateGroup).toHaveBeenCalledOnceWith();
   }));
+
+  it('should disable delete button without delete-permissions', fakeAsync(() => {
+    spectator.inject(AccessControlMockService).setNoAdminAndGranted(allPermissions.filter(p => p.name != PermissionName.DeleteGroup));
+    spectator.setRouteParam('', '');
+    tick();
+    expect(spectator.query(byTextContent('Delete', { selector: 'app-delete-confirm-button' }))).not.toBeVisible();
+  }));
 });
