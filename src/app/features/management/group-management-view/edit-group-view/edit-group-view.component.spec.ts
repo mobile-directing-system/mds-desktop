@@ -14,6 +14,7 @@ import { SearchResult } from '../../../../core/util/store';
 import { AccessControlService } from '../../../../core/services/access-control.service';
 import { AccessControlMockService } from '../../../../core/services/access-control-mock.service';
 import { PermissionName } from '../../../../core/permissions/permissions';
+import {By} from "@angular/platform-browser";
 
 function genFactoryOptions(): SpectatorRoutingOptions<EditGroupView> {
   return {
@@ -103,6 +104,7 @@ describe('EditGroupView', () => {
     { name: PermissionName.ViewUser },
     { name: PermissionName.ViewGroup },
     { name: PermissionName.UpdateGroup },
+    { name: PermissionName.DeleteGroup },
   ];
 
   beforeEach(async () => {
@@ -551,5 +553,23 @@ describe('EditGroupView', () => {
     spectator.setRouteParam('', '');
     tick();
     expect(spectator.query(byTextContent('Delete', { selector: 'app-delete-confirm-button' }))).not.toBeVisible();
+  }));
+
+  it('should delete group when delete button is confirmed', fakeAsync(() => {
+    const deleteConfirmButton = spectator.fixture.debugElement.query(By.css('app-delete-confirm-button'));
+    tick();
+    expect(deleteConfirmButton).toBeTruthy();
+
+    const groupService = spectator.inject(GroupService);
+    spectator.inject(GroupService).deleteGroupById.and.returnValue(of(void 0));
+
+
+    spyOn(component, 'delete');
+   // spyOn(groupService, 'deleteGroupById');
+    deleteConfirmButton.triggerEventHandler('deleteConfirmed');
+    tick();
+    expect(component.delete).toHaveBeenCalledOnceWith();
+    tick();
+    expect(groupService.deleteGroupById).toHaveBeenCalledOnceWith(sampleGroup.id);
   }));
 });
