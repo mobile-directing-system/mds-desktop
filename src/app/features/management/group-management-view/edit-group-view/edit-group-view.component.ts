@@ -220,7 +220,7 @@ export class EditGroupView implements OnInit, OnDestroy {
   delete() {
     this.groupService.deleteGroupById(this.groupId).subscribe({
         next: _ => {
-          this.router.navigate(['..'], { relativeTo: this.route }).then();
+          this.close();
         },
         error: _ => {
           this.notificationService.notifyUninvasiveShort($localize`Group deletion failed.`);

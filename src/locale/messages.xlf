@@ -1345,5 +1345,13 @@
         <source>Delete</source>
       </segment>
     </unit>
+    <unit id="8006160526649588056">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.ts:226</note>
+      </notes>
+      <segment>
+        <source>Group deletion failed.</source>
+      </segment>
+    </unit>
   </file>
 </xliff>
