@@ -559,12 +559,9 @@ describe('EditGroupView', () => {
     let deleteConfirmButton = spectator.fixture.debugElement.query(By.css('app-delete-confirm-button'));
     let groupService = spectator.inject(GroupService);
     groupService.deleteGroupById.and.returnValue(of(void 0));
-    groupService.deleteGroupById(sampleGroup.id).subscribe();
-    spyOn(component, 'delete');
 
     expect(deleteConfirmButton).toBeTruthy();
     deleteConfirmButton.triggerEventHandler('deleteConfirmed');
-    expect(component.delete).toHaveBeenCalledOnceWith();
     expect(groupService.deleteGroupById).toHaveBeenCalledOnceWith(sampleGroup.id);
   }));
 });
