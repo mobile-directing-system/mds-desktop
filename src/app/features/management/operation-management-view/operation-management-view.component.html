@@ -42,7 +42,7 @@
     <ng-container matColumnDef="props">
       <th *matHeaderCellDef mat-header-cell scope="col"></th>
       <td *matCellDef="let row" mat-cell>
-        <mat-icon *ngIf="asOperation(row).is_archived" i18n-matTooltip matTooltip="Archived">
+        <mat-icon *ngIf="asOperation(row).isArchived" i18n-matTooltip matTooltip="Archived">
           inventory
         </mat-icon>
         <mat-icon *ngIf="isOperationInFuture(asOperation(row))" i18n-matTooltip matTooltip="Planned in the future">
@@ -57,7 +57,7 @@
     <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
     <tr (click)="navigateToOperation(asOperation(row).id)"
         *matRowDef="let row; columns: columnsToDisplay"
-        [ngClass]="{ 'archived': asOperation(row).is_archived, 'clickable': !asOperation(row).is_archived, 'planned': isOperationInFuture(asOperation(row)), 'active': isOperationActive(asOperation(row)) }"
+        [ngClass]="{ 'archived': asOperation(row).isArchived, 'clickable': !asOperation(row).isArchived, 'planned': isOperationInFuture(asOperation(row)), 'active': isOperationActive(asOperation(row)) }"
         class="operation"
         mat-row></tr>
 

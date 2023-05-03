@@ -90,14 +90,14 @@ describe('EditGroupView', () => {
       title: 'roof',
       description: 'temple',
       start: new Date(),
-      is_archived: false,
+      isArchived: false,
     },
     {
       id: 'drop',
       title: 'garden',
       description: 'excite',
       start: new Date(),
-      is_archived: false,
+      isArchived: false,
     },
   ];
   const allPermissions = [

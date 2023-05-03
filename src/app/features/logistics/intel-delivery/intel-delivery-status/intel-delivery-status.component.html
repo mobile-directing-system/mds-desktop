@@ -1,0 +1,17 @@
+<div class="c">
+  <div>
+    <span *ngIf="!isWebSocketConnected" class="realtime" i18n>
+    No realtime updates (no connection)
+  </span>
+    <span *ngIf="isWebSocketConnected" i18n>
+    <span class="realtime realtime--ok">Realtime</span>
+    updates for {{ subscribedOperations.length }} operation(s).
+  </span>
+    <span i18n>Open intel deliveries: </span>
+    <span *ngIf="openIntelDeliveriesCount === undefined">?</span>
+    <span *ngIf="openIntelDeliveriesCount !== undefined">{{ openIntelDeliveriesCount }}</span>
+  </div>
+  <div>
+    <span i18n>Warning: Manual intel delivery is meant to be performed by only one person at a time.</span>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<ng-container *ngIf="intel" [ngSwitch]="intel.type">
+  <div *ngSwitchCase="IntelType.PlainTextMessage">
+    <app-plain-text-message-summary [content]="plainTextMessage()!.content"></app-plain-text-message-summary>
+  </div>
+  <div *ngSwitchCase="IntelType.AnalogRadioMessage">
+    <app-analog-radio-message-summary [content]="analogRadioMessage()!.content"></app-analog-radio-message-summary>
+  </div>
+  <div *ngSwitchDefault class="icon">
+    <mat-icon>help_outline</mat-icon>
+    <span i18n>Unknown intel type</span>
+  </div>
+  <div *ngSwitchCase="undefined" class="icon">
+    <mat-icon>help_outline</mat-icon>
+    <span i18n>Missing intel information</span>
+  </div>
+</ng-container>

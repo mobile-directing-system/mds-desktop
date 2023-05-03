@@ -18,12 +18,20 @@ import { ChannelService } from '../../../../core/services/channel.service';
 import { Channel, ChannelType } from '../../../../core/model/channel';
 import { Importance } from '../../../../core/model/importance';
 import * as moment from 'moment';
+import { AccessControlService } from '../../../../core/services/access-control.service';
+import { AccessControlMockService } from '../../../../core/services/access-control-mock.service';
+import { MockComponent } from 'ng-mocks';
+import {
+  AddressBookEntryAutoIntelDeliveryComponent,
+} from '../address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component';
+import { CoreModule } from '../../../../core/core.module';
 import anything = jasmine.anything;
 
 function genFactoryOptions(): SpectatorRoutingOptions<EditAddressBookEntryView> {
   return {
     component: EditAddressBookEntryView,
     imports: [
+      CoreModule,
       LogisticsModule,
     ],
     mocks: [
@@ -33,6 +41,15 @@ function genFactoryOptions(): SpectatorRoutingOptions<EditAddressBookEntryView> 
       UserService,
       OperationService,
       MatDialog,
+    ],
+    providers: [
+      {
+        provide: AccessControlService,
+        useClass: AccessControlMockService,
+      },
+    ],
+    declarations: [
+      MockComponent(AddressBookEntryAutoIntelDeliveryComponent),
     ],
     params: {
       entryId: 'develop',
@@ -53,6 +70,7 @@ describe('EditAddressBookLogisticsView', () => {
   const channels: Channel[] = [
     {
       entry: 'develop',
+      isActive: true,
       label: 'replace',
       type: ChannelType.Radio,
       priority: 24,
@@ -96,7 +114,7 @@ describe('EditAddressBookLogisticsView', () => {
     title: 'roof',
     description: 'temple',
     start: new Date(),
-    is_archived: false,
+    isArchived: false,
   };
 
   beforeEach(async () => {

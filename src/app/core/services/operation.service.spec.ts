@@ -35,7 +35,7 @@ describe('OperationService', () => {
       description: 'Tonky',
       start: new Date(),
       end: new Date(new Date().getDate() + 1),
-      is_archived: false,
+      isArchived: false,
     };
     const netCreated = {
       id: 'strange things',
@@ -51,7 +51,7 @@ describe('OperationService', () => {
       description: 'bonk',
       start: create.start,
       end: create.end,
-      is_archived: false,
+      isArchived: false,
     };
 
     it('should create an operation correctly', fakeAsync(() => {
@@ -93,7 +93,7 @@ describe('OperationService', () => {
       description: 'honky tonky',
       start: new Date(),
       end: new Date(new Date().getDate() + 1),
-      is_archived: false,
+      isArchived: false,
     };
 
     it('should update an operation correctly', fakeAsync(() => {
@@ -108,7 +108,7 @@ describe('OperationService', () => {
         description: update.description,
         start: update.start.toISOString(),
         end: update.end?.toISOString(),
-        is_archived: update.is_archived,
+        is_archived: update.isArchived,
       }, {});
     }));
 
@@ -143,7 +143,7 @@ describe('OperationService', () => {
       description: 'sleep',
       start: new Date(Date.parse(netOperation.start)),
       end: new Date(Date.parse(netOperation.end)),
-      is_archived: false,
+      isArchived: false,
     };
 
     it('should return correct operation upon retrieval', fakeAsync(() => {
@@ -214,7 +214,7 @@ describe('OperationService', () => {
           description: 'abroad',
           start: new Date(Date.parse(netOperations[0].start)),
           end: new Date(Date.parse(netOperations[0].end)),
-          is_archived: false,
+          isArchived: false,
         },
         {
           id: 'evenMoreRandom',
@@ -222,7 +222,7 @@ describe('OperationService', () => {
           description: 'abroad',
           start: new Date(Date.parse(netOperations[1].start)),
           end: new Date(Date.parse(netOperations[1].end)),
-          is_archived: false,
+          isArchived: false,
         },
       ]));
     }));
@@ -308,7 +308,7 @@ describe('OperationService', () => {
           description: 'sow',
           start: new Date(Date.parse(netOperations[0].start)),
           end: new Date(Date.parse(netOperations[0].end)),
-          is_archived: false,
+          isArchived: false,
         },
         {
           id: 'evenMoreRandom',
@@ -316,7 +316,7 @@ describe('OperationService', () => {
           description: 'steady',
           start: new Date(Date.parse(netOperations[1].start)),
           end: new Date(Date.parse(netOperations[1].end)),
-          is_archived: false,
+          isArchived: false,
         },
       ]));
     }));

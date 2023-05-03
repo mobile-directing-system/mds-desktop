@@ -1,0 +1,43 @@
+@import 'src/styles/view';
+
+$spacing: 1em;
+
+.c {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  gap: $spacing;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing;
+  max-width: 50%;
+}
+
+.open-intel-deliveries {
+  flex-grow: 1;
+}
+
+.intel-to-deliver {
+  width: 60%;
+}
+
+.delivery {
+  display: flex;
+  flex-direction: row;
+  gap: $spacing;
+}
+
+.delivery-attempts {
+  width: 40%;
+}
+
+.channel-selection {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing;
+}

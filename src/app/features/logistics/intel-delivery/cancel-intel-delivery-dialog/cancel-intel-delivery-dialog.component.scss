@@ -1,0 +1,15 @@
+@use 'sass:map';
+@import 'src/styles/forms';
+@import 'src/styles/corporate';
+
+.prompt {
+  margin-bottom: 1em;
+}
+
+form {
+  gap: 1em;
+}
+
+.selection-changed {
+  color: map.get($mds-desktop-danger-palette, 800);
+}

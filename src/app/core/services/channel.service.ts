@@ -18,6 +18,7 @@ export type NetChannel = NetInAppNotificationChannel | NetRadioChannel
 interface NetChannelBase {
   id?: string;
   entry: string;
+  is_active: boolean;
   label: string;
   type: string;
   priority: number;
@@ -55,6 +56,7 @@ function netChannelBaseFromApp(a: ChannelBase): NetChannelBase {
   return {
     id: a.id,
     entry: a.entry,
+    is_active: a.isActive,
     label: a.label,
     type: a.type,
     min_importance: a.minImportance,
@@ -87,6 +89,7 @@ function appChannelBaseFromNet(n: NetChannel): ChannelBase {
   return {
     id: n.id,
     entry: n.entry,
+    isActive: n.is_active,
     label: n.label,
     type: appChannelTypeFromNet(n),
     minImportance: n.min_importance,

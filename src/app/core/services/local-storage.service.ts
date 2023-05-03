@@ -19,6 +19,10 @@ export class LocalStorageService {
    * The id of the user being logged in.
    */
   static TokenLoggedInUserId = 'logged-in-user-id';
+  /**
+   * The id of the currently selected operation.
+   */
+  static TokenWorkspaceOperation = 'workspace-operation';
 
   /**
    * Assembles the final key for local storage with prefix.

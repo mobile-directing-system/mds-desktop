@@ -1,0 +1,33 @@
+<h1 mat-dialog-title i18n>Confirm</h1>
+<mat-dialog-content>
+  <div *ngFor="let createIntel of intelCreationService.intelInCreation">
+    <div class="view" *ngFor="let createIntel of intelCreationService.intelInCreation">
+      <p *ngIf="createIntel.type === IntelType.PlainTextMessage" i18n>
+        Plain Text Message
+      </p>
+      <p *ngIf="createIntel.type === IntelType.AnalogRadioMessage" i18n>
+        Analog Radio Message
+      </p>
+      <p class="text-content" *ngIf="createIntel.type === IntelType.PlainTextMessage">
+        {{createIntel.content.text}}
+      </p>
+      <p class="text-content" *ngIf="createIntel.type === IntelType.AnalogRadioMessage">
+        {{createIntel.content.content}}
+      </p>
+      <div class="text-content">
+        <app-importance-inline [importance]="createIntel.importance"></app-importance-inline>
+      </div>
+      <p i18n>
+        To:
+        <span *ngFor="let addressBookEntryId of createIntel.initialDeliverTo">
+        {{intelCreationService.getLoadedAddressBookEntryById(addressBookEntryId) ? intelCreationService.getLoadedAddressBookEntryById(addressBookEntryId)!.label : ''}}
+      </span>
+      </p>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+  <mat-dialog-actions class="actions">
+    <button mat-button (click)="onCancelClick()" i18n>Cancel</button>
+    <button mat-button mat-dialog-close="true" i18n>Confirm</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

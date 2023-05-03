@@ -1,0 +1,37 @@
+@use 'sass:map';
+@import 'src/styles/corporate';
+
+.frame {
+  background-color: map.get($mds-desktop-font-palette, 100);
+  border: solid 2px map.get($mds-desktop-font-palette, 600);
+  padding: 1em;
+}
+
+.intel-importance {
+  float: right;
+  top: 0;
+}
+
+.subject {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .5em;
+  font-weight: 500;
+}
+
+.from-to {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1.3em;
+  font-weight: 500;
+  margin: .3em 0;
+}
+
+.intel-summary {
+  max-height: 15em;
+  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: auto;
+}

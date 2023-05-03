@@ -1,3 +1,6 @@
+import { of, OperatorFunction, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
 /**
  * Used as a container for errors in MDS. The wrapping concept is taken from error handling in Go.
  */
@@ -82,4 +85,17 @@ export enum MDSErrorCode {
    * Unexpected error if no code was provided.
    */
   Unexpected
+}
+
+/**
+ * Maps to the given value, if the {@link Error} is an {@link MDSError} with {@link MDSErrorCode.Forbidden}.
+ * @param mapTo The value to use for a matching {@link Error}.
+ */
+export function mapMDSForbiddenErrorTo<T>(mapTo: T): OperatorFunction<any, T> {
+  return catchError(error => {
+    if (error instanceof MDSError && error.finalCode() == MDSErrorCode.Forbidden) {
+      return of(mapTo);
+    }
+    return throwError(() => error);
+  });
 }

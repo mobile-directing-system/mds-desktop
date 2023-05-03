@@ -1,0 +1,23 @@
+<ng-container [ngSwitch]="intelType">
+  <div
+    [matTooltip]="hideTooltip ? '' : 'Intel type: ' + (intelType?.toString() ?? 'undefined')"
+    class="intel-type"
+    matTooltipShowDelay="350">
+    <div *ngSwitchCase="IntelType.PlainTextMessage">
+      <mat-icon fontSet="material-icons-outlined">article</mat-icon>
+      <span i18n="@@intelType-plain-text-message">Plain-text Message</span>
+    </div>
+    <div *ngSwitchCase="IntelType.AnalogRadioMessage">
+      <mat-icon fontSet="material-icons-outlined">headset_mic</mat-icon>
+      <span i18n="@@intelType-analog-radio-message">Analog Radio Message</span>
+    </div>
+    <div *ngSwitchDefault class="unknown">
+      <mat-icon>help_outline</mat-icon>
+      <span i18n>Unknown</span>
+    </div>
+    <div *ngSwitchCase="undefined" class="not-set">
+      <mat-icon>help_outline</mat-icon>
+      <span i18n>Not set</span>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,34 @@
+<div class="c clickable" [ngClass]="{'highlight': highlight}">
+  <div *ngIf="channel" class="channel-meta">
+    <div class="stat">
+      <div class="label" i18n>Channel type</div>
+      <app-channel-type-inline [channelType]="channel.channel.type"></app-channel-type-inline>
+    </div>
+    <div class="stat">
+      <div class="label" i18n>Label</div>
+      <span>{{ channel.channel.label }}</span>
+    </div>
+    <div class="stat">
+      <div class="label" i18n>Priority</div>
+      <span>{{ channel.channel.priority }}</span>
+    </div>
+    <div class="stat">
+      <div class="label" i18n>Timeout</div>
+      <span>{{ channel.channel.timeout | duration }}</span>
+    </div>
+    <div class="stat">
+      <div class="label" i18n>Min Importance</div>
+      <app-importance-inline [importance]="channel.channel.minImportance"></app-importance-inline>
+    </div>
+  </div>
+  <!--Details if not recommended.-->
+  <div *ngIf="getMinImportanceNotSatisfiedChannel(); let channel" class="not-recommended" i18n>
+    Minimum importance not satisfied.
+  </div>
+  <div *ngIf="getFailedAttemptChannel(); let channel" class="not-recommended" i18n>
+    Failed attempt at {{ channel.details.attempt.createdAt | date:'medium' }}.
+  </div>
+  <div *ngIf="getInactiveChannelChannel(); let channel" class="not-recommended" i18n>
+    Channel marked as inactive.
+  </div>
+</div>

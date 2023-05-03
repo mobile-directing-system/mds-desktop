@@ -23,7 +23,7 @@ import { MDSError, MDSErrorCode } from '../../../core/util/errors';
   ],
 })
 export class ChannelsComponent extends CustomControlValueAccessor<Channel[]> {
-  columnsToDisplay = ['label', 'type', 'priority', 'minImportance', 'timeout'];
+  columnsToDisplay = ['label', 'isActive', 'type', 'priority', 'minImportance', 'timeout'];
   /**
    * Datasource for the table that contains the channel list.
    */

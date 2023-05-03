@@ -1,0 +1,76 @@
+<app-local-paginated-list
+  [pageSizeOptions]="[5,10,25,50]"
+  [data]="_openIntelDeliveries" #openIntelDeliveryList>
+  <table
+    [dataSource]="openIntelDeliveryList.dataSource"
+    aria-label="User list"
+    mat-table>
+
+    <ng-container matColumnDef="intelCreatedAt">
+      <th *matHeaderCellDef i18n mat-header-cell>Created at</th>
+      <td *matCellDef="let row"
+          mat-cell>{{ asDetailedOpenIntelDelivery(row).delivery.intel.createdAt | date:'medium' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="intelOperation">
+      <th *matHeaderCellDef i18n mat-header-cell>Operation</th>
+      <td *matCellDef="let row"
+          mat-cell
+          [appShowLoadingDots]="asDetailedOpenIntelDelivery(row).operation === undefined">
+        <span *ngIf="asDetailedOpenIntelDelivery(row).operation; let operation">{{ operation.title }}</span>
+        <app-hidden *ngIf="asDetailedOpenIntelDelivery(row).operation === null" [width]="5"></app-hidden>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="intelCreatedBy">
+      <th *matHeaderCellDef i18n mat-header-cell>From</th>
+      <td *matCellDef="let row"
+          [appShowLoadingDots]="asDetailedOpenIntelDelivery(row).intelCreator === undefined"
+          mat-cell>
+        <span *ngIf="asDetailedOpenIntelDelivery(row).intelCreator; let intelCreator">
+          {{ intelCreator.firstName }} {{ intelCreator.lastName }}
+        </span>
+        <app-hidden *ngIf="asDetailedOpenIntelDelivery(row).intelCreator === null" [width]="5"></app-hidden>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="deliveryTo">
+      <th *matHeaderCellDef i18n mat-header-cell>To</th>
+      <td *matCellDef="let row"
+          [appShowLoadingDots]="asDetailedOpenIntelDelivery(row).recipientEntry === undefined"
+          mat-cell>
+        <span *ngIf="asDetailedOpenIntelDelivery(row).recipientEntry; let recipientEntry">
+          {{ recipientEntry.label }}
+        </span>
+        <app-hidden *ngIf="asDetailedOpenIntelDelivery(row).recipientEntry === null" [width]="5"></app-hidden>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="intelType">
+      <th *matHeaderCellDef i18n mat-header-cell>Intel type</th>
+      <td *matCellDef="let row"
+          [appShowLoadingDots]="asDetailedOpenIntelDelivery(row).intel === undefined"
+          mat-cell>
+        <ng-container *ngIf="asDetailedOpenIntelDelivery(row).intel; let intel">
+          <app-intel-type-inline
+            [intelType]="intel.type"></app-intel-type-inline>
+        </ng-container>
+        <app-hidden *ngIf="asDetailedOpenIntelDelivery(row).intel === null" [width]="5"></app-hidden>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="intelImportance">
+      <th *matHeaderCellDef i18n mat-header-cell>Importance</th>
+      <td *matCellDef="let row" mat-cell>
+        <app-importance-inline
+          [importance]="asDetailedOpenIntelDelivery(row).delivery.intel.importance"></app-importance-inline>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="columns" mat-header-row></tr>
+    <tr (click)="selectOpenIntelDelivery(asDetailedOpenIntelDelivery(row).delivery.delivery.id)"
+        *matRowDef="let row; columns: columns"
+        class="clickable"
+        mat-row></tr>
+  </table>
+</app-local-paginated-list>

@@ -1,0 +1,25 @@
+<h1 mat-dialog-title i18n>Select workspace operation</h1>
+<mat-dialog-content>
+  <form>
+    <app-searchable-entity-input
+      [displayTemplate]="display"
+      [formControl]="operationFC"
+      [retrieve]="getOperationById.bind(this)"
+      [search]="searchOperations.bind(this)"
+      [suggestionTemplate]="suggestion"
+      class="app-edit-input-large"
+      i18n-label label="Operation"
+      i18n-placeholder placeholder="Search operation...">
+      <ng-template #display let-entity='entity'>
+        {{asOperation(entity).title}}
+      </ng-template>
+      <ng-template #suggestion let-entity='entity'>
+        {{asOperation(entity).title}}
+      </ng-template>
+    </app-searchable-entity-input>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="cancel()" i18n mat-button>Cancel</button>
+  <button (click)="apply()" [disabled]="!operationFC.valid" color="primary" i18n mat-button type="submit">Submit</button>
+</mat-dialog-actions>

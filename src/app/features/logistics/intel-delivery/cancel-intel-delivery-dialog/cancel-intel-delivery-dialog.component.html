@@ -1,0 +1,27 @@
+<h1 mat-dialog-title i18n>Confirm cancellation</h1>
+<mat-dialog-content>
+  <div class="prompt app-edit-input-large" i18n>
+    Do you really want to cancel the delivery? This will also cancel all active delivery attempts.
+    If you want to cancel the delivery, please provide information below.
+  </div>
+  <form class="form-column">
+    <mat-slide-toggle [formControl]="form.controls.success" i18n>Mark delivery as successful</mat-slide-toggle>
+    {{ form.controls.success.getRawValue() }}
+    <mat-form-field class="app-edit-input-large">
+      <mat-label i18n>Note</mat-label>
+      <textarea
+        [formControl]="form.controls.note"
+        i18n-placeholder
+        matInput
+        placeholder="Explain why the delivery was cancelled."></textarea>
+    </mat-form-field>
+  </form>
+  <div *ngIf="!allowConfirm()" class="selection-changed app-edit-input-large" i18n>
+    Selected delivery changed. In order to prevent unintended cancelling of a delivery, you must close the dialog,
+    review the selected delivery and try again.
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="cancel()" i18n mat-button type="button">Don't cancel</button>
+  <button (click)="confirm()" [disabled]="!allowConfirm()" color="warn" i18n mat-button type="submit">Confirm</button>
+</mat-dialog-actions>

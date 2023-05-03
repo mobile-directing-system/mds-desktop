@@ -17,7 +17,13 @@ export class LocalPaginatedListComponent<EntryT> implements OnChanges {
   /**
    * The available page sizes.
    */
-  @Input() pageSizeOptions = [25, 50, 100, 500];
+  _pageSizeOptions = [25, 50, 100, 500];
+  @Input() set pageSizeOptions(options: number[]) {
+    this._pageSizeOptions = options;
+    this.pagination.limit = options[0];
+    this.refreshDataSource();
+  }
+
   /**
    * Optional id if multiple lists share the same route. This is used in order to differ between pagination query
    * params.
@@ -30,7 +36,7 @@ export class LocalPaginatedListComponent<EntryT> implements OnChanges {
   /**
    * Current pagination.
    */
-  pagination = new PaginationParams<string>(this.pageSizeOptions[0], 0);
+  pagination = new PaginationParams<string>(this._pageSizeOptions[0], 0);
   /**
    * Public data source to be used by child components.
    */

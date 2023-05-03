@@ -51,7 +51,7 @@ describe('EditOperationViewComponent', () => {
     description: 'wage',
     start: new Date(2023, 9, 9, 12, 0, 0, 0),
     end: new Date(2023, 10, 10, 12, 0, 0, 0),
-    is_archived: false,
+    isArchived: false,
   };
 
   const title = 'spring';
@@ -482,7 +482,7 @@ describe('EditOperationViewComponent', () => {
         description: description,
         start: startDate.toDate(),
         end: endDateWithEqualDateButGreaterTime.toDate(),
-        is_archived: isArchived,
+        isArchived: isArchived,
       });
 
       expect(spectator.inject(OperationService).updateOperationMembers).toHaveBeenCalledOnceWith(sampleOp.id, members);

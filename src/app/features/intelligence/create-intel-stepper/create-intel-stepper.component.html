@@ -1,0 +1,105 @@
+<mat-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]="intelTypeFormGroup">
+    <ng-template matStepLabel i18n-matStepLabel>Intel Type</ng-template>
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>Intel Type</mat-label>
+      <mat-select [formControl]="intelTypeFormGroup.controls.intelType">
+        <mat-option [value]="IntelType.PlainTextMessage" i18n>Plain Text Message</mat-option>
+        <mat-option [value]="IntelType.AnalogRadioMessage" i18n>Analog Radio Message</mat-option>
+      </mat-select>
+      <mat-error *ngIf="intelTypeFormGroup.controls.intelType.errors && intelTypeFormGroup.controls.intelType.errors['required']" i18n>
+        Intel type is required.
+      </mat-error>
+    </mat-form-field>
+    <div>
+      <button mat-button *ngIf="intelTypeFormGroup.controls.intelType.getRawValue()" matStepperNext i18n>Next</button>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="contentFormGroup">
+    <div class="multiple-form">
+      <ng-template matStepLabel i18n-matStepLabel>Content</ng-template>
+      <mat-form-field *ngIf="intelTypeFormGroup.controls.intelType.getRawValue() === IntelType.AnalogRadioMessage"
+                      class="app-edit-input">
+        <mat-label i18n>Callsign</mat-label>
+        <input matInput [formControl]="contentFormGroup.controls.callsign">
+        <mat-error *ngIf="contentFormGroup.controls.callsign.errors && contentFormGroup.controls.callsign.errors['required']" i18n>
+          Callsign is required.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="intelTypeFormGroup.controls.intelType.getRawValue() === IntelType.AnalogRadioMessage"
+                      class="app-edit-input">
+        <mat-label i18n>Head</mat-label>
+        <input matInput [formControl]="contentFormGroup.controls.head">
+        <mat-error *ngIf="contentFormGroup.controls.head.errors && contentFormGroup.controls.head.errors['required']" i18n>
+          Head is required.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="intelTypeFormGroup.controls.intelType.getRawValue() === IntelType.AnalogRadioMessage"
+                      class="app-edit-input">
+        <mat-label i18n>Channel</mat-label>
+        <input matInput [formControl]="contentFormGroup.controls.channel">
+        <mat-error *ngIf="contentFormGroup.controls.channel.errors && contentFormGroup.controls.channel.errors['required']" i18n>
+          Channel is required.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="intelTypeFormGroup.controls.intelType.getRawValue() === IntelType.AnalogRadioMessage"
+                      class="app-edit-input">
+        <mat-label i18n>Content</mat-label>
+        <textarea matInput [formControl]="contentFormGroup.controls.content"></textarea>
+        <mat-error *ngIf="contentFormGroup.controls.content.errors && contentFormGroup.controls.content.errors['required']" i18n>
+          Content is required.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="intelTypeFormGroup.controls.intelType.getRawValue() === IntelType.PlainTextMessage"
+                      class="app-edit-input-larger">
+        <mat-label i18n>Text</mat-label>
+        <textarea matInput [formControl]="contentFormGroup.controls.text"> </textarea>
+        <mat-error *ngIf="contentFormGroup.controls.text.errors && contentFormGroup.controls.text.errors['required']" i18n>
+          Text is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-button matStepperPrevious i18n>Back</button>
+      <button mat-button matStepperNext i18n>Next</button>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="deliverToFromGroup">
+    <ng-template matStepLabel i18n-matStepLabel>Deliver To</ng-template>
+    <app-searchable-multi-chip-entity-input-field
+      [chipTemplate]="chip"
+      [formControl]="deliverToFromGroup.controls.deliverTo"
+      [retrieve]="getAddressBookEntryById.bind(this)"
+      [search]="searchAddressBookEntry.bind(this)"
+      [suggestionTemplate]="suggestionAddressBookEntry"
+      class="app-edit-input-large"
+      i18n-label label="Add address book entries"
+      i18n-placeholder placeholder="Add address book entries...">
+      <ng-template #chip let-entity='entity'>
+        {{asAddressBookEntry(entity).label}}
+      </ng-template>
+      <ng-template #suggestionAddressBookEntry let-entity='entity'>
+        {{asAddressBookEntry(entity).label}}<span
+        class="username">({{asAddressBookEntry(entity).label}})</span>
+      </ng-template>
+    </app-searchable-multi-chip-entity-input-field>
+    <div>
+      <button mat-button matStepperPrevious i18n>Back</button>
+      <button mat-button matStepperNext i18n>Next</button>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="importanceFormGroup">
+    <ng-template matStepLabel i18n-matStepLabel>Importance</ng-template>
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>Importance</mat-label>
+      <app-importance-select [formControl]="importanceFormGroup.controls.importance"></app-importance-select>
+      <mat-error *ngIf="importanceFormGroup.controls.importance.errors && importanceFormGroup.controls.importance.errors['required']" i18n>
+        Importance is required.
+      </mat-error>
+    </mat-form-field>
+    <div>
+      <button mat-button matStepperPrevious i18n>Back</button>
+      <button (click)="addCreateIntel()" mat-button matStepperNext i18n>Continue</button>
+    </div>
+  </mat-step>
+</mat-stepper>

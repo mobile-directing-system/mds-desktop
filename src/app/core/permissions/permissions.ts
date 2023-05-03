@@ -104,6 +104,10 @@ export enum PermissionName {
    * Allows to retrieve users.
    */
   ViewUser = 'user.view',
+  /**
+   * Allows delivering intel and managing ongoing deliveries.
+   */
+  ManageIntelDelivery = 'logistics.intel-delivery.manage',
 }
 
 /**

@@ -37,6 +37,22 @@ import { DeleteConfirmDialog } from './components/delete-confirm-dialog/delete-c
 import { ImportanceSelectComponent } from './components/importance-select/importance-select.component';
 import { ChannelTypeSelectComponent } from './components/channel-type-select/channel-type-select.component';
 import { DurationPickerComponent } from './components/duration-picker/duration-picker.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import {
+  WorkspaceOperationSelectorComponent,
+} from './components/home-layout/workspace-operation-selector/workspace-operation-selector.component';
+import {
+  SelectWorkspaceOperationDialog,
+} from './components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component';
+import { HiddenComponent } from './components/hidden/hidden.component';
+import { IntelTypeInlineComponent } from './components/intel-type-inline/intel-type-inline.component';
+import { IntelSummaryComponent } from './components/intel-summary/intel-summary.component';
+import {
+  PlainTextMessageSummaryComponent,
+} from './components/intel-summary/plain-text-message-summary/plain-text-message-summary.component';
+import {
+  AnalogRadioMessageSummaryComponent,
+} from './components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component';
 
 
 @NgModule({
@@ -70,6 +86,13 @@ import { DurationPickerComponent } from './components/duration-picker/duration-p
     ChannelTypeSelectComponent,
     ImportanceSelectComponent,
     DurationPickerComponent,
+    WorkspaceOperationSelectorComponent,
+    SelectWorkspaceOperationDialog,
+    HiddenComponent,
+    IntelTypeInlineComponent,
+    IntelSummaryComponent,
+    PlainTextMessageSummaryComponent,
+    AnalogRadioMessageSummaryComponent,
   ],
   exports: [
     LogoComponent,
@@ -99,6 +122,9 @@ import { DurationPickerComponent } from './components/duration-picker/duration-p
     ImportanceSelectComponent,
     DurationPickerComponent,
     AngularMaterialModule,
+    HiddenComponent,
+    IntelTypeInlineComponent,
+    IntelSummaryComponent,
   ],
   imports: [
     CommonModule,
@@ -110,6 +136,7 @@ import { DurationPickerComponent } from './components/duration-picker/duration-p
     MtxDatetimepickerModule,
     MtxNativeDatetimeModule,
     MtxMomentDatetimeModule,
+    MatStepperModule,
   ],
 })
 export class CoreModule {

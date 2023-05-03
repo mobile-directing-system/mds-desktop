@@ -11,7 +11,7 @@ import { User } from '../../../../core/model/user';
 import { map } from 'rxjs/operators';
 import { SearchResult } from '../../../../core/util/store';
 import { Operation } from '../../../../core/model/operation';
-import { AddressBookEntry, CreateAddressBookEntry } from '../../../../core/model/addressbookEntry';
+import { AddressBookEntry, CreateAddressBookEntry } from '../../../../core/model/address-book-entry';
 
 /**
  * View to create a new {@link AddressBookEntry}.

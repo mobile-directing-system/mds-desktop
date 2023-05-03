@@ -21,7 +21,7 @@ export  interface  CreateOperation {
   /**
    * Indicates whether the operation is archived. This means that it is no longer visible and used instead of deleting it.
    */
-  is_archived: boolean;
+  isArchived: boolean;
 }
 
 /**
@@ -51,5 +51,5 @@ export interface Operation {
   /**
    * Indicates whether the operation is archived. This means that it is no longer visible and used instead of deleting it.
    */
-  is_archived: boolean;
+  isArchived: boolean;
 }
