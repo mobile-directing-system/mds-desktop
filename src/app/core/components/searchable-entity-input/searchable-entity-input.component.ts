@@ -99,6 +99,10 @@ export class SearchableEntityInputComponent<Id, T extends Identifiable<Id>> impl
    */
   @Input() formControl?: FormControl;
   /**
+   * Default option which will be shown if nothing is selected. Only works in combination with required=false.
+   */
+  @Input() defaultOption?: String;
+  /**
    * Currently selected entities.
    */
   selectedEntityId?: Id;
@@ -139,6 +143,7 @@ export class SearchableEntityInputComponent<Id, T extends Identifiable<Id>> impl
   }
 
   ngOnInit(): void {
+    console.log(this.formControl?.value);
     this.s.push(this.searchFC.valueChanges.pipe(
       // Ignore other types. Required because of selecting a suggestion leading to setting the value automatically in
       // the search form control.

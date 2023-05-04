@@ -35,6 +35,9 @@
     </ng-container>
     <mat-icon class="clear-entity" (click)="clearSelectedEntity()">close</mat-icon>
   </div>
+  <div *ngIf="selectedEntityId === undefined && defaultOption" class="entity-display">
+    {{defaultOption}}
+  </div>
   <!--Errors.-->
   <ng-container *ngIf="searchFC.touched && errorTemplate">
     <ng-container *ngTemplateOutlet="errorTemplate"></ng-container>
