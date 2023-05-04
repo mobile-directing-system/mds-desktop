@@ -37,6 +37,9 @@
           <span *ngIf="asAddressBookEntryRow(row).operation; let operation">
             {{ operation.title }}
           </span>
+          <span *ngIf="!asAddressBookEntryRow(row).operation;" i18n>
+            All
+          </span>
         </td>
       </ng-container>
 

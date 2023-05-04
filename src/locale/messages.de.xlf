@@ -1467,7 +1467,7 @@
     </unit>
     <unit id="2392488717875840729">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:44</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:47</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:44,43</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:44,43</note>
       </notes>
@@ -2395,6 +2395,15 @@
       <segment state="initial">
         <source>Add address book entries...</source>
         <target>Addressbucheinträge auswählen...</target>
+      </segment>
+    </unit>
+    <unit id="8386976308507652568">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:41,42</note>
+      </notes>
+      <segment state="initial">
+        <source>All</source>
+        <target>Alle</target>
       </segment>
     </unit>
   </file>
