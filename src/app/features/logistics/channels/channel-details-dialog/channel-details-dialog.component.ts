@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { ValidatorDurationMin, ValidatorDurationRequired } from '../../../../core/util/duration';
+import * as uuid from 'uuid';
 
 /**
  * Dialog data for {@link ChannelDetailsDialog}.
@@ -71,7 +72,7 @@ export class ChannelDetailsDialog {
   closeSubmit(): void {
     const v = this.form.getRawValue();
     const channel: ChannelBase = {
-      id: v.id ?? undefined,
+      id: v.id ?? uuid.v4(),
       entry: v.entry!,
       isActive: v.isActive,
       label: v.label,
