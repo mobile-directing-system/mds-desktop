@@ -1,12 +1,361 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
   <file id="ngi18n" original="ng.template">
+    <unit id="channel-type-in-app-notification">
+      <notes>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:5</note>
+        <note category="location">src/app/core/model/channel.ts:93</note>
+      </notes>
+      <segment>
+        <source>In-App Notification</source>
+      </segment>
+    </unit>
+    <unit id="channel-type-radio">
+      <notes>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:9</note>
+        <note category="location">src/app/core/model/channel.ts:95</note>
+      </notes>
+      <segment>
+        <source>Radio</source>
+      </segment>
+    </unit>
+    <unit id="4467323362722952678">
+      <notes>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:13</note>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:32</note>
+        <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:16</note>
+      </notes>
+      <segment>
+        <source>Unknown</source>
+      </segment>
+    </unit>
+    <unit id="2085611136494552870">
+      <notes>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:17</note>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:36</note>
+        <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:20</note>
+      </notes>
+      <segment>
+        <source>Not set</source>
+      </segment>
+    </unit>
+    <unit id="5042044684614360469">
+      <notes>
+        <note category="location">src/app/core/components/delete-confirm-dialog/delete-confirm-dialog.component.ts:16</note>
+      </notes>
+      <segment>
+        <source>Do you really want to delete this entity?</source>
+      </segment>
+    </unit>
+    <unit id="7022070615528435141">
+      <notes>
+        <note category="location">src/app/core/components/delete-confirm-dialog/delete-confirm-dialog.component.ts:20</note>
+      </notes>
+      <segment>
+        <source>Delete</source>
+      </segment>
+    </unit>
+    <unit id="996392855508119363">
+      <notes>
+        <note category="location">src/app/core/components/hidden/hidden.component.html:5</note>
+      </notes>
+      <segment>
+        <source>Hidden</source>
+      </segment>
+    </unit>
+    <unit id="6002195485717726199">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:7</note>
+      </notes>
+      <segment>
+        <source>Mailbox</source>
+      </segment>
+    </unit>
+    <unit id="8489670130200267808">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:8</note>
+      </notes>
+      <segment>
+        <source>Intelligence</source>
+      </segment>
+    </unit>
+    <unit id="2446117790692479672">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:9</note>
+      </notes>
+      <segment>
+        <source>Resources</source>
+      </segment>
+    </unit>
+    <unit id="3891569230075043049">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:10</note>
+        <note category="location">src/app/features/logistics/logistics-layout/logistics-layout.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Logistics</source>
+      </segment>
+    </unit>
+    <unit id="7507948636555938109">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/profile/profile.component.html:9</note>
+        <note category="location">src/app/core/components/missing-permissions-view/missing-permissions-view.component.html:4</note>
+      </notes>
+      <segment>
+        <source>Log out</source>
+      </segment>
+    </unit>
+    <unit id="6897556149900065265">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:1</note>
+      </notes>
+      <segment>
+        <source>Select workspace operation</source>
+      </segment>
+    </unit>
+    <unit id="1283895920974679461">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:11</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:34</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:25</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:25</note>
+        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:16</note>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:28</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:27</note>
+        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:28</note>
+      </notes>
+      <segment>
+        <source>Operation</source>
+      </segment>
+    </unit>
+    <unit id="2725499532293844250">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:12</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:26</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:26</note>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:29</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:28</note>
+      </notes>
+      <segment>
+        <source>Search operation...</source>
+      </segment>
+    </unit>
+    <unit id="2159130950882492111">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:23</note>
+        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:30</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="935187492052582731">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:24</note>
+      </notes>
+      <segment>
+        <source>Submit</source>
+      </segment>
+    </unit>
+    <unit id="6508120659907084246">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/workspace-operation-selector.component.html:7</note>
+      </notes>
+      <segment>
+        <source>Currently selected operation for workspace. Click to change.</source>
+      </segment>
+    </unit>
+    <unit id="3095333197718374378">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/workspace-operation-selector.component.html:10,11</note>
+      </notes>
+      <segment>
+        <source>Click to select operation.</source>
+      </segment>
+    </unit>
+    <unit id="importance-none">
+      <notes>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:8</note>
+        <note category="location">src/app/core/model/importance.ts:27</note>
+      </notes>
+      <segment>
+        <source>None</source>
+      </segment>
+    </unit>
+    <unit id="importance-low">
+      <notes>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:12</note>
+        <note category="location">src/app/core/model/importance.ts:29</note>
+      </notes>
+      <segment>
+        <source>Low</source>
+      </segment>
+    </unit>
+    <unit id="importance-regular">
+      <notes>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:16</note>
+        <note category="location">src/app/core/model/importance.ts:31</note>
+      </notes>
+      <segment>
+        <source>Regular</source>
+      </segment>
+    </unit>
+    <unit id="importance-urgent">
+      <notes>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:20</note>
+        <note category="location">src/app/core/model/importance.ts:33</note>
+      </notes>
+      <segment>
+        <source>Urgent</source>
+      </segment>
+    </unit>
+    <unit id="importance-strike">
+      <notes>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:24</note>
+        <note category="location">src/app/core/model/importance.ts:35</note>
+      </notes>
+      <segment>
+        <source>Strike</source>
+      </segment>
+    </unit>
+    <unit id="importance-national-emergency">
+      <notes>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:28</note>
+        <note category="location">src/app/core/model/importance.ts:37</note>
+      </notes>
+      <segment>
+        <source>National Emergency</source>
+      </segment>
+    </unit>
+    <unit id="8632433842489123268">
+      <notes>
+        <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Callsign:</source>
+      </segment>
+    </unit>
+    <unit id="1130610467579985996">
+      <notes>
+        <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Head:</source>
+      </segment>
+    </unit>
+    <unit id="3487000124762334468">
+      <notes>
+        <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:4</note>
+      </notes>
+      <segment>
+        <source>Channel:</source>
+      </segment>
+    </unit>
+    <unit id="1395787838997214663">
+      <notes>
+        <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:5</note>
+      </notes>
+      <segment>
+        <source>Content:</source>
+      </segment>
+    </unit>
+    <unit id="3957104034487106247">
+      <notes>
+        <note category="location">src/app/core/components/intel-summary/intel-summary.component.html:10</note>
+      </notes>
+      <segment>
+        <source>Unknown intel type</source>
+      </segment>
+    </unit>
+    <unit id="8861844397105042477">
+      <notes>
+        <note category="location">src/app/core/components/intel-summary/intel-summary.component.html:14</note>
+      </notes>
+      <segment>
+        <source>Missing intel information</source>
+      </segment>
+    </unit>
+    <unit id="intelType-plain-text-message">
+      <notes>
+        <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:8</note>
+      </notes>
+      <segment>
+        <source>Plain-text Message</source>
+      </segment>
+    </unit>
+    <unit id="intelType-analog-radio-message">
+      <notes>
+        <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:12</note>
+      </notes>
+      <segment>
+        <source>Analog Radio Message</source>
+      </segment>
+    </unit>
     <unit id="8943841646314786602">
       <notes>
         <note category="location">src/app/core/components/landing-layout/landing-layout.component.html:11</note>
       </notes>
       <segment>
         <source>Change server url</source>
+      </segment>
+    </unit>
+    <unit id="763483268749037337">
+      <notes>
+        <note category="location">src/app/core/components/missing-permissions-view/missing-permissions-view.component.html:1</note>
+      </notes>
+      <segment>
+        <source>You are missing permissions to access the requested resource.</source>
+      </segment>
+    </unit>
+    <unit id="8890553633144307762">
+      <notes>
+        <note category="location">src/app/core/components/missing-permissions-view/missing-permissions-view.component.html:3</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:63</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:87</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:101</note>
+      </notes>
+      <segment>
+        <source>Back</source>
+      </segment>
+    </unit>
+    <unit id="2046391739963920580">
+      <notes>
+        <note category="location">src/app/core/components/quick-search/quick-search.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Quick search</source>
+      </segment>
+    </unit>
+    <unit id="6480637826590791425">
+      <notes>
+        <note category="location">src/app/core/services/web-socket.service.ts:88</note>
+      </notes>
+      <segment>
+        <source>WebSocket connection error</source>
+      </segment>
+    </unit>
+    <unit id="4743002849260529978">
+      <notes>
+        <note category="location">src/app/core/util/app-init.ts:24</note>
+      </notes>
+      <segment>
+        <source>Items per page:</source>
+      </segment>
+    </unit>
+    <unit id="4131502629887927598">
+      <notes>
+        <note category="location">src/app/core/util/app-init.ts:27</note>
+      </notes>
+      <segment>
+        <source>0 of <ph id="0" equiv="total" disp="length"/></source>
+      </segment>
+    </unit>
+    <unit id="4213264276527500323">
+      <notes>
+        <note category="location">src/app/core/util/app-init.ts:32</note>
+      </notes>
+      <segment>
+        <source><ph id="0" equiv="from" disp="startIndex + 1"/> - <ph id="1" equiv="to" disp="endIndex"/> of <ph id="2" equiv="total" disp="length"/></source>
       </segment>
     </unit>
     <unit id="5248717555542428023">
@@ -47,6 +396,38 @@
         <source>Login failed.</source>
       </segment>
     </unit>
+    <unit id="7393468163947639901">
+      <notes>
+        <note category="location">src/app/features/auth/logout-view/logout-view.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Logging you out...</source>
+      </segment>
+    </unit>
+    <unit id="5975532227999286857">
+      <notes>
+        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:5</note>
+      </notes>
+      <segment>
+        <source>Server URL</source>
+      </segment>
+    </unit>
+    <unit id="8086405223858773229">
+      <notes>
+        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:6</note>
+      </notes>
+      <segment>
+        <source>URL for accessing the server</source>
+      </segment>
+    </unit>
+    <unit id="6872707229089240366">
+      <notes>
+        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:7</note>
+      </notes>
+      <segment>
+        <source>e.g. https://mds.my-server.net/server</source>
+      </segment>
+    </unit>
     <unit id="4630695809547785290">
       <notes>
         <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:8,10</note>
@@ -63,6 +444,14 @@
         <source>Invalid server URL.</source>
       </segment>
     </unit>
+    <unit id="lbApply">
+      <notes>
+        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:15</note>
+      </notes>
+      <segment>
+        <source>Apply</source>
+      </segment>
+    </unit>
     <unit id="5782776032868892761">
       <notes>
         <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.ts:40</note>
@@ -72,406 +461,322 @@
         <source>Server url set to <ph id="0" equiv="new_server_url" disp="newServerUrl"/>.</source>
       </segment>
     </unit>
-    <unit id="lbApply">
+    <unit id="9178182467454450952">
       <notes>
-        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:15</note>
+        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:1</note>
+        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:31</note>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:26</note>
       </notes>
       <segment>
-        <source>Apply</source>
+        <source>Confirm</source>
       </segment>
     </unit>
-    <unit id="5975532227999286857">
+    <unit id="3299719390830582413">
       <notes>
-        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:5</note>
+        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:5,7</note>
+        <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:4,6</note>
       </notes>
       <segment>
-        <source>Server URL</source>
+        <source>Plain Text Message</source>
       </segment>
     </unit>
-    <unit id="7507948636555938109">
+    <unit id="2168018587334986318">
       <notes>
-        <note category="location">src/app/core/components/home-layout/profile/profile.component.html:9</note>
-        <note category="location">src/app/core/components/missing-permissions-view/missing-permissions-view.component.html:4</note>
+        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:8,10</note>
+        <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:7,9</note>
       </notes>
       <segment>
-        <source>Log out</source>
+        <source>Analog Radio Message</source>
       </segment>
     </unit>
-    <unit id="2046391739963920580">
+    <unit id="8502337056684895182">
       <notes>
-        <note category="location">src/app/core/components/quick-search/quick-search.component.html:2</note>
+        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:20,24</note>
+        <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:19,23</note>
       </notes>
       <segment>
-        <source>Quick search</source>
+        <source>To: <pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span *ngFor=&quot;let addressBookEntryId of createIntel.initialDeliverTo&quot;&gt;" dispEnd="&lt;/span&gt;"><ph id="1" equiv="INTERPOLATION" disp="{{intelCreationService.getLoadedAddressBookEntryById(addressBookEntryId) ? intelCreationService.getLoadedAddressBookEntryById(addressBookEntryId)!.label : &apos;&apos;}}"/></pc></source>
       </segment>
     </unit>
-    <unit id="2149300564474427551">
+    <unit id="1652218416869979294">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:95</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:112</note>
-        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:38</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:5</note>
       </notes>
       <segment>
-        <source>Administrator</source>
+        <source>Intel Type</source>
       </segment>
     </unit>
-    <unit id="2468239074984100046">
+    <unit id="8844804275730553009">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:3</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:7</note>
       </notes>
       <segment>
-        <source>Create, manage and edit users.</source>
+        <source>Plain Text Message</source>
       </segment>
     </unit>
-    <unit id="3586674587150281199">
+    <unit id="9140544690687942988">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:78</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:95</note>
-        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:21</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:8</note>
       </notes>
       <segment>
-        <source>Last name</source>
+        <source>Analog Radio Message</source>
       </segment>
     </unit>
-    <unit id="4131502629887927598">
+    <unit id="1828723992081381720">
       <notes>
-        <note category="location">src/app/core/util/app-init.ts:27</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:10,12</note>
       </notes>
       <segment>
-        <source>0 of <ph id="0" equiv="total" disp="length"/></source>
+        <source>Intel type is required.</source>
       </segment>
     </unit>
-    <unit id="4213264276527500323">
+    <unit id="3885497195825665706">
       <notes>
-        <note category="location">src/app/core/util/app-init.ts:32</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:15</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:64</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:88</note>
       </notes>
       <segment>
-        <source><ph id="0" equiv="from" disp="startIndex + 1"/> - <ph id="1" equiv="to" disp="endIndex"/> of <ph id="2" equiv="total" disp="length"/></source>
+        <source>Next</source>
       </segment>
     </unit>
-    <unit id="4555457172864212828">
+    <unit id="2053523035231858643">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:24</note>
-        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:1</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:23</note>
       </notes>
       <segment>
-        <source>Users</source>
+        <source>Callsign</source>
       </segment>
     </unit>
-    <unit id="4743002849260529978">
+    <unit id="5577987272356825897">
       <notes>
-        <note category="location">src/app/core/util/app-init.ts:24</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:25,27</note>
       </notes>
       <segment>
-        <source>Items per page:</source>
+        <source>Callsign is required.</source>
       </segment>
     </unit>
-    <unit id="5342432350421167093">
+    <unit id="4161176881257288804">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:83</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:100</note>
-        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:26</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:31</note>
       </notes>
       <segment>
-        <source>First name</source>
+        <source>Head</source>
       </segment>
     </unit>
-    <unit id="5891941941917080206">
+    <unit id="1012788843982935709">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:2</note>
-        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:7</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:33,35</note>
       </notes>
       <segment>
-        <source>Create User</source>
+        <source>Head is required.</source>
       </segment>
     </unit>
-    <unit id="5944812089887969249">
+    <unit id="5462361983940693567">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:1</note>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:62</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:39</note>
       </notes>
       <segment>
-        <source>Groups</source>
+        <source>Channel</source>
       </segment>
     </unit>
-    <unit id="7457179823984196306">
+    <unit id="3495585784674914530">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:1</note>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:88</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:41,43</note>
       </notes>
       <segment>
-        <source>Operations</source>
+        <source>Channel is required.</source>
       </segment>
     </unit>
-    <unit id="7615147220727762615">
+    <unit id="6205355627445317276">
       <notes>
-        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:3</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:20</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:47</note>
       </notes>
       <segment>
-        <source>Management</source>
+        <source>Content</source>
       </segment>
     </unit>
-    <unit id="1859131936150262113">
+    <unit id="7806919353578821914">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:96</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:113</note>
-        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:39</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:49,51</note>
       </notes>
       <segment>
-        <source>Inactive</source>
+        <source>Content is required.</source>
       </segment>
     </unit>
-    <unit id="6872707229089240366">
+    <unit id="6162693758764653365">
       <notes>
-        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:7</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:55</note>
       </notes>
       <segment>
-        <source>e.g. https://mds.my-server.net/server</source>
+        <source>Text</source>
       </segment>
     </unit>
-    <unit id="8086405223858773229">
+    <unit id="2644662487244441749">
       <notes>
-        <note category="location">src/app/features/auth/set-server-url-view/set-server-url-view.component.html:6</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:57,59</note>
       </notes>
       <segment>
-        <source>URL for accessing the server</source>
+        <source>Text is required.</source>
       </segment>
     </unit>
-    <unit id="1221596867309460035">
+    <unit id="7783591557067224321">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:6</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:76</note>
       </notes>
       <segment>
-        <source>New Password</source>
+        <source>Add address book entries</source>
       </segment>
     </unit>
-    <unit id="1481645236299803925">
+    <unit id="940160377118654830">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:37,38</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:77</note>
       </notes>
       <segment>
-        <source>Change Password</source>
+        <source>Add address book entries...</source>
       </segment>
     </unit>
-    <unit id="1558069880513305355">
+    <unit id="6019305939828737244">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:17,18</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:92</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:94</note>
+        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:63</note>
       </notes>
       <segment>
-        <source>Update Password</source>
+        <source>Importance</source>
       </segment>
     </unit>
-    <unit id="2330577642930707695">
+    <unit id="1600546907793893756">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:55,56</note>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:66,67</note>
-        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:64,65</note>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:120,121</note>
-        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:59,60</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:135,136</note>
-        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:35,36</note>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:29,30</note>
-        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:14,15</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:96,98</note>
       </notes>
       <segment>
-        <source>Cancel</source>
+        <source>Importance is required.</source>
       </segment>
     </unit>
-    <unit id="2689115924213512946">
+    <unit id="6962699013778688473">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:22,23</note>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:22,23</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:102</note>
       </notes>
       <segment>
-        <source>Last name is required.</source>
+        <source>Continue</source>
       </segment>
     </unit>
-    <unit id="3277520558587299577">
+    <unit id="4266864201796016633">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:2</note>
+        <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:2</note>
       </notes>
       <segment>
-        <source>Update Password</source>
+        <source>Intel in Creation</source>
       </segment>
     </unit>
-    <unit id="3191375468946657151">
+    <unit id="1636701572518005081">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:15,16</note>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:15,16</note>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:10</note>
       </notes>
       <segment>
-        <source>First name is required.</source>
+        <source>Choose a context</source>
       </segment>
     </unit>
-    <unit id="4407559560004943843">
+    <unit id="6223909137047684293">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:19</note>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:19</note>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:14</note>
       </notes>
       <segment>
-        <source>Last Name</source>
+        <source>Intel Generators</source>
       </segment>
     </unit>
-    <unit id="6028371114637047813">
+    <unit id="8365674988775051590">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:12</note>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:12</note>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:20,22</note>
       </notes>
       <segment>
-        <source>First Name</source>
+        <source>Empty Intel</source>
       </segment>
     </unit>
-    <unit id="6072990007630394552">
+    <unit id="7240532014248635304">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.ts:57</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.html:4</note>
       </notes>
       <segment>
-        <source>Updating password failed.</source>
+        <source>Auto Intel Delivery is enabled.</source>
       </segment>
     </unit>
-    <unit id="6104401008203737027">
+    <unit id="7056360524244234265">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.ts:69</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.html:6,7</note>
       </notes>
       <segment>
-        <source>User creation failed.</source>
+        <source>Disable Now</source>
       </segment>
     </unit>
-    <unit id="623221856807203436">
+    <unit id="4788215378402402752">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:26</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.html:11</note>
       </notes>
       <segment>
-        <source>Initial Password</source>
+        <source>Auto Intel Delivery is disabled.</source>
       </segment>
     </unit>
-    <unit id="5424016037871909683">
+    <unit id="3192247086533582747">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:9,10</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.html:13,14</note>
       </notes>
       <segment>
-        <source>New password is required.</source>
+        <source>Enable Now</source>
       </segment>
     </unit>
-    <unit id="9081239727073547463">
+    <unit id="7337574145907490264">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:8,9</note>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:8,9</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.ts:47</note>
       </notes>
       <segment>
-        <source>Username is required.</source>
+        <source>Auto Intel Delivery for this entry is now enabled.</source>
       </segment>
     </unit>
-    <unit id="760085743178726328">
+    <unit id="1326584312169948709">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.ts:101</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.ts:58</note>
       </notes>
       <segment>
-        <source>Updating user failed.</source>
+        <source>Auto Intel Delivery for this entry is now disabled.</source>
       </segment>
     </unit>
-    <unit id="2161528641772974097">
+    <unit id="1733705102982766446">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:29,30</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:2</note>
       </notes>
       <segment>
-        <source>Password is required.</source>
+        <source>Address Book Entries</source>
       </segment>
     </unit>
-    <unit id="247214804822900420">
+    <unit id="2881007568281222797">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:2,3</note>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:2,3</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:4</note>
       </notes>
       <segment>
-        <source>User: <ph id="0" equiv="INTERPOLATION" disp="{{user.firstName}}"/> <ph id="1" equiv="INTERPOLATION_1" disp="{{user.lastName}}"/></source>
+        <source>Create, manage and edit address book entries.</source>
       </segment>
     </unit>
-    <unit id="5009437026549898623">
+    <unit id="918029365747744094">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.ts:65</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:8</note>
       </notes>
       <segment>
-        <source>User created successfully.</source>
+        <source>Create Entry</source>
       </segment>
     </unit>
-    <unit id="6284119778725231733">
+    <unit id="4077520913910941990">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:25</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:24</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:6</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:6</note>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:13</note>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:8</note>
       </notes>
       <segment>
-        <source>Is Admin</source>
-      </segment>
-    </unit>
-    <unit id="8204176479746810612">
-      <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:18</note>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:26</note>
-      </notes>
-      <segment>
-        <source>Active</source>
-      </segment>
-    </unit>
-    <unit id="3620188369327429839">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:179,180</note>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:48,49</note>
-      </notes>
-      <segment>
-        <source>Save</source>
-      </segment>
-    </unit>
-    <unit id="7941428823403788384">
-      <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:63,64</note>
-        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:70,71</note>
-        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:63,64</note>
-        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:39,40</note>
-      </notes>
-      <segment>
-        <source>Create</source>
-      </segment>
-    </unit>
-    <unit id="1241348629231510663">
-      <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:36</note>
-      </notes>
-      <segment>
-        <source>End</source>
-      </segment>
-    </unit>
-    <unit id="1562584780596394495">
-      <notes>
-        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:56</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:58</note>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:45</note>
-      </notes>
-      <segment>
-        <source>Archived</source>
-      </segment>
-    </unit>
-    <unit id="2519536460151870844">
-      <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:3</note>
-      </notes>
-      <segment>
-        <source>Create, manage and edit operations.</source>
-      </segment>
-    </unit>
-    <unit id="2617770989260729968">
-      <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:51</note>
-      </notes>
-      <segment>
-        <source>Currently active</source>
-      </segment>
-    </unit>
-    <unit id="4328253427834278164">
-      <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:48</note>
-      </notes>
-      <segment>
-        <source>Planned in the future</source>
+        <source>Label</source>
       </segment>
     </unit>
     <unit id="4902817035128594900">
@@ -490,12 +795,523 @@
         <source>Description</source>
       </segment>
     </unit>
-    <unit id="5162686434580248853">
+    <unit id="2392488717875840729">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:31</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:44</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:44,43</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:44,43</note>
       </notes>
       <segment>
-        <source>Start</source>
+        <source>User</source>
+      </segment>
+    </unit>
+    <unit id="4496775740135012216">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Create Address Book Entry</source>
+      </segment>
+    </unit>
+    <unit id="1360954096804522853">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:9,10</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:9,10</note>
+      </notes>
+      <segment>
+        <source>Label is required.</source>
+      </segment>
+    </unit>
+    <unit id="9023787216859143413">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:44</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:44</note>
+      </notes>
+      <segment>
+        <source>Search user...</source>
+      </segment>
+    </unit>
+    <unit id="2330577642930707695">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:55,56</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:66,67</note>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:64,65</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:120,121</note>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:59,60</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:135,136</note>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:35,36</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:29,30</note>
+        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:14,15</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="7941428823403788384">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:63,64</note>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:70,71</note>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:63,64</note>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:39,40</note>
+      </notes>
+      <segment>
+        <source>Create</source>
+      </segment>
+    </unit>
+    <unit id="2365695266522758926">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.ts:51</note>
+      </notes>
+      <segment>
+        <source>Address book entry creation failed.</source>
+      </segment>
+    </unit>
+    <unit id="9198068988902166479">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:2,3</note>
+      </notes>
+      <segment>
+        <source>Address Book Entry: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.label.getRawValue()}}"/></source>
+      </segment>
+    </unit>
+    <unit id="6660925946511264619">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:69,70</note>
+      </notes>
+      <segment>
+        <source>Delete</source>
+      </segment>
+    </unit>
+    <unit id="2592690450389009216">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:75,76</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:124,125</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:139,140</note>
+      </notes>
+      <segment>
+        <source>Update</source>
+      </segment>
+    </unit>
+    <unit id="872015140095767450">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.ts:104</note>
+      </notes>
+      <segment>
+        <source>Updating address book entry failed.</source>
+      </segment>
+    </unit>
+    <unit id="5549841090450425281">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Channel - <ph id="0" equiv="INTERPOLATION" disp="{{ form.controls.label.value }}"/></source>
+      </segment>
+    </unit>
+    <unit id="8782767546165933649">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Unnamed Channel</source>
+      </segment>
+    </unit>
+    <unit id="5853287764718196763">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/in-app-notification-channel-details/in-app-notification-channel-details.component.html:1</note>
+      </notes>
+      <segment>
+        <source>Nothing to configure for in-app notifications.</source>
+      </segment>
+    </unit>
+    <unit id="314315645942131479">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/radio-channel-details/radio-channel-details.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Info</source>
+      </segment>
+    </unit>
+    <unit id="5002013608403252995">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/radio-channel-details/radio-channel-details.component.html:4</note>
+      </notes>
+      <segment>
+        <source>Channel, frequency, call-name...</source>
+      </segment>
+    </unit>
+    <unit id="8341057228987784101">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:2,4</note>
+      </notes>
+      <segment>
+        <source>New Channel</source>
+      </segment>
+    </unit>
+    <unit id="8204176479746810612">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:18</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:26</note>
+      </notes>
+      <segment>
+        <source>Active</source>
+      </segment>
+    </unit>
+    <unit id="8650499415827640724">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:26</note>
+      </notes>
+      <segment>
+        <source>Type</source>
+      </segment>
+    </unit>
+    <unit id="2734022681675842051">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:33</note>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:12</note>
+      </notes>
+      <segment>
+        <source>Priority</source>
+      </segment>
+    </unit>
+    <unit id="5037087188394157831">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:38</note>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:20</note>
+      </notes>
+      <segment>
+        <source>Min Importance</source>
+      </segment>
+    </unit>
+    <unit id="5956316725115867558">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:45</note>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:16</note>
+      </notes>
+      <segment>
+        <source>Timeout</source>
+      </segment>
+    </unit>
+    <unit id="6378747169231297519">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:1</note>
+      </notes>
+      <segment>
+        <source>Confirm cancellation</source>
+      </segment>
+    </unit>
+    <unit id="8463221083755539381">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:3,6</note>
+      </notes>
+      <segment>
+        <source>Do you really want to cancel the delivery? This will also cancel all active delivery attempts. If you want to cancel the delivery, please provide information below.</source>
+      </segment>
+    </unit>
+    <unit id="2514977068213191529">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:8</note>
+      </notes>
+      <segment>
+        <source>Mark delivery as successful</source>
+      </segment>
+    </unit>
+    <unit id="4388879716045736175">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:11</note>
+      </notes>
+      <segment>
+        <source>Note</source>
+      </segment>
+    </unit>
+    <unit id="6604849199707156712">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:16</note>
+      </notes>
+      <segment>
+        <source>Explain why the delivery was cancelled.</source>
+      </segment>
+    </unit>
+    <unit id="6924818567014384939">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:19,22</note>
+      </notes>
+      <segment>
+        <source>Selected delivery changed. In order to prevent unintended cancelling of a delivery, you must close the dialog, review the selected delivery and try again.</source>
+      </segment>
+    </unit>
+    <unit id="5543329497352362801">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:25</note>
+      </notes>
+      <segment>
+        <source>Don&apos;t cancel</source>
+      </segment>
+    </unit>
+    <unit id="1381592311007231590">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:4</note>
+      </notes>
+      <segment>
+        <source>Channel type</source>
+      </segment>
+    </unit>
+    <unit id="3318253074943304111">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:25,27</note>
+      </notes>
+      <segment>
+        <source>Minimum importance not satisfied.</source>
+      </segment>
+    </unit>
+    <unit id="8779994653903382762">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:28,30</note>
+      </notes>
+      <segment>
+        <source>Failed attempt at <ph id="0" equiv="INTERPOLATION" disp="{{ channel.details.attempt.createdAt | date:&apos;medium&apos; }}"/>.</source>
+      </segment>
+    </unit>
+    <unit id="2867253902287405242">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:31,33</note>
+      </notes>
+      <segment>
+        <source>Channel marked as inactive.</source>
+      </segment>
+    </unit>
+    <unit id="7507439656779414767">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-status/intel-delivery-status.component.html:3,5</note>
+      </notes>
+      <segment>
+        <source>No realtime updates (no connection)</source>
+      </segment>
+    </unit>
+    <unit id="1252975380380555860">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-status/intel-delivery-status.component.html:7,9</note>
+      </notes>
+      <segment>
+        <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span class=&quot;realtime realtime--ok&quot;&gt;" dispEnd="&lt;/span&gt;">Realtime</pc> updates for <ph id="1" equiv="INTERPOLATION" disp="{{ subscribedOperations.length }}"/> operation(s).</source>
+      </segment>
+    </unit>
+    <unit id="5556579166957234680">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-status/intel-delivery-status.component.html:10</note>
+      </notes>
+      <segment>
+        <source>Open intel deliveries:</source>
+      </segment>
+    </unit>
+    <unit id="5666906448529967607">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-status/intel-delivery-status.component.html:15</note>
+      </notes>
+      <segment>
+        <source>Warning: Manual intel delivery is meant to be performed by only one person at a time.</source>
+      </segment>
+    </unit>
+    <unit id="3996222233708051585">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Most important:</source>
+      </segment>
+    </unit>
+    <unit id="7856130762394583508">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:7</note>
+      </notes>
+      <segment>
+        <source>Oldest:</source>
+      </segment>
+    </unit>
+    <unit id="3244478074612290092">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:17</note>
+      </notes>
+      <segment>
+        <source>Past delivery attempts:</source>
+      </segment>
+    </unit>
+    <unit id="6913985416235046011">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:24</note>
+      </notes>
+      <segment>
+        <source>Cancel delivery</source>
+      </segment>
+    </unit>
+    <unit id="3711878318833148750">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:30,31</note>
+      </notes>
+      <segment>
+        <source>View recipient</source>
+      </segment>
+    </unit>
+    <unit id="8440770642617655682">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.ts:85</note>
+      </notes>
+      <segment>
+        <source>Intel delivery cancelled.</source>
+      </segment>
+    </unit>
+    <unit id="6735232392328456585">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-attempts/intel-to-deliver-attempts.component.html:2</note>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-details/intel-to-deliver-details.component.html:2</note>
+      </notes>
+      <segment>
+        <source>No intel delivery selected.</source>
+      </segment>
+    </unit>
+    <unit id="4549773563555782103">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-attempts/intel-to-deliver-attempts.component.html:6</note>
+      </notes>
+      <segment>
+        <source>No delivery attempts, yet.</source>
+      </segment>
+    </unit>
+    <unit id="3265646491227170237">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-attempts/intel-to-deliver-attempts.component.html:17,18</note>
+      </notes>
+      <segment>
+        <source>Marked as failed after: <ph id="0" equiv="INTERPOLATION" disp="{{ attemptFailedAfter(attempt.createdAt, attempt.statusTS) | duration }}"/> </source>
+      </segment>
+    </unit>
+    <unit id="5695831684206293253">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:18,19</note>
+      </notes>
+      <segment>
+        <source>Keyboard selection suspended. Click here to enable.</source>
+      </segment>
+    </unit>
+    <unit id="6163254812569741732">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:21,22</note>
+      </notes>
+      <segment>
+        <source>Select channel with arrow keys. Confirm with ENTER.</source>
+      </segment>
+    </unit>
+    <unit id="1691441506559935070">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:23</note>
+      </notes>
+      <segment>
+        <source>Recommended:</source>
+      </segment>
+    </unit>
+    <unit id="3536162210726760140">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:26</note>
+      </notes>
+      <segment>
+        <source>No recommended channels available for delivery.</source>
+      </segment>
+    </unit>
+    <unit id="3501355854670445847">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:35</note>
+      </notes>
+      <segment>
+        <source>Others:</source>
+      </segment>
+    </unit>
+    <unit id="4480823431167495579">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:38</note>
+      </notes>
+      <segment>
+        <source>No other channels available for delivery.</source>
+      </segment>
+    </unit>
+    <unit id="6074000751994236114">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-details/intel-to-deliver-details.component.html:11,12</note>
+      </notes>
+      <segment>
+        <source>Intel id: <ph id="0" equiv="INTERPOLATION" disp="{{ selected.delivery.intel.id }}"/> </source>
+      </segment>
+    </unit>
+    <unit id="8189002981351101741">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-details/intel-to-deliver-details.component.html:19</note>
+      </notes>
+      <segment>
+        <source>Operation associated with the intel</source>
+      </segment>
+    </unit>
+    <unit id="5587443221678456037">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-details/intel-to-deliver-details.component.html:21,22</note>
+      </notes>
+      <segment>
+        <source>Operation id: <ph id="0" equiv="INTERPOLATION" disp="{{ selected.delivery.intel.operation }}"/> </source>
+      </segment>
+    </unit>
+    <unit id="1520049505561836231">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:10</note>
+      </notes>
+      <segment>
+        <source>Created at</source>
+      </segment>
+    </unit>
+    <unit id="5203279511751768967">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:26</note>
+      </notes>
+      <segment>
+        <source>From</source>
+      </segment>
+    </unit>
+    <unit id="1640609344969975994">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:38</note>
+      </notes>
+      <segment>
+        <source>To</source>
+      </segment>
+    </unit>
+    <unit id="5533441977056773945">
+      <notes>
+        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:50</note>
+      </notes>
+      <segment>
+        <source>Intel type</source>
+      </segment>
+    </unit>
+    <unit id="2813434146158055036">
+      <notes>
+        <note category="location">src/app/features/logistics/logistics-layout/logistics-layout.component.html:9,10</note>
+      </notes>
+      <segment>
+        <source>Address Book Entries</source>
+      </segment>
+    </unit>
+    <unit id="6521912326611189962">
+      <notes>
+        <note category="location">src/app/features/logistics/logistics-layout/logistics-layout.component.html:16,18</note>
+      </notes>
+      <segment>
+        <source>Intel Delivery <pc id="0" equivStart="START_TAG_MAT_ICON" equivEnd="CLOSE_TAG_MAT_ICON" type="other" dispStart="&lt;mat-icon class=&quot;icon-suffix-small&quot;&gt;" dispEnd="&lt;/mat-icon&gt;">open_in_new</pc></source>
+      </segment>
+    </unit>
+    <unit id="4643671691415114219">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:2</note>
+        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:7</note>
+      </notes>
+      <segment>
+        <source>Create Group</source>
       </segment>
     </unit>
     <unit id="5701618810648052610">
@@ -511,38 +1327,15 @@
         <source>Title</source>
       </segment>
     </unit>
-    <unit id="9131063577527940964">
+    <unit id="3695400929536588338">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:2</note>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:7</note>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:9,10</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:8,9</note>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:8,9</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:9,10</note>
       </notes>
       <segment>
-        <source>Create Operation</source>
-      </segment>
-    </unit>
-    <unit id="1155679422702437698">
-      <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:64,65</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:82,83</note>
-      </notes>
-      <segment>
-        <source>Add Members</source>
-      </segment>
-    </unit>
-    <unit id="229735695122793954">
-      <notes>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.ts:145</note>
-      </notes>
-      <segment>
-        <source>Operation updated successfully.</source>
-      </segment>
-    </unit>
-    <unit id="2571539791936033085">
-      <notes>
-        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.ts:73</note>
-      </notes>
-      <segment>
-        <source>Operation created successfully.</source>
+        <source>Title is required.</source>
       </segment>
     </unit>
     <unit id="2978800622836475330">
@@ -555,49 +1348,103 @@
         <source>Description is required.</source>
       </segment>
     </unit>
-    <unit id="3092880857721570149">
+    <unit id="1589749564133337410">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:33,34</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:35,36</note>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:46</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:51</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:68</note>
       </notes>
       <segment>
-        <source>Start is required.</source>
+        <source>Add members</source>
       </segment>
     </unit>
-    <unit id="3695400929536588338">
+    <unit id="3291437606661186188">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:9,10</note>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:8,9</note>
-        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:8,9</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:9,10</note>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:47</note>
       </notes>
       <segment>
-        <source>Title is required.</source>
+        <source>Add member...</source>
       </segment>
     </unit>
-    <unit id="2813596695204835456">
+    <unit id="6141691779454788323">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:52,53</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:54,55</note>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:58,59</note>
       </notes>
       <segment>
-        <source>End date must be after start date.</source>
+        <source>All group members must be members of the selected operation.</source>
       </segment>
     </unit>
-    <unit id="3999003596543849763">
+    <unit id="1512712705645664720">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:2,3</note>
+        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.ts:78</note>
       </notes>
       <segment>
-        <source>Operation: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/></source>
+        <source>Group creation failed.</source>
       </segment>
     </unit>
-    <unit id="5266935633882771143">
+    <unit id="1243614560979208707">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.ts:149</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:2,3</note>
       </notes>
       <segment>
-        <source>Updating operation failed.</source>
+        <source>Group: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/></source>
+      </segment>
+    </unit>
+    <unit id="4691887509600985309">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:42</note>
+      </notes>
+      <segment>
+        <source>Members</source>
+      </segment>
+    </unit>
+    <unit id="1155679422702437698">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:64,65</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:82,83</note>
+      </notes>
+      <segment>
+        <source>Add Members</source>
+      </segment>
+    </unit>
+    <unit id="3586674587150281199">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:78</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:95</note>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:21</note>
+      </notes>
+      <segment>
+        <source>Last name</source>
+      </segment>
+    </unit>
+    <unit id="5342432350421167093">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:83</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:100</note>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:26</note>
+      </notes>
+      <segment>
+        <source>First name</source>
+      </segment>
+    </unit>
+    <unit id="2149300564474427551">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:95</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:112</note>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:38</note>
+      </notes>
+      <segment>
+        <source>Administrator</source>
+      </segment>
+    </unit>
+    <unit id="1859131936150262113">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:96</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:113</note>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:39</note>
+      </notes>
+      <segment>
+        <source>Inactive</source>
       </segment>
     </unit>
     <unit id="7165302310980913730">
@@ -609,52 +1456,21 @@
         <source>Remove Member</source>
       </segment>
     </unit>
-    <unit id="7948767415506862382">
+    <unit id="1161198591600004816">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.ts:77</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.ts:146</note>
       </notes>
       <segment>
-        <source>Operation creation failed.</source>
+        <source>Updating group failed.</source>
       </segment>
     </unit>
-    <unit id="1243614560979208707">
+    <unit id="5944812089887969249">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:2,3</note>
+        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:1</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:62</note>
       </notes>
       <segment>
-        <source>Group: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/></source>
-      </segment>
-    </unit>
-    <unit id="1283895920974679461">
-      <notes>
-        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:11</note>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:34</note>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:25</note>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:25</note>
-        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:16</note>
-        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:28</note>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:27</note>
-        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:28</note>
-      </notes>
-      <segment>
-        <source>Operation</source>
-      </segment>
-    </unit>
-    <unit id="1512712705645664720">
-      <notes>
-        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.ts:78</note>
-      </notes>
-      <segment>
-        <source>Group creation failed.</source>
-      </segment>
-    </unit>
-    <unit id="4643671691415114219">
-      <notes>
-        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:2</note>
-        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:7</note>
-      </notes>
-      <segment>
-        <source>Create Group</source>
+        <source>Groups</source>
       </segment>
     </unit>
     <unit id="5673725231002148994">
@@ -665,361 +1481,12 @@
         <source>Create, manage and edit groups.</source>
       </segment>
     </unit>
-    <unit id="1161198591600004816">
+    <unit id="7615147220727762615">
       <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.ts:146</note>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:3</note>
       </notes>
       <segment>
-        <source>Updating group failed.</source>
-      </segment>
-    </unit>
-    <unit id="2592690450389009216">
-      <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:75,76</note>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:124,125</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:139,140</note>
-      </notes>
-      <segment>
-        <source>Update</source>
-      </segment>
-    </unit>
-    <unit id="6141691779454788323">
-      <notes>
-        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:58,59</note>
-      </notes>
-      <segment>
-        <source>All group members must be members of the selected operation.</source>
-      </segment>
-    </unit>
-    <unit id="2725499532293844250">
-      <notes>
-        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:12</note>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:26</note>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:26</note>
-        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:29</note>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:28</note>
-      </notes>
-      <segment>
-        <source>Search operation...</source>
-      </segment>
-    </unit>
-    <unit id="3291437606661186188">
-      <notes>
-        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:47</note>
-      </notes>
-      <segment>
-        <source>Add member...</source>
-      </segment>
-    </unit>
-    <unit id="4691887509600985309">
-      <notes>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:42</note>
-      </notes>
-      <segment>
-        <source>Members</source>
-      </segment>
-    </unit>
-    <unit id="126074860850048964">
-      <notes>
-        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:38</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:40</note>
-      </notes>
-      <segment>
-        <source>End date</source>
-      </segment>
-    </unit>
-    <unit id="8801252524063904279">
-      <notes>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:60</note>
-      </notes>
-      <segment>
-        <source>Operation Members</source>
-      </segment>
-    </unit>
-    <unit id="888341446683346521">
-      <notes>
-        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:19</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:20</note>
-      </notes>
-      <segment>
-        <source>Start date</source>
-      </segment>
-    </unit>
-    <unit id="1589749564133337410">
-      <notes>
-        <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:46</note>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:51</note>
-        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:68</note>
-      </notes>
-      <segment>
-        <source>Add members</source>
-      </segment>
-    </unit>
-    <unit id="7393468163947639901">
-      <notes>
-        <note category="location">src/app/features/auth/logout-view/logout-view.component.html:2</note>
-      </notes>
-      <segment>
-        <source>Logging you out...</source>
-      </segment>
-    </unit>
-    <unit id="1084185553555601352">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:111,112</note>
-      </notes>
-      <segment>
-        <source>View operation members</source>
-      </segment>
-    </unit>
-    <unit id="1262853421734429816">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:47,48</note>
-      </notes>
-      <segment>
-        <source>Update user password</source>
-      </segment>
-    </unit>
-    <unit id="1397367236021319842">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:35,36</note>
-      </notes>
-      <segment>
-        <source>Create user</source>
-      </segment>
-    </unit>
-    <unit id="2006249854662541346">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:163,164</note>
-      </notes>
-      <segment>
-        <source>Invalidate intel</source>
-      </segment>
-    </unit>
-    <unit id="2141107198366258842">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:15,16</note>
-      </notes>
-      <segment>
-        <source>View permissions</source>
-      </segment>
-    </unit>
-    <unit id="2194749592615669638">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:29,30</note>
-      </notes>
-      <segment>
-        <source>View user</source>
-      </segment>
-    </unit>
-    <unit id="2524155554502788709">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:93,94</note>
-      </notes>
-      <segment>
-        <source>View any operation</source>
-      </segment>
-    </unit>
-    <unit id="2955752891888522689">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:41,42</note>
-      </notes>
-      <segment>
-        <source>Update user</source>
-      </segment>
-    </unit>
-    <unit id="3024148990071937145">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:53,54</note>
-      </notes>
-      <segment>
-        <source>Grant admin privileges</source>
-      </segment>
-    </unit>
-    <unit id="3974253861479915513">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:6,7</note>
-      </notes>
-      <segment>
-        <source>This user is an admin and therefore indirectly granted all permissions.</source>
-      </segment>
-    </unit>
-    <unit id="416927273325597932">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:21,22</note>
-      </notes>
-      <segment>
-        <source>Set permissions</source>
-      </segment>
-    </unit>
-    <unit id="4380665952308222234">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:59,60</note>
-      </notes>
-      <segment>
-        <source>(De)Activate user</source>
-      </segment>
-    </unit>
-    <unit id="4635161069054306636">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:85,86</note>
-      </notes>
-      <segment>
-        <source>Delete group</source>
-      </segment>
-    </unit>
-    <unit id="4780513354353360625">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:125,126</note>
-      </notes>
-      <segment>
-        <source>View any address book entry</source>
-      </segment>
-    </unit>
-    <unit id="493679773485810593">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:79,80</note>
-      </notes>
-      <segment>
-        <source>Update group</source>
-      </segment>
-    </unit>
-    <unit id="5133200523459705531">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:67,68</note>
-      </notes>
-      <segment>
-        <source>View group</source>
-      </segment>
-    </unit>
-    <unit id="5171896764639180140">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:131,132</note>
-      </notes>
-      <segment>
-        <source>Create any address book entry</source>
-      </segment>
-    </unit>
-    <unit id="5265020118967515341">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:45,46</note>
-      </notes>
-      <segment>
-        <source>Permissions</source>
-      </segment>
-    </unit>
-    <unit id="5375995439209157844">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:105,106</note>
-      </notes>
-      <segment>
-        <source>Update operation</source>
-      </segment>
-    </unit>
-    <unit id="5547981558491672240">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:176,177</note>
-      </notes>
-      <segment>
-        <source>Close</source>
-      </segment>
-    </unit>
-    <unit id="5581588744689339912">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:73,74</note>
-      </notes>
-      <segment>
-        <source>Create group</source>
-      </segment>
-    </unit>
-    <unit id="5763505564851880614">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:143,144</note>
-      </notes>
-      <segment>
-        <source>Delete any address book entry</source>
-      </segment>
-    </unit>
-    <unit id="6542906208341279692">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:157,158</note>
-      </notes>
-      <segment>
-        <source>Create intel</source>
-      </segment>
-    </unit>
-    <unit id="7183369261710848043">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:151,152</note>
-      </notes>
-      <segment>
-        <source>View any intel</source>
-      </segment>
-    </unit>
-    <unit id="7359118621257933263">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:137,138</note>
-      </notes>
-      <segment>
-        <source>Update any address book entry</source>
-      </segment>
-    </unit>
-    <unit id="7655881037072776703">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:117,118</note>
-      </notes>
-      <segment>
-        <source>Update operation members</source>
-      </segment>
-    </unit>
-    <unit id="775957762658704246">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:99,100</note>
-      </notes>
-      <segment>
-        <source>Create operation</source>
-      </segment>
-    </unit>
-    <unit id="6754575033428839801">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:146</note>
-      </notes>
-      <segment>
-        <source>Intel</source>
-      </segment>
-    </unit>
-    <unit id="7314814725704332646">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:10</note>
-      </notes>
-      <segment>
-        <source>Permissions</source>
-      </segment>
-    </unit>
-    <unit id="7316788515989911343">
-      <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:120</note>
-      </notes>
-      <segment>
-        <source>Address book</source>
-      </segment>
-    </unit>
-    <unit id="763483268749037337">
-      <notes>
-        <note category="location">src/app/core/components/missing-permissions-view/missing-permissions-view.component.html:1</note>
-      </notes>
-      <segment>
-        <source>You are missing permissions to access the requested resource.</source>
-      </segment>
-    </unit>
-    <unit id="8890553633144307762">
-      <notes>
-        <note category="location">src/app/core/components/missing-permissions-view/missing-permissions-view.component.html:3</note>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:63</note>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:87</note>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:101</note>
-      </notes>
-      <segment>
-        <source>Back</source>
+        <source>Management</source>
       </segment>
     </unit>
     <unit id="3488583301572536241">
@@ -1046,540 +1513,484 @@
         <source>Operations</source>
       </segment>
     </unit>
-    <unit id="1733705102982766446">
+    <unit id="9131063577527940964">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:2</note>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:2</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:7</note>
       </notes>
       <segment>
-        <source>Address Book Entries</source>
+        <source>Create Operation</source>
       </segment>
     </unit>
-    <unit id="2365695266522758926">
+    <unit id="888341446683346521">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.ts:51</note>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:19</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:20</note>
       </notes>
       <segment>
-        <source>Address book entry creation failed.</source>
+        <source>Start date</source>
       </segment>
     </unit>
-    <unit id="2392488717875840729">
+    <unit id="3092880857721570149">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:44</note>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:44,43</note>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:44,43</note>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:33,34</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:35,36</note>
       </notes>
       <segment>
-        <source>User</source>
+        <source>Start is required.</source>
       </segment>
     </unit>
-    <unit id="4077520913910941990">
+    <unit id="126074860850048964">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:24</note>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:6</note>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:6</note>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:13</note>
-        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:8</note>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:38</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:40</note>
       </notes>
       <segment>
-        <source>Label</source>
+        <source>End date</source>
       </segment>
     </unit>
-    <unit id="4496775740135012216">
+    <unit id="2813596695204835456">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:2</note>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:52,53</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:54,55</note>
       </notes>
       <segment>
-        <source>Create Address Book Entry</source>
+        <source>End date must be after start date.</source>
       </segment>
     </unit>
-    <unit id="872015140095767450">
+    <unit id="1562584780596394495">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.ts:104</note>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:56</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:58</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:45</note>
       </notes>
       <segment>
-        <source>Updating address book entry failed.</source>
+        <source>Archived</source>
       </segment>
     </unit>
-    <unit id="9023787216859143413">
+    <unit id="2571539791936033085">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:44</note>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:44</note>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.ts:73</note>
       </notes>
       <segment>
-        <source>Search user...</source>
+        <source>Operation created successfully.</source>
       </segment>
     </unit>
-    <unit id="918029365747744094">
+    <unit id="7948767415506862382">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:8</note>
+        <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.ts:77</note>
       </notes>
       <segment>
-        <source>Create Entry</source>
+        <source>Operation creation failed.</source>
       </segment>
     </unit>
-    <unit id="9198068988902166479">
+    <unit id="3999003596543849763">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:2,3</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:2,3</note>
       </notes>
       <segment>
-        <source>Address Book Entry: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.label.getRawValue()}}"/></source>
+        <source>Operation: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/></source>
       </segment>
     </unit>
-    <unit id="2881007568281222797">
+    <unit id="8801252524063904279">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:4</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:60</note>
       </notes>
       <segment>
-        <source>Create, manage and edit address book entries.</source>
+        <source>Operation Members</source>
       </segment>
     </unit>
-    <unit id="2813434146158055036">
+    <unit id="229735695122793954">
       <notes>
-        <note category="location">src/app/features/logistics/logistics-layout/logistics-layout.component.html:9,10</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.ts:145</note>
       </notes>
       <segment>
-        <source>Address Book Entries</source>
+        <source>Operation updated successfully.</source>
       </segment>
     </unit>
-    <unit id="3891569230075043049">
+    <unit id="5266935633882771143">
       <notes>
-        <note category="location">src/app/features/logistics/logistics-layout/logistics-layout.component.html:3</note>
+        <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.ts:149</note>
       </notes>
       <segment>
-        <source>Logistics</source>
+        <source>Updating operation failed.</source>
       </segment>
     </unit>
-    <unit id="1360954096804522853">
+    <unit id="7457179823984196306">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:9,10</note>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:9,10</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:1</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:88</note>
       </notes>
       <segment>
-        <source>Label is required.</source>
+        <source>Operations</source>
       </segment>
     </unit>
-    <unit id="2085611136494552870">
+    <unit id="2519536460151870844">
       <notes>
-        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:17</note>
-        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:36</note>
-        <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:20</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:3</note>
       </notes>
       <segment>
-        <source>Not set</source>
+        <source>Create, manage and edit operations.</source>
       </segment>
     </unit>
-    <unit id="2734022681675842051">
+    <unit id="5162686434580248853">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:33</note>
-        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:12</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:31</note>
       </notes>
       <segment>
-        <source>Priority</source>
+        <source>Start</source>
       </segment>
     </unit>
-    <unit id="314315645942131479">
+    <unit id="1241348629231510663">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channel-details-dialog/radio-channel-details/radio-channel-details.component.html:2</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:36</note>
       </notes>
       <segment>
-        <source>Info</source>
+        <source>End</source>
       </segment>
     </unit>
-    <unit id="4467323362722952678">
+    <unit id="4328253427834278164">
       <notes>
-        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:13</note>
-        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:32</note>
-        <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:16</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:48</note>
       </notes>
       <segment>
-        <source>Unknown</source>
+        <source>Planned in the future</source>
       </segment>
     </unit>
-    <unit id="5002013608403252995">
+    <unit id="2617770989260729968">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channel-details-dialog/radio-channel-details/radio-channel-details.component.html:4</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:51</note>
       </notes>
       <segment>
-        <source>Channel, frequency, call-name...</source>
+        <source>Currently active</source>
       </segment>
     </unit>
-    <unit id="5037087188394157831">
+    <unit id="5891941941917080206">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:38</note>
-        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:20</note>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:2</note>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:7</note>
       </notes>
       <segment>
-        <source>Min Importance</source>
+        <source>Create User</source>
       </segment>
     </unit>
-    <unit id="5042044684614360469">
+    <unit id="9081239727073547463">
       <notes>
-        <note category="location">src/app/core/components/delete-confirm-dialog/delete-confirm-dialog.component.ts:16</note>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:8,9</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:8,9</note>
       </notes>
       <segment>
-        <source>Do you really want to delete this entity?</source>
+        <source>Username is required.</source>
       </segment>
     </unit>
-    <unit id="5549841090450425281">
+    <unit id="6028371114637047813">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:2</note>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:12</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:12</note>
       </notes>
       <segment>
-        <source>Channel - <ph id="0" equiv="INTERPOLATION" disp="{{ form.controls.label.value }}"/></source>
+        <source>First Name</source>
       </segment>
     </unit>
-    <unit id="5853287764718196763">
+    <unit id="3191375468946657151">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channel-details-dialog/in-app-notification-channel-details/in-app-notification-channel-details.component.html:1</note>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:15,16</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:15,16</note>
       </notes>
       <segment>
-        <source>Nothing to configure for in-app notifications.</source>
+        <source>First name is required.</source>
       </segment>
     </unit>
-    <unit id="5956316725115867558">
+    <unit id="4407559560004943843">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:45</note>
-        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:16</note>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:19</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:19</note>
       </notes>
       <segment>
-        <source>Timeout</source>
+        <source>Last Name</source>
       </segment>
     </unit>
-    <unit id="7022070615528435141">
+    <unit id="2689115924213512946">
       <notes>
-        <note category="location">src/app/core/components/delete-confirm-dialog/delete-confirm-dialog.component.ts:20</note>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:22,23</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:22,23</note>
       </notes>
       <segment>
-        <source>Delete</source>
+        <source>Last name is required.</source>
       </segment>
     </unit>
-    <unit id="8341057228987784101">
+    <unit id="623221856807203436">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:2,4</note>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:26</note>
       </notes>
       <segment>
-        <source>New Channel</source>
+        <source>Initial Password</source>
       </segment>
     </unit>
-    <unit id="8650499415827640724">
+    <unit id="2161528641772974097">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:26</note>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:29,30</note>
       </notes>
       <segment>
-        <source>Type</source>
+        <source>Password is required.</source>
       </segment>
     </unit>
-    <unit id="8782767546165933649">
+    <unit id="5009437026549898623">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:3</note>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.ts:65</note>
       </notes>
       <segment>
-        <source>Unnamed Channel</source>
+        <source>User created successfully.</source>
       </segment>
     </unit>
-    <unit id="channel-type-in-app-notification">
+    <unit id="6104401008203737027">
       <notes>
-        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:5</note>
-        <note category="location">src/app/core/model/channel.ts:93</note>
+        <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.ts:69</note>
       </notes>
       <segment>
-        <source>In-App Notification</source>
+        <source>User creation failed.</source>
       </segment>
     </unit>
-    <unit id="channel-type-radio">
+    <unit id="247214804822900420">
       <notes>
-        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:9</note>
-        <note category="location">src/app/core/model/channel.ts:95</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:2,3</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:2,3</note>
       </notes>
       <segment>
-        <source>Radio</source>
+        <source>User: <ph id="0" equiv="INTERPOLATION" disp="{{user.firstName}}"/> <ph id="1" equiv="INTERPOLATION_1" disp="{{user.lastName}}"/></source>
       </segment>
     </unit>
-    <unit id="importance-low">
+    <unit id="3974253861479915513">
       <notes>
-        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:12</note>
-        <note category="location">src/app/core/model/importance.ts:29</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:6,7</note>
       </notes>
       <segment>
-        <source>Low</source>
+        <source>This user is an admin and therefore indirectly granted all permissions.</source>
       </segment>
     </unit>
-    <unit id="importance-national-emergency">
+    <unit id="7314814725704332646">
       <notes>
-        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:28</note>
-        <note category="location">src/app/core/model/importance.ts:37</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:10</note>
       </notes>
       <segment>
-        <source>National Emergency</source>
+        <source>Permissions</source>
       </segment>
     </unit>
-    <unit id="importance-none">
+    <unit id="2141107198366258842">
       <notes>
-        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:8</note>
-        <note category="location">src/app/core/model/importance.ts:27</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:15,16</note>
       </notes>
       <segment>
-        <source>None</source>
+        <source>View permissions</source>
       </segment>
     </unit>
-    <unit id="importance-regular">
+    <unit id="416927273325597932">
       <notes>
-        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:16</note>
-        <note category="location">src/app/core/model/importance.ts:31</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:21,22</note>
       </notes>
       <segment>
-        <source>Regular</source>
+        <source>Set permissions</source>
       </segment>
     </unit>
-    <unit id="importance-strike">
+    <unit id="4555457172864212828">
       <notes>
-        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:24</note>
-        <note category="location">src/app/core/model/importance.ts:35</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:24</note>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:1</note>
       </notes>
       <segment>
-        <source>Strike</source>
+        <source>Users</source>
       </segment>
     </unit>
-    <unit id="importance-urgent">
+    <unit id="2194749592615669638">
       <notes>
-        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:20</note>
-        <note category="location">src/app/core/model/importance.ts:33</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:29,30</note>
       </notes>
       <segment>
-        <source>Urgent</source>
+        <source>View user</source>
       </segment>
     </unit>
-    <unit id="6660925946511264619">
+    <unit id="1397367236021319842">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:69,70</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:35,36</note>
       </notes>
       <segment>
-        <source>Delete</source>
+        <source>Create user</source>
       </segment>
     </unit>
-    <unit id="1012788843982935709">
+    <unit id="2955752891888522689">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:33,35</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:41,42</note>
       </notes>
       <segment>
-        <source>Head is required.</source>
+        <source>Update user</source>
       </segment>
     </unit>
-    <unit id="1600546907793893756">
+    <unit id="1262853421734429816">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:96,98</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:47,48</note>
       </notes>
       <segment>
-        <source>Importance is required.</source>
+        <source>Update user password</source>
       </segment>
     </unit>
-    <unit id="1636701572518005081">
+    <unit id="3024148990071937145">
       <notes>
-        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:10</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:53,54</note>
       </notes>
       <segment>
-        <source>Choose a context</source>
+        <source>Grant admin privileges</source>
       </segment>
     </unit>
-    <unit id="1652218416869979294">
+    <unit id="4380665952308222234">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:5</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:59,60</note>
       </notes>
       <segment>
-        <source>Intel Type</source>
+        <source>(De)Activate user</source>
       </segment>
     </unit>
-    <unit id="1828723992081381720">
+    <unit id="5133200523459705531">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:10,12</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:67,68</note>
       </notes>
       <segment>
-        <source>Intel type is required.</source>
+        <source>View group</source>
       </segment>
     </unit>
-    <unit id="2053523035231858643">
+    <unit id="5581588744689339912">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:23</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:73,74</note>
       </notes>
       <segment>
-        <source>Callsign</source>
+        <source>Create group</source>
       </segment>
     </unit>
-    <unit id="2159130950882492111">
+    <unit id="493679773485810593">
       <notes>
-        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:23</note>
-        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:30</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:79,80</note>
       </notes>
       <segment>
-        <source>Cancel</source>
+        <source>Update group</source>
       </segment>
     </unit>
-    <unit id="2168018587334986318">
+    <unit id="4635161069054306636">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:8,10</note>
-        <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:7,9</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:85,86</note>
       </notes>
       <segment>
-        <source>Analog Radio Message</source>
+        <source>Delete group</source>
       </segment>
     </unit>
-    <unit id="2644662487244441749">
+    <unit id="2524155554502788709">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:57,59</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:93,94</note>
       </notes>
       <segment>
-        <source>Text is required.</source>
+        <source>View any operation</source>
       </segment>
     </unit>
-    <unit id="3299719390830582413">
+    <unit id="775957762658704246">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:5,7</note>
-        <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:4,6</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:99,100</note>
       </notes>
       <segment>
-        <source>Plain Text Message</source>
+        <source>Create operation</source>
       </segment>
     </unit>
-    <unit id="3495585784674914530">
+    <unit id="5375995439209157844">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:41,43</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:105,106</note>
       </notes>
       <segment>
-        <source>Channel is required.</source>
+        <source>Update operation</source>
       </segment>
     </unit>
-    <unit id="3885497195825665706">
+    <unit id="1084185553555601352">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:15</note>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:64</note>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:88</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:111,112</note>
       </notes>
       <segment>
-        <source>Next</source>
+        <source>View operation members</source>
       </segment>
     </unit>
-    <unit id="4161176881257288804">
+    <unit id="7655881037072776703">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:31</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:117,118</note>
       </notes>
       <segment>
-        <source>Head</source>
+        <source>Update operation members</source>
       </segment>
     </unit>
-    <unit id="4266864201796016633">
+    <unit id="7316788515989911343">
       <notes>
-        <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:2</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:120</note>
       </notes>
       <segment>
-        <source>Intel in Creation</source>
+        <source>Address book</source>
       </segment>
     </unit>
-    <unit id="5462361983940693567">
+    <unit id="4780513354353360625">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:39</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:125,126</note>
       </notes>
       <segment>
-        <source>Channel</source>
+        <source>View any address book entry</source>
       </segment>
     </unit>
-    <unit id="5577987272356825897">
+    <unit id="5171896764639180140">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:25,27</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:131,132</note>
       </notes>
       <segment>
-        <source>Callsign is required.</source>
+        <source>Create any address book entry</source>
       </segment>
     </unit>
-    <unit id="6019305939828737244">
+    <unit id="7359118621257933263">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:94</note>
-        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:63</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:137,138</note>
       </notes>
       <segment>
-        <source>Importance</source>
+        <source>Update any address book entry</source>
       </segment>
     </unit>
-    <unit id="6162693758764653365">
+    <unit id="5763505564851880614">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:55</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:143,144</note>
       </notes>
       <segment>
-        <source>Text</source>
+        <source>Delete any address book entry</source>
       </segment>
     </unit>
-    <unit id="6205355627445317276">
+    <unit id="6754575033428839801">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:47</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:146</note>
       </notes>
       <segment>
-        <source>Content</source>
+        <source>Intel</source>
       </segment>
     </unit>
-    <unit id="6223909137047684293">
+    <unit id="7183369261710848043">
       <notes>
-        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:14</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:151,152</note>
       </notes>
       <segment>
-        <source>Intel Generators</source>
+        <source>View any intel</source>
       </segment>
     </unit>
-    <unit id="6962699013778688473">
+    <unit id="6542906208341279692">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:102</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:157,158</note>
       </notes>
       <segment>
-        <source>Continue</source>
+        <source>Create intel</source>
       </segment>
     </unit>
-    <unit id="7806919353578821914">
+    <unit id="2006249854662541346">
       <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:49,51</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:163,164</note>
       </notes>
       <segment>
-        <source>Content is required.</source>
-      </segment>
-    </unit>
-    <unit id="8365674988775051590">
-      <notes>
-        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:20,22</note>
-      </notes>
-      <segment>
-        <source>Empty Intel</source>
-      </segment>
-    </unit>
-    <unit id="8502337056684895182">
-      <notes>
-        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:20,24</note>
-        <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:19,23</note>
-      </notes>
-      <segment>
-        <source>To: <pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span *ngFor=&quot;let addressBookEntryId of createIntel.initialDeliverTo&quot;&gt;" dispEnd="&lt;/span&gt;"><ph id="1" equiv="INTERPOLATION" disp="{{intelCreationService.getLoadedAddressBookEntryById(addressBookEntryId) ? intelCreationService.getLoadedAddressBookEntryById(addressBookEntryId)!.label : &apos;&apos;}}"/></pc></source>
-      </segment>
-    </unit>
-    <unit id="8844804275730553009">
-      <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:7</note>
-      </notes>
-      <segment>
-        <source>Plain Text Message</source>
-      </segment>
-    </unit>
-    <unit id="9140544690687942988">
-      <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:8</note>
-      </notes>
-      <segment>
-        <source>Analog Radio Message</source>
-      </segment>
-    </unit>
-    <unit id="9178182467454450952">
-      <notes>
-        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:1</note>
-        <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:31</note>
-        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:26</note>
-      </notes>
-      <segment>
-        <source>Confirm</source>
+        <source>Invalidate intel</source>
       </segment>
     </unit>
     <unit id="1324352416087573030">
@@ -1598,485 +2009,109 @@
         <source>Manage Intel Delivery</source>
       </segment>
     </unit>
-    <unit id="3095333197718374378">
+    <unit id="5547981558491672240">
       <notes>
-        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/workspace-operation-selector.component.html:10,11</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:176,177</note>
       </notes>
       <segment>
-        <source>Click to select operation.</source>
+        <source>Close</source>
       </segment>
     </unit>
-    <unit id="6508120659907084246">
+    <unit id="3620188369327429839">
       <notes>
-        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/workspace-operation-selector.component.html:7</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:179,180</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:48,49</note>
       </notes>
       <segment>
-        <source>Currently selected operation for workspace. Click to change.</source>
+        <source>Save</source>
       </segment>
     </unit>
-    <unit id="6521912326611189962">
+    <unit id="6284119778725231733">
       <notes>
-        <note category="location">src/app/features/logistics/logistics-layout/logistics-layout.component.html:16,18</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:25</note>
       </notes>
       <segment>
-        <source>Intel Delivery <pc id="0" equivStart="START_TAG_MAT_ICON" equivEnd="CLOSE_TAG_MAT_ICON" type="other" dispStart="&lt;mat-icon class=&quot;icon-suffix-small&quot;&gt;" dispEnd="&lt;/mat-icon&gt;">open_in_new</pc></source>
+        <source>Is Admin</source>
       </segment>
     </unit>
-    <unit id="6897556149900065265">
+    <unit id="1481645236299803925">
       <notes>
-        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:1</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:37,38</note>
       </notes>
       <segment>
-        <source>Select workspace operation</source>
+        <source>Change Password</source>
       </segment>
     </unit>
-    <unit id="1252975380380555860">
+    <unit id="5265020118967515341">
       <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-status/intel-delivery-status.component.html:7,9</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:45,46</note>
       </notes>
       <segment>
-        <source><pc id="0" equivStart="START_TAG_SPAN" equivEnd="CLOSE_TAG_SPAN" type="other" dispStart="&lt;span class=&quot;realtime realtime--ok&quot;&gt;" dispEnd="&lt;/span&gt;">Realtime</pc> updates for <ph id="1" equiv="INTERPOLATION" disp="{{ subscribedOperations.length }}"/> operation(s).</source>
+        <source>Permissions</source>
       </segment>
     </unit>
-    <unit id="1326584312169948709">
+    <unit id="760085743178726328">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.ts:58</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.ts:101</note>
       </notes>
       <segment>
-        <source>Auto Intel Delivery for this entry is now disabled.</source>
+        <source>Updating user failed.</source>
       </segment>
     </unit>
-    <unit id="1381592311007231590">
+    <unit id="3277520558587299577">
       <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:4</note>
+        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:2</note>
       </notes>
       <segment>
-        <source>Channel type</source>
+        <source>Update Password</source>
       </segment>
     </unit>
-    <unit id="1520049505561836231">
+    <unit id="1221596867309460035">
       <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:10</note>
+        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:6</note>
       </notes>
       <segment>
-        <source>Created at</source>
+        <source>New Password</source>
       </segment>
     </unit>
-    <unit id="1640609344969975994">
+    <unit id="5424016037871909683">
       <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:38</note>
+        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:9,10</note>
       </notes>
       <segment>
-        <source>To</source>
+        <source>New password is required.</source>
       </segment>
     </unit>
-    <unit id="1691441506559935070">
+    <unit id="1558069880513305355">
       <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:23</note>
+        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:17,18</note>
       </notes>
       <segment>
-        <source>Recommended:</source>
+        <source>Update Password</source>
       </segment>
     </unit>
-    <unit id="2514977068213191529">
+    <unit id="6072990007630394552">
       <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:8</note>
+        <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.ts:57</note>
       </notes>
       <segment>
-        <source>Mark delivery as successful</source>
+        <source>Updating password failed.</source>
       </segment>
     </unit>
-    <unit id="2867253902287405242">
+    <unit id="2468239074984100046">
       <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:31,33</note>
+        <note category="location">src/app/features/management/user-management-view/user-management-view.component.html:3</note>
       </notes>
       <segment>
-        <source>Channel marked as inactive.</source>
+        <source>Create, manage and edit users.</source>
       </segment>
     </unit>
-    <unit id="3192247086533582747">
+    <unit id="4146502596881037592">
       <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.html:13,14</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:68</note>
       </notes>
       <segment>
-        <source>Enable Now</source>
-      </segment>
-    </unit>
-    <unit id="3244478074612290092">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:17</note>
-      </notes>
-      <segment>
-        <source>Past delivery attempts:</source>
-      </segment>
-    </unit>
-    <unit id="3265646491227170237">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-attempts/intel-to-deliver-attempts.component.html:17,18</note>
-      </notes>
-      <segment>
-        <source>Marked as failed after: <ph id="0" equiv="INTERPOLATION" disp="{{ attemptFailedAfter(attempt.createdAt, attempt.statusTS) | duration }}"/> </source>
-      </segment>
-    </unit>
-    <unit id="3318253074943304111">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:25,27</note>
-      </notes>
-      <segment>
-        <source>Minimum importance not satisfied.</source>
-      </segment>
-    </unit>
-    <unit id="3501355854670445847">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:35</note>
-      </notes>
-      <segment>
-        <source>Others:</source>
-      </segment>
-    </unit>
-    <unit id="3536162210726760140">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:26</note>
-      </notes>
-      <segment>
-        <source>No recommended channels available for delivery.</source>
-      </segment>
-    </unit>
-    <unit id="3711878318833148750">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:30,31</note>
-      </notes>
-      <segment>
-        <source>View recipient</source>
-      </segment>
-    </unit>
-    <unit id="3957104034487106247">
-      <notes>
-        <note category="location">src/app/core/components/intel-summary/intel-summary.component.html:10</note>
-      </notes>
-      <segment>
-        <source>Unknown intel type</source>
-      </segment>
-    </unit>
-    <unit id="4388879716045736175">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:11</note>
-      </notes>
-      <segment>
-        <source>Note</source>
-      </segment>
-    </unit>
-    <unit id="4480823431167495579">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:38</note>
-      </notes>
-      <segment>
-        <source>No other channels available for delivery.</source>
-      </segment>
-    </unit>
-    <unit id="4549773563555782103">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-attempts/intel-to-deliver-attempts.component.html:6</note>
-      </notes>
-      <segment>
-        <source>No delivery attempts, yet.</source>
-      </segment>
-    </unit>
-    <unit id="4788215378402402752">
-      <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.html:11</note>
-      </notes>
-      <segment>
-        <source>Auto Intel Delivery is disabled.</source>
-      </segment>
-    </unit>
-    <unit id="5203279511751768967">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:26</note>
-      </notes>
-      <segment>
-        <source>From</source>
-      </segment>
-    </unit>
-    <unit id="5533441977056773945">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:50</note>
-      </notes>
-      <segment>
-        <source>Intel type</source>
-      </segment>
-    </unit>
-    <unit id="5543329497352362801">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:25</note>
-      </notes>
-      <segment>
-        <source>Don&apos;t cancel</source>
-      </segment>
-    </unit>
-    <unit id="5556579166957234680">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-status/intel-delivery-status.component.html:10</note>
-      </notes>
-      <segment>
-        <source>Open intel deliveries:</source>
-      </segment>
-    </unit>
-    <unit id="5587443221678456037">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-details/intel-to-deliver-details.component.html:21,22</note>
-      </notes>
-      <segment>
-        <source>Operation id: <ph id="0" equiv="INTERPOLATION" disp="{{ selected.delivery.intel.operation }}"/> </source>
-      </segment>
-    </unit>
-    <unit id="5666906448529967607">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-status/intel-delivery-status.component.html:15</note>
-      </notes>
-      <segment>
-        <source>Warning: Manual intel delivery is meant to be performed by only one person at a time.</source>
-      </segment>
-    </unit>
-    <unit id="5695831684206293253">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:18,19</note>
-      </notes>
-      <segment>
-        <source>Keyboard selection suspended. Click here to enable.</source>
-      </segment>
-    </unit>
-    <unit id="6074000751994236114">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-details/intel-to-deliver-details.component.html:11,12</note>
-      </notes>
-      <segment>
-        <source>Intel id: <ph id="0" equiv="INTERPOLATION" disp="{{ selected.delivery.intel.id }}"/> </source>
-      </segment>
-    </unit>
-    <unit id="6163254812569741732">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-channel-selection/intel-to-deliver-channel-selection.component.html:21,22</note>
-      </notes>
-      <segment>
-        <source>Select channel with arrow keys. Confirm with ENTER.</source>
-      </segment>
-    </unit>
-    <unit id="6378747169231297519">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:1</note>
-      </notes>
-      <segment>
-        <source>Confirm cancellation</source>
-      </segment>
-    </unit>
-    <unit id="6604849199707156712">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:16</note>
-      </notes>
-      <segment>
-        <source>Explain why the delivery was cancelled.</source>
-      </segment>
-    </unit>
-    <unit id="6735232392328456585">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-attempts/intel-to-deliver-attempts.component.html:2</note>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-details/intel-to-deliver-details.component.html:2</note>
-      </notes>
-      <segment>
-        <source>No intel delivery selected.</source>
-      </segment>
-    </unit>
-    <unit id="6913985416235046011">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:24</note>
-      </notes>
-      <segment>
-        <source>Cancel delivery</source>
-      </segment>
-    </unit>
-    <unit id="6924818567014384939">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:19,22</note>
-      </notes>
-      <segment>
-        <source>Selected delivery changed. In order to prevent unintended cancelling of a delivery, you must close the dialog, review the selected delivery and try again.</source>
-      </segment>
-    </unit>
-    <unit id="7056360524244234265">
-      <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.html:6,7</note>
-      </notes>
-      <segment>
-        <source>Disable Now</source>
-      </segment>
-    </unit>
-    <unit id="7240532014248635304">
-      <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.html:4</note>
-      </notes>
-      <segment>
-        <source>Auto Intel Delivery is enabled.</source>
-      </segment>
-    </unit>
-    <unit id="7337574145907490264">
-      <notes>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component.ts:47</note>
-      </notes>
-      <segment>
-        <source>Auto Intel Delivery for this entry is now enabled.</source>
-      </segment>
-    </unit>
-    <unit id="7507439656779414767">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-status/intel-delivery-status.component.html:3,5</note>
-      </notes>
-      <segment>
-        <source>No realtime updates (no connection)</source>
-      </segment>
-    </unit>
-    <unit id="8189002981351101741">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-to-deliver-details/intel-to-deliver-details.component.html:19</note>
-      </notes>
-      <segment>
-        <source>Operation associated with the intel</source>
-      </segment>
-    </unit>
-    <unit id="8440770642617655682">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.ts:85</note>
-      </notes>
-      <segment>
-        <source>Intel delivery cancelled.</source>
-      </segment>
-    </unit>
-    <unit id="8463221083755539381">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:3,6</note>
-      </notes>
-      <segment>
-        <source>Do you really want to cancel the delivery? This will also cancel all active delivery attempts. If you want to cancel the delivery, please provide information below.</source>
-      </segment>
-    </unit>
-    <unit id="8779994653903382762">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:28,30</note>
-      </notes>
-      <segment>
-        <source>Failed attempt at <ph id="0" equiv="INTERPOLATION" disp="{{ channel.details.attempt.createdAt | date:&apos;medium&apos; }}"/>.</source>
-      </segment>
-    </unit>
-    <unit id="8861844397105042477">
-      <notes>
-        <note category="location">src/app/core/components/intel-summary/intel-summary.component.html:14</note>
-      </notes>
-      <segment>
-        <source>Missing intel information</source>
-      </segment>
-    </unit>
-    <unit id="996392855508119363">
-      <notes>
-        <note category="location">src/app/core/components/hidden/hidden.component.html:5</note>
-      </notes>
-      <segment>
-        <source>Hidden</source>
-      </segment>
-    </unit>
-    <unit id="intelType-analog-radio-message">
-      <notes>
-        <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:12</note>
-      </notes>
-      <segment>
-        <source>Analog Radio Message</source>
-      </segment>
-    </unit>
-    <unit id="intelType-plain-text-message">
-      <notes>
-        <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:8</note>
-      </notes>
-      <segment>
-        <source>Plain-text Message</source>
-      </segment>
-    </unit>
-    <unit id="6480637826590791425">
-      <notes>
-        <note category="location">src/app/core/services/web-socket.service.ts:88</note>
-      </notes>
-      <segment>
-        <source>WebSocket connection error</source>
-      </segment>
-    </unit>
-    <unit id="1130610467579985996">
-      <notes>
-        <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:3</note>
-      </notes>
-      <segment>
-        <source>Head:</source>
-      </segment>
-    </unit>
-    <unit id="1395787838997214663">
-      <notes>
-        <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:5</note>
-      </notes>
-      <segment>
-        <source>Content:</source>
-      </segment>
-    </unit>
-    <unit id="3487000124762334468">
-      <notes>
-        <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:4</note>
-      </notes>
-      <segment>
-        <source>Channel:</source>
-      </segment>
-    </unit>
-    <unit id="3996222233708051585">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:3</note>
-      </notes>
-      <segment>
-        <source>Most important:</source>
-      </segment>
-    </unit>
-    <unit id="7856130762394583508">
-      <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:7</note>
-      </notes>
-      <segment>
-        <source>Oldest:</source>
-      </segment>
-    </unit>
-    <unit id="8632433842489123268">
-      <notes>
-        <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:2</note>
-      </notes>
-      <segment>
-        <source>Callsign:</source>
-      </segment>
-    </unit>
-    <unit id="935187492052582731">
-      <notes>
-        <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:24</note>
-      </notes>
-      <segment>
-        <source>Submit</source>
-      </segment>
-    </unit>
-    <unit id="7783591557067224321">
-      <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:76</note>
-      </notes>
-      <segment>
-        <source>Add address book entries</source>
-      </segment>
-    </unit>
-    <unit id="940160377118654830">
-      <notes>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:77</note>
-      </notes>
-      <segment>
-        <source>Add address book entries...</source>
+        <source>Deliver To</source>
       </segment>
     </unit>
   </file>
