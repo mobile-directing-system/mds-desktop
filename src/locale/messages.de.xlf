@@ -450,6 +450,7 @@
     </unit>
     <unit id="8204176479746810612">
       <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:38</note>
         <note category="location">src/app/features/logistics/channels/channels.component.html:18</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:26</note>
       </notes>
@@ -1397,6 +1398,7 @@
     </unit>
     <unit id="2734022681675842051">
       <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:27</note>
         <note category="location">src/app/features/logistics/channels/channels.component.html:33</note>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:12</note>
       </notes>
@@ -1407,6 +1409,7 @@
     </unit>
     <unit id="5037087188394157831">
       <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:20</note>
         <note category="location">src/app/features/logistics/channels/channels.component.html:38</note>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:20</note>
       </notes>
@@ -1417,6 +1420,7 @@
     </unit>
     <unit id="5956316725115867558">
       <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:32</note>
         <note category="location">src/app/features/logistics/channels/channels.component.html:45</note>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:16</note>
       </notes>
@@ -1457,6 +1461,7 @@
         <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:24</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:6</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:6</note>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:10</note>
         <note category="location">src/app/features/logistics/channels/channels.component.html:13</note>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:8</note>
       </notes>
@@ -1553,6 +1558,7 @@
     <unit id="6660925946511264619">
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:69,70</note>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:57,59</note>
       </notes>
       <segment state="initial">
         <source>Delete</source>
@@ -2067,6 +2073,7 @@
     <unit id="935187492052582731">
       <notes>
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:24</note>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:60</note>
       </notes>
       <segment state="initial">
         <source>Submit</source>
@@ -2172,6 +2179,7 @@
       <notes>
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:23</note>
         <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:30</note>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:54</note>
       </notes>
       <segment state="initial">
         <source>Cancel</source>
@@ -2395,6 +2403,15 @@
       <segment state="initial">
         <source>Add address book entries...</source>
         <target>Addressbucheinträge auswählen...</target>
+      </segment>
+    </unit>
+    <unit id="4720298664489204785">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:15</note>
+      </notes>
+      <segment state="initial">
+        <source>Channel Type</source>
+        <target>Kanal-Typ</target>
       </segment>
     </unit>
   </file>
