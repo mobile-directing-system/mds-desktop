@@ -2129,6 +2129,7 @@
     </unit>
     <unit id="9178182467454450952">
       <notes>
+        <note category="location">src/app/core/components/delete-confirm-dialog/delete-confirm-dialog.component.html:1</note>
         <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:1</note>
         <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:31</note>
         <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:26</note>
@@ -2170,6 +2171,7 @@
     </unit>
     <unit id="2159130950882492111">
       <notes>
+        <note category="location">src/app/core/components/delete-confirm-dialog/delete-confirm-dialog.component.html:4</note>
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:23</note>
         <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:30</note>
       </notes>
