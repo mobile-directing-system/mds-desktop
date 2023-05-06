@@ -218,14 +218,14 @@ export class EditGroupView implements OnInit, OnDestroy {
    * Deletes the group.
    */
   delete() {
-    this.groupService.deleteGroupById(this.groupId).subscribe({
+    this.s.push(this.groupService.deleteGroupById(this.groupId).subscribe({
         next: _ => {
           this.close();
         },
         error: _ => {
           this.notificationService.notifyUninvasiveShort($localize`Group deletion failed.`);
         },
-    });
+    }));
   }
 
   /**
