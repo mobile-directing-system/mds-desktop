@@ -1,16 +1,16 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {
   AnalogRadioMessageIntelContent,
   CreateIntel,
   IntelType,
   PlaintextMessageIntelContent,
 } from 'src/app/core/model/intel';
-import { MatStepper } from '@angular/material/stepper';
-import { FormBuilder, Validators } from '@angular/forms';
-import { IntelCreationService } from '../../../core/services/intel-creation.service';
-import { Observable, Subscription } from 'rxjs';
-import { Importance } from 'src/app/core/model/importance';
-import { AddressBookEntry } from '../../../core/model/address-book-entry';
+import {MatStepper} from '@angular/material/stepper';
+import {FormBuilder, Validators} from '@angular/forms';
+import {IntelCreationService} from '../../../core/services/intel-creation.service';
+import {Observable, Subscription} from 'rxjs';
+import {Importance} from 'src/app/core/model/importance';
+import {AddressBookEntry} from '../../../core/model/address-book-entry';
 
 
 @Component({
@@ -45,7 +45,7 @@ export class CreateIntelStepperComponent implements OnInit, OnDestroy {
   /**
    * {@link Importance} of the {@link CreateIntel} to be created.
    */
-  @Input() importance?: Importance;
+  @Input() importance?: Importance = Importance.Regular;
 
   @ViewChild('stepper') private stepper!: MatStepper;
 
@@ -55,30 +55,6 @@ export class CreateIntelStepperComponent implements OnInit, OnDestroy {
 
   s: Subscription[] = [];
 
-  intelTypeFormGroup = this.fb.nonNullable.group({
-    intelType: this.fb.nonNullable.control<IntelType | null>(this.intelType ? this.intelType : null, Validators.required),
-  });
-
-  contentFormGroup = this.fb.nonNullable.group({
-    channel: this.fb.nonNullable.control<string>((this.contentAnalogRadioMessageIntel
-      && this.contentAnalogRadioMessageIntel.channel) ? this.contentAnalogRadioMessageIntel.channel : ''),
-    callsign: this.fb.nonNullable.control<string>((this.contentAnalogRadioMessageIntel
-      && this.contentAnalogRadioMessageIntel.callsign) ? this.contentAnalogRadioMessageIntel.callsign : ''),
-    head: this.fb.nonNullable.control<string>((this.contentAnalogRadioMessageIntel
-      && this.contentAnalogRadioMessageIntel.head) ? this.contentAnalogRadioMessageIntel.head : ''),
-    content: this.fb.nonNullable.control<string>((this.contentAnalogRadioMessageIntel
-      && this.contentAnalogRadioMessageIntel.content) ? this.contentAnalogRadioMessageIntel.content : ''),
-    text: this.fb.nonNullable.control<string>((this.contentPlainTextMessageIntel
-      && this.contentPlainTextMessageIntel.text) ? this.contentPlainTextMessageIntel.text : ''),
-  });
-
-  deliverToFromGroup = this.fb.nonNullable.group({
-    deliverTo: this.fb.nonNullable.control<string[]>(this.deliverTo ? this.deliverTo : [], Validators.required),
-  });
-
-  importanceFormGroup = this.fb.nonNullable.group({
-    importance: this.fb.nonNullable.control<Importance | null>(this.importance ? this.importance : null, Validators.required),
-  });
 
   constructor(private intelCreationService: IntelCreationService, private fb: FormBuilder) {
   }
@@ -108,6 +84,31 @@ export class CreateIntelStepperComponent implements OnInit, OnDestroy {
       this.updateFromValidators();
     }));
   }
+
+  intelTypeFormGroup = this.fb.nonNullable.group({
+    intelType: this.fb.nonNullable.control<IntelType | null>(this.intelType ? this.intelType : null, Validators.required),
+  });
+
+  contentFormGroup = this.fb.nonNullable.group({
+    channel: this.fb.nonNullable.control<string>((this.contentAnalogRadioMessageIntel
+      && this.contentAnalogRadioMessageIntel.channel) ? this.contentAnalogRadioMessageIntel.channel : ''),
+    callsign: this.fb.nonNullable.control<string>((this.contentAnalogRadioMessageIntel
+      && this.contentAnalogRadioMessageIntel.callsign) ? this.contentAnalogRadioMessageIntel.callsign : ''),
+    head: this.fb.nonNullable.control<string>((this.contentAnalogRadioMessageIntel
+      && this.contentAnalogRadioMessageIntel.head) ? this.contentAnalogRadioMessageIntel.head : ''),
+    content: this.fb.nonNullable.control<string>((this.contentAnalogRadioMessageIntel
+      && this.contentAnalogRadioMessageIntel.content) ? this.contentAnalogRadioMessageIntel.content : ''),
+    text: this.fb.nonNullable.control<string>((this.contentPlainTextMessageIntel
+      && this.contentPlainTextMessageIntel.text) ? this.contentPlainTextMessageIntel.text : ''),
+  });
+
+  deliverToFromGroup = this.fb.nonNullable.group({
+    deliverTo: this.fb.nonNullable.control<string[]>(this.deliverTo ? this.deliverTo : [], Validators.required),
+  });
+
+  importanceFormGroup = this.fb.nonNullable.group({
+    importance: this.fb.nonNullable.control<Importance | null>(this.importance ? this.importance : null, Validators.required),
+  });
 
   asAddressBookEntry(entity: AddressBookEntry): AddressBookEntry {
     return entity;
