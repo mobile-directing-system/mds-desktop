@@ -23,7 +23,8 @@
       [suggestionTemplate]="suggestionOperation"
       class="app-edit-input-large"
       i18n-label label="Operation"
-      i18n-placeholder placeholder="Search operation...">
+      i18n-placeholder placeholder="Search operation..."
+      i18n-defaultOption defaultOption="All">
       <ng-template #displayOperation let-entity='entity'>
         {{asOperation(entity).title}}
       </ng-template>

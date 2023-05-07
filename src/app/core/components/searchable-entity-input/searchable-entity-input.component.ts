@@ -99,6 +99,10 @@ export class SearchableEntityInputComponent<Id, T extends Identifiable<Id>> impl
    */
   @Input() formControl?: FormControl;
   /**
+   * Default option which will be shown if nothing is selected. Only works in combination with required=false.
+   */
+  @Input() defaultOption?: String;
+  /**
    * Currently selected entities.
    */
   selectedEntityId?: Id;
