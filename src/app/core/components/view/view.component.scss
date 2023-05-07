@@ -2,17 +2,42 @@
 @import 'src/styles/view';
 
 .drawer-container {
-  height: 100%;
-  width: 100vw;
+  margin-bottom: 100px;
+  overflow: auto;
 }
 
 .drawer-content {
-  @extend .view;
   min-width: 75%;
+  padding: 1rem 1rem 0 1rem;
 }
 
 .side-nav {
   background-color: lighten($dark-primary-text, 94%);
   max-width: 35%;
   width: 15rem;
+}
+
+table{
+  position: fixed;
+  bottom: 0;
+  border-collapse: collapse;
+  overflow: hidden;
+  height: 100px;
+  z-index: 10000;
+  background-color: white;
+}
+
+.info td{
+  width: 8%;
+  text-align: center;
+}
+
+.info tr, .info td{
+  border: 1px solid #dddddd;
+  padding: 10px;
+}
+
+.key td{
+  text-align: center;
+  padding: 3px;
 }
