@@ -64,6 +64,7 @@ import {
 import {
   IntelDeliveryView,
 } from '../../features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component';
+import {ManageIntelDelivery} from "../permissions/intel-delivery";
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -214,6 +215,11 @@ export const AppRoutes: PermissionGuardedRoute[] = [
       {
         path: 'intel-delivery',
         component: IntelDeliveryView,
+        data: {
+          requirePermissions: [
+            ManageIntelDelivery(),
+          ],
+        },
       },
     ],
   },

@@ -9,6 +9,7 @@ import { AppRoutes } from '../../../core/constants/routes';
 import { PermissionMatcher } from '../../../core/permissions/permissions';
 import { ViewUserPermission } from '../../../core/permissions/users';
 import { Router } from '@angular/router';
+import {ManageIntelDelivery} from "../../../core/permissions/intel-delivery";
 
 
 describe('LogisticsLayoutComponent', () => {
@@ -49,6 +50,11 @@ describe('LogisticsLayoutComponent', () => {
         name: 'Address Book Entries',
         link: ['/logistics', 'address-book'],
         requiredPermissions: [ViewUserPermission()],
+      },
+      {
+        name: 'Intel Delivery',
+        link: ['/intel-delivery'],
+        requiredPermissions: [ManageIntelDelivery()],
       },
     ];
     tests.forEach(tt => {

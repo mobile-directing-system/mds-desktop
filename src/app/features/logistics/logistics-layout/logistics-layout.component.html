@@ -1,6 +1,8 @@
 <app-view [sideNav]="sideNav">
   <ng-template #sideNav>
-    <app-side-nav-title i18n>Logistics</app-side-nav-title>
+    <app-side-nav-title *ngIf="((isViewAddressBookEntriesGranted()) | async) || ((isManageIntelDeliveryGranted()) | async)" i18n>
+      Logistics
+    </app-side-nav-title>
     <app-side-nav-item
       *ngIf="(isViewAddressBookEntriesGranted()) | async"
       [link]="['/logistics', 'address-book']"
@@ -9,7 +11,7 @@
       Address Book Entries
     </app-side-nav-item>
     <app-side-nav-item
-      *ngIf="(isViewAddressBookEntriesGranted()) | async"
+      *ngIf="(isManageIntelDeliveryGranted()) | async"
       [link]="['/intel-delivery']"
       i18n
       icon="directions">
