@@ -143,7 +143,6 @@ export class SearchableEntityInputComponent<Id, T extends Identifiable<Id>> impl
   }
 
   ngOnInit(): void {
-    console.log(this.formControl?.value);
     this.s.push(this.searchFC.valueChanges.pipe(
       // Ignore other types. Required because of selecting a suggestion leading to setting the value automatically in
       // the search form control.
