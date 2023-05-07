@@ -1,6 +1,6 @@
 <mat-stepper [linear]="true" #stepper>
   <mat-step [stepControl]="intelTypeFormGroup">
-    <ng-template matStepLabel i18n-matStepLabel>Intel Type</ng-template>
+    <ng-template matStepLabel i18n>Intel Type</ng-template>
     <mat-form-field class="app-edit-input">
       <mat-label i18n>Intel Type</mat-label>
       <mat-select [formControl]="intelTypeFormGroup.controls.intelType">
@@ -17,7 +17,7 @@
   </mat-step>
   <mat-step [stepControl]="contentFormGroup">
     <div class="multiple-form">
-      <ng-template matStepLabel i18n-matStepLabel>Content</ng-template>
+      <ng-template matStepLabel i18n>Content</ng-template>
       <mat-form-field *ngIf="intelTypeFormGroup.controls.intelType.getRawValue() === IntelType.AnalogRadioMessage"
                       class="app-edit-input">
         <mat-label i18n>Callsign</mat-label>
@@ -65,7 +65,7 @@
     </div>
   </mat-step>
   <mat-step [stepControl]="deliverToFromGroup">
-    <ng-template matStepLabel i18n-matStepLabel>Deliver To</ng-template>
+    <ng-template matStepLabel i18n>Deliver To</ng-template>
     <app-searchable-multi-chip-entity-input-field
       [chipTemplate]="chip"
       [formControl]="deliverToFromGroup.controls.deliverTo"
@@ -89,7 +89,7 @@
     </div>
   </mat-step>
   <mat-step [stepControl]="importanceFormGroup">
-    <ng-template matStepLabel i18n-matStepLabel>Importance</ng-template>
+    <ng-template matStepLabel i18n>Importance</ng-template>
     <mat-form-field class="app-edit-input">
       <mat-label i18n>Importance</mat-label>
       <app-importance-select [formControl]="importanceFormGroup.controls.importance"></app-importance-select>

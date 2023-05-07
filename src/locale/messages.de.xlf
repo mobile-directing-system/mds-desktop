@@ -666,7 +666,7 @@
       </notes>
       <segment state="initial">
         <source>Remove Member</source>
-        <target>Mitglieder Entfernen</target>
+        <target>Mitglieder entfernen</target>
       </segment>
     </unit>
     <unit id="3695400929536588338">
@@ -803,7 +803,7 @@
       </notes>
       <segment state="initial">
         <source>All group members must be members of the selected operation.</source>
-        <target>Alle Mitglieder der Gruppe, müssen auch Teilnehmer des gewählten Einsatzes sein.</target>
+        <target>Alle Mitglieder der Gruppe müssen auch Teilnehmer des gewählten Einsatzes sein.</target>
       </segment>
     </unit>
     <unit id="2725499532293844250">
@@ -1111,7 +1111,7 @@
       </notes>
       <segment state="initial">
         <source>View any intel</source>
-        <target>Intel sehen</target>
+        <target>Jede Nachricht sehen</target>
       </segment>
     </unit>
     <unit id="6542906208341279692">
@@ -1120,7 +1120,7 @@
       </notes>
       <segment state="initial">
         <source>Create intel</source>
-        <target>Intel erstellen</target>
+        <target>Nachricht erstellen</target>
       </segment>
     </unit>
     <unit id="2006249854662541346">
@@ -1129,7 +1129,7 @@
       </notes>
       <segment state="initial">
         <source>Invalidate intel</source>
-        <target>Intel für ungültig erklären</target>
+        <target>Nachricht für ungültig erklären</target>
       </segment>
     </unit>
     <unit id="5547981558491672240">
@@ -1174,7 +1174,7 @@
       </notes>
       <segment state="initial">
         <source>Intel</source>
-        <target>Intel</target>
+        <target>Nachricht</target>
       </segment>
     </unit>
     <unit id="3488583301572536241">
@@ -1487,7 +1487,7 @@
       </notes>
       <segment state="initial">
         <source>Create Address Book Entry</source>
-        <target>Adressbucheintrag Erstellen</target>
+        <target>Adressbucheintrag erstellen</target>
       </segment>
     </unit>
     <unit id="9023787216859143413">
@@ -1529,6 +1529,7 @@
     </unit>
     <unit id="1494433821441163544">
       <notes>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:10</note>
         <note category="location">src/app/features/logistics/logistics-layout/logistics-layout.component.html:4,5</note>
       </notes>
       <segment state="initial">
@@ -1598,7 +1599,7 @@
       </notes>
       <segment state="initial">
         <source>Intel Delivery <pc id="0" equivStart="START_TAG_MAT_ICON" equivEnd="CLOSE_TAG_MAT_ICON" type="other" dispStart="&lt;mat-icon class=&quot;icon-suffix-small&quot;&gt;" dispEnd="&lt;/mat-icon&gt;">open_in_new</pc></source>
-        <target>Intelzustellung <pc id="0" equivStart="START_TAG_MAT_ICON" equivEnd="CLOSE_TAG_MAT_ICON" type="other" dispStart="&lt;mat-icon class=&quot;icon-suffix-small&quot;&gt;" dispEnd="&lt;/mat-icon&gt;">open_in_new</pc> </target>
+        <target>Nachrichtenzustellung <pc id="0" equivStart="START_TAG_MAT_ICON" equivEnd="CLOSE_TAG_MAT_ICON" type="other" dispStart="&lt;mat-icon class=&quot;icon-suffix-small&quot;&gt;" dispEnd="&lt;/mat-icon&gt;">open_in_new</pc> </target>
       </segment>
     </unit>
     <unit id="1324352416087573030">
@@ -1607,7 +1608,7 @@
       </notes>
       <segment state="initial">
         <source>Intel Delivery</source>
-        <target>Intelzustellung</target>
+        <target>Nachrichtenzustellung</target>
       </segment>
     </unit>
     <unit id="1556790495823358787">
@@ -1616,7 +1617,7 @@
       </notes>
       <segment state="initial">
         <source>Manage Intel Delivery</source>
-        <target>Intelzustellung kontrollieren</target>
+        <target>Nachrichtenzustellung kontrollieren</target>
       </segment>
     </unit>
     <unit id="996392855508119363">
@@ -1634,7 +1635,7 @@
       </notes>
       <segment state="initial">
         <source>Unknown intel type</source>
-        <target>Unbekannter Intel-Typ</target>
+        <target>Unbekannter Nachrichtentyp</target>
       </segment>
     </unit>
     <unit id="8861844397105042477">
@@ -1643,7 +1644,7 @@
       </notes>
       <segment state="initial">
         <source>Missing intel information</source>
-        <target>Fehlende Intel-Details.</target>
+        <target>Fehlende Nachrichtendetails.</target>
       </segment>
     </unit>
     <unit id="intelType-plain-text-message">
@@ -1670,7 +1671,7 @@
       </notes>
       <segment state="initial">
         <source>Auto Intel Delivery is enabled.</source>
-        <target>Auto-Intel-Zustellung ist aktiviert.</target>
+        <target>Auto-Nachrichtenzustellung ist aktiviert.</target>
       </segment>
     </unit>
     <unit id="7056360524244234265">
@@ -1688,7 +1689,7 @@
       </notes>
       <segment state="initial">
         <source>Auto Intel Delivery is disabled.</source>
-        <target>Auto-Intel-Zustellung ist deaktiviert.</target>
+        <target>Auto-Nachrichtenzustellung ist deaktiviert.</target>
       </segment>
     </unit>
     <unit id="3192247086533582747">
@@ -1706,7 +1707,7 @@
       </notes>
       <segment state="initial">
         <source>Auto Intel Delivery for this entry is now enabled.</source>
-        <target>Auto-Intel-Zustellung ist für diesen Eintrag jetzt aktiviert.</target>
+        <target>Auto-Nachrichtenzustellung ist für diesen Eintrag jetzt aktiviert.</target>
       </segment>
     </unit>
     <unit id="1326584312169948709">
@@ -1715,7 +1716,7 @@
       </notes>
       <segment state="initial">
         <source>Auto Intel Delivery for this entry is now disabled.</source>
-        <target>Auto-Intel-Zustellung ist für diesen Eintrag jetzt deaktiviert.</target>
+        <target>Auto-Nachrichtenzustellung ist für diesen Eintrag jetzt deaktiviert.</target>
       </segment>
     </unit>
     <unit id="6378747169231297519">
@@ -1814,7 +1815,7 @@
       </notes>
       <segment state="initial">
         <source>Failed attempt at <ph id="0" equiv="INTERPOLATION" disp="{{ channel.details.attempt.createdAt | date:&apos;medium&apos; }}"/>.</source>
-        <target>Fehlgeschlagener Versuch am<ph id="0" equiv="INTERPOLATION" disp="{{ channel.details.attempt.createdAt | date:&apos;medium&apos; }}"/> .</target>
+        <target>Fehlgeschlagener Versuch am <ph id="0" equiv="INTERPOLATION" disp="{{ channel.details.attempt.createdAt | date:&apos;medium&apos; }}"/> .</target>
       </segment>
     </unit>
     <unit id="2867253902287405242">
@@ -1850,7 +1851,7 @@
       </notes>
       <segment state="initial">
         <source>Open intel deliveries:</source>
-        <target>Offene Intel-Zustellungen:</target>
+        <target>Offene Nachrichtenzustellungen:</target>
       </segment>
     </unit>
     <unit id="5666906448529967607">
@@ -1859,7 +1860,7 @@
       </notes>
       <segment state="initial">
         <source>Warning: Manual intel delivery is meant to be performed by only one person at a time.</source>
-        <target>Warnung: Die manuelle Intel-Zustellung sollte nur von einer Person gleichzeitig bedient werden.</target>
+        <target>Warnung: Die manuelle Nachrichtenzustellung sollte nur von einer Person gleichzeitig bedient werden.</target>
       </segment>
     </unit>
     <unit id="3244478074612290092">
@@ -1895,7 +1896,7 @@
       </notes>
       <segment state="initial">
         <source>Intel delivery cancelled.</source>
-        <target>Intel-Zustellung abgebrochen.</target>
+        <target>Nachrichtenzustellung abgebrochen.</target>
       </segment>
     </unit>
     <unit id="6735232392328456585">
@@ -1905,7 +1906,7 @@
       </notes>
       <segment state="initial">
         <source>No intel delivery selected.</source>
-        <target>Keine Intel-Zustellung ausgewählt.</target>
+        <target>Keine Nachrichtenzustellung ausgewählt.</target>
       </segment>
     </unit>
     <unit id="4549773563555782103">
@@ -1986,7 +1987,7 @@
       </notes>
       <segment state="initial">
         <source>Intel id: <ph id="0" equiv="INTERPOLATION" disp="{{ selected.delivery.intel.id }}"/> </source>
-        <target>Intel ID: <ph id="0" equiv="INTERPOLATION" disp="{{ selected.delivery.intel.id }}"/> </target>
+        <target>Nachricht ID: <ph id="0" equiv="INTERPOLATION" disp="{{ selected.delivery.intel.id }}"/> </target>
       </segment>
     </unit>
     <unit id="8189002981351101741">
@@ -1995,7 +1996,7 @@
       </notes>
       <segment state="initial">
         <source>Operation associated with the intel</source>
-        <target>Mit Intel assoziierter Einsatz</target>
+        <target>Mit Nachricht assoziierter Einsatz</target>
       </segment>
     </unit>
     <unit id="5587443221678456037">
@@ -2040,7 +2041,7 @@
       </notes>
       <segment state="initial">
         <source>Intel type</source>
-        <target>Intel-Typ</target>
+        <target>Nachrichtentyp</target>
       </segment>
     </unit>
     <unit id="6019305939828737244">
@@ -2194,7 +2195,7 @@
       </notes>
       <segment state="initial">
         <source>Intel Type</source>
-        <target>Intel Typ</target>
+        <target>Nachrichtentyp</target>
       </segment>
     </unit>
     <unit id="8844804275730553009">
@@ -2221,7 +2222,7 @@
       </notes>
       <segment state="initial">
         <source>Intel type is required.</source>
-        <target>Intel Typ erforderlich</target>
+        <target>Nachrichtentyp erforderlich</target>
       </segment>
     </unit>
     <unit id="3885497195825665706">
@@ -2291,6 +2292,7 @@
     </unit>
     <unit id="6205355627445317276">
       <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:20</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:47</note>
       </notes>
       <segment state="initial">
@@ -2327,6 +2329,7 @@
     </unit>
     <unit id="6019305939828737244">
       <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:92</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:94</note>
         <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:63</note>
       </notes>
@@ -2359,7 +2362,7 @@
       </notes>
       <segment state="initial">
         <source>Intel in Creation</source>
-        <target>Intel in erstellung.</target>
+        <target>Nachricht in Erstellung.</target>
       </segment>
     </unit>
     <unit id="1636701572518005081">
@@ -2377,7 +2380,7 @@
       </notes>
       <segment state="initial">
         <source>Intel Generators</source>
-        <target>Intel Generatoren</target>
+        <target>Nachrichten Generator</target>
       </segment>
     </unit>
     <unit id="8365674988775051590">
@@ -2386,7 +2389,7 @@
       </notes>
       <segment state="initial">
         <source>Empty Intel</source>
-        <target>Intel ohne Vorglage</target>
+        <target>Nachricht ohne Vorlage</target>
       </segment>
     </unit>
     <unit id="7783591557067224321">
@@ -2432,6 +2435,42 @@
       <segment state="initial">
         <source>Channel Type</source>
         <target>Kanal-Typ</target>
+      </segment>
+    </unit>
+    <unit id="6002195485717726199">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:7</note>
+      </notes>
+      <segment state="initial">
+        <source>Mailbox</source>
+        <target>Mailbox</target>
+      </segment>
+    </unit>
+    <unit id="8489670130200267808">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:8</note>
+      </notes>
+      <segment state="initial">
+        <source>Intelligence</source>
+        <target>Nachrichten</target>
+      </segment>
+    </unit>
+    <unit id="2446117790692479672">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:9</note>
+      </notes>
+      <segment state="initial">
+        <source>Resources</source>
+        <target>Ressourcen</target>
+      </segment>
+    </unit>
+    <unit id="4146502596881037592">
+      <notes>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:68</note>
+      </notes>
+      <segment state="initial">
+        <source>Deliver To</source>
+        <target>Zustellen an</target>
       </segment>
     </unit>
   </file>
