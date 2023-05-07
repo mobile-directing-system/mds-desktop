@@ -7,35 +7,35 @@
     <div class="form-row">
       <!--Label.-->
       <mat-form-field class="app-edit-input">
-        <mat-label>Label</mat-label>
+        <mat-label i18n>Label</mat-label>
         <input matInput [formControl]="form.controls.label">
       </mat-form-field>
       <!--Channel type.-->
       <mat-form-field class="app-edit-input">
-        <mat-label>Channel Type</mat-label>
+        <mat-label i18n>Channel Type</mat-label>
         <app-channel-type-select [formControl]="form.controls.type"></app-channel-type-select>
       </mat-form-field>
       <!--Importance.-->
       <mat-form-field class="app-edit-input">
-        <mat-label>Min Importance</mat-label>
+        <mat-label i18n>Min Importance</mat-label>
         <app-importance-select [formControl]="form.controls.minImportance"></app-importance-select>
       </mat-form-field>
     </div>
     <div class="form-row">
       <!--Priority.-->
       <mat-form-field class="app-edit-input">
-        <mat-label>Priority</mat-label>
+        <mat-label i18n>Priority</mat-label>
         <input matInput type="number" [formControl]="form.controls.priority">
       </mat-form-field>
       <!--Timeout.-->
       <mat-form-field class="app-edit-input">
-        <mat-label>Timeout</mat-label>
+        <mat-label i18n>Timeout</mat-label>
         <app-duration-picker [formControl]="form.controls.timeout"></app-duration-picker>
       </mat-form-field>
     </div>
     <div class="form-row">
       <!--Is active.-->
-      <mat-slide-toggle [formControl]="form.controls.isActive">Active</mat-slide-toggle>
+      <mat-slide-toggle [formControl]="form.controls.isActive" i18n>Active</mat-slide-toggle>
     </div>
     <mat-divider></mat-divider>
     <!--Channel details.-->
@@ -51,11 +51,11 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="close(undefined)">Cancel</button>
+  <button mat-button (click)="close(undefined)" i18n>Cancel</button>
   <app-delete-confirm-button
     (deleteConfirmed)="closeDelete()"
-    *ngIf="!data.create">
+    *ngIf="!data.create" i18n>
     Delete
   </app-delete-confirm-button>
-  <button (click)="closeSubmit()" [disabled]="!form.valid" color="primary" mat-button type="submit">Submit</button>
+  <button (click)="closeSubmit()" [disabled]="!form.valid" color="primary" mat-button type="submit" i18n>Submit</button>
 </mat-dialog-actions>
