@@ -1,14 +1,24 @@
 @import 'src/styles/corporate';
 @import 'src/styles/view';
 
+
+:host{
+  display: block;
+  height: 100%;
+}
+
 .drawer-container {
-  margin-bottom: 100px;
   overflow: auto;
+  height: calc(100% - 100px);
 }
 
 .drawer-content {
+  @extend .view;
   min-width: 75%;
-  padding: 1rem 1rem 0 1rem;
+}
+
+ng-content{
+  height: 100%;
 }
 
 .side-nav {

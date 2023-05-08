@@ -1,10 +1,9 @@
 <app-view [sideNav]="sideNav">
-  <div>
     <ng-template #sideNav>
       <app-intel-in-creation-side-nav>
       </app-intel-in-creation-side-nav>
     </ng-template>
-    <div *ngIf="intelCreationService.selectedOperation.getRawValue()">
+    <div class="main" *ngIf="intelCreationService.selectedOperation.getRawValue()">
       <div class="items" *ngIf="!intelCreationService.inIntelCreation">
         <div>
           <h2 i18n>Choose a context</h2>
@@ -25,5 +24,4 @@
       <app-create-intel-stepper *ngIf="intelCreationService.inIntelCreation">
       </app-create-intel-stepper>
     </div>
-  </div>
 </app-view>
