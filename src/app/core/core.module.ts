@@ -53,6 +53,7 @@ import {
 import {
   AnalogRadioMessageSummaryComponent,
 } from './components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component';
+import {KeyInfoBarComponent} from "./components/key-info-bar/key-info-bar.component";
 
 
 @NgModule({
@@ -93,6 +94,7 @@ import {
     IntelSummaryComponent,
     PlainTextMessageSummaryComponent,
     AnalogRadioMessageSummaryComponent,
+    KeyInfoBarComponent
   ],
   exports: [
     LogoComponent,
@@ -125,6 +127,7 @@ import {
     HiddenComponent,
     IntelTypeInlineComponent,
     IntelSummaryComponent,
+    KeyInfoBarComponent
   ],
   imports: [
     CommonModule,

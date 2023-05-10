@@ -1,0 +1,8 @@
+<table class="key-info-bar">
+    <tr class="info">
+      <td *ngFor="let keyInfo of keyInfos;"><div class="info-text" matRipple *ngIf="keyInfo" (click)="keyInfo && keyInfo.action()">{{keyInfo.label}}</div></td>
+    </tr>
+    <tr class="key">
+      <td *ngFor="let keyInfo of keyInfos;"><span *ngIf="keyInfo">{{keyInfo.shortcutAsString()}}</span></td>
+    </tr>
+</table>

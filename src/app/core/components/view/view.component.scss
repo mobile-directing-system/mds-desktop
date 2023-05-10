@@ -7,9 +7,13 @@
   height: 100%;
 }
 
-.drawer-container {
+.drawer-container-with-key-info-bar{
   overflow: auto;
   height: calc(100% - 100px);
+}
+.drawer-container-without-key-info-bar{
+  overflow: auto;
+  height: 100%;
 }
 
 .drawer-content {
