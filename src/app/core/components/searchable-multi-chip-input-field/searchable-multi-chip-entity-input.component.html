@@ -27,6 +27,7 @@
     <!--Autocomplete.-->
     <mat-autocomplete #auto="matAutocomplete"
                       autoActiveFirstOption
+                      autofocus
                       (optionSelected)="addEntity($event.option.value)">
       <mat-option *ngFor="let suggestion of suggestions | async" [value]="suggestion">
         <ng-container *ngIf="suggestionTemplate">

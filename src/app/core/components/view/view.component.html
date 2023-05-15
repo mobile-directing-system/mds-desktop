@@ -1,5 +1,5 @@
 
-  <mat-drawer-container [ngClass]="keyInfos ? 'drawer-container-with-key-info-bar' : 'drawer-container-without-key-info-bar'">
+  <mat-drawer-container [ngClass]="showKeyInfos ? 'drawer-container-with-key-info-bar' : 'drawer-container-without-key-info-bar'">
     <mat-drawer opened mode="side" *ngIf="sideNav" class="side-nav">
       <ng-container *ngTemplateOutlet="sideNav"></ng-container>
     </mat-drawer>
@@ -8,4 +8,4 @@
     </mat-drawer-content>
   </mat-drawer-container>
 
-  <app-key-info-bar *ngIf="keyInfos" [keyInfos]="keyInfos"></app-key-info-bar>
+  <app-key-info-bar *ngIf="showKeyInfos"></app-key-info-bar>

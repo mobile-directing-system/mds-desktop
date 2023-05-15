@@ -54,6 +54,7 @@ import {
   AnalogRadioMessageSummaryComponent,
 } from './components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component';
 import {KeyInfoBarComponent} from "./components/key-info-bar/key-info-bar.component";
+import {AutofocusDirective} from "./directives/autofocus.directive";
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import {KeyInfoBarComponent} from "./components/key-info-bar/key-info-bar.compon
     IntelSummaryComponent,
     PlainTextMessageSummaryComponent,
     AnalogRadioMessageSummaryComponent,
-    KeyInfoBarComponent
+    KeyInfoBarComponent,
+    AutofocusDirective
   ],
   exports: [
     LogoComponent,
@@ -127,7 +129,8 @@ import {KeyInfoBarComponent} from "./components/key-info-bar/key-info-bar.compon
     HiddenComponent,
     IntelTypeInlineComponent,
     IntelSummaryComponent,
-    KeyInfoBarComponent
+    KeyInfoBarComponent,
+    AutofocusDirective
   ],
   imports: [
     CommonModule,
