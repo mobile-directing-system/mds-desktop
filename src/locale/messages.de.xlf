@@ -585,7 +585,7 @@
       </notes>
       <segment state="initial">
         <source>Create Group</source>
-        <target>Gruppe Erstellen</target>
+        <target>Gruppe erstellen</target>
       </segment>
     </unit>
     <unit id="3695400929536588338">
@@ -2502,7 +2502,7 @@
       </notes>
       <segment state="initial">
         <source>Logistics</source>
-        <target>Logistics</target>
+        <target>Logistik</target>
       </segment>
     </unit>
   </file>
