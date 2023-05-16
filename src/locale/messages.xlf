@@ -1385,6 +1385,7 @@
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:8,9</note>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:8,9</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:9,10</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:127,128</note>
       </notes>
       <segment>
         <source>Title is required.</source>
@@ -1412,6 +1413,7 @@
     </unit>
     <unit id="3291437606661186188">
       <notes>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:9</note>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:47</note>
       </notes>
       <segment>
@@ -1559,6 +1561,7 @@
     </unit>
     <unit id="8705640949204819723">
       <notes>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:13</note>
         <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:20,21</note>
       </notes>
       <segment>
@@ -1585,6 +1588,7 @@
     </unit>
     <unit id="3092880857721570149">
       <notes>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:20,21</note>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:33,34</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:35,36</note>
       </notes>
@@ -1605,6 +1609,7 @@
       <notes>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:52,53</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:54,55</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.ts:131</note>
       </notes>
       <segment>
         <source>End date must be after start date.</source>
@@ -1615,6 +1620,7 @@
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:56</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:58</note>
         <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:45</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.ts:135</note>
       </notes>
       <segment>
         <source>Archived</source>
@@ -2134,6 +2140,14 @@
         <source>New password is required.</source>
       </segment>
     </unit>
+    <unit id="8006160526649588056">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.ts:226</note>
+      </notes>
+      <segment>
+        <source>Group deletion failed.</source>
+      </segment>
+    </unit>
     <unit id="1558069880513305355">
       <notes>
         <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:17,18</note>
@@ -2145,6 +2159,7 @@
     <unit id="6072990007630394552">
       <notes>
         <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.ts:57</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:28,27</note>
       </notes>
       <segment>
         <source>Updating password failed.</source>
@@ -2156,6 +2171,14 @@
       </notes>
       <segment>
         <source>Create, manage and edit users.</source>
+      </segment>
+    </unit>
+    <unit id="5766868287924802852">
+      <notes>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.ts:26</note>
+      </notes>
+      <segment>
+        <source>Empty Intel</source>
       </segment>
     </unit>
   </file>

@@ -1,9 +1,19 @@
 @import 'src/styles/corporate';
 @import 'src/styles/view';
 
-.drawer-container {
+
+:host{
+  display: block;
   height: 100%;
-  width: 100vw;
+}
+
+.drawer-container-with-key-info-bar{
+  overflow: auto;
+  height: calc(100% - 100px);
+}
+.drawer-container-without-key-info-bar{
+  overflow: auto;
+  height: 100%;
 }
 
 .drawer-content {
@@ -11,8 +21,37 @@
   min-width: 75%;
 }
 
+ng-content{
+  height: 100%;
+}
+
 .side-nav {
   background-color: lighten($dark-primary-text, 94%);
   max-width: 35%;
   width: 15rem;
+}
+
+table{
+  position: fixed;
+  bottom: 0;
+  border-collapse: collapse;
+  overflow: hidden;
+  height: 100px;
+  z-index: 10000;
+  background-color: white;
+}
+
+.info td{
+  width: 8%;
+  text-align: center;
+}
+
+.info tr, .info td{
+  border: 1px solid #dddddd;
+  padding: 10px;
+}
+
+.key td{
+  text-align: center;
+  padding: 3px;
 }

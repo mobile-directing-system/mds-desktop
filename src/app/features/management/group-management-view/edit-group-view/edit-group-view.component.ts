@@ -14,7 +14,7 @@ import { SearchResult, sortStrings } from '../../../../core/util/store';
 import { map } from 'rxjs/operators';
 import { Sort } from '@angular/material/sort';
 import { AccessControlService } from '../../../../core/services/access-control.service';
-import { UpdateGroupPermission } from '../../../../core/permissions/groups';
+import {DeleteGroupPermission, UpdateGroupPermission} from '../../../../core/permissions/groups';
 
 @Component({
   selector: 'app-edit-group-view',
@@ -215,6 +215,20 @@ export class EditGroupView implements OnInit, OnDestroy {
   }
 
   /**
+   * Deletes the group.
+   */
+  delete() {
+    this.s.push(this.groupService.deleteGroupById(this.groupId).subscribe({
+        next: _ => {
+          this.close();
+        },
+        error: _ => {
+          this.notificationService.notifyUninvasiveShort($localize`Group deletion failed.`);
+        },
+    }));
+  }
+
+  /**
    * Removes the member with the given id.
    * @param memberId The id of the member to remove.
    */
@@ -336,5 +350,9 @@ export class EditGroupView implements OnInit, OnDestroy {
 
   isUpdateGranted(): Observable<boolean> {
     return this.acService.isGranted([UpdateGroupPermission()]);
+  }
+
+  isDeletionGranted(): Observable<boolean> {
+    return this.acService.isGranted([DeleteGroupPermission()]);
   }
 }

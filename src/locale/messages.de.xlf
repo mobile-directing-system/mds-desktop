@@ -1559,6 +1559,7 @@
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:70,71</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:57,59</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:127,128</note>
       </notes>
       <segment state="initial">
         <source>Delete</source>
@@ -2202,6 +2203,7 @@
     <unit id="8844804275730553009">
       <notes>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:7</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.ts:131</note>
       </notes>
       <segment state="initial">
         <source>Plain Text Message</source>
@@ -2211,6 +2213,7 @@
     <unit id="9140544690687942988">
       <notes>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:8</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.ts:135</note>
       </notes>
       <segment state="initial">
         <source>Analog Radio Message</source>
@@ -2368,7 +2371,7 @@
     </unit>
     <unit id="1636701572518005081">
       <notes>
-        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:10</note>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:9</note>
       </notes>
       <segment state="initial">
         <source>Choose a context</source>
@@ -2377,7 +2380,7 @@
     </unit>
     <unit id="6223909137047684293">
       <notes>
-        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:14</note>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:13</note>
       </notes>
       <segment state="initial">
         <source>Intel Generators</source>
@@ -2386,7 +2389,7 @@
     </unit>
     <unit id="8365674988775051590">
       <notes>
-        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:20,22</note>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:20,21</note>
       </notes>
       <segment state="initial">
         <source>Empty Intel</source>
@@ -2409,6 +2412,15 @@
       <segment state="initial">
         <source>Add address book entries...</source>
         <target>Addressbucheinträge auswählen...</target>
+      </segment>
+    </unit>
+    <unit id="8006160526649588056">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.ts:226</note>
+      </notes>
+      <segment state="initial">
+        <source>Group deletion failed.</source>
+        <target>Löschen der Gruppe fehlgeschlagen.</target>
       </segment>
     </unit>
     <unit id="8386976308507652568">
@@ -2437,6 +2449,15 @@
       <segment state="initial">
         <source>Channel Type</source>
         <target>Kanal-Typ</target>
+      </segment>
+    </unit>
+    <unit id="5766868287924802852">
+      <notes>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.ts:26</note>
+      </notes>
+      <segment state="initial">
+        <source>Empty Intel</source>
+        <target>Nachricht ohne Vorlage</target>
       </segment>
     </unit>
     <unit id="6002195485717726199">
