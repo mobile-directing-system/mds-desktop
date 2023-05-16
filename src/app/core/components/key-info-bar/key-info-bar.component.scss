@@ -1,0 +1,36 @@
+@import 'src/styles/corporate';
+
+table{
+  position: fixed;
+  bottom: 0;
+  border-collapse: collapse;
+  overflow: hidden;
+  height: 100px;
+  z-index: 10000;
+  background-color: white;
+  width: 100%
+}
+
+.info td{
+  width: 8%;
+  text-align: center;
+}
+
+.info tr, .info td{
+  border: 1px solid #dddddd;
+}
+
+.key td{
+  text-align: center;
+  padding: 3px;
+}
+
+.info-text{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Align horizontal */
+  align-items: center; /* Align vertical */
+  cursor: pointer;
+  padding: 10px;
+}

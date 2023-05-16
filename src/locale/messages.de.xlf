@@ -2200,6 +2200,7 @@
     <unit id="8844804275730553009">
       <notes>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:7</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.ts:131</note>
       </notes>
       <segment state="initial">
         <source>Plain Text Message</source>
@@ -2209,6 +2210,7 @@
     <unit id="9140544690687942988">
       <notes>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:8</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.ts:135</note>
       </notes>
       <segment state="initial">
         <source>Analog Radio Message</source>
@@ -2364,7 +2366,7 @@
     </unit>
     <unit id="1636701572518005081">
       <notes>
-        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:10</note>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:9</note>
       </notes>
       <segment state="initial">
         <source>Choose a context</source>
@@ -2373,7 +2375,7 @@
     </unit>
     <unit id="6223909137047684293">
       <notes>
-        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:14</note>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:13</note>
       </notes>
       <segment state="initial">
         <source>Intel Generators</source>
@@ -2382,11 +2384,11 @@
     </unit>
     <unit id="8365674988775051590">
       <notes>
-        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:20,22</note>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:20,21</note>
       </notes>
       <segment state="initial">
         <source>Empty Intel</source>
-        <target>Intel ohne Vorglage</target>
+        <target>Nachricht ohne Vorlage</target>
       </segment>
     </unit>
     <unit id="7783591557067224321">
@@ -2419,6 +2421,7 @@
     <unit id="1616102757855967475">
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:28,27</note>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:28,27</note>
       </notes>
       <segment state="initial">
         <source>All</source>
@@ -2432,6 +2435,15 @@
       <segment state="initial">
         <source>Channel Type</source>
         <target>Kanal-Typ</target>
+      </segment>
+    </unit>
+    <unit id="5766868287924802852">
+      <notes>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.ts:26</note>
+      </notes>
+      <segment state="initial">
+        <source>Empty Intel</source>
+        <target>Nachricht ohne Vorlage</target>
       </segment>
     </unit>
   </file>

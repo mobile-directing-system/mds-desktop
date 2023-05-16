@@ -6,6 +6,7 @@ import { fakeAsync, tick } from '@angular/core/testing';
 import { IntelCreationService } from '../../../core/services/intel-creation.service';
 import { FormControl } from '@angular/forms';
 import { IntelligenceModule } from '../intelligence.module';
+import {Subject} from "rxjs";
 
 function genFactoryOptions(): SpectatorRoutingOptions<CreateIntelStepperComponent> {
   return {
@@ -58,7 +59,11 @@ describe('CreateIntelStepperComponent', () => {
       component.contentFormGroup.controls.callsign.setValue(sampleContent.callsign);
       component.importanceFormGroup.controls.importance.setValue(sampleImportance);
       component.deliverToFromGroup.controls.deliverTo.setValue(sampleAddressBookEntryIds);
-      const createSpy = spectator.inject(IntelCreationService).addCreateIntel.and.returnValue(void 0);
+
+      const intelCreationService = spectator.inject(IntelCreationService);
+      intelCreationService.inIntelCreation = new Subject<Boolean>();
+      const createSpy = intelCreationService.addCreateIntel.and.returnValue(void 0);
+
       tick();
       component.addCreateIntel();
       expect(createSpy).toHaveBeenCalled();
