@@ -19,6 +19,7 @@ describe('KeyInfoBarComponent', () => {
 
   const keyInfos: (KeyInfoEntry | null)[] = [
     new KeyInfoEntry("k", "label1", action, false, true),
+    new KeyInfoEntry("1", "label1", action, false, true),
     null, null
   ];
 
@@ -53,6 +54,18 @@ describe('KeyInfoBarComponent', () => {
     spectator.detectChanges();
     const keyEvent = new KeyboardEvent("keypress",{
         "key": "k",
+    });
+    spyOn(window, 'alert');
+    tick();
+    component.handleKeyboardEvent(keyEvent)
+    expect(window.alert).toHaveBeenCalled();
+    flush();
+  }));
+
+  it('should activate function when pressing the corresponding key via mapping', fakeAsync( () => {
+    spectator.detectChanges();
+    const keyEvent = new KeyboardEvent("keypress",{
+      "key": "!",
     });
     spyOn(window, 'alert');
     tick();

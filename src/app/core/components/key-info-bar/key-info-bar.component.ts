@@ -52,7 +52,7 @@ export class KeyInfoBarComponent implements OnInit{
     if(this.keyInfos){
       for(let i = 0; i < this.keyInfos?.length; i++){
         let keyInfoEntry = this.keyInfos[i];
-        if(keyInfoEntry != null && ((keyInfoEntry.withAltKey && event.altKey) || !keyInfoEntry.withAltKey) && event.key == keyInfoEntry.key){
+        if(keyInfoEntry != null && ((keyInfoEntry.withAltKey && event.altKey) || !keyInfoEntry.withAltKey) && this.isKeyMatch(event.key, keyInfoEntry.key)){
 
           // show visual effects
           let infoElement = this.infoElements?.get(i);
@@ -75,5 +75,22 @@ export class KeyInfoBarComponent implements OnInit{
         }
       }
     }
+  }
+
+  private isKeyMatch(keyFromEvent: string, keyFromKeyInfoEntry: string): boolean{
+    if(keyFromEvent == keyFromKeyInfoEntry) return true;
+    let keyMapping = new Map<string, string>( [
+      ["!", "1"],
+      ["TODO", "2"],
+      ["TODO", "3"],
+      ["TODO", "4"],
+      ["TODO", "5"],
+      ["TODO", "6"],
+      ["TODO", "7"],
+      ["TODO", "8"],
+      ["TODO", "9"],
+      ["TODO", "0"]
+    ]);
+    return keyMapping.get(keyFromEvent) == keyFromKeyInfoEntry;
   }
 }
