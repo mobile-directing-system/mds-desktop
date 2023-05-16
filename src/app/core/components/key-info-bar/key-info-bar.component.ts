@@ -77,6 +77,11 @@ export class KeyInfoBarComponent implements OnInit{
     }
   }
 
+  /**
+   * Checks if the passed keys are the same. Also does a mapping for iOS keys to equivalent Windows keys.
+   * @param keyFromEvent: the key from the {@link KeyboardEvent}
+   * @param keyFromKeyInfoEntry: the key from the {@link KeyInfoEntry}
+   */
   private isKeyMatch(keyFromEvent: string, keyFromKeyInfoEntry: string): boolean{
     if(keyFromEvent == keyFromKeyInfoEntry) return true;
     let keyMapping = new Map<string, string>( [
