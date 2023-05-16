@@ -3,7 +3,7 @@ import * as moment from 'moment';
 import 'moment-duration-format';
 
 export function formatDurationLong(dur: moment.Duration): string {
-  return dur.format('w[w] d[d] h[h] m[m] s[s]', {
+  return dur.format('w[w] d[d] h[h] m[m] s[s] S[ms]', {
     trim: 'both mid',
   });
 }

@@ -1,11 +1,10 @@
-<app-view [sideNav]="sideNav">
-  <div>
+<app-view [sideNav]="sideNav" [showKeyInfos]="true">
     <ng-template #sideNav>
       <app-intel-in-creation-side-nav>
       </app-intel-in-creation-side-nav>
     </ng-template>
-    <div *ngIf="intelCreationService.selectedOperation.getRawValue()">
-      <div class="items" *ngIf="!intelCreationService.inIntelCreation">
+    <div class="main" *ngIf="intelCreationService.selectedOperation.getRawValue()">
+      <div class="items" *ngIf="((intelCreationService.inIntelCreation | async) === null || (intelCreationService.inIntelCreation | async) === false)">
         <div>
           <h2 i18n>Choose a context</h2>
           <mat-divider></mat-divider>
@@ -15,15 +14,14 @@
           <mat-divider></mat-divider>
         </div>
         <div class="container-b">
-          <button mat-raised-button class="button-large" i18n
-                  (click)="intelCreationService.inIntelCreation = true"
+          <button #butEmptyIntel mat-raised-button class="button-large" i18n
+                  (click)="intelCreationService.inIntelCreation.next(true)"
           >
             Empty Intel
           </button>
         </div>
       </div>
-      <app-create-intel-stepper *ngIf="intelCreationService.inIntelCreation">
+      <app-create-intel-stepper *ngIf="(intelCreationService.inIntelCreation | async)">
       </app-create-intel-stepper>
     </div>
-  </div>
 </app-view>

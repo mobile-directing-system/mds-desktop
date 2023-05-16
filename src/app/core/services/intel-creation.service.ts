@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { IntelService } from './intel.service';
 import { CreateIntel } from '../model/intel';
-import { Observable, Subscription } from 'rxjs';
+import {Observable, Subject, Subscription} from 'rxjs';
 import { AddressBookService } from './addressbook.service';
 import { map } from 'rxjs/operators';
 import { SearchResult } from '../util/store';
@@ -24,12 +24,13 @@ export class IntelCreationService implements OnDestroy {
 
   selectedOperation = this.fb.nonNullable.control<string | null>(null);
 
-  inIntelCreation = false;
+  inIntelCreation: Subject<Boolean>  = new Subject();
 
   s: Subscription[] = [];
 
   constructor(private intelService: IntelService, private addressBookEntryService: AddressBookService,
               private fb: FormBuilder, private operationService: OperationService) {
+    this.inIntelCreation.next(false);
   }
 
   ngOnDestroy(): void {
