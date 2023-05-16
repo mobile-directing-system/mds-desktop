@@ -1559,6 +1559,7 @@
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:70,71</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:57,59</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:127,128</note>
       </notes>
       <segment state="initial">
         <source>Delete</source>
@@ -2407,6 +2408,15 @@
       <segment state="initial">
         <source>Add address book entries...</source>
         <target>Addressbucheinträge auswählen...</target>
+      </segment>
+    </unit>
+    <unit id="8006160526649588056">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.ts:226</note>
+      </notes>
+      <segment state="initial">
+        <source>Group deletion failed.</source>
+        <target>Löschen der Gruppe fehlgeschlagen.</target>
       </segment>
     </unit>
     <unit id="8386976308507652568">

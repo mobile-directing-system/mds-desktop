@@ -123,6 +123,9 @@
               [disabled]="!form.valid || (loader.loadingChange() | async)" i18n>
         Update
       </button>
+      <app-delete-confirm-button *ngIf="isDeletionGranted() | async" (deleteConfirmed)="delete()"  i18n>
+        Delete
+      </app-delete-confirm-button>
     </div>
   </form>
 </div>
