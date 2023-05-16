@@ -65,7 +65,7 @@ describe('KeyInfoBarComponent', () => {
   it('should activate function when pressing the corresponding key via mapping', fakeAsync( () => {
     spectator.detectChanges();
     const keyEvent = new KeyboardEvent("keypress",{
-      "key": "!",
+      "key": "¡",
     });
     spyOn(window, 'alert');
     tick();
