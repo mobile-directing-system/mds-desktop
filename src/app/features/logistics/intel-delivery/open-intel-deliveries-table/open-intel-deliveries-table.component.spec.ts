@@ -131,7 +131,6 @@ describe('OpenIntelDeliveriesTableComponent', () => {
 
   it('should show user attributes in table', () => {
     const attributes = [
-      selected.operation!.title,
       `${ selected.intelCreator!.firstName } ${ selected.intelCreator!.lastName }`,
       selected.recipientEntry!.label,
     ];
