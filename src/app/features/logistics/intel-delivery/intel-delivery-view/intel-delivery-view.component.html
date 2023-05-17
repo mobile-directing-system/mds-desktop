@@ -3,11 +3,13 @@
     <div i18n>Most important:</div>
     <app-open-intel-deliveries-table
       (deliverySelected)="selectOpenIntelDelivery($event)"
-      [openIntelDeliveries]="openIntelDeliveriesByImportance() | async"></app-open-intel-deliveries-table>
+      [openIntelDeliveries]="openIntelDeliveriesByImportance() | async"
+    [selected]="selected"></app-open-intel-deliveries-table>
     <div i18n>Oldest:</div>
     <app-open-intel-deliveries-table
       (deliverySelected)="selectOpenIntelDelivery($event)"
-      [openIntelDeliveries]="openIntelDeliveriesByAge() | async"></app-open-intel-deliveries-table>
+      [openIntelDeliveries]="openIntelDeliveriesByAge() | async"
+      [selected]="selected">></app-open-intel-deliveries-table>
     <app-intel-delivery-status></app-intel-delivery-status>
   </div>
   <div class="column intel-to-deliver">

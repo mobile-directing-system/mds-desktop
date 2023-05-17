@@ -70,6 +70,7 @@
     <tr *matHeaderRowDef="columns" mat-header-row></tr>
     <tr (click)="selectOpenIntelDelivery(asDetailedOpenIntelDelivery(row).delivery.delivery.id)"
         *matRowDef="let row; columns: columns"
+        [ngClass]="{'highlight': selected && selected.delivery.delivery.id === asDetailedOpenIntelDelivery(row).delivery.delivery.id}"
         class="clickable"
         mat-row></tr>
   </table>
