@@ -23,6 +23,7 @@ export class OpenIntelDeliveriesTableComponent {
    * Emits when an open delivery is selected. The emitted value is the delivery id.
    */
   @Output() deliverySelected = new EventEmitter<string>();
+  deliverSelectedId? : string;
 
   readonly columns = ['intelCreatedAt', 'intelOperation', 'intelCreatedBy', 'deliveryTo', 'intelType', 'intelImportance'];
 
@@ -35,6 +36,7 @@ export class OpenIntelDeliveriesTableComponent {
    * @param deliveryId The id of the delivery to select.
    */
   selectOpenIntelDelivery(deliveryId: string): void {
+    this.deliverSelectedId = deliveryId;
     this.deliverySelected.next(deliveryId);
   }
 }
