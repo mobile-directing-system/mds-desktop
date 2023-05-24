@@ -1,0 +1,49 @@
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <span i18n>Radio Delivery Job</span>
+        <app-importance-inline [importance]="detailedRadioDelivery.radioDelivery.intel_importance"></app-importance-inline>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <div i18n>
+          Accepted at
+          {{ detailedRadioDelivery.radioDelivery.accepted_at | date:'medium' }}
+          ({{ fromNow(detailedRadioDelivery.radioDelivery.accepted_at) }})
+        </div>
+        <div i18n>
+          Created at
+          {{ detailedRadioDelivery.radioDelivery.created_at | date:'medium' }}
+          ({{ fromNow(detailedRadioDelivery.radioDelivery.created_at) }})
+        </div>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p *ngIf="detailedRadioDelivery.intel.type === IntelType.AnalogRadioMessage">
+        <span class="content-title" i18n>Call-sign:</span>
+        <span class="content-text">{{detailedRadioDelivery.intel.content.callsign}}</span>
+      </p>
+      <p *ngIf="detailedRadioDelivery.intel.type === IntelType.AnalogRadioMessage">
+        <span class="content-title" i18n>Head:</span>
+        <span class="content-text">{{detailedRadioDelivery.intel.content.head}}</span>
+      </p>
+      <p *ngIf="detailedRadioDelivery.intel.type === IntelType.AnalogRadioMessage">
+        <span class="content-title" i18n>Channel:</span>
+        <span class="content-text">{{detailedRadioDelivery.intel.content.channel}}</span>
+      </p>
+      <p *ngIf="detailedRadioDelivery.intel.type === IntelType.AnalogRadioMessage">
+        <span class="content-title" i18n>Content:</span>
+        <span class="content-text">{{detailedRadioDelivery.intel.content.content}}</span>
+      </p>
+      <p *ngIf="detailedRadioDelivery.intel.type === IntelType.PlainTextMessage">
+        <span class="content-title" i18n>Content:</span>
+        <span class="content-text">{{detailedRadioDelivery.intel.content.text}}</span>
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="release.emit()" i18n>RELEASE AND CHANGE NOTHING</button>
+      <button mat-button (click)="finish.emit(false)" i18n>MARK AS UNSUCCESSFULLY</button>
+      <button mat-button color="primary" (click)="finish.emit(true)" i18n>CONFIRM DELIVERY</button>
+    </mat-card-actions>
+  </mat-card>
+

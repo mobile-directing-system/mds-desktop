@@ -18,6 +18,13 @@
       Intel Delivery
       <mat-icon class="icon-suffix-small">open_in_new</mat-icon>
     </app-side-nav-item>
+    <app-side-nav-item
+      *ngIf="(isDeliverRadioIntelGranted()) | async"
+      [link]="['/logistics', 'radio-delivery']"
+      i18n
+      icon="directions">
+      Radio Delivery
+    </app-side-nav-item>
   </ng-template>
   <router-outlet></router-outlet>
 </app-view>
