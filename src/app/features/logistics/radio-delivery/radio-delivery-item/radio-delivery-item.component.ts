@@ -1,8 +1,11 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {DetailedRadioDelivery} from "../../../../core/model/radio-delivery";
+import {DetailedRadioDelivery, RadioDelivery} from "../../../../core/model/radio-delivery";
 import * as moment from "moment/moment";
 import {IntelType} from "../../../../core/model/intel";
 
+/**
+ * Component for visualising one {@link RadioDelivery}
+ */
 @Component({
   selector: 'app-radio-delivery-item',
   templateUrl: './radio-delivery-item.component.html',
@@ -10,12 +13,21 @@ import {IntelType} from "../../../../core/model/intel";
 })
 export class RadioDeliveryItemComponent {
 
+  /**
+   * The {@link RadioDelivery} to show
+   */
   @Input()
   detailedRadioDelivery!: DetailedRadioDelivery
 
+  /**
+   * Event if the user releases the {@link RadioDelivery}
+   */
   @Output()
   release = new EventEmitter<void>();
 
+  /**
+   * Event if the user finishes the {@link RadioDelivery}
+   */
   @Output()
   finish = new EventEmitter<boolean>();
 

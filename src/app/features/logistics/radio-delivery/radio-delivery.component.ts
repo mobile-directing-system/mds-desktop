@@ -2,11 +2,14 @@ import {Component, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {RadioDeliveryService} from "../../../core/services/radio-delivery.service";
 import {WorkspaceService} from "../../../core/services/workspace.service";
-import {DetailedRadioDelivery} from "../../../core/model/radio-delivery";
+import {DetailedRadioDelivery, RadioDelivery} from "../../../core/model/radio-delivery";
 import {NotificationService} from "../../../core/services/notification.service";
 import {IntelService} from "../../../core/services/intel.service";
 import {first, Subscription} from "rxjs";
 
+/**
+ * Component for managing radio deliveries. {@link RadioDelivery} can be picked up, released and finished.
+ */
 @Component({
   selector: 'app-radio-delivery',
   templateUrl: './radio-delivery.component.html',
@@ -14,8 +17,17 @@ import {first, Subscription} from "rxjs";
 })
 export class RadioDeliveryComponent implements OnDestroy{
 
+  /**
+   * Currently selected operation in the workspace
+   */
   private operationId: string | undefined = undefined;
+  /**
+   * Currently picked up radio delivery if that is the case
+   */
   detailedRadioDelivery: DetailedRadioDelivery | undefined = undefined;
+  /**
+   * Subscription array for cleaning up on destroy
+   */
   private s: Subscription[] = [];
 
   constructor(private router: Router, private route: ActivatedRoute,
@@ -46,6 +58,9 @@ export class RadioDeliveryComponent implements OnDestroy{
 
   }
 
+  /**
+   * Picks up next available {@link RadioDelivery} for the currently selected operation.
+   */
   pickUpNextRadioDelivery(): void {
     if(this.operationId){
       this.s.push(this.radioDeliveryService.getNextRadioDelivery(this.operationId).subscribe({
@@ -61,15 +76,6 @@ export class RadioDeliveryComponent implements OnDestroy{
                     radioDelivery: radioDelivery,
                     intel: intel
                   };
-
-                  // if(intel.type == IntelType.AnalogRadioMessage){
-                  // }else{
-                  //   console.log(intel);
-                  //   this.notificationService.notifyUninvasiveShort($localize`Picking up next radio delivery failed - wrong intel content.`);
-                  // }
-                  // if(intel.type == IntelType.PlainTextMessage){
-                  //   intel.content.text
-                  // }
                 },
                 error: _ => {
                   this.notificationService.notifyUninvasiveShort($localize`Picking up next radio delivery failed - can not find intel.`);
@@ -88,6 +94,9 @@ export class RadioDeliveryComponent implements OnDestroy{
 
   }
 
+  /**
+   * Releases currently picked up {@link RadioDelivery}.
+   */
   releaseCurrentRadioDelivery(){
     if(this.detailedRadioDelivery){
       this.radioDeliveryService.releaseRadioDelivery(this.detailedRadioDelivery.radioDelivery.id).subscribe(
@@ -104,6 +113,11 @@ export class RadioDeliveryComponent implements OnDestroy{
     }
   }
 
+  /**
+   * Finishes currently picked up {@link RadioDelivery}.
+   *
+   * @param success If the delivery should be marked as successfully or unsuccessfully
+   */
   finishCurrentRadioDelivery(success: boolean){
     if(this.detailedRadioDelivery){
       this.s.push(this.radioDeliveryService.finishRadioDelivery(this.detailedRadioDelivery.radioDelivery.id, success).subscribe(
