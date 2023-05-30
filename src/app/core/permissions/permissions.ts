@@ -108,6 +108,11 @@ export enum PermissionName {
    * Allows delivering intel and managing ongoing deliveries.
    */
   ManageIntelDelivery = 'logistics.intel-delivery.manage',
+  /**
+   * Allows retrieving next radio delivery to deliver,
+   * releasing picked up radio delivery and finish picked up radio delivery.
+   */
+  RadioDelivery = 'radio-delivery.deliver.any',
 }
 
 /**

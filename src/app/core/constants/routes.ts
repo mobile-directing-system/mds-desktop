@@ -64,7 +64,11 @@ import {
 import {
   IntelDeliveryView,
 } from '../../features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component';
-import {ManageIntelDelivery} from "../permissions/intel-delivery";
+import {ManageIntelDelivery, RadioDeliveryPermission} from "../permissions/intel-delivery";
+import {RadioDeliveryComponent} from "../../features/logistics/radio-delivery/radio-delivery.component";
+import {
+  RadioDeliveryItemComponent
+} from "../../features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component";
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -207,6 +211,24 @@ export const AppRoutes: PermissionGuardedRoute[] = [
                 UpdateAddressBookEntryPermission(),
                 ViewUserPermission(),
                 ViewAnyOperationPermission(),
+              ],
+            },
+          },
+          {
+            path: 'radio-delivery',
+            component: RadioDeliveryComponent,
+            data: {
+              requirePermissions: [
+                RadioDeliveryPermission()
+              ],
+            },
+          },
+          {
+            path: 'radio-delivery/:attemptId',
+            component: RadioDeliveryItemComponent,
+            data: {
+              requirePermissions: [
+                RadioDeliveryPermission()
               ],
             },
           },

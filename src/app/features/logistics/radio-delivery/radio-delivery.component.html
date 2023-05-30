@@ -1,0 +1,5 @@
+<div class="container">
+  <button *ngIf='!detailedRadioDelivery' mat-raised-button color="primary" (click)="pickUpNextRadioDelivery()" i18n>Retrieve next radio delivery job</button>
+  <app-radio-delivery-item *ngIf='detailedRadioDelivery' [detailedRadioDelivery]="detailedRadioDelivery"
+  (release)="releaseCurrentRadioDelivery()" (finish)="finishCurrentRadioDelivery($event)"></app-radio-delivery-item>
+</div>

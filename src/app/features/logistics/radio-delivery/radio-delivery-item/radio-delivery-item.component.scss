@@ -1,0 +1,26 @@
+:host{
+  height: 100%;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+mat-card-content{
+  padding-top: 10px;
+}
+
+mat-card-title{
+  display: flex;
+  justify-content: space-between;
+}
+
+.content-title{
+  padding-right: 5px;
+  font-weight: bold;
+}
+
+

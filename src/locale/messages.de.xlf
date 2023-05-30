@@ -473,7 +473,7 @@
     </unit>
     <unit id="3620188369327429839">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:179,180</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:185,186</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:48,49</note>
       </notes>
       <segment state="initial">
@@ -1134,7 +1134,7 @@
     </unit>
     <unit id="5547981558491672240">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:176,177</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:182,183</note>
       </notes>
       <segment state="initial">
         <source>Close</source>
@@ -1865,7 +1865,7 @@
     </unit>
     <unit id="3244478074612290092">
       <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:17</note>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:19</note>
       </notes>
       <segment state="initial">
         <source>Past delivery attempts:</source>
@@ -1874,7 +1874,7 @@
     </unit>
     <unit id="6913985416235046011">
       <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:24</note>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:26</note>
       </notes>
       <segment state="initial">
         <source>Cancel delivery</source>
@@ -1883,7 +1883,7 @@
     </unit>
     <unit id="3711878318833148750">
       <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:30,31</note>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:32,33</note>
       </notes>
       <segment state="initial">
         <source>View recipient</source>
@@ -2093,6 +2093,7 @@
     <unit id="1130610467579985996">
       <notes>
         <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:3</note>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:27</note>
       </notes>
       <segment state="initial">
         <source>Head:</source>
@@ -2102,6 +2103,7 @@
     <unit id="3487000124762334468">
       <notes>
         <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:4</note>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:31</note>
       </notes>
       <segment state="initial">
         <source>Channel:</source>
@@ -2111,6 +2113,8 @@
     <unit id="1395787838997214663">
       <notes>
         <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:5</note>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:35</note>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:39</note>
       </notes>
       <segment state="initial">
         <source>Content:</source>
@@ -2128,7 +2132,7 @@
     </unit>
     <unit id="7856130762394583508">
       <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:7</note>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:8</note>
       </notes>
       <segment state="initial">
         <source>Oldest:</source>
@@ -2503,6 +2507,179 @@
       <segment state="initial">
         <source>Logistics</source>
         <target>Logistik</target>
+      </segment>
+    </unit>
+    <unit id="7085358785795625415">
+      <notes>
+        <note category="location">src/app/features/logistics/logistics-layout/logistics-layout.component.html:26,27</note>
+      </notes>
+      <segment state="initial">
+        <source>Radio Delivery</source>
+        <target>Funkzustellung</target>
+      </segment>
+    </unit>
+    <unit id="7549732148077107879">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:5</note>
+      </notes>
+      <segment state="initial">
+        <source>Radio Delivery Job</source>
+        <target>Funkzustellung</target>
+      </segment>
+    </unit>
+    <unit id="2289647317965493791">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:9,13</note>
+      </notes>
+      <segment state="initial">
+        <source>Accepted at <ph id="0" equiv="INTERPOLATION" disp="{{ detailedRadioDelivery.radioDelivery.accepted_at | date:&apos;medium&apos; }}"/> (<ph id="1" equiv="INTERPOLATION_1" disp="{{ fromNow(detailedRadioDelivery.radioDelivery.accepted_at) }}"/>)</source>
+        <target>Akzeptiert am <ph id="0" equiv="INTERPOLATION" disp="{{ detailedRadioDelivery.radioDelivery.accepted_at | date:&apos;medium&apos; }}"/> (<ph id="1" equiv="INTERPOLATION_1" disp="{{ fromNow(detailedRadioDelivery.radioDelivery.accepted_at) }}"/>)</target>
+      </segment>
+    </unit>
+    <unit id="6689187030719521014">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:14,18</note>
+      </notes>
+      <segment state="initial">
+        <source>Created at <ph id="0" equiv="INTERPOLATION" disp="{{ detailedRadioDelivery.radioDelivery.created_at | date:&apos;medium&apos; }}"/> (<ph id="1" equiv="INTERPOLATION_1" disp="{{ fromNow(detailedRadioDelivery.radioDelivery.created_at) }}"/>)</source>
+        <target>Erstellt am <ph id="0" equiv="INTERPOLATION" disp="{{ detailedRadioDelivery.radioDelivery.created_at | date:&apos;medium&apos; }}"/> (<ph id="1" equiv="INTERPOLATION_1" disp="{{ fromNow(detailedRadioDelivery.radioDelivery.created_at) }}"/>)</target>
+      </segment>
+    </unit>
+    <unit id="1173761627274948930">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:23</note>
+      </notes>
+      <segment state="initial">
+        <source>Call-sign:</source>
+        <target>Rufname:</target>
+      </segment>
+    </unit>
+    <unit id="2072822895790245528">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:50</note>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:106</note>
+      </notes>
+      <segment state="initial">
+        <source>Released current radio delivery.</source>
+        <target>Aktuelle Funkzustellung freigegeben</target>
+      </segment>
+    </unit>
+    <unit id="7027371707640112564">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:53</note>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:109</note>
+      </notes>
+      <segment state="initial">
+        <source>Releasing current radio delivery failed.</source>
+        <target>Freigabe der aktuellen Funkzustellung fehlgeschlagen.</target>
+      </segment>
+    </unit>
+    <unit id="9175601838641134573">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:69</note>
+      </notes>
+      <segment state="initial">
+        <source>Currently no radio delivery job available.</source>
+        <target>Aktuell ist keine Funkzustellung verfügbar</target>
+      </segment>
+    </unit>
+    <unit id="2494181381924817706">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:81</note>
+      </notes>
+      <segment state="initial">
+        <source>Picking up next radio delivery failed - can not find intel.</source>
+        <target>Die Abholung der nächsten Funkzustellung ist fehlgeschlagen - die Nachricht wurde nicht gefunden</target>
+      </segment>
+    </unit>
+    <unit id="360338769035523547">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:88</note>
+      </notes>
+      <segment state="initial">
+        <source>Picking up next radio delivery failed.</source>
+        <target>Die Abholung der nächsten Funkzustellung ist fehlgeschlagen.</target>
+      </segment>
+    </unit>
+    <unit id="3312566244661379878">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:92</note>
+      </notes>
+      <segment state="initial">
+        <source>Please select an operation for this workspace before.</source>
+        <target>Bitte wähle vorher eine Operation für diesen Arbeitsbereich aus.</target>
+      </segment>
+    </unit>
+    <unit id="4790413214730194597">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:128</note>
+      </notes>
+      <segment state="initial">
+        <source>Confirmed radio delivery</source>
+        <target>Funkzustellung bestätigt</target>
+      </segment>
+    </unit>
+    <unit id="5252339880418113417">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:130</note>
+      </notes>
+      <segment state="initial">
+        <source>Marked radio delivery as unsuccessfully.</source>
+        <target>Funkzustellung als erfolglos markiert.</target>
+      </segment>
+    </unit>
+    <unit id="8246650065167908109">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:134</note>
+      </notes>
+      <segment state="initial">
+        <source>Finishing current radio delivery failed.</source>
+        <target>Beendigung der aktuellen Funkzustellung fehlgeschlagen.</target>
+      </segment>
+    </unit>
+    <unit id="7642497281607279980">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:44</note>
+      </notes>
+      <segment state="initial">
+        <source>RELEASE AND CHANGE NOTHING</source>
+        <target>FREIGEBEN UND NICHTS ÄNDERN</target>
+      </segment>
+    </unit>
+    <unit id="8312352094955535192">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:45</note>
+      </notes>
+      <segment state="initial">
+        <source>MARK AS UNSUCCESSFULLY</source>
+        <target>ALS NICHT ERFOLGREICH MARKIEREN</target>
+      </segment>
+    </unit>
+    <unit id="6742478043532651698">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:46</note>
+      </notes>
+      <segment state="initial">
+        <source>CONFIRM DELIVERY</source>
+        <target>ZUSTELLUNG BESTÄTIGEN</target>
+      </segment>
+    </unit>
+    <unit id="6648831648110720902">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.html:2</note>
+      </notes>
+      <segment state="initial">
+        <source>Retrieve next radio delivery job</source>
+        <target>Nächsten Funkzustellungsauftrag anfragen</target>
+      </segment>
+    </unit>
+    <unit id="5894443913359933337">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:177,178</note>
+      </notes>
+      <segment state="initial">
+        <source>Manage Radio Delivery</source>
+        <target>Funkzustellungen verwalten</target>
       </segment>
     </unit>
   </file>

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AccessControlService } from '../../../core/services/access-control.service';
 import { Observable } from 'rxjs';
 import { ViewUserPermission } from '../../../core/permissions/users';
-import { ManageIntelDelivery } from '../../../core/permissions/intel-delivery';
+import {ManageIntelDelivery, RadioDeliveryPermission} from '../../../core/permissions/intel-delivery';
 
 /**
  * Layout for logistics.
@@ -22,5 +22,9 @@ export class LogisticsLayoutComponent {
 
   isManageIntelDeliveryGranted(): Observable<boolean> {
     return this.acService.isGranted([ManageIntelDelivery()]);
+  }
+
+  isDeliverRadioIntelGranted(): Observable<boolean> {
+    return this.acService.isGranted([RadioDeliveryPermission()]);
   }
 }

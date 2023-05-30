@@ -252,6 +252,7 @@
     <unit id="1130610467579985996">
       <notes>
         <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:3</note>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:27</note>
       </notes>
       <segment>
         <source>Head:</source>
@@ -260,6 +261,7 @@
     <unit id="3487000124762334468">
       <notes>
         <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:4</note>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:31</note>
       </notes>
       <segment>
         <source>Channel:</source>
@@ -268,6 +270,8 @@
     <unit id="1395787838997214663">
       <notes>
         <note category="location">src/app/core/components/intel-summary/analog-radio-message-summary/analog-radio-message-summary.component.html:5</note>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:35</note>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:39</note>
       </notes>
       <segment>
         <source>Content:</source>
@@ -514,6 +518,7 @@
     <unit id="8844804275730553009">
       <notes>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:7</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.ts:131</note>
       </notes>
       <segment>
         <source>Plain Text Message</source>
@@ -522,6 +527,7 @@
     <unit id="9140544690687942988">
       <notes>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:8</note>
+        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.ts:135</note>
       </notes>
       <segment>
         <source>Analog Radio Message</source>
@@ -686,7 +692,7 @@
     </unit>
     <unit id="1636701572518005081">
       <notes>
-        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:10</note>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:9</note>
       </notes>
       <segment>
         <source>Choose a context</source>
@@ -694,7 +700,7 @@
     </unit>
     <unit id="6223909137047684293">
       <notes>
-        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:14</note>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:13</note>
       </notes>
       <segment>
         <source>Intel Generators</source>
@@ -702,7 +708,7 @@
     </unit>
     <unit id="8365674988775051590">
       <notes>
-        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:20,22</note>
+        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:20,21</note>
       </notes>
       <segment>
         <source>Empty Intel</source>
@@ -909,6 +915,7 @@
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:70,71</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:57,59</note>
+        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:127,128</note>
       </notes>
       <segment>
         <source>Delete</source>
@@ -1166,7 +1173,7 @@
     </unit>
     <unit id="7856130762394583508">
       <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:7</note>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:8</note>
       </notes>
       <segment>
         <source>Oldest:</source>
@@ -1174,7 +1181,7 @@
     </unit>
     <unit id="3244478074612290092">
       <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:17</note>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:19</note>
       </notes>
       <segment>
         <source>Past delivery attempts:</source>
@@ -1182,7 +1189,7 @@
     </unit>
     <unit id="6913985416235046011">
       <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:24</note>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:26</note>
       </notes>
       <segment>
         <source>Cancel delivery</source>
@@ -1190,7 +1197,7 @@
     </unit>
     <unit id="3711878318833148750">
       <notes>
-        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:30,31</note>
+        <note category="location">src/app/features/logistics/intel-delivery/intel-delivery-view/intel-delivery-view.component.html:32,33</note>
       </notes>
       <segment>
         <source>View recipient</source>
@@ -1385,7 +1392,6 @@
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:8,9</note>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:8,9</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:9,10</note>
-        <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:127,128</note>
       </notes>
       <segment>
         <source>Title is required.</source>
@@ -1413,7 +1419,6 @@
     </unit>
     <unit id="3291437606661186188">
       <notes>
-        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:9</note>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:47</note>
       </notes>
       <segment>
@@ -1561,7 +1566,6 @@
     </unit>
     <unit id="8705640949204819723">
       <notes>
-        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:13</note>
         <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:20,21</note>
       </notes>
       <segment>
@@ -1588,7 +1592,6 @@
     </unit>
     <unit id="3092880857721570149">
       <notes>
-        <note category="location">src/app/features/intelligence/intelligence-layout/intelligence-layout.component.html:20,21</note>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:33,34</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:35,36</note>
       </notes>
@@ -1609,7 +1612,6 @@
       <notes>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:52,53</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:54,55</note>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.ts:131</note>
       </notes>
       <segment>
         <source>End date must be after start date.</source>
@@ -1620,7 +1622,6 @@
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:56</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:58</note>
         <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:45</note>
-        <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.ts:135</note>
       </notes>
       <segment>
         <source>Archived</source>
@@ -2069,7 +2070,7 @@
     </unit>
     <unit id="5547981558491672240">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:176,177</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:182,183</note>
       </notes>
       <segment>
         <source>Close</source>
@@ -2077,7 +2078,7 @@
     </unit>
     <unit id="3620188369327429839">
       <notes>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:179,180</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:185,186</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:48,49</note>
       </notes>
       <segment>
@@ -2159,7 +2160,6 @@
     <unit id="6072990007630394552">
       <notes>
         <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.ts:57</note>
-        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:28,27</note>
       </notes>
       <segment>
         <source>Updating password failed.</source>
@@ -2179,6 +2179,160 @@
       </notes>
       <segment>
         <source>Empty Intel</source>
+      </segment>
+    </unit>
+    <unit id="1173761627274948930">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:23</note>
+      </notes>
+      <segment>
+        <source>Call-sign:</source>
+      </segment>
+    </unit>
+    <unit id="2072822895790245528">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:50</note>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:106</note>
+      </notes>
+      <segment>
+        <source>Released current radio delivery.</source>
+      </segment>
+    </unit>
+    <unit id="2289647317965493791">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:9,13</note>
+      </notes>
+      <segment>
+        <source>Accepted at <ph id="0" equiv="INTERPOLATION" disp="{{ detailedRadioDelivery.radioDelivery.accepted_at | date:&apos;medium&apos; }}"/> (<ph id="1" equiv="INTERPOLATION_1" disp="{{ fromNow(detailedRadioDelivery.radioDelivery.accepted_at) }}"/>)</source>
+      </segment>
+    </unit>
+    <unit id="2494181381924817706">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:81</note>
+      </notes>
+      <segment>
+        <source>Picking up next radio delivery failed - can not find intel.</source>
+      </segment>
+    </unit>
+    <unit id="3312566244661379878">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:92</note>
+      </notes>
+      <segment>
+        <source>Please select an operation for this workspace before.</source>
+      </segment>
+    </unit>
+    <unit id="360338769035523547">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:88</note>
+      </notes>
+      <segment>
+        <source>Picking up next radio delivery failed.</source>
+      </segment>
+    </unit>
+    <unit id="4790413214730194597">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:128</note>
+      </notes>
+      <segment>
+        <source>Confirmed radio delivery</source>
+      </segment>
+    </unit>
+    <unit id="5252339880418113417">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:130</note>
+      </notes>
+      <segment>
+        <source>Marked radio delivery as unsuccessfully.</source>
+      </segment>
+    </unit>
+    <unit id="6689187030719521014">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:14,18</note>
+      </notes>
+      <segment>
+        <source>Created at <ph id="0" equiv="INTERPOLATION" disp="{{ detailedRadioDelivery.radioDelivery.created_at | date:&apos;medium&apos; }}"/> (<ph id="1" equiv="INTERPOLATION_1" disp="{{ fromNow(detailedRadioDelivery.radioDelivery.created_at) }}"/>)</source>
+      </segment>
+    </unit>
+    <unit id="7027371707640112564">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:53</note>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:109</note>
+      </notes>
+      <segment>
+        <source>Releasing current radio delivery failed.</source>
+      </segment>
+    </unit>
+    <unit id="7085358785795625415">
+      <notes>
+        <note category="location">src/app/features/logistics/logistics-layout/logistics-layout.component.html:26,27</note>
+      </notes>
+      <segment>
+        <source>Radio Delivery</source>
+      </segment>
+    </unit>
+    <unit id="7549732148077107879">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:5</note>
+      </notes>
+      <segment>
+        <source>Radio Delivery Job</source>
+      </segment>
+    </unit>
+    <unit id="8246650065167908109">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:134</note>
+      </notes>
+      <segment>
+        <source>Finishing current radio delivery failed.</source>
+      </segment>
+    </unit>
+    <unit id="9175601838641134573">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:69</note>
+      </notes>
+      <segment>
+        <source>Currently no radio delivery job available.</source>
+      </segment>
+    </unit>
+    <unit id="6742478043532651698">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:46</note>
+      </notes>
+      <segment>
+        <source>CONFIRM DELIVERY</source>
+      </segment>
+    </unit>
+    <unit id="7642497281607279980">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:44</note>
+      </notes>
+      <segment>
+        <source>RELEASE AND CHANGE NOTHING</source>
+      </segment>
+    </unit>
+    <unit id="8312352094955535192">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component.html:45</note>
+      </notes>
+      <segment>
+        <source>MARK AS UNSUCCESSFULLY</source>
+      </segment>
+    </unit>
+    <unit id="6648831648110720902">
+      <notes>
+        <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Retrieve next radio delivery job</source>
+      </segment>
+    </unit>
+    <unit id="5894443913359933337">
+      <notes>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:177,178</note>
+      </notes>
+      <segment>
+        <source>Manage Radio Delivery</source>
       </segment>
     </unit>
   </file>
