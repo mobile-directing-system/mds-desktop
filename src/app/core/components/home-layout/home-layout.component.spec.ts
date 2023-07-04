@@ -35,7 +35,7 @@ function genFactoryOptions(): SpectatorRoutingOptions<HomeLayoutComponent> {
   };
 }
 
-describe('HomeLayoutComponent', () => {
+fdescribe('HomeLayoutComponent', () => {
   let spectator: SpectatorRouting<HomeLayoutComponent>;
   const createComponent = createRoutingFactory<HomeLayoutComponent>({
     ...genFactoryOptions(),
@@ -69,25 +69,40 @@ describe('HomeLayoutComponent', () => {
   });
 
   describe('menu items', () => {
-    const tests: {
+    type MenuItem = {
       name: string,
       link: string[],
+    }
+    const tests: {
+      name: string;
+      link: string[];
+      subItems?: MenuItem[];
     }[] = [
+      {
+        name: "Signaler",
+        link: [],
+        subItems: [
+          {
+            name: "Incoming",
+            link: ["/signaler/incoming"]
+          },
+          {
+            name: "Outgoing",
+            link: ["/signaler/outgoing"]
+          }
+        ]
+      },
       {
         name: 'Mailbox',
         link: ['/mailbox'],
       },
       {
-        name: 'Intelligence',
-        link: ['/intelligence'],
+        name: 'Address book',
+        link: ['/logistics/address-book'],
       },
       {
         name: 'Resources',
         link: ['/resources'],
-      },
-      {
-        name: 'Logistics',
-        link: ['/logistics'],
       },
     ];
     tests.forEach(tt => {
@@ -95,20 +110,36 @@ describe('HomeLayoutComponent', () => {
       const url = tt.link.join('/');
       const menuItemSelector = byTextContent(tt.name, { selector: 'div' });
 
-      it(`should display menu item for ${ ttName }`, () => {
+      it(`should display menu item for '${ ttName }'`, () => {
         expect(spectator.query(menuItemSelector)).toExist();
       });
 
-      it(`should navigate correctly when clicking menu item ${ ttName }`, async () => {
-        expect(spectator.router.url).not.toEqual(url);
+      if(!tt.subItems) {
+        it(`should navigate correctly when clicking menu item '${ ttName }'`, async () => {
+          expect(spectator.router.url).not.toEqual(url);
+  
+          spectator.click(menuItemSelector);
+          await spectator.fixture.whenStable();
+  
+          expect(spectator.inject(Router).url).toEqual(url);
+        });
+      }
 
-        spectator.click(menuItemSelector);
-        await spectator.fixture.whenStable();
-
-        expect(spectator.inject(Router).url).toEqual(url);
+      tt.subItems?.forEach(subItem => {
+        let subItemUrl = subItem.link.join("/");
+        it(`should navigate correctly when clicking sub item '${ subItem.name }' on menu '${ ttName }'`, async () => {
+          expect(spectator.router.url).not.toEqual(subItemUrl);
+  
+          spectator.click(menuItemSelector);
+          const subItemSelector = byTextContent(subItem.name, { selector: 'button' });
+          spectator.click(subItemSelector);
+          await spectator.fixture.whenStable();
+  
+          expect(spectator.inject(Router).url).toEqual(subItemUrl);
+        });
       });
 
-      it(`should highlight menu item ${ ttName } when active`, async () => {
+      it(`should highlight menu item '${ ttName }' when active`, async () => {
         spectator.fixture.ngZone?.run(() => {
           spectator.router.navigate(tt.link).then();
         });
