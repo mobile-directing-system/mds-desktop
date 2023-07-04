@@ -69,6 +69,11 @@ import {RadioDeliveryComponent} from "../../features/logistics/radio-delivery/ra
 import {
   RadioDeliveryItemComponent
 } from "../../features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component";
+import { SignalerIncomingView } from '../../features/signaler/incoming/signaler-incoming-view.component';
+import { SignalerOutgoingView } from '../../features/signaler/outgoing/signaler-outgoing-view.component';
+import { ReviewerIncomingView } from '../../features/reviewer/incoming/reviewer-incoming-view.component';
+import { ReviewerOutgoingView } from '../../features/reviewer/outgoing/reviewer-outgoing-view.component';
+import { OperationTableView } from '../../features/operation-table/operation-table-view.component';
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -164,6 +169,36 @@ export const AppRoutes: PermissionGuardedRoute[] = [
             },
           },
         ],
+      },
+      {
+        path: 'signaler',
+        children: [
+          {
+            path: 'incoming',
+            component: SignalerIncomingView
+          },
+          {
+            path: 'outgoing',
+            component: SignalerOutgoingView
+          }
+        ]
+      },
+      {
+        path: 'reviewer',
+        children: [
+          {
+            path: 'incoming',
+            component: ReviewerIncomingView
+          },
+          {
+            path: 'outgoing',
+            component: ReviewerOutgoingView
+          }
+        ]
+      },
+      {
+        path: 'operation-table',
+        component: OperationTableView
       },
       {
         path: 'mailbox',

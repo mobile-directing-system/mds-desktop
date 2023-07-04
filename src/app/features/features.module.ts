@@ -6,10 +6,15 @@ import { MailboxModule } from './mailbox/mailbox.module';
 import { IntelligenceModule } from './intelligence/intelligence.module';
 import { ResourcesModule } from './resources/resources.module';
 import { LogisticsModule } from './logistics/logistics.module';
+import { SignalerModule } from './signaler/signaler.module';
+import { ReviewerModule } from './reviewer/reviewer.module';
+import { OperationTableView } from './operation-table/operation-table-view.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    OperationTableView,
+  ],
   imports: [
     CommonModule,
     AuthModule,
@@ -18,6 +23,8 @@ import { LogisticsModule } from './logistics/logistics.module';
     IntelligenceModule,
     ResourcesModule,
     LogisticsModule,
+    SignalerModule,
+    ReviewerModule
   ],
 })
 export class FeaturesModule {
