@@ -88,34 +88,18 @@
     </unit>
     <unit id="6002195485717726199">
       <notes>
-        <note category="location">src/app/core/components/home-layout/home-layout.component.html:7</note>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:25</note>
       </notes>
       <segment>
         <source>Mailbox</source>
       </segment>
     </unit>
-    <unit id="8489670130200267808">
-      <notes>
-        <note category="location">src/app/core/components/home-layout/home-layout.component.html:8</note>
-      </notes>
-      <segment>
-        <source>Intelligence</source>
-      </segment>
-    </unit>
     <unit id="2446117790692479672">
       <notes>
-        <note category="location">src/app/core/components/home-layout/home-layout.component.html:9</note>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:27</note>
       </notes>
       <segment>
         <source>Resources</source>
-      </segment>
-    </unit>
-    <unit id="3891569230075043049">
-      <notes>
-        <note category="location">src/app/core/components/home-layout/home-layout.component.html:10</note>
-      </notes>
-      <segment>
-        <source>Logistics</source>
       </segment>
     </unit>
     <unit id="7507948636555938109">
@@ -1702,7 +1686,7 @@
     </unit>
     <unit id="1241348629231510663">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:36</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:37,36</note>
       </notes>
       <segment>
         <source>End</source>
@@ -1982,6 +1966,7 @@
     </unit>
     <unit id="7316788515989911343">
       <notes>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:26</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:120</note>
       </notes>
       <segment>
@@ -2333,6 +2318,48 @@
       </notes>
       <segment>
         <source>Manage Radio Delivery</source>
+      </segment>
+    </unit>
+    <unit id="2615576020575810838">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:17</note>
+      </notes>
+      <segment>
+        <source>Reviewer</source>
+      </segment>
+    </unit>
+    <unit id="2890725890035827779">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:12</note>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:21</note>
+      </notes>
+      <segment>
+        <source>Incoming</source>
+      </segment>
+    </unit>
+    <unit id="4169213784117603465">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:13</note>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:22</note>
+      </notes>
+      <segment>
+        <source>Outgoing</source>
+      </segment>
+    </unit>
+    <unit id="542725519312506171">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:8</note>
+      </notes>
+      <segment>
+        <source>Signaler</source>
+      </segment>
+    </unit>
+    <unit id="7411696043576231323">
+      <notes>
+        <note category="location">src/app/core/components/home-layout/home-layout.component.html:28</note>
+      </notes>
+      <segment>
+        <source>Operation table</source>
       </segment>
     </unit>
   </file>

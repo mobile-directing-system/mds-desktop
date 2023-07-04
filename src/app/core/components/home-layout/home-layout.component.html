@@ -5,30 +5,30 @@
     <app-workspace-operation-selector></app-workspace-operation-selector>
     <div class="spacer"></div>
     <div mat-button [matMenuTriggerFor]="signalerMenu" class="menu-item selectable" routerLinkActive="active">
-      Signaler
+      <span i18n>Signaler</span>
       <mat-icon fontIcon="keyboard_arrow_down"></mat-icon>
 
       <mat-menu #signalerMenu="matMenu">
-        <button mat-menu-item [routerLink]="['/signaler/incoming']">Incoming</button>
-        <button mat-menu-item [routerLink]="['/signaler/outgoing']">Outgoing</button>
+        <button mat-menu-item [routerLink]="['/signaler/incoming']" i18n>Incoming</button>
+        <button mat-menu-item [routerLink]="['/signaler/outgoing']" i18n>Outgoing</button>
       </mat-menu>
     </div>
     <div mat-button [matMenuTriggerFor]="reviewerMenu" class="menu-item selectable" routerLinkActive="active">
-      Reviewer
+      <span i18n>Reviewer</span>
       <mat-icon fontIcon="keyboard_arrow_down"></mat-icon>
 
       <mat-menu #reviewerMenu="matMenu">
-        <button mat-menu-item [routerLink]="['/reviewer/incoming']">Incoming</button>
-        <button mat-menu-item [routerLink]="['/reviewer/outgoing']">Outgoing</button>
+        <button mat-menu-item [routerLink]="['/reviewer/incoming']" i18n>Incoming</button>
+        <button mat-menu-item [routerLink]="['/reviewer/outgoing']" i18n>Outgoing</button>
       </mat-menu>
     </div>
     <div mat-button [routerLink]="['/mailbox']" class="menu-item selectable" routerLinkActive="active" i18n>Mailbox</div>
     <div mat-button [routerLink]="['/logistics/address-book']" class="menu-item selectable" routerLinkActive="active" i18n>Address book</div>
     <div mat-button [routerLink]="['/resources']" class="menu-item selectable" routerLinkActive="active" i18n>Resources</div>
     <div mat-button class="menu-item selectable" [routerLink]="['/operation-table']" routerLinkActive="active" i18n>Operation table</div>
-
     <app-profile class="profile"></app-profile>
   </mat-toolbar>
+  
   <div class="outlet">
     <router-outlet></router-outlet>
   </div>
