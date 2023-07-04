@@ -33,6 +33,9 @@ mat-toolbar{
   padding: .05rem .5rem;
   border-radius: 4px;
 
+  display: flex;
+  align-items: center;
+
   &.selectable {
     color: $dark-disabled-text;
     cursor: pointer;
