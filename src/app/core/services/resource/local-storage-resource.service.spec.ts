@@ -3,8 +3,9 @@ import { TestBed } from '@angular/core/testing';
 import { LocalStorageResourceService } from './local-storage-resource.service';
 import { ResourceService } from './resource.service';
 import { CreateResource, Resource } from '../../model/resource';
+import { mockLocalStorage } from '../../util/testing';
 
-fdescribe('LocalStorageResourceService', () => {
+describe('LocalStorageResourceService', () => {
   let service: ResourceService;
 
   let createResource: CreateResource = {
@@ -14,31 +15,7 @@ fdescribe('LocalStorageResourceService', () => {
   };
 
   beforeEach(() => {
-    // Mock local storage
-    let store: any = {};
-    const mockLocalStorage = {
-      getItem: (key: string): string => {
-        return key in store ? store[key] : null;
-      },
-      setItem: (key: string, value: string) => {
-        store[key] = `${value}`;
-      },
-      removeItem: (key: string) => {
-        delete store[key];
-      },
-      clear: () => {
-        store = {};
-      }
-    };
-    spyOn(localStorage, 'getItem')
-      .and.callFake(mockLocalStorage.getItem);
-    spyOn(localStorage, 'setItem')
-      .and.callFake(mockLocalStorage.setItem);
-    spyOn(localStorage, 'removeItem')
-      .and.callFake(mockLocalStorage.removeItem);
-    spyOn(localStorage, 'clear')
-      .and.callFake(mockLocalStorage.clear);
-
+    mockLocalStorage();
     TestBed.configureTestingModule({
       providers: [
         {
