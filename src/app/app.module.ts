@@ -18,6 +18,8 @@ import { LocalStorageService } from './core/services/local-storage.service';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import 'moment-duration-format';
 import { matPaginatorInternationalization, netLoginInit } from './core/util/app-init';
+import { ResourceService } from './core/services/resource/resource.service';
+import { LocalStorageResourceService } from './core/services/resource/local-storage-resource.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,10 @@ import { matPaginatorInternationalization, netLoginInit } from './core/util/app-
     AuthService,
     UserService,
     LocalStorageService,
+    {
+      provide: ResourceService,
+      useClass: LocalStorageResourceService
+    },
     {
       provide: APP_INITIALIZER,
       useFactory: netLoginInit,

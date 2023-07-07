@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { NetService } from './net.service';
-import { AddressBookEntry, CreateAddressBookEntry } from '../model/address-book-entry';
 import { Observable } from 'rxjs';
-import { User } from '../model/user';
-import urlJoin from 'url-join';
 import { map } from 'rxjs/operators';
-import { Paginated, PaginationParams, SearchParams, SearchResult } from '../util/store';
+import urlJoin from 'url-join';
+import { AddressBookEntry, CreateAddressBookEntry } from '../model/address-book-entry';
+import { User } from '../model/user';
+import { MDSError, MDSErrorCode } from '../util/errors';
 import {
   NetPaginated,
   NetPaginationParams,
+  NetSearchResult,
   netPaginationParams,
   netSearchParams,
-  NetSearchResult,
   paginatedFromNet,
   searchResultFromNet,
 } from '../util/net';
-import { MDSError, MDSErrorCode } from '../util/errors';
+import { Paginated, PaginationParams, SearchParams, SearchResult } from '../util/store';
+import { NetService } from './net.service';
 
 /**
  * Fields for sorting address book entries.
