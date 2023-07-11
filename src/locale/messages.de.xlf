@@ -342,6 +342,7 @@
         <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:35,36</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:29,30</note>
         <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:14,15</note>
+        <note category="location">src/app/features/resources/create-resource/create-resource.component.html:56,57</note>
       </notes>
       <segment state="initial">
         <source>Cancel</source>
@@ -465,6 +466,7 @@
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:70,71</note>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:63,64</note>
         <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:39,40</note>
+        <note category="location">src/app/features/resources/create-resource/create-resource.component.html:64,65</note>
       </notes>
       <segment state="initial">
         <source>Create</source>
@@ -525,6 +527,7 @@
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:12</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:14</note>
         <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:26</note>
+        <note category="location">src/app/features/resources/create-resource/create-resource.component.html:14</note>
       </notes>
       <segment state="initial">
         <source>Description</source>
@@ -654,6 +657,7 @@
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:28</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:27</note>
         <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:28</note>
+        <note category="location">src/app/features/resources/create-resource/create-resource.component.html:25</note>
       </notes>
       <segment state="initial">
         <source>Operation</source>
@@ -813,6 +817,7 @@
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:26</note>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:29</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:28</note>
+        <note category="location">src/app/features/resources/create-resource/create-resource.component.html:26</note>
       </notes>
       <segment state="initial">
         <source>Search operation...</source>
@@ -1451,6 +1456,7 @@
     <unit id="918029365747744094">
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:8</note>
+        <note category="location">src/app/features/resources/list-resources/list-resources.component.html:7</note>
       </notes>
       <segment state="initial">
         <source>Create Entry</source>
@@ -1465,6 +1471,7 @@
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:10</note>
         <note category="location">src/app/features/logistics/channels/channels.component.html:13</note>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:8</note>
+        <note category="location">src/app/features/resources/create-resource/create-resource.component.html:6</note>
       </notes>
       <segment state="initial">
         <source>Label</source>
@@ -1476,6 +1483,7 @@
         <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:47</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:45,44</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:45,44</note>
+        <note category="location">src/app/features/resources/create-resource/create-resource.component.html:45,44</note>
       </notes>
       <segment state="initial">
         <source>User</source>
@@ -1495,6 +1503,7 @@
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:45</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:45</note>
+        <note category="location">src/app/features/resources/create-resource/create-resource.component.html:45</note>
       </notes>
       <segment state="initial">
         <source>Search user...</source>
@@ -1550,6 +1559,7 @@
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:9,10</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:9,10</note>
+        <note category="location">src/app/features/resources/create-resource/create-resource.component.html:9,10</note>
       </notes>
       <segment state="initial">
         <source>Label is required.</source>
@@ -2441,6 +2451,7 @@
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:28,27</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:28,27</note>
+        <note category="location">src/app/features/resources/create-resource/create-resource.component.html:28,27</note>
       </notes>
       <segment state="initial">
         <source>All</source>
@@ -2477,6 +2488,7 @@
     <unit id="2446117790692479672">
       <notes>
         <note category="location">src/app/core/components/home-layout/home-layout.component.html:27</note>
+        <note category="location">src/app/features/resources/list-resources/list-resources.component.html:2</note>
       </notes>
       <segment state="initial">
         <source>Resources</source>
@@ -2710,6 +2722,33 @@
       <segment state="initial">
         <source>Operation table</source>
         <target>Einsatztableau</target>
+      </segment>
+    </unit>
+    <unit id="371235895513539408">
+      <notes>
+        <note category="location">src/app/features/resources/create-resource/create-resource.component.html:2</note>
+      </notes>
+      <segment state="initial">
+        <source>Create Resource</source>
+        <target>Ressource erstellen</target>
+      </segment>
+    </unit>
+    <unit id="1151079475182114940">
+      <notes>
+        <note category="location">src/app/features/resources/create-resource/create-resource.component.ts:50</note>
+      </notes>
+      <segment state="initial">
+        <source>Creation of resource failed.</source>
+        <target>Ressource konnte nicht erstellt werden.</target>
+      </segment>
+    </unit>
+    <unit id="3105692942836693483">
+      <notes>
+        <note category="location">src/app/features/resources/list-resources/list-resources.component.html:3</note>
+      </notes>
+      <segment state="initial">
+        <source>Create, manage and edit resources.</source>
+        <target>Erstellen, verwalten und bearbeiten von Ressourcen.</target>
       </segment>
     </unit>
   </file>
