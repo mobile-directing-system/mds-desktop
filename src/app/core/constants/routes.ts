@@ -15,7 +15,7 @@ import { MailboxLayoutComponent } from '../../features/mailbox/mailbox-layout/ma
 import {
   IntelligenceLayoutComponent,
 } from '../../features/intelligence/intelligence-layout/intelligence-layout.component';
-import { ResourcesLayoutComponent } from '../../features/resources/resources-layout/resources-layout.component';
+import { ResourcesLayoutComponent } from '../../features/resources/resources-layout.component';
 import { GroupManagementView } from '../../features/management/group-management-view/group-management-view.component';
 import {
   OperationManagementView,
@@ -74,6 +74,8 @@ import { SignalerOutgoingView } from '../../features/signaler/outgoing/signaler-
 import { ReviewerIncomingView } from '../../features/reviewer/incoming/reviewer-incoming-view.component';
 import { ReviewerOutgoingView } from '../../features/reviewer/outgoing/reviewer-outgoing-view.component';
 import { OperationTableView } from '../../features/operation-table/operation-table-view.component';
+import { ListResourcesComponent } from 'src/app/features/resources/list-resources/list-resources.component';
+import { CreateResourceView } from 'src/app/features/resources/create-resource/create-resource.component';
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -211,6 +213,16 @@ export const AppRoutes: PermissionGuardedRoute[] = [
       {
         path: 'resources',
         component: ResourcesLayoutComponent,
+        children: [
+          {
+            path: '',
+            component: ListResourcesComponent
+          },
+          {
+            path: 'create',
+            component: CreateResourceView
+          }
+        ]
       },
       {
         path: 'logistics',

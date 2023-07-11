@@ -7,7 +7,7 @@ export interface Resource extends AddressBookEntry {
     /**
      * Current status code of the resource
      */
-    statusCode: number
+    statusCode?: number
 }
 
 /**
@@ -17,5 +17,5 @@ export interface CreateResource extends CreateAddressBookEntry {
     /**
      * Current status code of the resource
      */
-    statusCode: number
+    statusCode?: number
 }
