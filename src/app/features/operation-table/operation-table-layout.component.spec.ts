@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OperationTableLayout } from './operation-table-layout.component';
+import { OperationTableLayoutComponent } from './operation-table-layout.component';
 
-describe('OperationTableLayout', () => {
-  let component: OperationTableLayout;
-  let fixture: ComponentFixture<OperationTableLayout>;
+describe('OperationTableLayoutComponent', () => {
+  let component: OperationTableLayoutComponent;
+  let fixture: ComponentFixture<OperationTableLayoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OperationTableLayout ]
+      declarations: [ OperationTableLayoutComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(OperationTableLayout);
+    fixture = TestBed.createComponent(OperationTableLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

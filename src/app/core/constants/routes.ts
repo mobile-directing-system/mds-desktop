@@ -75,7 +75,7 @@ import { ReviewerIncomingView } from '../../features/reviewer/incoming/reviewer-
 import { ReviewerOutgoingView } from '../../features/reviewer/outgoing/reviewer-outgoing-view.component';
 import { ListResourcesComponent } from 'src/app/features/resources/list-resources/list-resources.component';
 import { CreateResourceView } from 'src/app/features/resources/create-resource/create-resource.component';
-import { OperationTableLayout } from 'src/app/features/operation-table/operation-table-layout.component';
+import { OperationTableLayoutComponent } from 'src/app/features/operation-table/operation-table-layout.component';
 import { OperationTableView } from 'src/app/features/operation-table/operation-table-view/operation-table-view.component';
 import { CreateIncidentComponent } from 'src/app/features/operation-table/create-incident/create-incident.component';
 
@@ -212,7 +212,7 @@ export const AppRoutes: PermissionGuardedRoute[] = [
       },
       {
         path: 'operation-table',
-        component: OperationTableLayout,
+        component: OperationTableLayoutComponent,
         children: [
           {
             path: '',

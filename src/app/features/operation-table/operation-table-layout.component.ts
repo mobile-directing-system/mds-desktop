@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './operation-table-layout.component.html',
   styleUrls: ['./operation-table-layout.component.scss']
 })
-export class OperationTableLayout {
+export class OperationTableLayoutComponent {
 
 }
