@@ -201,12 +201,6 @@ export const AppRoutes: PermissionGuardedRoute[] = [
         ]
       },
       {
-        path: 'incidents',
-        redirectTo: 'operation-table',
-        pathMatch: 'full',
-
-      },
-      {
         path: 'incidents/create',
         component: CreateIncidentComponent
       },
