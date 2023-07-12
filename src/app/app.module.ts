@@ -20,6 +20,8 @@ import 'moment-duration-format';
 import { matPaginatorInternationalization, netLoginInit } from './core/util/app-init';
 import { ResourceService } from './core/services/resource/resource.service';
 import { LocalStorageResourceService } from './core/services/resource/local-storage-resource.service';
+import { IncidentService } from './core/services/incident/incident.service';
+import { LocalStorageIncidentService } from './core/services/incident/local-storage-incident.service';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,10 @@ import { LocalStorageResourceService } from './core/services/resource/local-stor
     {
       provide: ResourceService,
       useClass: LocalStorageResourceService
+    },
+    {
+      provide: IncidentService,
+      useClass: LocalStorageIncidentService
     },
     {
       provide: APP_INITIALIZER,

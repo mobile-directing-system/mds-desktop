@@ -8,13 +8,10 @@ import { ResourcesModule } from './resources/resources.module';
 import { LogisticsModule } from './logistics/logistics.module';
 import { SignalerModule } from './signaler/signaler.module';
 import { ReviewerModule } from './reviewer/reviewer.module';
-import { OperationTableView } from './operation-table/operation-table-view.component';
+import { OperationTableModule } from './operation-table/operation-table.module';
 
 
 @NgModule({
-  declarations: [
-    OperationTableView,
-  ],
   imports: [
     CommonModule,
     AuthModule,
@@ -24,7 +21,8 @@ import { OperationTableView } from './operation-table/operation-table-view.compo
     ResourcesModule,
     LogisticsModule,
     SignalerModule,
-    ReviewerModule
+    ReviewerModule,
+    OperationTableModule
   ],
 })
 export class FeaturesModule {

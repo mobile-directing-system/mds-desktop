@@ -73,9 +73,11 @@ import { SignalerIncomingView } from '../../features/signaler/incoming/signaler-
 import { SignalerOutgoingView } from '../../features/signaler/outgoing/signaler-outgoing-view.component';
 import { ReviewerIncomingView } from '../../features/reviewer/incoming/reviewer-incoming-view.component';
 import { ReviewerOutgoingView } from '../../features/reviewer/outgoing/reviewer-outgoing-view.component';
-import { OperationTableView } from '../../features/operation-table/operation-table-view.component';
 import { ListResourcesComponent } from 'src/app/features/resources/list-resources/list-resources.component';
 import { CreateResourceView } from 'src/app/features/resources/create-resource/create-resource.component';
+import { OperationTableLayout } from 'src/app/features/operation-table/operation-table-layout.component';
+import { OperationTableView } from 'src/app/features/operation-table/operation-table-view/operation-table-view.component';
+import { CreateIncidentComponent } from 'src/app/features/operation-table/create-incident/create-incident.component';
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -199,8 +201,24 @@ export const AppRoutes: PermissionGuardedRoute[] = [
         ]
       },
       {
+        path: 'incidents',
+        redirectTo: 'operation-table',
+        pathMatch: 'full',
+
+      },
+      {
+        path: 'incidents/create',
+        component: CreateIncidentComponent
+      },
+      {
         path: 'operation-table',
-        component: OperationTableView
+        component: OperationTableLayout,
+        children: [
+          {
+            path: '',
+            component: OperationTableView
+          }
+        ]
       },
       {
         path: 'mailbox',
