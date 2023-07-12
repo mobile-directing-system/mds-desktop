@@ -1,1 +1,29 @@
-<p>create-incident works!</p>
+<div class="view" [appShowLoadingOverlay]="loader.loadingChange() | async">
+    <h1 i18n>Create incident</h1>
+
+    <form (submit)="createIncident()" class="form-column">
+        <!--Name-->
+        <mat-form-field class="app-edit-input">
+            <mat-label i18n>Name</mat-label>
+            <input matInput [formControl]="form.controls.name">
+            <mat-error *ngIf="form.controls.name.errors && form.controls.name.errors['required']" i18n>
+                Name is required.
+            </mat-error>
+        </mat-form-field>
+        <!--Description-->
+        <mat-form-field class="app-edit-input">
+            <mat-label i18n>Description</mat-label>
+            <textarea matInput [formControl]="form.controls.description"></textarea>
+        </mat-form-field>
+
+        <div class="action-bar">
+            <button mat-button type="button" (click)="cancel()" i18n>
+                Cancel
+            </button>
+            <button [disabled]="!form.valid || (loader.loadingChange() | async)" color="primary" i18n mat-button
+                type="submit">
+                Create
+            </button>
+        </div>
+    </form>
+</div>
