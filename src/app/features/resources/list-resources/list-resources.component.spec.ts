@@ -1,20 +1,43 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ListResourcesComponent } from './list-resources.component';
+import { ResourcesModule } from '../resources.module';
+import { UserService } from 'src/app/core/services/user.service';
+import { OperationService } from 'src/app/core/services/operation.service';
+import { ResourceService } from 'src/app/core/services/resource/resource.service';
+import { LocalStorageResourceService } from 'src/app/core/services/resource/local-storage-resource.service';
+import { SpectatorRouting, SpectatorRoutingOptions, createRoutingFactory } from '@ngneat/spectator';
+import { mockLocalStorage } from 'src/app/core/util/testing';
 
-describe('ListResourcesComponent', () => {
+function genFactoryOptions(): SpectatorRoutingOptions<ListResourcesComponent> {
+  return {
+    component: ListResourcesComponent,
+    imports: [
+      ResourcesModule,
+    ],
+    mocks: [
+      UserService,
+      OperationService
+    ],
+    providers: [
+      {
+        provide: ResourceService,
+        useClass: LocalStorageResourceService
+      }
+    ],
+    detectChanges: false,
+  };
+}
+
+fdescribe('ListResourcesComponent', () => {
   let component: ListResourcesComponent;
-  let fixture: ComponentFixture<ListResourcesComponent>;
+  let spectator: SpectatorRouting<ListResourcesComponent>;
+
+  const createComponent = createRoutingFactory(genFactoryOptions());
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ListResourcesComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(ListResourcesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createComponent();
+    mockLocalStorage();
+    component = spectator.component;
+    spectator.detectChanges();
   });
 
   it('should create', () => {
