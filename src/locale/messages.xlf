@@ -769,7 +769,7 @@
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:8</note>
         <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.html:6</note>
-        <note category="location">src/app/features/resources/list-resources/list-resources.component.html:7</note>
+        <note category="location">src/app/features/resources/list-resources/list-resources.component.html:14</note>
       </notes>
       <segment>
         <source>Create Entry</source>
@@ -2449,6 +2449,70 @@
       </notes>
       <segment>
         <source>Incident created successfully.</source>
+      </segment>
+    </unit>
+    <unit id="4580988005648117665">
+      <notes>
+        <note category="location">src/app/features/resources/list-resources/list-resources.component.html:8</note>
+      </notes>
+      <segment>
+        <source>Search</source>
+      </segment>
+    </unit>
+    <unit id="2179675132693271881">
+      <notes>
+        <note category="location">src/app/features/resources/list-resources/list-resources.component.html:36</note>
+      </notes>
+      <segment>
+        <source>User</source>
+      </segment>
+    </unit>
+    <unit id="2289335295750933302">
+      <notes>
+        <note category="location">src/app/features/resources/list-resources/list-resources.component.html:48</note>
+      </notes>
+      <segment>
+        <source>Incident</source>
+      </segment>
+    </unit>
+    <unit id="3563823504206575540">
+      <notes>
+        <note category="location">src/app/features/resources/list-resources/list-resources.component.html:30</note>
+      </notes>
+      <segment>
+        <source>Description</source>
+      </segment>
+    </unit>
+    <unit id="4282587102956396340">
+      <notes>
+        <note category="location">src/app/features/resources/list-resources/list-resources.component.html:54</note>
+      </notes>
+      <segment>
+        <source>Status</source>
+      </segment>
+    </unit>
+    <unit id="5928868080162558607">
+      <notes>
+        <note category="location">src/app/features/resources/list-resources/list-resources.component.html:42</note>
+      </notes>
+      <segment>
+        <source>Operation</source>
+      </segment>
+    </unit>
+    <unit id="6428648557710235460">
+      <notes>
+        <note category="location">src/app/features/resources/list-resources/list-resources.component.html:24</note>
+      </notes>
+      <segment>
+        <source>Label</source>
+      </segment>
+    </unit>
+    <unit id="571559318874154726">
+      <notes>
+        <note category="location">src/app/features/resources/list-resources/list-resources.component.html:63</note>
+      </notes>
+      <segment>
+        <source>No data matching the filter &quot;<ph id="0" equiv="INTERPOLATION" disp="{{input.value}}"/>&quot;</source>
       </segment>
     </unit>
   </file>

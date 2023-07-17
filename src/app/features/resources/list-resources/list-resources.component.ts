@@ -41,7 +41,7 @@ export class ListResourcesComponent implements AfterViewInit {
           description: resource.description,
           user: resource.user,
           operation: resource.operation,
-          incident: "n.a.",
+          incident: "",
           status: resource.statusCode?.toString()
         });
         if(resource.operation) this.operationService.getOperationById(resource.operation).subscribe(operation => resourceRow.operation = operation.title);
