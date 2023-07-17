@@ -768,6 +768,7 @@
     <unit id="918029365747744094">
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/address-book-entry-list-view.component.html:8</note>
+        <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.html:6</note>
         <note category="location">src/app/features/resources/list-resources/list-resources.component.html:7</note>
       </notes>
       <segment>
@@ -799,6 +800,7 @@
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:12</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:14</note>
         <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:26</note>
+        <note category="location">src/app/features/operation-table/create-incident/create-incident.component.html:15</note>
         <note category="location">src/app/features/resources/create-resource/create-resource.component.html:14</note>
       </notes>
       <segment>
@@ -873,6 +875,7 @@
         <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:35,36</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:29,30</note>
         <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:14,15</note>
+        <note category="location">src/app/features/operation-table/create-incident/create-incident.component.html:21,22</note>
         <note category="location">src/app/features/resources/create-resource/create-resource.component.html:56,57</note>
       </notes>
       <segment>
@@ -885,6 +888,7 @@
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:70,71</note>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:63,64</note>
         <note category="location">src/app/features/management/user-management-view/create-user-view/create-user-view.component.html:39,40</note>
+        <note category="location">src/app/features/operation-table/create-incident/create-incident.component.html:25,26</note>
         <note category="location">src/app/features/resources/create-resource/create-resource.component.html:64,65</note>
       </notes>
       <segment>
@@ -2369,6 +2373,7 @@
     <unit id="7411696043576231323">
       <notes>
         <note category="location">src/app/core/components/home-layout/home-layout.component.html:28</note>
+        <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.html:2</note>
       </notes>
       <segment>
         <source>Operation table</source>
@@ -2396,6 +2401,54 @@
       </notes>
       <segment>
         <source>Create Resource</source>
+      </segment>
+    </unit>
+    <unit id="3323415564519831786">
+      <notes>
+        <note category="location">src/app/features/operation-table/create-incident/create-incident.component.html:10,11</note>
+      </notes>
+      <segment>
+        <source>Name is required.</source>
+      </segment>
+    </unit>
+    <unit id="5095679039997353596">
+      <notes>
+        <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.html:3</note>
+      </notes>
+      <segment>
+        <source>View and manage active incidents.</source>
+      </segment>
+    </unit>
+    <unit id="7472531361737402305">
+      <notes>
+        <note category="location">src/app/features/operation-table/create-incident/create-incident.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Create incident</source>
+      </segment>
+    </unit>
+    <unit id="8953033926734869941">
+      <notes>
+        <note category="location">src/app/features/operation-table/create-incident/create-incident.component.html:7</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="incident-creation-failed">
+      <notes>
+        <note category="location">src/app/features/operation-table/create-incident/create-incident.component.ts:38</note>
+      </notes>
+      <segment>
+        <source>Incident creation failed.</source>
+      </segment>
+    </unit>
+    <unit id="incident-creation-successful">
+      <notes>
+        <note category="location">src/app/features/operation-table/create-incident/create-incident.component.ts:35</note>
+      </notes>
+      <segment>
+        <source>Incident created successfully.</source>
       </segment>
     </unit>
   </file>
