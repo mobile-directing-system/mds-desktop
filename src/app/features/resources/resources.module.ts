@@ -5,6 +5,7 @@ import { CoreModule } from 'src/app/core/core.module';
 import { CreateResourceView } from './create-resource/create-resource.component';
 import { RouterModule } from '@angular/router';
 import { ListResourcesComponent } from './list-resources/list-resources.component';
+import { EditResourceComponent } from './edit-resource/edit-resource.component';
 
 
 
@@ -12,7 +13,8 @@ import { ListResourcesComponent } from './list-resources/list-resources.componen
   declarations: [
     ResourcesLayoutComponent,
     CreateResourceView,
-    ListResourcesComponent
+    ListResourcesComponent,
+    EditResourceComponent
   ],
   imports: [
     CommonModule,

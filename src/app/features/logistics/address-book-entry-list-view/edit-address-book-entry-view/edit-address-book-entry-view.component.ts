@@ -152,7 +152,7 @@ export class EditAddressBookEntryView implements OnInit, OnDestroy {
   delete(): void {
     this.loader.take(this.addressBookService.deleteAddressBookEntry(this.entryId)
       .subscribe(() => {
-        this.notificationService.notifyUninvasiveShort(`Address book entry deleted.`);
+        this.notificationService.notifyUninvasiveShort($localize`:@@adress-book-entry-deleted:Address book entry deleted.`);
         this.close();
       }));
   }

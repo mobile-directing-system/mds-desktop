@@ -2,12 +2,14 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { concatMap, from, map, mergeMap, of, toArray } from 'rxjs';
 import { OperationService } from 'src/app/core/services/operation.service';
 import { ResourceService } from 'src/app/core/services/resource/resource.service';
 import { UserService } from 'src/app/core/services/user.service';
 
 interface ResourceRow {
+  id: string,
   label: string;
   description: string;
   user: string;
@@ -28,7 +30,7 @@ export class ListResourcesComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private resourceService: ResourceService, private operationService: OperationService, private userService: UserService) {
+  constructor(private resourceService: ResourceService, private operationService: OperationService, private userService: UserService, private router: Router) {
     this.refreshDataSource();
   }
 
@@ -37,6 +39,7 @@ export class ListResourcesComponent implements AfterViewInit {
       concatMap(resources => from(resources)),
       map((resource, _) => {
         let resourceRow = <ResourceRow>({
+          id: resource.id,
           label: resource.label,
           description: resource.description,
           user: resource.user,
@@ -50,10 +53,7 @@ export class ListResourcesComponent implements AfterViewInit {
       }),
       toArray());
 
-    resourceRows.subscribe(rows => {
-      this.dataSource = new MatTableDataSource<ResourceRow>(rows);
-      console.log(rows);
-    });
+    resourceRows.subscribe(rows => this.dataSource = new MatTableDataSource<ResourceRow>(rows));
   }
 
   applyFilter(event: Event) {
@@ -68,5 +68,9 @@ export class ListResourcesComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  entryClicked(row: ResourceRow) {
+    this.router.navigate(["/resources", row.id]);
   }
 }
