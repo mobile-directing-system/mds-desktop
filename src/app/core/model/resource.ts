@@ -8,14 +8,9 @@ export interface Resource extends AddressBookEntry {
      * Current status code of the resource
      */
     statusCode?: number
-}
 
-/**
- * Used to create a {@link Resource}
- */
-export interface CreateResource extends CreateAddressBookEntry {
     /**
-     * Current status code of the resource
+     * The incident id the resource is attached to
      */
-    statusCode?: number
+    incident?: string
 }

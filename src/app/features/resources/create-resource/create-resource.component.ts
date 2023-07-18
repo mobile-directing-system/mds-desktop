@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { Operation } from 'src/app/core/model/operation';
-import { CreateResource } from 'src/app/core/model/resource';
+import { Resource } from 'src/app/core/model/resource';
 import { User } from 'src/app/core/model/user';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { OperationService } from 'src/app/core/services/operation.service';
@@ -35,7 +35,8 @@ export class CreateResourceView {
 
   createEntry(): void {
     const fv = this.form.getRawValue();
-    const create: CreateResource = {
+    const create: Resource = {
+      id: "",
       label: fv.label,
       description: fv.description,
       operation: fv.operation ?? undefined,

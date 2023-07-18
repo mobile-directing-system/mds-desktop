@@ -116,7 +116,7 @@ describe('CreateResourceView', () => {
     });
 
     component.createEntry();
-    spectator.inject(ResourceService).getAllResources().subscribe(resources => {
+    spectator.inject(ResourceService).getResources().subscribe(resources => {
       expect(resources.length).toBe(1);
       expect(resources[0].label).toBe("Max");
       expect(resources[0].description).toBe("Test");

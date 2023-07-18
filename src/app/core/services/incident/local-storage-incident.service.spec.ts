@@ -6,7 +6,7 @@ import { mockLocalStorage } from '../../util/testing';
 import { Incident } from '../../model/incident';
 import { IncidentFilters } from './incident.service';
 
-fdescribe('LocalStorageIncidentService', () => {
+describe('LocalStorageIncidentService', () => {
   let service: IncidentService;
 
   const exampleIncidents: Incident[] = [

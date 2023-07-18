@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Incident } from 'src/app/core/model/incident';
 import { Resource } from 'src/app/core/model/resource';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
@@ -17,15 +17,19 @@ export interface OperationTableEntry {
   templateUrl: './operation-table-view.component.html',
   styleUrls: ['./operation-table-view.component.scss']
 })
-export class OperationTableView {
+export class OperationTableView implements OnInit {
 
   entries: OperationTableEntry[] = []
   loader: Loader = new Loader();
 
   constructor(private resourceService: ResourceService, private incidentService: IncidentService, private notificationService: NotificationService) {}
 
+  ngOnInit(): void {
+    this.refreshOperationTable();
+  }
+
   refreshOperationTable() {
-    
+    this.incidentService.getIncidents();
   }
 
 }

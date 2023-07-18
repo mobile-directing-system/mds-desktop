@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ResourceService } from './resource.service';
+import { ResourceFilters, ResourceService } from './resource.service';
 import { Observable, of } from 'rxjs';
-import { CreateResource, Resource } from '../../model/resource';
+import { Resource } from '../../model/resource';
 import { LocalStorageCRUDRepository } from '../../util/local-storage';
 
 /**
@@ -18,8 +18,8 @@ export class LocalStorageResourceService extends ResourceService {
    * 
    * @param resource to create
    */
-  public override createResource(resource: CreateResource): Observable<Resource> {
-    return of(this.repository.save({id: "", ...resource}));
+  public override createResource(resource: Resource): Observable<Resource> {
+    return of(this.repository.save(resource));
   }
 
   public override updateResource(resource: Resource): Observable<boolean> {
@@ -27,10 +27,18 @@ export class LocalStorageResourceService extends ResourceService {
   }
 
   /**
-   * Fetches all available resources
+   * Fetches resources
    */
-  public override getAllResources(): Observable<Resource[]> {
-    return of(this.repository.fetchAll());
+  public override getResources(filters?: ResourceFilters): Observable<Resource[]> {
+    let resources: Resource[] = this.repository.fetchAll();
+    if(filters) {
+      if(filters.byLabel) resources = resources.filter(r => r.label === filters.byLabel);
+      if(filters.byIncident) resources = resources.filter(r => r.incident === filters.byIncident);
+      if(filters.byOperation) resources = resources.filter(r => r.operation === filters.byOperation);
+      if(filters.byUser) resources = resources.filter(r => r.user === filters.byUser);
+      if(filters.byStatusCode) resources = resources.filter(r => r.statusCode === filters.byStatusCode);
+    }
+    return of(resources);
   }
 
   /**

@@ -8,6 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { LocalStorageIncidentService } from 'src/app/core/services/incident/local-storage-incident.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { mockLocalStorageService } from 'src/app/core/services/local-storage.service.spec';
 
 describe('CreateIncidentComponent', () => {
   let component: CreateIncidentComponent;
@@ -33,12 +35,18 @@ describe('CreateIncidentComponent', () => {
         {
           provide: NotificationService,
           useValue: notificationServiceMock
+        },
+        {
+          provide: LocalStorageService,
+          useValue: mockLocalStorageService()
         }
       ]
     })
     .compileComponents();
 
     mockLocalStorage();
+
+    TestBed.inject(LocalStorageService).setItem(LocalStorageService.TokenWorkspaceOperation, "123");
 
     incidentService = TestBed.inject(IncidentService);
 

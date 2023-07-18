@@ -2,13 +2,14 @@ import { TestBed } from '@angular/core/testing';
 
 import { LocalStorageResourceService } from './local-storage-resource.service';
 import { ResourceService } from './resource.service';
-import { CreateResource, Resource } from '../../model/resource';
+import { Resource } from '../../model/resource';
 import { mockLocalStorage } from '../../util/testing';
 
 describe('LocalStorageResourceService', () => {
   let service: ResourceService;
 
-  let createResource: CreateResource = {
+  let createResource: Resource = {
+    id: "",
     label: "RTW 123",
     description: "Test",
     statusCode: 2
@@ -32,7 +33,7 @@ describe('LocalStorageResourceService', () => {
   });
 
   it('should fetch no resources when local storage is empty', () => {
-    service.getAllResources().subscribe(resources => {
+    service.getResources().subscribe(resources => {
       expect(resources).toEqual([]);
     });
   });
@@ -48,7 +49,7 @@ describe('LocalStorageResourceService', () => {
 
   it('should fetch resource correctly that was created', () => {
     service.createResource(createResource).subscribe(createdResource => {
-      service.getAllResources().subscribe(resources => {
+      service.getResources().subscribe(resources => {
         expect(resources.length).toBe(1);
         expect(resources[0]).toEqual(createdResource);
       });
@@ -60,7 +61,7 @@ describe('LocalStorageResourceService', () => {
     for (let i = 0; i < amount; i++) {
       service.createResource(createResource);
     }
-    service.getAllResources().subscribe(resources => {
+    service.getResources().subscribe(resources => {
       expect(resources.length).toBe(amount);
       for (let i = 0; i < amount; i++) {
         expect(resources[i].id).toBe(i.toString());
@@ -72,7 +73,7 @@ describe('LocalStorageResourceService', () => {
     service.createResource(createResource).subscribe(resource => {
       service.deleteResource(resource).subscribe(successful => {
         expect(successful).toBeTrue();
-        service.getAllResources().subscribe(resources => {
+        service.getResources().subscribe(resources => {
           console.log(resources);
           expect(resources.length).toBe(0);
         });
@@ -85,7 +86,7 @@ describe('LocalStorageResourceService', () => {
       resource.id = "123";
       service.deleteResource(resource).subscribe(successful => {
         expect(successful).toBeFalse();
-        service.getAllResources().subscribe(resources => expect(resources.length).toBe(1));
+        service.getResources().subscribe(resources => expect(resources.length).toBe(1));
       });
     });
   });
