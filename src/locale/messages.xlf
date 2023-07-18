@@ -2544,7 +2544,7 @@
     </unit>
     <unit id="delete-resource-failed">
       <notes>
-        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:57</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:86</note>
       </notes>
       <segment>
         <source>Resource deletion failed.</source>
@@ -2552,10 +2552,26 @@
     </unit>
     <unit id="update-resource-successful">
       <notes>
-        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:54</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:73</note>
+      </notes>
+      <segment>
+        <source>Resource updated.</source>
+      </segment>
+    </unit>
+    <unit id="delete-resource-successful">
+      <notes>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:84</note>
       </notes>
       <segment>
         <source>Resource deleted.</source>
+      </segment>
+    </unit>
+    <unit id="update-resource-failed">
+      <notes>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:75</note>
+      </notes>
+      <segment>
+        <source>Updating resource failed.</source>
       </segment>
     </unit>
   </file>

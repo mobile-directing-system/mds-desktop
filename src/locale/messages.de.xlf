@@ -2913,20 +2913,38 @@
     </unit>
     <unit id="update-resource-successful">
       <notes>
-        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:54</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:73</note>
       </notes>
       <segment state="initial">
-        <source>Resource deleted.</source>
-        <target>Ressource gelöscht.</target>
+        <source>Resource updated.</source>
+        <target>Ressource erfolgreich aktualisiert.</target>
       </segment>
     </unit>
     <unit id="delete-resource-failed">
       <notes>
-        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:57</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:86</note>
       </notes>
       <segment state="initial">
         <source>Resource deletion failed.</source>
         <target>Fehler beim Löschen der Ressource.</target>
+      </segment>
+    </unit>
+    <unit id="update-resource-failed">
+      <notes>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:75</note>
+      </notes>
+      <segment state="initial">
+        <source>Updating resource failed.</source>
+        <target>Ressource konnte nicht aktualisiert werden.</target>
+      </segment>
+    </unit>
+    <unit id="delete-resource-successful">
+      <notes>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:84</note>
+      </notes>
+      <segment state="initial">
+        <source>Resource deleted.</source>
+        <target>Ressource gelöscht.</target>
       </segment>
     </unit>
   </file>

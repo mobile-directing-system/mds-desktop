@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription, forkJoin, map, switchMap } from 'rxjs';
 import { Operation } from 'src/app/core/model/operation';
+import { Resource } from 'src/app/core/model/resource';
 import { User } from 'src/app/core/model/user';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { OperationService } from 'src/app/core/services/operation.service';
@@ -57,18 +58,33 @@ export class EditResourceComponent implements OnInit, OnDestroy {
   }
 
   updateEntry() {
+    let fd = this.form.getRawValue();
+    let resource: Resource = {
+      id: this.entryId,
+      label: fd.label,
+      description: fd.description,
+      operation: fd.operation ?? undefined,
+      user: fd.user ?? undefined
+    }
     
+    this.resourceService.updateResource(resource).subscribe(successful => {
+      if(successful) {
+        this.close();
+        this.notificationService.notifyUninvasiveShort($localize`:@@update-resource-successful:Resource updated.`);
+      }else{
+        this.notificationService.notifyUninvasiveShort($localize`:@@update-resource-failed:Updating resource failed.`);
+      }
+    });
   }
 
   delete() {
-    this.resourceService.deleteResourceById(this.entryId).subscribe({
-      next: _ => {
+    this.resourceService.deleteResourceById(this.entryId).subscribe(successful => {
+      if(successful) {
         this.close();
-        this.notificationService.notifyUninvasiveShort($localize`:@@update-resource-successful:Resource deleted.`);
-      },
-      error: _ => {
+        this.notificationService.notifyUninvasiveShort($localize`:@@delete-resource-successful:Resource deleted.`);
+      }else{
         this.notificationService.notifyUninvasiveShort($localize`:@@delete-resource-failed:Resource deletion failed.`);
-      },
+      }
     });
   }
 
