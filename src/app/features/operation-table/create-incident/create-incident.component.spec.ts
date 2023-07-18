@@ -57,7 +57,7 @@ describe('CreateIncidentComponent', () => {
       description: "123"
     });
     component.createIncident();
-    incidentService.getAllIncidents().subscribe(incidents => {
+    incidentService.getIncidents().subscribe(incidents => {
        expect(incidents.length).toBe(1);
     });
   });

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CreateIncident, Incident } from 'src/app/core/model/incident';
+import { Incident } from 'src/app/core/model/incident';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
@@ -32,7 +32,8 @@ export class CreateIncidentComponent {
     }
 
     const fv = this.form.getRawValue();
-    const incident: CreateIncident = {
+    const incident: Incident = {
+      id: "",
       name: fv.name,
       description: fv.description ?? "",
       isCompleted: false,

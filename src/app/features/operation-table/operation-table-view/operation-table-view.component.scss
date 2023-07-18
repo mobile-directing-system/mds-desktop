@@ -1,1 +1,19 @@
 @import 'src/styles/view';
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.example-headers-align .mat-action-row {
+    justify-content: flex-start;
+    align-items: center;
+}
+
+mat-list-item:hover {
+    background-color: whitesmoke;
+}
+
+.icon-class {
+    margin-left: auto;
+}
