@@ -34,9 +34,19 @@ export class LocalStorageCRUDRepository<T> {
      * @returns if deletion was successful
      */
     public delete(item: T): boolean {
+      return this.deleteById((item as any).id);
+    }
+
+    /**
+     * Delete an object by id from {@link localStorage}
+     * 
+     * @param id of the object
+     * @returns if deletion was successful
+     */
+    public deleteById(id: string): boolean {
       let items: any[] = this.fetchAll();
       for(let i = 0; i < items.length; i++) {
-        if(items[i].id === (item as any).id) {
+        if(items[i].id === id) {
           items.splice(i, 1);
           localStorage.setItem(this.storageKey, JSON.stringify(items));
           return true;

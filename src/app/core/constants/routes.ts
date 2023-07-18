@@ -78,6 +78,7 @@ import { CreateResourceView } from 'src/app/features/resources/create-resource/c
 import { OperationTableLayoutComponent } from 'src/app/features/operation-table/operation-table-layout.component';
 import { OperationTableView } from 'src/app/features/operation-table/operation-table-view/operation-table-view.component';
 import { CreateIncidentComponent } from 'src/app/features/operation-table/create-incident/create-incident.component';
+import { EditResourceComponent } from 'src/app/features/resources/edit-resource/edit-resource.component';
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -233,6 +234,10 @@ export const AppRoutes: PermissionGuardedRoute[] = [
           {
             path: 'create',
             component: CreateResourceView
+          },
+          {
+            'path': ':id',
+            component: EditResourceComponent
           }
         ]
       },

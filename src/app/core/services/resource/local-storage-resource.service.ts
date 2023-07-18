@@ -49,4 +49,8 @@ export class LocalStorageResourceService extends ResourceService {
   public override deleteResource(resource: Resource): Observable<boolean> {
     return of(this.repository.delete(resource));
   }
+
+  public override deleteResourceById(id: string): Observable<boolean> {
+    return of(this.repository.deleteById(id));
+  }
 }

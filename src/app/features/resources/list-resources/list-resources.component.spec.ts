@@ -27,7 +27,7 @@ function genFactoryOptions(): SpectatorRoutingOptions<ListResourcesComponent> {
   };
 }
 
-fdescribe('ListResourcesComponent', () => {
+describe('ListResourcesComponent', () => {
   let component: ListResourcesComponent;
   let spectator: SpectatorRouting<ListResourcesComponent>;
 

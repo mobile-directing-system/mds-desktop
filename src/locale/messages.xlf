@@ -131,6 +131,7 @@
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:27</note>
         <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:28</note>
         <note category="location">src/app/features/resources/create-resource/create-resource.component.html:25</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:29</note>
       </notes>
       <segment>
         <source>Operation</source>
@@ -144,6 +145,7 @@
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:29</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:28</note>
         <note category="location">src/app/features/resources/create-resource/create-resource.component.html:26</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:30</note>
       </notes>
       <segment>
         <source>Search operation...</source>
@@ -784,6 +786,7 @@
         <note category="location">src/app/features/logistics/channels/channels.component.html:13</note>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:8</note>
         <note category="location">src/app/features/resources/create-resource/create-resource.component.html:6</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:8</note>
       </notes>
       <segment>
         <source>Label</source>
@@ -802,6 +805,7 @@
         <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:26</note>
         <note category="location">src/app/features/operation-table/create-incident/create-incident.component.html:15</note>
         <note category="location">src/app/features/resources/create-resource/create-resource.component.html:14</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:17</note>
       </notes>
       <segment>
         <source>Description</source>
@@ -821,6 +825,7 @@
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:45,44</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:45,44</note>
         <note category="location">src/app/features/resources/create-resource/create-resource.component.html:45,44</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:49,48</note>
       </notes>
       <segment>
         <source>User</source>
@@ -839,6 +844,7 @@
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:9,10</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:9,10</note>
         <note category="location">src/app/features/resources/create-resource/create-resource.component.html:9,10</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:11,12</note>
       </notes>
       <segment>
         <source>Label is required.</source>
@@ -849,6 +855,7 @@
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:28,27</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:28,27</note>
         <note category="location">src/app/features/resources/create-resource/create-resource.component.html:28,27</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:32,31</note>
       </notes>
       <segment>
         <source>All</source>
@@ -859,6 +866,7 @@
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:45</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:45</note>
         <note category="location">src/app/features/resources/create-resource/create-resource.component.html:45</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:49</note>
       </notes>
       <segment>
         <source>Search user...</source>
@@ -877,6 +885,7 @@
         <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:14,15</note>
         <note category="location">src/app/features/operation-table/create-incident/create-incident.component.html:21,22</note>
         <note category="location">src/app/features/resources/create-resource/create-resource.component.html:56,57</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:60,61</note>
       </notes>
       <segment>
         <source>Cancel</source>
@@ -916,6 +925,7 @@
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:70,71</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:57,59</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:127,128</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:63,64</note>
       </notes>
       <segment>
         <source>Delete</source>
@@ -926,6 +936,7 @@
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:76,77</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:124,125</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:139,140</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:69,70</note>
       </notes>
       <segment>
         <source>Update</source>
@@ -2513,6 +2524,54 @@
       </notes>
       <segment>
         <source>No data matching the filter &quot;<ph id="0" equiv="INTERPOLATION" disp="{{input.value}}"/>&quot;</source>
+      </segment>
+    </unit>
+    <unit id="1664620352147673062">
+      <notes>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Resource</source>
+      </segment>
+    </unit>
+    <unit id="adress-book-entry-deleted">
+      <notes>
+        <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.ts:155</note>
+      </notes>
+      <segment>
+        <source>Address book entry deleted.</source>
+      </segment>
+    </unit>
+    <unit id="delete-resource-failed">
+      <notes>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:86</note>
+      </notes>
+      <segment>
+        <source>Resource deletion failed.</source>
+      </segment>
+    </unit>
+    <unit id="update-resource-successful">
+      <notes>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:73</note>
+      </notes>
+      <segment>
+        <source>Resource updated.</source>
+      </segment>
+    </unit>
+    <unit id="delete-resource-successful">
+      <notes>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:84</note>
+      </notes>
+      <segment>
+        <source>Resource deleted.</source>
+      </segment>
+    </unit>
+    <unit id="update-resource-failed">
+      <notes>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:75</note>
+      </notes>
+      <segment>
+        <source>Updating resource failed.</source>
       </segment>
     </unit>
   </file>
