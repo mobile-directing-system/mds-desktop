@@ -9,62 +9,36 @@
         </button>
     </app-list-action-bar>
 
-    <mat-accordion class="example-headers-align" multi>
-        <mat-expansion-panel>
+    <mat-accordion multi>
+        <mat-expansion-panel *ngFor="let entry of entries">
             <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Personal data
-                </mat-panel-title>
-                <mat-panel-description>
-                    Type your name and age
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-
-            <mat-list role="list">
-                <mat-list-item role="listitem">Item 1</mat-list-item>
-                <mat-list-item role="listitem">Item 2</mat-list-item>
-                <mat-list-item role="listitem">Item 3</mat-list-item>
-            </mat-list>
-
-            <mat-action-row>
-                <button mat-flat-button color="primary" extended>
-                    <mat-icon>add</mat-icon>
-                    <span i18n>Add</span></button>
-            </mat-action-row>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel>
-            <mat-expansion-panel-header disabled>
-                <mat-panel-title>
-                    Personal data
-                </mat-panel-title>
-                <mat-panel-description>
-                    Type your name and age
-                </mat-panel-description>
+                <mat-panel-title>{{ entry.incident.name }}</mat-panel-title>
+                <mat-panel-description>{{ entry.incident.description }}</mat-panel-description>
             </mat-expansion-panel-header>
 
             <mat-list>
-                <mat-list-item>
-                    <span matListItemTitle>RTW 111</span>
-                    <span matListItemLine>2 - Angekommen</span>
-                </mat-list-item>
-                <mat-list-item>
-                    <span matListItemTitle>Paprika</span>
-                    <span matListItemLine>Produced by dried and ground red peppers</span>
+                <mat-list-item *ngFor="let resource of entry.resources">
+                    <span matListItemTitle>{{ resource.label }}</span>
+                    <span matListItemLine>{{ resource.statusCode }}</span>
 
-                    <button mat-icon-button matListItemMeta>
+                    <button mat-icon-button (click)="deleteResourceFromIncident(resource, entry)"matListItemMeta>
                         <mat-icon class="material-icons-outlined mat-24">close</mat-icon>
                     </button>
                 </mat-list-item>
             </mat-list>
 
             <mat-action-row>
-                <button mat-flat-button color="primary" extended>
-                    <mat-icon>add</mat-icon>
-                    <span i18n>Add</span></button>
+                <mat-form-field>
+                    <mat-label>Add resource</mat-label>
+                    <input type="text" [formControl]=entry.addResourceFormControl [matAutocomplete]="auto" matInput #resourceInput>
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="getResourceName" (optionSelected)='resourceOptionSelected($event.option.value,entry,resourceInput)'>
+                        <mat-option *ngFor="let option of entry.filteredResourceOptions | async" [value]="option">
+                            {{option.label}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
             </mat-action-row>
         </mat-expansion-panel>
-
 
     </mat-accordion>
 </div>
