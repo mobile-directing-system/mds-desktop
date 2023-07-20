@@ -66,7 +66,7 @@ export class OperationTableView implements OnInit {
   }
 
   getStatusText(statusCode: number | undefined) {
-    if(statusCode === undefined) return "No Status";
+    if(statusCode === undefined) return $localize`:@@no-status:No Status`;
     return `${statusCode} -  ${getStatusCodeText(statusCode)}`;
   }
 
