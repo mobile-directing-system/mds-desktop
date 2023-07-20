@@ -17,7 +17,7 @@
             </mat-expansion-panel-header>
 
             <mat-list>
-                <mat-list-item *ngFor="let resource of entry.resources">
+                <mat-list-item *ngFor="let resource of entry.resources" (click)="resourceClicked(resource)">
                     <span matListItemTitle>{{ resource.label }}</span>
                     <span matListItemLine>{{ getStatusText(resource.statusCode) }}</span>
 

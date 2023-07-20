@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable, concatMap, from, map, startWith, toArray } from 'rxjs';
 import { Incident } from 'src/app/core/model/incident';
 import { Resource, getStatusCodeText } from 'src/app/core/model/resource';
@@ -28,7 +29,8 @@ export class OperationTableView implements OnInit {
   operationId: string | null = null;
   resources: Resource[] = [];
 
-  constructor(private resourceService: ResourceService, private incidentService: IncidentService, private notificationService: NotificationService, private localStorageService: LocalStorageService) {}
+  constructor(private resourceService: ResourceService, private incidentService: IncidentService,
+    private notificationService: NotificationService,private localStorageService: LocalStorageService, private router: Router) {}
 
   ngOnInit(): void {
     this.operationId = this.localStorageService.getItem(LocalStorageService.TokenWorkspaceOperation);
@@ -57,6 +59,10 @@ export class OperationTableView implements OnInit {
     this.resourceService.updateResource(resource).subscribe(successful => {
       if(successful) this.refreshResourcesOfEntries();
     });
+  }
+
+  resourceClicked(resource: Resource) {
+    this.router.navigate(["/resources", resource.id]);
   }
 
   getStatusText(statusCode: number | undefined) {
