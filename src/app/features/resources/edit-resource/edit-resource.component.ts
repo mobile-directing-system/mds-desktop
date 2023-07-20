@@ -58,22 +58,32 @@ export class EditResourceComponent implements OnInit, OnDestroy {
   }
 
   updateEntry() {
-    let fd = this.form.getRawValue();
-    let resource: Resource = {
-      id: this.entryId,
-      label: fd.label,
-      description: fd.description,
-      operation: fd.operation ?? undefined,
-      user: fd.user ?? undefined
-    }
-    
-    this.resourceService.updateResource(resource).subscribe(successful => {
-      if(successful) {
-        this.close();
-        this.notificationService.notifyUninvasiveShort($localize`:@@update-resource-successful:Resource updated.`);
-      }else{
+    this.resourceService.getResourceById(this.entryId).pipe(map(resource => {
+      if(!resource) return undefined;
+      let fd = this.form.getRawValue();
+      let updatedResource: Resource = {
+        id: resource.id,
+        label: fd.label,
+        description: fd.description,
+        operation: fd.operation ?? undefined,
+        user: fd.user ?? undefined,
+        incident: resource.incident,
+        statusCode: resource.statusCode
+      };
+      return updatedResource;
+    })).subscribe(updatedResource => {
+      if(!updatedResource) {
         this.notificationService.notifyUninvasiveShort($localize`:@@update-resource-failed:Updating resource failed.`);
+        return;
       }
+      this.resourceService.updateResource(updatedResource).subscribe(successful => {
+        if(successful) {
+          this.close();
+          this.notificationService.notifyUninvasiveShort($localize`:@@update-resource-successful:Resource updated.`);
+        }else{
+          this.notificationService.notifyUninvasiveShort($localize`:@@update-resource-failed:Updating resource failed.`);
+        }
+      });
     });
   }
 
