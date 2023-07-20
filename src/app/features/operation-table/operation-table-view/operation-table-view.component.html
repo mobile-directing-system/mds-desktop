@@ -1,13 +1,13 @@
 <div class=view [appShowLoadingOverlay]="loader.loadingChange() | async">
-    <h1 i18n>Operation table</h1>
-    <app-heading-hint i18n>View and manage active incidents.</app-heading-hint>
 
-    <app-list-action-bar>
+    <div class="head">
+        <h1 i18n>Operation table</h1>
+        <app-heading-hint i18n>View and manage active incidents.</app-heading-hint>
         <button mat-flat-button extended color="primary" [routerLink]="['/incidents/create']">
             <mat-icon>add</mat-icon>
-            <span i18n>Create Entry</span>
+            <span i18n>Create incident</span>
         </button>
-    </app-list-action-bar>
+    </div>
 
     <mat-accordion multi>
         <mat-expansion-panel *ngFor="let entry of entries">
@@ -19,7 +19,7 @@
             <mat-list>
                 <mat-list-item *ngFor="let resource of entry.resources">
                     <span matListItemTitle>{{ resource.label }}</span>
-                    <span matListItemLine>{{ resource.statusCode }}</span>
+                    <span matListItemLine>{{ getStatusText(resource.statusCode) }}</span>
 
                     <button mat-icon-button (click)="deleteResourceFromIncident(resource, entry)"matListItemMeta>
                         <mat-icon class="material-icons-outlined mat-24">close</mat-icon>
@@ -29,7 +29,7 @@
 
             <mat-action-row>
                 <mat-form-field>
-                    <mat-label>Add resource</mat-label>
+                    <mat-label i18n>Add resource</mat-label>
                     <input type="text" [formControl]=entry.addResourceFormControl [matAutocomplete]="auto" matInput #resourceInput>
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="getResourceName" (optionSelected)='resourceOptionSelected($event.option.value,entry,resourceInput)'>
                         <mat-option *ngFor="let option of entry.filteredResourceOptions | async" [value]="option">

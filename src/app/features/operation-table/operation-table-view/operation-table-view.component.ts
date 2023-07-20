@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, concatMap, from, map, startWith, toArray } from 'rxjs';
 import { Incident } from 'src/app/core/model/incident';
-import { Resource } from 'src/app/core/model/resource';
+import { Resource, getStatusCodeText } from 'src/app/core/model/resource';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
@@ -35,7 +35,7 @@ export class OperationTableView implements OnInit {
     this.resourceService.getResources().subscribe(resources => {
       this.resources = resources.filter(r => r.operation === undefined || r.operation === this.operationId);
     });
-    this.refreshOperationTable();
+    this.loadOperationTableEntries();
   }
 
   getResourceName(resource: Resource): string {
@@ -43,16 +43,34 @@ export class OperationTableView implements OnInit {
   }
 
   resourceOptionSelected(resource: Resource, entry: OperationTableEntry, input: HTMLInputElement) {
-    if(!entry.resources.includes(resource)) entry.resources.push(resource);
     entry.addResourceFormControl.setValue("");
     setTimeout(() => input.blur(), 50);
+
+    resource.incident = entry.incident.id;
+    this.resourceService.updateResource(resource).subscribe(successful => {
+      if(successful) this.refreshResourcesOfEntries();
+    });
   }
 
   deleteResourceFromIncident(resource: Resource, entry: OperationTableEntry) {
-    entry.resources = entry.resources.filter(r => r.id !== resource.id);
+    resource.incident = undefined;
+    this.resourceService.updateResource(resource).subscribe(successful => {
+      if(successful) this.refreshResourcesOfEntries();
+    });
   }
 
-  refreshOperationTable() {
+  getStatusText(statusCode: number | undefined) {
+    if(statusCode === undefined) return "No Status";
+    return `${statusCode} -  ${getStatusCodeText(statusCode)}`;
+  }
+
+  refreshResourcesOfEntries() {
+    for(let entry of this.entries) {
+      this.resourceService.getResources({ byIncident: entry.incident.id }).subscribe(resources => entry.resources = resources);
+    }
+  }
+
+  loadOperationTableEntries() {
     let fetchEntries = this.incidentService.getIncidents({ byOperation: this.operationId ?? undefined }).pipe(
       concatMap(incidents => from(incidents)),
       map(incident => {

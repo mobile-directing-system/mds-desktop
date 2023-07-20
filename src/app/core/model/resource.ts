@@ -14,3 +14,16 @@ export interface Resource extends AddressBookEntry {
      */
     incident?: string
 }
+
+/**
+ * Translate a status code to a text
+ * 
+ * @param statusCode 
+ */
+export function getStatusCodeText(statusCode: number): string {
+    switch(statusCode){
+        case 1:
+            return $localize`:@@status-code-1:Free over radio`;
+    }
+    return "";
+}
