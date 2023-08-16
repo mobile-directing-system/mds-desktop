@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription, forkJoin, map, switchMap } from 'rxjs';
 import { Operation } from 'src/app/core/model/operation';
-import { Resource } from 'src/app/core/model/resource';
+import { Resource, getStatusCodeText } from 'src/app/core/model/resource';
 import { User } from 'src/app/core/model/user';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { OperationService } from 'src/app/core/services/operation.service';
@@ -12,6 +12,7 @@ import { ResourceService } from 'src/app/core/services/resource/resource.service
 import { UserService } from 'src/app/core/services/user.service';
 import { Loader } from 'src/app/core/util/loader';
 import { SearchResult } from 'src/app/core/util/store';
+import { statusCodes } from 'src/app/core/model/resource';
 
 @Component({
   selector: 'app-edit-resource',
@@ -28,7 +29,8 @@ export class EditResourceComponent implements OnInit, OnDestroy {
     label: this.fb.nonNullable.control<string>('', Validators.required),
     description: this.fb.nonNullable.control<string>(''),
     operation: this.fb.nonNullable.control<string | null>(null),
-    user: this.fb.nonNullable.control<string | null>(null)
+    user: this.fb.nonNullable.control<string | null>(null),
+    statusCode: this.fb.nonNullable.control<number | null>(null)
   });
 
   constructor(private operationService: OperationService, private userService: UserService,
@@ -52,7 +54,8 @@ export class EditResourceComponent implements OnInit, OnDestroy {
         label: result.entry?.label,
         description: result.entry?.description,
         operation: result.entry?.operation,
-        user: result.entry?.user
+        user: result.entry?.user,
+        statusCode: result.entry?.statusCode
       });
     }));
   }
@@ -68,7 +71,7 @@ export class EditResourceComponent implements OnInit, OnDestroy {
         operation: fd.operation ?? undefined,
         user: fd.user ?? undefined,
         incident: resource.incident,
-        statusCode: resource.statusCode
+        statusCode: fd.statusCode ?? undefined
       };
       return updatedResource;
     })).subscribe(updatedResource => {
@@ -96,6 +99,10 @@ export class EditResourceComponent implements OnInit, OnDestroy {
         this.notificationService.notifyUninvasiveShort($localize`:@@delete-resource-failed:Resource deletion failed.`);
       }
     });
+  }
+
+  getStatusCodes() {
+    return statusCodes;
   }
 
   getUserById(id: string): Observable<User> {

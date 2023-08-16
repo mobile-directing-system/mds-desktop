@@ -8,6 +8,7 @@ import { IncidentService } from 'src/app/core/services/incident/incident.service
 import { OperationService } from 'src/app/core/services/operation.service';
 import { ResourceService } from 'src/app/core/services/resource/resource.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { getStatusCodeText } from 'src/app/core/model/resource';
 
 interface ResourceRow {
   id: string,
@@ -16,7 +17,7 @@ interface ResourceRow {
   user: string;
   operation: string;
   incident: string;
-  status: string;
+  statusCode: number;
 }
 
 @Component({
@@ -47,7 +48,7 @@ export class ListResourcesComponent implements AfterViewInit {
           user: resource.user,
           operation: resource.operation,
           incident: "",
-          status: resource.statusCode?.toString()
+          statusCode: resource.statusCode
         });
         if (resource.operation) this.operationService.getOperationById(resource.operation).subscribe(operation => resourceRow.operation = operation.title);
         if (resource.user) this.userService.getUserById(resource.user).subscribe(user => resourceRow.user = user.username);
@@ -75,5 +76,9 @@ export class ListResourcesComponent implements AfterViewInit {
 
   entryClicked(row: ResourceRow) {
     this.router.navigate(["/resources", row.id]);
+  }
+
+  getStatusCodeText(statusCode: number): string {
+    return getStatusCodeText(statusCode);
   }
 }

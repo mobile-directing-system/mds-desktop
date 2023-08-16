@@ -884,7 +884,7 @@
         <note category="location">src/app/features/management/user-management-view/update-user-password-view/update-user-password-view.component.html:14,15</note>
         <note category="location">src/app/features/operation-table/create-incident/create-incident.component.html:21,22</note>
         <note category="location">src/app/features/resources/create-resource/create-resource.component.html:56,57</note>
-        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:60,61</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:67,68</note>
       </notes>
       <segment>
         <source>Cancel</source>
@@ -924,7 +924,7 @@
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:70,71</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:57,59</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:127,128</note>
-        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:63,64</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:70,71</note>
       </notes>
       <segment>
         <source>Delete</source>
@@ -935,7 +935,7 @@
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:76,77</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:124,125</note>
         <note category="location">src/app/features/management/operation-management-view/edit-operation-view/edit-operation-view.component.html:139,140</note>
-        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:69,70</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:76,77</note>
       </notes>
       <segment>
         <source>Update</source>
@@ -2545,7 +2545,7 @@
     </unit>
     <unit id="delete-resource-failed">
       <notes>
-        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:96</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:99</note>
       </notes>
       <segment>
         <source>Resource deletion failed.</source>
@@ -2553,7 +2553,7 @@
     </unit>
     <unit id="update-resource-successful">
       <notes>
-        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:82</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:85</note>
       </notes>
       <segment>
         <source>Resource updated.</source>
@@ -2561,7 +2561,7 @@
     </unit>
     <unit id="delete-resource-successful">
       <notes>
-        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:94</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:97</note>
       </notes>
       <segment>
         <source>Resource deleted.</source>
@@ -2569,8 +2569,8 @@
     </unit>
     <unit id="update-resource-failed">
       <notes>
-        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:76</note>
-        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:84</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:79</note>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.ts:87</note>
       </notes>
       <segment>
         <source>Updating resource failed.</source>
@@ -2586,7 +2586,7 @@
     </unit>
     <unit id="status-code-1">
       <notes>
-        <note category="location">src/app/core/model/resource.ts:26</note>
+        <note category="location">src/app/core/model/resource.ts:23</note>
       </notes>
       <segment>
         <source>Free over radio</source>
@@ -2598,6 +2598,94 @@
       </notes>
       <segment>
         <source>No Status</source>
+      </segment>
+    </unit>
+    <unit id="status-code-0">
+      <notes>
+        <note category="location">src/app/core/model/resource.ts:22</note>
+      </notes>
+      <segment>
+        <source>Emergency call</source>
+      </segment>
+    </unit>
+    <unit id="status-code-2">
+      <notes>
+        <note category="location">src/app/core/model/resource.ts:24</note>
+      </notes>
+      <segment>
+        <source>Free on station</source>
+      </segment>
+    </unit>
+    <unit id="status-code-3">
+      <notes>
+        <note category="location">src/app/core/model/resource.ts:25</note>
+      </notes>
+      <segment>
+        <source>Operation accepted</source>
+      </segment>
+    </unit>
+    <unit id="status-code-4">
+      <notes>
+        <note category="location">src/app/core/model/resource.ts:26</note>
+      </notes>
+      <segment>
+        <source>Arrived at destination</source>
+      </segment>
+    </unit>
+    <unit id="status-code-5">
+      <notes>
+        <note category="location">src/app/core/model/resource.ts:27</note>
+      </notes>
+      <segment>
+        <source>Request to talk</source>
+      </segment>
+    </unit>
+    <unit id="status-code-6">
+      <notes>
+        <note category="location">src/app/core/model/resource.ts:28</note>
+      </notes>
+      <segment>
+        <source>Out of service</source>
+      </segment>
+    </unit>
+    <unit id="status-code-7">
+      <notes>
+        <note category="location">src/app/core/model/resource.ts:29</note>
+      </notes>
+      <segment>
+        <source>Taken over at operation place</source>
+      </segment>
+    </unit>
+    <unit id="status-code-8">
+      <notes>
+        <note category="location">src/app/core/model/resource.ts:30</note>
+      </notes>
+      <segment>
+        <source>Arrived at hospital</source>
+      </segment>
+    </unit>
+    <unit id="status-code-9">
+      <notes>
+        <note category="location">src/app/core/model/resource.ts:31</note>
+      </notes>
+      <segment>
+        <source>Approved</source>
+      </segment>
+    </unit>
+    <unit id="status-code-unkown">
+      <notes>
+        <note category="location">src/app/core/model/resource.ts:41</note>
+      </notes>
+      <segment>
+        <source>Status code unknown</source>
+      </segment>
+    </unit>
+    <unit id="4714004045286975302">
+      <notes>
+        <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:59</note>
+      </notes>
+      <segment>
+        <source>Status code</source>
       </segment>
     </unit>
   </file>
