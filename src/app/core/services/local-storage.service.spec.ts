@@ -28,6 +28,9 @@ describe('LocalStorageService', () => {
   });
 });
 
+/**
+ * Mocks {@link LocalStorageService} for testing
+ */
 export function mockLocalStorageService(): LocalStorageService {
   let store: any = {};
   const mockLocalStorage = {

@@ -8,14 +8,22 @@ export interface Resource extends AddressBookEntry {
      * Current status code of the resource
      */
     statusCode?: number
+
+    /**
+     * The incident id the resource is attached to
+     */
+    incident?: string
 }
 
 /**
- * Used to create a {@link Resource}
+ * Translate a status code to a text
+ * 
+ * @param statusCode 
  */
-export interface CreateResource extends CreateAddressBookEntry {
-    /**
-     * Current status code of the resource
-     */
-    statusCode?: number
+export function getStatusCodeText(statusCode: number): string {
+    switch(statusCode){
+        case 1:
+            return $localize`:@@status-code-1:Free over radio`;
+    }
+    return "";
 }

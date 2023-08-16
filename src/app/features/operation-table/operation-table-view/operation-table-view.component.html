@@ -1,8 +1,44 @@
-<div class=view>
-    <h1 i18n>Operation table</h1>
-    <app-heading-hint i18n>View and manage active incidents.</app-heading-hint>
+<div class=view [appShowLoadingOverlay]="loader.loadingChange() | async">
 
-    <app-list-action-bar>
-        <button mat-button [routerLink]="['/incidents/create']" i18n>Create Entry</button>
-    </app-list-action-bar>
+    <div class="head">
+        <h1 i18n>Operation table</h1>
+        <app-heading-hint i18n>View and manage active incidents.</app-heading-hint>
+        <button mat-flat-button extended color="primary" [routerLink]="['/incidents/create']">
+            <mat-icon>add</mat-icon>
+            <span i18n>Create incident</span>
+        </button>
+    </div>
+
+    <mat-accordion multi>
+        <mat-expansion-panel *ngFor="let entry of entries">
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{ entry.incident.name }}</mat-panel-title>
+                <mat-panel-description>{{ entry.incident.description }}</mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-list>
+                <mat-list-item *ngFor="let resource of entry.resources" (click)="resourceClicked(resource)">
+                    <span matListItemTitle>{{ resource.label }}</span>
+                    <span matListItemLine>{{ getStatusText(resource.statusCode) }}</span>
+
+                    <button mat-icon-button (click)="deleteResourceFromIncident(resource, entry)"matListItemMeta>
+                        <mat-icon class="material-icons-outlined mat-24">close</mat-icon>
+                    </button>
+                </mat-list-item>
+            </mat-list>
+
+            <mat-action-row>
+                <mat-form-field>
+                    <mat-label i18n>Add resource</mat-label>
+                    <input type="text" [formControl]=entry.addResourceFormControl [matAutocomplete]="auto" matInput #resourceInput>
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="getResourceName" (optionSelected)='resourceOptionSelected($event.option.value,entry,resourceInput)'>
+                        <mat-option *ngFor="let option of entry.filteredResourceOptions | async" [value]="option">
+                            {{option.label}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </mat-action-row>
+        </mat-expansion-panel>
+
+    </mat-accordion>
 </div>

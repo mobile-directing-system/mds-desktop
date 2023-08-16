@@ -68,7 +68,7 @@ const sampleOperation: Operation = {
   isArchived: false,
 };
 
-fdescribe('EditResourceComponent', () => {
+describe('EditResourceComponent', () => {
   let component: EditResourceComponent;
   let spectator: SpectatorRouting<EditResourceComponent>;
 

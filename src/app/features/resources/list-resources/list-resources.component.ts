@@ -35,7 +35,7 @@ export class ListResourcesComponent implements AfterViewInit {
   }
 
   refreshDataSource() {
-    let resourceRows = this.resourceService.getAllResources().pipe(
+    let resourceRows = this.resourceService.getResources().pipe(
       concatMap(resources => from(resources)),
       map((resource, _) => {
         let resourceRow = <ResourceRow>({

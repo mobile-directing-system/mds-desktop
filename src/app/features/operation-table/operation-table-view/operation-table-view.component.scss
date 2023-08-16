@@ -1,1 +1,29 @@
 @import 'src/styles/view';
+
+.head {
+    padding-bottom: 1.5em;
+}
+
+app-list-action-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-accordion .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+mat-accordion .mat-action-row {
+    justify-content: flex-start;
+    align-items: center;
+}
+
+mat-list-item:hover {
+    background-color: whitesmoke;
+    cursor: pointer;
+}
+
+.icon-class {
+    margin-left: auto;
+}
