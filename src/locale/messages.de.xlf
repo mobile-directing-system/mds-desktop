@@ -2170,6 +2170,7 @@
         <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:31</note>
         <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:28</note>
         <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:26</note>
+        <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.ts:134</note>
       </notes>
       <segment state="initial">
         <source>Confirm</source>
@@ -2732,7 +2733,7 @@
     <unit id="7411696043576231323">
       <notes>
         <note category="location">src/app/core/components/home-layout/home-layout.component.html:28</note>
-        <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.html:4</note>
+        <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.html:3</note>
       </notes>
       <segment state="initial">
         <source>Operation table</source>
@@ -2769,7 +2770,7 @@
     <unit id="7472531361737402305">
       <notes>
         <note category="location">src/app/features/operation-table/create-incident/create-incident.component.html:2</note>
-        <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.html:8</note>
+        <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.html:7</note>
       </notes>
       <segment state="initial">
         <source>Create incident</source>
@@ -2796,7 +2797,7 @@
     </unit>
     <unit id="5095679039997353596">
       <notes>
-        <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.html:5</note>
+        <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.html:4</note>
       </notes>
       <segment state="initial">
         <source>View and manage active incidents.</source>
@@ -2960,7 +2961,7 @@
     </unit>
     <unit id="1646904989256295637">
       <notes>
-        <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.html:32</note>
+        <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.html:33</note>
       </notes>
       <segment state="initial">
         <source>Add resource</source>
@@ -2969,7 +2970,7 @@
     </unit>
     <unit id="no-status">
       <notes>
-        <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.ts:69</note>
+        <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.ts:72</note>
       </notes>
       <segment state="initial">
         <source>No Status</source>
@@ -3073,6 +3074,15 @@
       <segment state="initial">
         <source>Status code</source>
         <target>Statuscode</target>
+      </segment>
+    </unit>
+    <unit id="delete-incident-question">
+      <notes>
+        <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.ts:133</note>
+      </notes>
+      <segment state="initial">
+        <source>Should the incident be completed?</source>
+        <target>Soll der Vorfall beendet werden?</target>
       </segment>
     </unit>
   </file>

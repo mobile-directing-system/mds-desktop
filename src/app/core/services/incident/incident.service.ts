@@ -7,7 +7,7 @@ import { Incident } from "../../model/incident";
 export interface IncidentFilters {
     byOperation?: string;
     byName?: string;
-    isComplated?: boolean;
+    isCompleted?: boolean;
 }
 
 /**

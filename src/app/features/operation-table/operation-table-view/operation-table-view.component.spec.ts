@@ -7,6 +7,7 @@ import { LocalStorageIncidentService } from 'src/app/core/services/incident/loca
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { LocalStorageResourceService } from 'src/app/core/services/resource/local-storage-resource.service';
 import { ResourceService } from 'src/app/core/services/resource/resource.service';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 describe('OperationTableView', () => {
   let component: OperationTableView;
@@ -16,6 +17,7 @@ describe('OperationTableView', () => {
   beforeEach(async () => {
     let notificationServiceMock = jasmine.createSpyObj("NotificationService", ["notifyUninvasiveShort"]);
     await TestBed.configureTestingModule({
+      imports: [ MatDialogModule ],
       declarations: [ OperationTableView ],
       providers: [
         {
@@ -29,7 +31,9 @@ describe('OperationTableView', () => {
         {
           provide: NotificationService,
           useValue: notificationServiceMock
-        }
+        },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
       ]
     })
     .compileComponents();
