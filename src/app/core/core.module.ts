@@ -130,7 +130,8 @@ import {AutofocusDirective} from "./directives/autofocus.directive";
     IntelTypeInlineComponent,
     IntelSummaryComponent,
     KeyInfoBarComponent,
-    AutofocusDirective
+    AutofocusDirective,
+    DeleteConfirmDialog
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable, concatMap, from, map, startWith, toArray } from 'rxjs';
+import { DeleteConfirmDialog } from 'src/app/core/components/delete-confirm-dialog/delete-confirm-dialog.component';
 import { Incident } from 'src/app/core/model/incident';
 import { Resource, getStatusCodeText } from 'src/app/core/model/resource';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
@@ -20,7 +22,7 @@ export interface OperationTableEntry {
 @Component({
   selector: 'app-operation-table-view',
   templateUrl: './operation-table-view.component.html',
-  styleUrls: ['./operation-table-view.component.scss']
+  styleUrls: ['./operation-table-view.component.scss'],
 })
 export class OperationTableView implements OnInit {
 
@@ -30,7 +32,8 @@ export class OperationTableView implements OnInit {
   resources: Resource[] = [];
 
   constructor(private resourceService: ResourceService, private incidentService: IncidentService,
-    private notificationService: NotificationService,private localStorageService: LocalStorageService, private router: Router) {}
+    private notificationService: NotificationService, private localStorageService: LocalStorageService, private router: Router,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.operationId = this.localStorageService.getItem(LocalStorageService.TokenWorkspaceOperation);
@@ -50,14 +53,14 @@ export class OperationTableView implements OnInit {
 
     resource.incident = entry.incident.id;
     this.resourceService.updateResource(resource).subscribe(successful => {
-      if(successful) this.refreshResourcesOfEntries();
+      if (successful) this.refreshResourcesOfEntries();
     });
   }
 
   deleteResourceFromIncident(resource: Resource, entry: OperationTableEntry) {
     resource.incident = undefined;
     this.resourceService.updateResource(resource).subscribe(successful => {
-      if(successful) this.refreshResourcesOfEntries();
+      if (successful) this.refreshResourcesOfEntries();
     });
   }
 
@@ -66,18 +69,18 @@ export class OperationTableView implements OnInit {
   }
 
   getStatusText(statusCode: number | undefined) {
-    if(statusCode === undefined) return $localize`:@@no-status:No Status`;
+    if (statusCode === undefined) return $localize`:@@no-status:No Status`;
     return `${statusCode} -  ${getStatusCodeText(statusCode)}`;
   }
 
   refreshResourcesOfEntries() {
-    for(let entry of this.entries) {
+    for (let entry of this.entries) {
       this.resourceService.getResources({ byIncident: entry.incident.id }).subscribe(resources => entry.resources = resources);
     }
   }
 
   loadOperationTableEntries() {
-    let fetchEntries = this.incidentService.getIncidents({ byOperation: this.operationId ?? undefined }).pipe(
+    let fetchEntries = this.incidentService.getIncidents({ byOperation: this.operationId ?? undefined, isCompleted: false }).pipe(
       concatMap(incidents => from(incidents)),
       map(incident => {
         let formControl = new FormControl<string | Resource>("");
@@ -96,8 +99,40 @@ export class OperationTableView implements OnInit {
         return entry;
       }),
       toArray()
-      );
+    );
     this.loader.load(fetchEntries).subscribe(entries => this.entries = entries);
+  }
+
+  /**
+   * Completes an incident and unassignes all resources from the incident
+   */
+  completeIncident(event: Event, entry: OperationTableEntry) {
+    event.stopPropagation();
+
+    this.showCompleteIncidentDialog().subscribe(result => {
+      if(result === true) {
+        entry.incident.isCompleted = true;
+        this.incidentService.updateIncident(entry.incident).subscribe(successful => {
+          this.entries = this.entries.filter(e => e.incident.id !== entry.incident.id);
+        });
+        entry.resources.forEach(resource => {
+          resource.incident = undefined;
+          this.resourceService.updateResource(resource);
+        })
+      }
+    })
+  }
+
+  /***
+   * Shows a dialog to complete an incident
+   * 
+   * @returns result of dialog
+   */
+  showCompleteIncidentDialog(): Observable<boolean> {
+    let dialog = this.dialog.open(DeleteConfirmDialog);
+    dialog.componentInstance.message = $localize`:@@delete-incident-question:Should the incident be completed?`;
+    dialog.componentInstance.deleteLabel = $localize`Confirm`;
+    return dialog.afterClosed();
   }
 
   private filterResourcesByName(name: string): Resource[] {

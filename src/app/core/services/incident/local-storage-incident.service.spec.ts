@@ -29,7 +29,7 @@ describe('LocalStorageIncidentService', () => {
       name: "Incident 890",
       description: "Test",
       operation: "1234",
-      isCompleted: false
+      isCompleted: true
     }
   ];
 
@@ -76,6 +76,16 @@ describe('LocalStorageIncidentService', () => {
       expect(incidents.length).toBe(1);
       expect(incidents[0].name).toBe(filters.byName!);
       expect(incidents[0].operation).toBe(filters.byOperation!);
+    });
+  });
+
+  it('should fetch incidents with isCompleted filter correctly', ()=> {
+    const filters: IncidentFilters = {
+      isCompleted: true
+    }
+    service.getIncidents(filters).subscribe(incidents => {
+      expect(incidents.length).toBe(1);
+      expect(incidents[0].name).toBe("Incident 890");
     });
   });
 });
