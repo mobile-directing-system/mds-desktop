@@ -7,7 +7,7 @@ export interface Resource extends AddressBookEntry {
     /**
      * Current status code of the resource
      */
-    statusCode?: number
+    statusCode: number
 
     /**
      * The incident id the resource is attached to
@@ -19,6 +19,7 @@ export interface Resource extends AddressBookEntry {
  * Returns all available status codes
  */
 export const statusCodes: Record<number, string> = {
+    '-1': $localize`:@@status-code-no-status:No status`,
     0: $localize`:@@status-code-0:Emergency call`,
     1: $localize`:@@status-code-1:Free over radio`,
     2: $localize`:@@status-code-2:Free on station`,

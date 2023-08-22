@@ -1,0 +1,25 @@
+@use 'sass:map';
+@import 'src/styles/view';
+@import 'src/styles/forms';
+@import 'src/styles/corporate';
+
+.mat-stepper-vertical {
+  margin-top: 0.4em;
+}
+  
+.mat-step-content {
+  margin-top: 16px;
+}
+
+#summary-container {
+  border: 1px solid red;
+}
+
+mat-stepper {
+  width: 28rem;
+  background-color: transparent;
+}
+
+mat-icon {
+  color: map.get($mds-desktop-font-palette, 800);
+}

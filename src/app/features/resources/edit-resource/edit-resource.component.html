@@ -58,7 +58,9 @@
         <mat-form-field class="app-edit-input">
           <mat-label i18n>Status code</mat-label>
           <mat-select [formControl]="form.controls.statusCode">
-            <mat-option *ngFor="let code of getStatusCodes() | keyvalue" [value]="code.key">{{ code.key }} - {{ code.value }}</mat-option>
+            <mat-option *ngFor="let code of getStatusCodes() | keyvalue" [value]="code.key">
+              <span *ngIf="code.key !== '-1'">{{ code.key }} -</span> {{ code.value }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
     

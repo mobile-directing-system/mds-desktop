@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -121,6 +121,11 @@ export class SearchableEntityInputComponent<Id, T extends Identifiable<Id>> impl
   @Input() errorTemplate?: TemplateRef<any>;
 
   /**
+   * Emits the option that was selected
+   */
+  @Output() optionSelected = new EventEmitter<T>;
+
+  /**
    * For some magical reasons, we need direct ref as seen in example
    * {@link https://material.angular.io/components/chips/overview#autocomplete}. Value changes to {@link searchFC} are
    * not reflected if a suggestion is selected and the control's value cleared. There is already an issue open at
@@ -190,6 +195,7 @@ export class SearchableEntityInputComponent<Id, T extends Identifiable<Id>> impl
     this.suggestions.next([]);
     this.selectedEntityId = entity.id;
     this.selectedEntityValue = entity;
+    this.optionSelected.emit(entity);
     this.notifyOnChange();
   }
 

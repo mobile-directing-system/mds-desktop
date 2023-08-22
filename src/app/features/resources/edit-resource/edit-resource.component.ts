@@ -71,7 +71,7 @@ export class EditResourceComponent implements OnInit, OnDestroy {
         operation: fd.operation ?? undefined,
         user: fd.user ?? undefined,
         incident: resource.incident,
-        statusCode: fd.statusCode ?? undefined
+        statusCode: fd.statusCode ?? -1
       };
       return updatedResource;
     })).subscribe(updatedResource => {

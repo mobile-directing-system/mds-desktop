@@ -131,7 +131,8 @@ import {AutofocusDirective} from "./directives/autofocus.directive";
     IntelSummaryComponent,
     KeyInfoBarComponent,
     AutofocusDirective,
-    DeleteConfirmDialog
+    DeleteConfirmDialog,
+    MatStepperModule
   ],
   imports: [
     CommonModule,
