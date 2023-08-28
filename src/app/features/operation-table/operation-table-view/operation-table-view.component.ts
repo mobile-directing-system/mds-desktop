@@ -68,8 +68,8 @@ export class OperationTableView implements OnInit {
     this.router.navigate(["/resources", resource.id]);
   }
 
-  getStatusText(statusCode: number | undefined) {
-    if (statusCode === undefined) return $localize`:@@no-status:No Status`;
+  getStatusText(statusCode: number) {
+    if (statusCode == -1) return getStatusCodeText(statusCode);
     return `${statusCode} -  ${getStatusCodeText(statusCode)}`;
   }
 

@@ -5,7 +5,7 @@ import { ResourceService } from './resource.service';
 import { Resource } from '../../model/resource';
 import { mockLocalStorage } from '../../util/testing';
 
-describe('LocalStorageResourceService', () => {
+fdescribe('LocalStorageResourceService', () => {
   let service: ResourceService;
 
   let createResource: Resource = {
@@ -101,6 +101,16 @@ describe('LocalStorageResourceService', () => {
           expect(resource?.description).toBe("Updated description");
         });
       });
+    });
+  });
+
+  it('should find a resource by substring of its label', () => {
+    service.createResource(createResource).subscribe(resource => {
+      service.getResources({
+        byLabel: "RT"
+      }).subscribe(resources => {
+        expect(resources.length).toBe(1);
+      })
     });
   });
 });

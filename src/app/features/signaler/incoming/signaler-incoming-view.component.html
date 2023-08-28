@@ -1,1 +1,142 @@
-<p>signaler-incoming-view works!</p>
+<div class=view>
+    <h1 i18n>Incoming messages</h1>
+    <form [formGroup]="channelForm">
+        <!-- Message type -->
+        <mat-form-field>
+            <mat-label i18n>Channel type</mat-label>
+            <mat-select [formControl]="channelForm.controls.channel">
+                <mat-option *ngFor="let channel of channelTypes" [value]="channel"> {{ localizeChannel(channel) }} </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- Stepper -->
+        <mat-stepper linear orientation="vertical" #stepper>
+
+            <!-- Sender -->
+            <mat-step [stepControl]="senderForm" i18n-label label="Sender">
+                <div class="mat-step-content">
+                    <form [formGroup]="senderForm">
+                        <mat-form-field class="app-edit-input">
+                            <mat-label i18n>Sender</mat-label>
+                            <input type="text" matInput formControlName="sender" [matAutocomplete]="auto"
+                                i18n-placeholder placeholder="Select sender" required>
+                            <button matSuffix mat-icon-button aria-label="Clear"
+                                (click)="senderForm.controls.sender.reset()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+
+                            <mat-autocomplete requireSelection [displayWith]="displayEntry"
+                                (optionSelected)="senderSelected($event.option.value)" #auto="matAutocomplete">
+                                <mat-option *ngFor="let entry of filteredSenderOptions | async" [value]="entry">
+                                    <div style="display: flex; align-items: center;">
+                                        <mat-icon *ngIf="isResource(entry)">local_shipping</mat-icon>
+                                        <mat-icon *ngIf="!isResource(entry)">import_contacts</mat-icon>
+                                        {{ entry.label }}
+                                    </div>
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                        <mat-form-field class="app-edit-input">
+                            <mat-label i18n>Info</mat-label>
+                            <input type="text" matInput formControlName="info" i18n-placeholder
+                                placeholder="E.g. mail address" required>
+                        </mat-form-field>
+                    </form>
+                    <div>
+                        <button mat-button matStepperNext i18n>Next</button>
+                    </div>
+                </div>
+            </mat-step>
+
+            <!-- Content -->
+            <mat-step i18n-label [stepControl]="contentForm" label="Content">
+                <div class="mat-step-content">
+                    <form [formGroup]="contentForm">
+                        <mat-form-field style="width: 100%;">
+                            <mat-label i18n>Content</mat-label>
+                            <textarea matInput formControlName="content" rows="10" i18n-placeholder
+                                placeholder="Content of the message"></textarea>
+                        </mat-form-field>
+                    </form>
+                    <div>
+                        <button mat-button matStepperPrevious i18n>Back</button>
+                        <button mat-button matStepperNext i18n>Next</button>
+                    </div>
+                </div>
+            </mat-step>
+
+            <!-- Incident -->
+            <mat-step *ngIf="isResource(selectedSender)" i18n-label [stepControl]="contentForm" label="Incident">
+                <div class="mat-step-content">
+                    <form [formGroup]="incidentForm">
+                        <mat-form-field class="app-edit-input">
+                            <mat-label i18n>Incident</mat-label>
+                            <input type="text" matInput formControlName="incident" [matAutocomplete]="auto"
+                                i18n-placeholder placeholder="Select incident">
+                            <button matSuffix mat-icon-button aria-label="Clear"
+                                (click)="incidentForm.controls.incident.reset()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+
+                            <mat-autocomplete requireSelection [displayWith]="displayIncident" #auto="matAutocomplete">
+                                <mat-option *ngFor="let incident of filteredIncidents | async" [value]="incident">
+                                    <div style="display: flex; align-items: center;">
+                                        {{ incident.name }}
+                                    </div>
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </form>
+                    <div>
+                        <button mat-button matStepperPrevious i18n>Back</button>
+                        <button mat-button matStepperNext i18n>Next</button>
+                    </div>
+                </div>
+            </mat-step>
+
+            <!-- Status -->
+            <mat-step *ngIf="isResource(selectedSender)" i18n-label label="Status">
+                <div class="mat-step-content">
+                    <form [formGroup]="statusForm">
+                        <mat-form-field class="app-edit-input">
+                            <mat-label i18n>Status</mat-label>
+                            <mat-select formControlName="statusCode">
+                                <mat-option *ngFor="let code of getStatusCodes() | keyvalue" [value]="code.key">
+                                    <span *ngIf="code.key !== '-1'">{{ code.key }} -</span> {{ code.value }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </form>
+                    <div>
+                        <button mat-button matStepperPrevious i18n>Back</button>
+                        <button mat-button matStepperNext i18n>Next</button>
+                    </div>
+                </div>
+            </mat-step>
+
+            <!-- Finish -->
+            <mat-step i18n-label label="Finish">
+                <mat-card class="mat-step-content">
+                    <mat-card-header>
+                        <mat-card-title>{{ channelForm.controls.channel.value | titlecase }}</mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <p><b>Sender</b>: {{ selectedSender?.label }}, {{ senderForm.controls.info.value }}</p>
+                    <p><b>Content</b>: {{ contentForm.controls.content.value }}</p>
+                    <p *ngIf="incidentForm.controls.incident.value as incident"><b>Incident</b>: {{ asIncident(incident).name }}</p>
+                    <p *ngIf="statusForm.controls.statusCode.value as newStatus">
+                        <b>Old status</b>: {{ getStatusText(asResource(selectedSender!).statusCode) }}<br>
+                        <b>New status</b>: {{ getStatusText(newStatus) }}
+                    </p>
+                      </mat-card-content>
+                      <mat-card-actions>
+                        <button mat-button (click)="resetStepper()" i18n>Reset</button>
+                        <button mat-button i18n>Confirm</button>
+                      </mat-card-actions>
+                </mat-card>
+            </mat-step>
+
+        </mat-stepper>
+    </form>
+</div>

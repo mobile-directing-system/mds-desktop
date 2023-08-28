@@ -16,7 +16,7 @@ export interface ResourceFilters {
  * The resource service allows to fetch and manipulate resources
  */
 export abstract class ResourceService {
-
+    
     public abstract getResources(filters?: ResourceFilters): Observable<Resource[]>;
     public abstract getResourceById(id: string): Observable<Resource | undefined>;
     public abstract createResource(resource: Resource): Observable<Resource>;

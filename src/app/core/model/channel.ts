@@ -8,6 +8,8 @@ import { Importance } from './importance';
 export enum ChannelType {
   InAppNotification = 'in-app-notification',
   Radio = 'radio',
+  Phone = 'phone',
+  Email = 'email'
 }
 
 /**
@@ -93,6 +95,10 @@ export function localizeChannelType(t: ChannelType): string {
       return $localize`:@@channel-type-in-app-notification:In-App Notification`;
     case ChannelType.Radio:
       return $localize`:@@channel-type-radio:Radio`;
+    case ChannelType.Email:
+      return $localize`:@@channel-type-email:Email`;
+    case ChannelType.Phone:
+      return $localize`:@@channel-type-phone:Phone`;
   }
 }
 

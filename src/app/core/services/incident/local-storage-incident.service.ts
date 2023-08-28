@@ -12,7 +12,7 @@ export class LocalStorageIncidentService extends IncidentService {
   public override getIncidents(filters: IncidentFilters): Observable<Incident[]> {
     let incidents: Incident[] = this.repository.fetchAll();
     if(filters) {
-      if(filters.byName !== undefined) incidents = incidents.filter(i => filters.byName === i.name);
+      if(filters.byName !== undefined) incidents = incidents.filter(i => i.name.includes(filters.byName!));
       if(filters.byOperation !== undefined) incidents = incidents.filter(i => filters.byOperation === i.operation);
       if(filters.isCompleted !== undefined) incidents = incidents.filter(i => filters.isCompleted === i.isCompleted);
     }

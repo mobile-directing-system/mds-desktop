@@ -41,7 +41,7 @@ export class CreateResourceView {
       description: fv.description,
       operation: fv.operation ?? undefined,
       user: fv.user ?? undefined,
-      statusCode: undefined
+      statusCode: -1
     };
     this.loader.load(this.resourceService.createResource(create)).subscribe({
       next: _ => {
