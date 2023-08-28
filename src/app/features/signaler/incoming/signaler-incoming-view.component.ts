@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Observable, debounceTime, forkJoin, map, mergeMap, of, startWith } from 'rxjs';
 import { AddressBookEntry } from 'src/app/core/model/address-book-entry';
+import { Channel, ChannelType, localizeChannelType } from 'src/app/core/model/channel';
 import { Incident } from 'src/app/core/model/incident';
 import { Resource, statusCodes, getStatusCodeText } from 'src/app/core/model/resource';
 import { AddressBookService } from 'src/app/core/services/addressbook.service';
@@ -16,8 +17,8 @@ import { ResourceService } from 'src/app/core/services/resource/resource.service
 })
 export class SignalerIncomingView implements OnInit {
 
-  form = this.fb.group({
-    messageType: this.fb.nonNullable.control<string>('mail')
+  channelForm = this.fb.group({
+    channel: this.fb.nonNullable.control<ChannelType>(ChannelType.Email)
   });
 
   senderForm = this.fb.group({
@@ -43,7 +44,8 @@ export class SignalerIncomingView implements OnInit {
 
   @ViewChild(MatStepper) stepper!: MatStepper
 
-  readonly messageTypes: string[] = ["mail", "telephone", "radio"];
+  readonly channelTypes: ChannelType[] = Object.values(ChannelType);
+  localizeChannel = localizeChannelType
 
   constructor(private fb: FormBuilder, private addressBookService: AddressBookService,
     private resourceService: ResourceService, private incidentService: IncidentService) { }
@@ -131,8 +133,15 @@ export class SignalerIncomingView implements OnInit {
     return entry as Resource;
   }
 
+  asIncident(incident: any): Incident {
+    return incident as Incident;
+  }
+
   resetStepper() {
-    this.stepper.reset();
     this.senderForm.reset();
+    this.contentForm.reset();
+    this.incidentForm.reset();
+    this.statusForm.reset();
+    this.stepper.reset();
   }
 }
