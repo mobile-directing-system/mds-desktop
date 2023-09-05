@@ -47,7 +47,7 @@
         <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:28</note>
         <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:26</note>
         <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.ts:134</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:136</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:138</note>
       </notes>
       <segment>
         <source>Confirm</source>
@@ -322,9 +322,9 @@
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:63</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:87</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:101</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:63</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:92</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:112</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:64</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:93</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:113</note>
       </notes>
       <segment>
         <source>Back</source>
@@ -540,10 +540,10 @@
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:15</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:64</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:88</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:47</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:64</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:93</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:113</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:48</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:65</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:94</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:114</note>
       </notes>
       <segment>
         <source>Next</source>
@@ -553,8 +553,9 @@
       <notes>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:20</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:47</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:53</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:57</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:54</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:58</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:127</note>
       </notes>
       <segment>
         <source>Content</source>
@@ -1035,7 +1036,7 @@
     <unit id="314315645942131479">
       <notes>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/radio-channel-details/radio-channel-details.component.html:2</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:41</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:42</note>
       </notes>
       <segment>
         <source>Info</source>
@@ -2719,8 +2720,9 @@
     </unit>
     <unit id="1092246396276485959">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:70</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:74</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:71</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:75</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:129</note>
       </notes>
       <segment>
         <source>Incident</source>
@@ -2736,7 +2738,7 @@
     </unit>
     <unit id="3174883446698862933">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:59</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:60</note>
       </notes>
       <segment>
         <source>Content of the message</source>
@@ -2744,8 +2746,8 @@
     </unit>
     <unit id="5611592591303869712">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:100,99</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:103</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:101,100</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:104</note>
       </notes>
       <segment>
         <source>Status</source>
@@ -2753,7 +2755,7 @@
     </unit>
     <unit id="65984904390749158">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:120,119</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:121,120</note>
       </notes>
       <segment>
         <source>Finish</source>
@@ -2761,7 +2763,7 @@
     </unit>
     <unit id="7808756054397155068">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:135</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:137</note>
       </notes>
       <segment>
         <source>Reset</source>
@@ -2769,7 +2771,7 @@
     </unit>
     <unit id="8008587693876377253">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:43</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:44</note>
       </notes>
       <segment>
         <source>E.g. mail address</source>
@@ -2777,8 +2779,9 @@
     </unit>
     <unit id="910656806257300801">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:17,16</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:20</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:18,17</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:21</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:126</note>
       </notes>
       <segment>
         <source>Sender</source>
@@ -2786,7 +2789,7 @@
     </unit>
     <unit id="2791007109724882912">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:22</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:23</note>
       </notes>
       <segment>
         <source>Select sender</source>
@@ -2794,7 +2797,7 @@
     </unit>
     <unit id="7608330402066932450">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:76</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:77</note>
       </notes>
       <segment>
         <source>Select incident</source>
@@ -2806,6 +2809,22 @@
       </notes>
       <segment>
         <source>Phone</source>
+      </segment>
+    </unit>
+    <unit id="1467059276438662086">
+      <notes>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:133</note>
+      </notes>
+      <segment>
+        <source>New status</source>
+      </segment>
+    </unit>
+    <unit id="2352629566113014741">
+      <notes>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:132</note>
+      </notes>
+      <segment>
+        <source>Old status</source>
       </segment>
     </unit>
   </file>

@@ -32,7 +32,7 @@ export class LocalStorageResourceService extends ResourceService {
   public override getResources(filters?: ResourceFilters): Observable<Resource[]> {
     let resources: Resource[] = this.repository.fetchAll();
     if(filters) {
-      if(filters.byLabel) resources = resources.filter(r => r.label.includes(filters.byLabel!));
+      if(filters.byLabel) resources = resources.filter(r => r.label.toLowerCase().includes(filters.byLabel!.toLocaleLowerCase()));
       if(filters.byIncident) resources = resources.filter(r => r.incident === filters.byIncident);
       if(filters.byOperation) resources = resources.filter(r => r.operation === filters.byOperation);
       if(filters.byUser) resources = resources.filter(r => r.user === filters.byUser);

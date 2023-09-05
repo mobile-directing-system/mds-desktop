@@ -22,6 +22,8 @@ import { ResourceService } from './core/services/resource/resource.service';
 import { LocalStorageResourceService } from './core/services/resource/local-storage-resource.service';
 import { IncidentService } from './core/services/incident/incident.service';
 import { LocalStorageIncidentService } from './core/services/incident/local-storage-incident.service';
+import { MessageService } from './core/services/message/message.service';
+import { LocalStorageMessageService } from './core/services/message/local-storage-message.service';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,10 @@ import { LocalStorageIncidentService } from './core/services/incident/local-stor
     {
       provide: IncidentService,
       useClass: LocalStorageIncidentService
+    },
+    {
+      provide: MessageService,
+      useClass: LocalStorageMessageService
     },
     {
       provide: APP_INITIALIZER,
