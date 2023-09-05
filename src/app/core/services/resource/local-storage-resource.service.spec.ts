@@ -5,7 +5,7 @@ import { ResourceService } from './resource.service';
 import { Resource } from '../../model/resource';
 import { mockLocalStorage } from '../../util/testing';
 
-fdescribe('LocalStorageResourceService', () => {
+describe('LocalStorageResourceService', () => {
   let service: ResourceService;
 
   let createResource: Resource = {
