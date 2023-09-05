@@ -218,6 +218,12 @@ export const AppRoutes: PermissionGuardedRoute[] = [
       {
         path: 'mailbox',
         component: MailboxLayoutComponent,
+        children: [
+          {
+            path: 'create',
+            component: MailboxLayoutComponent
+          },
+        ]
       },
       {
         path: 'intelligence',
