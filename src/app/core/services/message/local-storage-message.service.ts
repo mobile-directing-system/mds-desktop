@@ -22,6 +22,7 @@ export class LocalStorageMessageService extends MessageService {
     return of(messages);
   }
 
+  //TODO filter out messages that need review
   public override getMailboxMessages(roleId: string, read: boolean): Observable<Message[]> {
     let messages: Message[] = this.repository.fetchAll();
     messages = messages.filter(message => {
