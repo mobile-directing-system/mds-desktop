@@ -1,21 +1,20 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
-import {concatMap, from, map, Observable, of, switchMap, toArray} from 'rxjs';
+import {concatMap, from, map, Observable, of, toArray} from 'rxjs';
 import {IncidentService} from 'src/app/core/services/incident/incident.service';
 import {OperationService} from 'src/app/core/services/operation.service';
-import {UserService} from 'src/app/core/services/user.service';
 import {getStatusCodeText} from 'src/app/core/model/resource';
 import {MessageService} from "../../../core/services/message/message.service";
 import {ChannelType, localizeChannelType} from "../../../core/model/channel";
 import {Message, MessageDirection, Participant} from "../../../core/model/message";
 import {ResourceService} from "../../../core/services/resource/resource.service";
 import {AddressBookService} from "../../../core/services/addressbook.service";
-import {GroupFilter, GroupService, GroupSort} from "../../../core/services/group.service";
+import {GroupService} from "../../../core/services/group.service";
 import {AuthService} from "../../../core/services/auth.service";
-import {PaginationParams} from "../../../core/util/store";
+import {Group} from "../../../core/model/group";
 
 interface MessageRow {
   id: string;
@@ -39,6 +38,8 @@ export class IncomingMessagesViewComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  @Input() loggedInRole: Group | undefined;
 
   constructor(private messageService: MessageService, private operationService: OperationService, private resourceService: ResourceService,
               private groupService: GroupService, private incidentService: IncidentService, private addressBookService: AddressBookService, private authService: AuthService, private router: Router) {
@@ -134,19 +135,8 @@ export class IncomingMessagesViewComponent implements AfterViewInit {
   }
 
   refreshDataSource() {
-    let loggedInUserId = this.authService.loggedInUser();
-    let paginationParams: PaginationParams<GroupSort> = new PaginationParams<GroupSort>(1,0);
-    this.groupService.getGroups(paginationParams,{userId: loggedInUserId}).subscribe( paginatedGroup => {
-        if(paginatedGroup.entries.length > 0){
-          let groupTitle = paginatedGroup.entries[0].title;
-          let groupId = paginatedGroup.entries[0].id;
-        }
-      }
-    );
-
-
-
-    let messageRows = this.messageService.getMailboxMessages("S1", false).pipe(
+    if(this.loggedInRole){
+    let messageRows = this.messageService.getMailboxMessages(this.loggedInRole.id, false).pipe(
       concatMap(messages => from(messages)),
       map((message, _) => {
         let messageRow = <MessageRow>({
@@ -186,6 +176,7 @@ export class IncomingMessagesViewComponent implements AfterViewInit {
       }),
       toArray());
     messageRows.subscribe(rows => this.dataSource = new MatTableDataSource<MessageRow>(rows));
+    }
   }
 
   getParticipantLabel(senderType?: Participant, senderId?: string): Observable<string | undefined>{

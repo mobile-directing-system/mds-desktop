@@ -1,5 +1,15 @@
 <div class=view>
-  <h1 i18n>Mailbox for {{getRole() | }}</h1>
-  <app-heading-hint i18n>Read your messages and create new ones.</app-heading-hint>
-  <app-incoming-messages-view></app-incoming-messages-view>
+  <ng-container *ngIf="(loggedInRole===null)">
+    <h1 i18n>Mailbox</h1>
+    <app-heading-hint i18n>You must assign a role to this user first to be able to read and create messages for the role.</app-heading-hint>
+  </ng-container>
+
+  <ng-container *ngIf="loggedInRole">
+    <h1 i18n>Mailbox for {{loggedInRole.title}}</h1>
+    <app-heading-hint i18n>Read your messages and create new ones.</app-heading-hint>
+    <app-incoming-messages-view [loggedInRole]="loggedInRole"></app-incoming-messages-view>
+  </ng-container>
 </div>
+
+
+
