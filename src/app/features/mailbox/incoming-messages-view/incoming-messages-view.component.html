@@ -78,7 +78,8 @@
 
       <!-- Row shown when there is no matching data. -->
       <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="6" i18n>No data matching the filter "{{input.value}}"</td>
+        <td *ngIf="input.value" class="mat-cell" colspan="6" i18n>No messages matching the filter "{{input.value}}"</td>
+        <td *ngIf="!input.value" class="mat-cell" colspan="6" i18n>No messages at the moment</td>
       </tr>
     </table>
 
