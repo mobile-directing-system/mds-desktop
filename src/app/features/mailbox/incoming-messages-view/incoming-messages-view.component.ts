@@ -41,6 +41,8 @@ export class IncomingMessagesViewComponent implements AfterViewInit {
 
   @Input() loggedInRole: Group | undefined;
 
+  filterRead = false;
+
   constructor(private messageService: MessageService, private operationService: OperationService, private resourceService: ResourceService,
               private groupService: GroupService, private incidentService: IncidentService, private addressBookService: AddressBookService, private authService: AuthService, private router: Router) {
     const exampleMessages: Message[] = [
@@ -136,7 +138,7 @@ export class IncomingMessagesViewComponent implements AfterViewInit {
 
   refreshDataSource() {
     if(this.loggedInRole){
-    let messageRows = this.messageService.getMailboxMessages(this.loggedInRole.id, false).pipe(
+    let messageRows = this.messageService.getMailboxMessages(this.loggedInRole.id, this.filterRead).pipe(
       concatMap(messages => from(messages)),
       map((message, _) => {
         let messageRow = <MessageRow>({
@@ -206,6 +208,17 @@ export class IncomingMessagesViewComponent implements AfterViewInit {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+
+  public onFilterReadChange(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    if(filterValue === "unread"){
+      this.filterRead = false;
+      this.refreshDataSource();
+    }else if (filterValue === "read"){
+      this.filterRead = true;
+      this.refreshDataSource();
     }
   }
 
