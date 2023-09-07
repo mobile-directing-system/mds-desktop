@@ -15,7 +15,7 @@
 
             <!-- Sender -->
             <mat-step [stepControl]="senderForm" i18n-label label="Sender">
-                <div class="mat-step-content">
+                <div class="mat-step-content" id="sender-step">
                     <form [formGroup]="senderForm">
                         <mat-form-field class="app-edit-input">
                             <mat-label i18n>Sender</mat-label>
@@ -51,8 +51,8 @@
             </mat-step>
 
             <!-- Content -->
-            <mat-step i18n-label [stepControl]="contentForm" label="Content">
-                <div class="mat-step-content">
+            <mat-step [stepControl]="contentForm" i18n-label label="Content">
+                <div class="mat-step-content" id="content-step">
                     <form [formGroup]="contentForm">
                         <mat-form-field style="width: 100%;">
                             <mat-label i18n>Content</mat-label>
@@ -68,8 +68,8 @@
             </mat-step>
 
             <!-- Incident -->
-            <mat-step *ngIf="isResource(selectedSender)" i18n-label [stepControl]="contentForm" label="Incident">
-                <div class="mat-step-content">
+            <mat-step *ngIf="isResource(selectedSender)" [stepControl]="contentForm" i18n-label label="Incident">
+                <div class="mat-step-content" id="incident-step">
                     <form [formGroup]="incidentForm">
                         <mat-form-field class="app-edit-input">
                             <mat-label i18n>Incident</mat-label>
@@ -80,7 +80,8 @@
                                 <mat-icon>close</mat-icon>
                             </button>
 
-                            <mat-autocomplete requireSelection [displayWith]="displayIncident" #auto="matAutocomplete">
+                            <mat-autocomplete requireSelection [displayWith]="displayIncident"
+                                (optionSelected)="incidentSelected($event.option.value)" #auto="matAutocomplete">
                                 <mat-option *ngFor="let incident of filteredIncidents | async" [value]="incident">
                                     <div style="display: flex; align-items: center;">
                                         {{ incident.name }}
@@ -98,7 +99,7 @@
 
             <!-- Status -->
             <mat-step *ngIf="isResource(selectedSender)" i18n-label label="Status">
-                <div class="mat-step-content">
+                <div class="mat-step-content" id="status-step">
                     <form [formGroup]="statusForm">
                         <mat-form-field class="app-edit-input">
                             <mat-label i18n>Status</mat-label>
@@ -118,7 +119,7 @@
 
             <!-- Finish -->
             <mat-step i18n-label label="Finish">
-                <mat-card class="mat-step-content">
+                <mat-card class="mat-step-content" id="finish-step">
                     <mat-card-header>
                         <mat-card-title>{{ channelForm.controls.channel.value | titlecase }}</mat-card-title>
                     </mat-card-header>
@@ -134,8 +135,10 @@
                         </p>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-button (click)="resetStepper()" i18n>Reset</button>
-                        <button mat-button i18n>Confirm</button>
+                        <button mat-button id="reset-message-button" type="reset" (click)="resetStepper()"
+                            i18n>Reset</button>
+                        <button mat-button id="submit-message-button" type="submit" (click)="submitMessage()"
+                            i18n>Confirm</button>
                     </mat-card-actions>
                 </mat-card>
             </mat-step>
