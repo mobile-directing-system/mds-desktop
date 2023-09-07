@@ -1,6 +1,6 @@
 import {fakeAsync, tick} from '@angular/core/testing';
 
-import {createRoutingFactory, SpectatorRouting} from "@ngneat/spectator";
+import {byTextContent, createRoutingFactory, SpectatorRouting} from "@ngneat/spectator";
 import {CoreModule} from "../../../core/core.module";
 import {AccessControlService} from "../../../core/services/access-control.service";
 import {AccessControlMockService} from "../../../core/services/access-control-mock.service";
@@ -19,7 +19,7 @@ import {Resource} from "../../../core/model/resource";
 import {AddressBookEntry} from "../../../core/model/address-book-entry";
 import {ChannelType} from "../../../core/model/channel";
 
-fdescribe('IncomingMessagesViewComponent', () => {
+describe('IncomingMessagesViewComponent', () => {
   let spectator: SpectatorRouting<IncomingMessagesViewComponent>;
   let component: IncomingMessagesViewComponent;
 
@@ -101,6 +101,27 @@ fdescribe('IncomingMessagesViewComponent', () => {
           recipientType: Participant.AddressBookEntry,
           recipientId: "recipientId",
           read: false
+        }
+      ]
+    },
+  ];
+
+  const mailboxMessagesRead: Message[] = [
+    {
+      id: "0",
+      direction: MessageDirection.Incoming,
+      incomingChannelType: ChannelType.Email,
+      senderId: "senderId",
+      senderType: Participant.AddressBookEntry,
+      content: "Example content",
+      createdAt: new Date(),
+      priority: 1000,
+      needsReview: false,
+      recipients: [
+        {
+          recipientType: Participant.Role,
+          recipientId: "loggedInRoleId",
+          read: true
         }
       ]
     },
@@ -198,52 +219,20 @@ fdescribe('IncomingMessagesViewComponent', () => {
 
   it('should load messages successfully', fakeAsync(() => {
     component.ngOnInit();
-    tick();
-    tick();
-    tick();
     messagesSubject.next(mailboxMessages);
     incidentSubject.next(incident);
-    incidentSubject.next(incident);
-    incidentSubject.next(incident);
-    incidentSubject.next(incident);
-    resourceSubject.next(resource);
-    resourceSubject.next(resource);
-    resourceSubject.next(resource);
-    resourceSubject.next(resource);
-    resourceSubject.next(resource);
-    resourceSubject.next(resource);
-    resourceSubject.next(resource);
-    resourceSubject.next(resource);
     resourceSubject.next(resource);
     addressBookSubject.next(addressBookEntry);
-    addressBookSubject.next(addressBookEntry);
-    addressBookSubject.next(addressBookEntry);
-    addressBookSubject.next(addressBookEntry)
-    addressBookSubject.next(addressBookEntry);
-    addressBookSubject.next(addressBookEntry);
-    addressBookSubject.next(addressBookEntry);
-    addressBookSubject.next(addressBookEntry);
-    addressBookSubject.next(addressBookEntry);
-    addressBookSubject.next(addressBookEntry);
-    addressBookSubject.next(addressBookEntry);
-    addressBookSubject.next(addressBookEntry);
     groupSubject.next(group);
-    groupSubject.next(group);
-    groupSubject.next(group);
-    groupSubject.next(group);
-    groupSubject.next(group);
-    groupSubject.next(group);
-    groupSubject.next(group);
-    groupSubject.next(group);
-    groupSubject.next(group);
-    groupSubject.next(group);
-    groupSubject.next(group);
-    groupSubject.next(group);
-    tick();
-    tick();
-    tick();
     tick();
     expect(spectator.component.dataSource.data.length).toEqual(mailboxMessages.length);
+    spectator.detectComponentChanges();
+    expect(spectator.query(byTextContent('Example content 123', {
+      exact: false,
+      selector: 'td',
+    }))).toBeVisible();
   }));
+
+  // test if read button toggles set filter read value
 
 });

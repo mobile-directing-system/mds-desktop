@@ -1,6 +1,6 @@
 import {fakeAsync, tick} from '@angular/core/testing';
 
-import {createRoutingFactory, SpectatorRouting} from "@ngneat/spectator";
+import {byTextContent, createRoutingFactory, SpectatorRouting} from "@ngneat/spectator";
 import {CoreModule} from "../../../core/core.module";
 import {AccessControlService} from "../../../core/services/access-control.service";
 import {AccessControlMockService} from "../../../core/services/access-control-mock.service";
@@ -78,13 +78,34 @@ describe('MailboxLayoutComponent', () => {
     groupSubject.next(paginatedGroups);
     tick();
     expect(spectator.component.loggedInRole).toEqual(group);
+    spectator.detectComponentChanges();
+    expect(spectator.query(byTextContent('', {
+      exact: false,
+      selector: 'app-incoming-messages-view',
+    }))).toBeVisible();
   }));
+
+  it('should hide create button when missing appropriate permissions', async () => {
+    groupSubject.next(paginatedGroups);
+    await spectator.fixture.whenStable();
+
+    expect(spectator.component.loggedInRole).toEqual(group);
+    expect(spectator.query(byTextContent('', {
+      exact: false,
+      selector: 'h1',
+    }))).toBeVisible();
+  });
 
   it('should handle no role yet successful', fakeAsync(() => {
     expect(spectator.component.loggedInRole).toBeUndefined();
     groupSubject.next(emptyPaginatedGroups);
     tick();
     expect(spectator.component.loggedInRole).toBeNull();
+    spectator.detectComponentChanges();
+    expect(spectator.query(byTextContent('', {
+      exact: false,
+      selector: 'app-incoming-messages-view',
+    }))).not.toBeVisible();
   }));
 
 });
