@@ -3,11 +3,14 @@ import { FormBuilder } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Observable, debounceTime, forkJoin, map, mergeMap, of, startWith } from 'rxjs';
 import { AddressBookEntry } from 'src/app/core/model/address-book-entry';
-import { Channel, ChannelType, localizeChannelType } from 'src/app/core/model/channel';
+import { ChannelType, localizeChannelType } from 'src/app/core/model/channel';
 import { Incident } from 'src/app/core/model/incident';
+import { Message, MessageDirection, Participant } from 'src/app/core/model/message';
 import { Resource, statusCodes, getStatusCodeText } from 'src/app/core/model/resource';
 import { AddressBookService } from 'src/app/core/services/addressbook.service';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
+import { MessageService } from 'src/app/core/services/message/message.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 import { ResourceService } from 'src/app/core/services/resource/resource.service';
 
 @Component({
@@ -24,11 +27,11 @@ export class SignalerIncomingView implements OnInit {
   senderForm = this.fb.group({
     sender: this.fb.control<AddressBookEntry | string>(""),
     info: this.fb.control<string>(""),
-  })
+  });
 
   contentForm = this.fb.group({
     content: this.fb.nonNullable.control<string>("")
-  })
+  });
 
   incidentForm = this.fb.group({
     incident: this.fb.nonNullable.control<Incident | string>("")
@@ -36,21 +39,24 @@ export class SignalerIncomingView implements OnInit {
 
   statusForm = this.fb.group({
     statusCode: this.fb.control<number | null>(null)
-  })
+  });
 
-  selectedSender: AddressBookEntry | null = null
+  selectedSender: AddressBookEntry | null = null;
   filteredSenderOptions: Observable<AddressBookEntry[]> = of([]);
+
+  selectedIncident: Incident | null = null;
   filteredIncidents: Observable<Incident[]> = of([]);
 
   @ViewChild(MatStepper) stepper!: MatStepper
 
   readonly channelTypes: ChannelType[] = Object.values(ChannelType);
-  localizeChannel = localizeChannelType
+  readonly localizeChannel = localizeChannelType
 
   constructor(private fb: FormBuilder, private addressBookService: AddressBookService,
-    private resourceService: ResourceService, private incidentService: IncidentService) { }
+    private resourceService: ResourceService, private incidentService: IncidentService,
+    private messageService: MessageService, private notificationService: NotificationService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.filteredSenderOptions = this.senderForm.controls.sender.valueChanges.pipe(
       startWith(""),
       debounceTime(250),
@@ -91,13 +97,45 @@ export class SignalerIncomingView implements OnInit {
 
   /**
    * Searches for available incidents
-   * @param query 
-   * @returns 
+   * 
+   * @param query Label to search for
    */
   searchIncidents(query: string): Observable<Incident[]> {
     return this.incidentService.getIncidents({
       byName: query,
       isCompleted: false
+    });
+  }
+
+  /**
+   * Submits new incoming message with the data of the stepper
+   */
+  submitMessage() {
+    if(!this.selectedSender) return;
+
+    let msg: Message = {
+      id: "",
+      direction: MessageDirection.Incoming,
+      incomingChannelType: this.channelForm.getRawValue().channel,
+      senderType: this.isResource(this.selectedSender) ? Participant.Resource : Participant.AddressBookEntry,
+      senderId: this.selectedSender.id,
+      info: this.senderForm.getRawValue().info ?? "",
+      content: this.contentForm.getRawValue().content,
+      createdAt: new Date(),
+      needsReview: true,
+      recipients: []
+    }
+
+    // Set resource specific fields
+    if(this.isResource(this.selectedSender)) {
+      msg.incidentId = this.selectedIncident?.id;
+      msg.resourceStatusCode = this.statusForm.getRawValue().statusCode ?? undefined;
+    }
+
+    this.messageService.createMessage(msg).subscribe(msg => {
+      console.log(msg);
+      this.notificationService.notifyUninvasiveShort($localize`:@@signaler-message-submitted:Message successfully submitted.`);
+      this.resetStepper();
     });
   }
 
@@ -129,6 +167,10 @@ export class SignalerIncomingView implements OnInit {
     this.selectedSender = entity;
   }
 
+  incidentSelected(incident: Incident) {
+    this.selectedIncident = incident;
+  }
+
   asResource(entry: AddressBookEntry): Resource {
     return entry as Resource;
   }
@@ -138,6 +180,8 @@ export class SignalerIncomingView implements OnInit {
   }
 
   resetStepper() {
+    this.selectedIncident = null;
+    this.selectedSender = null;
     this.senderForm.reset();
     this.contentForm.reset();
     this.incidentForm.reset();

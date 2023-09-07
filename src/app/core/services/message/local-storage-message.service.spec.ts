@@ -6,7 +6,7 @@ import { Message, MessageDirection, Participant } from '../../model/message';
 import { ChannelType } from '../../model/channel';
 import { mockLocalStorage } from '../../util/testing';
 
-fdescribe('LocalStorageMessageService', () => {
+describe('LocalStorageMessageService', () => {
   let service: MessageService;
 
   const exampleMessages: Message[] = [
