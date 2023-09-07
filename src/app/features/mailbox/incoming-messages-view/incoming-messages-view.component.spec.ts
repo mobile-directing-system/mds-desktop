@@ -106,27 +106,6 @@ describe('IncomingMessagesViewComponent', () => {
     },
   ];
 
-  const mailboxMessagesRead: Message[] = [
-    {
-      id: "0",
-      direction: MessageDirection.Incoming,
-      incomingChannelType: ChannelType.Email,
-      senderId: "senderId",
-      senderType: Participant.AddressBookEntry,
-      content: "Example content",
-      createdAt: new Date(),
-      priority: 1000,
-      needsReview: false,
-      recipients: [
-        {
-          recipientType: Participant.Role,
-          recipientId: "loggedInRoleId",
-          read: true
-        }
-      ]
-    },
-  ];
-
   const incident: Incident = {
     id: "incidentId",
     name: "incidentName",
@@ -231,6 +210,16 @@ describe('IncomingMessagesViewComponent', () => {
       exact: false,
       selector: 'td',
     }))).toBeVisible();
+  }));
+
+  it('should set read filter successfully', fakeAsync(() => {
+   spectator.component.onFilterReadChange("read");
+   expect(spectator.component.filterRead).toEqual(true);
+  }));
+
+  it('should set unread filter successfully', fakeAsync(() => {
+    spectator.component.onFilterReadChange("unread");
+    expect(spectator.component.filterRead).toEqual(false);
   }));
 
   // test if read button toggles set filter read value

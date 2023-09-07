@@ -6,9 +6,9 @@
       <input matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>
 
-    <mat-button-toggle-group name="filterRead" aria-label="FilterRead" (change)="onFilterReadChange($event.value)">
-      <mat-button-toggle [checked]=true value="unread">Unread</mat-button-toggle>
-      <mat-button-toggle value="read">Read</mat-button-toggle>
+    <mat-button-toggle-group name="filterRead" aria-label="FilterRead" >
+      <mat-button-toggle [checked]=true value="unread" (change)="onFilterReadChange($event.value)">Unread</mat-button-toggle>
+      <mat-button-toggle value="read" (change)="onFilterReadChange($event.value)">Read</mat-button-toggle>
     </mat-button-toggle-group>
 
 

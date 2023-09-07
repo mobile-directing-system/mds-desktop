@@ -7,8 +7,8 @@ import {map, Observable, of} from 'rxjs';
 import {IncidentService} from 'src/app/core/services/incident/incident.service';
 import {getStatusCodeText} from 'src/app/core/model/resource';
 import {MessageService} from "../../../core/services/message/message.service";
-import {ChannelType, localizeChannelType} from "../../../core/model/channel";
-import {Message, MessageDirection, Participant} from "../../../core/model/message";
+import {localizeChannelType} from "../../../core/model/channel";
+import {Participant} from "../../../core/model/message";
 import {ResourceService} from "../../../core/services/resource/resource.service";
 import {AddressBookService} from "../../../core/services/addressbook.service";
 import {GroupService} from "../../../core/services/group.service";
@@ -43,94 +43,6 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
 
   constructor(private messageService: MessageService, private resourceService: ResourceService,
               private groupService: GroupService, private incidentService: IncidentService, private addressBookService: AddressBookService, private router: Router) {
-    const exampleMessages: Message[] = [
-      {
-        id: "0",
-        direction: MessageDirection.Incoming,
-        incomingChannelType: ChannelType.Email,
-        senderId: "123",
-        senderType: Participant.AddressBookEntry,
-        content: "Example content",
-        createdAt: new Date(),
-        priority: 1000,
-        recipients: [
-          {
-            recipientType: Participant.Role,
-            recipientId: "S1",
-            read: false
-          }
-        ]
-      },
-      {
-        id: "1",
-        direction: MessageDirection.Incoming,
-        incomingChannelType: ChannelType.Email,
-        senderId: "1234",
-        senderType: Participant.Resource,
-        content: "Example content 123",
-        createdAt: new Date(),
-        needsReview: true,
-        priority: 0,
-        recipients: [
-          {
-            recipientType: Participant.Role,
-            recipientId: "S1",
-            read: false
-          },
-          {
-            recipientType: Participant.Role,
-            recipientId: "S3",
-            read: false
-          }
-        ]
-      },
-      {
-        id: "2",
-        direction: MessageDirection.Outgoing,
-        senderType: Participant.Role,
-        senderId: "S1",
-        content: "A message from S1",
-        createdAt: new Date(),
-        needsReview: true,
-        recipients: [
-          {
-            recipientType: Participant.Role,
-            recipientId: "S2",
-            read: false
-          },
-          {
-            recipientType: Participant.Role,
-            recipientId: "S3",
-            read: false
-          }
-        ]
-      },
-      {
-        id: "3",
-        direction: MessageDirection.Outgoing,
-        senderType: Participant.Role,
-        senderId: "S2",
-        content: "A message from S2",
-        createdAt: new Date(),
-        recipients: [
-          {
-            recipientType: Participant.Role,
-            recipientId: "S4",
-            read: false
-          },
-          {
-            recipientType: Participant.AddressBookEntry,
-            recipientId: "12345",
-            send: false
-          },
-        ]
-      }
-    ];
-    // this.messageService.createMessage(exampleMessages[0]);
-    // this.messageService.createMessage(exampleMessages[1]);
-    // this.messageService.createMessage(exampleMessages[2]);
-    // this.messageService.createMessage(exampleMessages[3]);
-
   }
 
   ngOnInit(): void {
@@ -141,7 +53,6 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
 
   refreshDataSource() {
     if(this.loggedInRole){
-
       this.messageService.getMailboxMessages(this.loggedInRole.id, this.filterRead)
         .pipe(map (messages => messages.map(message => {
             let messageRow = <MessageRow>({
@@ -182,54 +93,6 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
         .subscribe((messageRows)=>{
           this.dataSource = new MatTableDataSource<MessageRow>(messageRows);
         });
-
-
-    // let messageRows = this.messageService.getMailboxMessages(this.loggedInRole.id, this.filterRead).pipe(
-    //   concatMap(messages => from(messages)),
-    //   map((message, _) => {
-    //     let messageRow = <MessageRow>({
-    //       id: message.id,
-    //       priority: message.priority,
-    //       createdAt: message.createdAt,
-    //       incomingChannelType: message.incomingChannelType ? localizeChannelType(message.incomingChannelType) : "",
-    //       sender: message.senderId,
-    //       recipients:"",
-    //       content: message.content,
-    //       incident: message.incidentId,
-    //      });
-    //
-    //     // get sender label
-    //     this.getParticipantLabel(message.senderType, message.senderId).subscribe((label => {
-    //       if(label) messageRow.sender = label;
-    //     }));
-    //
-    //     // get recipients label
-    //     message.recipients.forEach((recipient => {
-    //       this.getParticipantLabel(recipient.recipientType, recipient.recipientId).subscribe((label => {
-    //         if(!messageRow.recipients){ // first entry
-    //           if(label) messageRow.recipients = label;
-    //         }else{ // not first entry
-    //           if(label) messageRow.recipients += (", " + label);
-    //         }
-    //
-    //       }))
-    //     }))
-    //
-    //     //get incident label
-    //     if(message.incidentId) this.incidentService.getIncidentById(message.incidentId).subscribe((incident => {
-    //       if(incident) messageRow.incident = incident.name;
-    //     }));
-    //     console.log("hello");
-    //
-    //     return messageRow;
-    //   }),
-    //   toArray());
-    //   console.log("hello123");
-    //   messageRows.subscribe(rows => {
-    //     this.dataSource = new MatTableDataSource<MessageRow>(rows);
-    //     console.log("MMV");
-    //   });
-
     }
   }
 
@@ -263,12 +126,11 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
     }
   }
 
-  public onFilterReadChange(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    if(filterValue === "unread"){
+  public onFilterReadChange(value: String) {
+    if(value === "unread"){
       this.filterRead = false;
       this.refreshDataSource();
-    }else if (filterValue === "read"){
+    }else if (value === "read"){
       this.filterRead = true;
       this.refreshDataSource();
     }
