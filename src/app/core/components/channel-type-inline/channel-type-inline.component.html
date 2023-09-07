@@ -8,6 +8,14 @@
       <mat-icon>cell_tower</mat-icon>
       <span i18n="@@channel-type-radio">Radio</span>
     </div>
+    <div *ngSwitchCase="ChannelType.Phone">
+      <mat-icon>call</mat-icon>
+      <span i18n="@@channel-type-phone">Phone</span>
+    </div>
+    <div *ngSwitchCase="ChannelType.Email">
+      <mat-icon>mail</mat-icon>
+      <span i18n="@@channel-type-email">Email</span>
+    </div>
     <div *ngSwitchDefault class="unknown">
       <mat-icon>help_outline</mat-icon>
       <span i18n>Unknown</span>

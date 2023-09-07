@@ -61,7 +61,7 @@ describe('ChannelTypeInlineComponent', () => {
         });
 
         it('should display label', () => {
-          expect(spectator.query('mat-icon')).withContext('display icon').toBeVisible();
+          expect(spectator.query("span")).withContext('display label').toBeVisible();
           expect(spectator.query(byTextContent('unknown', {
             exact: false,
             selector: 'div',
