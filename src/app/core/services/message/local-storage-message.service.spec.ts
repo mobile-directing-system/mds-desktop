@@ -1,4 +1,4 @@
-import { TestBed, fakeAsync, flush, tick } from '@angular/core/testing';
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { LocalStorageMessageService } from './local-storage-message.service';
 import { MessageService } from './message.service';
@@ -6,7 +6,7 @@ import { Message, MessageDirection, Participant } from '../../model/message';
 import { ChannelType } from '../../model/channel';
 import { mockLocalStorage } from '../../util/testing';
 
-fdescribe('LocalStorageMessageService', () => {
+describe('LocalStorageMessageService', () => {
   let service: MessageService;
 
   const exampleMessages: Message[] = [

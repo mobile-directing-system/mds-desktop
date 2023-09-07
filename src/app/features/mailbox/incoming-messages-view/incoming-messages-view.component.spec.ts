@@ -1,23 +1,249 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {fakeAsync, tick} from '@angular/core/testing';
 
-import { IncomingMessagesViewComponent } from './incoming-messages-view.component';
+import {createRoutingFactory, SpectatorRouting} from "@ngneat/spectator";
+import {CoreModule} from "../../../core/core.module";
+import {AccessControlService} from "../../../core/services/access-control.service";
+import {AccessControlMockService} from "../../../core/services/access-control-mock.service";
+import {Subject} from "rxjs";
+import {GroupService} from "../../../core/services/group.service";
+import {Group} from "../../../core/model/group";
+import {AuthService} from "../../../core/services/auth.service";
+import {IncomingMessagesViewComponent} from "./incoming-messages-view.component";
+import {MessageService} from "../../../core/services/message/message.service";
+import {IncidentService} from "../../../core/services/incident/incident.service";
+import {ResourceService} from "../../../core/services/resource/resource.service";
+import {AddressBookService} from "../../../core/services/addressbook.service";
+import {Message, MessageDirection, Participant} from "../../../core/model/message";
+import {Incident} from "../../../core/model/incident";
+import {Resource} from "../../../core/model/resource";
+import {AddressBookEntry} from "../../../core/model/address-book-entry";
+import {ChannelType} from "../../../core/model/channel";
 
-describe('IncomingMessagesViewComponent', () => {
+fdescribe('IncomingMessagesViewComponent', () => {
+  let spectator: SpectatorRouting<IncomingMessagesViewComponent>;
   let component: IncomingMessagesViewComponent;
-  let fixture: ComponentFixture<IncomingMessagesViewComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ IncomingMessagesViewComponent ]
-    })
-    .compileComponents();
+  const messagesSubject: Subject<Message[]> = new Subject();
+  const incidentSubject: Subject<Incident> = new Subject()
+  const resourceSubject: Subject<Resource|undefined> = new Subject();
+  const addressBookSubject: Subject<AddressBookEntry> = new Subject();
+  const groupSubject: Subject<Group> = new Subject();
 
-    fixture = TestBed.createComponent(IncomingMessagesViewComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  const mailboxMessages: Message[] = [
+    {
+      id: "0",
+      direction: MessageDirection.Incoming,
+      incomingChannelType: ChannelType.Email,
+      senderId: "senderId",
+      senderType: Participant.AddressBookEntry,
+      content: "Example content",
+      createdAt: new Date(),
+      priority: 1000,
+      needsReview: false,
+      recipients: [
+        {
+          recipientType: Participant.Role,
+          recipientId: "loggedInRoleId",
+          read: false
+        }
+      ]
+    },
+    {
+      id: "1",
+      direction: MessageDirection.Incoming,
+      incomingChannelType: ChannelType.Email,
+      senderId: "senderId",
+      senderType: Participant.Resource,
+      content: "Example content 123",
+      createdAt: new Date(),
+      needsReview: false,
+      priority: 0,
+      recipients: [
+        {
+          recipientType: Participant.Role,
+          recipientId: "loggedInRoleId",
+          read: false
+        },
+        {
+          recipientType: Participant.Role,
+          recipientId: "S3",
+          read: false
+        }
+      ]
+    },
+    {
+      id: "1",
+      direction: MessageDirection.Incoming,
+      incomingChannelType: ChannelType.Email,
+      senderId: "senderId",
+      senderType: Participant.Role,
+      content: "Example content 123",
+      createdAt: new Date(),
+      needsReview: false,
+      priority: 0,
+      recipients: [
+        {
+          recipientType: Participant.Role,
+          recipientId: "loggedInRoleId",
+          read: false
+        },
+        {
+          recipientType: Participant.Role,
+          recipientId: "recipientId",
+          read: false
+        },
+        {
+          recipientType: Participant.Resource,
+          recipientId: "recipientId",
+          read: false
+        },
+        {
+          recipientType: Participant.AddressBookEntry,
+          recipientId: "recipientId",
+          read: false
+        }
+      ]
+    },
+  ];
+
+  const incident: Incident = {
+    id: "incidentId",
+    name: "incidentName",
+    description: "description",
+    operation: "operation",
+    isCompleted: false,
+  };
+
+  const resource: Resource = {
+    id: "resourceId",
+    label: "resourceLabel",
+    description: "description",
+    statusCode: 1,
+  };
+
+  const addressBookEntry: AddressBookEntry = {
+    id: "addressBookId",
+    label: "addressBookLabel",
+    description: "description",
+  };
+
+  const group: Group = {
+    id: "loggedInRoleId",
+    title: "S1",
+    description: "description",
+    members:["loggedInUserId"]
+  };
+
+
+  const createComponent = createRoutingFactory({
+    component: IncomingMessagesViewComponent,
+    imports: [
+      CoreModule,
+    ],
+    providers: [
+      {
+        provide: AccessControlService,
+        useExisting: AccessControlMockService,
+      },
+      {
+        provide: MessageService,
+        useValue: {
+          getMailboxMessages: ()=> messagesSubject,
+        },
+      },
+      {
+        provide: IncidentService,
+        useValue: {
+          getIncidentById: ()=> incidentSubject,
+        },
+      },
+      {
+        provide: ResourceService,
+        useValue: {
+          getResourceById: ()=> resourceSubject,
+        },
+      },
+      {
+        provide: AddressBookService,
+        useValue: {
+          getAddressBookEntryById: ()=> addressBookSubject,
+        },
+      },
+      {
+        provide: GroupService,
+        useValue: {
+          getGroupById: ()=> groupSubject,
+        },
+      },
+    ],
+    mocks: [
+      AuthService,
+    ],
+    detectChanges: false,
   });
+
+
+  beforeEach(fakeAsync(() => {
+    spectator = createComponent();
+    component = spectator.component;
+    component.loggedInRole = group;
+    spectator.router.navigate = jasmine.createSpy().and.callFake(spectator.router.navigate).and.resolveTo();
+    spectator.detectComponentChanges();
+    tick();
+  }));
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
+
+  it('should load messages successfully', fakeAsync(() => {
+    component.ngOnInit();
+    tick();
+    tick();
+    tick();
+    messagesSubject.next(mailboxMessages);
+    incidentSubject.next(incident);
+    incidentSubject.next(incident);
+    incidentSubject.next(incident);
+    incidentSubject.next(incident);
+    resourceSubject.next(resource);
+    resourceSubject.next(resource);
+    resourceSubject.next(resource);
+    resourceSubject.next(resource);
+    resourceSubject.next(resource);
+    resourceSubject.next(resource);
+    resourceSubject.next(resource);
+    resourceSubject.next(resource);
+    resourceSubject.next(resource);
+    addressBookSubject.next(addressBookEntry);
+    addressBookSubject.next(addressBookEntry);
+    addressBookSubject.next(addressBookEntry);
+    addressBookSubject.next(addressBookEntry)
+    addressBookSubject.next(addressBookEntry);
+    addressBookSubject.next(addressBookEntry);
+    addressBookSubject.next(addressBookEntry);
+    addressBookSubject.next(addressBookEntry);
+    addressBookSubject.next(addressBookEntry);
+    addressBookSubject.next(addressBookEntry);
+    addressBookSubject.next(addressBookEntry);
+    addressBookSubject.next(addressBookEntry);
+    groupSubject.next(group);
+    groupSubject.next(group);
+    groupSubject.next(group);
+    groupSubject.next(group);
+    groupSubject.next(group);
+    groupSubject.next(group);
+    groupSubject.next(group);
+    groupSubject.next(group);
+    groupSubject.next(group);
+    groupSubject.next(group);
+    groupSubject.next(group);
+    groupSubject.next(group);
+    tick();
+    tick();
+    tick();
+    tick();
+    expect(spectator.component.dataSource.data.length).toEqual(mailboxMessages.length);
+  }));
+
 });

@@ -1,11 +1,10 @@
-import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
-import {concatMap, from, map, Observable, of, toArray} from 'rxjs';
+import {map, Observable, of} from 'rxjs';
 import {IncidentService} from 'src/app/core/services/incident/incident.service';
-import {OperationService} from 'src/app/core/services/operation.service';
 import {getStatusCodeText} from 'src/app/core/model/resource';
 import {MessageService} from "../../../core/services/message/message.service";
 import {ChannelType, localizeChannelType} from "../../../core/model/channel";
@@ -13,7 +12,6 @@ import {Message, MessageDirection, Participant} from "../../../core/model/messag
 import {ResourceService} from "../../../core/services/resource/resource.service";
 import {AddressBookService} from "../../../core/services/addressbook.service";
 import {GroupService} from "../../../core/services/group.service";
-import {AuthService} from "../../../core/services/auth.service";
 import {Group} from "../../../core/model/group";
 
 interface MessageRow {
@@ -32,7 +30,7 @@ interface MessageRow {
   templateUrl: './incoming-messages-view.component.html',
   styleUrls: ['./incoming-messages-view.component.scss']
 })
-export class IncomingMessagesViewComponent implements AfterViewInit {
+export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['id', 'priority', 'createdAt', 'incomingChannelType', 'sender', 'recipients', 'content', 'incident'];
   dataSource: MatTableDataSource<MessageRow> = new MatTableDataSource();
 
@@ -43,8 +41,8 @@ export class IncomingMessagesViewComponent implements AfterViewInit {
 
   filterRead = false;
 
-  constructor(private messageService: MessageService, private operationService: OperationService, private resourceService: ResourceService,
-              private groupService: GroupService, private incidentService: IncidentService, private addressBookService: AddressBookService, private authService: AuthService, private router: Router) {
+  constructor(private messageService: MessageService, private resourceService: ResourceService,
+              private groupService: GroupService, private incidentService: IncidentService, private addressBookService: AddressBookService, private router: Router) {
     const exampleMessages: Message[] = [
       {
         id: "0",
@@ -133,51 +131,105 @@ export class IncomingMessagesViewComponent implements AfterViewInit {
     // this.messageService.createMessage(exampleMessages[2]);
     // this.messageService.createMessage(exampleMessages[3]);
 
+  }
+
+  ngOnInit(): void {
     this.refreshDataSource();
   }
 
+
+
   refreshDataSource() {
     if(this.loggedInRole){
-    let messageRows = this.messageService.getMailboxMessages(this.loggedInRole.id, this.filterRead).pipe(
-      concatMap(messages => from(messages)),
-      map((message, _) => {
-        let messageRow = <MessageRow>({
-          id: message.id,
-          priority: message.priority,
-          createdAt: message.createdAt,
-          incomingChannelType: message.incomingChannelType ? localizeChannelType(message.incomingChannelType) : "",
-          sender: message.senderId,
-          recipients:"",
-          content: message.content,
-          incident: message.incidentId,
-         });
 
-        // get sender label
-        this.getParticipantLabel(message.senderType, message.senderId).subscribe((label => {
-          if(label) messageRow.sender = label;
-        }));
+      this.messageService.getMailboxMessages(this.loggedInRole.id, this.filterRead)
+        .pipe(map (messages => messages.map(message => {
+            let messageRow = <MessageRow>({
+              id: message.id,
+              priority: message.priority,
+              createdAt: message.createdAt,
+              incomingChannelType: message.incomingChannelType ? localizeChannelType(message.incomingChannelType) : "",
+              sender: message.senderId,
+              recipients:"",
+              content: message.content,
+              incident: message.incidentId,
+            });
 
-        // get recipients label
-        message.recipients.forEach((recipient => {
-          this.getParticipantLabel(recipient.recipientType, recipient.recipientId).subscribe((label => {
-            if(!messageRow.recipients){ // first entry
-              if(label) messageRow.recipients = label;
-            }else{ // not first entry
-              if(label) messageRow.recipients += (", " + label);
-            }
+            // get sender label
+            this.getParticipantLabel(message.senderType, message.senderId).subscribe((label => {
+              if(label) messageRow.sender = label;
+            }));
 
-          }))
-        }))
+            // get recipients label
+            message.recipients.forEach((recipient => {
+              this.getParticipantLabel(recipient.recipientType, recipient.recipientId).subscribe((label => {
+                if(!messageRow.recipients){ // first entry
+                  if(label) messageRow.recipients = label;
+                }else{ // not first entry
+                  if(label) messageRow.recipients += (", " + label);
+                }
+              }))
+            }))
 
-        //get incident label
-        if(message.incidentId) this.incidentService.getIncidentById(message.incidentId).subscribe((incident => {
-          if(incident) messageRow.incident = incident.name;
-        }));
+            //get incident label
+            if(message.incidentId) this.incidentService.getIncidentById(message.incidentId).subscribe((incident => {
+              if(incident) messageRow.incident = incident.name;
+            }));
 
-        return messageRow;
-      }),
-      toArray());
-    messageRows.subscribe(rows => this.dataSource = new MatTableDataSource<MessageRow>(rows));
+            return messageRow;
+          })
+        ))
+        .subscribe((messageRows)=>{
+          this.dataSource = new MatTableDataSource<MessageRow>(messageRows);
+        });
+
+
+    // let messageRows = this.messageService.getMailboxMessages(this.loggedInRole.id, this.filterRead).pipe(
+    //   concatMap(messages => from(messages)),
+    //   map((message, _) => {
+    //     let messageRow = <MessageRow>({
+    //       id: message.id,
+    //       priority: message.priority,
+    //       createdAt: message.createdAt,
+    //       incomingChannelType: message.incomingChannelType ? localizeChannelType(message.incomingChannelType) : "",
+    //       sender: message.senderId,
+    //       recipients:"",
+    //       content: message.content,
+    //       incident: message.incidentId,
+    //      });
+    //
+    //     // get sender label
+    //     this.getParticipantLabel(message.senderType, message.senderId).subscribe((label => {
+    //       if(label) messageRow.sender = label;
+    //     }));
+    //
+    //     // get recipients label
+    //     message.recipients.forEach((recipient => {
+    //       this.getParticipantLabel(recipient.recipientType, recipient.recipientId).subscribe((label => {
+    //         if(!messageRow.recipients){ // first entry
+    //           if(label) messageRow.recipients = label;
+    //         }else{ // not first entry
+    //           if(label) messageRow.recipients += (", " + label);
+    //         }
+    //
+    //       }))
+    //     }))
+    //
+    //     //get incident label
+    //     if(message.incidentId) this.incidentService.getIncidentById(message.incidentId).subscribe((incident => {
+    //       if(incident) messageRow.incident = incident.name;
+    //     }));
+    //     console.log("hello");
+    //
+    //     return messageRow;
+    //   }),
+    //   toArray());
+    //   console.log("hello123");
+    //   messageRows.subscribe(rows => {
+    //     this.dataSource = new MatTableDataSource<MessageRow>(rows);
+    //     console.log("MMV");
+    //   });
+
     }
   }
 
@@ -234,4 +286,6 @@ export class IncomingMessagesViewComponent implements AfterViewInit {
   getStatusCodeText(statusCode: number): string {
     return getStatusCodeText(statusCode);
   }
+
+
 }
