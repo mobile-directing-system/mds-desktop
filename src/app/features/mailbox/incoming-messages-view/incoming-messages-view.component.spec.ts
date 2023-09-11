@@ -222,6 +222,5 @@ describe('IncomingMessagesViewComponent', () => {
     expect(spectator.component.filterRead).toEqual(false);
   }));
 
-  // test if read button toggles set filter read value
 
 });

@@ -13,8 +13,16 @@ import {ResourceService} from "../../../core/services/resource/resource.service"
 import {AddressBookService} from "../../../core/services/addressbook.service";
 import {GroupService} from "../../../core/services/group.service";
 import {Group} from "../../../core/model/group";
+import {MatDialog} from "@angular/material/dialog";
+import {IncomingMessageComponent} from "./incoming-message/incoming-message.component";
 
-interface MessageRow {
+export interface DialogData {
+  messageRow: MessageRow;
+  loggedInRole: Group;
+  isRead: boolean;
+}
+
+export interface MessageRow {
   id: string;
   priority: number;
   createdAt: Date;
@@ -42,7 +50,7 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
   filterRead = false;
 
   constructor(private messageService: MessageService, private resourceService: ResourceService,
-              private groupService: GroupService, private incidentService: IncidentService, private addressBookService: AddressBookService, private router: Router) {
+              private groupService: GroupService, private incidentService: IncidentService, private addressBookService: AddressBookService, private router: Router, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -91,7 +99,8 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
           })
         ))
         .subscribe((messageRows)=>{
-          this.dataSource = new MatTableDataSource<MessageRow>(messageRows);
+          if(this.dataSource) this.dataSource.data = messageRows;
+          else this.dataSource = new MatTableDataSource<MessageRow>(messageRows);
         });
     }
   }
@@ -142,7 +151,16 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
   }
 
   entryClicked(row: MessageRow) {
-    this.router.navigate(["/resources", row.id]);
+    const dialogRef = this.dialog.open(IncomingMessageComponent, {
+      data: {
+        messageRow: row,
+        loggedInRole: this.loggedInRole,
+        isRead: this.filterRead
+      },
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.refreshDataSource();
+    });
   }
 
   getStatusCodeText(statusCode: number): string {

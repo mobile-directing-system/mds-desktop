@@ -10,13 +10,15 @@ import {MatInputModule} from "@angular/material/input";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import {MatTableModule} from "@angular/material/table";
+import { IncomingMessageComponent } from './incoming-messages-view/incoming-message/incoming-message.component';
 
 
 
 @NgModule({
   declarations: [
     MailboxLayoutComponent,
-    IncomingMessagesViewComponent
+    IncomingMessagesViewComponent,
+    IncomingMessageComponent
   ],
   imports: [
     CommonModule,

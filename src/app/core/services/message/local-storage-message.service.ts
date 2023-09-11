@@ -9,9 +9,13 @@ export class LocalStorageMessageService extends MessageService {
 
   private repository: LocalStorageCRUDRepository<Message> = new LocalStorageCRUDRepository<Message>("mds-desktop__messages");
 
-  public override createMessage(message: Message): Observable<Message> {
-    return of(this.repository.save(message));
+  /**
+   * Get message by id
+   */
+  public override getMessageById(id: string): Observable<Message | undefined> {
+    return of(this.repository.findById(id));
   }
+
 
   public override getMessages(filters?: MessageFilters): Observable<Message[]> {
     let messages: Message[] = this.repository.fetchAll();
@@ -20,6 +24,14 @@ export class LocalStorageMessageService extends MessageService {
       if(filters.byDirection !== undefined) messages = messages.filter(m => m.direction === filters.byDirection);
     }
     return of(messages);
+  }
+
+  public override createMessage(message: Message): Observable<Message> {
+    return of(this.repository.save(message));
+  }
+
+  public override updateMessage(message: Message): Observable<boolean> {
+    return of(this.repository.replace(message));
   }
 
   //TODO filter out messages that need review

@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>
+    <div class="header">
+      <span i18n>Message 21</span>
+      <app-importance-inline [importance]="data.messageRow.priority"></app-importance-inline>
+    </div>
+ </h1>
+<div mat-dialog-content>
+  <div class="context">
+    <div i18n class="left-row">
+      <p> Received at: {{ data.messageRow.createdAt | date:'medium' }} </p>
+      <p> Sender: {{ data.messageRow.sender}} </p>
+      <p> Channel: {{ data.messageRow.incomingChannelType  }} </p>
+    </div>
+    <div i18n class="right-row">
+      <p> Recipients: {{ data.messageRow.recipients}} </p>
+      <p> Incident: {{ data.messageRow.incident}} </p>
+    </div>
+  </div>
+  <div class="content">{{data.messageRow.content}}</div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Cancel</button>
+  <button mat-button>React with new message</button>
+  <button *ngIf="!data.isRead" mat-button cdkFocusInitial (click)="toggleReadState()">Mark as read</button>
+  <button *ngIf="data.isRead" mat-button cdkFocusInitial (click)="toggleReadState()">Mark as unread</button>
+</div>
