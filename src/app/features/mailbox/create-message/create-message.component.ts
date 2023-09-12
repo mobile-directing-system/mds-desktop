@@ -13,11 +13,19 @@ import {IncidentService} from "../../../core/services/incident/incident.service"
 import {ResourceService} from "../../../core/services/resource/resource.service";
 import {AddressBookService} from "../../../core/services/addressbook.service";
 import {GroupService, GroupSort} from "../../../core/services/group.service";
+import {Group} from "../../../core/model/group";
+import {AuthService} from "../../../core/services/auth.service";
+import {ChannelType} from "../../../core/model/channel";
 
 
 export interface Recipient {
   label: string;
-  id: {type: Participant, id: string,}
+  id: RecipientId
+}
+
+export interface RecipientId{
+  type: Participant,
+  id: string
 }
 
 @Component({
@@ -32,13 +40,25 @@ export class CreateMessageComponent {
   constructor(private messageService: MessageService, private fb: FormBuilder,
               private router: Router, private route: ActivatedRoute, private notificationService: NotificationService,
               private incidentService: IncidentService, private resourceService: ResourceService,
-              private addressBookService: AddressBookService, private groupService: GroupService) {
+              private addressBookService: AddressBookService, private groupService: GroupService,
+              private authService: AuthService) {
+    this.loadRole();
   }
 
   loader = new Loader();
 
+  loggedInRole: (Group | undefined | null);
+
+  loadRole() {
+    this.loader.load(this.authService.loggedInRole()).subscribe((next)=>{
+      this.loggedInRole = next;
+    }, _ => {
+      this.notificationService.notifyUninvasiveShort($localize`Loading role failed.`);
+    });
+  }
+
   form = this.fb.nonNullable.group({
-    recipients: this.fb.nonNullable.control<Recipient[] | null>(null, Validators.required),
+    recipients: this.fb.nonNullable.control<RecipientId[]>([], Validators.required),
     priority: this.fb.nonNullable.control<Importance>(Importance.Regular, Validators.required),
     incident: this.fb.nonNullable.control<string | null>(null),
     content: this.fb.nonNullable.control<string>('', Validators.required),
@@ -48,9 +68,12 @@ export class CreateMessageComponent {
     const fv = this.form.getRawValue();
     const create: Message = {
       id: "",
-      recipients: fv.recipients!.map((recipient=>{
-        return {recipientId:recipient.id.id, recipientType: recipient.id.type}
-      })),//fv.label,
+      senderId: this.loggedInRole!.id,
+      senderType: Participant.Role,
+      recipients: fv.recipients.map((recipientId => {
+        return {recipientId: recipientId.id, recipientType: recipientId.type, read: false}
+      })),
+      incomingChannelType: ChannelType.InAppNotification,
       priority: fv.priority,
       incidentId: fv.incident ?? undefined,
       content: fv.content,
@@ -134,13 +157,9 @@ export class CreateMessageComponent {
         }))
       );
 
-    let recipients = forkJoin(recipientsResources, recipientsAddressBookEntries, recipientsRole).pipe(map( recipients =>{
-          return recipients.reduce(((acc, cur) => [...acc, ...cur]))
-        }));
-
-    recipients.subscribe(next=> {console.log("MMV " + next)});
-
-    return recipients;
+    return forkJoin(recipientsResources, recipientsAddressBookEntries, recipientsRole).pipe(map(recipients => {
+      return recipients.reduce(((acc, cur) => [...acc, ...cur]))
+    }));
 
   }
 

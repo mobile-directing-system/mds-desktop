@@ -4,6 +4,9 @@ import { BehaviorSubject, finalize, Observable, of, switchMap, tap } from 'rxjs'
 import { catchError, map } from 'rxjs/operators';
 import { MDSError, MDSErrorCode } from '../util/errors';
 import { LocalStorageService } from './local-storage.service';
+import {PaginationParams} from "../util/store";
+import {GroupService, GroupSort} from "./group.service";
+import {Group} from "../model/group";
 
 /**
  * The user token returned when logging in.
@@ -29,7 +32,7 @@ export class AuthService {
   private _userChange = new BehaviorSubject<string | undefined>(undefined);
   private _authTokenChange = new BehaviorSubject<string | undefined>(undefined);
 
-  constructor(private netService: NetService, private lsService: LocalStorageService) {
+  constructor(private netService: NetService, private lsService: LocalStorageService, private groupService: GroupService) {
     // Assure server url set as otherwise we do not have anything to do.
     if (lsService.getItem(LocalStorageService.TokenServerURL) === null) {
       return;
@@ -107,6 +110,17 @@ export class AuthService {
 
   loggedInUser(): string | undefined {
     return this.loggedInUserId;
+  }
+
+  loggedInRole(): Observable<Group | undefined> {
+    let paginationParams: PaginationParams<GroupSort> = new PaginationParams<GroupSort>(1,0);
+    return this.groupService.getGroups(paginationParams,{userId: this.loggedInUserId}).pipe(map(paginatedGroups=> {
+      if(paginatedGroups.entries.length > 0){
+        return paginatedGroups.entries[0];
+      }else{
+        return undefined;
+      }
+    }));
   }
 
   /**
