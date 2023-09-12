@@ -91,7 +91,7 @@ export class SearchableMultiChipEntityInputComponent<Id, T extends Identifiable<
   /**
    * Function for retrieving the entity, identified by the given id.
    */
-  @Input() retrieve?: (id: Id) => Observable<T>;
+  @Input() retrieve?: (id: Id) => Observable<T | undefined>;
   /**
    * Currently selected entities.
    */

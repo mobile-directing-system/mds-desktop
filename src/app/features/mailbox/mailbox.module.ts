@@ -11,6 +11,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import {MatTableModule} from "@angular/material/table";
 import { IncomingMessageComponent } from './incoming-messages-view/incoming-message/incoming-message.component';
+import { CreateMessageComponent } from './create-message/create-message.component';
+import {RouterLink} from "@angular/router";
 
 
 
@@ -18,7 +20,8 @@ import { IncomingMessageComponent } from './incoming-messages-view/incoming-mess
   declarations: [
     MailboxLayoutComponent,
     IncomingMessagesViewComponent,
-    IncomingMessageComponent
+    IncomingMessageComponent,
+    CreateMessageComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +32,8 @@ import { IncomingMessageComponent } from './incoming-messages-view/incoming-mess
     MatInputModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    RouterLink
   ]
 })
 export class MailboxModule { }

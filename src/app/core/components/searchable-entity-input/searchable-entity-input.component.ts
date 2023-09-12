@@ -93,7 +93,7 @@ export class SearchableEntityInputComponent<Id, T extends Identifiable<Id>> impl
   /**
    * Function for retrieving the entity, identified by the given id.
    */
-  @Input() retrieve?: (id: Id) => Observable<T>;
+  @Input() retrieve?: (id: Id) => Observable<T | undefined>;
   /**
    * Form control for accessing validation errors.
    */
@@ -283,7 +283,7 @@ export class SearchableEntityInputComponent<Id, T extends Identifiable<Id>> impl
       throw new MDSError(MDSErrorCode.AppError, 'missing retrieve function');
     }
     this.loadingSubscription = this.retrieve(this.selectedEntityId).subscribe(retrievedValue => {
-      if (this.selectedEntityId !== retrievedValue.id) {
+      if (retrievedValue == undefined || this.selectedEntityId !== retrievedValue.id) {
         return;
       }
       this.selectedEntityValue = retrievedValue;

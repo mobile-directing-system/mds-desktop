@@ -11,9 +11,7 @@
       <mat-button-toggle value="read" (change)="onFilterReadChange($event.value)">Read</mat-button-toggle>
     </mat-button-toggle-group>
 
-
-    <!--[routerLink]="['/mailbox/create']"-->
-    <button mat-flat-button extended color="primary" >
+    <button mat-flat-button extended color="primary" [routerLink]="['/mailbox/create']">
       <mat-icon>add</mat-icon>
       <span i18n>Create message</span>
     </button>

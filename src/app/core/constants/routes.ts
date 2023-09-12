@@ -79,6 +79,7 @@ import { OperationTableLayoutComponent } from 'src/app/features/operation-table/
 import { OperationTableView } from 'src/app/features/operation-table/operation-table-view/operation-table-view.component';
 import { CreateIncidentComponent } from 'src/app/features/operation-table/create-incident/create-incident.component';
 import { EditResourceComponent } from 'src/app/features/resources/edit-resource/edit-resource.component';
+import {CreateMessageComponent} from "../../features/mailbox/create-message/create-message.component";
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -217,11 +218,14 @@ export const AppRoutes: PermissionGuardedRoute[] = [
       },
       {
         path: 'mailbox',
-        component: MailboxLayoutComponent,
         children: [
           {
-            path: 'create',
+            path: '',
             component: MailboxLayoutComponent
+          },
+          {
+            path: 'create',
+            component: CreateMessageComponent
           },
         ]
       },

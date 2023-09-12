@@ -1,0 +1,78 @@
+<div class="view" [appShowLoadingOverlay]="loader.loadingChange() | async">
+  <h1 i18n>Send message as</h1>
+  <form (submit)="createEntry()" class="form-column">
+
+    <!--Recipients -->
+    <app-searchable-multi-chip-entity-input-field
+      [chipTemplate]="chip"
+      [formControl]="form.controls.recipients"
+      [retrieve]="getRecipientById.bind(this)"
+      [search]="searchRecipients.bind(this)"
+      [suggestionTemplate]="suggestionRecipient"
+      class="app-edit-input-large"
+      i18n-label label="Recipients"
+      i18n-placeholder placeholder="Add recipients..." #deliverToInput>
+      <ng-template #chip let-entity='entity'>
+          {{asRecipient(entity).label}}
+      </ng-template>
+      <ng-template #suggestionRecipient let-entity='entity'>
+        <div style="display: flex; align-items: center;">
+          <mat-icon *ngIf="asRecipient(entity).id.type === Participant.Resource">local_shipping</mat-icon>
+          <mat-icon *ngIf="asRecipient(entity).id.type === Participant.AddressBookEntry">import_contacts</mat-icon>
+          <mat-icon *ngIf="asRecipient(entity).id.type === Participant.Role">group</mat-icon>
+          {{asRecipient(entity).label}}
+        </div>
+      </ng-template>
+      <mat-error *ngIf="form.controls.recipients.errors && form.controls.recipients.errors['required']" i18n>
+        Recipients is required.
+      </mat-error>
+    </app-searchable-multi-chip-entity-input-field>
+
+    <!--Priority -->
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>Priority</mat-label>
+      <app-importance-select [formControl]="form.controls.priority"></app-importance-select>
+      <mat-error *ngIf="form.controls.priority.errors && form.controls.priority.errors['required']" i18n>
+        Priority is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!--Incident-->
+    <app-searchable-entity-input
+      [displayTemplate]="displayIncident"
+      [formControl]="form.controls.incident"
+      [retrieve]="getIncidentById.bind(this)"
+      [search]="searchIncidents.bind(this)"
+      [suggestionTemplate]="displayIncident"
+      class="app-edit-input-large"
+      i18n-label label="Incident"
+      i18n-placeholder placeholder="Search incident...">
+      <ng-template #displayIncident let-entity='entity'>
+        {{asIncident(entity).name}}
+      </ng-template>
+    </app-searchable-entity-input>
+
+    <!--Content-->
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>Content</mat-label>
+      <textarea matInput [formControl]="form.controls.content"></textarea>
+      <mat-error *ngIf="form.controls.content.errors && form.controls.content.errors['required']" i18n>
+        Content is required.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="action-bar">
+      <button mat-button type="button" (click)="cancel()" i18n>
+        Cancel
+      </button>
+      <button
+        [disabled]="!form.valid || (loader.loadingChange() | async)"
+        color="primary"
+        i18n
+        mat-button
+        type="submit">
+        Send
+      </button>
+    </div>
+  </form>
+</div>
