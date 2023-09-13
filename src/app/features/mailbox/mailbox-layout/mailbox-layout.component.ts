@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import {GroupService} from "../../../core/services/group.service";
 import {AuthService} from "../../../core/services/auth.service";
-import {Router} from "@angular/router";
 import {Group} from "../../../core/model/group";
 
 @Component({
@@ -10,8 +8,7 @@ import {Group} from "../../../core/model/group";
   styleUrls: ['./mailbox-layout.component.scss'],
 })
 export class MailboxLayoutComponent {
-  constructor(
-              private groupService: GroupService, private authService: AuthService) {
+  constructor(private authService: AuthService) {
     this.getRole()
   }
 

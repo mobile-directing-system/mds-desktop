@@ -2,14 +2,39 @@ import { AuthService } from './auth.service';
 import { createServiceFactory, createSpyObject, SpectatorService } from '@ngneat/spectator';
 import { NetService } from './net.service';
 import { fakeAsync, tick } from '@angular/core/testing';
-import { of, throwError } from 'rxjs';
+import {of, Subject, throwError} from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { LocalStorageService } from './local-storage.service';
 import anything = jasmine.anything;
 import createSpy = jasmine.createSpy;
+import {GroupService} from "./group.service";
+import {Group} from "../model/group";
+import {Paginated} from "../util/store";
 
 describe('AuthService', () => {
   let spectator: SpectatorService<AuthService>;
+  let groupsSubject: Subject<Paginated<Group>> = new Subject();
+
+  const group: Group | undefined = {
+    id: "loggedInRoleId",
+    title: "S1",
+    description: "description",
+    members:["loggedInUserId"]
+  };
+  const paginatedGroups: Paginated<Group> = new Paginated<Group>([group],{
+    total: 1,
+    limit: 1,
+    offset: 0,
+    retrieved: 1,
+  })
+
+  const emptyPaginatedGroups: Paginated<Group> = new Paginated<Group>([],{
+    total: 0,
+    limit: 1,
+    offset: 0,
+    retrieved: 0,
+  })
+
   const createService = createServiceFactory({
     service: AuthService,
     providers: [
@@ -22,6 +47,12 @@ describe('AuthService', () => {
           return netService;
         },
       },
+      {
+        provide: GroupService,
+        useValue: {
+          getGroups: ()=> groupsSubject,
+        },
+      }
     ],
   });
   const username = 'accept';
@@ -270,6 +301,22 @@ describe('AuthService', () => {
       expect(() => spectator.service.logout().subscribe({
         next: () => fail('should fail'),
       })).toThrowError();
+    }));
+
+    it('should pass loggedInRole when available', fakeAsync(() => {
+      let observed: (Group | undefined);
+      spectator.service.loggedInRole().subscribe(res=> observed = res);
+      groupsSubject.next(paginatedGroups);
+      tick();
+      expect(observed).toEqual(group);
+    }));
+
+    it('should pass undefined when loggedInRole is not available', fakeAsync(() => {
+      let observed: (Group | undefined);
+      spectator.service.loggedInRole().subscribe(res=> observed = res);
+      groupsSubject.next(emptyPaginatedGroups);
+      tick();
+      expect(observed).toBeUndefined();
     }));
   });
 });

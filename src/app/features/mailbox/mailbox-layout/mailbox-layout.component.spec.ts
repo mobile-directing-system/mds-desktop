@@ -6,35 +6,20 @@ import {AccessControlService} from "../../../core/services/access-control.servic
 import {AccessControlMockService} from "../../../core/services/access-control-mock.service";
 import {Subject} from "rxjs";
 import {MailboxLayoutComponent} from "./mailbox-layout.component";
-import {GroupService} from "../../../core/services/group.service";
 import {Group} from "../../../core/model/group";
-import {Paginated} from "../../../core/util/store";
 import {AuthService} from "../../../core/services/auth.service";
 
 describe('MailboxLayoutComponent', () => {
   let spectator: SpectatorRouting<MailboxLayoutComponent>;
   let component: MailboxLayoutComponent;
 
-  const groupSubject: Subject<Paginated<Group>> = new Subject();
+  const groupSubject: Subject<Group | undefined> = new Subject();
   const group: Group = {
     id: "loggedInRoleId",
     title: "S1",
     description: "description",
     members:["loggedInUserId"]
   };
-  const paginatedGroups: Paginated<Group> = new Paginated<Group>([group],{
-    total: 1,
-    limit: 1,
-    offset: 0,
-    retrieved: 1,
-  })
-
-  const emptyPaginatedGroups: Paginated<Group> = new Paginated<Group>([],{
-    total: 0,
-    limit: 1,
-    offset: 0,
-    retrieved: 0,
-  })
 
 
   const createComponent = createRoutingFactory({
@@ -48,15 +33,13 @@ describe('MailboxLayoutComponent', () => {
         useExisting: AccessControlMockService,
       },
       {
-        provide: GroupService,
+        provide: AuthService,
         useValue: {
-          getGroups: ()=> groupSubject,
+          loggedInRole: ()=> groupSubject,
         },
       },
     ],
-    mocks: [
-      AuthService,
-    ],
+    mocks: [],
     detectChanges: false,
   });
 
@@ -75,7 +58,7 @@ describe('MailboxLayoutComponent', () => {
 
   it('should load loggedInRole successful', fakeAsync(() => {
     expect(spectator.component.loggedInRole).toBeUndefined();
-    groupSubject.next(paginatedGroups);
+    groupSubject.next(group);
     tick();
     expect(spectator.component.loggedInRole).toEqual(group);
     spectator.detectComponentChanges();
@@ -85,22 +68,12 @@ describe('MailboxLayoutComponent', () => {
     }))).toBeVisible();
   }));
 
-  it('should hide create button when missing appropriate permissions', async () => {
-    groupSubject.next(paginatedGroups);
-    await spectator.fixture.whenStable();
-
-    expect(spectator.component.loggedInRole).toEqual(group);
-    expect(spectator.query(byTextContent('', {
-      exact: false,
-      selector: 'h1',
-    }))).toBeVisible();
-  });
 
   it('should handle no role yet successful', fakeAsync(() => {
     expect(spectator.component.loggedInRole).toBeUndefined();
-    groupSubject.next(emptyPaginatedGroups);
+    groupSubject.next(undefined);
     tick();
-    expect(spectator.component.loggedInRole).toBeNull();
+    expect(spectator.component.loggedInRole).toBeUndefined();
     spectator.detectComponentChanges();
     expect(spectator.query(byTextContent('', {
       exact: false,
