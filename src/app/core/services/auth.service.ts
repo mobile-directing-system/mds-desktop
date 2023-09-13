@@ -112,6 +112,9 @@ export class AuthService {
     return this.loggedInUserId;
   }
 
+  /**
+   * Returns the role of the logged-in user. Returns undefined if no role is assigned yet.
+   */
   loggedInRole(): Observable<Group | undefined> {
     let paginationParams: PaginationParams<GroupSort> = new PaginationParams<GroupSort>(1,0);
     return this.groupService.getGroups(paginationParams,{userId: this.loggedInUserId}).pipe(map(paginatedGroups=> {

@@ -18,16 +18,29 @@ import {AuthService} from "../../../core/services/auth.service";
 import {ChannelType} from "../../../core/model/channel";
 
 
+/**
+ * Identifiable recipient. A recipient can be a resource, an address book entry or a role.
+ *
+ * Needed this extra interface for the SearchableMultiChipEntityInputFieldComponent as it requires an
+ * identifiable object meaning there has to be the identifiable field 'id'. In our case that is
+ * the composed RecipientId.
+ */
 export interface Recipient {
   label: string;
   id: RecipientId
 }
 
+/**
+ * Identifies a recipient and is composed of the recipient type and id.
+ */
 export interface RecipientId{
   type: Participant,
   id: string
 }
 
+/**
+ * Component for creating and sending a new message
+ */
 @Component({
   selector: 'app-create-message',
   templateUrl: './create-message.component.html',
@@ -47,10 +60,16 @@ export class CreateMessageComponent implements OnDestroy{
 
   loader = new Loader();
 
+  /**
+   * Role of the logged-in user
+   */
   loggedInRole: (Group | undefined | null);
 
   s: Subscription[] = [];
 
+  /**
+   * Loads the role of the logged-in user
+   */
   loadRole() {
     this.authService.loggedInRole().subscribe((next)=>{
       this.loggedInRole = next;
@@ -66,8 +85,12 @@ export class CreateMessageComponent implements OnDestroy{
     content: this.fb.nonNullable.control<string>('', Validators.required),
   });
 
+  /**
+   * Creates and sends a new message based on the form values
+   */
   createEntry(): void {
     const fv = this.form.getRawValue();
+    // create new message
     const create: Message = {
       id: "",
       senderId: this.loggedInRole!.id,
@@ -82,7 +105,7 @@ export class CreateMessageComponent implements OnDestroy{
       direction: MessageDirection.Outgoing,
       createdAt: new Date(),
     };
-
+    // save/send the message with the message service
     this.messageService.createMessage(create).subscribe({
       next: _ => {
         this.notificationService.notifyUninvasiveShort($localize`Message send.`);
@@ -98,8 +121,12 @@ export class CreateMessageComponent implements OnDestroy{
     return this.incidentService.getIncidentById(id);
   }
 
-
-  getRecipientById(id:{id: string, type: Participant}): Observable<Recipient | undefined> {
+  /**
+   * Used by SearchableMultiChipEntityInputFieldComponent to receive the recipients.
+   * @param id: identifiable and composed id of a recipient
+   * @returns observableRecipient
+   */
+  getRecipientById(id:RecipientId): Observable<Recipient | undefined> {
     if (id.type === Participant.Resource) {
       return this.resourceService.getResourceById(id.id).pipe(
         map(resource => resource ? {label: resource.label, id:id} : undefined)
@@ -130,13 +157,19 @@ export class CreateMessageComponent implements OnDestroy{
     return this.incidentService.getIncidents({byName:query}).pipe(take(5));
   }
 
+  /**
+   * Used by SearchableMultiChipEntityInputFieldComponent to search the recipients.
+   * @param query: searches for that string in the label of the recipients
+   * @returns observableRecipientArray
+   */
   searchRecipients(query: string): Observable<Recipient[]> {
-
+    // get resources and map them into recipients
     let recipientsResources = this.resourceService.getResources({byLabel: query}).pipe(
       map((resources => {
         return resources.map(resource => {return {label: resource.label, id: {id:resource.id, type: Participant.Resource}} as Recipient})
       }))
     );
+    // get address book entries and map them into recipients
     let recipientsAddressBookEntries = this.addressBookService.searchAddressBookEntries({
         query: query,
         limit: 5,
@@ -147,6 +180,7 @@ export class CreateMessageComponent implements OnDestroy{
       }))
     );
 
+    // get roles and map them into recipients
     // Attention: non-sustainable quick fix. Long term solution: Adapting backend to improve quick fix
     // Add a filter like recipientsResources or a search endpoint like recipientsAddressBookEntries in the backend to allow searching for groups.
     // The current quickfix below sets the pagination limit to 100000 and searches the groups in memory which can hide larger data
@@ -160,6 +194,8 @@ export class CreateMessageComponent implements OnDestroy{
         }))
       );
 
+    // merge recipients from resources, address book entries and roles together while preserving order.
+    // flatten the list because otherwise it would be an array of arrays
     return forkJoin(recipientsResources, recipientsAddressBookEntries, recipientsRole).pipe(map(recipients => {
       return recipients.reduce(((acc, cur) => [...acc, ...cur]))
     }));

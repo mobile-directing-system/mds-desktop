@@ -2,10 +2,8 @@ import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core'
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {Router} from '@angular/router';
 import {map, Observable, of} from 'rxjs';
 import {IncidentService} from 'src/app/core/services/incident/incident.service';
-import {getStatusCodeText} from 'src/app/core/model/resource';
 import {MessageService} from "../../../core/services/message/message.service";
 import {localizeChannelType} from "../../../core/model/channel";
 import {Participant} from "../../../core/model/message";
@@ -16,12 +14,18 @@ import {Group} from "../../../core/model/group";
 import {MatDialog} from "@angular/material/dialog";
 import {IncomingMessageComponent} from "./incoming-message/incoming-message.component";
 
+/**
+ * Passed to the IncomingMessageComponent to show a detail view of the message
+ */
 export interface DialogData {
   messageRow: MessageRow;
   loggedInRole: Group;
   isRead: boolean;
 }
 
+/**
+ * One row of incoming messages in the table
+ */
 export interface MessageRow {
   id: string;
   priority: number;
@@ -33,6 +37,9 @@ export interface MessageRow {
   incident: string;
 }
 
+/**
+ * Table of incoming messages
+ */
 @Component({
   selector: 'app-incoming-messages-view',
   templateUrl: './incoming-messages-view.component.html',
@@ -45,12 +52,18 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  /**
+   * The role of the logged-in user
+   */
   @Input() loggedInRole: Group | undefined;
 
+  /**
+   * Indicates if read or unread messages should be shown
+   */
   filterRead = false;
 
   constructor(private messageService: MessageService, private resourceService: ResourceService,
-              private groupService: GroupService, private incidentService: IncidentService, private addressBookService: AddressBookService, private router: Router, public dialog: MatDialog) {
+              private groupService: GroupService, private incidentService: IncidentService, private addressBookService: AddressBookService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -58,7 +71,9 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
   }
 
 
-
+  /**
+   * Refreshes the data in the table.
+   */
   refreshDataSource() {
     if(this.loggedInRole){
       this.messageService.getMailboxMessages(this.loggedInRole.id, this.filterRead)
@@ -105,6 +120,13 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
     }
   }
 
+  /**
+   * Returns label of the participant
+   *
+   * @param senderType: type of the participant
+   * @param senderId: id of the participant
+   * @returns observableLabel
+   */
   getParticipantLabel(senderType?: Participant, senderId?: string): Observable<string | undefined>{
     if (senderId && senderType != undefined) {
       if (senderType === Participant.Resource) {
@@ -126,6 +148,9 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
     return of(undefined);
   }
 
+  /**
+   * Filters the table data to the search term
+   */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -135,6 +160,10 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
     }
   }
 
+  /**
+   * Filters the table data to read/unread messages
+   * @param value: read | unread
+   */
   public onFilterReadChange(value: String) {
     if(value === "unread"){
       this.filterRead = false;
@@ -150,6 +179,9 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  /**
+   * Opens dialog for detail view when clicking an entry in the table
+   */
   entryClicked(row: MessageRow) {
     const dialogRef = this.dialog.open(IncomingMessageComponent, {
       data: {
@@ -162,10 +194,4 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
       this.refreshDataSource();
     });
   }
-
-  getStatusCodeText(statusCode: number): string {
-    return getStatusCodeText(statusCode);
-  }
-
-
 }

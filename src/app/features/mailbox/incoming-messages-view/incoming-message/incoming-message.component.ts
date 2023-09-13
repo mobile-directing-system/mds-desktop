@@ -4,6 +4,9 @@ import {DialogData} from "../incoming-messages-view.component";
 import {MessageService} from "../../../../core/services/message/message.service";
 import {NotificationService} from "../../../../core/services/notification.service";
 
+/**
+ * Detail view of one incoming message
+ */
 @Component({
   selector: 'app-incoming-message',
   templateUrl: './incoming-message.component.html',
@@ -17,11 +20,18 @@ export class IncomingMessageComponent {
     private notificationService: NotificationService
   ) {}
 
+  /**
+   * Closes dialog
+   */
   onClose(): void {
     this.dialogRef.close();
   }
 
+  /**
+   * Marks message as read/unread
+   */
   toggleReadState(): void {
+    // load message
    this.messageService.getMessageById(this.data.messageRow.id).subscribe((message) =>{
      if(!message){
        this.notificationService.notifyUninvasiveShort($localize`Error, could not find the message in the system.`);
@@ -29,9 +39,12 @@ export class IncomingMessageComponent {
        return;
      }
 
+     // set message to read/unread for the logged-in role
      message.recipients.forEach((recipient) => {
        if(recipient.recipientId === this.data.loggedInRole.id) recipient.read = !this.data.isRead;
      })
+
+     // save message
      this.messageService.updateMessage(message).subscribe(success=>{
        if(success) {
          if(!this.data.isRead)this.notificationService.notifyUninvasiveShort($localize`Marked message as read.`);
