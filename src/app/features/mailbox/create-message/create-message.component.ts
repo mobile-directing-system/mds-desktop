@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {PaginationParams} from "../../../core/util/store";
 import {FormBuilder, Validators} from "@angular/forms";
 import {NotificationService} from "../../../core/services/notification.service";
 import {Loader} from "../../../core/util/loader";
-import {forkJoin, map, Observable, of, take} from "rxjs";
+import {forkJoin, map, Observable, of, Subscription, take} from "rxjs";
 import {Message, MessageDirection, Participant} from "../../../core/model/message";
 import {MessageService} from "../../../core/services/message/message.service";
 import {Importance} from "../../../core/model/importance";
@@ -33,7 +33,7 @@ export interface RecipientId{
   templateUrl: './create-message.component.html',
   styleUrls: ['./create-message.component.scss']
 })
-export class CreateMessageComponent {
+export class CreateMessageComponent implements OnDestroy{
 
 
 
@@ -41,7 +41,7 @@ export class CreateMessageComponent {
               private router: Router, private route: ActivatedRoute, private notificationService: NotificationService,
               private incidentService: IncidentService, private resourceService: ResourceService,
               private addressBookService: AddressBookService, private groupService: GroupService,
-              private authService: AuthService) {
+              private authService: AuthService){
     this.loadRole();
   }
 
@@ -49,8 +49,10 @@ export class CreateMessageComponent {
 
   loggedInRole: (Group | undefined | null);
 
+  s: Subscription[] = [];
+
   loadRole() {
-    this.loader.load(this.authService.loggedInRole()).subscribe((next)=>{
+    this.authService.loggedInRole().subscribe((next)=>{
       this.loggedInRole = next;
     }, _ => {
       this.notificationService.notifyUninvasiveShort($localize`Loading role failed.`);
@@ -80,7 +82,8 @@ export class CreateMessageComponent {
       direction: MessageDirection.Outgoing,
       createdAt: new Date(),
     };
-    this.loader.load(this.messageService.createMessage(create)).subscribe({
+
+    this.messageService.createMessage(create).subscribe({
       next: _ => {
         this.notificationService.notifyUninvasiveShort($localize`Message send.`);
         this.cancel();
@@ -165,6 +168,10 @@ export class CreateMessageComponent {
 
   cancel() {
     this.router.navigate(['..'], {relativeTo: this.route}).then();
+  }
+
+  ngOnDestroy(): void {
+    this.s.forEach(s => s.unsubscribe());
   }
 
   protected readonly Participant = Participant;
