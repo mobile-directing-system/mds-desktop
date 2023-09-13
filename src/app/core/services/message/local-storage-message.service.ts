@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MessageFilters, MessageService } from './message.service';
 import { Observable, of } from 'rxjs';
-import { Message, Participant, Recipient } from '../../model/message';
+import { Message, Participant} from '../../model/message';
 import { LocalStorageCRUDRepository } from '../../util/local-storage';
 
 @Injectable()
@@ -9,9 +9,13 @@ export class LocalStorageMessageService extends MessageService {
 
   private repository: LocalStorageCRUDRepository<Message> = new LocalStorageCRUDRepository<Message>("mds-desktop__messages");
 
-  public override createMessage(message: Message): Observable<Message> {
-    return of(this.repository.save(message));
+  /**
+   * Get message by id
+   */
+  public override getMessageById(id: string): Observable<Message | undefined> {
+    return of(this.repository.findById(id));
   }
+
 
   public override getMessages(filters?: MessageFilters): Observable<Message[]> {
     let messages: Message[] = this.repository.fetchAll();
@@ -22,8 +26,18 @@ export class LocalStorageMessageService extends MessageService {
     return of(messages);
   }
 
+  public override createMessage(message: Message): Observable<Message> {
+    return of(this.repository.save(message));
+  }
+
+  public override updateMessage(message: Message): Observable<boolean> {
+    return of(this.repository.replace(message));
+  }
+
+  //TODO filter out messages that need review
   public override getMailboxMessages(roleId: string, read: boolean): Observable<Message[]> {
     let messages: Message[] = this.repository.fetchAll();
+
     messages = messages.filter(message => {
       for(let recipient of message.recipients) {
         if(recipient.recipientType === Participant.Role && recipient.recipientId === roleId && recipient.read === read) {

@@ -12,24 +12,38 @@ export interface MessageFilters {
 export abstract class MessageService {
 
   /**
+   * Fetch message
+   *
+   * @param id Id of the message.
+   */
+  public abstract getMessageById(id: string): Observable<Message | undefined>;
+
+  /**
    * Fetch messages
-   * 
+   *
    * @param filters Filter messages by search criteria.
    */
   public abstract getMessages(filters?: MessageFilters): Observable<Message[]>;
   /**
    * Create a new message
-   * 
-   * @param message 
+   *
+   * @param message
    */
   public abstract createMessage(message: Message): Observable<Message>;
   /**
+   * Updates an existing message
+   *
+   * @param message
+   * @returns success
+   */
+  public abstract updateMessage(message: Message): Observable<boolean>;
+  /**
    * Get all messages that are addressed to a role in the system.
    * With that, messages of a mailbox for a specific role can be fetched.
-   * 
+   *
    * @param roleId Role id of the recipient
    * @param read Whether messages have already been read
-   * 
+   *
    * @returns messages
    */
   public abstract getMailboxMessages(roleId: string, read: boolean): Observable<Message[]>;

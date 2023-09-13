@@ -1,4 +1,4 @@
-import { TestBed, fakeAsync, flush, tick } from '@angular/core/testing';
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { LocalStorageMessageService } from './local-storage-message.service';
 import { MessageService } from './message.service';

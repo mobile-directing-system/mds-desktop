@@ -21,7 +21,7 @@
     </unit>
     <unit id="4467323362722952678">
       <notes>
-        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:13</note>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:21</note>
         <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:32</note>
         <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:16</note>
       </notes>
@@ -31,7 +31,7 @@
     </unit>
     <unit id="2085611136494552870">
       <notes>
-        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:17</note>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:25</note>
         <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:36</note>
         <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:20</note>
       </notes>
@@ -47,7 +47,7 @@
         <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:28</note>
         <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:26</note>
         <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.ts:134</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:139</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:141</note>
       </notes>
       <segment>
         <source>Confirm</source>
@@ -91,6 +91,7 @@
     <unit id="6002195485717726199">
       <notes>
         <note category="location">src/app/core/components/home-layout/home-layout.component.html:25</note>
+        <note category="location">src/app/features/mailbox/mailbox-layout/mailbox-layout.component.html:3</note>
       </notes>
       <segment>
         <source>Mailbox</source>
@@ -553,6 +554,7 @@
       <notes>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:20</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:47</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.html:64</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:54</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:58</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:128</note>
@@ -612,6 +614,7 @@
     <unit id="7806919353578821914">
       <notes>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:49,51</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.html:67,68</note>
       </notes>
       <segment>
         <source>Content is required.</source>
@@ -887,6 +890,7 @@
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:56,57</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:67,68</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.html:73,74</note>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:64,65</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:120,121</note>
         <note category="location">src/app/features/management/operation-management-view/create-operation-view/create-operation-view.component.html:59,60</note>
@@ -1000,6 +1004,7 @@
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:27</note>
         <note category="location">src/app/features/logistics/channels/channels.component.html:33</note>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:12</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.html:40</note>
       </notes>
       <segment>
         <source>Priority</source>
@@ -1566,7 +1571,7 @@
     </unit>
     <unit id="7615147220727762615">
       <notes>
-        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:3</note>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:4</note>
       </notes>
       <segment>
         <source>Management</source>
@@ -1574,7 +1579,7 @@
     </unit>
     <unit id="3488583301572536241">
       <notes>
-        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:9</note>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:10</note>
       </notes>
       <segment>
         <source>Users</source>
@@ -1582,7 +1587,7 @@
     </unit>
     <unit id="6173425432294670559">
       <notes>
-        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:15</note>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:16</note>
       </notes>
       <segment>
         <source>Groups</source>
@@ -1590,7 +1595,7 @@
     </unit>
     <unit id="8705640949204819723">
       <notes>
-        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:20,21</note>
+        <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:21,22</note>
       </notes>
       <segment>
         <source>Operations</source>
@@ -1726,7 +1731,7 @@
     </unit>
     <unit id="1241348629231510663">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:37,36</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:36</note>
       </notes>
       <segment>
         <source>End</source>
@@ -2479,6 +2484,7 @@
     </unit>
     <unit id="4580988005648117665">
       <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:5</note>
         <note category="location">src/app/features/resources/list-resources/list-resources.component.html:8</note>
       </notes>
       <segment>
@@ -2495,6 +2501,7 @@
     </unit>
     <unit id="2289335295750933302">
       <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:70</note>
         <note category="location">src/app/features/resources/list-resources/list-resources.component.html:48</note>
       </notes>
       <segment>
@@ -2720,6 +2727,7 @@
     </unit>
     <unit id="1092246396276485959">
       <notes>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.html:55</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:71</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:75</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:130</note>
@@ -2730,6 +2738,7 @@
     </unit>
     <unit id="channel-type-email">
       <notes>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:17</note>
         <note category="location">src/app/core/model/channel.ts:99</note>
       </notes>
       <segment>
@@ -2746,7 +2755,7 @@
     </unit>
     <unit id="5611592591303869712">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:102,101</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:101</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:105</note>
       </notes>
       <segment>
@@ -2755,7 +2764,7 @@
     </unit>
     <unit id="65984904390749158">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:122,121</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:121</note>
       </notes>
       <segment>
         <source>Finish</source>
@@ -2763,7 +2772,7 @@
     </unit>
     <unit id="7808756054397155068">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:138</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:139</note>
       </notes>
       <segment>
         <source>Reset</source>
@@ -2779,7 +2788,7 @@
     </unit>
     <unit id="910656806257300801">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:18,17</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:17</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:21</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:127</note>
       </notes>
@@ -2805,6 +2814,7 @@
     </unit>
     <unit id="channel-type-phone">
       <notes>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:13</note>
         <note category="location">src/app/core/model/channel.ts:101</note>
       </notes>
       <segment>
@@ -2833,6 +2843,269 @@
       </notes>
       <segment>
         <source>Message successfully submitted.</source>
+      </segment>
+    </unit>
+    <unit id="1138878689524442778">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:40</note>
+      </notes>
+      <segment>
+        <source>Received at</source>
+      </segment>
+    </unit>
+    <unit id="1253879069732164922">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:37</note>
+      </notes>
+      <segment>
+        <source>Marked message as read.</source>
+      </segment>
+    </unit>
+    <unit id="1440728154205157554">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:27</note>
+      </notes>
+      <segment>
+        <source>Error, could not find the message in the system.</source>
+      </segment>
+    </unit>
+    <unit id="1484691810377259440">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:26</note>
+      </notes>
+      <segment>
+        <source>ID</source>
+      </segment>
+    </unit>
+    <unit id="1733993200592511918">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:40</note>
+      </notes>
+      <segment>
+        <source>Error while marking the message as read.</source>
+      </segment>
+    </unit>
+    <unit id="1807417606902194888">
+      <notes>
+        <note category="location">src/app/features/mailbox/mailbox-layout/mailbox-layout.component.html:4</note>
+      </notes>
+      <segment>
+        <source>You must assign a role to this user first to be able to read and create messages for the role.</source>
+      </segment>
+    </unit>
+    <unit id="251068565358023268">
+      <notes>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.html:9,10</note>
+      </notes>
+      <segment>
+        <source>Send message as <ph id="0" equiv="INTERPOLATION" disp="{{loggedInRole.title}}"/></source>
+      </segment>
+    </unit>
+    <unit id="2630865067176779866">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:52</note>
+      </notes>
+      <segment>
+        <source>Sender</source>
+      </segment>
+    </unit>
+    <unit id="293135431475345100">
+      <notes>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.html:56</note>
+      </notes>
+      <segment>
+        <source>Search incident...</source>
+      </segment>
+    </unit>
+    <unit id="3273468360247046180">
+      <notes>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.html:21</note>
+      </notes>
+      <segment>
+        <source>Add recipients...</source>
+      </segment>
+    </unit>
+    <unit id="3666897644786742399">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:16</note>
+      </notes>
+      <segment>
+        <source>Create message</source>
+      </segment>
+    </unit>
+    <unit id="3938757882705748651">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:58</note>
+      </notes>
+      <segment>
+        <source>Recipients</source>
+      </segment>
+    </unit>
+    <unit id="4242554670930589411">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:46</note>
+      </notes>
+      <segment>
+        <source>Channel</source>
+      </segment>
+    </unit>
+    <unit id="4261151989804355353">
+      <notes>
+        <note category="location">src/app/features/mailbox/mailbox-layout/mailbox-layout.component.html:8</note>
+      </notes>
+      <segment>
+        <source>Mailbox for <ph id="0" equiv="INTERPOLATION" disp="{{loggedInRole.title}}"/></source>
+      </segment>
+    </unit>
+    <unit id="4275313186867973379">
+      <notes>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.html:5</note>
+      </notes>
+      <segment>
+        <source>You must assign a role to this user first to be able to create messages for the role.</source>
+      </segment>
+    </unit>
+    <unit id="442331107363877729">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:79</note>
+      </notes>
+      <segment>
+        <source>No messages matching the filter &quot;<ph id="0" equiv="INTERPOLATION" disp="{{input.value}}"/>&quot;</source>
+      </segment>
+    </unit>
+    <unit id="4524038999216139194">
+      <notes>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.html:34,35</note>
+      </notes>
+      <segment>
+        <source>Recipients is required.</source>
+      </segment>
+    </unit>
+    <unit id="4540589325711926146">
+      <notes>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:58</note>
+      </notes>
+      <segment>
+        <source>Loading role failed.</source>
+      </segment>
+    </unit>
+    <unit id="4860449449806508753">
+      <notes>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:88</note>
+      </notes>
+      <segment>
+        <source>Message send.</source>
+      </segment>
+    </unit>
+    <unit id="5068991054085823744">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:80</note>
+      </notes>
+      <segment>
+        <source>No messages at the moment</source>
+      </segment>
+    </unit>
+    <unit id="5928181193903168495">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:64</note>
+      </notes>
+      <segment>
+        <source>Content</source>
+      </segment>
+    </unit>
+    <unit id="6163435959371489060">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:38</note>
+      </notes>
+      <segment>
+        <source>Marked message as unread.</source>
+      </segment>
+    </unit>
+    <unit id="6719475355989808631">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:32</note>
+      </notes>
+      <segment>
+        <source>Priority</source>
+      </segment>
+    </unit>
+    <unit id="7198847879983209791">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:10,12</note>
+      </notes>
+      <segment>
+        <source>
+          <pc id="0" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Received at: <ph id="1" equiv="INTERPOLATION" disp="{{ data.messageRow.createdAt | date:&apos;medium&apos; }}"/> </pc>
+          <pc id="2" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Sender: <ph id="3" equiv="INTERPOLATION_1" disp="{{ data.messageRow.sender}}"/> </pc>
+          <pc id="4" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Channel: <ph id="5" equiv="INTERPOLATION_2" disp="{{ data.messageRow.incomingChannelType }}"/> </pc>
+        </source>
+      </segment>
+    </unit>
+    <unit id="72748386340014679">
+      <notes>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:92</note>
+      </notes>
+      <segment>
+        <source>Sending message failed.</source>
+      </segment>
+    </unit>
+    <unit id="7563035552061651664">
+      <notes>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.html:82,83</note>
+      </notes>
+      <segment>
+        <source>Send</source>
+      </segment>
+    </unit>
+    <unit id="7817501228881741585">
+      <notes>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.html:20</note>
+      </notes>
+      <segment>
+        <source>Recipients</source>
+      </segment>
+    </unit>
+    <unit id="8294349973939672112">
+      <notes>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.html:43,44</note>
+      </notes>
+      <segment>
+        <source>Priority is required.</source>
+      </segment>
+    </unit>
+    <unit id="8594734568527700225">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:15,16</note>
+      </notes>
+      <segment>
+        <source>
+          <pc id="0" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Recipients: <ph id="1" equiv="INTERPOLATION" disp="{{ data.messageRow.recipients}}"/> </pc>
+          <pc id="2" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Incident: <ph id="3" equiv="INTERPOLATION_1" disp="{{ data.messageRow.incident}}"/> </pc>
+        </source>
+      </segment>
+    </unit>
+    <unit id="8740036082299980043">
+      <notes>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.html:4</note>
+      </notes>
+      <segment>
+        <source>Send message</source>
+      </segment>
+    </unit>
+    <unit id="9023322324012148307">
+      <notes>
+        <note category="location">src/app/features/mailbox/mailbox-layout/mailbox-layout.component.html:9</note>
+      </notes>
+      <segment>
+        <source>Read your messages and create new ones.</source>
+      </segment>
+    </unit>
+    <unit id="6813150319820097954">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Message <ph id="0" equiv="INTERPOLATION" disp="{{data.messageRow.id}}"/></source>
       </segment>
     </unit>
   </file>
