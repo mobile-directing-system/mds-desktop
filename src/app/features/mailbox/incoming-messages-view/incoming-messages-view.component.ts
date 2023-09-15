@@ -83,10 +83,10 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
               priority: message.priority,
               createdAt: message.createdAt,
               incomingChannelType: message.incomingChannelType ? localizeChannelType(message.incomingChannelType) : "",
-              sender: message.senderId,
+              sender:"",
               recipients:"",
               content: message.content,
-              incident: message.incidentId,
+              incident: "",
             });
 
             // get sender label
