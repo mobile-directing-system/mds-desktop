@@ -114,8 +114,19 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
           })
         ))
         .subscribe((messageRows)=>{
-          if(this.dataSource) this.dataSource.data = messageRows;
-          else this.dataSource = new MatTableDataSource<MessageRow>(messageRows);
+          if(this.dataSource) {
+            this.dataSource.data = messageRows;
+          }else {
+            this.dataSource = new MatTableDataSource<MessageRow>(messageRows);
+          }
+
+          // Define custom sorting strategy
+          this.dataSource.sortingDataAccessor = (data: any, property: string) => {
+            switch(property) {
+                case 'createdAt': return new Date(data.createdAt);
+                default: return data[property];
+            }
+          };
         });
     }
   }
