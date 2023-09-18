@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable, filter, flatMap, from, map, mergeAll, mergeMap, of, toArray } from 'rxjs';
+import { Observable, from, map, mergeAll, mergeMap, of, toArray } from 'rxjs';
 import { MessageDirection, Participant } from 'src/app/core/model/message';
 import { AddressBookService } from 'src/app/core/services/addressbook.service';
 import { GroupService } from 'src/app/core/services/group.service';
@@ -24,11 +24,11 @@ export interface MessageRow {
 }
 
 @Component({
-  selector: 'app-reviewer-outgoing-view',
-  templateUrl: './reviewer-outgoing-view.component.html',
-  styleUrls: ['./reviewer-outgoing-view.component.scss']
+  selector: 'outgoing-messages-view',
+  templateUrl: './outgoing-messages-view.component.html',
+  styleUrls: ['./outgoing-messages-view.component.scss']
 })
-export class ReviewerOutgoingView implements OnInit, AfterViewInit {
+export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
