@@ -24,7 +24,7 @@ export interface MessageRow {
 }
 
 @Component({
-  selector: 'outgoing-messages-view',
+  selector: 'app-outgoing-messages-view',
   templateUrl: './outgoing-messages-view.component.html',
   styleUrls: ['./outgoing-messages-view.component.scss']
 })
