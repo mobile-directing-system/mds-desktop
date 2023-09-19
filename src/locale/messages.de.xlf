@@ -551,7 +551,7 @@
     </unit>
     <unit id="1241348629231510663">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:36</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:37,36</note>
       </notes>
       <segment state="initial">
         <source>End</source>
@@ -2891,6 +2891,7 @@
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:70</note>
         <note category="location">src/app/features/resources/list-resources/list-resources.component.html:48</note>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.html:44</note>
       </notes>
       <segment state="initial">
         <source>Incident</source>
@@ -3126,7 +3127,7 @@
     </unit>
     <unit id="910656806257300801">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:17</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:18,17</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:21</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:127</note>
       </notes>
@@ -3167,7 +3168,7 @@
     </unit>
     <unit id="5611592591303869712">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:101</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:102,101</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:105</note>
       </notes>
       <segment state="initial">
@@ -3177,7 +3178,7 @@
     </unit>
     <unit id="65984904390749158">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:121</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:122,121</note>
       </notes>
       <segment state="initial">
         <source>Finish</source>
@@ -3331,7 +3332,7 @@
     </unit>
     <unit id="4540589325711926146">
       <notes>
-        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:58</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:77</note>
       </notes>
       <segment state="initial">
         <source>Loading role failed.</source>
@@ -3340,7 +3341,7 @@
     </unit>
     <unit id="4860449449806508753">
       <notes>
-        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:88</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:111</note>
       </notes>
       <segment state="initial">
         <source>Message send.</source>
@@ -3349,7 +3350,7 @@
     </unit>
     <unit id="72748386340014679">
       <notes>
-        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:92</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:115</note>
       </notes>
       <segment state="initial">
         <source>Sending message failed.</source>
@@ -3390,7 +3391,7 @@
     </unit>
     <unit id="1440728154205157554">
       <notes>
-        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:27</note>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:37</note>
       </notes>
       <segment state="initial">
         <source>Error, could not find the message in the system.</source>
@@ -3399,7 +3400,7 @@
     </unit>
     <unit id="1253879069732164922">
       <notes>
-        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:37</note>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:50</note>
       </notes>
       <segment state="initial">
         <source>Marked message as read.</source>
@@ -3408,7 +3409,7 @@
     </unit>
     <unit id="6163435959371489060">
       <notes>
-        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:38</note>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:51</note>
       </notes>
       <segment state="initial">
         <source>Marked message as unread.</source>
@@ -3417,7 +3418,7 @@
     </unit>
     <unit id="1733993200592511918">
       <notes>
-        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:40</note>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:53</note>
       </notes>
       <segment state="initial">
         <source>Error while marking the message as read.</source>
@@ -3436,6 +3437,7 @@
     <unit id="1484691810377259440">
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:26</note>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.html:6</note>
       </notes>
       <segment state="initial">
         <source>ID</source>
@@ -3445,6 +3447,7 @@
     <unit id="6719475355989808631">
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:32</note>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.html:12</note>
       </notes>
       <segment state="initial">
         <source>Priority</source>
@@ -3472,6 +3475,7 @@
     <unit id="2630865067176779866">
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:52</note>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.html:26</note>
       </notes>
       <segment state="initial">
         <source>Sender</source>
@@ -3490,6 +3494,7 @@
     <unit id="5928181193903168495">
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:64</note>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.html:38</note>
       </notes>
       <segment state="initial">
         <source>Content</source>
@@ -3548,6 +3553,42 @@
       <segment state="initial">
         <source>Message <ph id="0" equiv="INTERPOLATION" disp="{{data.messageRow.id}}"/></source>
         <target>Nachricht <ph id="0" equiv="INTERPOLATION" disp="{{data.messageRow.id}}"/></target>
+      </segment>
+    </unit>
+    <unit id="5252157793294355250">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.html:32</note>
+      </notes>
+      <segment state="initial">
+        <source>Recipient</source>
+        <target>Empfänger</target>
+      </segment>
+    </unit>
+    <unit id="9071274347227355459">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.html:53</note>
+      </notes>
+      <segment state="initial">
+        <source>No outgoing messages to review at the moment.</source>
+        <target>Im Moment sind keine ausgehenden Nachrichten zum Sichten vorhanden.</target>
+      </segment>
+    </unit>
+    <unit id="2623073779873718859">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/reviewer-outgoing-layout/reviewer-outgoing-layout.component.html:2</note>
+      </notes>
+      <segment state="initial">
+        <source>Review outgoing messages</source>
+        <target>Ausgehende Nachrichten sichten</target>
+      </segment>
+    </unit>
+    <unit id="4070888718648503727">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.html:20</note>
+      </notes>
+      <segment state="initial">
+        <source>Created at</source>
+        <target>Erstellt am</target>
       </segment>
     </unit>
   </file>
