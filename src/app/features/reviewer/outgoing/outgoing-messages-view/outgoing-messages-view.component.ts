@@ -16,13 +16,15 @@ import { SelectChannelDialog } from '../select-channel-dialog/select-channel-dia
  * One row of incoming messages in the table
  */
 export interface MessageRow {
-  id: string;
+  messageId: string;
   priority: number;
   createdAt: Date;
-  sender: string;
-  recipient: string;
+  senderLabel: string;
+  recipientType: Participant;
+  recipientId: string;
+  recipientLabel: string;
   content: string;
-  incident: string;
+  incidentLabel: string;
 }
 
 @Component({
@@ -71,29 +73,31 @@ export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
           // Create new table entry when message was not already sent to recipient
           if (!recipient.send) {
             let row: MessageRow = {
-              id: msg.id,
+              messageId: msg.id,
               priority: msg.priority ?? -1,
               createdAt: msg.createdAt,
               content: msg.content,
-              sender: "",
-              recipient: "",
-              incident: ""
+              senderLabel: "",
+              recipientType: recipient.recipientType,
+              recipientId: recipient.recipientId,
+              recipientLabel: "",
+              incidentLabel: ""
             }
 
             // Fetch sender label
             this.getParticipantLabel(msg.senderType, msg.senderId).subscribe((label => {
-              if (label) row.sender = label;
+              if (label) row.senderLabel = label;
             }));
 
             // Fetch recipient label
             this.getParticipantLabel(recipient.recipientType, recipient.recipientId).subscribe(label => {
-              if (label) row.recipient = label;
+              if (label) row.recipientLabel = label;
             });
 
             // Fetch incident label
             if (msg.incidentId) {
               this.incidentService.getIncidentById(msg.incidentId).subscribe((incident => {
-                if (incident) row.incident = incident.name;
+                if (incident) row.incidentLabel = incident.name;
               }));
             }
 
@@ -143,9 +147,7 @@ export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
    */
   rowClicked(row: MessageRow) {
     this.dialog.open(SelectChannelDialog, {
-      data: {
-        messageRow: row
-      }
+      data: row
     });
   }
 }

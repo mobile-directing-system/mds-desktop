@@ -1,9 +1,16 @@
+@use 'sass:map';
+@import 'src/styles/corporate';
+
 .header {
     font-size: 1.2rem;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.channel-selection {
+    padding: 2rem 0 0.5rem 0;
 }
 
 .context {
@@ -22,4 +29,30 @@
 
 .mdc-dialog__title::before {
     height: 0;
+}
+
+table {
+    width: 100%;
+    background-color: white;
+    margin: 1rem 0 1rem 0;
+}
+
+.mat-mdc-header-row {
+    background: whitesmoke;
+}
+
+.mat-mdc-row:hover, .selected-channel-row {
+    outline: map.get($mds-desktop-primary-palette, 300) solid 3px;
+    outline-offset: -3px;
+    cursor: pointer;
+}
+
+.select-channel-heading {
+    font-weight: 500;
+    font-size: 1rem;
+    color: black;
+}
+
+.select-channel-error-label {
+    color: map.get($mds-desktop-danger-palette, 500);
 }

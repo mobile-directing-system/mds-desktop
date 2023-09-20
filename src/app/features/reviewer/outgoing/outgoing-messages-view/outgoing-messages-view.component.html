@@ -4,7 +4,7 @@
         <!-- ID Column -->
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> ID </th>
-            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.messageId}} </td>
         </ng-container>
 
         <!-- Priority Column -->
@@ -24,13 +24,13 @@
         <!-- Sender Column -->
         <ng-container matColumnDef="sender">
             <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Sender </th>
-            <td mat-cell *matCellDef="let row"> {{row.sender}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.senderLabel}} </td>
         </ng-container>
 
         <!-- Recipient Column -->
         <ng-container matColumnDef="recipient">
             <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Recipient </th>
-            <td mat-cell *matCellDef="let row"> {{row.recipient}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.recipientLabel}} </td>
         </ng-container>
 
         <!-- Content Column -->
@@ -42,7 +42,7 @@
         <!-- Incident Column -->
         <ng-container matColumnDef="incident">
             <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Incident </th>
-            <td mat-cell *matCellDef="let row"> {{row.incident}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.incidentLabel}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -196,11 +196,11 @@ describe('OutgoingMessagesViewComponent', () => {
     it('should display sender name correctly ', () => {
       expect(component.dataSource.data).toBeTruthy();
       component.dataSource.data.forEach(row => {
-        expect(spectator.query(byText(row.sender, {
+        expect(spectator.query(byText(row.senderLabel, {
           selector: "td",
           exact: true
         })))
-          .withContext(row.sender)
+          .withContext(row.senderLabel)
           .toBeVisible();
       });
     });
@@ -220,11 +220,11 @@ describe('OutgoingMessagesViewComponent', () => {
     it('should display incident name correctly ', () => {
       expect(component.dataSource.data).toBeTruthy();
       component.dataSource.data.forEach(row => {
-        expect(spectator.query(byText(row.incident, {
+        expect(spectator.query(byText(row.incidentLabel, {
           selector: "td",
           exact: true
         })))
-          .withContext(row.incident)
+          .withContext(row.incidentLabel)
           .toBeVisible();
       });
     });
