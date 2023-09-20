@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +10,7 @@ import { GroupService } from 'src/app/core/services/group.service';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
 import { MessageService } from 'src/app/core/services/message/message.service';
 import { ResourceService } from 'src/app/core/services/resource/resource.service';
+import { SelectChannelDialog } from '../select-channel-dialog/select-channel-dialog.component';
 
 /**
  * One row of incoming messages in the table
@@ -38,7 +40,8 @@ export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
 
   constructor(private messageService: MessageService, private resourceService: ResourceService,
     private addressBookService: AddressBookService, private groupService: GroupService,
-    private incidentService: IncidentService) { }
+    private incidentService: IncidentService,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.dataSource.sortingDataAccessor = (data: any, property: string) => {
@@ -133,7 +136,16 @@ export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
     return of(undefined);
   }
 
-  entryClicked(row: MessageRow) {
-
+  /**
+   * Is called when row in table was clicked
+   * 
+   * @param row that was clicked
+   */
+  rowClicked(row: MessageRow) {
+    this.dialog.open(SelectChannelDialog, {
+      data: {
+        messageRow: row
+      }
+    });
   }
 }

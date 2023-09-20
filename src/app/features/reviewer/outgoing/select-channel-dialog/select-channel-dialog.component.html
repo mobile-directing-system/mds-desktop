@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>
+    <div class="header">
+      <span i18n>Message {{data.messageRow.id}}</span>
+      <app-importance-inline [importance]="data.messageRow.priority"></app-importance-inline>
+    </div>
+ </h1>
+<div mat-dialog-content>
+    <div class="context">
+        <div i18n class="left-row">
+            <p> Received at: {{ data.messageRow.createdAt | date:'medium' }} </p>
+            <p> Sender: {{ data.messageRow.sender}} </p>
+            <p> Channel: {{ data.messageRow.incomingChannelType }} </p>
+        </div>
+        <div i18n class="right-row">
+            <p> Recipients: {{ data.messageRow.recipients}} </p>
+            <p> Incident: {{ data.messageRow.incident}} </p>
+        </div>
+    </div>
+    <div class="content">{{data.messageRow.content}}</div>
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button type="submit" mat-button cdkFocusInitial>Submit</button>
+</div>
