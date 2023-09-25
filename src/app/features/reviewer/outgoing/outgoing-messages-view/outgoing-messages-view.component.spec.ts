@@ -1,7 +1,7 @@
 import { fakeAsync } from '@angular/core/testing';
 
-import { Spectator, SpyObject, byText, createComponentFactory } from '@ngneat/spectator';
-import { BehaviorSubject, Subject, of } from 'rxjs';
+import { Spectator, byText, createComponentFactory } from '@ngneat/spectator';
+import { of } from 'rxjs';
 import { AddressBookEntry } from 'src/app/core/model/address-book-entry';
 import { Group } from 'src/app/core/model/group';
 import { Incident } from 'src/app/core/model/incident';
@@ -12,8 +12,8 @@ import { GroupService } from 'src/app/core/services/group.service';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
 import { MessageService } from 'src/app/core/services/message/message.service';
 import { ResourceService } from 'src/app/core/services/resource/resource.service';
-import { OutgoingMessagesViewComponent } from './outgoing-messages-view.component';
 import { ReviewerModule } from '../../reviewer.module';
+import { OutgoingMessagesViewComponent } from './outgoing-messages-view.component';
 
 describe('OutgoingMessagesViewComponent', () => {
 
@@ -57,7 +57,8 @@ describe('OutgoingMessagesViewComponent', () => {
         {
           recipientType: Participant.Resource,
           recipientId: "2",
-          send: true
+          send: false,
+          channelId: "1234"
         }
       ]
     }
@@ -208,11 +209,11 @@ describe('OutgoingMessagesViewComponent', () => {
     it('should display recipient name correctly ', () => {
       expect(component.dataSource.data).toBeTruthy();
       component.dataSource.data.forEach(row => {
-        expect(spectator.query(byText(row.recipient, {
+        expect(spectator.query(byText(row.recipientLabel, {
           selector: "td",
           exact: true
         })))
-          .withContext(row.recipient)
+          .withContext(row.recipientLabel)
           .toBeVisible();
       });
     });

@@ -3,16 +3,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable, Subject, from, map, mergeAll, mergeMap, of, pipe, switchMap, toArray } from 'rxjs';
+import { Observable, from, map, mergeAll, mergeMap, of, switchMap, toArray } from 'rxjs';
+import { Channel } from 'src/app/core/model/channel';
 import { MessageDirection, Participant } from 'src/app/core/model/message';
 import { AddressBookService } from 'src/app/core/services/addressbook.service';
 import { GroupService } from 'src/app/core/services/group.service';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
 import { MessageService } from 'src/app/core/services/message/message.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 import { ResourceService } from 'src/app/core/services/resource/resource.service';
 import { SelectChannelDialog } from '../select-channel-dialog/select-channel-dialog.component';
-import { Channel } from 'src/app/core/model/channel';
-import { NotificationService } from 'src/app/core/services/notification.service';
 
 /**
  * One row of incoming messages in the table

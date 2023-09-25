@@ -3,7 +3,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Channel } from 'src/app/core/model/channel';
 import { Participant } from 'src/app/core/model/message';
 import { ChannelService } from 'src/app/core/services/channel.service';
-import { MessageService } from 'src/app/core/services/message/message.service';
 import { MessageRow } from '../outgoing-messages-view/outgoing-messages-view.component';
 
 @Component({
@@ -20,7 +19,7 @@ export class SelectChannelDialog implements OnInit {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: MessageRow, private channelService: ChannelService,
-    private dialogRef: MatDialogRef<SelectChannelDialog>, private messageService: MessageService) {}
+    private dialogRef: MatDialogRef<SelectChannelDialog>) {}
 
   ngOnInit(): void {
     if(this.data.recipientType === Participant.AddressBookEntry) {
