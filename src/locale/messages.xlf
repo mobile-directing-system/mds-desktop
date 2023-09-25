@@ -59,6 +59,7 @@
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:23</note>
         <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:30</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:54</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:51</note>
       </notes>
       <segment>
         <source>Cancel</source>
@@ -158,6 +159,7 @@
       <notes>
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:24</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:60</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:52</note>
       </notes>
       <segment>
         <source>Submit</source>
@@ -2536,6 +2538,7 @@
     <unit id="6428648557710235460">
       <notes>
         <note category="location">src/app/features/resources/list-resources/list-resources.component.html:24</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:26</note>
       </notes>
       <segment>
         <source>Label</source>
@@ -2947,6 +2950,7 @@
     <unit id="4242554670930589411">
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:46</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:32</note>
       </notes>
       <segment>
         <source>Channel</source>
@@ -3081,6 +3085,7 @@
     <unit id="8594734568527700225">
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:15,16</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:14,15</note>
       </notes>
       <segment>
         <source>
@@ -3108,6 +3113,7 @@
     <unit id="6813150319820097954">
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:3</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:3</note>
       </notes>
       <segment>
         <source>Message <ph id="0" equiv="INTERPOLATION" disp="{{data.messageRow.id}}"/></source>
@@ -3143,6 +3149,62 @@
       </notes>
       <segment>
         <source>Created at</source>
+      </segment>
+    </unit>
+    <unit id="1193927136538220767">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:38</note>
+      </notes>
+      <segment>
+        <source>Info</source>
+      </segment>
+    </unit>
+    <unit id="5360489784778094272">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:47</note>
+      </notes>
+      <segment>
+        <source>*Select a channel for the message</source>
+      </segment>
+    </unit>
+    <unit id="4238444168354179734">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:10</note>
+      </notes>
+      <segment>
+        <source>Created: <ph id="0" equiv="INTERPOLATION" disp="{{ data.createdAt | date:&apos;medium&apos; }}"/> </source>
+      </segment>
+    </unit>
+    <unit id="5634087423964784964">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:11</note>
+      </notes>
+      <segment>
+        <source>Sender: <ph id="0" equiv="INTERPOLATION" disp="{{ data.senderLabel }}"/> </source>
+      </segment>
+    </unit>
+    <unit id="4234153988600583417">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:21</note>
+      </notes>
+      <segment>
+        <source>Outgoing channel</source>
+      </segment>
+    </unit>
+    <unit id="5196470657182929588">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:158</note>
+      </notes>
+      <segment>
+        <source>Channel successfully selected</source>
+      </segment>
+    </unit>
+    <unit id="5611077149195482047">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:159</note>
+      </notes>
+      <segment>
+        <source>Failed to select channel for message</source>
       </segment>
     </unit>
   </file>

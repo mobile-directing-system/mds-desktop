@@ -2106,6 +2106,7 @@
       <notes>
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:24</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:60</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:52</note>
       </notes>
       <segment state="initial">
         <source>Submit</source>
@@ -2221,6 +2222,7 @@
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:23</note>
         <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:30</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:54</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:51</note>
       </notes>
       <segment state="initial">
         <source>Cancel</source>
@@ -2854,6 +2856,7 @@
     <unit id="6428648557710235460">
       <notes>
         <note category="location">src/app/features/resources/list-resources/list-resources.component.html:24</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:26</note>
       </notes>
       <segment state="initial">
         <source>Label</source>
@@ -3377,6 +3380,7 @@
     <unit id="8594734568527700225">
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:15,16</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:14,15</note>
       </notes>
       <segment state="initial">
         <source>
@@ -3466,6 +3470,7 @@
     <unit id="4242554670930589411">
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:46</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:32</note>
       </notes>
       <segment state="initial">
         <source>Channel</source>
@@ -3549,6 +3554,7 @@
     <unit id="6813150319820097954">
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:3</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:3</note>
       </notes>
       <segment state="initial">
         <source>Message <ph id="0" equiv="INTERPOLATION" disp="{{data.messageRow.id}}"/></source>
@@ -3589,6 +3595,69 @@
       <segment state="initial">
         <source>Created at</source>
         <target>Erstellt am</target>
+      </segment>
+    </unit>
+    <unit id="1193927136538220767">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:38</note>
+      </notes>
+      <segment state="initial">
+        <source>Info</source>
+        <target>Info</target>
+      </segment>
+    </unit>
+    <unit id="5360489784778094272">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:47</note>
+      </notes>
+      <segment state="initial">
+        <source>*Select a channel for the message</source>
+        <target>*Wähle einen Zustellungskanal für die Nachricht</target>
+      </segment>
+    </unit>
+    <unit id="4238444168354179734">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:10</note>
+      </notes>
+      <segment state="initial">
+        <source>Created: <ph id="0" equiv="INTERPOLATION" disp="{{ data.createdAt | date:&apos;medium&apos; }}"/> </source>
+        <target>Erstellt: <ph id="0" equiv="INTERPOLATION" disp="{{ data.createdAt | date:&apos;medium&apos; }}"/> </target>
+      </segment>
+    </unit>
+    <unit id="5634087423964784964">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:11</note>
+      </notes>
+      <segment state="initial">
+        <source>Sender: <ph id="0" equiv="INTERPOLATION" disp="{{ data.senderLabel }}"/> </source>
+        <target>Absender: <ph id="0" equiv="INTERPOLATION" disp="{{ data.senderLabel }}"/> </target>
+      </segment>
+    </unit>
+    <unit id="4234153988600583417">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:21</note>
+      </notes>
+      <segment state="initial">
+        <source>Outgoing channel</source>
+        <target>Zustellungskanal</target>
+      </segment>
+    </unit>
+    <unit id="5196470657182929588">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:158</note>
+      </notes>
+      <segment state="initial">
+        <source>Channel successfully selected</source>
+        <target>Ausgangskanal erfolgreich ausgewählt</target>
+      </segment>
+    </unit>
+    <unit id="5611077149195482047">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:159</note>
+      </notes>
+      <segment state="initial">
+        <source>Failed to select channel for message</source>
+        <target>Fehler: Ausgangskanal konnte nicht gesetzt werden</target>
       </segment>
     </unit>
   </file>

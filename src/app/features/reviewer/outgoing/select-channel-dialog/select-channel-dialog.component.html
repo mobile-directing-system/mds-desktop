@@ -6,9 +6,9 @@
 </h1>
 <div mat-dialog-content>
     <div class="context">
-        <div i18n class="left-row">
-            <p> Created: {{ data.createdAt | date:'medium' }} </p>
-            <p> Sender: {{ data.senderLabel }} </p>
+        <div class="left-row">
+            <p i18n> Created: {{ data.createdAt | date:'medium' }} </p>
+            <p i18n> Sender: {{ data.senderLabel }} </p>
         </div>
         <div i18n class="right-row">
             <p> Recipients: {{ data.recipientLabel }} </p>
@@ -18,7 +18,7 @@
     <div class="content">{{data.content}}</div>
 
     <div class="channel-selection">
-        <p class="select-channel-heading" i18n>Select a channel</p>
+        <p class="select-channel-heading" i18n>Outgoing channel</p>
         <table mat-table [dataSource]="selectableChannels">
 
             <!-- Label Column -->
@@ -48,7 +48,7 @@
     </div>
 
     <div mat-dialog-actions>
-        <button mat-button mat-dialog-close>Cancel</button>
-        <button type="submit" mat-button (click)="submitClicked()">Submit</button>
+        <button mat-button mat-dialog-close i18n>Cancel</button>
+        <button type="submit" mat-button (click)="submitClicked()" i18n>Submit</button>
     </div>
 </div>
