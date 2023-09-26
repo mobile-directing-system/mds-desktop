@@ -155,6 +155,9 @@ export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(channel => {
       if (!channel) return;
       this.setChannelForRecipient(row.messageId, row.recipientId, (channel as Channel).id ?? "").subscribe(successful => {
+        if(successful) {
+          this.dataSource.data = this.dataSource.data.filter(tableRow => tableRow !== row);
+        }
         this.notificationService.notifyUninvasiveShort(successful ? $localize`Channel successfully selected` :
           $localize`Failed to select channel for message`);
       });

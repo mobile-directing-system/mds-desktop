@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Spectator, byText, byTextContent, createComponentFactory } from '@ngneat/spectator';
 import * as moment from 'moment';
 import { of } from 'rxjs';
+import { ImportanceInlineComponent } from 'src/app/core/components/importance-inline/importance-inline.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { Channel, ChannelType } from 'src/app/core/model/channel';
 import { Importance } from 'src/app/core/model/importance';
@@ -11,8 +12,6 @@ import { Participant } from 'src/app/core/model/message';
 import { ChannelService } from 'src/app/core/services/channel.service';
 import { MessageRow } from '../outgoing-messages-view/outgoing-messages-view.component';
 import { SelectChannelDialog } from './select-channel-dialog.component';
-import { ChannelTypeInlineComponent } from 'src/app/core/components/channel-type-inline/channel-type-inline.component';
-import { ImportanceInlineComponent } from 'src/app/core/components/importance-inline/importance-inline.component';
 
 fdescribe('SelectChannelDialog', () => {
   let spectator: Spectator<SelectChannelDialog>;
@@ -195,7 +194,7 @@ fdescribe('SelectChannelDialog', () => {
     it('should close dialog and return selected channel', ()=> {
       component.selectedChannel = exampleChannels[0];
       component.submitClicked();
-      expect(dialogRef.close).toHaveBeenCalled();
+      expect(dialogRef.close).toHaveBeenCalledOnceWith(component.selectedChannel);
     });
   });
 
