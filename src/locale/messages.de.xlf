@@ -3380,7 +3380,6 @@
     <unit id="8594734568527700225">
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:15,16</note>
-        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:14,15</note>
       </notes>
       <segment state="initial">
         <source>
@@ -3658,6 +3657,21 @@
       <segment state="initial">
         <source>Failed to select channel for message</source>
         <target>Fehler: Ausgangskanal konnte nicht gesetzt werden</target>
+      </segment>
+    </unit>
+    <unit id="8024714461094442568">
+      <notes>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:14,15</note>
+      </notes>
+      <segment state="initial">
+        <source>
+          <pc id="0" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Recipient: <ph id="1" equiv="INTERPOLATION" disp="{{ data.recipientLabel }}"/> </pc>
+          <pc id="2" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Incident: <ph id="3" equiv="INTERPOLATION_1" disp="{{ data.incidentLabel }}"/> </pc>
+        </source>
+        <target>
+          <pc id="0" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Empfänger: <ph id="1" equiv="INTERPOLATION" disp="{{ data.recipientLabel }}"/> </pc>
+          <pc id="2" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Vorfall: <ph id="3" equiv="INTERPOLATION_1" disp="{{ data.incidentLabel }}"/> </pc>
+        </target>
       </segment>
     </unit>
   </file>
