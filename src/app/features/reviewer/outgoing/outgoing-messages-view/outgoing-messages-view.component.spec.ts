@@ -1,9 +1,13 @@
 import { fakeAsync } from '@angular/core/testing';
 
+import { MatDialog } from '@angular/material/dialog';
 import { Spectator, byText, createComponentFactory } from '@ngneat/spectator';
+import * as moment from 'moment';
 import { of } from 'rxjs';
 import { AddressBookEntry } from 'src/app/core/model/address-book-entry';
+import { Channel, ChannelType } from 'src/app/core/model/channel';
 import { Group } from 'src/app/core/model/group';
+import { Importance } from 'src/app/core/model/importance';
 import { Incident } from 'src/app/core/model/incident';
 import { Message, MessageDirection, Participant } from 'src/app/core/model/message';
 import { Resource } from 'src/app/core/model/resource';
@@ -11,6 +15,7 @@ import { AddressBookService } from 'src/app/core/services/addressbook.service';
 import { GroupService } from 'src/app/core/services/group.service';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
 import { MessageService } from 'src/app/core/services/message/message.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 import { ResourceService } from 'src/app/core/services/resource/resource.service';
 import { ReviewerModule } from '../../reviewer.module';
 import { OutgoingMessagesViewComponent } from './outgoing-messages-view.component';
@@ -64,6 +69,22 @@ describe('OutgoingMessagesViewComponent', () => {
     }
   ]
 
+  const exampleChannel: Channel = {
+    id: "1",
+    entry: "123",
+    isActive: true,
+    label: "Radio channel 1",
+    type: ChannelType.Radio,
+    priority: 200,
+    minImportance: Importance.Strike,
+    timeout: moment.duration({
+      seconds: 200,
+    }),
+    details: {
+      info: "some details",
+    },
+  };
+
   let exampleAddressBookEntry: AddressBookEntry = {
     id: "1",
     label: "Max Mustermann",
@@ -95,24 +116,28 @@ describe('OutgoingMessagesViewComponent', () => {
   let spectator: Spectator<OutgoingMessagesViewComponent>;
   let component: OutgoingMessagesViewComponent;
   let messageService: MessageService;
+  let matDialog: MatDialog;
 
   const createComponent = createComponentFactory({
     component: OutgoingMessagesViewComponent,
     imports: [ReviewerModule],
     mocks: [
       AddressBookService,
-      GroupService
+      GroupService,
+      MatDialog,
+      NotificationService
     ]
   });
 
   beforeEach(async () => {
-
     spectator = createComponent({
       providers: [
         {
           provide: MessageService,
           useValue: jasmine.createSpyObj("MessageService", {
-            getMessages: of(exampleMessages)
+            getMessages: of(exampleMessages),
+            getMessageById: of(exampleMessages[0]),
+            updateMessage: of(true)
           })
         },
         {
@@ -138,6 +163,7 @@ describe('OutgoingMessagesViewComponent', () => {
     });
     component = spectator.component;
     messageService = spectator.inject(MessageService);
+    matDialog = spectator.inject(MatDialog);
     spectator.detectComponentChanges();
   });
 
@@ -165,6 +191,35 @@ describe('OutgoingMessagesViewComponent', () => {
     // Three rows should have been created
     expect(component.dataSource.data.length).toBe(3);
   }));
+
+  it('should update channel for recipient correctly', ()=> {
+    let msg: Message = {
+      id: "0",
+      direction: MessageDirection.Outgoing,
+      senderId: "1",
+      senderType: Participant.Role,
+      content: "Example content",
+      createdAt: new Date(),
+      priority: 1000,
+      recipients: [
+        {
+          recipientType: Participant.Role,
+          recipientId: "1",
+          send: false
+        }
+      ]
+    };
+    let msgServiceSpy = messageService as jasmine.SpyObj<MessageService>;
+    msgServiceSpy.getMessageById.and.returnValue(of(msg));
+    msgServiceSpy.updateMessage.and.returnValue(of(true));
+
+    let channelId = "123";
+    component.setChannelForRecipient(msg.id, msg.recipients[0].recipientId, channelId).subscribe(success =>{
+      expect(messageService.updateMessage).toHaveBeenCalledOnceWith(msg);
+      expect(success).toBeTrue();
+      expect(msg.recipients[0].channelId).toBe(channelId);
+    });
+  });
 
   describe('table', () => {
     beforeEach(fakeAsync(() => {
@@ -230,5 +285,38 @@ describe('OutgoingMessagesViewComponent', () => {
       });
     });
 
+    it('should open channel selection dialog when row clicked', fakeAsync(()=> {
+      spyOn(component, "rowClicked").and.callThrough();
+      spectator.click(byText(exampleMessages[0].content));
+      spectator.tick();
+      expect(component.rowClicked).toHaveBeenCalled();
+      expect(matDialog.open).toHaveBeenCalled();
+    }));
+
+    it('should not contain message when channel was successfully selected', ()=> {
+      let dialogRef = jasmine.createSpyObj("MatDialogRef", {
+        afterClosed: of(exampleChannel)
+      });
+      spyOn(component, "setChannelForRecipient").and.returnValue(of(true));
+      (matDialog as jasmine.SpyObj<MatDialog>).open.and.returnValue(dialogRef);
+
+      let selectedRow = component.dataSource.data[0];
+      expect(component.dataSource.data).toContain(selectedRow);
+      component.rowClicked(selectedRow);
+      expect(component.dataSource.data).not.toContain(selectedRow);
+    });
+
+    it('should not change when channel selection failed', ()=> {
+      let dialogRef = jasmine.createSpyObj("MatDialogRef", {
+        afterClosed: of(exampleChannel)
+      });
+      spyOn(component, "setChannelForRecipient").and.returnValue(of(false));
+      (matDialog as jasmine.SpyObj<MatDialog>).open.and.returnValue(dialogRef);
+
+      let selectedRow = component.dataSource.data[0];
+      let expectedTableEntrySize = component.dataSource.data.length;
+      component.rowClicked(selectedRow);
+      expect(component.dataSource.data.length).toBe(expectedTableEntrySize);
+    });
   });
 });

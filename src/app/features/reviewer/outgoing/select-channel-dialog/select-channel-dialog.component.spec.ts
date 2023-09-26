@@ -13,7 +13,7 @@ import { ChannelService } from 'src/app/core/services/channel.service';
 import { MessageRow } from '../outgoing-messages-view/outgoing-messages-view.component';
 import { SelectChannelDialog } from './select-channel-dialog.component';
 
-fdescribe('SelectChannelDialog', () => {
+describe('SelectChannelDialog', () => {
   let spectator: Spectator<SelectChannelDialog>;
   let component: SelectChannelDialog;
   let channelService: ChannelService;
