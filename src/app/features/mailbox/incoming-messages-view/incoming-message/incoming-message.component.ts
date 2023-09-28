@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {DialogData} from "../incoming-messages-view.component";
 import {MessageService} from "../../../../core/services/message/message.service";
 import {NotificationService} from "../../../../core/services/notification.service";
+import {Router} from "@angular/router";
 
 /**
  * Detail view of one incoming message
@@ -17,15 +18,26 @@ export class IncomingMessageComponent {
     public dialogRef: MatDialogRef<IncomingMessageComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public messageService: MessageService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {}
 
   /**
    * Closes dialog
    */
-  onClose(): void {
+  closeDialog(): void {
     this.dialogRef.close();
   }
+
+  /**
+   * Closes dialog
+   */
+  reactWithNewMessage(): void {
+    this.dialogRef.close();
+    this.router.navigate(["/mailbox/create", this.data.messageRow.id]).then();
+  }
+
+
 
   /**
    * Marks message as read/unread

@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {PaginationParams} from "../../../core/util/store";
 import {FormBuilder, Validators} from "@angular/forms";
@@ -46,7 +46,7 @@ export interface RecipientId{
   templateUrl: './create-message.component.html',
   styleUrls: ['./create-message.component.scss']
 })
-export class CreateMessageComponent implements OnDestroy{
+export class CreateMessageComponent implements OnDestroy, OnInit{
 
 
 
@@ -56,6 +56,21 @@ export class CreateMessageComponent implements OnDestroy{
               private addressBookService: AddressBookService, private groupService: GroupService,
               private authService: AuthService){
     this.loadRole();
+  }
+
+  ngOnInit(): void {
+    this.route.params.subscribe((params => {
+      let referencedMessageId = params["referencedMessageId"];
+      if (!referencedMessageId) return;
+      this.messageService.getMessageById(referencedMessageId).subscribe(message=>{
+        if(!message || !message.incidentId) return;
+        this.incidentService.getIncidentById(message.incidentId).subscribe(incident => {
+          if(!incident) return;
+          this.form.controls.incident.setValue(incident.id)
+        });
+      });
+    }
+    ))
   }
 
   loader = new Loader();
@@ -203,7 +218,7 @@ export class CreateMessageComponent implements OnDestroy{
   }
 
   cancel() {
-    this.router.navigate(['..'], {relativeTo: this.route}).then();
+    this.router.navigate(["mailbox"]).then();
   }
 
   ngOnDestroy(): void {

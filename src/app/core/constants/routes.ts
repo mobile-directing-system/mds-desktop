@@ -225,7 +225,16 @@ export const AppRoutes: PermissionGuardedRoute[] = [
           },
           {
             path: 'create',
-            component: CreateMessageComponent
+            children: [
+              {
+                path: '',
+                component: CreateMessageComponent
+              },
+              {
+                path: ':referencedMessageId',
+                component: CreateMessageComponent
+              },
+            ]
           },
         ]
       },
