@@ -59,18 +59,10 @@ export class CreateMessageComponent implements OnDestroy, OnInit{
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params => {
+    this.s.push(this.route.params.subscribe(params => {
       let referencedMessageId = params["referencedMessageId"];
-      if (!referencedMessageId) return;
-      this.messageService.getMessageById(referencedMessageId).subscribe(message=>{
-        if(!message || !message.incidentId) return;
-        this.incidentService.getIncidentById(message.incidentId).subscribe(incident => {
-          if(!incident) return;
-          this.form.controls.incident.setValue(incident.id)
-        });
-      });
-    }
-    ))
+      if(referencedMessageId) this.loadReferencedMessage(referencedMessageId);
+    }));
   }
 
   loader = new Loader();
@@ -90,6 +82,20 @@ export class CreateMessageComponent implements OnDestroy, OnInit{
       this.loggedInRole = next;
     }, _ => {
       this.notificationService.notifyUninvasiveShort($localize`Loading role failed.`);
+    });
+  }
+
+  /**
+   * The new message can reference an old message.
+   * Loads the incident of the referenced message if that is the case.
+   */
+  loadReferencedMessage(referencedMessageId: string){
+    this.messageService.getMessageById(referencedMessageId).subscribe(message=>{
+      if(!message || !message.incidentId) return;
+      this.incidentService.getIncidentById(message.incidentId).subscribe(incident => {
+        if(!incident) return;
+        this.form.controls.incident.setValue(incident.id)
+      });
     });
   }
 
