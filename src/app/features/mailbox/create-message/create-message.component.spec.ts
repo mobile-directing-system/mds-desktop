@@ -55,6 +55,7 @@ describe('CreateMessageComponent', () => {
     createdAt: new Date(),
     priority: 1000,
     needsReview: false,
+    incidentId: "incidentId",
     recipients: [
       {
         recipientType: Participant.Role,
@@ -134,6 +135,7 @@ describe('CreateMessageComponent', () => {
         provide: MessageService,
         useValue: {
           createMessage: ()=> messageSubject,
+          getMessageById: ()=>messageSubject,
         },
       },
       {
@@ -341,6 +343,14 @@ describe('CreateMessageComponent', () => {
     expect(recipientsObserved[0].label).toEqual(resources[0].label);
     expect(recipientsObserved[1].label).toEqual(addressBookEntries[0].label);
     expect(recipientsObserved[2].label).toEqual(groups[0].title);
+  }));
+
+  it('should load referenced incident correctly', fakeAsync(() => {
+    component.loadReferencedMessage("refMessageId");
+    messageSubject.next(message);
+    incidentSubject.next(incident);
+    tick();
+    expect(component.form.controls.incident.getRawValue()).toEqual(incident.id);
   }));
 
 });

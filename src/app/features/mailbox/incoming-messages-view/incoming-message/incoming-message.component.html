@@ -20,8 +20,8 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onClose()">Cancel</button>
-  <button mat-button [routerLink]="['/mailbox/create']" (click)="onClose()">React with new message</button>
+  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button mat-button (click)="reactWithNewMessage()">React with new message</button>
   <button *ngIf="!data.isRead" mat-button cdkFocusInitial (click)="toggleReadState()">Mark as read</button>
   <button *ngIf="data.isRead" mat-button cdkFocusInitial (click)="toggleReadState()">Mark as unread</button>
 </div>
