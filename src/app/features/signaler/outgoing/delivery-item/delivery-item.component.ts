@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {DeliveryItemDialogAction, DeliveryItemDialogData} from "../signaler-outgoing-view.component";
+import {ChannelType} from "../../../../core/model/channel";
 
 /**
  * Component for visualising a {@link Message} which should be sent
@@ -25,4 +26,5 @@ export class DeliveryItemComponent {
   }
 
   protected readonly DeliveryItemDialogAction = DeliveryItemDialogAction;
+  protected readonly ChannelType = ChannelType;
 }

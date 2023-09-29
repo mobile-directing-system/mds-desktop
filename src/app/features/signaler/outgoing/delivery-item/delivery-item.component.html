@@ -9,14 +9,18 @@
     <div i18n class="left-row">
       <p> Received at: {{ data.message.createdAt | date:'medium' }} </p>
       <p> Sender: {{ data.senderLabel}} </p>
-      <p> Channel: {{ data.message.incomingChannelType  }} </p>
+      <p> Incident: {{ data.incidentLabel}} </p>
     </div>
     <div i18n class="right-row">
       <p> Recipient: {{ data.recipientLabel}} </p>
-      <p> Incident: {{ data.incidentLabel}} </p>
+      <p>Channel: {{data.recipientChannel?.label}}</p>
+      <p><app-channel-type-inline [channelType]="data.recipientChannel?.type"></app-channel-type-inline></p>
+      <p *ngIf="data.recipientChannel && data.recipientChannel.type === ChannelType.Radio">Channel Info: {{data.recipientChannel.details.info}}</p>
     </div>
   </div>
-  <div class="content">{{data.message.content}}</div>
+  <div class="content">
+    {{data.message.content}}
+  </div>
 
 </div>
 <div mat-dialog-actions>
