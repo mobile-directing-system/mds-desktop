@@ -71,7 +71,6 @@ import {
 } from "../../features/logistics/radio-delivery/radio-delivery-item/radio-delivery-item.component";
 import { SignalerIncomingView } from '../../features/signaler/incoming/signaler-incoming-view.component';
 import { SignalerOutgoingView } from '../../features/signaler/outgoing/signaler-outgoing-view.component';
-import { ReviewerIncomingView } from '../../features/reviewer/incoming/reviewer-incoming-view.component';
 import { ListResourcesComponent } from 'src/app/features/resources/list-resources/list-resources.component';
 import { CreateResourceView } from 'src/app/features/resources/create-resource/create-resource.component';
 import { OperationTableLayoutComponent } from 'src/app/features/operation-table/operation-table-layout.component';
@@ -80,6 +79,7 @@ import { CreateIncidentComponent } from 'src/app/features/operation-table/create
 import { EditResourceComponent } from 'src/app/features/resources/edit-resource/edit-resource.component';
 import {CreateMessageComponent} from "../../features/mailbox/create-message/create-message.component";
 import { ReviewerOutgoingLayoutComponent } from 'src/app/features/reviewer/outgoing/reviewer-outgoing-layout/reviewer-outgoing-layout.component';
+import { ReviewerIncomingLayoutComponent } from 'src/app/features/reviewer/incoming/reviewer-incoming-layout/reviewer-incoming-layout.component';
 
 /**
  * Routes for usage in {@link AppModule}.
@@ -194,7 +194,7 @@ export const AppRoutes: PermissionGuardedRoute[] = [
         children: [
           {
             path: 'incoming',
-            component: ReviewerIncomingView
+            component: ReviewerIncomingLayoutComponent
           },
           {
             path: 'outgoing',
