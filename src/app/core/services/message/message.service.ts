@@ -24,12 +24,14 @@ export abstract class MessageService {
    * @param filters Filter messages by search criteria.
    */
   public abstract getMessages(filters?: MessageFilters): Observable<Message[]>;
+
   /**
    * Create a new message
    *
    * @param message
    */
   public abstract createMessage(message: Message): Observable<Message>;
+
   /**
    * Updates an existing message
    *
@@ -37,6 +39,7 @@ export abstract class MessageService {
    * @returns success
    */
   public abstract updateMessage(message: Message): Observable<boolean>;
+
   /**
    * Get all messages that are addressed to a role in the system.
    * With that, messages of a mailbox for a specific role can be fetched.
@@ -47,5 +50,26 @@ export abstract class MessageService {
    * @returns messages
    */
   public abstract getMailboxMessages(roleId: string, read: boolean): Observable<Message[]>;
+
+  /**
+   * Gets next available outgoing message that a signaler can deliver.
+   * Locks the message so that no one can fetch the message until it is released again.
+   * If a message has multiple receivers returns a message for each receiver separately.
+   *
+   * @returns message
+   */
+  public abstract pickUpNextMessageToDeliver(signalerId: string): Observable<Message | undefined>;
+
+  /**
+   * Releases the message after it was picked up. That enables it to be picked up again.
+   * @returns message
+   */
+  public abstract releaseMessageToDeliver(message: Message): Observable<boolean>;
+
+  /**
+   * Marks the message as send.
+   * @returns message
+   */
+  public abstract markMessageAsSend(messageToMarkAsSend: Message): Observable<boolean>;
 
 }

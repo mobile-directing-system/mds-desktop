@@ -1,0 +1,82 @@
+{
+  "messages": [
+    {
+      "id":"10000",
+      "direction":1,
+      "senderId":"455a0c8e-f8ab-4d92-81fd-56c7a138d110",
+      "senderType":0,
+      "content":"Example content 1",
+      "createdAt":"2023-09-05T12:33:17.617Z",
+      "needsReview": false,
+      "priority": 1000,
+      "recipients":[
+        {"recipientType":0,"recipientId":"455a0c8e-f8ab-4d92-81fd-56c7a138d110", "channelId":0},
+        {"recipientType":2,"recipientId":"fd4f3ab4-df76-4940-b421-6e71c7769b7b", "channelId":1},
+        {"recipientType":2,"recipientId":"1"},
+        {"recipientType":1,"recipientId":"0"},
+        {"recipientType":0,"recipientId":"7bfcc2b1-18bb-45ec-bf99-17a6e2c833ed", "channelId":0},
+        {"recipientType":1,"recipientId":"1"}
+      ],
+      "incidentId": "0"
+    },
+    {
+      "id":"10001",
+      "direction":1,
+      "senderId":"455a0c8e-f8ab-4d92-81fd-56c7a138d110",
+      "senderType":0,
+      "content":"Example content 2",
+      "createdAt":"2023-09-05T12:33:17.617Z",
+      "needsReview": false,
+      "priority": 1000,
+      "recipients":[
+        {"recipientType":0,"recipientId":"455a0c8e-f8ab-4d92-81fd-56c7a138d110", "channelId":1},
+        {"recipientType":2,"recipientId":"fd4f3ab4-df76-4940-b421-6e71c7769b7b", "channelId":1},
+        {"recipientType":2,"recipientId":"1"},
+        {"recipientType":1,"recipientId":"0"},
+        {"recipientType":0,"recipientId":"7bfcc2b1-18bb-45ec-bf99-17a6e2c833ed", "channelId":1},
+        {"recipientType":1,"recipientId":"1"}
+      ],
+      "incidentId": "0"
+    },
+    {
+      "id":"10002",
+      "direction":1,
+      "senderId":"455a0c8e-f8ab-4d92-81fd-56c7a138d110",
+      "senderType":0,
+      "content":"Needs review",
+      "createdAt":"2023-09-05T12:33:17.617Z",
+      "needsReview": true,
+      "priority": 1000,
+      "recipients":[
+        {"recipientType":0,"recipientId":"455a0c8e-f8ab-4d92-81fd-56c7a138d110", "channelId":0},
+        {"recipientType":2,"recipientId":"fd4f3ab4-df76-4940-b421-6e71c7769b7b", "channelId":1},
+        {"recipientType":2,"recipientId":"1"},
+        {"recipientType":1,"recipientId":"0"},
+        {"recipientType":0,"recipientId":"7bfcc2b1-18bb-45ec-bf99-17a6e2c833ed", "channelId":0},
+        {"recipientType":1,"recipientId":"1"}
+      ],
+      "incidentId": "0"
+    },
+
+    {
+      "id":"1",
+      "direction":0,
+      "incomingChannelType":"email",
+      "senderId":"455a0c8e-f8ab-4d92-81fd-56c7a138d110",
+      "senderType":0,
+      "content":"Ingoing message",
+      "createdAt":"2023-09-05T12:33:17.617Z",
+      "needsReview": false,
+      "priority": 0,
+      "recipients":[
+        {"recipientType":2,"recipientId":"fd4f3ab4-df76-4940-b421-6e71c7769b7b","read":false},
+        {"recipientType":2,"recipientId":"1","read":false},
+        {"recipientType":0,"recipientId":"455a0c8e-f8ab-4d92-81fd-56c7a138d110","read":false},
+        {"recipientType":1,"recipientId":"0","read":false}
+      ],
+      "incidentId": "0"
+    }
+  ]
+}
+
+

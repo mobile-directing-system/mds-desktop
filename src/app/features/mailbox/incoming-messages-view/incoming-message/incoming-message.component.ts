@@ -30,7 +30,7 @@ export class IncomingMessageComponent {
   }
 
   /**
-   * Closes dialog
+   * Creates new message with passing the message as a context
    */
   reactWithNewMessage(): void {
     this.dialogRef.close();
