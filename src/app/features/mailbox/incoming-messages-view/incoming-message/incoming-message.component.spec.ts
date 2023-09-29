@@ -157,6 +157,4 @@ describe('IncomingMessageComponent', () => {
     tick();
     expect(updateMessageSubject.observed).toBeTrue();
   }));
-
-
 });

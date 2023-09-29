@@ -1,26 +1,32 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable, from, map, mergeAll, mergeMap, of, toArray } from 'rxjs';
+import { Observable, from, map, mergeAll, mergeMap, of, switchMap, toArray } from 'rxjs';
+import { Channel } from 'src/app/core/model/channel';
 import { MessageDirection, Participant } from 'src/app/core/model/message';
 import { AddressBookService } from 'src/app/core/services/addressbook.service';
 import { GroupService } from 'src/app/core/services/group.service';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
 import { MessageService } from 'src/app/core/services/message/message.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 import { ResourceService } from 'src/app/core/services/resource/resource.service';
+import { SelectChannelDialog } from '../select-channel-dialog/select-channel-dialog.component';
 
 /**
  * One row of incoming messages in the table
  */
 export interface MessageRow {
-  id: string;
+  messageId: string;
   priority: number;
   createdAt: Date;
-  sender: string;
-  recipient: string;
+  senderLabel: string;
+  recipientType: Participant;
+  recipientId: string;
+  recipientLabel: string;
   content: string;
-  incident: string;
+  incidentLabel: string;
 }
 
 @Component({
@@ -38,13 +44,14 @@ export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
 
   constructor(private messageService: MessageService, private resourceService: ResourceService,
     private addressBookService: AddressBookService, private groupService: GroupService,
-    private incidentService: IncidentService) { }
+    private incidentService: IncidentService, private dialog: MatDialog,
+    private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.dataSource.sortingDataAccessor = (data: any, property: string) => {
-      switch(property) {
-          case 'createdAt': return new Date(data.createdAt);
-          default: return data[property];
+      switch (property) {
+        case 'createdAt': return new Date(data.createdAt);
+        default: return data[property];
       }
     };
     this.refreshDataSource();
@@ -65,32 +72,37 @@ export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
         let rows: MessageRow[] = [];
 
         msg.recipients.forEach(recipient => {
-          // Create new table entry when message was not already sent to recipient
-          if (!recipient.send) {
+          // Do not display Resources and Roles because they do not have channels assigned
+          if(recipient.recipientType === Participant.Resource || recipient.recipientType === Participant.Role) return;
+
+          // Create new table entry when message has no outgoing channel yet
+          if (!recipient.channelId) {
             let row: MessageRow = {
-              id: msg.id,
+              messageId: msg.id,
               priority: msg.priority ?? -1,
               createdAt: msg.createdAt,
               content: msg.content,
-              sender: "",
-              recipient: "",
-              incident: ""
+              senderLabel: "",
+              recipientType: recipient.recipientType,
+              recipientId: recipient.recipientId,
+              recipientLabel: "",
+              incidentLabel: ""
             }
 
             // Fetch sender label
             this.getParticipantLabel(msg.senderType, msg.senderId).subscribe((label => {
-              if (label) row.sender = label;
+              if (label) row.senderLabel = label;
             }));
 
             // Fetch recipient label
             this.getParticipantLabel(recipient.recipientType, recipient.recipientId).subscribe(label => {
-              if (label) row.recipient = label;
+              if (label) row.recipientLabel = label;
             });
 
             // Fetch incident label
             if (msg.incidentId) {
               this.incidentService.getIncidentById(msg.incidentId).subscribe((incident => {
-                if (incident) row.incident = incident.name;
+                if (incident) row.incidentLabel = incident.name;
               }));
             }
 
@@ -133,7 +145,46 @@ export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
     return of(undefined);
   }
 
-  entryClicked(row: MessageRow) {
+  /**
+   * Is called when row in table was clicked
+   * 
+   * @param row that was clicked
+   */
+  rowClicked(row: MessageRow) {
+    const dialogRef = this.dialog.open(SelectChannelDialog, {
+      data: row
+    });
 
+    dialogRef.afterClosed().subscribe(channel => {
+      if (!channel) return;
+      this.setChannelForRecipient(row.messageId, row.recipientId, (channel as Channel).id ?? "").subscribe(successful => {
+        if(successful) {
+          this.dataSource.data = this.dataSource.data.filter(tableRow => tableRow !== row);
+        }
+        this.notificationService.notifyUninvasiveShort(successful ? $localize`Channel successfully selected` :
+          $localize`Failed to select channel for message`);
+      });
+    });
+  }
+
+  /**
+   * Set an outgoing channel for a recipient.
+   * 
+   * @param messageId of the message
+   * @param recipientId of the recipient
+   * @param channelId of the selected channel
+   * 
+   * @returns if update was successful
+   * 
+   */
+  setChannelForRecipient(messageId: string, recipientId: string, channelId: string): Observable<boolean> {
+    return this.messageService.getMessageById(messageId).pipe(switchMap(message => {
+      let participant = message?.recipients.find((value, _, __) => value.recipientId === recipientId);
+
+      if (!participant) return of(false);
+
+      participant.channelId = channelId;
+      return this.messageService.updateMessage(message!);
+    }));
   }
 }
