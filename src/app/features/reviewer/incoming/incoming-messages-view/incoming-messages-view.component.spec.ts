@@ -1,16 +1,16 @@
 
-import { Spectator, byTextContent, createComponentFactory } from '@ngneat/spectator';
-import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
-import { MessageService } from 'src/app/core/services/message/message.service';
-import { ReviewerModule } from '../reviewer.module';
-import { ReviewerIncomingView } from './reviewer-incoming-view.component';
-import { Message, MessageDirection, Participant } from 'src/app/core/model/message';
-import { By } from '@angular/platform-browser';
-import { MatTable } from '@angular/material/table';
-import { ChannelType } from 'src/app/core/model/channel';
 import { fakeAsync } from '@angular/core/testing';
+import { MatTable } from '@angular/material/table';
+import { By } from '@angular/platform-browser';
+import { Spectator, byTextContent, createComponentFactory } from '@ngneat/spectator';
+import { BehaviorSubject } from 'rxjs';
+import { ChannelType } from 'src/app/core/model/channel';
+import { Message, MessageDirection, Participant } from 'src/app/core/model/message';
+import { MessageService } from 'src/app/core/services/message/message.service';
+import { ReviewerModule } from '../../reviewer.module';
+import { IncomingMessagesViewComponent } from './incoming-messages-view.component';
 
-fdescribe('ReviewerIncomingView', () => {
+fdescribe('IncomingMessagesViewComponent', () => {
 
   const exampleMessages: Message[] = [
     {
@@ -56,11 +56,12 @@ fdescribe('ReviewerIncomingView', () => {
   let getMessages = new BehaviorSubject<Message[]>(exampleMessages);
 
   const createComponent = createComponentFactory({
-    component: ReviewerIncomingView,
+    component: IncomingMessagesViewComponent,
     imports: [ReviewerModule]
   });
 
-  let spectator: Spectator<ReviewerIncomingView>;
+  let spectator: Spectator<IncomingMessagesViewComponent>;
+  let component: IncomingMessagesViewComponent;
 
   beforeEach(() => {
     let messageService = jasmine.createSpyObj("MessageService", {
@@ -75,6 +76,7 @@ fdescribe('ReviewerIncomingView', () => {
         }
       ]
     });
+    component = spectator.component;
   });
 
   it('should create', () => {
@@ -108,6 +110,16 @@ fdescribe('ReviewerIncomingView', () => {
           exact: true
         })
         )).withContext("display message content in table").toBeVisible();
+      });
+    });
+
+    it('should display ids of messages', () => {
+      exampleMessages.forEach(msg => {
+        expect(spectator.query(byTextContent(msg.id, {
+          selector: "td",
+          exact: true
+        })
+        )).withContext("display message id in table").toBeVisible();
       });
     });
 

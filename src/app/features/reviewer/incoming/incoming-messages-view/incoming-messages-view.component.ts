@@ -6,11 +6,11 @@ import { Message } from 'src/app/core/model/message';
 import { MessageService } from 'src/app/core/services/message/message.service';
 
 @Component({
-  selector: 'app-reviewer-incoming-view',
-  templateUrl: './reviewer-incoming-view.component.html',
-  styleUrls: ['./reviewer-incoming-view.component.scss']
+  selector: 'app-incoming-messages-view',
+  templateUrl: './incoming-messages-view.component.html',
+  styleUrls: ['./incoming-messages-view.component.scss']
 })
-export class ReviewerIncomingView implements OnInit, AfterViewInit {
+export class IncomingMessagesViewComponent implements OnInit, AfterViewInit{
 
   displayedColumns: string[] = ['id', 'created_at', 'channel', 'content', 'incident'];
   dataSource: MatTableDataSource<Message> = new MatTableDataSource<Message>();
@@ -36,6 +36,4 @@ export class ReviewerIncomingView implements OnInit, AfterViewInit {
     };
     this.dataSource.paginator = this.paginator;
   }
-
-
 }
