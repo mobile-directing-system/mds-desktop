@@ -2,15 +2,18 @@
 import { fakeAsync } from '@angular/core/testing';
 import { MatTable } from '@angular/material/table';
 import { By } from '@angular/platform-browser';
-import { Spectator, byTextContent, createComponentFactory } from '@ngneat/spectator';
-import { BehaviorSubject } from 'rxjs';
+import { Spectator, byText, byTextContent, createComponentFactory } from '@ngneat/spectator';
+import { of } from 'rxjs';
+import { ChannelTypeInlineComponent } from 'src/app/core/components/channel-type-inline/channel-type-inline.component';
 import { ChannelType } from 'src/app/core/model/channel';
+import { Incident } from 'src/app/core/model/incident';
 import { Message, MessageDirection, Participant } from 'src/app/core/model/message';
+import { IncidentService } from 'src/app/core/services/incident/incident.service';
 import { MessageService } from 'src/app/core/services/message/message.service';
 import { ReviewerModule } from '../../reviewer.module';
-import { IncomingMessagesViewComponent } from './incoming-messages-view.component';
+import { IncomingMessagesViewComponent, ReviewerIncomingMessageRow } from './incoming-messages-view.component';
 
-fdescribe('IncomingMessagesViewComponent', () => {
+describe('IncomingMessagesViewComponent', () => {
 
   const exampleMessages: Message[] = [
     {
@@ -20,14 +23,9 @@ fdescribe('IncomingMessagesViewComponent', () => {
       senderId: "123",
       senderType: Participant.AddressBookEntry,
       content: "Example content",
+      needsReview: true,
       createdAt: new Date(),
-      recipients: [
-        {
-          recipientType: Participant.Role,
-          recipientId: "S1",
-          read: false
-        }
-      ]
+      recipients: []
     },
     {
       id: "1",
@@ -36,24 +34,20 @@ fdescribe('IncomingMessagesViewComponent', () => {
       senderId: "1234",
       senderType: Participant.Resource,
       content: "Example content 123",
+      incidentId: "0",
       createdAt: new Date(),
       needsReview: true,
-      recipients: [
-        {
-          recipientType: Participant.Role,
-          recipientId: "S1",
-          read: false
-        },
-        {
-          recipientType: Participant.Role,
-          recipientId: "S3",
-          read: false
-        }
-      ]
+      recipients: []
     }
   ];
 
-  let getMessages = new BehaviorSubject<Message[]>(exampleMessages);
+  const exampleIncident: Incident = {
+    id: "0",
+    name: "Example incident",
+    description: "Incident description",
+    operation: "1",
+    isCompleted: false
+  };
 
   const createComponent = createComponentFactory({
     component: IncomingMessagesViewComponent,
@@ -64,16 +58,21 @@ fdescribe('IncomingMessagesViewComponent', () => {
   let component: IncomingMessagesViewComponent;
 
   beforeEach(() => {
-    let messageService = jasmine.createSpyObj("MessageService", {
-      getMessages: getMessages
-    });
-
     spectator = createComponent({
+      detectChanges: false,
       providers: [
         {
           provide: MessageService,
-          useValue: messageService
-        }
+          useValue: jasmine.createSpyObj("MessageService", {
+            getMessages: of(exampleMessages)
+          })
+        },
+        {
+          provide: IncidentService,
+          useValue: jasmine.createSpyObj("IncidentService", {
+            getIncidentById: of(exampleIncident)
+          })
+        },
       ]
     });
     component = spectator.component;
@@ -87,19 +86,33 @@ fdescribe('IncomingMessagesViewComponent', () => {
     expect(spectator.debugElement.query(By.directive(MatTable))).toBeTruthy();
   })
 
-  it('should load messages on init', fakeAsync(() => {
-    getMessages.next(exampleMessages);
-    spectator.component.ngOnInit();
-    spectator.tick();
+  it('should load messages on init', () => {
+    spectator.detectChanges();
     expect(spectator.component.dataSource.data.length).toBe(exampleMessages.length);
     expect(spectator.inject(MessageService).getMessages).toHaveBeenCalled();
+  });
+
+  it('should fetch message rows correctly', fakeAsync(()=> {
+    component.refreshDataSource();
+    spectator.tick();
+    expect(component.dataSource.data.length).toBe(exampleMessages.length);
+    exampleMessages.forEach(msg => {
+
+      let msgRow: ReviewerIncomingMessageRow  = {
+        id: msg.id,
+        createdAt: msg.createdAt,
+        channelType: msg.incomingChannelType!,
+        content: msg.content,
+      };
+      if(msg.incidentId) msgRow.incident = exampleIncident;
+
+      expect(component.dataSource.data).toContain(jasmine.objectContaining(msgRow));
+    });
   }));
 
   describe('table', () => {
 
     beforeEach(() => {
-      getMessages.next(exampleMessages);
-      spectator.component.ngOnInit();
       spectator.detectChanges();
     });
 
@@ -123,6 +136,24 @@ fdescribe('IncomingMessagesViewComponent', () => {
       });
     });
 
+    it('should display channel types', () => {
+      expect(spectator.query(ChannelTypeInlineComponent)).toBeVisible();
+      exampleMessages.forEach(msg => {
+        expect(spectator.query(byText(msg.incomingChannelType!, {
+          exact: false,
+        }))).toBeVisible();
+      })
+    });
+
+    it('should display incident names if available', () => {
+      component.dataSource.data.forEach(row => {
+        expect(spectator.query(byText(row.incident?.name ?? "", {
+          selector: "td",
+          exact: true
+        }))).toBeVisible();
+      });
+    });
+
     it('should be sorted initially descending by message creation date', fakeAsync(() => {
       spectator.component.ngAfterViewInit();
       spectator.tick();
@@ -130,5 +161,11 @@ fdescribe('IncomingMessagesViewComponent', () => {
       expect(spectator.component.dataSource.sort?.active).toBe("created_at");
     }));
 
+    it('should call rowClicked() when row was clicked', ()=> {
+      spyOn(component, "rowClicked");
+      let row = component.dataSource.data[0];
+      spectator.click(byText(row.id));
+      expect(component.rowClicked).toHaveBeenCalledWith(row);
+    })
   });
 });
