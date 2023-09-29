@@ -557,6 +557,7 @@
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:20</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:47</note>
         <note category="location">src/app/features/mailbox/create-message/create-message.component.html:64</note>
+        <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.html:26</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:54</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:58</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:128</note>
@@ -600,6 +601,7 @@
     <unit id="5462361983940693567">
       <notes>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:39</note>
+        <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.html:18</note>
       </notes>
       <segment>
         <source>Channel</source>
@@ -1342,6 +1344,7 @@
     <unit id="1520049505561836231">
       <notes>
         <note category="location">src/app/features/logistics/intel-delivery/open-intel-deliveries-table/open-intel-deliveries-table.component.html:10</note>
+        <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.html:12</note>
       </notes>
       <segment>
         <source>Created at</source>
@@ -2732,6 +2735,7 @@
     <unit id="1092246396276485959">
       <notes>
         <note category="location">src/app/features/mailbox/create-message/create-message.component.html:55</note>
+        <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.html:32</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:71</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:75</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:130</note>
@@ -2859,7 +2863,7 @@
     </unit>
     <unit id="1253879069732164922">
       <notes>
-        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:50</note>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:62</note>
       </notes>
       <segment>
         <source>Marked message as read.</source>
@@ -2867,7 +2871,7 @@
     </unit>
     <unit id="1440728154205157554">
       <notes>
-        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:37</note>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:49</note>
       </notes>
       <segment>
         <source>Error, could not find the message in the system.</source>
@@ -2884,7 +2888,7 @@
     </unit>
     <unit id="1733993200592511918">
       <notes>
-        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:53</note>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:65</note>
       </notes>
       <segment>
         <source>Error while marking the message as read.</source>
@@ -2990,7 +2994,7 @@
     </unit>
     <unit id="4540589325711926146">
       <notes>
-        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:77</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:84</note>
       </notes>
       <segment>
         <source>Loading role failed.</source>
@@ -2998,7 +3002,7 @@
     </unit>
     <unit id="4860449449806508753">
       <notes>
-        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:111</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:132</note>
       </notes>
       <segment>
         <source>Message send.</source>
@@ -3023,7 +3027,7 @@
     </unit>
     <unit id="6163435959371489060">
       <notes>
-        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:51</note>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:63</note>
       </notes>
       <segment>
         <source>Marked message as unread.</source>
@@ -3052,7 +3056,7 @@
     </unit>
     <unit id="72748386340014679">
       <notes>
-        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:115</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:136</note>
       </notes>
       <segment>
         <source>Sending message failed.</source>
@@ -3192,7 +3196,7 @@
     </unit>
     <unit id="5196470657182929588">
       <notes>
-        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:158</note>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:164</note>
       </notes>
       <segment>
         <source>Channel successfully selected</source>
@@ -3200,7 +3204,7 @@
     </unit>
     <unit id="5611077149195482047">
       <notes>
-        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:159</note>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:165</note>
       </notes>
       <segment>
         <source>Failed to select channel for message</source>
@@ -3215,6 +3219,30 @@
           <pc id="0" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Recipient: <ph id="1" equiv="INTERPOLATION" disp="{{ data.recipientLabel }}"/> </pc>
           <pc id="2" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Incident: <ph id="3" equiv="INTERPOLATION_1" disp="{{ data.incidentLabel }}"/> </pc>
         </source>
+      </segment>
+    </unit>
+    <unit id="3370412951953370633">
+      <notes>
+        <note category="location">src/app/features/reviewer/incoming/reviewer-incoming-layout/reviewer-incoming-layout.component.html:2</note>
+      </notes>
+      <segment>
+        <source>Review incoming messages</source>
+      </segment>
+    </unit>
+    <unit id="4082884868478550404">
+      <notes>
+        <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.html:41</note>
+      </notes>
+      <segment>
+        <source>No incoming messages to review at the moment.</source>
+      </segment>
+    </unit>
+    <unit id="8040881171107393560">
+      <notes>
+        <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.html:6</note>
+      </notes>
+      <segment>
+        <source>ID</source>
       </segment>
     </unit>
   </file>
