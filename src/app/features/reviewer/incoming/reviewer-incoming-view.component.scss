@@ -1,0 +1,6 @@
+@import 'src/styles/view';
+
+.mat-mdc-row:hover .mat-mdc-cell {
+    background-color: whitesmoke;
+    cursor: pointer;
+}
