@@ -33,13 +33,13 @@ describe('OutgoingMessagesViewComponent', () => {
       priority: 1000,
       recipients: [
         {
-          recipientType: Participant.Role,
+          recipientType: Participant.AddressBookEntry,
           recipientId: "1",
           send: false
         },
         {
-          recipientType: Participant.Resource,
-          recipientId: "1",
+          recipientType: Participant.Role,
+          recipientId: "2",
           send: false
         }
       ]
@@ -55,7 +55,7 @@ describe('OutgoingMessagesViewComponent', () => {
       incidentId: "1",
       recipients: [
         {
-          recipientType: Participant.Role,
+          recipientType: Participant.AddressBookEntry,
           recipientId: "1",
           send: false
         },
@@ -122,8 +122,6 @@ describe('OutgoingMessagesViewComponent', () => {
     component: OutgoingMessagesViewComponent,
     imports: [ReviewerModule],
     mocks: [
-      AddressBookService,
-      GroupService,
       MatDialog,
       NotificationService
     ]
@@ -144,6 +142,12 @@ describe('OutgoingMessagesViewComponent', () => {
           provide: ResourceService,
           useValue: jasmine.createSpyObj("ResourceService", {
             getResourceById: of(exampleResource)
+          })
+        },
+        {
+          provide: AddressBookService,
+          useValue: jasmine.createSpyObj("AddressBookService", {
+            getAddressBookEntryById: of(exampleAddressBookEntry)
           })
         },
         {
@@ -188,8 +192,8 @@ describe('OutgoingMessagesViewComponent', () => {
 
     expect(messageService.getMessages).toHaveBeenCalled();
 
-    // Three rows should have been created
-    expect(component.dataSource.data.length).toBe(3);
+    // Two rows should have been created
+    expect(component.dataSource.data.length).toBe(2);
   }));
 
   it('should update channel for recipient correctly', ()=> {
