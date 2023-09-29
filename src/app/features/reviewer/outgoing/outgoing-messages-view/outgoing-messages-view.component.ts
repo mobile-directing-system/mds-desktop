@@ -72,6 +72,9 @@ export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
         let rows: MessageRow[] = [];
 
         msg.recipients.forEach(recipient => {
+          // Do not display Resources and Roles because they do not have channels assigned
+          if(recipient.recipientType === Participant.Resource || recipient.recipientType === Participant.Role) return;
+
           // Create new table entry when message has no outgoing channel yet
           if (!recipient.channelId) {
             let row: MessageRow = {
