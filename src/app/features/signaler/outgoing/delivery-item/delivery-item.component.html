@@ -14,8 +14,10 @@
     <div i18n class="right-row">
       <p> Recipient: {{ data.recipientLabel}} </p>
       <p>Channel: {{data.recipientChannel?.label}}</p>
-      <p><app-channel-type-inline [channelType]="data.recipientChannel?.type"></app-channel-type-inline></p>
-      <p *ngIf="data.recipientChannel && data.recipientChannel.type === ChannelType.Radio">Channel Info: {{data.recipientChannel.details.info}}</p>
+      <p>Channel Typ: <app-channel-type-inline [channelType]="data.recipientChannel?.type"></app-channel-type-inline></p>
+      <ng-container *ngIf="data.recipientChannel">
+      <p *ngIf="data.recipientChannel.type === ChannelType.Radio">Channel Info: {{data.recipientChannel.details.info}}</p>
+      </ng-container>
     </div>
   </div>
   <div class="content">

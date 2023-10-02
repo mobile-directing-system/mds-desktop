@@ -7,7 +7,7 @@ import {NotificationService} from "../../../core/services/notification.service";
 import {IntelService} from "../../../core/services/intel.service";
 import {MessageService} from "../../../core/services/message/message.service";
 import {AuthService} from "../../../core/services/auth.service";
-import {Channel} from "../../../core/model/channel";
+import {Channel, ChannelType} from "../../../core/model/channel";
 import {AddressBookService} from "../../../core/services/addressbook.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ResourceService} from "../../../core/services/resource/resource.service";
@@ -15,6 +15,7 @@ import {GroupService} from "../../../core/services/group.service";
 import {IncidentService} from "../../../core/services/incident/incident.service";
 import {ChannelService} from "../../../core/services/channel.service";
 import {DeliveryItemComponent} from "./delivery-item/delivery-item.component";
+import {FormBuilder} from "@angular/forms";
 
 
 /**
@@ -54,18 +55,25 @@ export class SignalerOutgoingView implements OnDestroy{
    */
   private s: Subscription[] = [];
 
+  selectedChannelControl = this.fb.nonNullable.control<ChannelType | undefined>(undefined);
+
+
   constructor(private router: Router, private route: ActivatedRoute,
               private messageService: MessageService, private workspaceService: WorkspaceService,
               private notificationService: NotificationService, private intelService: IntelService,
               private authService: AuthService, private addressBookService: AddressBookService, public dialog: MatDialog,
               private resourceService: ResourceService, private groupService: GroupService,
-              private incidentService: IncidentService, private channelService: ChannelService) {
+              private incidentService: IncidentService, private channelService: ChannelService,
+              private fb: FormBuilder) {
     this.workspaceService.operationChange().subscribe((operationId: string | undefined)=>{
       this.operationId = operationId;
     });
   }
 
   ngOnDestroy(): void {
+
+    console.log("Destroyed")
+
     this.s.forEach(s => s.unsubscribe());
 
     // release picked up message to deliver if exists
@@ -91,6 +99,8 @@ export class SignalerOutgoingView implements OnDestroy{
    */
   pickUpNextMessageToDeliver(): void {
 
+    this.getSelectedChannelType();
+
     // get loggedInUserId
     let loggedInUserId = this.authService.loggedInUser();
     if(!loggedInUserId){
@@ -100,7 +110,7 @@ export class SignalerOutgoingView implements OnDestroy{
 
     if(this.operationId){
       // get message
-      this.s.push(this.messageService.pickUpNextMessageToDeliver(loggedInUserId).subscribe({
+      this.s.push(this.messageService.pickUpNextMessageToDeliver(loggedInUserId, this.getSelectedChannelType()).subscribe({
         next: message => {
           this.pickedUpMessage = message;
           if(message == undefined){
@@ -243,6 +253,10 @@ export class SignalerOutgoingView implements OnDestroy{
         channel=>channel.id === recipient.channelId
       ).at(0))
     );
+  }
+
+  getSelectedChannelType(){
+    return this.selectedChannelControl.getRawValue();
   }
 
 

@@ -1,3 +1,7 @@
 <div class="container">
+  <mat-form-field class="app-edit-input">
+    <mat-label i18n>Filter channel</mat-label>
+    <app-channel-type-select nullValuePlaceholder="All types" [formControl]="selectedChannelControl"></app-channel-type-select>
+  </mat-form-field>
   <button mat-raised-button color="primary" (click)="pickUpNextMessageToDeliver()" i18n>Retrieve next delivery job</button>
 </div>

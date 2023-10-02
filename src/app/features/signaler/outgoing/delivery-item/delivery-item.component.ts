@@ -11,7 +11,7 @@ import {ChannelType} from "../../../../core/model/channel";
   templateUrl: './delivery-item.component.html',
   styleUrls: ['./delivery-item.component.scss']
 })
-export class DeliveryItemComponent {
+export class DeliveryItemComponent{
 
   constructor(
     public dialogRef: MatDialogRef<DeliveryItemComponent>,
@@ -27,4 +27,5 @@ export class DeliveryItemComponent {
 
   protected readonly DeliveryItemDialogAction = DeliveryItemDialogAction;
   protected readonly ChannelType = ChannelType;
+
 }

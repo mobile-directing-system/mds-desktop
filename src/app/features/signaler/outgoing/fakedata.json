@@ -10,11 +10,11 @@
       "needsReview": false,
       "priority": 1000,
       "recipients":[
-        {"recipientType":0,"recipientId":"455a0c8e-f8ab-4d92-81fd-56c7a138d110", "channelId":0},
+        {"recipientType":0,"recipientId":"455a0c8e-f8ab-4d92-81fd-56c7a138d110", "channelId":"c821b824-0de2-4dad-8c14-1120cac9893d"},
         {"recipientType":2,"recipientId":"fd4f3ab4-df76-4940-b421-6e71c7769b7b", "channelId":1},
         {"recipientType":2,"recipientId":"1"},
         {"recipientType":1,"recipientId":"0"},
-        {"recipientType":0,"recipientId":"7bfcc2b1-18bb-45ec-bf99-17a6e2c833ed", "channelId":0},
+        {"recipientType":0,"recipientId":"7bfcc2b1-18bb-45ec-bf99-17a6e2c833ed", "channelId":"ddb38042-fc01-480e-8ea5-9a2106687dda"},
         {"recipientType":1,"recipientId":"1"}
       ],
       "incidentId": "0"
@@ -29,11 +29,11 @@
       "needsReview": false,
       "priority": 1000,
       "recipients":[
-        {"recipientType":0,"recipientId":"455a0c8e-f8ab-4d92-81fd-56c7a138d110", "channelId":1},
+        {"recipientType":0,"recipientId":"455a0c8e-f8ab-4d92-81fd-56c7a138d110", "channelId":"54b07771-264c-4f28-8535-57edf61c05b2"},
         {"recipientType":2,"recipientId":"fd4f3ab4-df76-4940-b421-6e71c7769b7b", "channelId":1},
         {"recipientType":2,"recipientId":"1"},
         {"recipientType":1,"recipientId":"0"},
-        {"recipientType":0,"recipientId":"7bfcc2b1-18bb-45ec-bf99-17a6e2c833ed", "channelId":1},
+        {"recipientType":0,"recipientId":"7bfcc2b1-18bb-45ec-bf99-17a6e2c833ed", "channelId":"1293616d-0142-4400-bf72-9cc408624cbf"},
         {"recipientType":1,"recipientId":"1"}
       ],
       "incidentId": "0"

@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 import { Message, MessageDirection } from '../../model/message';
+import {ChannelType} from "../../model/channel";
 
 export interface MessageFilters {
   byNeedsReview?: boolean;
@@ -58,7 +59,7 @@ export abstract class MessageService {
    *
    * @returns message
    */
-  public abstract pickUpNextMessageToDeliver(signalerId: string): Observable<Message | undefined>;
+  public abstract pickUpNextMessageToDeliver(signalerId: string, filterForChannel?: ChannelType): Observable<Message | undefined>;
 
   /**
    * Releases the message after it was picked up. That enables it to be picked up again.
