@@ -1,21 +1,21 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { map, mergeAll, mergeMap, toArray } from 'rxjs';
-import { ChannelType } from 'src/app/core/model/channel';
+import { Subscription, interval, map, mergeAll, toArray } from 'rxjs';
 import { Incident } from 'src/app/core/model/incident';
+import { Message, MessageDirection } from 'src/app/core/model/message';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
 import { MessageService } from 'src/app/core/services/message/message.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
+import { ReviewDialog } from '../review-dialog/review-dialog.component';
 
 /**
  * Data of table row that represents an incoming message
  */
 export interface ReviewerIncomingMessageRow {
-  id: string;
-  createdAt: Date;
-  channelType: ChannelType;
-  content: string;
+  message: Message;
   incident?: Incident;
 }
 
@@ -24,29 +24,41 @@ export interface ReviewerIncomingMessageRow {
   templateUrl: './incoming-messages-view.component.html',
   styleUrls: ['./incoming-messages-view.component.scss']
 })
-export class IncomingMessagesViewComponent implements OnInit, AfterViewInit{
+export class IncomingMessagesViewComponent implements OnInit, OnDestroy, AfterViewInit{
 
   displayedColumns: string[] = ['id', 'created_at', 'channel', 'content', 'incident'];
   dataSource: MatTableDataSource<ReviewerIncomingMessageRow> = new MatTableDataSource<ReviewerIncomingMessageRow>();
 
+  readonly refreshIntervall: number = 10;
+  refreshTimer!: Subscription;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private messageService: MessageService, private incidentService: IncidentService) {}
+  constructor(private messageService: MessageService, private incidentService: IncidentService, private dialog: MatDialog,
+    private notificationService: NotificationService) {}
 
   ngOnInit() {
     this.refreshDataSource();
+    this.refreshTimer = interval(this.refreshIntervall * 1000).subscribe(() => this.refreshDataSource());
   }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
-    this.dataSource.sortingDataAccessor = (item: any, property: string) => {
-      switch (property) {
-        case 'created_at': return new Date(item.createdAt);
-        default: return item[property];
+    this.dataSource.sortingDataAccessor = (data: any, property: string) => {
+      switch(property) {
+          case 'created_at': return new Date(data.message.createdAt);
+          case 'id': return data.message.id;
+          case 'channel': return data.message.incomingChannelType;
+          case 'content': return data.message.content;
+          default: return data[property];
       }
     };
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnDestroy(): void {
+    this.refreshTimer.unsubscribe();
   }
 
   /**
@@ -54,15 +66,13 @@ export class IncomingMessagesViewComponent implements OnInit, AfterViewInit{
    */
   refreshDataSource() {
     let tableRows = this.messageService.getMessages({
-      byNeedsReview: true
+      byNeedsReview: true,
+      byDirection: MessageDirection.Incoming
     }).pipe(
       mergeAll(),
       map(msg => {
         let row: ReviewerIncomingMessageRow = {
-          id: msg.id,
-          createdAt: msg.createdAt,
-          channelType: msg.incomingChannelType!,
-          content: msg.content
+          message: msg
         }
 
         if(msg.incidentId) {
@@ -86,6 +96,16 @@ export class IncomingMessagesViewComponent implements OnInit, AfterViewInit{
    * @param row that was clicked
    */
   rowClicked(row: ReviewerIncomingMessageRow) {
-    
+    let dialogRef = this.dialog.open(ReviewDialog, {
+      data: row
+    });
+
+    dialogRef.afterClosed().subscribe(successful => {
+      if(successful !== undefined) {
+        if(successful) this.refreshDataSource();
+        this.notificationService.notifyUninvasiveShort(successful ? 
+          $localize`Message as successfully reviewed` : $localize`Error: Message could not be forwarded`);
+      }
+    });
   }
 }

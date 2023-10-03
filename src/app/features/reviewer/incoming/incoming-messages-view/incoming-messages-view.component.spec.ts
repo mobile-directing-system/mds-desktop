@@ -99,10 +99,7 @@ describe('IncomingMessagesViewComponent', () => {
     exampleMessages.forEach(msg => {
 
       let msgRow: ReviewerIncomingMessageRow  = {
-        id: msg.id,
-        createdAt: msg.createdAt,
-        channelType: msg.incomingChannelType!,
-        content: msg.content,
+        message: msg,
       };
       if(msg.incidentId) msgRow.incident = exampleIncident;
 
@@ -164,7 +161,7 @@ describe('IncomingMessagesViewComponent', () => {
     it('should call rowClicked() when row was clicked', ()=> {
       spyOn(component, "rowClicked");
       let row = component.dataSource.data[0];
-      spectator.click(byText(row.id));
+      spectator.click(byText(row.message.id));
       expect(component.rowClicked).toHaveBeenCalledWith(row);
     })
   });

@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>
+    <div class="header">
+        <span i18n>Message {{ data.message.id }}</span>
+    </div>
+</h1>
+<div mat-dialog-content>
+    <div class="context">
+        <div class="left-row">
+            <p i18n> Created: {{ data.message.createdAt | date:'medium' }} </p>
+            <p i18n> Sender: {{ senderName }}, {{ data.message.info }} </p>
+        </div>
+        <div class="right-row">
+            <p *ngIf="data.incident" i18n> Incident: #{{ data.incident.id }} {{ data.incident.name }} </p>
+        </div>
+    </div>
+    <div class="message-content">{{ data.message.content }}</div>
+
+    <div class="form">
+        <mat-form-field class="app-edit-input">
+            <mat-label i18n>Priority</mat-label>
+            <app-importance-select [formControl]="form.controls.priority"></app-importance-select>
+        </mat-form-field>
+    
+        <mat-form-field class="app-edit-input">
+            <mat-label i18n>Forward to</mat-label>
+            <mat-select [formControl]="form.controls.roles" multiple>
+                <mat-option *ngFor="let role of roles;" [value]="role.id"> {{ role.title }} </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-button (click)="cancelClicked()" i18n>Cancel</button>
+        <button type="submit" mat-button (click)="submitClicked()" i18n>Submit</button>
+    </div>
+</div>
