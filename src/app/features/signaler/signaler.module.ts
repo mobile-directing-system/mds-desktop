@@ -4,13 +4,15 @@ import { SignalerIncomingView } from './incoming/signaler-incoming-view.componen
 import { SignalerOutgoingView } from './outgoing/signaler-outgoing-view.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { RouterModule } from '@angular/router';
+import {DeliveryItemComponent} from "./outgoing/delivery-item/delivery-item.component";
 
 
 
 @NgModule({
   declarations: [
     SignalerIncomingView,
-    SignalerOutgoingView
+    SignalerOutgoingView,
+    DeliveryItemComponent
   ],
   imports: [
     CommonModule,

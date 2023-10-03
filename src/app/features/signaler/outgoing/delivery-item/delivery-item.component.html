@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>
+  <div class="header">
+    <span i18n>Message {{data.message.id}}</span>
+    <app-importance-inline [importance]="data.message.priority"></app-importance-inline>
+  </div>
+</h1>
+<div mat-dialog-content>
+  <div class="context">
+    <div i18n class="left-row">
+      <p> Received at: {{ data.message.createdAt | date:'medium' }} </p>
+      <p> Sender: {{ data.senderLabel}} </p>
+      <p> Incident: {{ data.incidentLabel}} </p>
+    </div>
+    <div i18n class="right-row">
+      <p> Recipient: {{ data.recipientLabel}} </p>
+      <p>Channel: {{data.recipientChannel?.label}}</p>
+      <p>Channel Typ: <app-channel-type-inline [channelType]="data.recipientChannel?.type"></app-channel-type-inline></p>
+      <ng-container *ngIf="data.recipientChannel">
+      <p *ngIf="data.recipientChannel.type === ChannelType.Radio">Channel Info: {{data.recipientChannel.details.info}}</p>
+      </ng-container>
+    </div>
+  </div>
+  <div class="content">
+    {{data.message.content}}
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog(DeliveryItemDialogAction.Cancel)" i18n>Cancel</button>
+  <button mat-button cdkFocusInitial (click)="closeDialog(DeliveryItemDialogAction.MarkAsSend)" i18n>Mark as send</button>
+</div>

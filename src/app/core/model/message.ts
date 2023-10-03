@@ -32,15 +32,19 @@ export interface Recipient {
      */
     channelId?: string;
     /**
-     * Whether the recipient already read the messsage.
+     * Whether the recipient already read the message.
      * This is only relevant for {@link Participant.Role} in the system
      * because for other participants the read status cannot be determined.
      */
     read?: boolean;
     /**
-     * Whether the message was send to the recipient
+     * Whether the message was sent to the recipient
      */
     send?: boolean;
+    /**
+     * User id of a signaler if he has picked up the message to send it to the recipient
+     */
+    signalerId?: string;
 }
 
 /**
@@ -56,7 +60,7 @@ export interface Message {
      */
     direction: MessageDirection;
     /**
-     * Type of an incoming message (e.g. radio or telephone)
+     * Type of incoming message (e.g. radio or telephone)
      */
     incomingChannelType?: ChannelType;
     /**

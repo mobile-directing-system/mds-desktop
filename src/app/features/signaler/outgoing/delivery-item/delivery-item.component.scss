@@ -1,0 +1,22 @@
+.header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.mdc-dialog__title::before{
+  height: 0;
+}
+
+.context{
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-row{
+  padding-right: 50px;
+}
+
+.content{
+  padding-top: 20px;
+  color: black;
+}

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Optional, Self } from '@angular/core';
+import {Component, ElementRef, Input, Optional, Self} from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { ChannelType, localizeChannelType } from '../../model/channel';
 import { CustomMatFormField } from '../../util/form-fields';
@@ -22,6 +22,12 @@ export class ChannelTypeSelectComponent extends CustomMatFormField<ChannelType> 
   ChannelType = ChannelType;
   localizeChannelType = localizeChannelType;
   availableChannelTypes: ChannelType[] = Object.values(ChannelType);
+
+  /**
+   * If passed, allows to select null as a value.
+   * The passed string will be shown as a placeholder instead of null.
+   */
+  @Input() nullValuePlaceholder?: string;
 
   constructor(_elementRef: ElementRef<HTMLElement>, @Optional() @Self() ngControl: NgControl) {
     super({

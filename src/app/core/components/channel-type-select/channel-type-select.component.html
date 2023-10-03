@@ -1,7 +1,8 @@
-<mat-select (valueChange)="selectChannelType($event)" [disabled]="disabled" [value]="value">
+<mat-select (valueChange)="selectChannelType($event)" [disabled]="disabled" [value]="value" placeholder="{{nullValuePlaceholder}}">
   <mat-select-trigger>
-    <app-channel-type-inline [channelType]="value"></app-channel-type-inline>
+    <app-channel-type-inline *ngIf="value" [channelType]="value"></app-channel-type-inline>
   </mat-select-trigger>
+  <mat-option *ngIf="nullValuePlaceholder"> {{nullValuePlaceholder}} </mat-option>
   <mat-option *ngFor="let channelType of availableChannelTypes"
               [value]="channelType">
     <app-channel-type-inline [channelType]="channelType"></app-channel-type-inline>
