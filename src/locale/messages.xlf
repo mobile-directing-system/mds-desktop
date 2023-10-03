@@ -3120,6 +3120,8 @@
     <unit id="6813150319820097954">
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:3</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:3</note>
+        <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:3</note>
       </notes>
       <segment>
         <source>Message <ph id="0" equiv="INTERPOLATION" disp="{{data.messageRow.id}}"/></source>

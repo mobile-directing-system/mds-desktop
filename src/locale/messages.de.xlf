@@ -2223,8 +2223,8 @@
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:23</note>
         <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:30</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:54</note>
-        <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:29</note>
         <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:51</note>
+        <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:29</note>
       </notes>
       <segment state="initial">
         <source>Cancel</source>
@@ -3561,6 +3561,8 @@
     <unit id="6813150319820097954">
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:3</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:3</note>
+        <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:3</note>
       </notes>
       <segment state="initial">
         <source>Message <ph id="0" equiv="INTERPOLATION" disp="{{data.messageRow.id}}"/></source>
@@ -3849,14 +3851,14 @@
         <target>Sichten eingehender Nachrichten</target>
       </segment>
     </unit>
-     <unit id="7208685079081503329">
-          <notes>
-            <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:30</note>
-          </notes>
-          <segment state="initial">
-            <source>Mark as send</source>
-            <target>Sendung bestätigen</target>
-          </segment>
-        </unit>
+    <unit id="7208685079081503329">
+      <notes>
+        <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:30</note>
+      </notes>
+      <segment state="initial">
+        <source>Mark as send</source>
+        <target>Sendung bestätigen</target>
+      </segment>
+    </unit>
   </file>
 </xliff>
