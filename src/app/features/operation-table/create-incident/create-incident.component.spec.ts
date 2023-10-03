@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 
 import { CreateIncidentComponent } from './create-incident.component';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
-import { mockLocalStorage } from 'src/app/core/util/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
@@ -10,6 +9,7 @@ import { LocalStorageIncidentService } from 'src/app/core/services/incident/loca
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { mockLocalStorageService } from 'src/app/core/services/local-storage.service.spec';
+import { mockLocalStorage } from 'src/app/core/testutil/testutil';
 
 describe('CreateIncidentComponent', () => {
   let component: CreateIncidentComponent;

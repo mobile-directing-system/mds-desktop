@@ -5,9 +5,9 @@ import { OperationService } from 'src/app/core/services/operation.service';
 import { ResourceService } from 'src/app/core/services/resource/resource.service';
 import { LocalStorageResourceService } from 'src/app/core/services/resource/local-storage-resource.service';
 import { SpectatorRouting, SpectatorRoutingOptions, createRoutingFactory } from '@ngneat/spectator';
-import { mockLocalStorage } from 'src/app/core/util/testing';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
 import { LocalStorageIncidentService } from 'src/app/core/services/incident/local-storage-incident.service';
+import { mockLocalStorage } from 'src/app/core/testutil/testutil';
 
 function genFactoryOptions(): SpectatorRoutingOptions<ListResourcesComponent> {
   return {

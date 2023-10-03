@@ -1,6 +1,5 @@
 import { EditResourceComponent } from './edit-resource.component';
 import { SpectatorRouting, SpectatorRoutingOptions, createRoutingFactory } from '@ngneat/spectator';
-import { mockLocalStorage } from 'src/app/core/util/testing';
 import { ResourcesModule } from '../resources.module';
 import { UserService } from 'src/app/core/services/user.service';
 import { OperationService } from 'src/app/core/services/operation.service';
@@ -11,6 +10,7 @@ import { User } from 'src/app/core/model/user';
 import { Operation } from 'src/app/core/model/operation';
 import { SearchResult } from 'src/app/core/util/store';
 import { of } from 'rxjs';
+import { mockLocalStorage } from 'src/app/core/testutil/testutil';
 
 function genFactoryOptions(): SpectatorRoutingOptions<EditResourceComponent> {
   return {
