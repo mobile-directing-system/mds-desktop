@@ -13,6 +13,7 @@ import {GroupService} from "../../../core/services/group.service";
 import {Group} from "../../../core/model/group";
 import {MatDialog} from "@angular/material/dialog";
 import {IncomingMessageComponent} from "./incoming-message/incoming-message.component";
+import { getParticipantLabel } from 'src/app/core/util/service';
 
 /**
  * Passed to the IncomingMessageComponent to show a detail view of the message
@@ -139,24 +140,7 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
    * @returns observableLabel
    */
   getParticipantLabel(senderType?: Participant, senderId?: string): Observable<string | undefined>{
-    if (senderId && senderType != undefined) {
-      if (senderType === Participant.Resource) {
-        return this.resourceService.getResourceById(senderId).pipe(
-          map(resource => resource?.label)
-        )
-      }
-      if (senderType === Participant.AddressBookEntry) {
-        return this.addressBookService.getAddressBookEntryById(senderId).pipe(
-          map(entry => entry.label)
-        )
-      }
-      if (senderType === Participant.Role) {
-        return this.groupService.getGroupById(senderId).pipe(
-          map(group => group.title)
-        )
-      }
-    }
-    return of(undefined);
+    return getParticipantLabel(this.resourceService, this.addressBookService, this.groupService, senderType, senderId);
   }
 
   /**
