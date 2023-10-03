@@ -1,0 +1,47 @@
+<div id="message-table">
+    <table mat-table [dataSource]="dataSource" matSortActive="created_at" matSortDirection="desc" matSort>
+
+        <!-- ID -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>ID</th>
+            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <!-- Created at -->
+        <ng-container matColumnDef="created_at">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Created at</th>
+            <td mat-cell *matCellDef="let row"> {{row.createdAt | date:'medium' }} </td>
+        </ng-container>
+
+        <!-- Channel -->
+        <ng-container matColumnDef="channel">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Channel</th>
+            <td mat-cell *matCellDef="let row">
+                <app-channel-type-inline [channelType]="row.channelType"></app-channel-type-inline>
+            </td>
+        </ng-container>
+
+        <!-- Content -->
+        <ng-container matColumnDef="content">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Content</th>
+            <td mat-cell *matCellDef="let row"> {{row.content}} </td>
+        </ng-container>
+
+        <!-- Incident -->
+        <ng-container matColumnDef="incident">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Incident</th>
+            <td mat-cell *matCellDef="let row"> {{row.incident?.name}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row (click)="rowClicked(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Text if no messages are available -->
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="6" i18n>No incoming messages to review at the moment.</td>
+        </tr>
+
+
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25]" aria-label="Select page of messages"></mat-paginator>
+</div>
