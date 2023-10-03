@@ -97,39 +97,6 @@ export class LocalStorageMessageService extends MessageService {
 
   }
 
-
-  // public override pickUpNextMessageToDeliver(signalerId: string, filterForChannel?: ChannelType): Observable<Message | undefined> {
-  //   let result = new Subject<Message | undefined>;
-  //   let messages: Message[] = this.repository.fetchAll();
-  //   for(let message of messages){
-  //     // filter for messages that are rdy to pick up
-  //     if(message.direction!= 1 || message.needsReview) continue;
-  //     for(let recipient of message.recipients) {
-  //       // filter for recipients that are rdy to pick up
-  //       if(recipient.recipientType == Participant.AddressBookEntry && !recipient.send && !recipient.signalerId) {
-  //
-  //         // filter for channel type if passed
-  //         if(filterForChannel){
-  //           console.log("MMV")
-  //           return this.channelService.getChannelsByAddressBookEntry(recipient.recipientId).pipe(map(channels=>{
-  //             console.log("MMV22 " +recipient.recipientId)
-  //             console.log("MMV2 " + channels[0].id)
-  //             console.log("MMV2 " + channels[1].id)
-  //             channels = channels.filter(channel=>channel.id === recipient.channelId);
-  //             console.log("MMV33 " + channels[0].type)
-  //             if(!channels[0] || channels[0].type != filterForChannel) return undefined; /// should only skip loop and not return
-  //             console.log("MMV44 ")
-  //             return this.lockSignalerAndReturnMessage(message, recipient, signalerId);
-  //           }));
-  //         }
-  //         return of(this.lockSignalerAndReturnMessage(message, recipient, signalerId));
-  //       }
-  //     }
-  //   }
-  //   return of(undefined);
-  // }
-
-
   /**
    * Help method for pickUpNextMessageToDeliver
    */

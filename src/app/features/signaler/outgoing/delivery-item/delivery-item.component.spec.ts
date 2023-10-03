@@ -1,57 +1,105 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {fakeAsync, tick} from '@angular/core/testing';
 
-import { DeliveryItemComponent } from './delivery-item.component';
+import {DeliveryItemComponent} from './delivery-item.component';
 import {CoreModule} from "../../../../core/core.module";
-import {IntelType} from "../../../../core/model/intel";
-import {LogisticsModule} from "../../../logistics/logistics.module";
+import {Message, MessageDirection, Participant} from "../../../../core/model/message";
+import {Channel, ChannelType} from "../../../../core/model/channel";
+import {duration} from "moment";
+import {DeliveryItemDialogAction, DeliveryItemDialogData} from "../signaler-outgoing-view.component";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {byTextContent, createRoutingFactory, SpectatorRouting} from "@ngneat/spectator";
 
-describe('RadioDeliveryItemComponent', () => {
-  let component: DeliveryItemComponent;
-  let fixture: ComponentFixture<DeliveryItemComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ DeliveryItemComponent ],
-      imports: [
-        CoreModule,
-        LogisticsModule,
-      ],
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(DeliveryItemComponent);
-    component = fixture.componentInstance;
-    component.detailedDelivery={
-      radioDelivery:{
-        id: "id",
-        intel: "intel",
-        intel_operation: "intel_operation",
-        intel_importance: 2,
-        assigned_to: "assigned_to",
-        assigned_to_label: "assigned_to_label",
-        delivery: "delivery",
-        channel: "channel",
-        created_at: new Date(),
-        status_ts: new Date(),
-        note: "note",
-        accepted_at: new Date(),
+describe('DeliveryItemComponent', () => {
+  const message: Message = {
+    id: "4",
+    direction: MessageDirection.Outgoing,
+    senderType: Participant.Role,
+    senderId: "S2",
+    content: "A message from S2",
+    createdAt: new Date(),
+    needsReview: false,
+    "priority": 1000,
+    recipients: [
+      {
+        recipientType: Participant.AddressBookEntry,
+        recipientId: "Jan",
+        channelId: "channelId1",
+        signalerId: "lockedBySignaler",
       },
-      intel:{
-        createdAt: new Date(),
-        createdBy: "createdBy",
-        id: "id",
-        importance: 0,
-        isValid: true,
-        operation: "operation",
-        searchText: "searchText",
-        type: IntelType.PlainTextMessage,
-        content: {text: "text"},
-      }
-    }
-    fixture.detectChanges();
+    ],
+    incidentId:"id"
+  };
+  const channel: Channel = {
+    id: "channelId1",
+    details: {info:"info"},
+    entry: "address-bookId",
+    isActive: false,
+    label: "label",
+    minImportance: 0,
+    priority: 0,
+    timeout: duration(10000),
+    type:  ChannelType.InAppNotification
+  };
+
+  const data: DeliveryItemDialogData= {
+    message: message,
+    senderLabel: "senderLabel",
+    incidentLabel: "incidentLabel",
+    recipientLabel: "recipientLabel",
+    recipientChannel: channel
+  }
+  let closed = false;
+
+  let spectator: SpectatorRouting<DeliveryItemComponent>;
+  let component: DeliveryItemComponent;
+
+  const createComponent = createRoutingFactory({
+    component: DeliveryItemComponent,
+    imports: [
+      CoreModule,
+    ],
+    providers: [
+      {
+        provide: MatDialogRef<DeliveryItemComponent>,
+        useValue: {
+          close: ()=> {
+            closed = true;
+          },
+        },
+      },
+      {
+        provide: MAT_DIALOG_DATA,
+        useValue: {
+          data: ()=> data
+        },
+      },
+    ],
+    detectChanges: false,
   });
+
+  beforeEach(fakeAsync(() => {
+    spectator = createComponent();
+    component = spectator.component;
+    component.data = data;
+    spectator.router.navigate = jasmine.createSpy().and.callFake(spectator.router.navigate).and.resolveTo();
+    spectator.detectComponentChanges();
+    tick();
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should close', () => {
+    expect(closed).toBeFalse();
+    component.closeDialog(DeliveryItemDialogAction.Cancel);
+    expect(closed).toBeTrue();
+  });
+
+  it('should show data successfully', fakeAsync(() => {
+    expect(spectator.query(byTextContent(data.message.content, {
+      exact: false,
+      selector: 'div',
+    }))).toBeVisible();
+  }));
 });

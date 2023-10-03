@@ -1,12 +1,13 @@
-import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { CoreModule } from '../../core.module';
-import { AngularMaterialModule } from '../../util/angular-material.module';
-import { FormControl } from '@angular/forms';
-import { ChannelType } from '../../model/channel';
-import { Component } from '@angular/core';
-import { MatSelectHarness } from '@angular/material/select/testing';
-import { HarnessLoader } from '@angular/cdk/testing';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import {createComponentFactory, Spectator} from '@ngneat/spectator';
+import {CoreModule} from '../../core.module';
+import {AngularMaterialModule} from '../../util/angular-material.module';
+import {FormControl} from '@angular/forms';
+import {ChannelType} from '../../model/channel';
+import {Component} from '@angular/core';
+import {MatSelectHarness} from '@angular/material/select/testing';
+import {HarnessLoader} from '@angular/cdk/testing';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {ChannelTypeSelectComponent} from "./channel-type-select.component";
 
 
 @Component({
@@ -72,5 +73,34 @@ describe('ChannelTypeSelectComponent.integration', () => {
     const selected = await select.getValueText()
     expect(selected.toLowerCase()).withContext('update select value').toContain('radio')
     expect(fc.value).withContext('update form control value').toEqual(ChannelType.Radio);
+  });
+});
+
+
+describe('ChannelTypeSelectComponent', () => {
+  let spectator: Spectator<ChannelTypeSelectComponent>;
+  let component: ChannelTypeSelectComponent;
+  const createComponent = createComponentFactory({
+    component: ChannelTypeSelectComponent,
+    imports: [CoreModule, AngularMaterialModule],
+  });
+
+  beforeEach(async () => {
+    spectator = createComponent();
+    component = spectator.component;
+    (spectator.fixture.componentInstance as any).ngControl = new FormControl<ChannelType | undefined>(undefined);
+    await spectator.fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should work with and without placeholder', async() => {
+    expect(component).toBeTruthy();
+    component.nullValuePlaceholder = "myUniquePlaceholder";
+    spectator.fixture.detectChanges();
+    await spectator.fixture.whenStable();
+    expect(component).toBeTruthy();
   });
 });

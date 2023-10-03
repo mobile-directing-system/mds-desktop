@@ -4,7 +4,6 @@ import {first, map, Observable, of, Subscription} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {WorkspaceService} from "../../../core/services/workspace.service";
 import {NotificationService} from "../../../core/services/notification.service";
-import {IntelService} from "../../../core/services/intel.service";
 import {MessageService} from "../../../core/services/message/message.service";
 import {AuthService} from "../../../core/services/auth.service";
 import {Channel, ChannelType} from "../../../core/model/channel";
@@ -19,7 +18,7 @@ import {FormBuilder} from "@angular/forms";
 
 
 /**
- * Passed to the DeliveryItemComponent to show a detail view of the message tp deliver
+ * Passed to the DeliveryItemComponent to show a detailed view of the message to deliver
  */
 export interface DeliveryItemDialogData {
   message: Message;
@@ -29,12 +28,18 @@ export interface DeliveryItemDialogData {
   recipientChannel: Channel | undefined
 }
 
+/**
+ * Result options of the DeliveryItemComponent dialog
+ */
 export enum DeliveryItemDialogAction{
   Cancel,
   MarkAsSend
 }
 
 
+/**
+ * Component that allows a signaler to pick up delivery jobs and mark them as completed.
+ */
 @Component({
   selector: 'app-signaler-outgoing-view',
   templateUrl: './signaler-outgoing-view.component.html',
@@ -55,12 +60,16 @@ export class SignalerOutgoingView implements OnDestroy{
    */
   private s: Subscription[] = [];
 
+  /**
+   * Form control of the selected channel type.
+   * That allows a signaler to filter for specific channel types.
+   */
   selectedChannelControl = this.fb.nonNullable.control<ChannelType | undefined>(undefined);
 
 
   constructor(private router: Router, private route: ActivatedRoute,
               private messageService: MessageService, private workspaceService: WorkspaceService,
-              private notificationService: NotificationService, private intelService: IntelService,
+              private notificationService: NotificationService,
               private authService: AuthService, private addressBookService: AddressBookService, public dialog: MatDialog,
               private resourceService: ResourceService, private groupService: GroupService,
               private incidentService: IncidentService, private channelService: ChannelService,
@@ -71,9 +80,6 @@ export class SignalerOutgoingView implements OnDestroy{
   }
 
   ngOnDestroy(): void {
-
-    console.log("Destroyed")
-
     this.s.forEach(s => s.unsubscribe());
 
     // release picked up message to deliver if exists
@@ -94,8 +100,7 @@ export class SignalerOutgoingView implements OnDestroy{
   }
 
   /**
-   * Picks up next available {@link Message} for the currently selected operation and opens dialog.
-   * //TODO Messages should have an op id
+   * Picks up next available {@link Message} to deliver for the currently selected operation and opens dialog.
    */
   pickUpNextMessageToDeliver(): void {
 
@@ -151,6 +156,10 @@ export class SignalerOutgoingView implements OnDestroy{
 
   }
 
+  /**
+   * Opens the DeliveryItemDialog with the passed data.
+   * Subscribes to dialog close event to call markCurrentMessageAsSend or releaseCurrentMessage depending on the result of the dialog
+   */
   openDeliveryItemDialog(data: DeliveryItemDialogData){
     const dialogRef = this.dialog.open(DeliveryItemComponent, {
       data: data,
@@ -239,15 +248,31 @@ export class SignalerOutgoingView implements OnDestroy{
     return of(undefined);
   }
 
+  /**
+   * Returns label of the incident
+   *
+   * @param incidentId: id of the incident
+   * @returns observableLabel
+   */
   getIncidentLabel(incidentId: string | undefined): Observable<string | undefined>{
     if(!incidentId) return of(undefined);
     return this.incidentService.getIncidentById(incidentId).pipe(
       map(incident => incident?.name)
     )
   }
+
+  /**
+   * Returns channel of the recipient.
+   *
+   * Applied quick fix:
+   * As the backend allows only to get channels by address book entry, the method applies additionally manual filtering.
+   * Can be improved by adding an endpoint getChannelByChannelId to the backend.
+   *
+   * @param recipient: containing channelId and recipientId
+   * @returns observableChannel
+   */
   getChannel(recipient: Recipient | undefined): Observable<Channel | undefined>{
     if(!recipient || recipient.recipientType !== Participant.AddressBookEntry || !recipient.channelId) return of(undefined);
-
     return this.channelService.getChannelsByAddressBookEntry(recipient.recipientId).pipe(
       map(channels => channels.filter(
         channel=>channel.id === recipient.channelId
@@ -255,6 +280,10 @@ export class SignalerOutgoingView implements OnDestroy{
     );
   }
 
+  /**
+   * Returns the selected channelType.
+   * That allows a signaler to filter for specific channel types.
+   */
   getSelectedChannelType(){
     return this.selectedChannelControl.getRawValue();
   }

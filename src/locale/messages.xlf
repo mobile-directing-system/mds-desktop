@@ -1731,7 +1731,7 @@
     </unit>
     <unit id="1241348629231510663">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:37,36</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:36</note>
       </notes>
       <segment>
         <source>End</source>
@@ -2223,6 +2223,7 @@
       <notes>
         <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:50</note>
         <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:106</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:81</note>
       </notes>
       <segment>
         <source>Released current radio delivery.</source>
@@ -2247,6 +2248,7 @@
     <unit id="3312566244661379878">
       <notes>
         <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:92</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:145</note>
       </notes>
       <segment>
         <source>Please select an operation for this workspace before.</source>
@@ -2288,6 +2290,7 @@
       <notes>
         <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:53</note>
         <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:109</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:84</note>
       </notes>
       <segment>
         <source>Releasing current radio delivery failed.</source>
@@ -2756,7 +2759,7 @@
     </unit>
     <unit id="5611592591303869712">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:102,101</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:101</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:105</note>
       </notes>
       <segment>
@@ -2765,7 +2768,7 @@
     </unit>
     <unit id="65984904390749158">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:122,121</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:121</note>
       </notes>
       <segment>
         <source>Finish</source>
@@ -2789,7 +2792,7 @@
     </unit>
     <unit id="910656806257300801">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:18,17</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:17</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:21</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:127</note>
       </notes>
@@ -2856,7 +2859,7 @@
     </unit>
     <unit id="1253879069732164922">
       <notes>
-        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:50</note>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:62</note>
       </notes>
       <segment>
         <source>Marked message as read.</source>
@@ -2864,7 +2867,7 @@
     </unit>
     <unit id="1440728154205157554">
       <notes>
-        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:37</note>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:49</note>
       </notes>
       <segment>
         <source>Error, could not find the message in the system.</source>
@@ -2881,7 +2884,7 @@
     </unit>
     <unit id="1733993200592511918">
       <notes>
-        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:53</note>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:65</note>
       </notes>
       <segment>
         <source>Error while marking the message as read.</source>
@@ -2986,7 +2989,7 @@
     </unit>
     <unit id="4540589325711926146">
       <notes>
-        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:77</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:84</note>
       </notes>
       <segment>
         <source>Loading role failed.</source>
@@ -2994,7 +2997,7 @@
     </unit>
     <unit id="4860449449806508753">
       <notes>
-        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:111</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:132</note>
       </notes>
       <segment>
         <source>Message send.</source>
@@ -3019,7 +3022,7 @@
     </unit>
     <unit id="6163435959371489060">
       <notes>
-        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:51</note>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.ts:63</note>
       </notes>
       <segment>
         <source>Marked message as unread.</source>
@@ -3048,7 +3051,7 @@
     </unit>
     <unit id="72748386340014679">
       <notes>
-        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:115</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:136</note>
       </notes>
       <segment>
         <source>Sending message failed.</source>
@@ -3108,6 +3111,7 @@
     <unit id="6813150319820097954">
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:3</note>
+        <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:3</note>
       </notes>
       <segment>
         <source>Message <ph id="0" equiv="INTERPOLATION" disp="{{data.messageRow.id}}"/></source>
@@ -3143,6 +3147,107 @@
       </notes>
       <segment>
         <source>Created at</source>
+      </segment>
+    </unit>
+    <unit id="223829450078755182">
+      <notes>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:103</note>
+      </notes>
+      <segment>
+        <source>Picking up next message to deliver failed, logged in user id not available.</source>
+      </segment>
+    </unit>
+    <unit id="2486817042598378700">
+      <notes>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:173</note>
+      </notes>
+      <segment>
+        <source>Released current message to deliver.</source>
+      </segment>
+    </unit>
+    <unit id="2622551599868423782">
+      <notes>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:113</note>
+      </notes>
+      <segment>
+        <source>Currently no message to deliver available.</source>
+      </segment>
+    </unit>
+    <unit id="2792260087270280744">
+      <notes>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:198</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:202</note>
+      </notes>
+      <segment>
+        <source>Finishing current message delivery failed.</source>
+      </segment>
+    </unit>
+    <unit id="3042156966682592152">
+      <notes>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:141</note>
+      </notes>
+      <segment>
+        <source>Picking up next message to deliver failed.</source>
+      </segment>
+    </unit>
+    <unit id="4114828084202431407">
+      <notes>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Filter channel</source>
+      </segment>
+    </unit>
+    <unit id="4636742157425647443">
+      <notes>
+        <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:10,12</note>
+      </notes>
+      <segment>
+        <source>
+          <pc id="0" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Received at: <ph id="1" equiv="INTERPOLATION" disp="{{ data.message.createdAt | date:&apos;medium&apos; }}"/> </pc>
+          <pc id="2" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Sender: <ph id="3" equiv="INTERPOLATION_1" disp="{{ data.senderLabel}}"/> </pc>
+          <pc id="4" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Incident: <ph id="5" equiv="INTERPOLATION_2" disp="{{ data.incidentLabel}}"/> </pc>
+        </source>
+      </segment>
+    </unit>
+    <unit id="5579024188656147827">
+      <notes>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.html:6</note>
+      </notes>
+      <segment>
+        <source>Retrieve next delivery job</source>
+      </segment>
+    </unit>
+    <unit id="7300587382654329939">
+      <notes>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:175</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:179</note>
+      </notes>
+      <segment>
+        <source>Releasing current message to deliver failed.</source>
+      </segment>
+    </unit>
+    <unit id="9175578906279675425">
+      <notes>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:196</note>
+      </notes>
+      <segment>
+        <source>Confirmed message delivery</source>
+      </segment>
+    </unit>
+    <unit id="942452819880431349">
+      <notes>
+        <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:15,20</note>
+      </notes>
+      <segment>
+        <source>
+          <pc id="0" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Recipient: <ph id="1" equiv="INTERPOLATION" disp="{{ data.recipientLabel}}"/> </pc>
+          <pc id="2" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Channel: <ph id="3" equiv="INTERPOLATION_1" disp="{{data.recipientChannel?.label}}"/></pc>
+          <pc id="4" equivStart="START_PARAGRAPH" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p&gt;" dispEnd="&lt;/p&gt;">Channel Typ: <pc id="5" equivStart="START_TAG_APP_CHANNEL_TYPE_INLINE" equivEnd="CLOSE_TAG_APP_CHANNEL_TYPE_INLINE" type="other" dispStart="&lt;app-channel-type-inline [channelType]=&quot;data.recipientChannel?.type&quot;&gt;" dispEnd="&lt;/app-channel-type-inline&gt;"/></pc>
+          <pc id="6" equivStart="START_TAG_NG_CONTAINER" equivEnd="CLOSE_TAG_NG_CONTAINER" type="other" dispStart="&lt;ng-container *ngIf=&quot;data.recipientChannel&quot;&gt;" dispEnd="&lt;/ng-container&gt;">
+            <pc id="7" equivStart="START_PARAGRAPH_1" equivEnd="CLOSE_PARAGRAPH" type="other" dispStart="&lt;p *ngIf=&quot;data.recipientChannel.type === ChannelType.Radio&quot;&gt;" dispEnd="&lt;/p&gt;">Channel Info: <ph id="8" equiv="INTERPOLATION_2" disp="{{data.recipientChannel.details.info}}"/></pc>
+          </pc>
+        </source>
       </segment>
     </unit>
   </file>

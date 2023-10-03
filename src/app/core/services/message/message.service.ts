@@ -57,19 +57,19 @@ export abstract class MessageService {
    * Locks the message so that no one can fetch the message until it is released again.
    * If a message has multiple receivers returns a message for each receiver separately.
    *
-   * @returns message
+   * @returns message or undefined if nor message available
    */
   public abstract pickUpNextMessageToDeliver(signalerId: string, filterForChannel?: ChannelType): Observable<Message | undefined>;
 
   /**
    * Releases the message after it was picked up. That enables it to be picked up again.
-   * @returns message
+   * @returns success
    */
   public abstract releaseMessageToDeliver(message: Message): Observable<boolean>;
 
   /**
    * Marks the message as send.
-   * @returns message
+   * @returns success
    */
   public abstract markMessageAsSend(messageToMarkAsSend: Message): Observable<boolean>;
 
