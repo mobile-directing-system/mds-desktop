@@ -288,5 +288,9 @@ export class SignalerOutgoingView implements OnDestroy{
     return this.selectedChannelControl.getRawValue();
   }
 
+  selectedChannelTypeNullValuePlaceholder(): string{
+    return $localize`All types`;
+  }
+
 
 }

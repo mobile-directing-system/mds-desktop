@@ -2221,6 +2221,7 @@
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:23</note>
         <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:30</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:54</note>
+        <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:29</note>
       </notes>
       <segment state="initial">
         <source>Cancel</source>
@@ -2586,7 +2587,7 @@
       <notes>
         <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:50</note>
         <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:106</note>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:81</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:91</note>
       </notes>
       <segment state="initial">
         <source>Released current radio delivery.</source>
@@ -2597,7 +2598,7 @@
       <notes>
         <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:53</note>
         <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:109</note>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:84</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:94</note>
       </notes>
       <segment state="initial">
         <source>Releasing current radio delivery failed.</source>
@@ -2634,7 +2635,7 @@
     <unit id="3312566244661379878">
       <notes>
         <note category="location">src/app/features/logistics/radio-delivery/radio-delivery.component.ts:92</note>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:145</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:154</note>
       </notes>
       <segment state="initial">
         <source>Please select an operation for this workspace before.</source>
@@ -3655,7 +3656,7 @@
     </unit>
     <unit id="223829450078755182">
       <notes>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:103</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:112</note>
       </notes>
       <segment state="initial">
         <source>Picking up next message to deliver failed, logged in user id not available.</source>
@@ -3664,7 +3665,7 @@
     </unit>
     <unit id="2622551599868423782">
       <notes>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:113</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:122</note>
       </notes>
       <segment state="initial">
         <source>Currently no message to deliver available.</source>
@@ -3673,7 +3674,7 @@
     </unit>
     <unit id="3042156966682592152">
       <notes>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:141</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:150</note>
       </notes>
       <segment state="initial">
         <source>Picking up next message to deliver failed.</source>
@@ -3682,7 +3683,7 @@
     </unit>
     <unit id="2486817042598378700">
       <notes>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:173</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:186</note>
       </notes>
       <segment state="initial">
         <source>Released current message to deliver.</source>
@@ -3691,8 +3692,8 @@
     </unit>
     <unit id="7300587382654329939">
       <notes>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:175</note>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:179</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:188</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:192</note>
       </notes>
       <segment state="initial">
         <source>Releasing current message to deliver failed.</source>
@@ -3701,7 +3702,7 @@
     </unit>
     <unit id="9175578906279675425">
       <notes>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:196</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:209</note>
       </notes>
       <segment state="initial">
         <source>Confirmed message delivery</source>
@@ -3710,12 +3711,30 @@
     </unit>
     <unit id="2792260087270280744">
       <notes>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:198</note>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:202</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:211</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:215</note>
       </notes>
       <segment state="initial">
         <source>Finishing current message delivery failed.</source>
         <target>Bestätigung der Nachrichtenzustellung fehlgeschlagen</target>
+      </segment>
+    </unit>
+    <unit id="424356320420294719">
+      <notes>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:292</note>
+      </notes>
+      <segment state="initial">
+        <source>All types</source>
+        <target>Alle Typen</target>
+      </segment>
+    </unit>
+    <unit id="7208685079081503329">
+      <notes>
+        <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:30</note>
+      </notes>
+      <segment state="initial">
+        <source>Mark as send</source>
+        <target>Sendung bestätigen</target>
       </segment>
     </unit>
   </file>
