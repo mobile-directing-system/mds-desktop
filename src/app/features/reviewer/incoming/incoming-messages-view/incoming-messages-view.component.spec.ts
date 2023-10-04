@@ -51,7 +51,8 @@ describe('IncomingMessagesViewComponent', () => {
 
   const createComponent = createComponentFactory({
     component: IncomingMessagesViewComponent,
-    imports: [ReviewerModule]
+    imports: [ReviewerModule],
+    detectChanges: false
   });
 
   let spectator: Spectator<IncomingMessagesViewComponent>;
@@ -76,6 +77,9 @@ describe('IncomingMessagesViewComponent', () => {
       ]
     });
     component = spectator.component;
+    spectator.detectChanges();
+    // Do not run refresh timer in tests
+    component.refreshTimer.unsubscribe();
   });
 
   it('should create', () => {
@@ -84,7 +88,7 @@ describe('IncomingMessagesViewComponent', () => {
 
   it('should contain a material table', () => {
     expect(spectator.debugElement.query(By.directive(MatTable))).toBeTruthy();
-  })
+  });
 
   it('should load messages on init', () => {
     spectator.detectChanges();
