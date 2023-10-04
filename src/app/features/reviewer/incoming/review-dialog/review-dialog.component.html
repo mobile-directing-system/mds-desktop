@@ -21,7 +21,7 @@
             <app-importance-select [formControl]="form.controls.priority"></app-importance-select>
         </mat-form-field>
     
-        <mat-form-field class="app-edit-input">
+        <mat-form-field class="app-edit-input forward-to">
             <mat-label i18n>Forward to</mat-label>
             <mat-select [formControl]="form.controls.roles" multiple>
                 <mat-option *ngFor="let role of roles;" [value]="role.id"> {{ role.title }} </mat-option>

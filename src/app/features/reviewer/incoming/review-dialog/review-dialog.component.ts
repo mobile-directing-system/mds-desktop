@@ -59,7 +59,6 @@ export class ReviewDialog implements OnInit {
     return this.groupServerice.getGroups(new PaginationParams<GroupSort>(100, 0, GroupSort.ByTitle, OrderDir.Asc), {}).pipe(map(paginatedGroups => paginatedGroups.entries));
   }
 
-
   /**
    * Is called when submit button was clicked
    */
@@ -70,7 +69,7 @@ export class ReviewDialog implements OnInit {
       // Update message with fields of dialog
       msg.priority = this.form.controls.priority.value;
       let recipients: Recipient[] = this.form.controls.roles.value.map(roleId => <Recipient>{
-        recipientType: Participant.Role,
+          recipientType: Participant.Role,
           recipientId: roleId,
           read: false
       });
