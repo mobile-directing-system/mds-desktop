@@ -1,14 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  CanActivateChild,
-  Data,
-  Route,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Data, Route, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { PermissionMatcher } from '../permissions/permissions';
 import { AccessControlService } from '../services/access-control.service';
@@ -35,7 +26,7 @@ export interface PermissionGuardedRoute extends Route {
 @Injectable({
   providedIn: 'root',
 })
-export class PermissionGuard implements CanActivate, CanActivateChild {
+export class PermissionGuard  {
   private readonly redirectOnMissingPermission: UrlTree;
 
   constructor(private acService: AccessControlService, private router: Router) {
