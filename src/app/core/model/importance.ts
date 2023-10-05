@@ -13,7 +13,6 @@ export enum Importance {
    * Danger for life or important assets.
    */
   Strike = 10000,
-  NationalEmergency = 900000
 }
 
 
@@ -33,7 +32,5 @@ export function localizeImportance(t: Importance): string {
       return $localize`:@@importance-urgent:Urgent`;
     case Importance.Strike:
       return $localize`:@@importance-strike:Strike`;
-    case Importance.NationalEmergency:
-      return $localize`:@@importance-national-emergency:National Emergency`;
   }
 }
