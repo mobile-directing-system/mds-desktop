@@ -175,26 +175,25 @@ describe('LoginView.integration', () => {
     expect(spectator.query('form button')).toBeDisabled();
   }));
 
-  it('should enable login button when login is allowed', fakeAsync(async () => {
+  it('should enable login button when login is allowed', fakeAsync(() => {
     component.form.setValue({
       username: username,
       pass: pass,
     });
-    tick();
     spectator.detectComponentChanges();
-    await spectator.fixture.whenStable();
+    spectator.tick();
 
     expect(spectator.query('form button')).not.toBeDisabled();
   }));
 
-  it('should login when login button is pressed', fakeAsync(async () => {
+  it('should login when login button is pressed', fakeAsync(() => {
     component.form.setValue({
       username: username,
       pass: pass,
     });
-    tick();
     spectator.detectComponentChanges();
-    await spectator.fixture.whenStable();
+    spectator.tick();
+
     spyOn(component, 'login');
 
     spectator.click('form button');
