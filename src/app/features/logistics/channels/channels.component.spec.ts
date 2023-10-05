@@ -161,7 +161,7 @@ describe('ChannelsComponent', () => {
           minutes: 3,
           milliseconds: 10,
         }),
-        minImportance: Importance.NationalEmergency,
+        minImportance: Importance.Urgent,
         details: {
           info: 'can',
         },
