@@ -1,5 +1,7 @@
+import packageJson from '../../package.json';
+
 export const environment = {
   production: false,
   useMocks: true,
-  version: require('../../package.json').version + '-mock',
+  version: packageJson.version + '-mock'
 };
