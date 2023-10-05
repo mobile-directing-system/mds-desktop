@@ -551,7 +551,7 @@
     </unit>
     <unit id="1241348629231510663">
       <notes>
-        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:36</note>
+        <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:37,36</note>
       </notes>
       <segment state="initial">
         <source>End</source>
@@ -1421,6 +1421,7 @@
         <note category="location">src/app/features/logistics/channels/channels.component.html:33</note>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:12</note>
         <note category="location">src/app/features/mailbox/create-message/create-message.component.html:40</note>
+        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:20</note>
       </notes>
       <segment state="initial">
         <source>Priority</source>
@@ -2107,6 +2108,7 @@
       <notes>
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:24</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:60</note>
+        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:34</note>
         <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:52</note>
       </notes>
       <segment state="initial">
@@ -2223,6 +2225,7 @@
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:23</note>
         <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:30</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:54</note>
+        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:33</note>
         <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:51</note>
         <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:29</note>
       </notes>
@@ -3137,7 +3140,7 @@
     </unit>
     <unit id="910656806257300801">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:17</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:18,17</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:21</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:127</note>
       </notes>
@@ -3179,7 +3182,7 @@
     </unit>
     <unit id="5611592591303869712">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:101</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:102,101</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:105</note>
       </notes>
       <segment state="initial">
@@ -3189,7 +3192,7 @@
     </unit>
     <unit id="65984904390749158">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:121</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:122,121</note>
       </notes>
       <segment state="initial">
         <source>Finish</source>
@@ -3561,6 +3564,7 @@
     <unit id="6813150319820097954">
       <notes>
         <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:3</note>
+        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:3</note>
         <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:3</note>
         <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:3</note>
       </notes>
@@ -3766,10 +3770,11 @@
     </unit>
     <unit id="4238444168354179734">
       <notes>
+        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:9</note>
         <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:10</note>
       </notes>
       <segment state="initial">
-        <source>Created: <ph id="0" equiv="INTERPOLATION" disp="{{ data.createdAt | date:&apos;medium&apos; }}"/> </source>
+        <source>Created: <ph id="0" equiv="INTERPOLATION" disp="{{ data.message.createdAt | date:&apos;medium&apos; }}"/> </source>
         <target>Erstellt: <ph id="0" equiv="INTERPOLATION" disp="{{ data.createdAt | date:&apos;medium&apos; }}"/> </target>
       </segment>
     </unit>
@@ -3793,7 +3798,7 @@
     </unit>
     <unit id="5196470657182929588">
       <notes>
-        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:164</note>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:148</note>
       </notes>
       <segment state="initial">
         <source>Channel successfully selected</source>
@@ -3802,7 +3807,7 @@
     </unit>
     <unit id="5611077149195482047">
       <notes>
-        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:165</note>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:149</note>
       </notes>
       <segment state="initial">
         <source>Failed to select channel for message</source>
@@ -3858,6 +3863,51 @@
       <segment state="initial">
         <source>Mark as send</source>
         <target>Sendung bestätigen</target>
+      </segment>
+    </unit>
+    <unit id="8895106299235581711">
+      <notes>
+        <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.ts:107</note>
+      </notes>
+      <segment state="initial">
+        <source>Message as successfully reviewed</source>
+        <target>Nachricht erfolgreich gesichtet</target>
+      </segment>
+    </unit>
+    <unit id="2708064499685408433">
+      <notes>
+        <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.ts:107</note>
+      </notes>
+      <segment state="initial">
+        <source>Error: Message could not be forwarded</source>
+        <target>Fehler: Nachricht konnte nicht weitergeleitet werden</target>
+      </segment>
+    </unit>
+    <unit id="924653813892163780">
+      <notes>
+        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:10</note>
+      </notes>
+      <segment state="initial">
+        <source>Sender: <ph id="0" equiv="INTERPOLATION" disp="{{ senderName }}"/>, <ph id="1" equiv="INTERPOLATION_1" disp="{{ data.message.info }}"/> </source>
+        <target>Absender: <ph id="0" equiv="INTERPOLATION" disp="{{ senderName }}"/>, <ph id="1" equiv="INTERPOLATION_1" disp="{{ data.message.info }}"/> </target>
+      </segment>
+    </unit>
+    <unit id="5066255858575477376">
+      <notes>
+        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:13</note>
+      </notes>
+      <segment state="initial">
+        <source>Incident: #<ph id="0" equiv="INTERPOLATION" disp="{{ data.incident.id }}"/> <ph id="1" equiv="INTERPOLATION_1" disp="{{ data.incident.name }}"/> </source>
+        <target>Vorfall: #<ph id="0" equiv="INTERPOLATION" disp="{{ data.incident.id }}"/> <ph id="1" equiv="INTERPOLATION_1" disp="{{ data.incident.name }}"/> </target>
+      </segment>
+    </unit>
+    <unit id="2011811111835112405">
+      <notes>
+        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:25</note>
+      </notes>
+      <segment state="initial">
+        <source>Forward to</source>
+        <target>Weiterleiten an</target>
       </segment>
     </unit>
   </file>

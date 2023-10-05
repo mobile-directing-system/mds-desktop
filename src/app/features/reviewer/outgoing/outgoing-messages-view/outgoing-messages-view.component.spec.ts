@@ -3,7 +3,7 @@ import { fakeAsync } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { Spectator, byText, createComponentFactory } from '@ngneat/spectator';
 import * as moment from 'moment';
-import { of } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { AddressBookEntry } from 'src/app/core/model/address-book-entry';
 import { Channel, ChannelType } from 'src/app/core/model/channel';
 import { Group } from 'src/app/core/model/group';
@@ -291,8 +291,14 @@ describe('OutgoingMessagesViewComponent', () => {
 
     it('should open channel selection dialog when row clicked', fakeAsync(()=> {
       spyOn(component, "rowClicked").and.callThrough();
+      let dialogRef = jasmine.createSpyObj("MatDialogRef", {
+        afterClosed: EMPTY
+      });
+      (matDialog as jasmine.SpyObj<MatDialog>).open.and.returnValue(dialogRef);
+
       spectator.click(byText(exampleMessages[0].content));
       spectator.tick();
+
       expect(component.rowClicked).toHaveBeenCalled();
       expect(matDialog.open).toHaveBeenCalled();
     }));

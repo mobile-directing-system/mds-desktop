@@ -1,10 +1,9 @@
 import {fakeAsync, TestBed, tick} from '@angular/core/testing';
-
 import {LocalStorageMessageService} from './local-storage-message.service';
 import {MessageService} from './message.service';
 import {Message, MessageDirection, Participant} from '../../model/message';
 import {Channel, ChannelType} from '../../model/channel';
-import {mockLocalStorage} from '../../util/testing';
+import { mockLocalStorage } from '../../testutil/testutil';
 import {ChannelService} from "../channel.service";
 import {Subject} from "rxjs";
 import {duration} from "moment";

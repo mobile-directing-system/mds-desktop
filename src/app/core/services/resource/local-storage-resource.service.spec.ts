@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { LocalStorageResourceService } from './local-storage-resource.service';
 import { ResourceService } from './resource.service';
 import { Resource } from '../../model/resource';
-import { mockLocalStorage } from '../../util/testing';
+import { mockLocalStorage } from '../../testutil/testutil';
 
 describe('LocalStorageResourceService', () => {
   let service: ResourceService;

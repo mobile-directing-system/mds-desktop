@@ -10,9 +10,9 @@ import { LocalStorageResourceService } from 'src/app/core/services/resource/loca
 import { ResourceService } from 'src/app/core/services/resource/resource.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { SearchResult } from 'src/app/core/util/store';
-import { mockLocalStorage } from 'src/app/core/util/testing';
 import { ResourcesModule } from '../resources.module';
 import { CreateResourceView } from './create-resource.component';
+import { mockLocalStorage } from 'src/app/core/testutil/testutil';
 
 function genFactoryOptions(): SpectatorRoutingOptions<CreateResourceView> {
   return {

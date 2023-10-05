@@ -13,6 +13,7 @@ import { MessageService } from 'src/app/core/services/message/message.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { ResourceService } from 'src/app/core/services/resource/resource.service';
 import { SelectChannelDialog } from '../select-channel-dialog/select-channel-dialog.component';
+import { getParticipantLabel } from 'src/app/core/util/service';
 
 /**
  * One row of incoming messages in the table
@@ -118,31 +119,14 @@ export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
   }
 
   /**
- * Returns label of the participant
- *
- * @param senderType: type of the participant
- * @param senderId: id of the participant
- * @returns observableLabel
- */
+   * Returns label of the participant
+   *
+   * @param senderType: type of the participant
+   * @param senderId: id of the participant
+   * @returns observableLabel
+   */
   getParticipantLabel(senderType?: Participant, senderId?: string): Observable<string | undefined> {
-    if (senderId && senderType != undefined) {
-      if (senderType === Participant.Resource) {
-        return this.resourceService.getResourceById(senderId).pipe(
-          map(resource => resource?.label)
-        )
-      }
-      if (senderType === Participant.AddressBookEntry) {
-        return this.addressBookService.getAddressBookEntryById(senderId).pipe(
-          map(entry => entry.label)
-        )
-      }
-      if (senderType === Participant.Role) {
-        return this.groupService.getGroupById(senderId).pipe(
-          map(group => group.title)
-        )
-      }
-    }
-    return of(undefined);
+    return getParticipantLabel(this.resourceService, this.addressBookService, this.groupService, senderType, senderId);
   }
 
   /**

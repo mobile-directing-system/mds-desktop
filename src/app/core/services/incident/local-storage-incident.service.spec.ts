@@ -2,9 +2,9 @@ import { TestBed } from '@angular/core/testing';
 
 import { LocalStorageIncidentService } from './local-storage-incident.service';
 import { IncidentService } from './incident.service';
-import { mockLocalStorage } from '../../util/testing';
 import { Incident } from '../../model/incident';
 import { IncidentFilters } from './incident.service';
+import { mockLocalStorage } from '../../testutil/testutil';
 
 describe('LocalStorageIncidentService', () => {
   let service: IncidentService;

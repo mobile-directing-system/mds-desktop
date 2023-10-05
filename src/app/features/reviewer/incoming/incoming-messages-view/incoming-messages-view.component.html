@@ -4,27 +4,27 @@
         <!-- ID -->
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>ID</th>
-            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.message.id}} </td>
         </ng-container>
 
         <!-- Created at -->
         <ng-container matColumnDef="created_at">
             <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Created at</th>
-            <td mat-cell *matCellDef="let row"> {{row.createdAt | date:'medium' }} </td>
+            <td mat-cell *matCellDef="let row"> {{row.message.createdAt | date:'medium' }} </td>
         </ng-container>
 
         <!-- Channel -->
         <ng-container matColumnDef="channel">
             <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Channel</th>
             <td mat-cell *matCellDef="let row">
-                <app-channel-type-inline [channelType]="row.channelType"></app-channel-type-inline>
+                <app-channel-type-inline [channelType]="row.message.incomingChannelType"></app-channel-type-inline>
             </td>
         </ng-container>
 
         <!-- Content -->
         <ng-container matColumnDef="content">
             <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Content</th>
-            <td mat-cell *matCellDef="let row"> {{row.content}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.message.content}} </td>
         </ng-container>
 
         <!-- Incident -->

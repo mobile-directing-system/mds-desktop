@@ -51,7 +51,8 @@ describe('IncomingMessagesViewComponent', () => {
 
   const createComponent = createComponentFactory({
     component: IncomingMessagesViewComponent,
-    imports: [ReviewerModule]
+    imports: [ReviewerModule],
+    detectChanges: false
   });
 
   let spectator: Spectator<IncomingMessagesViewComponent>;
@@ -76,6 +77,9 @@ describe('IncomingMessagesViewComponent', () => {
       ]
     });
     component = spectator.component;
+    spectator.detectChanges();
+    // Do not run refresh timer in tests
+    component.refreshTimer.unsubscribe();
   });
 
   it('should create', () => {
@@ -84,7 +88,7 @@ describe('IncomingMessagesViewComponent', () => {
 
   it('should contain a material table', () => {
     expect(spectator.debugElement.query(By.directive(MatTable))).toBeTruthy();
-  })
+  });
 
   it('should load messages on init', () => {
     spectator.detectChanges();
@@ -99,10 +103,7 @@ describe('IncomingMessagesViewComponent', () => {
     exampleMessages.forEach(msg => {
 
       let msgRow: ReviewerIncomingMessageRow  = {
-        id: msg.id,
-        createdAt: msg.createdAt,
-        channelType: msg.incomingChannelType!,
-        content: msg.content,
+        message: msg,
       };
       if(msg.incidentId) msgRow.incident = exampleIncident;
 
@@ -164,7 +165,7 @@ describe('IncomingMessagesViewComponent', () => {
     it('should call rowClicked() when row was clicked', ()=> {
       spyOn(component, "rowClicked");
       let row = component.dataSource.data[0];
-      spectator.click(byText(row.id));
+      spectator.click(byText(row.message.id));
       expect(component.rowClicked).toHaveBeenCalledWith(row);
     })
   });

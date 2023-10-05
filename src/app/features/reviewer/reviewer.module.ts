@@ -6,6 +6,7 @@ import { ReviewerOutgoingLayoutComponent } from './outgoing/reviewer-outgoing-la
 import { SelectChannelDialog } from './outgoing/select-channel-dialog/select-channel-dialog.component';
 import { ReviewerIncomingLayoutComponent } from './incoming/reviewer-incoming-layout/reviewer-incoming-layout.component';
 import { IncomingMessagesViewComponent } from './incoming/incoming-messages-view/incoming-messages-view.component';
+import { ReviewDialog } from './incoming/review-dialog/review-dialog.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { IncomingMessagesViewComponent } from './incoming/incoming-messages-view
     OutgoingMessagesViewComponent,
     SelectChannelDialog,
     ReviewerIncomingLayoutComponent,
-    IncomingMessagesViewComponent
+    IncomingMessagesViewComponent,
+    ReviewDialog
   ],
   imports: [
     CommonModule,

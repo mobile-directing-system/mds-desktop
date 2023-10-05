@@ -1,0 +1,39 @@
+@use 'sass:map';
+@import 'src/styles/corporate';
+@import 'src/styles/forms';
+
+.header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.channel-selection {
+    padding: 2rem 0 0.5rem 0;
+}
+
+.form {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 1.5rem;
+}
+
+.message-content {
+    margin: 1rem 0 2rem 0;
+    color: black;
+}
+
+.context {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-row {
+    padding-right: 50px;
+}
+
+.mdc-dialog__title::before {
+    height: 0;
+}
