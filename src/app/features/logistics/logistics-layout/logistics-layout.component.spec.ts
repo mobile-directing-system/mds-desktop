@@ -1,15 +1,14 @@
 import { fakeAsync, tick } from '@angular/core/testing';
-import { LogisticsLayoutComponent } from './logistics-layout.component';
-import { byTextContent, createRoutingFactory, SpectatorRouting } from '@ngneat/spectator';
-import { CoreModule } from '../../../core/core.module';
-import { AccessControlService } from '../../../core/services/access-control.service';
-import { AccessControlMockService } from '../../../core/services/access-control-mock.service';
-import { clearRouteComponentsExcept } from '../../../core/testutil/testutil';
+import { Router } from '@angular/router';
+import { SpectatorRouting, byTextContent, createRoutingFactory } from '@ngneat/spectator';
 import { AppRoutes } from '../../../core/constants/routes';
+import { CoreModule } from '../../../core/core.module';
 import { PermissionMatcher } from '../../../core/permissions/permissions';
 import { ViewUserPermission } from '../../../core/permissions/users';
-import { Router } from '@angular/router';
-import {ManageIntelDelivery} from "../../../core/permissions/intel-delivery";
+import { AccessControlMockService } from '../../../core/services/access-control-mock.service';
+import { AccessControlService } from '../../../core/services/access-control.service';
+import { clearRouteComponentsExcept } from '../../../core/testutil/testutil';
+import { LogisticsLayoutComponent } from './logistics-layout.component';
 
 
 describe('LogisticsLayoutComponent', () => {
@@ -48,13 +47,8 @@ describe('LogisticsLayoutComponent', () => {
     }[] = [
       {
         name: 'Address Book Entries',
-        link: ['/logistics', 'address-book'],
+        link: ['/address-book'],
         requiredPermissions: [ViewUserPermission()],
-      },
-      {
-        name: 'Intel Delivery',
-        link: ['/intel-delivery'],
-        requiredPermissions: [ManageIntelDelivery()],
       },
     ];
     tests.forEach(tt => {
