@@ -51,10 +51,6 @@
       </ng-template>
     </app-searchable-entity-input>
 
-    <app-address-book-entry-auto-intel-delivery
-      *ngIf="isManageAutoIntelDeliveryEnabled() | async"
-      [entryId]="entryId !== '' ? entryId : undefined"></app-address-book-entry-auto-intel-delivery>
-
     <!--Channels.-->
     <app-channels
       *ngIf="entryId !== ''"
