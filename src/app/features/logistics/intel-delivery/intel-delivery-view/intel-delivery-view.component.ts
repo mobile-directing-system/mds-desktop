@@ -13,6 +13,9 @@ import { NotificationService } from '../../../../core/services/notification.serv
 
 /**
  * Overview for (manual) intel delivery.
+ * 
+ * @deprecated because control flow of application changed. Is replaced by 
+ * {@link ReviewerIncomingLayoutComponent} and {@link ReviewerOutgoingLayoutComponent}
  */
 @Component({
   selector: 'app-intel-delivery-view',

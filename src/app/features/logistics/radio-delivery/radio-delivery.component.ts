@@ -9,6 +9,8 @@ import {first, Subscription} from "rxjs";
 
 /**
  * Component for managing radio deliveries. {@link RadioDelivery} can be picked up, released and finished.
+ * 
+ * @deprecated because requirements of application changed. Is replaced by {@link SignalerOutgoingView }
  */
 @Component({
   selector: 'app-radio-delivery',
