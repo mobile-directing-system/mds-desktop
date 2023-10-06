@@ -156,8 +156,4 @@ export class EditAddressBookEntryView implements OnInit, OnDestroy {
         this.close();
       }));
   }
-
-  isManageAutoIntelDeliveryEnabled(): Observable<boolean> {
-    return this.acService.isGranted([ManageIntelDelivery()])
-  }
 }
