@@ -1,4 +1,5 @@
 @import 'src/styles/view';
+@import 'src/styles/forms';
 
 .mat-mdc-row:hover .mat-mdc-cell {
     background-color: whitesmoke;
@@ -9,8 +10,4 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-}
-
-mat-form-field {
-    width: 18em;
 }

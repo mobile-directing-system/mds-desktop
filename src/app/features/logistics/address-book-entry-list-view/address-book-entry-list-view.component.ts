@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddressBookEntrySort, AddressBookService } from '../../../core/services/addressbook.service';
 import { OperationService } from '../../../core/services/operation.service';
@@ -9,6 +9,8 @@ import { Loader } from '../../../core/util/loader';
 import { map } from 'rxjs/operators';
 import { MDSError, MDSErrorCode } from '../../../core/util/errors';
 import { Sort } from '@angular/material/sort';
+import { MatTableDataSource, MatTableDataSourcePaginator } from '@angular/material/table';
+import { PaginatedListComponent } from 'src/app/core/components/paginated-list/paginated-list.component';
 
 export interface AddressBookEntryRow {
   entry: AddressBookEntry,
@@ -20,16 +22,28 @@ export interface AddressBookEntryRow {
   templateUrl: './address-book-entry-list-view.component.html',
   styleUrls: ['./address-book-entry-list-view.component.scss'],
 })
-export class AddressBookEntryListView {
+export class AddressBookEntryListView implements AfterViewInit {
   columnsToDisplay = ['label', 'description', 'operation', 'user'];
   pagination?: PaginationParams<AddressBookEntrySort>;
   addressBookEntryRows?: Paginated<AddressBookEntryRow>;
 
-  constructor(private router: Router, private route: ActivatedRoute, private addressBookService: AddressBookService, private operationService: OperationService) {
-  }
-
   retrieving = new Loader();
   retrievingOperation = new Loader();
+
+  @ViewChild(PaginatedListComponent) paginatedList!: PaginatedListComponent<AddressBookEntryRow>;
+
+  constructor(private router: Router, private route: ActivatedRoute, private addressBookService: AddressBookService,
+    private operationService: OperationService) { }
+
+  ngAfterViewInit(): void {
+    // Initialize filter for search bar
+    this.paginatedList.dataSource.filterPredicate = (row: AddressBookEntryRow, filterValue: string) => {
+      let elements: string[] = [...Object.values(row.entry), row.operation?.title].filter(value => value).map(value => {
+        return value?.toString().toLowerCase() ?? "";
+      });
+      return elements.some(e => e.includes(filterValue.toLocaleLowerCase()));
+    };
+  }
 
   refresh(): void {
     if (!this.pagination) {
@@ -50,14 +64,14 @@ export class AddressBookEntryListView {
             }
             return tableEntry;
           }), {
-            // Pagination details stay the same, since no extra entries where retrieved.
-            retrieved: paginatedEntries.retrieved,
-            limit: paginatedEntries.limit,
-            offset: paginatedEntries.offset,
-            total: paginatedEntries.total,
-            orderedBy: paginatedEntries.orderedBy,
-            orderDir: paginatedEntries.orderDir,
-          });
+          // Pagination details stay the same, since no extra entries where retrieved.
+          retrieved: paginatedEntries.retrieved,
+          limit: paginatedEntries.limit,
+          offset: paginatedEntries.offset,
+          total: paginatedEntries.total,
+          orderedBy: paginatedEntries.orderedBy,
+          orderDir: paginatedEntries.orderDir,
+        });
       }),
     ).subscribe(paginatedRows => this.addressBookEntryRows = paginatedRows), 'entry-retrieval');
   }
@@ -96,8 +110,13 @@ export class AddressBookEntryListView {
       case '':
         return undefined;
       default:
-        throw new MDSError(MDSErrorCode.AppError, `unsupported order-by: ${ s }`);
+        throw new MDSError(MDSErrorCode.AppError, `unsupported order-by: ${s}`);
     }
+  }
+
+  applySearchFilter(event: Event, dataSource: MatTableDataSource<AddressBookEntryRow, MatTableDataSourcePaginator>) {
+    let searchValue = (event.target as HTMLInputElement).value;
+    dataSource.filter = searchValue;
   }
 
   sortChange(sort: Sort): void {

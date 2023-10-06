@@ -12,6 +12,10 @@ import { DeliverChannelComponent } from './deliver-channel/deliver-channel.compo
 import { RouterLink } from '@angular/router';
 import { CancelIntelDeliveryDialog } from './cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component';
 
+/**
+ * @deprecated because requirements of application changed. Is replaced by {@link ReviewerIncomingLayoutComponent} and
+ * {@link ReviewerOutgoingLayoutComponent}
+ */
 @NgModule({
   declarations: [
     IntelDeliveryView,
