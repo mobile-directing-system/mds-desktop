@@ -4,21 +4,22 @@
   <app-heading-hint i18n>Create, manage and edit address book entries.</app-heading-hint>
 
   <!--Actions.-->
-  <app-list-action-bar>
-    <button mat-button i18n (click)="createAddressBookEntry()">Create Entry</button>
-  </app-list-action-bar>
+  <div id="action-bar">
+    <mat-form-field class="app-edit-input">
+      <mat-label i18n>Search</mat-label>
+      <input matInput (keyup)="applySearchFilter($event, list.dataSource)" #input>
+    </mat-form-field>
+
+    <button mat-flat-button extended color="primary" (click)="createAddressBookEntry()">
+      <mat-icon>add</mat-icon>
+      <span i18n>Create Entry</span>
+    </button>
+  </div>
   <!--Table.-->
-  <app-paginated-list
-    #list
-    (page)="page($event)"
-    [data]="addressBookEntryRows"
+  <app-paginated-list #list (page)="page($event)" [data]="addressBookEntryRows"
     [appShowLoadingOverlay]="retrieving.loadingChange() | async">
-    <table
-      (matSortChange)="sortChange($event)"
-      [dataSource]="list.dataSource"
-      aria-label="Address book entry list"
-      mat-table
-      matSort>
+    <table (matSortChange)="sortChange($event)" [dataSource]="list.dataSource" aria-label="Address book entry list"
+      mat-table matSort>
 
       <ng-container matColumnDef="label">
         <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="byLabel">Label</th>
@@ -32,8 +33,7 @@
 
       <ng-container matColumnDef="operation">
         <th *matHeaderCellDef i18n mat-header-cell>Operation</th>
-        <td *matCellDef="let row" mat-cell
-            [appShowLoadingDots]="retrievingOperation.loadingChange() | async">
+        <td *matCellDef="let row" mat-cell [appShowLoadingDots]="retrievingOperation.loadingChange() | async">
           <span *ngIf="asAddressBookEntryRow(row).operation; let operation">
             {{ operation.title }}
           </span>
@@ -45,15 +45,16 @@
 
       <ng-container matColumnDef="user">
         <th *matHeaderCellDef i18n mat-header-cell>User</th>
-        <td *matCellDef="let row"
-            mat-cell>{{ formatRowUser(asAddressBookEntryRow(row)) }}</td>
+        <td *matCellDef="let row" mat-cell>{{ formatRowUser(asAddressBookEntryRow(row)) }}</td>
       </ng-container>
 
       <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
       <tr (click)="navigateToAddressBookEntry(asAddressBookEntryRow(row).entry.id)"
-          *matRowDef="let row; columns: columnsToDisplay"
-          class="clickable" mat-row></tr>
+        *matRowDef="let row; columns: columnsToDisplay" class="clickable" mat-row></tr>
 
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="6" i18n>No data matching the filter "{{input.value}}"</td>
+      </tr>
     </table>
   </app-paginated-list>
 

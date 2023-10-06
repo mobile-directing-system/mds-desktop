@@ -112,7 +112,7 @@ describe('HomeLayoutComponent', () => {
       },
       {
         name: 'Address book',
-        link: ['/logistics/address-book'],
+        link: ['/address-book'],
       },
       {
         name: 'Resources',

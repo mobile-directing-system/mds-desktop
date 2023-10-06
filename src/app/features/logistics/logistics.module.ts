@@ -25,8 +25,7 @@ import {
 } from './channels/channel-details-dialog/in-app-notification-channel-details/in-app-notification-channel-details.component';
 import { IntelDeliveryModule } from './intel-delivery/intel-delivery.module';
 import { AddressBookEntryAutoIntelDeliveryComponent } from './address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component';
-import { RadioDeliveryComponent } from './radio-delivery/radio-delivery.component';
-import { RadioDeliveryItemComponent } from './radio-delivery/radio-delivery-item/radio-delivery-item.component';
+import { AddressBookLayoutComponent } from './address-book-layout/address-book-layout.component';
 
 
 @NgModule({
@@ -41,8 +40,7 @@ import { RadioDeliveryItemComponent } from './radio-delivery/radio-delivery-item
     RadioChannelDetailsComponent,
     InAppNotificationChannelDetailsComponent,
     AddressBookEntryAutoIntelDeliveryComponent,
-    RadioDeliveryComponent,
-    RadioDeliveryItemComponent,
+    AddressBookLayoutComponent
   ],
   imports: [
     CommonModule,

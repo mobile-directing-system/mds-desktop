@@ -5,6 +5,8 @@ import {IntelType} from "../../../../core/model/intel";
 
 /**
  * Component for visualising one {@link RadioDelivery}
+ * 
+ * @deprecated because requirements of application changed. Is replaced by {@link DeliveryItemComponent }
  */
 @Component({
   selector: 'app-radio-delivery-item',
