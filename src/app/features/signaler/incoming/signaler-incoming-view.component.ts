@@ -133,7 +133,6 @@ export class SignalerIncomingView implements OnInit {
     }
 
     this.messageService.createMessage(msg).subscribe(msg => {
-      console.log(msg);
       this.notificationService.notifyUninvasiveShort($localize`:@@signaler-message-submitted:Message successfully submitted.`);
       this.resetStepper();
     });
@@ -167,8 +166,28 @@ export class SignalerIncomingView implements OnInit {
     this.selectedSender = entity;
   }
 
+  /**
+   * Is called when the focus of the sender autocomplete field is lost
+   * Ensures that only selectable senders are displayed in the form field
+   */
+  senderAutocompleteFocusLost() {
+    this.senderForm.controls.sender.setValue(this.selectedSender);
+  }
+
   incidentSelected(incident: Incident) {
     this.selectedIncident = incident;
+  }
+
+  /**
+   * Is called when the focus of the incident autocomplete field is lost
+   */
+  incidentAutocompleteFocusLost() {
+    let incidentFormValue = this.incidentForm.controls.incident.value;
+    if(typeof incidentFormValue === 'string' && incidentFormValue.trim().length === 0) {
+      this.selectedIncident = null;
+      return;
+    }
+    this.incidentForm.controls.incident.setValue(this.selectedIncident ?? "");
   }
 
   asResource(entry: AddressBookEntry): Resource {

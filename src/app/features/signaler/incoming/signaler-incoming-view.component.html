@@ -20,13 +20,13 @@
                         <mat-form-field class="app-edit-input">
                             <mat-label i18n>Sender</mat-label>
                             <input type="text" matInput formControlName="sender" [matAutocomplete]="auto"
-                                i18n-placeholder placeholder="Select sender" required>
+                                i18n-placeholder placeholder="Select sender" (blur)="senderAutocompleteFocusLost()" required>
                             <button matSuffix mat-icon-button aria-label="Clear"
                                 (click)="senderForm.controls.sender.reset()">
                                 <mat-icon>close</mat-icon>
                             </button>
 
-                            <mat-autocomplete requireSelection [displayWith]="displayEntry"
+                            <mat-autocomplete [displayWith]="displayEntry"
                                 (optionSelected)="senderSelected($event.option.value)" #auto="matAutocomplete">
                                 <mat-option *ngFor="let entry of filteredSenderOptions | async" [value]="entry">
                                     <div style="display: flex; align-items: center;">
@@ -74,13 +74,13 @@
                         <mat-form-field class="app-edit-input">
                             <mat-label i18n>Incident</mat-label>
                             <input type="text" matInput formControlName="incident" [matAutocomplete]="auto"
-                                i18n-placeholder placeholder="Select incident">
+                                i18n-placeholder placeholder="Select incident" (blur)="incidentAutocompleteFocusLost()">
                             <button matSuffix mat-icon-button aria-label="Clear"
                                 (click)="incidentForm.controls.incident.reset()">
                                 <mat-icon>close</mat-icon>
                             </button>
 
-                            <mat-autocomplete requireSelection [displayWith]="displayIncident"
+                            <mat-autocomplete [displayWith]="displayIncident"
                                 (optionSelected)="incidentSelected($event.option.value)" #auto="matAutocomplete">
                                 <mat-option *ngFor="let incident of filteredIncidents | async" [value]="incident">
                                     <div style="display: flex; align-items: center;">
