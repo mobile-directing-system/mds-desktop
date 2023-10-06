@@ -1,6 +1,7 @@
 <div class="action-bar">
-  <button (click)="newChannel()" [disabled]="disableCreate || loading" i18n mat-button type="button">
-    New Channel
+  <button (click)="newChannel()" [disabled]="disableCreate || loading" mat-flat-button color="primary" type="button">
+    <mat-icon>add</mat-icon>
+    <span i18n>New Channel</span>
   </button>
 </div>
 <table
