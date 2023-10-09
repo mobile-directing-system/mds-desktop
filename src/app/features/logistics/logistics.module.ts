@@ -23,6 +23,7 @@ import {
 import { IntelDeliveryModule } from './intel-delivery/intel-delivery.module';
 import { AddressBookEntryAutoIntelDeliveryComponent } from './address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component';
 import { AddressBookLayoutComponent } from './address-book-layout/address-book-layout.component';
+import { MailChannelDetailsComponent } from './channels/channel-details-dialog/mail-channel-details/mail-channel-details.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { AddressBookLayoutComponent } from './address-book-layout/address-book-l
     ChannelDetailsDialog,
     RadioChannelDetailsComponent,
     AddressBookEntryAutoIntelDeliveryComponent,
-    AddressBookLayoutComponent
+    AddressBookLayoutComponent,
+    MailChannelDetailsComponent
   ],
   imports: [
     CommonModule,
