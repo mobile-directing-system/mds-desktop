@@ -1,13 +1,13 @@
 import { appChannelFromNet, ChannelService, NetChannel, netChannelFromApp } from './channel.service';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { NetService } from './net.service';
-import { Channel, ChannelType, RadioChannel } from '../model/channel';
+import { Channel, ChannelType, MailChannel, PhoneChannel, RadioChannel } from '../model/channel';
 import { Importance } from '../model/importance';
 import * as moment from 'moment';
 import { of, throwError } from 'rxjs';
 import { fakeAsync, tick } from '@angular/core/testing';
 
-describe('ChannelService', () => {
+fdescribe('ChannelService', () => {
   let spectator: SpectatorService<ChannelService>;
   let service: ChannelService;
   const createService = createServiceFactory({
@@ -53,6 +53,84 @@ describe('ChannelService', () => {
         }),
         details: {
           info: 'saddle',
+        },
+      };
+
+      it('should map from net to app correctly', () => {
+        expect(appChannelFromNet(net)).toEqual(app);
+      });
+
+      it('should map from app to net correctly', () => {
+        expect(netChannelFromApp(app)).toEqual(net);
+      });
+    });
+
+    describe('mail-channel', () => {
+      const net: NetChannel = {
+        id: 'ray',
+        entry: 'forgive',
+        is_active: false,
+        label: 'leg',
+        type: ChannelType.Email,
+        priority: 200,
+        min_importance: Importance.Strike,
+        timeout: 200 * 1000 * 1000 * 1000, // 200 Seconds.
+        details: {
+          email: 'example@example.com',
+        },
+      };
+      const app: MailChannel = {
+        id: 'ray',
+        entry: 'forgive',
+        isActive: false,
+        label: 'leg',
+        type: ChannelType.Email,
+        priority: 200,
+        minImportance: Importance.Strike,
+        timeout: moment.duration({
+          seconds: 200,
+        }),
+        details: {
+          email: 'example@example.com',
+        },
+      };
+
+      it('should map from net to app correctly', () => {
+        expect(appChannelFromNet(net)).toEqual(app);
+      });
+
+      it('should map from app to net correctly', () => {
+        expect(netChannelFromApp(app)).toEqual(net);
+      });
+    });
+
+    describe('phone-channel', () => {
+      const net: NetChannel = {
+        id: 'ray',
+        entry: 'forgive',
+        is_active: false,
+        label: 'leg',
+        type: ChannelType.Phone,
+        priority: 200,
+        min_importance: Importance.Strike,
+        timeout: 200 * 1000 * 1000 * 1000, // 200 Seconds.
+        details: {
+          phone: '0691471324',
+        },
+      };
+      const app: PhoneChannel = {
+        id: 'ray',
+        entry: 'forgive',
+        isActive: false,
+        label: 'leg',
+        type: ChannelType.Phone,
+        priority: 200,
+        minImportance: Importance.Strike,
+        timeout: moment.duration({
+          seconds: 200,
+        }),
+        details: {
+          phoneNumber: '0691471324',
         },
       };
 
