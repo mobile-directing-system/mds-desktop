@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { Channel, ChannelBase, ChannelType } from '../../../../core/model/channel';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -31,6 +31,9 @@ export type ChannelDetailsDialogResult = {
   selector: 'app-channel-details-dialog',
   templateUrl: './channel-details-dialog.component.html',
   styleUrls: ['./channel-details-dialog.component.scss'],
+  // Workaround for https://github.com/angular/angular/issues/23657
+  // Caused by MailChannelDetailsComponent: Uses custom Validator
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChannelDetailsDialog {
   ChannelType = ChannelType;

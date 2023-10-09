@@ -27,7 +27,12 @@
     <ng-container [ngSwitch]="form.controls.type.value">
       <app-radio-channel-details
         *ngSwitchCase="ChannelType.Radio"
-        [formControl]="form.controls.details"></app-radio-channel-details>
+        [formControl]="form.controls.details">
+      </app-radio-channel-details>
+      <app-mail-channel-details
+        *ngSwitchCase="ChannelType.Email"
+        [formControl]="form.controls.details">
+      </app-mail-channel-details>
       <span *ngSwitchDefault>{{ form.controls.type.value }}?</span>
     </ng-container>
   </form>
