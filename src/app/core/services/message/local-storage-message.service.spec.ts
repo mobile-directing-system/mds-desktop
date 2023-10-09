@@ -137,7 +137,7 @@ const channelInApp: Channel = {
   minImportance: 0,
   priority: 0,
   timeout: duration(10000),
-  type:  ChannelType.InAppNotification
+  type:  ChannelType.Radio
 };
 const channelRadio: Channel = {
   id: "channelId2",

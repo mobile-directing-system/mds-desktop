@@ -33,7 +33,7 @@ describe('ChannelTypeSelectComponent.integration', () => {
   let fc: FormControl<ChannelType>;
 
   beforeEach(async () => {
-    fc = new FormControl<ChannelType>(ChannelType.InAppNotification, { nonNullable: true });
+    fc = new FormControl<ChannelType>(ChannelType.Radio, { nonNullable: true });
     spectator = createComponent({
       props: {
         fc: fc,
@@ -51,7 +51,7 @@ describe('ChannelTypeSelectComponent.integration', () => {
 
   it('should apply selected value from form control', async () => {
     const valueText = await select.getValueText();
-    expect(valueText.toLowerCase()).toContain('in-app notification');
+    expect(valueText.toLowerCase()).toContain('radio');
   });
 
   it('should should select correct value', async () => {

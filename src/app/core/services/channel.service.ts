@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NetService } from './net.service';
-import { Channel, ChannelBase, ChannelType, InAppNotificationChannel, RadioChannel } from '../model/channel';
+import { Channel, ChannelBase, ChannelType, RadioChannel } from '../model/channel';
 import { Observable } from 'rxjs';
 import { MDSError, MDSErrorCode } from '../util/errors';
 import urlJoin from 'url-join';
@@ -10,7 +10,7 @@ import * as moment from 'moment';
 /**
  * Net representation of {@link Channel}.
  */
-export type NetChannel = NetInAppNotificationChannel | NetRadioChannel
+export type NetChannel = NetRadioChannel
 
 /**
  * Net representation of {@link NetChannelBase}.
@@ -28,14 +28,6 @@ interface NetChannelBase {
    */
   timeout: number;
   details: object;
-}
-
-/**
- * Net representation of {@link InAppNotificationChannel}.
- */
-interface NetInAppNotificationChannel extends NetChannelBase {
-  type: 'in-app-notification',
-  details: {};
 }
 
 /**
@@ -72,12 +64,10 @@ function netChannelBaseFromApp(a: ChannelBase): NetChannelBase {
  */
 function appChannelTypeFromNet(n: NetChannel): ChannelType {
   switch (n.type) {
-    case 'in-app-notification':
-      return ChannelType.InAppNotification;
     case 'radio':
       return ChannelType.Radio;
     default:
-      throw new MDSError(MDSErrorCode.AppError, `unsupported channel type while converting to app representation: ${ (n as Channel).type }`);
+      throw new MDSError(MDSErrorCode.AppError, `unsupported channel type while converting to app representation: ${ n.type }`);
   }
 }
 
@@ -96,30 +86,6 @@ function appChannelBaseFromNet(n: NetChannel): ChannelBase {
     priority: n.priority,
     details: {},
     timeout: moment.duration(n.timeout / 1000 / 1000, 'milliseconds'),
-  };
-}
-
-/**
- * Maps {@link InAppNotificationChannel} to {@link NetInAppNotificationChannel}
- * @param a The channel to map.
- */
-function netInAppNotificationChannelFromApp(a: InAppNotificationChannel): NetInAppNotificationChannel {
-  return {
-    ...netChannelBaseFromApp(a),
-    type: 'in-app-notification',
-    details: {},
-  };
-}
-
-/**
- * Maps {@link NetInAppNotificationChannel} to {@link InAppNotificationChannel}.
- * @param n The channel to map.
- */
-function appInAppNotificationChannelFromNet(n: NetInAppNotificationChannel): InAppNotificationChannel {
-  return {
-    ...appChannelBaseFromNet(n),
-    type: ChannelType.InAppNotification,
-    details: {},
   };
 }
 
@@ -157,8 +123,6 @@ function appRadioChannelFromNet(n: NetRadioChannel): RadioChannel {
  */
 export function netChannelFromApp(a: Channel): NetChannel {
   switch (a.type) {
-    case ChannelType.InAppNotification:
-      return netInAppNotificationChannelFromApp(a);
     case ChannelType.Radio:
       return netRadioChannelFromApp(a);
     default:
@@ -172,8 +136,6 @@ export function netChannelFromApp(a: Channel): NetChannel {
  */
 export function appChannelFromNet(n: NetChannel): Channel {
   switch (n.type) {
-    case 'in-app-notification':
-      return appInAppNotificationChannelFromNet(n);
     case 'radio':
       return appRadioChannelFromNet(n);
     default:

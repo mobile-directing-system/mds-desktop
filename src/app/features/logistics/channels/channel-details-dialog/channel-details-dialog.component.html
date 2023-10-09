@@ -40,9 +40,6 @@
     <mat-divider></mat-divider>
     <!--Channel details.-->
     <ng-container [ngSwitch]="form.controls.type.value">
-      <app-in-app-notification-channel-details
-        *ngSwitchCase="ChannelType.InAppNotification"
-        [formControl]="form.controls.details"></app-in-app-notification-channel-details>
       <app-radio-channel-details
         *ngSwitchCase="ChannelType.Radio"
         [formControl]="form.controls.details"></app-radio-channel-details>

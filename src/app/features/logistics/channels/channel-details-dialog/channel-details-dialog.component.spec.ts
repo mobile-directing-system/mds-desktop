@@ -133,8 +133,8 @@ describe('ChannelDetailsDialog', () => {
 
   describe('channel type form field', () => {
     let channelTypeSelect: MatSelectHarness;
-    const newChannelType: ChannelType = ChannelType.InAppNotification;
-    const searchOption = 'in-app';
+    const newChannelType: ChannelType = ChannelType.Radio;
+    const searchOption = 'radio';
 
     beforeEach(async () => {
       const formField = spectator.query(byTextContent('Channel Type', {
@@ -363,10 +363,6 @@ describe('ChannelDetailsDialog', () => {
       channelType: ChannelType;
       expectSelector: string;
     }[] = [
-      {
-        channelType: ChannelType.InAppNotification,
-        expectSelector: 'app-in-app-notification-channel-details',
-      },
       {
         channelType: ChannelType.Radio,
         expectSelector: 'app-radio-channel-details',

@@ -1,9 +1,5 @@
 <ng-container [ngSwitch]="channelType">
   <div class="channel-type">
-    <div *ngSwitchCase="ChannelType.InAppNotification">
-      <mat-icon>vibration</mat-icon>
-      <span i18n="@@channel-type-in-app-notification">In-App Notification</span>
-    </div>
     <div *ngSwitchCase="ChannelType.Radio">
       <mat-icon>cell_tower</mat-icon>
       <span i18n="@@channel-type-radio">Radio</span>

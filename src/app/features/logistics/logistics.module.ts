@@ -20,9 +20,6 @@ import { ChannelDetailsDialog } from './channels/channel-details-dialog/channel-
 import {
   RadioChannelDetailsComponent,
 } from './channels/channel-details-dialog/radio-channel-details/radio-channel-details.component';
-import {
-  InAppNotificationChannelDetailsComponent,
-} from './channels/channel-details-dialog/in-app-notification-channel-details/in-app-notification-channel-details.component';
 import { IntelDeliveryModule } from './intel-delivery/intel-delivery.module';
 import { AddressBookEntryAutoIntelDeliveryComponent } from './address-book-entry-list-view/address-book-entry-auto-intel-delivery/address-book-entry-auto-intel-delivery.component';
 import { AddressBookLayoutComponent } from './address-book-layout/address-book-layout.component';
@@ -38,7 +35,6 @@ import { AddressBookLayoutComponent } from './address-book-layout/address-book-l
     ChannelsComponent,
     ChannelDetailsDialog,
     RadioChannelDetailsComponent,
-    InAppNotificationChannelDetailsComponent,
     AddressBookEntryAutoIntelDeliveryComponent,
     AddressBookLayoutComponent
   ],

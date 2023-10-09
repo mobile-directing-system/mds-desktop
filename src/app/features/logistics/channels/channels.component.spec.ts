@@ -29,11 +29,13 @@ describe('ChannelsComponent', () => {
       entry: entryId,
       isActive: true,
       label: 'defeat',
-      type: ChannelType.InAppNotification,
+      type: ChannelType.Radio,
       priority: 50,
       timeout: moment.duration({ minutes: 2 }),
       minImportance: Importance.None,
-      details: {},
+      details: {
+        info: '069'
+      },
     },
     {
       id: 'popular',
