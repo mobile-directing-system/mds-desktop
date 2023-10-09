@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NetService } from './net.service';
-import { Channel, ChannelBase, ChannelType, RadioChannel } from '../model/channel';
+import { Channel, ChannelBase, ChannelType, RadioChannel, MailChannel } from '../model/channel';
 import { Observable } from 'rxjs';
 import { MDSError, MDSErrorCode } from '../util/errors';
 import urlJoin from 'url-join';
@@ -10,7 +10,7 @@ import * as moment from 'moment';
 /**
  * Net representation of {@link Channel}.
  */
-export type NetChannel = NetRadioChannel
+export type NetChannel = NetRadioChannel | NetMailChannel
 
 /**
  * Net representation of {@link NetChannelBase}.
@@ -41,6 +41,16 @@ interface NetRadioChannel extends NetChannelBase {
 }
 
 /**
+ * Net representation of {@link MailChannel}.
+ */
+interface NetMailChannel extends NetChannelBase {
+  type: 'email',
+  details: {
+    email: string;
+  }
+}
+
+/**
  * Maps {@link ChannelBase} to {@link NetChannelBase}.
  * @param a The channel to map.
  */
@@ -66,8 +76,10 @@ function appChannelTypeFromNet(n: NetChannel): ChannelType {
   switch (n.type) {
     case 'radio':
       return ChannelType.Radio;
+    case 'email':
+      return ChannelType.Email;
     default:
-      throw new MDSError(MDSErrorCode.AppError, `unsupported channel type while converting to app representation: ${ n.type }`);
+      throw new MDSError(MDSErrorCode.AppError, `unsupported channel type while converting to app representation: ${(n as Channel).type }`);
   }
 }
 
@@ -104,6 +116,20 @@ function netRadioChannelFromApp(a: RadioChannel): NetRadioChannel {
 }
 
 /**
+ * Maps {@link MailChannel} to {@link NetMailChannel}.
+ * @param a The channel to map.
+ */
+function netMailChannelFromApp(a: MailChannel): NetMailChannel {
+  return {
+    ...netChannelBaseFromApp(a),
+    type: 'email',
+    details: {
+      email: a.details.email
+    },
+  };
+}
+
+/**
  * Maps {@link NetRadioChannel} to {@link RadioChannel}.
  * @param n The channel to map.
  */
@@ -118,6 +144,20 @@ function appRadioChannelFromNet(n: NetRadioChannel): RadioChannel {
 }
 
 /**
+ * Maps {@link NetRadioChannel} to {@link RadioChannel}.
+ * @param n The channel to map.
+ */
+function appMailChannelFromNet(n: NetMailChannel): MailChannel {
+  return {
+    ...appChannelBaseFromNet(n),
+    type: ChannelType.Email,
+    details: {
+      email: n.details.email
+    },
+  };
+}
+
+/**
  * Maps {@link Channel} to {@link NetChannel}.
  * @param a The channel to map.
  */
@@ -125,6 +165,8 @@ export function netChannelFromApp(a: Channel): NetChannel {
   switch (a.type) {
     case ChannelType.Radio:
       return netRadioChannelFromApp(a);
+    case ChannelType.Email:
+      return netMailChannelFromApp(a);
     default:
       throw new MDSError(MDSErrorCode.AppError, `unsupported channel type while converting to net representation: ${ (a as Channel).type }`);
   }
@@ -138,6 +180,8 @@ export function appChannelFromNet(n: NetChannel): Channel {
   switch (n.type) {
     case 'radio':
       return appRadioChannelFromNet(n);
+    case 'email':
+      return appMailChannelFromNet(n);
     default:
       throw new MDSError(MDSErrorCode.AppError, `unsupported channel type while converting to app representation: ${ (n as NetChannel).type }`);
   }

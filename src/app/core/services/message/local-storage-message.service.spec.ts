@@ -128,18 +128,21 @@ const exampleMessages: Message[] = [
 ];
 
 let channelsSubject = new Subject<Channel []>();
-const channelInApp: Channel = {
+const channelMail: Channel = {
+  type:  ChannelType.Email,
   id: "channelId1",
-  details: {info:"info"},
+  details: {
+    email: "example@example.com"
+  },
   entry: "address-bookId",
   isActive: false,
   label: "label",
   minImportance: 0,
   priority: 0,
-  timeout: duration(10000),
-  type:  ChannelType.Radio
+  timeout: duration(10000)
 };
 const channelRadio: Channel = {
+  type:  ChannelType.Radio,
   id: "channelId2",
   details: {info:"info"},
   entry: "address-bookId",
@@ -148,13 +151,12 @@ const channelRadio: Channel = {
   minImportance: 0,
   priority: 0,
   timeout: duration(10000),
-  type:  ChannelType.Radio
 };
 const channelsInAppAndRadio: Channel[] = [
-  channelInApp, channelRadio
+  channelMail, channelRadio
 ]
 const channelsInApp: Channel[] = [
-  channelInApp
+  channelMail
 ]
 
 describe('LocalStorageMessageService', () => {

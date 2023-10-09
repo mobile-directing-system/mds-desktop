@@ -12,11 +12,11 @@ export enum ChannelType {
 }
 
 /**
- * Channels are ways of delivering intel to recipients. For example, an email channel is used for sending an email
- * containing the intel to a target email address. A radio channel might forward intel to a radio operator, that calls
- * the recipient. Each channel has a unique priority, timeout and minimum importance for intel.
+ * Channels are ways of delivering messages to recipients. For example, an email channel is used for sending an email
+ * containing the message to a target email address. A radio channel might forward a message to a radio operator, that calls
+ * the recipient.
  */
-export type Channel = RadioChannel
+export type Channel = RadioChannel | MailChannel
 
 export interface ChannelBase {
   /**
@@ -68,6 +68,18 @@ export interface RadioChannel extends ChannelBase {
 
 export interface RadioChannelDetails {
   info: string;
+}
+
+/**
+ * Channel with type {@link ChannelType.Email}.
+ */
+export interface MailChannel extends ChannelBase {
+  type: ChannelType.Email,
+  details: MailChannelDetails
+}
+
+export interface MailChannelDetails {
+  email: string;
 }
 
 /**
