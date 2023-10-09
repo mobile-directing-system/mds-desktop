@@ -2,12 +2,9 @@
     <h1 i18n>Incoming messages</h1>
     <form [formGroup]="channelForm">
         <!-- Message type -->
-        <mat-form-field>
+        <mat-form-field class="app-edit-input">
             <mat-label i18n>Channel type</mat-label>
-            <mat-select [formControl]="channelForm.controls.channel">
-                <mat-option *ngFor="let channel of channelTypes" [value]="channel"> {{ localizeChannel(channel) }}
-                </mat-option>
-            </mat-select>
+            <app-channel-type-select [formControl]="channelForm.controls.channel"></app-channel-type-select>
         </mat-form-field>
 
         <!-- Stepper -->
