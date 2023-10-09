@@ -59,11 +59,13 @@ describe('IntelToDeliverAttemptsComponent', () => {
       recipientChannels: [
         {
           id: 'harvest',
-          type: ChannelType.InAppNotification,
+          type: ChannelType.Radio,
           timeout: moment.duration({ seconds: 23 }),
           minImportance: Importance.Low,
           entry: 'rent',
-          details: {},
+          details: {
+            info: 'channel 2'
+          },
           isActive: true,
           priority: 144,
           label: 'mix',

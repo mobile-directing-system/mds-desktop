@@ -19,11 +19,13 @@ function genChannel(): DeliverChannel {
       label: 'ever',
       isActive: true,
       priority: 24,
-      details: {},
+      details: {
+        info: 'channel 1'
+      },
       entry: 'servant',
       minImportance: Importance.Regular,
       timeout: moment.duration({ second: 1 }),
-      type: ChannelType.InAppNotification,
+      type: ChannelType.Radio,
     },
     details: {
       intelImportance: Importance.Low,

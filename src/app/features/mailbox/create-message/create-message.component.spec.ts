@@ -48,7 +48,7 @@ describe('CreateMessageComponent', () => {
   const message: Message = {
     id: "",
     direction: MessageDirection.Outgoing,
-    incomingChannelType: ChannelType.InAppNotification,
+    incomingChannelType: ChannelType.Radio,
     senderId: "loggedInRoleId",
     senderType: Participant.Role,
     content: "Example content",

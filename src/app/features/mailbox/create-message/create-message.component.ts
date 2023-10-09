@@ -119,7 +119,7 @@ export class CreateMessageComponent implements OnDestroy, OnInit{
       recipients: fv.recipients.map((recipientId => {
         return {recipientId: recipientId.id, recipientType: recipientId.type, read: false}
       })),
-      incomingChannelType: ChannelType.InAppNotification,
+      incomingChannelType: ChannelType.Email,
       priority: fv.priority,
       incidentId: fv.incident ?? undefined,
       content: fv.content,

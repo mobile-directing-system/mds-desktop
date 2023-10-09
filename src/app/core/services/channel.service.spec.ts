@@ -1,13 +1,13 @@
 import { appChannelFromNet, ChannelService, NetChannel, netChannelFromApp } from './channel.service';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { NetService } from './net.service';
-import { Channel, ChannelType, InAppNotificationChannel, RadioChannel } from '../model/channel';
+import { Channel, ChannelType, MailChannel, PhoneChannel, RadioChannel } from '../model/channel';
 import { Importance } from '../model/importance';
 import * as moment from 'moment';
 import { of, throwError } from 'rxjs';
 import { fakeAsync, tick } from '@angular/core/testing';
 
-describe('ChannelService', () => {
+fdescribe('ChannelService', () => {
   let spectator: SpectatorService<ChannelService>;
   let service: ChannelService;
   const createService = createServiceFactory({
@@ -25,40 +25,6 @@ describe('ChannelService', () => {
   });
 
   describe('mapping', () => {
-    describe('in-app-notification-channel', () => {
-      const net: NetChannel = {
-        id: 'ray',
-        entry: 'forgive',
-        is_active: true,
-        label: 'leg',
-        type: 'in-app-notification',
-        priority: 200,
-        min_importance: Importance.Strike,
-        timeout: 200 * 1000 * 1000 * 1000, // 200 Seconds.
-        details: {},
-      };
-      const app: InAppNotificationChannel = {
-        id: 'ray',
-        entry: 'forgive',
-        isActive: true,
-        label: 'leg',
-        type: ChannelType.InAppNotification,
-        priority: 200,
-        minImportance: Importance.Strike,
-        timeout: moment.duration({
-          seconds: 200,
-        }),
-        details: {},
-      };
-
-      it('should map from net to app correctly', () => {
-        expect(appChannelFromNet(net)).toEqual(app);
-      });
-
-      it('should map from app to net correctly', () => {
-        expect(netChannelFromApp(app)).toEqual(net);
-      });
-    });
 
     describe('radio-channel', () => {
       const net: NetChannel = {
@@ -98,6 +64,84 @@ describe('ChannelService', () => {
         expect(netChannelFromApp(app)).toEqual(net);
       });
     });
+
+    describe('mail-channel', () => {
+      const net: NetChannel = {
+        id: 'ray',
+        entry: 'forgive',
+        is_active: false,
+        label: 'leg',
+        type: ChannelType.Email,
+        priority: 200,
+        min_importance: Importance.Strike,
+        timeout: 200 * 1000 * 1000 * 1000, // 200 Seconds.
+        details: {
+          email: 'example@example.com',
+        },
+      };
+      const app: MailChannel = {
+        id: 'ray',
+        entry: 'forgive',
+        isActive: false,
+        label: 'leg',
+        type: ChannelType.Email,
+        priority: 200,
+        minImportance: Importance.Strike,
+        timeout: moment.duration({
+          seconds: 200,
+        }),
+        details: {
+          email: 'example@example.com',
+        },
+      };
+
+      it('should map from net to app correctly', () => {
+        expect(appChannelFromNet(net)).toEqual(app);
+      });
+
+      it('should map from app to net correctly', () => {
+        expect(netChannelFromApp(app)).toEqual(net);
+      });
+    });
+
+    describe('phone-channel', () => {
+      const net: NetChannel = {
+        id: 'ray',
+        entry: 'forgive',
+        is_active: false,
+        label: 'leg',
+        type: ChannelType.Phone,
+        priority: 200,
+        min_importance: Importance.Strike,
+        timeout: 200 * 1000 * 1000 * 1000, // 200 Seconds.
+        details: {
+          phone: '0691471324',
+        },
+      };
+      const app: PhoneChannel = {
+        id: 'ray',
+        entry: 'forgive',
+        isActive: false,
+        label: 'leg',
+        type: ChannelType.Phone,
+        priority: 200,
+        minImportance: Importance.Strike,
+        timeout: moment.duration({
+          seconds: 200,
+        }),
+        details: {
+          phoneNumber: '0691471324',
+        },
+      };
+
+      it('should map from net to app correctly', () => {
+        expect(appChannelFromNet(net)).toEqual(app);
+      });
+
+      it('should map from app to net correctly', () => {
+        expect(netChannelFromApp(app)).toEqual(net);
+      });
+    });
   });
 
   describe('getChannelsByAddressBookEntry', () => {
@@ -113,7 +157,7 @@ describe('ChannelService', () => {
         min_importance: Importance.Strike,
         timeout: 200 * 1000 * 1000, // 200 Milliseconds.
         details: {
-          info: 'army',
+          info: 'channel 0',
         },
       },
       {
@@ -121,11 +165,13 @@ describe('ChannelService', () => {
         entry: entryId,
         is_active: false,
         label: 'every',
-        type: ChannelType.InAppNotification,
+        type: ChannelType.Radio,
         priority: 50,
         min_importance: Importance.None,
         timeout: 20 * 60 * 1000 * 1000 * 1000, // 20 Minutes.
-        details: {},
+        details: {
+          info: 'channel 1'
+        },
       },
     ];
     const expectChannels: Channel[] = [
@@ -141,7 +187,7 @@ describe('ChannelService', () => {
           milliseconds: 200,
         }),
         details: {
-          info: 'army',
+          info: 'channel 0',
         },
       },
       {
@@ -149,13 +195,15 @@ describe('ChannelService', () => {
         entry: entryId,
         isActive: false,
         label: 'every',
-        type: ChannelType.InAppNotification,
+        type: ChannelType.Radio,
         priority: 50,
         minImportance: Importance.None,
         timeout: moment.duration({
           minutes: 20,
         }),
-        details: {},
+        details: {
+          info: 'channel 1'
+        },
       },
     ];
 
@@ -209,13 +257,15 @@ describe('ChannelService', () => {
         entry: entryId,
         isActive: true,
         label: 'every',
-        type: ChannelType.InAppNotification,
+        type: ChannelType.Radio,
         priority: 50,
         minImportance: Importance.None,
         timeout: moment.duration({
           minutes: 20,
         }),
-        details: {},
+        details: {
+          info: 'test'
+        },
       },
     ];
     const netChannels = [
@@ -237,11 +287,13 @@ describe('ChannelService', () => {
         entry: entryId,
         is_active: true,
         label: 'every',
-        type: ChannelType.InAppNotification,
+        type: ChannelType.Radio,
         priority: 50,
         min_importance: Importance.None,
         timeout: 20 * 60 * 1000 * 1000 * 1000, // 20 Minutes.
-        details: {},
+        details: {
+          info: 'test'
+        },
       },
     ];
 

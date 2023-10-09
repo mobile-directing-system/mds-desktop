@@ -17,8 +17,10 @@ function genChannel(): Channel {
     isActive: true,
     priority: Math.random() * 100,
     entry: 'bleed',
-    type: ChannelType.InAppNotification,
-    details: {},
+    type: ChannelType.Radio,
+    details: {
+      info: 'channel 4'
+    },
     timeout: moment.duration({ seconds: 1 }),
     minImportance: Importance.Low,
   };

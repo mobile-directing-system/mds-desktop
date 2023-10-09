@@ -6,18 +6,17 @@ import { Importance } from './importance';
  * https://mobile-directing-system.github.io/mds-server/sites/address-book.html#channels-in-general.
  */
 export enum ChannelType {
-  InAppNotification = 'in-app-notification',
   Radio = 'radio',
   Phone = 'phone',
   Email = 'email'
 }
 
 /**
- * Channels are ways of delivering intel to recipients. For example, an email channel is used for sending an email
- * containing the intel to a target email address. A radio channel might forward intel to a radio operator, that calls
- * the recipient. Each channel has a unique priority, timeout and minimum importance for intel.
+ * Channels are ways of delivering messages to recipients. For example, an email channel is used for sending an email
+ * containing the message to a target email address. A radio channel might forward a message to a radio operator, that calls
+ * the recipient.
  */
-export type Channel = InAppNotificationChannel | RadioChannel
+export type Channel = RadioChannel | MailChannel | PhoneChannel
 
 export interface ChannelBase {
   /**
@@ -60,14 +59,6 @@ export interface ChannelBase {
 }
 
 /**
- * Channel with type {@link ChannelType.InAppNotification}.
- */
-export interface InAppNotificationChannel extends ChannelBase {
-  type: ChannelType.InAppNotification,
-  details: InAppNotificationChannelDetails
-}
-
-/**
  * Channel with type {@link ChannelType.Radio}.
  */
 export interface RadioChannel extends ChannelBase {
@@ -75,14 +66,32 @@ export interface RadioChannel extends ChannelBase {
   details: RadioChannelDetails
 }
 
-/**
- * Channel details for channels with type {@link ChannelType.InAppNotification}.
- */
-export interface InAppNotificationChannelDetails {
-}
-
 export interface RadioChannelDetails {
   info: string;
+}
+
+/**
+ * Channel with type {@link ChannelType.Email}.
+ */
+export interface MailChannel extends ChannelBase {
+  type: ChannelType.Email,
+  details: MailChannelDetails
+}
+
+export interface MailChannelDetails {
+  email: string;
+}
+
+/**
+ * Channel with type {@link ChannelType.Phone}.
+ */
+export interface PhoneChannel extends ChannelBase {
+  type: ChannelType.Phone,
+  details: PhoneChannelDetails
+}
+
+export interface PhoneChannelDetails {
+  phoneNumber: string;
 }
 
 /**
@@ -91,8 +100,6 @@ export interface RadioChannelDetails {
  */
 export function localizeChannelType(t: ChannelType): string {
   switch (t) {
-    case ChannelType.InAppNotification:
-      return $localize`:@@channel-type-in-app-notification:In-App Notification`;
     case ChannelType.Radio:
       return $localize`:@@channel-type-radio:Radio`;
     case ChannelType.Email:

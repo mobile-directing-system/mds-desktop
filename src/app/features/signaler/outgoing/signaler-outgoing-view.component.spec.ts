@@ -96,7 +96,7 @@ describe('SignalerOutgoingView', () => {
       minImportance: 0,
       priority: 0,
       timeout: duration(10000),
-      type:  ChannelType.InAppNotification
+      type:  ChannelType.Radio
     },
     {
       id: "channelId2",

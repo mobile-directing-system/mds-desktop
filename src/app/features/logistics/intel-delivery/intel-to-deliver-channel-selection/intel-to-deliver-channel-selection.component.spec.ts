@@ -23,8 +23,10 @@ function genChannel(): Channel {
     isActive: true,
     priority: Math.random() * 100,
     entry: 'direct',
-    type: ChannelType.InAppNotification,
-    details: {},
+    type: ChannelType.Radio,
+    details: {
+      info: 'channel 3'
+    },
     timeout: moment.duration({ seconds: 1 }),
     minImportance: Importance.Low,
   };
