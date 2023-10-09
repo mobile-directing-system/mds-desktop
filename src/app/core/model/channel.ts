@@ -16,7 +16,7 @@ export enum ChannelType {
  * containing the message to a target email address. A radio channel might forward a message to a radio operator, that calls
  * the recipient.
  */
-export type Channel = RadioChannel | MailChannel
+export type Channel = RadioChannel | MailChannel | PhoneChannel
 
 export interface ChannelBase {
   /**
@@ -80,6 +80,18 @@ export interface MailChannel extends ChannelBase {
 
 export interface MailChannelDetails {
   email: string;
+}
+
+/**
+ * Channel with type {@link ChannelType.Phone}.
+ */
+export interface PhoneChannel extends ChannelBase {
+  type: ChannelType.Phone,
+  details: PhoneChannelDetails
+}
+
+export interface PhoneChannelDetails {
+  phoneNumber: string;
 }
 
 /**
