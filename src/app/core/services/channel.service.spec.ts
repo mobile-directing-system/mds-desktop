@@ -7,7 +7,7 @@ import * as moment from 'moment';
 import { of, throwError } from 'rxjs';
 import { fakeAsync, tick } from '@angular/core/testing';
 
-fdescribe('ChannelService', () => {
+describe('ChannelService', () => {
   let spectator: SpectatorService<ChannelService>;
   let service: ChannelService;
   const createService = createServiceFactory({
