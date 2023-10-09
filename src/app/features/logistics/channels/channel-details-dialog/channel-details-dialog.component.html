@@ -15,29 +15,14 @@
         <mat-label i18n>Channel Type</mat-label>
         <app-channel-type-select [formControl]="form.controls.type"></app-channel-type-select>
       </mat-form-field>
-      <!--Importance.-->
-      <mat-form-field class="app-edit-input">
-        <mat-label i18n>Min Importance</mat-label>
-        <app-importance-select [formControl]="form.controls.minImportance"></app-importance-select>
-      </mat-form-field>
-    </div>
-    <div class="form-row">
-      <!--Priority.-->
-      <mat-form-field class="app-edit-input">
-        <mat-label i18n>Priority</mat-label>
-        <input matInput type="number" [formControl]="form.controls.priority">
-      </mat-form-field>
-      <!--Timeout.-->
-      <mat-form-field class="app-edit-input">
-        <mat-label i18n>Timeout</mat-label>
-        <app-duration-picker [formControl]="form.controls.timeout"></app-duration-picker>
-      </mat-form-field>
     </div>
     <div class="form-row">
       <!--Is active.-->
       <mat-slide-toggle [formControl]="form.controls.isActive" i18n>Active</mat-slide-toggle>
     </div>
+
     <mat-divider></mat-divider>
+
     <!--Channel details.-->
     <ng-container [ngSwitch]="form.controls.type.value">
       <app-radio-channel-details
@@ -47,6 +32,7 @@
     </ng-container>
   </form>
 </mat-dialog-content>
+
 <mat-dialog-actions>
   <button mat-button (click)="close(undefined)" i18n>Cancel</button>
   <app-delete-confirm-button
