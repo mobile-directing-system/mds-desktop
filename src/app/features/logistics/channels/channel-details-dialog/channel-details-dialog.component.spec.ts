@@ -226,6 +226,14 @@ describe('ChannelDetailsDialog', () => {
         channelType: ChannelType.Radio,
         expectSelector: 'app-radio-channel-details',
       },
+      {
+        channelType: ChannelType.Email,
+        expectSelector: 'app-mail-channel-details',
+      },
+      {
+        channelType: ChannelType.Phone,
+        expectSelector: 'app-phone-channel-details',
+      },
     ];
     tests.forEach(tt => {
       it(`should display details for ${ tt.channelType } with ${ tt.expectSelector }`, async () => {

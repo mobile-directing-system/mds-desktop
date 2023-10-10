@@ -1,0 +1,6 @@
+<mat-form-field class="app-edit-input">
+    <mat-label i18n>Email</mat-label>
+    <input type="email" matInput [formControl]="mailControl" i18n-placeholder placeholder="mail@example.com">
+    <mat-error *ngIf="mailControl.hasError('required') && (mailControl.touched || mailControl.dirty)" i18n>Email is required</mat-error>
+    <mat-error *ngIf="mailControl.hasError('email') && (mailControl.touched || mailControl.dirty)" i18n>Invalid mail</mat-error>
+</mat-form-field>

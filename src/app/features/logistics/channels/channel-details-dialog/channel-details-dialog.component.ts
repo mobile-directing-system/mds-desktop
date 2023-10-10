@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { Channel, ChannelBase, ChannelType } from '../../../../core/model/channel';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -44,7 +44,7 @@ export class ChannelDetailsDialog {
     priority: this.fb.nonNullable.control<number>(this.data.channel.priority),
     minImportance: this.fb.nonNullable.control<number>(this.data.channel.minImportance),
     timeout: this.fb.nonNullable.control<moment.Duration>(this.data.channel.timeout, [ValidatorDurationRequired, ValidatorDurationMin(moment.duration())]),
-    details: this.fb.nonNullable.control<object>(this.data.channel.details, Validators.required),
+    details: this.fb.nonNullable.control<object>(this.data.channel.details),
   });
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ChannelDetailsDialogData, private dialogRef: MatDialogRef<ChannelDetailsDialog>,
