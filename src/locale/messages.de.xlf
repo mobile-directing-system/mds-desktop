@@ -454,7 +454,7 @@
     </unit>
     <unit id="8204176479746810612">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:38</note>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:21</note>
         <note category="location">src/app/features/logistics/channels/channels.component.html:19</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:26</note>
       </notes>
@@ -906,9 +906,9 @@
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:63</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:87</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:101</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:64</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:94</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:114</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:61</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:91</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:111</note>
       </notes>
       <segment state="initial">
         <source>Back</source>
@@ -1222,20 +1222,10 @@
         <target>Einsätze</target>
       </segment>
     </unit>
-    <unit id="channel-type-in-app-notification">
-      <notes>
-        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:5</note>
-        <note category="location">src/app/core/model/channel.ts:95</note>
-      </notes>
-      <segment state="initial">
-        <source>In-App Notification</source>
-        <target>In-App Benachrichtigung</target>
-      </segment>
-    </unit>
     <unit id="channel-type-radio">
       <notes>
-        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:9</note>
-        <note category="location">src/app/core/model/channel.ts:97</note>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:5</note>
+        <note category="location">src/app/core/model/channel.ts:104</note>
       </notes>
       <segment state="initial">
         <source>Radio</source>
@@ -1244,7 +1234,7 @@
     </unit>
     <unit id="4467323362722952678">
       <notes>
-        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:21</note>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:17</note>
         <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:28</note>
         <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:16</note>
       </notes>
@@ -1255,7 +1245,7 @@
     </unit>
     <unit id="2085611136494552870">
       <notes>
-        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:25</note>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:21</note>
         <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:32</note>
         <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:20</note>
       </notes>
@@ -1350,19 +1340,10 @@
         <target>Unbenannter Kanal</target>
       </segment>
     </unit>
-    <unit id="5853287764718196763">
-      <notes>
-        <note category="location">src/app/features/logistics/channels/channel-details-dialog/in-app-notification-channel-details/in-app-notification-channel-details.component.html:1</note>
-      </notes>
-      <segment state="initial">
-        <source>Nothing to configure for in-app notifications.</source>
-        <target>Keine Konfigurationsmöglichkeiten für In-App Benachrichtigungen.</target>
-      </segment>
-    </unit>
     <unit id="314315645942131479">
       <notes>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/radio-channel-details/radio-channel-details.component.html:2</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:42</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:39</note>
       </notes>
       <segment state="initial">
         <source>Info</source>
@@ -1407,7 +1388,6 @@
     </unit>
     <unit id="2734022681675842051">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:27</note>
         <note category="location">src/app/features/logistics/channels/channels.component.html:34</note>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:12</note>
         <note category="location">src/app/features/mailbox/create-message/create-message.component.html:40</note>
@@ -1420,7 +1400,6 @@
     </unit>
     <unit id="5037087188394157831">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:20</note>
         <note category="location">src/app/features/logistics/channels/channels.component.html:39</note>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:20</note>
       </notes>
@@ -1431,7 +1410,6 @@
     </unit>
     <unit id="5956316725115867558">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:32</note>
         <note category="location">src/app/features/logistics/channels/channels.component.html:46</note>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:16</note>
       </notes>
@@ -1578,7 +1556,7 @@
     <unit id="6660925946511264619">
       <notes>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:65,67</note>
-        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:57,59</note>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:49,51</note>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:126,128</note>
         <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:71,73</note>
       </notes>
@@ -2097,7 +2075,7 @@
     <unit id="935187492052582731">
       <notes>
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:24</note>
-        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:60</note>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:52</note>
         <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:34</note>
         <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:52</note>
       </notes>
@@ -2168,7 +2146,7 @@
         <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:28</note>
         <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:26</note>
         <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.ts:134</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:141</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:138</note>
       </notes>
       <segment state="initial">
         <source>Confirm</source>
@@ -2210,7 +2188,7 @@
         <note category="location">src/app/core/components/delete-confirm-dialog/delete-confirm-dialog.component.html:4</note>
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:23</note>
         <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:30</note>
-        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:54</note>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:46</note>
         <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:33</note>
         <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:51</note>
         <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:29</note>
@@ -2264,10 +2242,10 @@
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:15</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:64</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:88</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:48</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:65</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:95</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:115</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:45</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:62</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:92</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:112</note>
       </notes>
       <segment state="initial">
         <source>Next</source>
@@ -2335,9 +2313,9 @@
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:47</note>
         <note category="location">src/app/features/mailbox/create-message/create-message.component.html:64</note>
         <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.html:26</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:54</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:58</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:128</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:51</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:55</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:125</note>
       </notes>
       <segment state="initial">
         <source>Content</source>
@@ -2987,8 +2965,8 @@
     </unit>
     <unit id="channel-type-email">
       <notes>
-        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:17</note>
-        <note category="location">src/app/core/model/channel.ts:99</note>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:13</note>
+        <note category="location">src/app/core/model/channel.ts:106</note>
       </notes>
       <segment state="initial">
         <source>Email</source>
@@ -2997,9 +2975,9 @@
     </unit>
     <unit id="910656806257300801">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:17</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:21</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:127</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:14</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:18</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:124</note>
       </notes>
       <segment state="initial">
         <source>Sender</source>
@@ -3008,7 +2986,7 @@
     </unit>
     <unit id="8008587693876377253">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:44</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:41</note>
       </notes>
       <segment state="initial">
         <source>E.g. mail address</source>
@@ -3017,7 +2995,7 @@
     </unit>
     <unit id="3174883446698862933">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:60</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:57</note>
       </notes>
       <segment state="initial">
         <source>Content of the message</source>
@@ -3028,9 +3006,9 @@
       <notes>
         <note category="location">src/app/features/mailbox/create-message/create-message.component.html:55</note>
         <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.html:32</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:71</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:75</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:130</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:68</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:72</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:127</note>
       </notes>
       <segment state="initial">
         <source>Incident</source>
@@ -3039,8 +3017,8 @@
     </unit>
     <unit id="5611592591303869712">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:101</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:105</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:98</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:102</note>
       </notes>
       <segment state="initial">
         <source>Status</source>
@@ -3049,7 +3027,7 @@
     </unit>
     <unit id="65984904390749158">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:121</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:118</note>
       </notes>
       <segment state="initial">
         <source>Finish</source>
@@ -3058,7 +3036,7 @@
     </unit>
     <unit id="7808756054397155068">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:139</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:136</note>
       </notes>
       <segment state="initial">
         <source>Reset</source>
@@ -3067,8 +3045,8 @@
     </unit>
     <unit id="channel-type-phone">
       <notes>
-        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:13</note>
-        <note category="location">src/app/core/model/channel.ts:101</note>
+        <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:9</note>
+        <note category="location">src/app/core/model/channel.ts:108</note>
       </notes>
       <segment state="initial">
         <source>Phone</source>
@@ -3077,7 +3055,7 @@
     </unit>
     <unit id="2791007109724882912">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:23</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:20</note>
       </notes>
       <segment state="initial">
         <source>Select sender</source>
@@ -3086,7 +3064,7 @@
     </unit>
     <unit id="7608330402066932450">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:77</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:74</note>
       </notes>
       <segment state="initial">
         <source>Select incident</source>
@@ -3095,7 +3073,7 @@
     </unit>
     <unit id="2352629566113014741">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:133</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:130</note>
       </notes>
       <segment state="initial">
         <source>Old status</source>
@@ -3104,7 +3082,7 @@
     </unit>
     <unit id="1467059276438662086">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:134</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:131</note>
       </notes>
       <segment state="initial">
         <source>New status</source>
@@ -3765,6 +3743,69 @@
       <segment state="initial">
         <source>Forward to</source>
         <target>Weiterleiten an</target>
+      </segment>
+    </unit>
+    <unit id="4768749765465246664">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/mail-channel-details/mail-channel-details.component.html:2</note>
+      </notes>
+      <segment state="initial">
+        <source>Email</source>
+        <target>E-Mail</target>
+      </segment>
+    </unit>
+    <unit id="6475711663580561164">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/mail-channel-details/mail-channel-details.component.html:3</note>
+      </notes>
+      <segment state="initial">
+        <source>mail@example.com</source>
+        <target>max@mustermann.de</target>
+      </segment>
+    </unit>
+    <unit id="8552587679160911578">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/mail-channel-details/mail-channel-details.component.html:4</note>
+      </notes>
+      <segment state="initial">
+        <source>Email is required</source>
+        <target>E-Mail wird benötigt</target>
+      </segment>
+    </unit>
+    <unit id="2470391657690122037">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/mail-channel-details/mail-channel-details.component.html:5</note>
+      </notes>
+      <segment state="initial">
+        <source>Invalid mail</source>
+        <target>Ungültige E-Mail</target>
+      </segment>
+    </unit>
+    <unit id="8121141462865337916">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/phone-channel-details/phone-channel-details.component.html:2</note>
+      </notes>
+      <segment state="initial">
+        <source>Phone number</source>
+        <target>Telefonnummer</target>
+      </segment>
+    </unit>
+    <unit id="2153045371136515717">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/phone-channel-details/phone-channel-details.component.html:3</note>
+      </notes>
+      <segment state="initial">
+        <source>089256782984</source>
+        <target>089256782984</target>
+      </segment>
+    </unit>
+    <unit id="4941543669684168127">
+      <notes>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/phone-channel-details/phone-channel-details.component.html:4</note>
+      </notes>
+      <segment state="initial">
+        <source>Phone number is required</source>
+        <target>Telefonnummer wird benötigt</target>
       </segment>
     </unit>
   </file>
