@@ -33,6 +33,10 @@
         *ngSwitchCase="ChannelType.Email"
         [formControl]="form.controls.details">
       </app-mail-channel-details>
+      <app-phone-channel-details
+        *ngSwitchCase="ChannelType.Phone" 
+        [formControl]="form.controls.details">
+      </app-phone-channel-details>
       <span *ngSwitchDefault>{{ form.controls.type.value }}?</span>
     </ng-container>
   </form>

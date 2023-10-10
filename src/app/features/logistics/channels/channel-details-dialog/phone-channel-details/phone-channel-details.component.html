@@ -1,0 +1,5 @@
+<mat-form-field class="app-edit-input">
+    <mat-label i18n>Phone number</mat-label>
+    <input type="tel" matInput [formControl]="phoneControl" i18n-placeholder placeholder="089256782984">
+    <mat-error *ngIf="phoneControl.hasError('required') && (phoneControl.touched || phoneControl.dirty)" i18n>Phone number is required</mat-error>
+</mat-form-field>

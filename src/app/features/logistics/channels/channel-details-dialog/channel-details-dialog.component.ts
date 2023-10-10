@@ -31,9 +31,6 @@ export type ChannelDetailsDialogResult = {
   selector: 'app-channel-details-dialog',
   templateUrl: './channel-details-dialog.component.html',
   styleUrls: ['./channel-details-dialog.component.scss'],
-  // Workaround for https://github.com/angular/angular/issues/23657
-  // Caused by MailChannelDetailsComponent: Uses custom Validator
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChannelDetailsDialog {
   ChannelType = ChannelType;
@@ -47,7 +44,7 @@ export class ChannelDetailsDialog {
     priority: this.fb.nonNullable.control<number>(this.data.channel.priority),
     minImportance: this.fb.nonNullable.control<number>(this.data.channel.minImportance),
     timeout: this.fb.nonNullable.control<moment.Duration>(this.data.channel.timeout, [ValidatorDurationRequired, ValidatorDurationMin(moment.duration())]),
-    details: this.fb.nonNullable.control<object>(this.data.channel.details, Validators.required),
+    details: this.fb.nonNullable.control<object>(this.data.channel.details),
   });
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ChannelDetailsDialogData, private dialogRef: MatDialogRef<ChannelDetailsDialog>,
