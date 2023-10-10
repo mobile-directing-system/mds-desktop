@@ -20,7 +20,7 @@ class TestHostComponent {
   }, { nonNullable: true });
 }
 
-fdescribe('MailChannelDetailsComponent', () => {
+describe('MailChannelDetailsComponent', () => {
   let spectator: Spectator<TestHostComponent>;
   let host: TestHostComponent;
   let hLoader: HarnessLoader;
