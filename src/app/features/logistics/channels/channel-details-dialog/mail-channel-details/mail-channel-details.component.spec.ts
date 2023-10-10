@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatFormFieldHarness } from '@angular/material/form-field/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
-import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import { Spectator, byText, createComponentFactory } from '@ngneat/spectator';
 import { CoreModule } from 'src/app/core/core.module';
 import { MailChannelDetails } from 'src/app/core/model/channel';
 import { LogisticsModule } from '../../../logistics.module';
@@ -28,7 +28,7 @@ describe('MailChannelDetailsComponent', () => {
   let details: MailChannelDetails = {
     email: "test@example.com"
   };
-  
+
   const createComponent = createComponentFactory({
     component: TestHostComponent,
     imports: [CoreModule, LogisticsModule],
@@ -78,5 +78,38 @@ describe('MailChannelDetailsComponent', () => {
         email: newMail,
       });
     });
+
+    describe('form validator', () => {
+      it('should display error when mail is empty', async () => {
+        await input.setValue("");
+        await input.blur();
+        expect(spectator.query(byText("Email is required", {
+          selector: "mat-error",
+          exact: true
+        }))).toBeVisible();
+      });
+
+      it('should propagate required error to parent form control', async () => {
+        await input.setValue("");
+        expect(host.fc.invalid).toBeTrue();
+        expect(host.fc.hasError("required")).toBeTrue();
+      });
+
+      it('should display error when mail is invalid', async () => {
+        await input.setValue("invalid mail");
+        await input.blur();
+        expect(spectator.query(byText("Invalid mail", {
+          selector: "mat-error",
+          exact: true
+        }))).toBeVisible();
+      });
+
+      it('should propagate invalid mail error to parent form control', async () => {
+        await input.setValue("invalid mail");
+        expect(host.fc.invalid).toBeTrue();
+        expect(host.fc.hasError("email")).toBeTrue();
+      });
+    });
+
   });
 });

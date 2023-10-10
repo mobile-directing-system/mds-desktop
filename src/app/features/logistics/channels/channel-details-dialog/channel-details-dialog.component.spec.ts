@@ -18,7 +18,7 @@ import {
   ChannelDetailsDialogResult,
 } from './channel-details-dialog.component';
 
-fdescribe('ChannelDetailsDialog', () => {
+describe('ChannelDetailsDialog', () => {
   let spectator: Spectator<ChannelDetailsDialog>;
   let component: ChannelDetailsDialog;
   const createComponent = createComponentFactory({
