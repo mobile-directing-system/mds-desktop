@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PhoneChannelDetailsComponent } from './phone-channel-details.component';
 import { FormControl } from '@angular/forms';
 import { PhoneChannelDetails } from 'src/app/core/model/channel';
-import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import { Spectator, byText, createComponentFactory } from '@ngneat/spectator';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { Component } from '@angular/core';
 import { CoreModule } from 'src/app/core/core.module';
@@ -79,6 +79,21 @@ describe('PhoneChannelDetailsComponent', () => {
         ...details,
         phoneNumber: newNumber,
       });
+    });
+
+    it('should display error when phone number is empty', async () => {
+      await input.setValue("");
+      await input.blur();
+      expect(spectator.query(byText("Phone number is required", {
+        selector: "mat-error",
+        exact: true
+      }))).toBeVisible();
+    });
+
+    it('should propagate required error to parent form control', async () => {
+      await input.setValue("");
+      expect(host.fc.invalid).toBeTrue();
+      expect(host.fc.hasError("required")).toBeTrue();
     });
   });
 });
