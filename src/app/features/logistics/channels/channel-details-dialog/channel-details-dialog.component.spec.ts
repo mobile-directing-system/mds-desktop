@@ -18,7 +18,7 @@ import {
   ChannelDetailsDialogResult,
 } from './channel-details-dialog.component';
 
-describe('ChannelDetailsDialog', () => {
+fdescribe('ChannelDetailsDialog', () => {
   let spectator: Spectator<ChannelDetailsDialog>;
   let component: ChannelDetailsDialog;
   const createComponent = createComponentFactory({
@@ -225,6 +225,14 @@ describe('ChannelDetailsDialog', () => {
       {
         channelType: ChannelType.Radio,
         expectSelector: 'app-radio-channel-details',
+      },
+      {
+        channelType: ChannelType.Email,
+        expectSelector: 'app-mail-channel-details',
+      },
+      {
+        channelType: ChannelType.Phone,
+        expectSelector: 'app-phone-channel-details',
       },
     ];
     tests.forEach(tt => {
