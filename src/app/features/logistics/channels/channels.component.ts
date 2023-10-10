@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import { Channel, defaultChannel } from '../../../core/model/channel';
+import { Channel, ChannelType, defaultChannel, MailChannelDetails, PhoneChannelDetails, RadioChannelDetails } from '../../../core/model/channel';
 import { MatTableDataSource } from '@angular/material/table';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,7 +23,10 @@ import { MDSError, MDSErrorCode } from '../../../core/util/errors';
   ],
 })
 export class ChannelsComponent extends CustomControlValueAccessor<Channel[]> {
-  columnsToDisplay = ['label', 'isActive', 'type', 'priority', 'minImportance', 'timeout'];
+
+  ChannelType = ChannelType;
+
+  columnsToDisplay = ['label', 'isActive', 'type', 'info'];
   /**
    * Datasource for the table that contains the channel list.
    */
@@ -42,6 +45,19 @@ export class ChannelsComponent extends CustomControlValueAccessor<Channel[]> {
 
   asChannel(c: Channel): Channel {
     return c;
+  }
+
+  getChannelDetails(c: Channel): string {
+    switch(c.type) {
+      case ChannelType.Email:
+        return c.details.email;
+      case ChannelType.Phone:
+        return c.details.phoneNumber;
+      case ChannelType.Radio:
+        return c.details.info;
+      default:
+        return "?";
+    }
   }
 
   override writeValue(channels: Channel[]): void {
