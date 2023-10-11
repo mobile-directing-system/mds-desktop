@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Channel } from 'src/app/core/model/channel';
+import { Channel, ChannelType, getChannelDetailsText } from 'src/app/core/model/channel';
 import { Participant } from 'src/app/core/model/message';
 import { ChannelService } from 'src/app/core/services/channel.service';
 import { MessageRow } from '../outgoing-messages-view/outgoing-messages-view.component';
@@ -11,6 +11,9 @@ import { MessageRow } from '../outgoing-messages-view/outgoing-messages-view.com
   styleUrls: ['./select-channel-dialog.component.scss']
 })
 export class SelectChannelDialog implements OnInit {
+
+  ChannelType = ChannelType;
+  getChannelDetailsText = getChannelDetailsText;
 
   channelColumns: string[] = ["label", "channelType", "info"];
   selectableChannels: Channel[] = [];

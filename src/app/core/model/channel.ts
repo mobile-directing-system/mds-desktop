@@ -109,6 +109,22 @@ export function localizeChannelType(t: ChannelType): string {
   }
 }
 
+/**
+ * Get channel details as a string representation
+ */
+export function getChannelDetailsText(c: Channel): string {
+  switch(c.type) {
+    case ChannelType.Email:
+      return c.details.email;
+    case ChannelType.Phone:
+      return c.details.phoneNumber;
+    case ChannelType.Radio:
+      return c.details.info;
+    default:
+      return "?";
+  }
+}
+
 export function defaultChannel(entryId: string): Channel {
   const c: RadioChannel = {
     entry: entryId,

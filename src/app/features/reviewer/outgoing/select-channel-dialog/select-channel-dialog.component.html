@@ -36,7 +36,12 @@
             <!-- Channel info Column -->
             <ng-container matColumnDef="info">
                 <th mat-header-cell *matHeaderCellDef i18n> Info </th>
-                <td mat-cell *matCellDef="let channel"> {{ channel.details.info }} </td>
+                <td *matCellDef="let channel" [ngSwitch]="channel.type" mat-cell>
+                    <ng-container *ngSwitchCase="ChannelType.Email">{{ getChannelDetailsText(channel)}}</ng-container>
+                    <ng-container *ngSwitchCase="ChannelType.Phone">{{ getChannelDetailsText(channel)}}</ng-container>
+                    <ng-container *ngSwitchCase="ChannelType.Radio">{{ getChannelDetailsText(channel)}}</ng-container>
+                    <ng-container *ngSwitchDefault>?</ng-container>
+                  </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="channelColumns"></tr>
