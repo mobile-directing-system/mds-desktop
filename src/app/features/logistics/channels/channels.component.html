@@ -4,11 +4,7 @@
     <span i18n>New Channel</span>
   </button>
 </div>
-<table
-  [appShowLoadingOverlay]="loading"
-  [dataSource]="channelsDataSource"
-  aria-label="Channel list"
-  mat-table>
+<table [appShowLoadingOverlay]="loading" [dataSource]="channelsDataSource" aria-label="Channel list" mat-table>
 
   <ng-container matColumnDef="label">
     <th *matHeaderCellDef i18n mat-header-cell>Label</th>
@@ -30,27 +26,18 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="priority">
-    <th *matHeaderCellDef i18n mat-header-cell>Priority</th>
-    <td *matCellDef="let row" mat-cell>{{ asChannel(row).priority }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="minImportance">
-    <th *matHeaderCellDef i18n mat-header-cell>Min Importance</th>
-    <td *matCellDef="let row" mat-cell>
-      <app-importance-inline [importance]="asChannel(row).minImportance"></app-importance-inline>
+  <ng-container matColumnDef="info">
+    <th *matHeaderCellDef i18n mat-header-cell>Info</th>
+    <td *matCellDef="let row" [ngSwitch]="asChannel(row).type" mat-cell>
+      <ng-container *ngSwitchCase="ChannelType.Email">{{ getChannelDetails(row) }}</ng-container>
+      <ng-container *ngSwitchCase="ChannelType.Phone">{{ getChannelDetails(row) }}</ng-container>
+      <ng-container *ngSwitchCase="ChannelType.Radio">{{ getChannelDetails(row) }}</ng-container>
+      <ng-container *ngSwitchDefault>?</ng-container>
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="timeout">
-    <th *matHeaderCellDef i18n mat-header-cell>Timeout</th>
-    <td *matCellDef="let row" mat-cell>{{ asChannel(row).timeout | duration:'long' }}</td>
-  </ng-container>
-
   <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
-  <tr *matRowDef="let row; columns: columnsToDisplay"
-      [ngClass]="{clickable: !disabled}"
-      (click)="!disabled && openChannel(asChannel(row))"
-      mat-row></tr>
+  <tr *matRowDef="let row; columns: columnsToDisplay" [ngClass]="{clickable: !disabled}"
+    (click)="!disabled && openChannel(asChannel(row))" mat-row></tr>
 
 </table>

@@ -1,17 +1,16 @@
-import { ChannelsComponent } from './channels.component';
+import { MatDialog } from '@angular/material/dialog';
 import { byTextContent, createComponentFactory, Spectator } from '@ngneat/spectator';
+import * as moment from 'moment';
 import { CoreModule } from '../../../core/core.module';
 import { Channel, ChannelType, defaultChannel, localizeChannelType } from '../../../core/model/channel';
-import * as moment from 'moment';
-import { Importance, localizeImportance } from '../../../core/model/importance';
-import { MatDialog } from '@angular/material/dialog';
+import { Importance } from '../../../core/model/importance';
 import { newMatDialogRefMock } from '../../../core/testutil/testutil';
 import {
   ChannelDetailsDialog,
   ChannelDetailsDialogData,
   ChannelDetailsDialogResult,
 } from './channel-details-dialog/channel-details-dialog.component';
-import { formatEditDuration } from '../../../core/components/duration-picker/duration-picker.component';
+import { ChannelsComponent } from './channels.component';
 
 describe('ChannelsComponent', () => {
   let spectator: Spectator<ChannelsComponent>;
@@ -42,12 +41,12 @@ describe('ChannelsComponent', () => {
       entry: entryId,
       isActive: true,
       label: 'continue',
-      type: ChannelType.Radio,
+      type: ChannelType.Email,
       priority: 40,
       timeout: moment.duration({ minutes: 5 }),
       minImportance: Importance.None,
       details: {
-        info: 'inventor',
+        email: 'test@example.com',
       },
     },
     {
@@ -55,7 +54,7 @@ describe('ChannelsComponent', () => {
       entry: entryId,
       isActive: true,
       label: 'inquire',
-      type: ChannelType.Radio,
+      type: ChannelType.Phone,
       priority: 10,
       timeout: moment.duration({
         hours: 2,
@@ -63,7 +62,7 @@ describe('ChannelsComponent', () => {
       }),
       minImportance: Importance.Strike,
       details: {
-        info: 'defeat',
+        phoneNumber: '124896731248',
       },
     },
   ];
@@ -87,6 +86,25 @@ describe('ChannelsComponent', () => {
   it('should apply written value', () => {
     expect(component.value).withContext('value').toEqual(sampleChannels);
     expect(component.channelsDataSource.data).withContext('data source').toEqual(sampleChannels);
+  });
+
+  it('getChannelDetails() should extract channel details correctly', ()=> {
+    sampleChannels.forEach(channel => {
+      let expectedInfo = "";
+      switch(channel.type) {
+        case ChannelType.Email:
+          expectedInfo = channel.details.email;
+          break;
+        case ChannelType.Phone:
+          expectedInfo = channel.details.phoneNumber;
+          break;
+        case ChannelType.Radio:
+          expectedInfo = channel.details.info;
+          break;
+      }
+      expect(expectedInfo).not.toBe("");
+      expect(component.getChannelDetails(channel)).toBe(expectedInfo);
+    });
   });
 
   describe('openChannel', () => {
@@ -213,9 +231,7 @@ describe('ChannelsComponent', () => {
         const attributes = [
           expectChannel.label,
           localizeChannelType(expectChannel.type),
-          expectChannel.priority,
-          localizeImportance(expectChannel.minImportance),
-          formatEditDuration(expectChannel.timeout),
+          component.getChannelDetails(expectChannel)
         ];
         attributes.forEach(expectAttribute => {
           expect(spectator.query(byTextContent(expectAttribute, {
