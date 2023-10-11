@@ -54,7 +54,7 @@ interface NetMailChannel extends NetChannelBase {
  * Net representation of {@link PhoneChannel}.
  */
 interface NetPhoneChannel extends NetChannelBase {
-  type: 'phone',
+  type: 'phone-call',
   details: {
     phone: string;
   }
@@ -88,7 +88,7 @@ function appChannelTypeFromNet(n: NetChannel): ChannelType {
       return ChannelType.Radio;
     case 'email':
       return ChannelType.Email;
-    case 'phone':
+    case 'phone-call':
       return ChannelType.Phone;
     default:
       throw new MDSError(MDSErrorCode.AppError, `unsupported channel type while converting to app representation: ${(n as Channel).type }`);
@@ -148,7 +148,7 @@ function netMailChannelFromApp(a: MailChannel): NetMailChannel {
 function netPhoneChannelFromApp(a: PhoneChannel): NetPhoneChannel {
   return {
     ...netChannelBaseFromApp(a),
-    type: 'phone',
+    type: 'phone-call',
     details: {
       phone: a.details.phoneNumber
     },
@@ -224,7 +224,7 @@ export function appChannelFromNet(n: NetChannel): Channel {
       return appRadioChannelFromNet(n);
     case 'email':
       return appMailChannelFromNet(n);
-    case 'phone':
+    case 'phone-call':
       return appPhoneChannelFromNet(n);
     default:
       throw new MDSError(MDSErrorCode.AppError, `unsupported channel type while converting to app representation: ${ (n as NetChannel).type }`);
