@@ -7,7 +7,7 @@ import { Importance } from './importance';
  */
 export enum ChannelType {
   Radio = 'radio',
-  Phone = 'phone',
+  Phone = 'phone-call',
   Email = 'email'
 }
 
