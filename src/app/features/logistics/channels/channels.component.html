@@ -29,9 +29,9 @@
   <ng-container matColumnDef="info">
     <th *matHeaderCellDef i18n mat-header-cell>Info</th>
     <td *matCellDef="let row" [ngSwitch]="asChannel(row).type" mat-cell>
-      <ng-container *ngSwitchCase="ChannelType.Email">{{ getChannelDetails(row) }}</ng-container>
-      <ng-container *ngSwitchCase="ChannelType.Phone">{{ getChannelDetails(row) }}</ng-container>
-      <ng-container *ngSwitchCase="ChannelType.Radio">{{ getChannelDetails(row) }}</ng-container>
+      <ng-container *ngSwitchCase="ChannelType.Email">{{ getChannelDetailsText(row) }}</ng-container>
+      <ng-container *ngSwitchCase="ChannelType.Phone">{{ getChannelDetailsText(row) }}</ng-container>
+      <ng-container *ngSwitchCase="ChannelType.Radio">{{ getChannelDetailsText(row) }}</ng-container>
       <ng-container *ngSwitchDefault>?</ng-container>
     </td>
   </ng-container>

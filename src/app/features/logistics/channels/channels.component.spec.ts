@@ -2,7 +2,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { byTextContent, createComponentFactory, Spectator } from '@ngneat/spectator';
 import * as moment from 'moment';
 import { CoreModule } from '../../../core/core.module';
-import { Channel, ChannelType, defaultChannel, localizeChannelType } from '../../../core/model/channel';
+import { Channel, ChannelType, defaultChannel, getChannelDetailsText, localizeChannelType } from '../../../core/model/channel';
 import { Importance } from '../../../core/model/importance';
 import { newMatDialogRefMock } from '../../../core/testutil/testutil';
 import {
@@ -86,25 +86,6 @@ describe('ChannelsComponent', () => {
   it('should apply written value', () => {
     expect(component.value).withContext('value').toEqual(sampleChannels);
     expect(component.channelsDataSource.data).withContext('data source').toEqual(sampleChannels);
-  });
-
-  it('getChannelDetails() should extract channel details correctly', ()=> {
-    sampleChannels.forEach(channel => {
-      let expectedInfo = "";
-      switch(channel.type) {
-        case ChannelType.Email:
-          expectedInfo = channel.details.email;
-          break;
-        case ChannelType.Phone:
-          expectedInfo = channel.details.phoneNumber;
-          break;
-        case ChannelType.Radio:
-          expectedInfo = channel.details.info;
-          break;
-      }
-      expect(expectedInfo).not.toBe("");
-      expect(component.getChannelDetails(channel)).toBe(expectedInfo);
-    });
   });
 
   describe('openChannel', () => {
@@ -231,7 +212,7 @@ describe('ChannelsComponent', () => {
         const attributes = [
           expectChannel.label,
           localizeChannelType(expectChannel.type),
-          component.getChannelDetails(expectChannel)
+          getChannelDetailsText(expectChannel)
         ];
         attributes.forEach(expectAttribute => {
           expect(spectator.query(byTextContent(expectAttribute, {
