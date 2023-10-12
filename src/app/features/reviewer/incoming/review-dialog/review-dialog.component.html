@@ -11,6 +11,7 @@
         </div>
         <div class="right-row">
             <p *ngIf="data.incident" i18n> Incident: #{{ data.incident.id }} {{ data.incident.name }} </p>
+            <p *ngIf="data.message.resourceStatusCode"><span>Status</span>: {{getStatusText(data.message.resourceStatusCode)}}</p>
         </div>
     </div>
     <div class="message-content">{{ data.message.content }}</div>

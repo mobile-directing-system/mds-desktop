@@ -12,6 +12,7 @@ import { getParticipantLabel } from 'src/app/core/util/service';
 import { OrderDir, PaginationParams } from 'src/app/core/util/store';
 import { ReviewerIncomingMessageRow } from '../incoming-messages-view/incoming-messages-view.component';
 import { MessageService } from 'src/app/core/services/message/message.service';
+import { getStatusCodeText } from 'src/app/core/model/resource';
 
 @Component({
   selector: 'app-review-dialog',
@@ -48,6 +49,16 @@ export class ReviewDialog implements OnInit {
    */
   getParticipantLabel(type?: Participant, id?: string): Observable<string | undefined> {
     return getParticipantLabel(this.resourceService, this.addressBookService, this.groupServerice, type, id);
+  }
+
+  /**
+   * Get status code as text representation
+   * 
+   * @param status code
+   */
+  getStatusText(statusCode: number): string {
+    if(statusCode == -1) return getStatusCodeText(statusCode);
+    return `${statusCode} - ${getStatusCodeText(statusCode)}`;
   }
 
   /**
