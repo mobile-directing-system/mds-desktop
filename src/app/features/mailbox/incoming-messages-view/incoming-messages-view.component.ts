@@ -14,6 +14,7 @@ import {Group} from "../../../core/model/group";
 import {MatDialog} from "@angular/material/dialog";
 import {IncomingMessageComponent} from "./incoming-message/incoming-message.component";
 import { getParticipantLabel } from 'src/app/core/util/service';
+import { WorkspaceService } from 'src/app/core/services/workspace.service';
 
 /**
  * Passed to the IncomingMessageComponent to show a detail view of the message
@@ -47,6 +48,9 @@ export interface MessageRow {
   styleUrls: ['./incoming-messages-view.component.scss']
 })
 export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
+
+  currentOperationId: string | undefined;
+
   displayedColumns: string[] = ['id', 'priority', 'createdAt', 'incomingChannelType', 'sender', 'recipients', 'content', 'incident'];
   dataSource: MatTableDataSource<MessageRow> = new MatTableDataSource();
 
@@ -64,11 +68,16 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
   filterRead = false;
 
   constructor(private messageService: MessageService, private resourceService: ResourceService,
-              private groupService: GroupService, private incidentService: IncidentService, private addressBookService: AddressBookService, public dialog: MatDialog) {
+              private groupService: GroupService, private incidentService: IncidentService,
+              private addressBookService: AddressBookService, public dialog: MatDialog,
+              private workspaceService: WorkspaceService) {
   }
 
-  ngOnInit(): void {
-    this.refreshDataSource();
+  ngOnInit() {
+    this.workspaceService.operationChange().subscribe(operationId => {
+      this.currentOperationId = operationId;
+      this.refreshDataSource();
+    });
   }
 
 
@@ -76,8 +85,8 @@ export class IncomingMessagesViewComponent implements AfterViewInit, OnInit {
    * Refreshes the data in the table.
    */
   refreshDataSource() {
-    if(this.loggedInRole){
-      this.messageService.getMailboxMessages(this.loggedInRole.id, this.filterRead)
+    if(this.loggedInRole) {
+      this.messageService.getMailboxMessages(this.loggedInRole.id, this.filterRead, this.currentOperationId)
         .pipe(map (messages => messages.map(message => {
             let messageRow = <MessageRow>({
               id: message.id,

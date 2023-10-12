@@ -3,7 +3,7 @@ import { fakeAsync } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { Spectator, byText, createComponentFactory } from '@ngneat/spectator';
 import * as moment from 'moment';
-import { EMPTY, of } from 'rxjs';
+import { BehaviorSubject, EMPTY, of } from 'rxjs';
 import { AddressBookEntry } from 'src/app/core/model/address-book-entry';
 import { Channel, ChannelType } from 'src/app/core/model/channel';
 import { Group } from 'src/app/core/model/group';
@@ -14,13 +14,16 @@ import { Resource } from 'src/app/core/model/resource';
 import { AddressBookService } from 'src/app/core/services/addressbook.service';
 import { GroupService } from 'src/app/core/services/group.service';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
-import { MessageService } from 'src/app/core/services/message/message.service';
+import { MessageFilters, MessageService } from 'src/app/core/services/message/message.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { ResourceService } from 'src/app/core/services/resource/resource.service';
 import { ReviewerModule } from '../../reviewer.module';
 import { OutgoingMessagesViewComponent } from './outgoing-messages-view.component';
+import { WorkspaceService } from 'src/app/core/services/workspace.service';
 
 describe('OutgoingMessagesViewComponent', () => {
+
+  const selectedOperationId = "123";
 
   const exampleMessages: Message[] = [
     {
@@ -65,7 +68,7 @@ describe('OutgoingMessagesViewComponent', () => {
           recipientType: Participant.Resource,
           recipientId: "2",
           send: false,
-          channelId: "1234"
+          channelId: "123"
         }
       ]
     }
@@ -164,10 +167,17 @@ describe('OutgoingMessagesViewComponent', () => {
             getIncidentById: of(exampleIncident)
           })
         },
+        {
+          provide: WorkspaceService,
+          useValue: jasmine.createSpyObj("WorkspaceService", {
+            operationChange: new BehaviorSubject(selectedOperationId)
+          })
+        }
       ],
       detectChanges: false
     });
     component = spectator.component;
+    component.currentOperationId = selectedOperationId;
     messageService = spectator.inject(MessageService);
     matDialog = spectator.inject(MatDialog);
     spectator.detectComponentChanges();
@@ -192,7 +202,10 @@ describe('OutgoingMessagesViewComponent', () => {
     component.refreshDataSource();
     spectator.tick();
 
-    expect(messageService.getMessages).toHaveBeenCalled();
+    expect(messageService.getMessages).toHaveBeenCalledWith(<MessageFilters>{ 
+      byDirection: MessageDirection.Outgoing,
+      byOperationId: selectedOperationId
+    });
 
     // Two rows should have been created
     expect(component.dataSource.data.length).toBe(2);

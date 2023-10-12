@@ -8,163 +8,165 @@ import { ChannelService } from "../channel.service";
 import { Subject } from "rxjs";
 import { duration } from "moment";
 
-
-const exampleMessages: Message[] = [
-  {
-    id: "0",
-    direction: MessageDirection.Incoming,
-    incomingChannelType: ChannelType.Email,
-    senderId: "123",
-    senderType: Participant.AddressBookEntry,
-    content: "Example content",
-    operationId: "123",
-    createdAt: new Date(),
-    recipients: [
-      {
-        recipientType: Participant.Role,
-        recipientId: "S1",
-        read: false
-      }
-    ]
-  },
-  {
-    id: "1",
-    direction: MessageDirection.Incoming,
-    incomingChannelType: ChannelType.Email,
-    senderId: "1234",
-    senderType: Participant.Resource,
-    content: "Example content 123",
-    operationId: "123",
-    createdAt: new Date(),
-    needsReview: true,
-    recipients: [
-      {
-        recipientType: Participant.Role,
-        recipientId: "S1",
-        read: false
-      },
-      {
-        recipientType: Participant.Role,
-        recipientId: "S3",
-        read: false
-      }
-    ]
-  },
-  {
-    id: "2",
-    direction: MessageDirection.Outgoing,
-    senderType: Participant.Role,
-    senderId: "S1",
-    content: "A message from S1",
-    operationId: "123",
-    createdAt: new Date(),
-    needsReview: true,
-    recipients: [
-      {
-        recipientType: Participant.Role,
-        recipientId: "S2",
-        read: false
-      },
-      {
-        recipientType: Participant.Role,
-        recipientId: "S3",
-        read: false
-      }
-    ]
-  },
-  {
-    id: "3",
-    direction: MessageDirection.Outgoing,
-    senderType: Participant.Role,
-    senderId: "S2",
-    content: "A message from S2",
-    operationId: "123",
-    createdAt: new Date(),
-    needsReview: false,
-    "priority": 1000,
-    recipients: [
-      {
-        recipientType: Participant.Role,
-        recipientId: "S1",
-      },
-      {
-        recipientType: Participant.AddressBookEntry,
-        recipientId: "Jan",
-        channelId: "channelId1"
-      },
-      {
-        recipientType: Participant.AddressBookEntry,
-        recipientId: "Gustav",
-        channelId: "channelId2"
-      },
-    ],
-    incidentId: "id"
-  },
-  {
-    id: "4",
-    direction: MessageDirection.Outgoing,
-    senderType: Participant.Role,
-    senderId: "S2",
-    content: "A message from S2",
-    operationId: "321",
-    createdAt: new Date(),
-    needsReview: false,
-    "priority": 1000,
-    recipients: [
-      {
-        recipientType: Participant.Role,
-        recipientId: "S1",
-      },
-      {
-        recipientType: Participant.AddressBookEntry,
-        recipientId: "Jan",
-        channelId: "channelId1",
-        signalerId: "lockedBySignaler",
-      },
-      {
-        recipientType: Participant.AddressBookEntry,
-        recipientId: "Gustav",
-        channelId: "channelId2"
-      },
-    ],
-    incidentId: "id"
-  },
-
-];
-
-let channelsSubject = new Subject<Channel[]>();
-const channelMail: Channel = {
-  type: ChannelType.Email,
-  id: "channelId1",
-  details: {
-    email: "example@example.com"
-  },
-  entry: "address-bookId",
-  isActive: false,
-  label: "label",
-  minImportance: 0,
-  priority: 0,
-  timeout: duration(10000)
-};
-const channelRadio: Channel = {
-  type: ChannelType.Radio,
-  id: "channelId2",
-  details: { info: "info" },
-  entry: "address-bookId",
-  isActive: false,
-  label: "label",
-  minImportance: 0,
-  priority: 0,
-  timeout: duration(10000),
-};
-const channelsInAppAndRadio: Channel[] = [
-  channelMail, channelRadio
-]
-const channelsInApp: Channel[] = [
-  channelMail
-]
-
 fdescribe('LocalStorageMessageService', () => {
+
+  const exampleMessages: Message[] = [
+    {
+      id: "0",
+      direction: MessageDirection.Incoming,
+      incomingChannelType: ChannelType.Email,
+      senderId: "123",
+      senderType: Participant.AddressBookEntry,
+      content: "Example content",
+      operationId: "123",
+      createdAt: new Date(),
+      recipients: [
+        {
+          recipientType: Participant.Role,
+          recipientId: "S1",
+          read: false
+        }
+      ]
+    },
+    {
+      id: "1",
+      direction: MessageDirection.Incoming,
+      incomingChannelType: ChannelType.Email,
+      senderId: "1234",
+      senderType: Participant.Resource,
+      content: "Example content 123",
+      operationId: "123",
+      createdAt: new Date(),
+      needsReview: true,
+      recipients: [
+        {
+          recipientType: Participant.Role,
+          recipientId: "S1",
+          read: false
+        },
+        {
+          recipientType: Participant.Role,
+          recipientId: "S3",
+          read: false
+        }
+      ]
+    },
+    {
+      id: "2",
+      direction: MessageDirection.Outgoing,
+      senderType: Participant.Role,
+      senderId: "S1",
+      content: "A message from S1",
+      operationId: "123",
+      createdAt: new Date(),
+      needsReview: true,
+      recipients: [
+        {
+          recipientType: Participant.Role,
+          recipientId: "S2",
+          read: false
+        },
+        {
+          recipientType: Participant.Role,
+          recipientId: "S3",
+          read: false
+        }
+      ]
+    },
+    {
+      id: "3",
+      direction: MessageDirection.Outgoing,
+      senderType: Participant.Role,
+      senderId: "S2",
+      content: "A message from S2",
+      operationId: "123",
+      createdAt: new Date(),
+      needsReview: false,
+      priority: 1000,
+      recipients: [
+        {
+          recipientType: Participant.Role,
+          recipientId: "S1",
+          read: false
+        },
+        {
+          recipientType: Participant.AddressBookEntry,
+          recipientId: "Jan",
+          channelId: "channelId1"
+        },
+        {
+          recipientType: Participant.AddressBookEntry,
+          recipientId: "Gustav",
+          channelId: "channelId2"
+        },
+      ],
+      incidentId: "id"
+    },
+    {
+      id: "4",
+      direction: MessageDirection.Outgoing,
+      senderType: Participant.Role,
+      senderId: "S2",
+      content: "A message from S2",
+      operationId: "321",
+      createdAt: new Date(),
+      needsReview: false,
+      priority: 1000,
+      recipients: [
+        {
+          recipientType: Participant.Role,
+          recipientId: "S1",
+          read: false
+        },
+        {
+          recipientType: Participant.AddressBookEntry,
+          recipientId: "Jan",
+          channelId: "channelId1",
+          signalerId: "lockedBySignaler",
+        },
+        {
+          recipientType: Participant.AddressBookEntry,
+          recipientId: "Gustav",
+          channelId: "channelId2"
+        },
+      ],
+      incidentId: "id"
+    },
+  
+  ];
+  
+  let channelsSubject = new Subject<Channel[]>();
+  const channelMail: Channel = {
+    type: ChannelType.Email,
+    id: "channelId1",
+    details: {
+      email: "example@example.com"
+    },
+    entry: "address-bookId",
+    isActive: false,
+    label: "label",
+    minImportance: 0,
+    priority: 0,
+    timeout: duration(10000)
+  };
+  const channelRadio: Channel = {
+    type: ChannelType.Radio,
+    id: "channelId2",
+    details: { info: "info" },
+    entry: "address-bookId",
+    isActive: false,
+    label: "label",
+    minImportance: 0,
+    priority: 0,
+    timeout: duration(10000),
+  };
+  const channelsInAppAndRadio: Channel[] = [
+    channelMail, channelRadio
+  ]
+  const channelsInApp: Channel[] = [
+    channelMail
+  ]
+
   let service: MessageService;
 
   beforeEach(() => {
@@ -241,18 +243,36 @@ fdescribe('LocalStorageMessageService', () => {
     }));
   });
 
-  it('should fetch messages for mailbox that are not read correctly', fakeAsync(() => {
-    for (let msg of exampleMessages) {
-      service.createMessage(msg).subscribe();
-    }
-    tick();
-    service.getMailboxMessages("S1", false).subscribe(messages => {
-      expect(messages.length).toBe(2);
-      for (let msg of messages) {
-        expect(msg.recipients).toContain(jasmine.objectContaining({ recipientId: "S1" }));
+  describe('getMailboxMessages', ()=> {
+
+    beforeEach(fakeAsync(()=> {
+      for (let msg of exampleMessages) {
+        service.createMessage(msg).subscribe();
       }
+      tick();
+    }));
+
+    it('should fetch messages correctly that are not read correctly', () => {
+      service.getMailboxMessages("S1", false).subscribe(messages => {
+        expect(messages.length).toBe(4);
+        for (let msg of messages) {
+          expect(msg.recipients).toContain(jasmine.objectContaining({ recipientId: "S1" }));
+        }
+      });
     });
-  }));
+
+    it('should fetch messages with operationId correctly', ()=> {
+      let operationId = "123";
+      service.getMailboxMessages("S1", false, operationId).subscribe(messages => {
+        expect(messages.length).toBe(3);
+        for (let msg of messages) {
+          expect(msg.operationId).toBe(operationId);
+        }
+      });
+    });
+  });
+
+
 
 
   it('should pick up next message to deliver without filtering for channel type', fakeAsync(() => {

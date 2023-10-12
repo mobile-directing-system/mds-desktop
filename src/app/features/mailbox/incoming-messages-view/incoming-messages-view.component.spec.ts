@@ -1,23 +1,24 @@
-import {fakeAsync, tick} from '@angular/core/testing';
+import { fakeAsync, tick } from '@angular/core/testing';
 
-import {byTextContent, createRoutingFactory, SpectatorRouting} from "@ngneat/spectator";
-import {CoreModule} from "../../../core/core.module";
-import {AccessControlService} from "../../../core/services/access-control.service";
-import {AccessControlMockService} from "../../../core/services/access-control-mock.service";
-import {Subject} from "rxjs";
-import {GroupService} from "../../../core/services/group.service";
-import {Group} from "../../../core/model/group";
-import {AuthService} from "../../../core/services/auth.service";
-import {IncomingMessagesViewComponent} from "./incoming-messages-view.component";
-import {MessageService} from "../../../core/services/message/message.service";
-import {IncidentService} from "../../../core/services/incident/incident.service";
-import {ResourceService} from "../../../core/services/resource/resource.service";
-import {AddressBookService} from "../../../core/services/addressbook.service";
-import {Message, MessageDirection, Participant} from "../../../core/model/message";
-import {Incident} from "../../../core/model/incident";
-import {Resource} from "../../../core/model/resource";
-import {AddressBookEntry} from "../../../core/model/address-book-entry";
-import {ChannelType} from "../../../core/model/channel";
+import { byTextContent, createRoutingFactory, SpectatorRouting } from "@ngneat/spectator";
+import { BehaviorSubject, Subject } from "rxjs";
+import { WorkspaceService } from 'src/app/core/services/workspace.service';
+import { CoreModule } from "../../../core/core.module";
+import { AddressBookEntry } from "../../../core/model/address-book-entry";
+import { ChannelType } from "../../../core/model/channel";
+import { Group } from "../../../core/model/group";
+import { Incident } from "../../../core/model/incident";
+import { Message, MessageDirection, Participant } from "../../../core/model/message";
+import { Resource } from "../../../core/model/resource";
+import { AccessControlMockService } from "../../../core/services/access-control-mock.service";
+import { AccessControlService } from "../../../core/services/access-control.service";
+import { AddressBookService } from "../../../core/services/addressbook.service";
+import { AuthService } from "../../../core/services/auth.service";
+import { GroupService } from "../../../core/services/group.service";
+import { IncidentService } from "../../../core/services/incident/incident.service";
+import { MessageService } from "../../../core/services/message/message.service";
+import { ResourceService } from "../../../core/services/resource/resource.service";
+import { IncomingMessagesViewComponent } from "./incoming-messages-view.component";
 
 describe('IncomingMessagesViewComponent', () => {
   let spectator: SpectatorRouting<IncomingMessagesViewComponent>;
@@ -28,6 +29,8 @@ describe('IncomingMessagesViewComponent', () => {
   const resourceSubject: Subject<Resource|undefined> = new Subject();
   const addressBookSubject: Subject<AddressBookEntry> = new Subject();
   const groupSubject: Subject<Group> = new Subject();
+
+  const selectedOperationId = "123";
 
   const mailboxMessages: Message[] = [
     {
@@ -178,6 +181,12 @@ describe('IncomingMessagesViewComponent', () => {
           getGroupById: ()=> groupSubject,
         },
       },
+      {
+        provide: WorkspaceService,
+        useValue: jasmine.createSpyObj("WorkspaceService", {
+          operationChange: new BehaviorSubject(selectedOperationId)
+        })
+      }
     ],
     mocks: [
       AuthService,
@@ -189,6 +198,7 @@ describe('IncomingMessagesViewComponent', () => {
   beforeEach(fakeAsync(() => {
     spectator = createComponent();
     component = spectator.component;
+    component.currentOperationId = selectedOperationId;
     component.loggedInRole = group;
     spectator.router.navigate = jasmine.createSpy().and.callFake(spectator.router.navigate).and.resolveTo();
     spectator.detectComponentChanges();
@@ -224,6 +234,5 @@ describe('IncomingMessagesViewComponent', () => {
     spectator.component.onFilterReadChange("unread");
     expect(spectator.component.filterRead).toEqual(false);
   }));
-
 
 });

@@ -44,17 +44,22 @@ export class LocalStorageMessageService extends MessageService {
   }
 
   //TODO filter out messages that need review and right direction
-  public override getMailboxMessages(roleId: string, read: boolean): Observable<Message[]> {
+  public override getMailboxMessages(roleId: string, read: boolean, operationId?: string): Observable<Message[]> {
     let messages: Message[] = this.repository.fetchAll();
 
     messages = messages.filter(message => {
       for(let recipient of message.recipients) {
-        if(recipient.recipientType === Participant.Role && recipient.recipientId === roleId && recipient.read === read) {
+        if(recipient.recipientType === Participant.Role 
+            && recipient.recipientId === roleId 
+            && recipient.read === read)
           return true;
-        }
       }
       return false;
     });
+
+    if(operationId) {
+      messages = messages.filter(message => message.operationId === operationId);
+    }
 
     return of(messages);
   }

@@ -3,17 +3,20 @@ import { fakeAsync } from '@angular/core/testing';
 import { MatTable } from '@angular/material/table';
 import { By } from '@angular/platform-browser';
 import { Spectator, byText, byTextContent, createComponentFactory } from '@ngneat/spectator';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { ChannelTypeInlineComponent } from 'src/app/core/components/channel-type-inline/channel-type-inline.component';
 import { ChannelType } from 'src/app/core/model/channel';
 import { Incident } from 'src/app/core/model/incident';
 import { Message, MessageDirection, Participant } from 'src/app/core/model/message';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
-import { MessageService } from 'src/app/core/services/message/message.service';
+import { MessageFilters, MessageService } from 'src/app/core/services/message/message.service';
 import { ReviewerModule } from '../../reviewer.module';
 import { IncomingMessagesViewComponent, ReviewerIncomingMessageRow } from './incoming-messages-view.component';
+import { WorkspaceService } from 'src/app/core/services/workspace.service';
 
 describe('IncomingMessagesViewComponent', () => {
+
+  const selectedOperationId = "123";
 
   const exampleMessages: Message[] = [
     {
@@ -24,7 +27,7 @@ describe('IncomingMessagesViewComponent', () => {
       senderType: Participant.AddressBookEntry,
       content: "Example content",
       needsReview: true,
-      operationId: "123",
+      operationId: selectedOperationId,
       createdAt: new Date(),
       recipients: []
     },
@@ -37,10 +40,10 @@ describe('IncomingMessagesViewComponent', () => {
       content: "Example content 123",
       incidentId: "0",
       createdAt: new Date(),
-      operationId: "123",
+      operationId: selectedOperationId,
       needsReview: true,
       recipients: []
-    }
+    },
   ];
 
   const exampleIncident: Incident = {
@@ -59,6 +62,7 @@ describe('IncomingMessagesViewComponent', () => {
 
   let spectator: Spectator<IncomingMessagesViewComponent>;
   let component: IncomingMessagesViewComponent;
+  let messageService: MessageService;
 
   beforeEach(() => {
     spectator = createComponent({
@@ -76,9 +80,17 @@ describe('IncomingMessagesViewComponent', () => {
             getIncidentById: of(exampleIncident)
           })
         },
+        {
+          provide: WorkspaceService,
+          useValue: jasmine.createSpyObj("WorkspaceService", {
+            operationChange: new BehaviorSubject(selectedOperationId)
+          })
+        }
       ]
     });
     component = spectator.component;
+    component.currentOperationId = selectedOperationId;
+    messageService = spectator.inject(MessageService);
     spectator.detectChanges();
     // Do not run refresh timer in tests
     component.refreshTimer.unsubscribe();
@@ -92,15 +104,21 @@ describe('IncomingMessagesViewComponent', () => {
     expect(spectator.debugElement.query(By.directive(MatTable))).toBeTruthy();
   });
 
-  it('should load messages on init', () => {
+  it('should load messages on init', fakeAsync(() => {
     spectator.detectChanges();
+    spectator.tick();
     expect(spectator.component.dataSource.data.length).toBe(exampleMessages.length);
     expect(spectator.inject(MessageService).getMessages).toHaveBeenCalled();
-  });
+  }));
 
   it('should fetch message rows correctly', fakeAsync(()=> {
     component.refreshDataSource();
     spectator.tick();
+    expect(messageService.getMessages).toHaveBeenCalledWith(<MessageFilters>{
+      byNeedsReview: true,
+      byDirection: MessageDirection.Incoming,
+      byOperationId: selectedOperationId
+    });
     expect(component.dataSource.data.length).toBe(exampleMessages.length);
     exampleMessages.forEach(msg => {
 

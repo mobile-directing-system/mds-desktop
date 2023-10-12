@@ -48,10 +48,11 @@ export abstract class MessageService {
    *
    * @param roleId Role id of the recipient
    * @param read Whether messages have already been read
+   * @param operationId Only get messeges of a specific operation
    *
    * @returns messages
    */
-  public abstract getMailboxMessages(roleId: string, read: boolean): Observable<Message[]>;
+  public abstract getMailboxMessages(roleId: string, read: boolean, operationId?: string): Observable<Message[]>;
 
   /**
    * Gets next available outgoing message that a signaler can deliver.
