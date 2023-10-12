@@ -18,7 +18,7 @@ import { ReviewerIncomingMessageRow } from '../incoming-messages-view/incoming-m
 import { ReviewDialog } from './review-dialog.component';
 import { Importance } from 'src/app/core/model/importance';
 
-describe('ReviewDialog', () => {
+fdescribe('ReviewDialog', () => {
 
   const senderName: string = "Example name";
 
@@ -152,6 +152,23 @@ describe('ReviewDialog', () => {
     component.data.incident = undefined;
     spectator.detectChanges();
     expect(spectator.query(byText(exampleIncident.name, {
+      exact: false
+    }))).not.toBeVisible();
+  }));
+
+  it('should display status code when its set', fakeAsync(()=> {
+    let statusCode = 1;
+    component.data.message.resourceStatusCode = statusCode;
+    spectator.detectChanges();
+    expect(spectator.query(byText(component.getStatusText(statusCode), {
+      exact: false
+    }))).toBeVisible();
+  }));
+
+  it('should not display status code when its not set', fakeAsync(()=> {
+    component.data.message.resourceStatusCode = undefined;
+    spectator.detectChanges();
+    expect(spectator.query(byText("Status:", {
       exact: false
     }))).not.toBeVisible();
   }));
