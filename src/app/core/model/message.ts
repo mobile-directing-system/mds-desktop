@@ -60,6 +60,10 @@ export interface Message {
      */
     direction: MessageDirection;
     /**
+     * Id of the {@link Operation} the message belongs to
+     */
+    operationId: string;
+    /**
      * Type of incoming message (e.g. radio or telephone)
      */
     incomingChannelType?: ChannelType;

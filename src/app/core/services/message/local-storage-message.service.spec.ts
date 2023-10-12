@@ -1,12 +1,12 @@
-import {fakeAsync, TestBed, tick} from '@angular/core/testing';
-import {LocalStorageMessageService} from './local-storage-message.service';
-import {MessageService} from './message.service';
-import {Message, MessageDirection, Participant} from '../../model/message';
-import {Channel, ChannelType} from '../../model/channel';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { LocalStorageMessageService } from './local-storage-message.service';
+import { MessageService } from './message.service';
+import { Message, MessageDirection, Participant } from '../../model/message';
+import { Channel, ChannelType } from '../../model/channel';
 import { mockLocalStorage } from '../../testutil/testutil';
-import {ChannelService} from "../channel.service";
-import {Subject} from "rxjs";
-import {duration} from "moment";
+import { ChannelService } from "../channel.service";
+import { Subject } from "rxjs";
+import { duration } from "moment";
 
 
 const exampleMessages: Message[] = [
@@ -17,6 +17,7 @@ const exampleMessages: Message[] = [
     senderId: "123",
     senderType: Participant.AddressBookEntry,
     content: "Example content",
+    operationId: "123",
     createdAt: new Date(),
     recipients: [
       {
@@ -33,6 +34,7 @@ const exampleMessages: Message[] = [
     senderId: "1234",
     senderType: Participant.Resource,
     content: "Example content 123",
+    operationId: "123",
     createdAt: new Date(),
     needsReview: true,
     recipients: [
@@ -54,6 +56,7 @@ const exampleMessages: Message[] = [
     senderType: Participant.Role,
     senderId: "S1",
     content: "A message from S1",
+    operationId: "123",
     createdAt: new Date(),
     needsReview: true,
     recipients: [
@@ -75,6 +78,7 @@ const exampleMessages: Message[] = [
     senderType: Participant.Role,
     senderId: "S2",
     content: "A message from S2",
+    operationId: "123",
     createdAt: new Date(),
     needsReview: false,
     "priority": 1000,
@@ -94,7 +98,7 @@ const exampleMessages: Message[] = [
         channelId: "channelId2"
       },
     ],
-    incidentId:"id"
+    incidentId: "id"
   },
   {
     id: "4",
@@ -102,6 +106,7 @@ const exampleMessages: Message[] = [
     senderType: Participant.Role,
     senderId: "S2",
     content: "A message from S2",
+    operationId: "321",
     createdAt: new Date(),
     needsReview: false,
     "priority": 1000,
@@ -122,14 +127,14 @@ const exampleMessages: Message[] = [
         channelId: "channelId2"
       },
     ],
-    incidentId:"id"
+    incidentId: "id"
   },
 
 ];
 
-let channelsSubject = new Subject<Channel []>();
+let channelsSubject = new Subject<Channel[]>();
 const channelMail: Channel = {
-  type:  ChannelType.Email,
+  type: ChannelType.Email,
   id: "channelId1",
   details: {
     email: "example@example.com"
@@ -142,9 +147,9 @@ const channelMail: Channel = {
   timeout: duration(10000)
 };
 const channelRadio: Channel = {
-  type:  ChannelType.Radio,
+  type: ChannelType.Radio,
   id: "channelId2",
-  details: {info:"info"},
+  details: { info: "info" },
   entry: "address-bookId",
   isActive: false,
   label: "label",
@@ -159,13 +164,12 @@ const channelsInApp: Channel[] = [
   channelMail
 ]
 
-describe('LocalStorageMessageService', () => {
+fdescribe('LocalStorageMessageService', () => {
   let service: MessageService;
-
 
   beforeEach(() => {
     mockLocalStorage();
-    channelsSubject = new Subject<Channel []>()
+    channelsSubject = new Subject<Channel[]>()
     TestBed.configureTestingModule({
       providers: [
         {
@@ -175,7 +179,7 @@ describe('LocalStorageMessageService', () => {
         {
           provide: ChannelService,
           useValue: {
-            getChannelsByAddressBookEntry: ()=> channelsSubject
+            getChannelsByAddressBookEntry: () => channelsSubject
           },
         }
       ]
@@ -187,50 +191,65 @@ describe('LocalStorageMessageService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should fetch all items correctly', fakeAsync(()=> {
-    service.createMessage(exampleMessages[0]).subscribe();
-    service.createMessage(exampleMessages[1]).subscribe();
-    tick();
-    service.getMessages().subscribe(messages => {
-      expect(messages[0].senderId).toBe(exampleMessages[0].senderId);
-      expect(messages[1].senderId).toBe(exampleMessages[1].senderId);
-    });
-  }));
+  describe('getMessages', () => {
+    it('should fetch all items correctly', fakeAsync(() => {
+      service.createMessage(exampleMessages[0]).subscribe();
+      service.createMessage(exampleMessages[1]).subscribe();
+      tick();
+      service.getMessages().subscribe(messages => {
+        expect(messages[0].senderId).toBe(exampleMessages[0].senderId);
+        expect(messages[1].senderId).toBe(exampleMessages[1].senderId);
+      });
+    }));
 
-  it('should fetch messages correctly with byDirection filter', fakeAsync(() => {
-    for(let msg of exampleMessages) {
-      service.createMessage(msg).subscribe();
-    }
-    tick();
-    service.getMessages({byDirection: MessageDirection.Incoming}).subscribe(messages => {
-      expect(messages.length).toBe(2);
-      expect(messages[0].direction).toBe(MessageDirection.Incoming);
-      expect(messages[1].direction).toBe(MessageDirection.Incoming);
-    });
-  }));
-
-  it('should fetch messages correctly with byNeedsReview filter', fakeAsync(() => {
-    for(let msg of exampleMessages) {
-      service.createMessage(msg).subscribe();
-    }
-    tick();
-    service.getMessages({byNeedsReview: true}).subscribe(messages => {
-      expect(messages.length).toBe(2);
-      for(let msg of messages) {
-        expect(msg.needsReview).toBeTrue();
+    it('should fetch messages correctly with byDirection filter', fakeAsync(() => {
+      for (let msg of exampleMessages) {
+        service.createMessage(msg).subscribe();
       }
-    });
-  }));
+      tick();
+      service.getMessages({ byDirection: MessageDirection.Incoming }).subscribe(messages => {
+        expect(messages.length).toBe(2);
+        expect(messages[0].direction).toBe(MessageDirection.Incoming);
+        expect(messages[1].direction).toBe(MessageDirection.Incoming);
+      });
+    }));
+
+    it('should fetch messages correctly with byNeedsReview filter', fakeAsync(() => {
+      for (let msg of exampleMessages) {
+        service.createMessage(msg).subscribe();
+      }
+      tick();
+      service.getMessages({ byNeedsReview: true }).subscribe(messages => {
+        expect(messages.length).toBe(2);
+        for (let msg of messages) {
+          expect(msg.needsReview).toBeTrue();
+        }
+      });
+    }));
+
+    it('should fetch messages correctly with byOperationId filter', fakeAsync(() => {
+      for (let msg of exampleMessages) {
+        service.createMessage(msg).subscribe();
+      }
+      tick();
+      service.getMessages({ byOperationId: "123" }).subscribe(messages => {
+        expect(messages.length).toBe(4);
+        for (let msg of messages) {
+          expect(msg.operationId).toBe("123");
+        }
+      });
+    }));
+  });
 
   it('should fetch messages for mailbox that are not read correctly', fakeAsync(() => {
-    for(let msg of exampleMessages) {
+    for (let msg of exampleMessages) {
       service.createMessage(msg).subscribe();
     }
     tick();
     service.getMailboxMessages("S1", false).subscribe(messages => {
       expect(messages.length).toBe(2);
-      for(let msg of messages) {
-        expect(msg.recipients).toContain(jasmine.objectContaining({recipientId: "S1"}));
+      for (let msg of messages) {
+        expect(msg.recipients).toContain(jasmine.objectContaining({ recipientId: "S1" }));
       }
     });
   }));
@@ -238,13 +257,13 @@ describe('LocalStorageMessageService', () => {
 
   it('should pick up next message to deliver without filtering for channel type', fakeAsync(() => {
 
-    for(let msg of exampleMessages) {
+    for (let msg of exampleMessages) {
       service.createMessage(msg).subscribe();
     }
     tick();
 
     let signalerId = "signalerId";
-    let pickedUpMessage: Message|undefined;
+    let pickedUpMessage: Message | undefined;
     service.pickUpNextMessageToDeliver(signalerId).subscribe(message => {
       pickedUpMessage = message;
     });
@@ -259,13 +278,13 @@ describe('LocalStorageMessageService', () => {
   }));
 
   it('should pick up next message to deliver with filtering for channel type', fakeAsync(() => {
-    for(let msg of exampleMessages) {
+    for (let msg of exampleMessages) {
       service.createMessage(msg).subscribe();
     }
     tick();
 
     let signalerId = "signalerId";
-    let pickedUpMessage: Message|undefined;
+    let pickedUpMessage: Message | undefined;
     service.pickUpNextMessageToDeliver(signalerId, ChannelType.Radio).subscribe(message => {
       pickedUpMessage = message;
     });
@@ -285,13 +304,13 @@ describe('LocalStorageMessageService', () => {
   }));
 
   it('should return undefined if no available message for channel filter', fakeAsync(() => {
-    for(let msg of exampleMessages) {
+    for (let msg of exampleMessages) {
       service.createMessage(msg).subscribe();
     }
     tick();
 
     let signalerId = "signalerId";
-    let pickedUpMessage: Message|undefined;
+    let pickedUpMessage: Message | undefined;
     service.pickUpNextMessageToDeliver(signalerId, ChannelType.Radio).subscribe(message => {
       pickedUpMessage = message;
     });
@@ -304,7 +323,7 @@ describe('LocalStorageMessageService', () => {
 
   it('should return undefined if no available messages', fakeAsync(() => {
     let signalerId = "signalerId";
-    let pickedUpMessage: Message|undefined;
+    let pickedUpMessage: Message | undefined;
     service.pickUpNextMessageToDeliver(signalerId, ChannelType.Radio).subscribe(message => {
       pickedUpMessage = message;
     });
@@ -316,7 +335,7 @@ describe('LocalStorageMessageService', () => {
   }));
 
   it('should release messageToDeliver', fakeAsync(() => {
-    for(let msg of exampleMessages) {
+    for (let msg of exampleMessages) {
       service.createMessage(msg).subscribe();
     }
     tick();
@@ -327,6 +346,7 @@ describe('LocalStorageMessageService', () => {
       senderType: Participant.Role,
       senderId: "S2",
       content: "A message from S2",
+      operationId: "123",
       createdAt: new Date(),
       needsReview: false,
       "priority": 1000,
@@ -338,9 +358,9 @@ describe('LocalStorageMessageService', () => {
           signalerId: "lockedBySignaler",
         },
       ],
-      incidentId:"id"
+      incidentId: "id"
     }
-    service.releaseMessageToDeliver(messageToRelease).subscribe((success=>{
+    service.releaseMessageToDeliver(messageToRelease).subscribe((success => {
       expect(success).toBe(true);
     }))
   }));
@@ -352,6 +372,7 @@ describe('LocalStorageMessageService', () => {
       senderType: Participant.Role,
       senderId: "S2",
       content: "A message from S2",
+      operationId: "123",
       createdAt: new Date(),
       needsReview: false,
       "priority": 1000,
@@ -363,15 +384,15 @@ describe('LocalStorageMessageService', () => {
           signalerId: "lockedBySignaler",
         },
       ],
-      incidentId:"id"
+      incidentId: "id"
     }
-    service.releaseMessageToDeliver(messageToRelease).subscribe((success=>{
+    service.releaseMessageToDeliver(messageToRelease).subscribe((success => {
       expect(success).toBe(false);
     }))
   }));
 
   it('release messageToDeliver: should return false if no recipient found', fakeAsync(() => {
-    for(let msg of exampleMessages) {
+    for (let msg of exampleMessages) {
       service.createMessage(msg).subscribe();
     }
     tick();
@@ -382,19 +403,20 @@ describe('LocalStorageMessageService', () => {
       senderType: Participant.Role,
       senderId: "S2",
       content: "A message from S2",
+      operationId: "123",
       createdAt: new Date(),
       needsReview: false,
       "priority": 1000,
       recipients: [],
-      incidentId:"id"
+      incidentId: "id"
     }
-    service.releaseMessageToDeliver(messageToRelease).subscribe((success=>{
+    service.releaseMessageToDeliver(messageToRelease).subscribe((success => {
       expect(success).toBe(false);
     }))
   }));
 
   it('release message to deliver: should return false if no suitable recipient found', fakeAsync(() => {
-    for(let msg of exampleMessages) {
+    for (let msg of exampleMessages) {
       service.createMessage(msg).subscribe();
     }
     tick();
@@ -405,24 +427,27 @@ describe('LocalStorageMessageService', () => {
       senderType: Participant.Role,
       senderId: "S2",
       content: "A message from S2",
+      operationId: "123",
       createdAt: new Date(),
       needsReview: false,
       "priority": 1000,
       recipients: [
-        { recipientType: Participant.AddressBookEntry,
+        {
+          recipientType: Participant.AddressBookEntry,
           recipientId: "noExistingId",
           channelId: "channelId1",
-          signalerId: "lockedBySignaler"}
+          signalerId: "lockedBySignaler"
+        }
       ],
-      incidentId:"id"
+      incidentId: "id"
     }
-    service.releaseMessageToDeliver(messageToRelease).subscribe((success=>{
+    service.releaseMessageToDeliver(messageToRelease).subscribe((success => {
       expect(success).toBe(false);
     }))
   }));
 
   it('should mark message as send', fakeAsync(() => {
-    for(let msg of exampleMessages) {
+    for (let msg of exampleMessages) {
       service.createMessage(msg).subscribe();
     }
     tick();
@@ -431,6 +456,7 @@ describe('LocalStorageMessageService', () => {
       id: "4",
       direction: MessageDirection.Outgoing,
       senderType: Participant.Role,
+      operationId: "123",
       senderId: "S2",
       content: "A message from S2",
       createdAt: new Date(),
@@ -444,9 +470,9 @@ describe('LocalStorageMessageService', () => {
           signalerId: "lockedBySignaler",
         },
       ],
-      incidentId:"id"
+      incidentId: "id"
     }
-    service.markMessageAsSend(messageToSend).subscribe((success=>{
+    service.markMessageAsSend(messageToSend).subscribe((success => {
       expect(success).toBe(true);
     }))
   }));
@@ -458,6 +484,7 @@ describe('LocalStorageMessageService', () => {
       senderType: Participant.Role,
       senderId: "S2",
       content: "A message from S2",
+      operationId: "123",
       createdAt: new Date(),
       needsReview: false,
       "priority": 1000,
@@ -469,15 +496,15 @@ describe('LocalStorageMessageService', () => {
           signalerId: "lockedBySignaler",
         },
       ],
-      incidentId:"id"
+      incidentId: "id"
     }
-    service.markMessageAsSend(messageToSend).subscribe((success=>{
+    service.markMessageAsSend(messageToSend).subscribe((success => {
       expect(success).toBe(false);
     }))
   }));
 
   it('mark message as send: should return false if no recipient found', fakeAsync(() => {
-    for(let msg of exampleMessages) {
+    for (let msg of exampleMessages) {
       service.createMessage(msg).subscribe();
     }
     tick();
@@ -488,24 +515,27 @@ describe('LocalStorageMessageService', () => {
       senderType: Participant.Role,
       senderId: "S2",
       content: "A message from S2",
+      operationId: "123",
       createdAt: new Date(),
       needsReview: false,
       "priority": 1000,
       recipients: [
-        { recipientType: Participant.AddressBookEntry,
+        {
+          recipientType: Participant.AddressBookEntry,
           recipientId: "noExistingId",
           channelId: "channelId1",
-          signalerId: "lockedBySignaler"}
+          signalerId: "lockedBySignaler"
+        }
       ],
-      incidentId:"id"
+      incidentId: "id"
     }
-    service.markMessageAsSend(messageToSend).subscribe((success=>{
+    service.markMessageAsSend(messageToSend).subscribe((success => {
       expect(success).toBe(false);
     }))
   }));
 
   it('mark message as send: should return false if no suitable recipient found', fakeAsync(() => {
-    for(let msg of exampleMessages) {
+    for (let msg of exampleMessages) {
       service.createMessage(msg).subscribe();
     }
     tick();
@@ -516,13 +546,14 @@ describe('LocalStorageMessageService', () => {
       senderType: Participant.Role,
       senderId: "S2",
       content: "A message from S2",
+      operationId: "123",
       createdAt: new Date(),
       needsReview: false,
       "priority": 1000,
       recipients: [],
-      incidentId:"id"
+      incidentId: "id"
     }
-    service.markMessageAsSend(messageToSend).subscribe((success=>{
+    service.markMessageAsSend(messageToSend).subscribe((success => {
       expect(success).toBe(false);
     }))
   }));

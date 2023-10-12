@@ -18,7 +18,7 @@ import { ReviewerIncomingMessageRow } from '../incoming-messages-view/incoming-m
 import { ReviewDialog } from './review-dialog.component';
 import { Importance } from 'src/app/core/model/importance';
 
-fdescribe('ReviewDialog', () => {
+describe('ReviewDialog', () => {
 
   const senderName: string = "Example name";
 
@@ -28,6 +28,7 @@ fdescribe('ReviewDialog', () => {
     incomingChannelType: ChannelType.Email,
     info: "example@example.com",
     senderId: "1",
+    operationId: "123",
     senderType: Participant.AddressBookEntry,
     content: "Example content",
     needsReview: true,

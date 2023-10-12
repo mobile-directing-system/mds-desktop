@@ -24,7 +24,7 @@ export interface ReviewerIncomingMessageRow {
   templateUrl: './incoming-messages-view.component.html',
   styleUrls: ['./incoming-messages-view.component.scss']
 })
-export class IncomingMessagesViewComponent implements OnInit, OnDestroy, AfterViewInit{
+export class IncomingMessagesViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   displayedColumns: string[] = ['id', 'created_at', 'channel', 'content', 'incident'];
   dataSource: MatTableDataSource<ReviewerIncomingMessageRow> = new MatTableDataSource<ReviewerIncomingMessageRow>();

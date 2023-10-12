@@ -46,6 +46,7 @@ describe('SignalerOutgoingView', () => {
     content: "A message from S2",
     createdAt: new Date(),
     needsReview: false,
+    operationId: "123",
     "priority": 1000,
     recipients: [
       {

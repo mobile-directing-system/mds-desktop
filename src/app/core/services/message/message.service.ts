@@ -5,6 +5,7 @@ import {ChannelType} from "../../model/channel";
 export interface MessageFilters {
   byNeedsReview?: boolean;
   byDirection?: MessageDirection;
+  byOperationId?: string;
 }
 
 /**

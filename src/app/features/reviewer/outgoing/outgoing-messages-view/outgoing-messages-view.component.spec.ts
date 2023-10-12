@@ -31,6 +31,7 @@ describe('OutgoingMessagesViewComponent', () => {
       content: "Example content",
       createdAt: new Date(),
       priority: 1000,
+      operationId: "123",
       recipients: [
         {
           recipientType: Participant.AddressBookEntry,
@@ -49,6 +50,7 @@ describe('OutgoingMessagesViewComponent', () => {
       direction: MessageDirection.Outgoing,
       senderId: "1",
       senderType: Participant.Role,
+      operationId: "123",
       content: "Another example",
       createdAt: new Date(),
       priority: 1000,
@@ -205,6 +207,7 @@ describe('OutgoingMessagesViewComponent', () => {
       content: "Example content",
       createdAt: new Date(),
       priority: 1000,
+      operationId: "123",
       recipients: [
         {
           recipientType: Participant.Role,

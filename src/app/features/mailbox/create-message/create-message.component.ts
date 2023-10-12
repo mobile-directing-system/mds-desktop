@@ -16,6 +16,7 @@ import {GroupService, GroupSort} from "../../../core/services/group.service";
 import {Group} from "../../../core/model/group";
 import {AuthService} from "../../../core/services/auth.service";
 import {ChannelType} from "../../../core/model/channel";
+import { WorkspaceService } from 'src/app/core/services/workspace.service';
 
 
 /**
@@ -54,7 +55,7 @@ export class CreateMessageComponent implements OnDestroy, OnInit{
               private router: Router, private route: ActivatedRoute, private notificationService: NotificationService,
               private incidentService: IncidentService, private resourceService: ResourceService,
               private addressBookService: AddressBookService, private groupService: GroupService,
-              private authService: AuthService){
+              private authService: AuthService, private workSpaceService: WorkspaceService){
     this.loadRole();
   }
 
@@ -63,6 +64,8 @@ export class CreateMessageComponent implements OnDestroy, OnInit{
       let referencedMessageId = params["referencedMessageId"];
       if(referencedMessageId) this.loadReferencedMessage(referencedMessageId);
     }));
+
+    this.workSpaceService.operationChange().subscribe(operationId => this.currentOperationId = operationId);
   }
 
   loader = new Loader();
@@ -71,6 +74,10 @@ export class CreateMessageComponent implements OnDestroy, OnInit{
    * Role of the logged-in user
    */
   loggedInRole: (Group | undefined | null);
+  /**
+   * Operation that is currecntly selected
+   */
+  currentOperationId: string | undefined;
 
   s: Subscription[] = [];
 
@@ -110,12 +117,18 @@ export class CreateMessageComponent implements OnDestroy, OnInit{
    * Creates and sends a new message based on the form values
    */
   createEntry(): void {
+    if(!this.currentOperationId) {
+      this.notificationService.notifyUninvasiveShort($localize`Could not send message. Please select an operation first!`)
+      return;
+    }
+    
     const fv = this.form.getRawValue();
     // create new message
     const create: Message = {
       id: "",
       senderId: this.loggedInRole!.id,
       senderType: Participant.Role,
+      operationId: this.currentOperationId,
       recipients: fv.recipients.map((recipientId => {
         return {recipientId: recipientId.id, recipientType: recipientId.type, read: false}
       })),

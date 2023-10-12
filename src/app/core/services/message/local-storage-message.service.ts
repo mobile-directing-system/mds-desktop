@@ -30,6 +30,7 @@ export class LocalStorageMessageService extends MessageService {
     if(filters) {
       if(filters.byNeedsReview !== undefined) messages = messages.filter(m => m.needsReview === filters.byNeedsReview);
       if(filters.byDirection !== undefined) messages = messages.filter(m => m.direction === filters.byDirection);
+      if(filters.byOperationId !== undefined) messages = messages.filter(m => m.operationId === filters.byOperationId);
     }
     return of(messages);
   }

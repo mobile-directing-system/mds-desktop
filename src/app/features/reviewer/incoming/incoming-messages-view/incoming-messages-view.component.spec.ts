@@ -24,6 +24,7 @@ describe('IncomingMessagesViewComponent', () => {
       senderType: Participant.AddressBookEntry,
       content: "Example content",
       needsReview: true,
+      operationId: "123",
       createdAt: new Date(),
       recipients: []
     },
@@ -36,6 +37,7 @@ describe('IncomingMessagesViewComponent', () => {
       content: "Example content 123",
       incidentId: "0",
       createdAt: new Date(),
+      operationId: "123",
       needsReview: true,
       recipients: []
     }

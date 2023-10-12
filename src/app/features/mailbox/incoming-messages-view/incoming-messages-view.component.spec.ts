@@ -38,6 +38,7 @@ describe('IncomingMessagesViewComponent', () => {
       senderType: Participant.AddressBookEntry,
       content: "Example content",
       createdAt: new Date(),
+      operationId: "123",
       priority: 1000,
       needsReview: false,
       recipients: [
@@ -56,6 +57,7 @@ describe('IncomingMessagesViewComponent', () => {
       senderType: Participant.Resource,
       content: "Example content 123",
       createdAt: new Date(),
+      operationId: "123",
       needsReview: false,
       priority: 0,
       recipients: [
@@ -80,6 +82,7 @@ describe('IncomingMessagesViewComponent', () => {
       content: "Example content 123",
       createdAt: new Date(),
       needsReview: false,
+      operationId: "123",
       priority: 0,
       recipients: [
         {
