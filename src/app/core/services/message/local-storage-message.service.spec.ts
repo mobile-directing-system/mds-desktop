@@ -241,6 +241,19 @@ describe('LocalStorageMessageService', () => {
         }
       });
     }));
+
+    it('should fetch messages correctly with byOperationId filter', fakeAsync(() => {
+      for (let msg of exampleMessages) {
+        service.createMessage(msg).subscribe();
+      }
+      tick();
+      service.getMessages({ byOperationId: "123" }).subscribe(messages => {
+        expect(messages.length).toBe(4);
+        for (let msg of messages) {
+          expect(msg.operationId).toBe("123");
+        }
+      });
+    }));
   });
 
   describe('getMailboxMessages', ()=> {
@@ -272,87 +285,120 @@ describe('LocalStorageMessageService', () => {
     });
   });
 
+  describe('pickUpNextMessageToDeliver', ()=> {
 
+    it('should pick up next message correctly without channel type', fakeAsync(() => {
 
+      for (let msg of exampleMessages) {
+        service.createMessage(msg).subscribe();
+      }
+      tick();
+  
+      let signalerId = "signalerId";
+      let pickedUpMessage: Message | undefined;
+      service.pickUpNextMessageToDeliver(signalerId).subscribe(message => {
+        pickedUpMessage = message;
+      });
+      tick();
+      expect(pickedUpMessage?.direction).toBe(MessageDirection.Outgoing);
+      expect(pickedUpMessage?.needsReview).toBe(false);
+      expect(pickedUpMessage?.recipients.length).toBe(1);
+      expect(pickedUpMessage?.recipients.at(0)?.recipientType).toBe(Participant.AddressBookEntry);
+      expect(pickedUpMessage?.recipients.at(0)?.send).not.toBe(true);
+      expect(pickedUpMessage?.recipients.at(0)?.signalerId).toBe(signalerId);
+      expect(pickedUpMessage?.recipients.at(0)?.channelId).toBeDefined();
+    }));
+  
+    it('should pick up next message correctly with channel type', fakeAsync(() => {
+      for (let msg of exampleMessages) {
+        service.createMessage(msg).subscribe();
+      }
+      tick();
+  
+      let signalerId = "signalerId";
+      let pickedUpMessage: Message | undefined;
+      service.pickUpNextMessageToDeliver(signalerId, ChannelType.Radio).subscribe(message => {
+        pickedUpMessage = message;
+      });
+      tick();
+      channelsSubject.next(channelsInAppAndRadio);
+      channelsSubject.complete();
+      tick();
+      tick();
+      tick();
+      expect(pickedUpMessage?.direction).toBe(MessageDirection.Outgoing);
+      expect(pickedUpMessage?.needsReview).toBe(false);
+      expect(pickedUpMessage?.recipients.length).toBe(1);
+      expect(pickedUpMessage?.recipients.at(0)?.recipientType).toBe(Participant.AddressBookEntry);
+      expect(pickedUpMessage?.recipients.at(0)?.send).not.toBe(true);
+      expect(pickedUpMessage?.recipients.at(0)?.signalerId).toBe(signalerId);
+      expect(pickedUpMessage?.recipients.at(0)?.channelId).toBeDefined();
+    }));
+  
+    it('should return undefined when no messages for channel type are available', fakeAsync(() => {
+      for (let msg of exampleMessages) {
+        service.createMessage(msg).subscribe();
+      }
+      tick();
+  
+      let signalerId = "signalerId";
+      let pickedUpMessage: Message | undefined;
+      service.pickUpNextMessageToDeliver(signalerId, ChannelType.Radio).subscribe(message => {
+        pickedUpMessage = message;
+      });
+  
+      channelsSubject.next(channelsInApp);
+      channelsSubject.complete();
+      tick();
+      expect(pickedUpMessage).toBeUndefined();
+    }));
+  
+    it('should return undefined when no messages are available', fakeAsync(() => {
+      let signalerId = "signalerId";
+      let pickedUpMessage: Message | undefined;
+      service.pickUpNextMessageToDeliver(signalerId, ChannelType.Radio).subscribe(message => {
+        pickedUpMessage = message;
+      });
+  
+      channelsSubject.next(channelsInAppAndRadio);
+      channelsSubject.complete();
+      tick();
+      expect(pickedUpMessage).toBeUndefined();
+    }));
 
-  it('should pick up next message to deliver without filtering for channel type', fakeAsync(() => {
+    it('should fetch message correctly when operationId exists', fakeAsync(()=> {
+      exampleMessages.forEach(m => service.createMessage(m).subscribe());
 
-    for (let msg of exampleMessages) {
-      service.createMessage(msg).subscribe();
-    }
-    tick();
+      let operationId = "123";
+      let pickedUpMessage: Message | undefined;
+      service.pickUpNextMessageToDeliver("signalerId", undefined, operationId).subscribe(message => {
+        pickedUpMessage = message;
+      });
 
-    let signalerId = "signalerId";
-    let pickedUpMessage: Message | undefined;
-    service.pickUpNextMessageToDeliver(signalerId).subscribe(message => {
-      pickedUpMessage = message;
-    });
-    tick();
-    expect(pickedUpMessage?.direction).toBe(MessageDirection.Outgoing);
-    expect(pickedUpMessage?.needsReview).toBe(false);
-    expect(pickedUpMessage?.recipients.length).toBe(1);
-    expect(pickedUpMessage?.recipients.at(0)?.recipientType).toBe(Participant.AddressBookEntry);
-    expect(pickedUpMessage?.recipients.at(0)?.send).not.toBe(true);
-    expect(pickedUpMessage?.recipients.at(0)?.signalerId).toBe(signalerId);
-    expect(pickedUpMessage?.recipients.at(0)?.channelId).toBeDefined();
-  }));
+      channelsSubject.next(channelsInAppAndRadio);
+      channelsSubject.complete();
+      tick();
 
-  it('should pick up next message to deliver with filtering for channel type', fakeAsync(() => {
-    for (let msg of exampleMessages) {
-      service.createMessage(msg).subscribe();
-    }
-    tick();
+      expect(pickedUpMessage).not.toBeUndefined();
+      expect(pickedUpMessage?.operationId).toBe(operationId);
+    }));
 
-    let signalerId = "signalerId";
-    let pickedUpMessage: Message | undefined;
-    service.pickUpNextMessageToDeliver(signalerId, ChannelType.Radio).subscribe(message => {
-      pickedUpMessage = message;
-    });
-    tick();
-    channelsSubject.next(channelsInAppAndRadio);
-    channelsSubject.complete();
-    tick();
-    tick();
-    tick();
-    expect(pickedUpMessage?.direction).toBe(MessageDirection.Outgoing);
-    expect(pickedUpMessage?.needsReview).toBe(false);
-    expect(pickedUpMessage?.recipients.length).toBe(1);
-    expect(pickedUpMessage?.recipients.at(0)?.recipientType).toBe(Participant.AddressBookEntry);
-    expect(pickedUpMessage?.recipients.at(0)?.send).not.toBe(true);
-    expect(pickedUpMessage?.recipients.at(0)?.signalerId).toBe(signalerId);
-    expect(pickedUpMessage?.recipients.at(0)?.channelId).toBeDefined();
-  }));
+    it('should fetch message correctly when operationId does not exist', fakeAsync(()=> {
+      exampleMessages.forEach(m => service.createMessage(m).subscribe());
 
-  it('should return undefined if no available message for channel filter', fakeAsync(() => {
-    for (let msg of exampleMessages) {
-      service.createMessage(msg).subscribe();
-    }
-    tick();
+      let operationId = "xyt1235";
+      let pickedUpMessage: Message | undefined;
+      service.pickUpNextMessageToDeliver("signalerId", undefined, operationId).subscribe(message => {
+        pickedUpMessage = message;
+      });
 
-    let signalerId = "signalerId";
-    let pickedUpMessage: Message | undefined;
-    service.pickUpNextMessageToDeliver(signalerId, ChannelType.Radio).subscribe(message => {
-      pickedUpMessage = message;
-    });
+      channelsSubject.next(channelsInAppAndRadio);
+      channelsSubject.complete();
+      tick();
 
-    channelsSubject.next(channelsInApp);
-    channelsSubject.complete();
-    tick();
-    expect(pickedUpMessage).toBeUndefined();
-  }));
-
-  it('should return undefined if no available messages', fakeAsync(() => {
-    let signalerId = "signalerId";
-    let pickedUpMessage: Message | undefined;
-    service.pickUpNextMessageToDeliver(signalerId, ChannelType.Radio).subscribe(message => {
-      pickedUpMessage = message;
-    });
-
-    channelsSubject.next(channelsInAppAndRadio);
-    channelsSubject.complete();
-    tick();
-    expect(pickedUpMessage).toBeUndefined();
-  }));
+      expect(pickedUpMessage).toBeUndefined();
+    }));
+  });
 
   it('should release messageToDeliver', fakeAsync(() => {
     for (let msg of exampleMessages) {
