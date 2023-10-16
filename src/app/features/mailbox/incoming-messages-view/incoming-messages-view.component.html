@@ -7,8 +7,8 @@
     </mat-form-field>
 
     <mat-button-toggle-group name="filterRead" aria-label="FilterRead" >
-      <mat-button-toggle [checked]=true value="unread" (change)="onFilterReadChange($event.value)">Unread</mat-button-toggle>
-      <mat-button-toggle value="read" (change)="onFilterReadChange($event.value)">Read</mat-button-toggle>
+      <mat-button-toggle [checked]=true value="unread" (change)="onFilterReadChange($event.value)" i18n>Unread</mat-button-toggle>
+      <mat-button-toggle value="read" (change)="onFilterReadChange($event.value)" i18n>Read</mat-button-toggle>
     </mat-button-toggle-group>
 
     <button mat-flat-button extended color="primary" [routerLink]="['/mailbox/create']">

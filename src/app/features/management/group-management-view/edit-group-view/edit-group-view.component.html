@@ -1,5 +1,5 @@
 <div class="view" [appShowLoadingOverlay]="loader.loadingChange() | async">
-  <h1 i18n>Group: {{form.controls.title.value}}</h1>
+  <h1 i18n>Role: {{form.controls.title.value}}</h1>
   <form (submit)="updateGroup()">
     <mat-form-field class="app-edit-input">
       <mat-label i18n>Title</mat-label>
@@ -34,7 +34,7 @@
       </ng-template>
       <ng-template #operationError>
         <mat-error *ngIf="form.controls.operation.errors">
-          All group members must be members of the selected operation.
+          All roles must be members of the selected operation.
         </mat-error>
       </ng-template>
     </app-searchable-entity-input>

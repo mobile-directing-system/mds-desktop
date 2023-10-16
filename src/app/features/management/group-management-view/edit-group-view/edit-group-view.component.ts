@@ -53,7 +53,7 @@ export class EditGroupView implements OnInit, OnDestroy {
     this.s.push(this.route.params.pipe(
       // Get group with the id within the route.
       switchMap(params => {
-        this.groupId = params['groupId'];
+        this.groupId = params['roleId'];
         this.groupMembers = [];
         this.form.disable();
         return combineLatest({
@@ -143,7 +143,7 @@ export class EditGroupView implements OnInit, OnDestroy {
         this.close();
       },
       error: _ => {
-        this.notificationService.notifyUninvasiveShort($localize`Updating group failed.`);
+        this.notificationService.notifyUninvasiveShort($localize`Updating role failed.`);
       },
     });
   }
@@ -223,7 +223,7 @@ export class EditGroupView implements OnInit, OnDestroy {
           this.close();
         },
         error: _ => {
-          this.notificationService.notifyUninvasiveShort($localize`Group deletion failed.`);
+          this.notificationService.notifyUninvasiveShort($localize`Role deletion failed.`);
         },
     }));
   }

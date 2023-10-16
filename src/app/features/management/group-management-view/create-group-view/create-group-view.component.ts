@@ -75,7 +75,7 @@ export class CreateGroupView implements OnInit, OnDestroy {
         this.cancel();
       },
       error: _ => {
-        this.notificationService.notifyUninvasiveShort($localize`Group creation failed.`);
+        this.notificationService.notifyUninvasiveShort($localize`Role creation failed.`);
       },
     });
   }
