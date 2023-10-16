@@ -1,20 +1,20 @@
-import {Component, OnDestroy} from '@angular/core';
-import {Message, Participant, Recipient} from "../../../core/model/message";
-import {first, map, Observable, of, Subscription} from "rxjs";
-import {ActivatedRoute, Router} from "@angular/router";
-import {WorkspaceService} from "../../../core/services/workspace.service";
-import {NotificationService} from "../../../core/services/notification.service";
-import {MessageService} from "../../../core/services/message/message.service";
-import {AuthService} from "../../../core/services/auth.service";
-import {Channel, ChannelType} from "../../../core/model/channel";
-import {AddressBookService} from "../../../core/services/addressbook.service";
-import {MatDialog} from "@angular/material/dialog";
-import {ResourceService} from "../../../core/services/resource/resource.service";
-import {GroupService} from "../../../core/services/group.service";
-import {IncidentService} from "../../../core/services/incident/incident.service";
-import {ChannelService} from "../../../core/services/channel.service";
-import {DeliveryItemComponent} from "./delivery-item/delivery-item.component";
-import {FormBuilder} from "@angular/forms";
+import { Component, OnDestroy } from '@angular/core';
+import { Message, Participant, Recipient } from "../../../core/model/message";
+import { first, forkJoin, map, Observable, of, Subscription } from "rxjs";
+import { ActivatedRoute, Router } from "@angular/router";
+import { WorkspaceService } from "../../../core/services/workspace.service";
+import { NotificationService } from "../../../core/services/notification.service";
+import { MessageService } from "../../../core/services/message/message.service";
+import { AuthService } from "../../../core/services/auth.service";
+import { Channel, ChannelType } from "../../../core/model/channel";
+import { AddressBookService } from "../../../core/services/addressbook.service";
+import { MatDialog } from "@angular/material/dialog";
+import { ResourceService } from "../../../core/services/resource/resource.service";
+import { GroupService } from "../../../core/services/group.service";
+import { IncidentService } from "../../../core/services/incident/incident.service";
+import { ChannelService } from "../../../core/services/channel.service";
+import { DeliveryItemComponent } from "./delivery-item/delivery-item.component";
+import { FormBuilder } from "@angular/forms";
 
 
 /**
@@ -31,7 +31,7 @@ export interface DeliveryItemDialogData {
 /**
  * Result options of the DeliveryItemComponent dialog
  */
-export enum DeliveryItemDialogAction{
+export enum DeliveryItemDialogAction {
   Cancel,
   MarkAsSend
 }
@@ -45,7 +45,7 @@ export enum DeliveryItemDialogAction{
   templateUrl: './signaler-outgoing-view.component.html',
   styleUrls: ['./signaler-outgoing-view.component.scss']
 })
-export class SignalerOutgoingView implements OnDestroy{
+export class SignalerOutgoingView implements OnDestroy {
 
   /**
    * Currently selected operation in the workspace
@@ -68,13 +68,13 @@ export class SignalerOutgoingView implements OnDestroy{
 
 
   constructor(private router: Router, private route: ActivatedRoute,
-              private messageService: MessageService, private workspaceService: WorkspaceService,
-              private notificationService: NotificationService,
-              private authService: AuthService, private addressBookService: AddressBookService, public dialog: MatDialog,
-              private resourceService: ResourceService, private groupService: GroupService,
-              private incidentService: IncidentService, private channelService: ChannelService,
-              private fb: FormBuilder) {
-    this.workspaceService.operationChange().subscribe((operationId: string | undefined)=>{
+    private messageService: MessageService, private workspaceService: WorkspaceService,
+    private notificationService: NotificationService,
+    private authService: AuthService, private addressBookService: AddressBookService, public dialog: MatDialog,
+    private resourceService: ResourceService, private groupService: GroupService,
+    private incidentService: IncidentService, private channelService: ChannelService,
+    private fb: FormBuilder) {
+    this.workspaceService.operationChange().subscribe((operationId: string | undefined) => {
       this.operationId = operationId;
     });
   }
@@ -83,7 +83,7 @@ export class SignalerOutgoingView implements OnDestroy{
     this.s.forEach(s => s.unsubscribe());
 
     // release picked up message to deliver if exists
-    if(this.pickedUpMessage){
+    if (this.pickedUpMessage) {
       this.messageService.releaseMessageToDeliver(this.pickedUpMessage).pipe(first()).subscribe(
         {
           next: _ => {
@@ -108,51 +108,46 @@ export class SignalerOutgoingView implements OnDestroy{
 
     // get loggedInUserId
     let loggedInUserId = this.authService.loggedInUser();
-    if(!loggedInUserId){
+    if (!loggedInUserId) {
       this.notificationService.notifyUninvasiveShort($localize`Picking up next message to deliver failed, logged in user id not available.`);
       return;
     }
 
-    if(this.operationId){
-      // get message
-      this.s.push(this.messageService.pickUpNextMessageToDeliver(loggedInUserId, this.getSelectedChannelType()).subscribe({
-        next: message => {
-          this.pickedUpMessage = message;
-          if(message == undefined){
-            this.notificationService.notifyUninvasiveShort($localize`Currently no message to deliver available.`);
-            return;
-          }
-
-          // get sender label
-          this.getParticipantLabel(message.senderType, message.senderId).subscribe(senderLabel => {
-            //get incident label
-            this.getIncidentLabel(message.incidentId).subscribe(incidentLabel => {
-              // get recipientLabel
-              this.getParticipantLabel(message.recipients.at(0)?.recipientType, message.recipients.at(0)?.recipientId).subscribe(recipientLabel => {
-                // get recipientChannel
-                this.getChannel(message.recipients.at(0)).subscribe(recipientChannel => {
-                  // open dialog
-                  this.openDeliveryItemDialog({
-                    message: message,
-                    senderLabel: senderLabel,
-                    incidentLabel: incidentLabel,
-                    recipientLabel: recipientLabel,
-                    recipientChannel: recipientChannel
-                  });
-                });
-              });
-            });
-          });
-
-
-        },
-        error: _ => {
-          this.notificationService.notifyUninvasiveShort($localize`Picking up next message to deliver failed.`);
-        },
-      }));
-    }else{
+    if (!this.operationId) {
       this.notificationService.notifyUninvasiveShort($localize`Please select an operation for this workspace before.`);
+      return;
     }
+
+    // get message
+    this.s.push(this.messageService.pickUpNextMessageToDeliver(loggedInUserId, this.getSelectedChannelType(), this.operationId).subscribe({
+      next: message => {
+        this.pickedUpMessage = message;
+        if (message == undefined) {
+          this.notificationService.notifyUninvasiveShort($localize`Currently no message to deliver available.`);
+          return;
+        }
+
+        forkJoin(
+          {
+            senderLabel: this.getParticipantLabel(message.senderType, message.senderId),
+            incidentLabel: this.getIncidentLabel(message.incidentId),
+            recipientLabel: this.getParticipantLabel(message.recipients.at(0)?.recipientType, message.recipients.at(0)?.recipientId),
+            recipientChannel: this.getChannel(message.recipients.at(0))
+          }
+        ).subscribe(result => {
+          this.openDeliveryItemDialog({
+            message: message,
+            senderLabel: result.senderLabel,
+            incidentLabel: result.incidentLabel,
+            recipientLabel: result.recipientLabel,
+            recipientChannel: result.recipientChannel
+          });
+        });
+      },
+      error: _ => {
+        this.notificationService.notifyUninvasiveShort($localize`Picking up next message to deliver failed.`);
+      },
+    }));
 
   }
 
@@ -160,14 +155,14 @@ export class SignalerOutgoingView implements OnDestroy{
    * Opens the DeliveryItemDialog with the passed data.
    * Subscribes to dialog close event to call markCurrentMessageAsSend or releaseCurrentMessage depending on the result of the dialog
    */
-  openDeliveryItemDialog(data: DeliveryItemDialogData){
+  openDeliveryItemDialog(data: DeliveryItemDialogData) {
     const dialogRef = this.dialog.open(DeliveryItemComponent, {
       data: data,
     });
     dialogRef.afterClosed().subscribe((action: DeliveryItemDialogAction) => {
-      if(action === DeliveryItemDialogAction.MarkAsSend){
+      if (action === DeliveryItemDialogAction.MarkAsSend) {
         this.markCurrentMessageAsSend();
-      }else{
+      } else {
         this.releaseCurrentMessage();
       }
     });
@@ -176,15 +171,15 @@ export class SignalerOutgoingView implements OnDestroy{
   /**
    * Releases currently picked up {@link Message}.
    */
-  releaseCurrentMessage(){
-    if(this.pickedUpMessage){
+  releaseCurrentMessage() {
+    if (this.pickedUpMessage) {
       this.messageService.releaseMessageToDeliver(this.pickedUpMessage).subscribe(
         {
           next: success => {
-            if(success){
+            if (success) {
               this.pickedUpMessage = undefined;
               this.notificationService.notifyUninvasiveShort($localize`Released current message to deliver.`);
-            }else{
+            } else {
               this.notificationService.notifyUninvasiveShort($localize`Releasing current message to deliver failed.`);
             }
           },
@@ -199,15 +194,15 @@ export class SignalerOutgoingView implements OnDestroy{
   /**
    * Marks currently picked up {@link Message} as send.
    */
-  markCurrentMessageAsSend(){
-    if(this.pickedUpMessage){
+  markCurrentMessageAsSend() {
+    if (this.pickedUpMessage) {
       this.s.push(this.messageService.markMessageAsSend(this.pickedUpMessage).subscribe(
         {
           next: success => {
             this.pickedUpMessage = undefined;
-            if(success){
+            if (success) {
               this.notificationService.notifyUninvasiveShort($localize`Confirmed message delivery`);
-            }else{
+            } else {
               this.notificationService.notifyUninvasiveShort($localize`Finishing current message delivery failed.`);
             }
           },
@@ -227,7 +222,7 @@ export class SignalerOutgoingView implements OnDestroy{
    * @param senderId: id of the participant
    * @returns observableLabel
    */
-  getParticipantLabel(senderType?: Participant, senderId?: string): Observable<string | undefined>{
+  getParticipantLabel(senderType?: Participant, senderId?: string): Observable<string | undefined> {
     if (senderId && senderType != undefined) {
       if (senderType === Participant.Resource) {
         return this.resourceService.getResourceById(senderId).pipe(
@@ -254,8 +249,8 @@ export class SignalerOutgoingView implements OnDestroy{
    * @param incidentId: id of the incident
    * @returns observableLabel
    */
-  getIncidentLabel(incidentId: string | undefined): Observable<string | undefined>{
-    if(!incidentId) return of(undefined);
+  getIncidentLabel(incidentId: string | undefined): Observable<string | undefined> {
+    if (!incidentId) return of(undefined);
     return this.incidentService.getIncidentById(incidentId).pipe(
       map(incident => incident?.name)
     )
@@ -271,11 +266,11 @@ export class SignalerOutgoingView implements OnDestroy{
    * @param recipient: containing channelId and recipientId
    * @returns observableChannel
    */
-  getChannel(recipient: Recipient | undefined): Observable<Channel | undefined>{
-    if(!recipient || recipient.recipientType !== Participant.AddressBookEntry || !recipient.channelId) return of(undefined);
+  getChannel(recipient: Recipient | undefined): Observable<Channel | undefined> {
+    if (!recipient || recipient.recipientType !== Participant.AddressBookEntry || !recipient.channelId) return of(undefined);
     return this.channelService.getChannelsByAddressBookEntry(recipient.recipientId).pipe(
       map(channels => channels.filter(
-        channel=>channel.id === recipient.channelId
+        channel => channel.id === recipient.channelId
       ).at(0))
     );
   }
@@ -284,11 +279,11 @@ export class SignalerOutgoingView implements OnDestroy{
    * Returns the selected channelType.
    * That allows a signaler to filter for specific channel types.
    */
-  getSelectedChannelType(){
+  getSelectedChannelType() {
     return this.selectedChannelControl.getRawValue();
   }
 
-  selectedChannelTypeNullValuePlaceholder(): string{
+  selectedChannelTypeNullValuePlaceholder(): string {
     return $localize`All types`;
   }
 

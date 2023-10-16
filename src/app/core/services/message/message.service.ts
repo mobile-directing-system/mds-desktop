@@ -5,6 +5,7 @@ import {ChannelType} from "../../model/channel";
 export interface MessageFilters {
   byNeedsReview?: boolean;
   byDirection?: MessageDirection;
+  byOperationId?: string;
 }
 
 /**
@@ -47,19 +48,24 @@ export abstract class MessageService {
    *
    * @param roleId Role id of the recipient
    * @param read Whether messages have already been read
+   * @param operationId Only get messeges of a specific operation
    *
    * @returns messages
    */
-  public abstract getMailboxMessages(roleId: string, read: boolean): Observable<Message[]>;
+  public abstract getMailboxMessages(roleId: string, read: boolean, operationId?: string): Observable<Message[]>;
 
   /**
    * Gets next available outgoing message that a signaler can deliver.
    * Locks the message so that no one can fetch the message until it is released again.
    * If a message has multiple receivers returns a message for each receiver separately.
+   * 
+   * @param signalerId of the singaler that processes the messages
+   * @param filterForChannel Get next message for specific channel
+   * @param operationId Only get messages for the operationId
    *
    * @returns message or undefined if nor message available
    */
-  public abstract pickUpNextMessageToDeliver(signalerId: string, filterForChannel?: ChannelType): Observable<Message | undefined>;
+  public abstract pickUpNextMessageToDeliver(signalerId: string, filterForChannel?: ChannelType, operationId?: string): Observable<Message | undefined>;
 
   /**
    * Releases the message after it was picked up. That enables it to be picked up again.

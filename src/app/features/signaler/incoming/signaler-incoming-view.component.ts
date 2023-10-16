@@ -12,6 +12,7 @@ import { IncidentService } from 'src/app/core/services/incident/incident.service
 import { MessageService } from 'src/app/core/services/message/message.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { ResourceService } from 'src/app/core/services/resource/resource.service';
+import { WorkspaceService } from 'src/app/core/services/workspace.service';
 
 @Component({
   selector: 'app-signaler-incoming-view',
@@ -41,11 +42,13 @@ export class SignalerIncomingView implements OnInit {
     statusCode: this.fb.control<number | null>(null)
   });
 
-  selectedSender: AddressBookEntry | null = null;
+  selectedSender: AddressBookEntry | undefined;
   filteredSenderOptions: Observable<AddressBookEntry[]> = of([]);
 
-  selectedIncident: Incident | null = null;
+  selectedIncident: Incident | undefined;
   filteredIncidents: Observable<Incident[]> = of([]);
+
+  currentOperationId: string | undefined;
 
   @ViewChild(MatStepper) stepper!: MatStepper
 
@@ -54,7 +57,8 @@ export class SignalerIncomingView implements OnInit {
 
   constructor(private fb: FormBuilder, private addressBookService: AddressBookService,
     private resourceService: ResourceService, private incidentService: IncidentService,
-    private messageService: MessageService, private notificationService: NotificationService) { }
+    private messageService: MessageService, private notificationService: NotificationService,
+    private workspaceService: WorkspaceService) { }
 
   ngOnInit() {
     this.filteredSenderOptions = this.senderForm.controls.sender.valueChanges.pipe(
@@ -73,6 +77,8 @@ export class SignalerIncomingView implements OnInit {
         return this.searchIncidents(label as string);
       })
     );
+
+    this.workspaceService.operationChange().subscribe(id => this.currentOperationId = id);
   }
 
   /**
@@ -112,11 +118,16 @@ export class SignalerIncomingView implements OnInit {
    */
   submitMessage() {
     if(!this.selectedSender) return;
+    if(!this.currentOperationId) {
+      this.notificationService.notifyUninvasiveShort($localize`Cannot submit message. Please select an operation!`);
+      return;
+    }
 
     let msg: Message = {
       id: "",
       direction: MessageDirection.Incoming,
       incomingChannelType: this.channelForm.getRawValue().channel,
+      operationId: this.currentOperationId,
       senderType: this.isResource(this.selectedSender) ? Participant.Resource : Participant.AddressBookEntry,
       senderId: this.selectedSender.id,
       info: this.senderForm.getRawValue().info ?? "",
@@ -171,7 +182,7 @@ export class SignalerIncomingView implements OnInit {
    * Ensures that only selectable senders are displayed in the form field
    */
   senderAutocompleteFocusLost() {
-    this.senderForm.controls.sender.setValue(this.selectedSender);
+    this.senderForm.controls.sender.setValue(this.selectedSender ?? null);
   }
 
   incidentSelected(incident: Incident) {
@@ -184,7 +195,7 @@ export class SignalerIncomingView implements OnInit {
   incidentAutocompleteFocusLost() {
     let incidentFormValue = this.incidentForm.controls.incident.value;
     if(typeof incidentFormValue === 'string' && incidentFormValue.trim().length === 0) {
-      this.selectedIncident = null;
+      this.selectedIncident = undefined;
       return;
     }
     this.incidentForm.controls.incident.setValue(this.selectedIncident ?? "");
@@ -199,8 +210,8 @@ export class SignalerIncomingView implements OnInit {
   }
 
   resetStepper() {
-    this.selectedIncident = null;
-    this.selectedSender = null;
+    this.selectedIncident = undefined;
+    this.selectedSender = undefined;
     this.senderForm.reset();
     this.contentForm.reset();
     this.incidentForm.reset();

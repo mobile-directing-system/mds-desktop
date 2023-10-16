@@ -16,6 +16,7 @@ describe('DeliveryItemComponent', () => {
     senderType: Participant.Role,
     senderId: "S2",
     content: "A message from S2",
+    operationId: "123",
     createdAt: new Date(),
     needsReview: false,
     "priority": 1000,

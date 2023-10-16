@@ -58,6 +58,7 @@ describe('IncomingMessageComponent', () => {
       senderId: "senderId",
       senderType: Participant.AddressBookEntry,
       content: "Example content",
+      operationId: "123",
       createdAt: new Date(),
       priority: 1000,
       needsReview: false,

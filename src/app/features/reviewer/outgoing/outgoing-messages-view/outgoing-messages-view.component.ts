@@ -9,11 +9,12 @@ import { MessageDirection, Participant } from 'src/app/core/model/message';
 import { AddressBookService } from 'src/app/core/services/addressbook.service';
 import { GroupService } from 'src/app/core/services/group.service';
 import { IncidentService } from 'src/app/core/services/incident/incident.service';
-import { MessageService } from 'src/app/core/services/message/message.service';
+import { MessageFilters, MessageService } from 'src/app/core/services/message/message.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { ResourceService } from 'src/app/core/services/resource/resource.service';
 import { SelectChannelDialog } from '../select-channel-dialog/select-channel-dialog.component';
 import { getParticipantLabel } from 'src/app/core/util/service';
+import { WorkspaceService } from 'src/app/core/services/workspace.service';
 
 /**
  * One row of incoming messages in the table
@@ -37,16 +38,18 @@ export interface MessageRow {
 })
 export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  currentOperationId: string | undefined;
 
   displayedColumns: string[] = ['id', 'priority', 'createdAt', 'sender', 'recipient', 'content', 'incident'];
   dataSource: MatTableDataSource<MessageRow> = new MatTableDataSource<MessageRow>();
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   constructor(private messageService: MessageService, private resourceService: ResourceService,
     private addressBookService: AddressBookService, private groupService: GroupService,
     private incidentService: IncidentService, private dialog: MatDialog,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService, private workspaceService: WorkspaceService) { }
 
   ngOnInit(): void {
     this.dataSource.sortingDataAccessor = (data: any, property: string) => {
@@ -55,7 +58,10 @@ export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
         default: return data[property];
       }
     };
-    this.refreshDataSource();
+    this.workspaceService.operationChange().subscribe(operationId => {
+      this.currentOperationId = operationId;
+      this.refreshDataSource();
+    });
   }
 
   ngAfterViewInit(): void {
@@ -67,14 +73,19 @@ export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
    * Refreshes the data in the table
    */
   refreshDataSource() {
-    this.messageService.getMessages({ byDirection: MessageDirection.Outgoing }).pipe(
+    let filters = <MessageFilters>{ 
+      byDirection: MessageDirection.Outgoing,
+      byOperationId: this.currentOperationId 
+    };
+    
+    this.messageService.getMessages(filters).pipe(
       mergeAll(),
       mergeMap(msg => {
         let rows: MessageRow[] = [];
 
         msg.recipients.forEach(recipient => {
           // Do not display Resources and Roles because they do not have channels assigned
-          if(recipient.recipientType === Participant.Resource || recipient.recipientType === Participant.Role) return;
+          if (recipient.recipientType === Participant.Resource || recipient.recipientType === Participant.Role) return;
 
           // Create new table entry when message has no outgoing channel yet
           if (!recipient.channelId) {
@@ -142,7 +153,7 @@ export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(channel => {
       if (!channel) return;
       this.setChannelForRecipient(row.messageId, row.recipientId, (channel as Channel).id ?? "").subscribe(successful => {
-        if(successful) {
+        if (successful) {
           this.dataSource.data = this.dataSource.data.filter(tableRow => tableRow !== row);
         }
         this.notificationService.notifyUninvasiveShort(successful ? $localize`Channel successfully selected` :

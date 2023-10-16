@@ -455,7 +455,7 @@
     <unit id="8204176479746810612">
       <notes>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:21</note>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:19</note>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:15</note>
         <note category="location">src/app/features/management/user-management-view/edit-user-view/edit-user-view.component.html:26</note>
       </notes>
       <segment state="initial">
@@ -1343,6 +1343,7 @@
     <unit id="314315645942131479">
       <notes>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/radio-channel-details/radio-channel-details.component.html:2</note>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:30</note>
         <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:39</note>
       </notes>
       <segment state="initial">
@@ -1379,7 +1380,7 @@
     </unit>
     <unit id="8650499415827640724">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:27</note>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:23</note>
       </notes>
       <segment state="initial">
         <source>Type</source>
@@ -1388,10 +1389,9 @@
     </unit>
     <unit id="2734022681675842051">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:34</note>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:12</note>
         <note category="location">src/app/features/mailbox/create-message/create-message.component.html:40</note>
-        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:20</note>
+        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:21</note>
       </notes>
       <segment state="initial">
         <source>Priority</source>
@@ -1400,7 +1400,6 @@
     </unit>
     <unit id="5037087188394157831">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:39</note>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:20</note>
       </notes>
       <segment state="initial">
@@ -1410,7 +1409,6 @@
     </unit>
     <unit id="5956316725115867558">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:46</note>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:16</note>
       </notes>
       <segment state="initial">
@@ -1452,7 +1450,7 @@
         <note category="location">src/app/features/logistics/address-book-entry-list-view/create-address-book-entry-view/create-address-book-entry-view.component.html:6</note>
         <note category="location">src/app/features/logistics/address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component.html:6</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:10</note>
-        <note category="location">src/app/features/logistics/channels/channels.component.html:14</note>
+        <note category="location">src/app/features/logistics/channels/channels.component.html:10</note>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:8</note>
         <note category="location">src/app/features/resources/create-resource/create-resource.component.html:6</note>
         <note category="location">src/app/features/resources/edit-resource/edit-resource.component.html:8</note>
@@ -2076,8 +2074,8 @@
       <notes>
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:24</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:52</note>
-        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:34</note>
-        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:52</note>
+        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:35</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:57</note>
       </notes>
       <segment state="initial">
         <source>Submit</source>
@@ -2189,8 +2187,8 @@
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:23</note>
         <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:30</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:46</note>
-        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:33</note>
-        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:51</note>
+        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:34</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:56</note>
         <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:29</note>
       </notes>
       <segment state="initial">
@@ -2539,7 +2537,7 @@
     </unit>
     <unit id="3312566244661379878">
       <notes>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:154</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:117</note>
       </notes>
       <segment state="initial">
         <source>Please select an operation for this workspace before.</source>
@@ -3091,7 +3089,7 @@
     </unit>
     <unit id="signaler-message-submitted">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.ts:136</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.ts:147</note>
       </notes>
       <segment state="initial">
         <source>Message successfully submitted.</source>
@@ -3181,7 +3179,7 @@
     </unit>
     <unit id="4540589325711926146">
       <notes>
-        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:84</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:91</note>
       </notes>
       <segment state="initial">
         <source>Loading role failed.</source>
@@ -3190,7 +3188,7 @@
     </unit>
     <unit id="4860449449806508753">
       <notes>
-        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:132</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:145</note>
       </notes>
       <segment state="initial">
         <source>Message send.</source>
@@ -3199,7 +3197,7 @@
     </unit>
     <unit id="72748386340014679">
       <notes>
-        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:136</note>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:149</note>
       </notes>
       <segment state="initial">
         <source>Sending message failed.</source>
@@ -3513,7 +3511,7 @@
     </unit>
     <unit id="2622551599868423782">
       <notes>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:122</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:126</note>
       </notes>
       <segment state="initial">
         <source>Currently no message to deliver available.</source>
@@ -3522,7 +3520,7 @@
     </unit>
     <unit id="3042156966682592152">
       <notes>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:150</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:148</note>
       </notes>
       <segment state="initial">
         <source>Picking up next message to deliver failed.</source>
@@ -3531,7 +3529,7 @@
     </unit>
     <unit id="2486817042598378700">
       <notes>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:186</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:181</note>
       </notes>
       <segment state="initial">
         <source>Released current message to deliver.</source>
@@ -3540,8 +3538,8 @@
     </unit>
     <unit id="7300587382654329939">
       <notes>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:188</note>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:192</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:183</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:187</note>
       </notes>
       <segment state="initial">
         <source>Releasing current message to deliver failed.</source>
@@ -3550,7 +3548,7 @@
     </unit>
     <unit id="9175578906279675425">
       <notes>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:209</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:204</note>
       </notes>
       <segment state="initial">
         <source>Confirmed message delivery</source>
@@ -3559,8 +3557,8 @@
     </unit>
     <unit id="2792260087270280744">
       <notes>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:211</note>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:215</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:206</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:210</note>
       </notes>
       <segment state="initial">
         <source>Finishing current message delivery failed.</source>
@@ -3569,7 +3567,7 @@
     </unit>
     <unit id="424356320420294719">
       <notes>
-        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:292</note>
+        <note category="location">src/app/features/signaler/outgoing/signaler-outgoing-view.component.ts:287</note>
       </notes>
       <segment state="initial">
         <source>All types</source>
@@ -3596,7 +3594,7 @@
     </unit>
     <unit id="5360489784778094272">
       <notes>
-        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:47</note>
+        <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:52</note>
       </notes>
       <segment state="initial">
         <source>*Select a channel for the message</source>
@@ -3633,7 +3631,7 @@
     </unit>
     <unit id="5196470657182929588">
       <notes>
-        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:148</note>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:159</note>
       </notes>
       <segment state="initial">
         <source>Channel successfully selected</source>
@@ -3642,7 +3640,7 @@
     </unit>
     <unit id="5611077149195482047">
       <notes>
-        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:149</note>
+        <note category="location">src/app/features/reviewer/outgoing/outgoing-messages-view/outgoing-messages-view.component.ts:160</note>
       </notes>
       <segment state="initial">
         <source>Failed to select channel for message</source>
@@ -3702,7 +3700,7 @@
     </unit>
     <unit id="8895106299235581711">
       <notes>
-        <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.ts:107</note>
+        <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.ts:114</note>
       </notes>
       <segment state="initial">
         <source>Message as successfully reviewed</source>
@@ -3711,7 +3709,7 @@
     </unit>
     <unit id="2708064499685408433">
       <notes>
-        <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.ts:107</note>
+        <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.ts:114</note>
       </notes>
       <segment state="initial">
         <source>Error: Message could not be forwarded</source>
@@ -3738,7 +3736,7 @@
     </unit>
     <unit id="2011811111835112405">
       <notes>
-        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:25</note>
+        <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:26</note>
       </notes>
       <segment state="initial">
         <source>Forward to</source>
@@ -3806,6 +3804,24 @@
       <segment state="initial">
         <source>Phone number is required</source>
         <target>Telefonnummer wird benötigt</target>
+      </segment>
+    </unit>
+    <unit id="3492905266230286009">
+      <notes>
+        <note category="location">src/app/features/mailbox/create-message/create-message.component.ts:121</note>
+      </notes>
+      <segment state="initial">
+        <source>Could not send message. Please select an operation first!</source>
+        <target>Nachricht konnte nicht gesendet werden. Eine Operation muss ausgewählt sein!</target>
+      </segment>
+    </unit>
+    <unit id="1065532133048615634">
+      <notes>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.ts:122</note>
+      </notes>
+      <segment state="initial">
+        <source>Cannot submit message. Please select an operation!</source>
+        <target>Nachricht konnte nicht aufgenommen werden. Eine Operation muss ausgewählt sein!</target>
       </segment>
     </unit>
   </file>

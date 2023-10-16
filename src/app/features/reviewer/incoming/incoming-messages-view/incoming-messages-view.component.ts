@@ -10,6 +10,7 @@ import { IncidentService } from 'src/app/core/services/incident/incident.service
 import { MessageService } from 'src/app/core/services/message/message.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { ReviewDialog } from '../review-dialog/review-dialog.component';
+import { WorkspaceService } from 'src/app/core/services/workspace.service';
 
 /**
  * Data of table row that represents an incoming message
@@ -24,7 +25,7 @@ export interface ReviewerIncomingMessageRow {
   templateUrl: './incoming-messages-view.component.html',
   styleUrls: ['./incoming-messages-view.component.scss']
 })
-export class IncomingMessagesViewComponent implements OnInit, OnDestroy, AfterViewInit{
+export class IncomingMessagesViewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   displayedColumns: string[] = ['id', 'created_at', 'channel', 'content', 'incident'];
   dataSource: MatTableDataSource<ReviewerIncomingMessageRow> = new MatTableDataSource<ReviewerIncomingMessageRow>();
@@ -32,15 +33,20 @@ export class IncomingMessagesViewComponent implements OnInit, OnDestroy, AfterVi
   readonly refreshIntervall: number = 10;
   refreshTimer!: Subscription;
 
+  currentOperationId: string | undefined;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private messageService: MessageService, private incidentService: IncidentService, private dialog: MatDialog,
-    private notificationService: NotificationService) {}
+    private notificationService: NotificationService, private workspaceService: WorkspaceService) {}
 
   ngOnInit() {
-    this.refreshDataSource();
-    this.refreshTimer = interval(this.refreshIntervall * 1000).subscribe(() => this.refreshDataSource());
+    this.workspaceService.operationChange().subscribe(operationId => {
+      this.currentOperationId = operationId;
+      this.refreshDataSource();
+      this.refreshTimer = interval(this.refreshIntervall * 1000).subscribe(() => this.refreshDataSource());
+    });
   }
 
   ngAfterViewInit(): void {
@@ -67,7 +73,8 @@ export class IncomingMessagesViewComponent implements OnInit, OnDestroy, AfterVi
   refreshDataSource() {
     let tableRows = this.messageService.getMessages({
       byNeedsReview: true,
-      byDirection: MessageDirection.Incoming
+      byDirection: MessageDirection.Incoming,
+      byOperationId: this.currentOperationId
     }).pipe(
       mergeAll(),
       map(msg => {

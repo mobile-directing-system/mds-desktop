@@ -4,7 +4,7 @@ import {createRoutingFactory, SpectatorRouting} from "@ngneat/spectator";
 import {CoreModule} from "../../../core/core.module";
 import {AccessControlService} from "../../../core/services/access-control.service";
 import {AccessControlMockService} from "../../../core/services/access-control-mock.service";
-import {Subject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 import {GroupService} from "../../../core/services/group.service";
 import {Group} from "../../../core/model/group";
 import {AuthService} from "../../../core/services/auth.service";
@@ -28,6 +28,7 @@ import {
 } from "../../../core/components/searchable-multi-chip-input-field/searchable-multi-chip-entity-input.component";
 import {By} from "@angular/platform-browser";
 import {Paginated, SearchResult} from "../../../core/util/store";
+import { WorkspaceService } from 'src/app/core/services/workspace.service';
 
 describe('CreateMessageComponent', () => {
   let spectator: SpectatorRouting<CreateMessageComponent>;
@@ -43,7 +44,7 @@ describe('CreateMessageComponent', () => {
   const groupSubject: Subject<Group> = new Subject();
   const groupsSubject: Subject<Paginated<Group>> = new Subject();
 
-
+  const currentOperationId = "123";
 
   const message: Message = {
     id: "",
@@ -52,6 +53,7 @@ describe('CreateMessageComponent', () => {
     senderId: "loggedInRoleId",
     senderType: Participant.Role,
     content: "Example content",
+    operationId: "123",
     createdAt: new Date(),
     priority: 1000,
     needsReview: false,
@@ -172,6 +174,12 @@ describe('CreateMessageComponent', () => {
           loggedInRole: ()=> groupSubject,
         },
       },
+      {
+        provide: WorkspaceService,
+        useValue: jasmine.createSpyObj("WorkspaceService", {
+          operationChange: new BehaviorSubject(currentOperationId)
+        })
+      }
 
     ],
     mocks: [
@@ -189,6 +197,7 @@ describe('CreateMessageComponent', () => {
     spectator = createComponent();
     component = spectator.component;
     spectator.router.navigate = jasmine.createSpy().and.callFake(spectator.router.navigate).and.resolveTo();
+    component.currentOperationId = currentOperationId;
     spectator.detectComponentChanges();
     tick();
   }));
