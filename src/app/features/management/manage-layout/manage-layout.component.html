@@ -10,9 +10,9 @@
     </app-side-nav-item>
     <app-side-nav-item
       *ngIf="isViewGroupsGranted() | async"
-      [link]="['/manage', 'groups']"
+      [link]="['/manage', 'roles']"
       i18n
-      icon="group">Groups
+      icon="group">Roles
     </app-side-nav-item>
     <app-side-nav-item
       *ngIf="isViewOperationsGranted() | async"

@@ -1,5 +1,5 @@
 <div class="view" [appShowLoadingOverlay]="creatingGroup.loadingChange() | async">
-  <h1 i18n>Create Group</h1>
+  <h1 i18n>Create Role</h1>
   <form (submit)="createGroup()" class="example-form">
     <!--Title.-->
     <mat-form-field class="app-edit-input">
@@ -55,7 +55,7 @@
     </app-searchable-multi-chip-entity-input-field>
     <ng-template #operationError>
       <mat-error *ngIf="form.controls.operation.errors" i18n>
-        All group members must be members of the selected operation.
+        All roles must be members of the selected operation.
       </mat-error>
     </ng-template>
 

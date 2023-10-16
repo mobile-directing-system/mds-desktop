@@ -1367,13 +1367,13 @@
         <source>Intel Delivery <pc id="0" equivStart="START_TAG_MAT_ICON" equivEnd="CLOSE_TAG_MAT_ICON" type="other" dispStart="&lt;mat-icon class=&quot;icon-suffix-small&quot;&gt;" dispEnd="&lt;/mat-icon&gt;">open_in_new</pc></source>
       </segment>
     </unit>
-    <unit id="4643671691415114219">
+    <unit id="7931300809730964362">
       <notes>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:2</note>
         <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:7</note>
       </notes>
       <segment>
-        <source>Create Group</source>
+        <source>Create Role</source>
       </segment>
     </unit>
     <unit id="5701618810648052610">
@@ -1428,28 +1428,28 @@
         <source>Add member...</source>
       </segment>
     </unit>
-    <unit id="6141691779454788323">
+    <unit id="1490233543880743518">
       <notes>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:57,59</note>
       </notes>
       <segment>
-        <source>All group members must be members of the selected operation.</source>
+        <source>All roles must be members of the selected operation.</source>
       </segment>
     </unit>
-    <unit id="1512712705645664720">
+    <unit id="8422395518682017869">
       <notes>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.ts:78</note>
       </notes>
       <segment>
-        <source>Group creation failed.</source>
+        <source>Role creation failed.</source>
       </segment>
     </unit>
-    <unit id="1243614560979208707">
+    <unit id="4685208866203790655">
       <notes>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:2,3</note>
       </notes>
       <segment>
-        <source>Group: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/></source>
+        <source>Role: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/></source>
       </segment>
     </unit>
     <unit id="4691887509600985309">
@@ -1518,29 +1518,20 @@
         <source>Remove Member</source>
       </segment>
     </unit>
-    <unit id="1161198591600004816">
+    <unit id="4357572023949788534">
       <notes>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.ts:146</note>
       </notes>
       <segment>
-        <source>Updating group failed.</source>
+        <source>Updating role failed.</source>
       </segment>
     </unit>
-    <unit id="5944812089887969249">
-      <notes>
-        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:1</note>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:62</note>
-      </notes>
-      <segment>
-        <source>Groups</source>
-      </segment>
-    </unit>
-    <unit id="5673725231002148994">
+    <unit id="5818856717826456546">
       <notes>
         <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:3</note>
       </notes>
       <segment>
-        <source>Create, manage and edit groups.</source>
+        <source>Create, manage and edit roles.</source>
       </segment>
     </unit>
     <unit id="7615147220727762615">
@@ -1559,12 +1550,12 @@
         <source>Users</source>
       </segment>
     </unit>
-    <unit id="6173425432294670559">
+    <unit id="4499651527836994743">
       <notes>
         <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:15,16</note>
       </notes>
       <segment>
-        <source>Groups</source>
+        <source>Roles</source>
       </segment>
     </unit>
     <unit id="8705640949204819723">
@@ -1911,36 +1902,36 @@
         <source>(De)Activate user</source>
       </segment>
     </unit>
-    <unit id="5133200523459705531">
+    <unit id="6711455878752942064">
       <notes>
         <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:66,68</note>
       </notes>
       <segment>
-        <source>View group</source>
+        <source>View role</source>
       </segment>
     </unit>
-    <unit id="5581588744689339912">
+    <unit id="1707703463624272074">
       <notes>
         <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:72,74</note>
       </notes>
       <segment>
-        <source>Create group</source>
+        <source>Create role</source>
       </segment>
     </unit>
-    <unit id="493679773485810593">
+    <unit id="5970563213390830393">
       <notes>
         <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:78,80</note>
       </notes>
       <segment>
-        <source>Update group</source>
+        <source>Update role</source>
       </segment>
     </unit>
-    <unit id="4635161069054306636">
+    <unit id="2259449179490014999">
       <notes>
         <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:84,86</note>
       </notes>
       <segment>
-        <source>Delete group</source>
+        <source>Delete role</source>
       </segment>
     </unit>
     <unit id="2524155554502788709">
@@ -2145,12 +2136,12 @@
         <source>New password is required.</source>
       </segment>
     </unit>
-    <unit id="8006160526649588056">
+    <unit id="938355404473318786">
       <notes>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.ts:226</note>
       </notes>
       <segment>
-        <source>Group deletion failed.</source>
+        <source>Role deletion failed.</source>
       </segment>
     </unit>
     <unit id="1558069880513305355">
@@ -3332,6 +3323,15 @@
       </notes>
       <segment>
         <source>Could not send message. Please select an operation first!</source>
+      </segment>
+    </unit>
+    <unit id="795890916060309463">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:1</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:62</note>
+      </notes>
+      <segment>
+        <source>Roles</source>
       </segment>
     </unit>
   </file>

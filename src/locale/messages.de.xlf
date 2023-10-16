@@ -214,16 +214,6 @@
         <target>Management</target>
       </segment>
     </unit>
-    <unit id="5944812089887969249">
-      <notes>
-        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:1</note>
-        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:62</note>
-      </notes>
-      <segment state="initial">
-        <source>Groups</source>
-        <target>Gruppen</target>
-      </segment>
-    </unit>
     <unit id="7457179823984196306">
       <notes>
         <note category="location">src/app/features/management/operation-management-view/operation-management-view.component.html:1</note>
@@ -587,14 +577,14 @@
         <target>Jetzt aktiv</target>
       </segment>
     </unit>
-    <unit id="4643671691415114219">
+    <unit id="7931300809730964362">
       <notes>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:2</note>
         <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:7</note>
       </notes>
       <segment state="initial">
-        <source>Create Group</source>
-        <target>Gruppe erstellen</target>
+        <source>Create Role</source>
+        <target>Rolle erstellen</target>
       </segment>
     </unit>
     <unit id="3695400929536588338">
@@ -617,22 +607,22 @@
         <target>Beschreibung ist erforderlich.</target>
       </segment>
     </unit>
-    <unit id="1512712705645664720">
+    <unit id="8422395518682017869">
       <notes>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.ts:78</note>
       </notes>
       <segment state="initial">
-        <source>Group creation failed.</source>
-        <target>Erstellen einer Gruppe fehlgeschlagen.</target>
+        <source>Role creation failed.</source>
+        <target>Erstellen der Rolle fehlgeschlagen.</target>
       </segment>
     </unit>
-    <unit id="1243614560979208707">
+    <unit id="4685208866203790655">
       <notes>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.html:2,3</note>
       </notes>
       <segment state="initial">
-        <source>Group: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/></source>
-        <target>Gruppe: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/> </target>
+        <source>Role: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/></source>
+        <target>Rolle: <ph id="0" equiv="INTERPOLATION" disp="{{form.controls.title.value}}"/> </target>
       </segment>
     </unit>
     <unit id="1155679422702437698">
@@ -642,15 +632,6 @@
       <segment state="initial">
         <source>Add Members</source>
         <target>Mitglieder hinzufügen</target>
-      </segment>
-    </unit>
-    <unit id="5673725231002148994">
-      <notes>
-        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:3</note>
-      </notes>
-      <segment state="initial">
-        <source>Create, manage and edit groups.</source>
-        <target>Gruppen erstellen, verwalten und bearbeiten.</target>
       </segment>
     </unit>
     <unit id="1283895920974679461">
@@ -800,22 +781,22 @@
         <target>Speichern</target>
       </segment>
     </unit>
-    <unit id="1161198591600004816">
+    <unit id="4357572023949788534">
       <notes>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.ts:146</note>
       </notes>
       <segment state="initial">
-        <source>Updating group failed.</source>
-        <target>Speichern der Gruppe fehlgeschlagen.</target>
+        <source>Updating role failed.</source>
+        <target>Speichern der Rolle fehlgeschlagen.</target>
       </segment>
     </unit>
-    <unit id="6141691779454788323">
+    <unit id="1490233543880743518">
       <notes>
         <note category="location">src/app/features/management/group-management-view/create-group-view/create-group-view.component.html:57,59</note>
       </notes>
       <segment state="initial">
-        <source>All group members must be members of the selected operation.</source>
-        <target>Alle Mitglieder der Gruppe müssen auch Teilnehmer des gewählten Einsatzes sein.</target>
+        <source>All roles must be members of the selected operation.</source>
+        <target>Alle Mitglieder der Rollen müssen auch Teilnehmer des gewählten Einsatzes sein.</target>
       </segment>
     </unit>
     <unit id="2725499532293844250">
@@ -1005,40 +986,40 @@
         <target>Nutzer (de)aktivieren</target>
       </segment>
     </unit>
-    <unit id="5133200523459705531">
+    <unit id="6711455878752942064">
       <notes>
         <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:66,68</note>
       </notes>
       <segment state="initial">
-        <source>View group</source>
-        <target>Gruppen sehen</target>
+        <source>View role</source>
+        <target>Rollen sehen</target>
       </segment>
     </unit>
-    <unit id="5581588744689339912">
+    <unit id="1707703463624272074">
       <notes>
         <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:72,74</note>
       </notes>
       <segment state="initial">
-        <source>Create group</source>
-        <target>Gruppen erstellen</target>
+        <source>Create role</source>
+        <target>Rolle erstellen</target>
       </segment>
     </unit>
-    <unit id="493679773485810593">
+    <unit id="5970563213390830393">
       <notes>
         <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:78,80</note>
       </notes>
       <segment state="initial">
-        <source>Update group</source>
-        <target>Gruppen bearbeiten</target>
+        <source>Update role</source>
+        <target>Rolle bearbeiten</target>
       </segment>
     </unit>
-    <unit id="4635161069054306636">
+    <unit id="2259449179490014999">
       <notes>
         <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:84,86</note>
       </notes>
       <segment state="initial">
-        <source>Delete group</source>
-        <target>Gruppen löschen</target>
+        <source>Delete role</source>
+        <target>Rolle löschen</target>
       </segment>
     </unit>
     <unit id="2524155554502788709">
@@ -1204,13 +1185,13 @@
         <target>Nutzer</target>
       </segment>
     </unit>
-    <unit id="6173425432294670559">
+    <unit id="4499651527836994743">
       <notes>
         <note category="location">src/app/features/management/manage-layout/manage-layout.component.html:15,16</note>
       </notes>
       <segment state="initial">
-        <source>Groups</source>
-        <target>Gruppen</target>
+        <source>Roles</source>
+        <target>Rollen</target>
       </segment>
     </unit>
     <unit id="8705640949204819723">
@@ -2431,13 +2412,13 @@
         <target>Addressbucheinträge auswählen...</target>
       </segment>
     </unit>
-    <unit id="8006160526649588056">
+    <unit id="938355404473318786">
       <notes>
         <note category="location">src/app/features/management/group-management-view/edit-group-view/edit-group-view.component.ts:226</note>
       </notes>
       <segment state="initial">
-        <source>Group deletion failed.</source>
-        <target>Löschen der Gruppe fehlgeschlagen.</target>
+        <source>Role deletion failed.</source>
+        <target>Löschen der Rolle fehlgeschlagen.</target>
       </segment>
     </unit>
     <unit id="8386976308507652568">
@@ -3822,6 +3803,25 @@
       <segment state="initial">
         <source>Cannot submit message. Please select an operation!</source>
         <target>Nachricht konnte nicht aufgenommen werden. Eine Operation muss ausgewählt sein!</target>
+      </segment>
+    </unit>
+    <unit id="795890916060309463">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:1</note>
+        <note category="location">src/app/features/management/user-management-view/edit-user-permissions-view/edit-user-permissions-view.component.html:62</note>
+      </notes>
+      <segment state="initial">
+        <source>Roles</source>
+        <target>Rollen</target>
+      </segment>
+    </unit>
+    <unit id="5818856717826456546">
+      <notes>
+        <note category="location">src/app/features/management/group-management-view/group-management-view.component.html:3</note>
+      </notes>
+      <segment state="initial">
+        <source>Create, manage and edit roles.</source>
+        <target>Rollen erstellen, verwalten und bearbeiten.</target>
       </segment>
     </unit>
   </file>

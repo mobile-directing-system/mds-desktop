@@ -118,21 +118,21 @@ export const AppRoutes: PermissionGuardedRoute[] = [
             },
           },
           {
-            path: 'groups',
+            path: 'roles',
             component: GroupManagementView,
             data: {
               requirePermissions: [ViewGroupPermission()],
             },
           },
           {
-            path: 'groups/create',
+            path: 'roles/create',
             component: CreateGroupView,
             data: {
               requirePermissions: [CreateGroupPermission(), ViewUserPermission()],
             },
           },
           {
-            path: 'groups/:groupId',
+            path: 'roles/:roleId',
             component: EditGroupView,
             data: {
               requirePermissions: [ViewGroupPermission()],

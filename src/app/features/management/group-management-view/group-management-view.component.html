@@ -1,16 +1,16 @@
-<h1 i18n>Groups</h1>
+<h1 i18n>Roles</h1>
 
-<app-heading-hint i18n>Create, manage and edit groups.</app-heading-hint>
+<app-heading-hint i18n>Create, manage and edit roles.</app-heading-hint>
 
 <!--Actions.-->
 <app-list-action-bar>
-  <button (click)="createGroup()" *ngIf="isCreateGranted() | async" i18n mat-button>Create Group</button>
+  <button (click)="createGroup()" *ngIf="isCreateGranted() | async" i18n mat-button>Create Role</button>
 </app-list-action-bar>
 <!--Table.-->
 <app-paginated-list #list (page)="page($event)" [data]="loadedGroupTableData">
   <table (matSortChange)="sortChange($event)" [appShowLoadingOverlay]="retrieving.loadingChange() | async"
          [dataSource]="list.dataSource"
-         aria-label="Group list"
+         aria-label="Role list"
          mat-table
          matSort>
 
