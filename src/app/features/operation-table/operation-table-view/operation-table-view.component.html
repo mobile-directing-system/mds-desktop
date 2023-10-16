@@ -36,7 +36,7 @@
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="getResourceName"
                         (optionSelected)='resourceOptionSelected($event.option.value,entry,resourceInput)'>
                         <mat-option *ngFor="let option of entry.filteredResourceOptions | async" [value]="option">
-                            {{option.label}}
+                            <mat-icon>local_shipping</mat-icon>{{option.label}}
                         </mat-option>
                     </mat-autocomplete>
                 </mat-form-field>
