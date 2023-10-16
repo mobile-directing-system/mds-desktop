@@ -58,10 +58,14 @@ export abstract class MessageService {
    * Gets next available outgoing message that a signaler can deliver.
    * Locks the message so that no one can fetch the message until it is released again.
    * If a message has multiple receivers returns a message for each receiver separately.
+   * 
+   * @param signalerId of the singaler that processes the messages
+   * @param filterForChannel Get next message for specific channel
+   * @param operationId Only get messages for the operationId
    *
    * @returns message or undefined if nor message available
    */
-  public abstract pickUpNextMessageToDeliver(signalerId: string, filterForChannel?: ChannelType): Observable<Message | undefined>;
+  public abstract pickUpNextMessageToDeliver(signalerId: string, filterForChannel?: ChannelType, operationId?: string): Observable<Message | undefined>;
 
   /**
    * Releases the message after it was picked up. That enables it to be picked up again.

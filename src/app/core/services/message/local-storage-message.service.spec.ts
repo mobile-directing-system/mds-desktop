@@ -8,7 +8,7 @@ import { ChannelService } from "../channel.service";
 import { Subject } from "rxjs";
 import { duration } from "moment";
 
-fdescribe('LocalStorageMessageService', () => {
+describe('LocalStorageMessageService', () => {
 
   const exampleMessages: Message[] = [
     {
