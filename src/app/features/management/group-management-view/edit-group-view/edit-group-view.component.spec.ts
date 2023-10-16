@@ -35,7 +35,7 @@ function genFactoryOptions(): SpectatorRoutingOptions<EditGroupView> {
       OperationService,
     ],
     params: {
-      groupId: 'defend',
+      roleId: 'defend',
     },
     detectChanges: false,
   };

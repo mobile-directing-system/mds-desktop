@@ -159,14 +159,14 @@ describe('GroupManagementView', () => {
     }));
 
     it('should have a descriptive heading', () => {
-      expect(spectator.query(byTextContent('Groups', {
+      expect(spectator.query(byTextContent('Roles', {
         exact: false,
         selector: 'h1',
       }))).toBeVisible();
     });
 
     it('should show a button for creating groups', () => {
-      expect(spectator.query(byTextContent('Create Group', {
+      expect(spectator.query(byTextContent('Create Role', {
         exact: false,
         selector: 'button',
       }))).toBeVisible();
@@ -174,7 +174,7 @@ describe('GroupManagementView', () => {
 
     it('should call createGroup on button click', () => {
       const createSpy = spyOn(component, 'createGroup');
-      spectator.click(byTextContent('Create Group', {
+      spectator.click(byTextContent('Create Role', {
         exact: false,
         selector: 'button',
       }));
@@ -182,7 +182,7 @@ describe('GroupManagementView', () => {
     });
 
     it('should navigate to Group/Create on button click', () => {
-      spectator.click(byTextContent('Create Group', {
+      spectator.click(byTextContent('Create Role', {
         exact: false,
         selector: 'button',
       }));
@@ -200,7 +200,7 @@ describe('GroupManagementView', () => {
           expect(spectator.query(byTextContent(expectAttribute, {
             exact: false,
             selector: 'td',
-          }))).withContext(`should show group attribute ${ expectAttribute } from group ${ expectGroup.id }`).toBeVisible();
+          }))).withContext(`should show role attribute ${ expectAttribute } from role ${ expectGroup.id }`).toBeVisible();
         });
       });
     });
@@ -290,7 +290,7 @@ describe('GroupManagementView', () => {
   it('should hide create button when missing appropriate permissions', async () => {
     spectator.inject(AccessControlMockService).setNoAdminAndGranted([]);
     await spectator.fixture.whenStable();
-    expect(spectator.query(byTextContent('Create group', {
+    expect(spectator.query(byTextContent('Create role', {
       exact: false,
       selector: 'button',
     }))).toBeVisible();

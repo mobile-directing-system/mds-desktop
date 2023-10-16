@@ -52,8 +52,8 @@ describe('ManagementLayoutComponent', () => {
         requiredPermissions: [ViewUserPermission()],
       },
       {
-        name: 'Groups',
-        link: ['/manage', 'groups'],
+        name: 'Roles',
+        link: ['/manage', 'roles'],
         requiredPermissions: [ViewGroupPermission()],
       },
       {
