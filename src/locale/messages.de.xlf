@@ -2168,6 +2168,7 @@
         <note category="location">src/app/core/components/home-layout/workspace-operation-selector/select-workspace-operation-dialog/select-workspace-operation-dialog.component.html:23</note>
         <note category="location">src/app/features/intelligence/create-intel-confirmation-dialog/create-intel-confirmation-dialog.component.html:30</note>
         <note category="location">src/app/features/logistics/channels/channel-details-dialog/channel-details-dialog.component.html:46</note>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:23</note>
         <note category="location">src/app/features/reviewer/incoming/review-dialog/review-dialog.component.html:34</note>
         <note category="location">src/app/features/reviewer/outgoing/select-channel-dialog/select-channel-dialog.component.html:56</note>
         <note category="location">src/app/features/signaler/outgoing/delivery-item/delivery-item.component.html:29</note>
@@ -3822,6 +3823,51 @@
       <segment state="initial">
         <source>Create, manage and edit roles.</source>
         <target>Rollen erstellen, verwalten und bearbeiten.</target>
+      </segment>
+    </unit>
+    <unit id="8524558978282508700">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:24</note>
+      </notes>
+      <segment state="initial">
+        <source>React with new message</source>
+        <target>Mit neuer Nachricht reagieren</target>
+      </segment>
+    </unit>
+    <unit id="1616968388083998795">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:25</note>
+      </notes>
+      <segment state="initial">
+        <source>Mark as read</source>
+        <target>Als gelesen markieren</target>
+      </segment>
+    </unit>
+    <unit id="4778071335193190633">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-message/incoming-message.component.html:26</note>
+      </notes>
+      <segment state="initial">
+        <source>Mark as unread</source>
+        <target>Als ungelesen markieren</target>
+      </segment>
+    </unit>
+    <unit id="5339845689623432357">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:10</note>
+      </notes>
+      <segment state="initial">
+        <source>Unread</source>
+        <target>Ungelesen</target>
+      </segment>
+    </unit>
+    <unit id="2327592562693301723">
+      <notes>
+        <note category="location">src/app/features/mailbox/incoming-messages-view/incoming-messages-view.component.html:11</note>
+      </notes>
+      <segment state="initial">
+        <source>Read</source>
+        <target>Gelesen</target>
       </segment>
     </unit>
   </file>
