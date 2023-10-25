@@ -3,7 +3,6 @@
  */
 export enum Importance {
   None = 0,
-  Low = 500,
   /**
    * Default importance.
    */
@@ -24,8 +23,6 @@ export function localizeImportance(t: Importance): string {
   switch (t) {
     case Importance.None:
       return $localize`:@@importance-none:None`;
-    case Importance.Low:
-      return $localize`:@@importance-low:Low`;
     case Importance.Regular:
       return $localize`:@@importance-regular:Regular`;
     case Importance.Urgent:

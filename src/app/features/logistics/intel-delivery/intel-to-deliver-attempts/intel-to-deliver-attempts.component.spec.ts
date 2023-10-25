@@ -61,7 +61,7 @@ describe('IntelToDeliverAttemptsComponent', () => {
           id: 'harvest',
           type: ChannelType.Radio,
           timeout: moment.duration({ seconds: 23 }),
-          minImportance: Importance.Low,
+          minImportance: Importance.Regular,
           entry: 'rent',
           details: {
             info: 'channel 2'

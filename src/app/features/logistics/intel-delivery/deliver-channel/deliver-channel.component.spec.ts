@@ -28,7 +28,7 @@ function genChannel(): DeliverChannel {
       type: ChannelType.Radio,
     },
     details: {
-      intelImportance: Importance.Low,
+      intelImportance: Importance.Regular,
       channelMinImportance: Importance.Regular,
     },
     noRecommendReason: DeliverChannelNoRecommendReason.MinImportanceNotSatisfied,
@@ -85,7 +85,7 @@ describe('DeliverChannelComponent', () => {
       noRecommendReason: DeliverChannelNoRecommendReason.MinImportanceNotSatisfied,
       details: {
         channelMinImportance: Importance.Regular,
-        intelImportance: Importance.Low,
+        intelImportance: Importance.Regular,
       },
     };
     component.channel = channel;
