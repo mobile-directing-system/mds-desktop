@@ -167,3 +167,10 @@ export function predefinedRadioChannelDetails(): RadioChannelDetails[] {
     }
   ];
 }
+
+/**
+ * Helper function the compare two {@link RadioChannelDetails} objects.
+ */
+export function compareRadioChannelDetails(d1: RadioChannelDetails, d2: RadioChannelDetails) {
+  return d1.info === d2.info && d1.name === d2.name;
+}

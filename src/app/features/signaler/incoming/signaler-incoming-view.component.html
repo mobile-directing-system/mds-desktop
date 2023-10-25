@@ -1,11 +1,23 @@
 <div class=view>
     <h1 i18n>Incoming messages</h1>
     <form [formGroup]="channelForm">
-        <!-- Message type -->
-        <mat-form-field class="app-edit-input">
-            <mat-label i18n>Channel type</mat-label>
-            <app-channel-type-select [formControl]="channelForm.controls.channel"></app-channel-type-select>
-        </mat-form-field>
+        <div id="channel-selection">
+            <!-- Message type -->
+            <mat-form-field class="app-edit-input">
+                <mat-label i18n>Channel type</mat-label>
+                <app-channel-type-select [formControl]="channelForm.controls.channelType"></app-channel-type-select>
+            </mat-form-field>
+
+            <!-- Radio channel -->
+            <mat-form-field *ngIf="channelForm.controls.channelType.value === ChannelType.Radio">
+                <mat-label>Channel</mat-label>
+                <mat-select [formControl]="channelForm.controls.radioChannel"
+                    [compareWith]="compareRadioChannelDetails">
+                    <mat-option *ngFor="let details of selectableRadioChannels" [value]="details">{{ details.name
+                        }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
         <!-- Stepper -->
         <mat-stepper linear orientation="vertical" #stepper>
@@ -17,7 +29,8 @@
                         <mat-form-field class="app-edit-input">
                             <mat-label i18n>Sender</mat-label>
                             <input type="text" matInput formControlName="sender" [matAutocomplete]="auto"
-                                i18n-placeholder placeholder="Select sender" (blur)="senderAutocompleteFocusLost()" required>
+                                i18n-placeholder placeholder="Select sender" (blur)="senderAutocompleteFocusLost()"
+                                required>
                             <button matSuffix mat-icon-button aria-label="Clear"
                                 (click)="senderForm.controls.sender.reset()">
                                 <mat-icon>close</mat-icon>
@@ -34,11 +47,12 @@
                                 </mat-option>
                             </mat-autocomplete>
                         </mat-form-field>
-
-                        <mat-form-field class="app-edit-input">
+                        <!-- Info -->
+                        <mat-form-field class="app-edit-input"
+                            *ngIf="channelForm.controls.channelType.value !== ChannelType.Radio">
                             <mat-label i18n>Info</mat-label>
                             <input type="text" matInput formControlName="info" i18n-placeholder
-                                placeholder="E.g. mail address" required>
+                                placeholder="E.g. mail address">
                         </mat-form-field>
                     </form>
                     <div>
@@ -118,14 +132,24 @@
             <mat-step i18n-label label="Finish">
                 <mat-card class="mat-step-content" id="finish-step">
                     <mat-card-header>
-                        <mat-card-title>{{ channelForm.controls.channel.value | titlecase }}</mat-card-title>
+                        <mat-card-title>{{ channelForm.controls.channelType.value | titlecase }}</mat-card-title>
                     </mat-card-header>
                     <mat-card-content id="summary-card-content">
-                        <p><b i18n>Sender</b>: {{ selectedSender?.label }}, {{ senderForm.controls.info.value }}</p>
+                        <!--Sender info -->
+                        <p>
+                            <b i18n>Sender</b>: {{ selectedSender?.label }},
+                            <ng-container
+                                *ngIf="channelForm.getRawValue().channelType === ChannelType.Radio; else notRadioInfo">{{ channelForm.getRawValue().radioChannel.name}}</ng-container>
+                            <ng-template #notRadioInfo>{{ senderForm.getRawValue().info }}</ng-template>
+                        </p>
+
+                        <!--Content -->
                         <p><b i18n>Content</b>: {{ contentForm.controls.content.value }}</p>
                         <p *ngIf="incidentForm.controls.incident.value as incident">
                             <b i18n>Incident</b>: {{ asIncident(incident).name }}
                         </p>
+
+                        <!--Status -->
                         <p *ngIf="statusForm.controls.statusCode.value as newStatus">
                             <b i18n>Old status</b>: {{ getStatusText(asResource(selectedSender!).statusCode) }}<br>
                             <b i18n>New status</b>: {{ getStatusText(newStatus) }}

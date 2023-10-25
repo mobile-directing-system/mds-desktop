@@ -1,6 +1,6 @@
 import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
 import { CustomControlValueAccessor } from '../../../../../core/util/form-fields';
-import { predefinedRadioChannelDetails, RadioChannelDetails } from '../../../../../core/model/channel';
+import { compareRadioChannelDetails, predefinedRadioChannelDetails, RadioChannelDetails } from '../../../../../core/model/channel';
 import { FormBuilder, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -21,7 +21,8 @@ import { Subscription } from 'rxjs';
 })
 export class RadioChannelDetailsComponent extends CustomControlValueAccessor<RadioChannelDetails> implements OnInit, OnDestroy {
 
-  selectableChannelDetails: RadioChannelDetails[] = predefinedRadioChannelDetails();
+  readonly compareDetails = compareRadioChannelDetails;
+  readonly selectableChannelDetails: RadioChannelDetails[] = predefinedRadioChannelDetails();
 
   radioDetailsControl = this.fb.nonNullable.control<RadioChannelDetails>(predefinedRadioChannelDetails()[0], [Validators.required]);
 
@@ -49,9 +50,5 @@ export class RadioChannelDetailsComponent extends CustomControlValueAccessor<Rad
     this.radioDetailsControl.patchValue({
       ...details
     })
-  }
-
-  compareDetails(d1: RadioChannelDetails, d2: RadioChannelDetails) {
-    return d1.info === d2.info && d1.name === d2.name;
   }
 }

@@ -139,7 +139,7 @@ describe('SignalerIncomingView', () => {
 
     it('should submit message correctly for an address book entry', () => {
       spyOn(component, "resetStepper");
-      component.channelForm.setValue({ channel: ChannelType.Email });
+      component.channelForm.patchValue({ channelType: ChannelType.Email });
       component.senderForm.setValue({
         sender: exampleAddresBookEntry,
         info: "mail@mail.de"
@@ -160,6 +160,23 @@ describe('SignalerIncomingView', () => {
         recipients: []
       }));
       expect(component.resetStepper).toHaveBeenCalled();
+    });
+
+    it('should set info correctly when radio channel is selected', () => {
+      component.channelForm.setValue({ channelType: ChannelType.Radio, radioChannel: component.selectableRadioChannels[0] });
+      component.senderForm.setValue({
+        sender: exampleAddresBookEntry,
+        info: "mail@mail.de"
+      });
+      component.contentForm.setValue({ content: "Test content" });
+      component.selectedSender = exampleAddresBookEntry;
+      component.submitMessage();
+
+      expect(messageService.createMessage).toHaveBeenCalledWith(jasmine.objectContaining({
+        incomingChannelType: ChannelType.Radio,
+        info: component.selectableRadioChannels[0].name
+      }));
+      
     });
 
     it('should not submit message when no operation is selected', () => {
