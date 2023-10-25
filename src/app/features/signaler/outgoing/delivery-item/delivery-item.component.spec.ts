@@ -32,7 +32,7 @@ describe('DeliveryItemComponent', () => {
   };
   const channel: Channel = {
     id: "channelId1",
-    details: {info:"info"},
+    details: {name: "channel 1", info:"channel 1 info"},
     entry: "address-bookId",
     isActive: false,
     label: "label",

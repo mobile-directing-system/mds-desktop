@@ -64,7 +64,8 @@ describe('IntelToDeliverAttemptsComponent', () => {
           minImportance: Importance.Regular,
           entry: 'rent',
           details: {
-            info: 'channel 2'
+            name: 'channel 2',
+            info: 'channel 2 info'
           },
           isActive: true,
           priority: 144,

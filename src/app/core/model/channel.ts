@@ -67,6 +67,13 @@ export interface RadioChannel extends ChannelBase {
 }
 
 export interface RadioChannelDetails {
+  /**
+   * Name of the channel (e.g. Channel 1, Channel 2 etc.)
+   */
+  name: string;
+  /**
+   * Info of the channel (e.g. the frequence of the channel)
+   */
   info: string;
 }
 
@@ -119,7 +126,7 @@ export function getChannelDetailsText(c: Channel): string {
     case ChannelType.Phone:
       return c.details.phoneNumber;
     case ChannelType.Radio:
-      return c.details.info;
+      return c.details.name;
     default:
       return "?";
   }
@@ -134,9 +141,29 @@ export function defaultChannel(entryId: string): Channel {
     minImportance: Importance.None,
     priority: 50,
     timeout: moment.duration(10, 'minutes'),
-    details: {
-      info: '',
-    },
+    details: predefinedRadioChannelDetails()[0],
   };
   return c;
+}
+
+/**
+ * Predefined radio channel details that can be selected for a readio channel.
+ * 
+ * TODO: Should be customizable in the settings of the application
+ */
+export function predefinedRadioChannelDetails(): RadioChannelDetails[] {
+  return [
+    {
+      name: "Channel 1",
+      info: "1"
+    },
+    {
+      name: "Channel 2",
+      info: "2"
+    },
+    {
+      name: "Channel 3",
+      info: "3"
+    }
+  ];
 }

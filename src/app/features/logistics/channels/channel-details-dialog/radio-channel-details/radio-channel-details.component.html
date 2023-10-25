@@ -1,5 +1,6 @@
 <mat-form-field class="app-edit-input">
-  <mat-label i18n>Info</mat-label>
-  <textarea [formControl]="form.controls.info" i18n-placeholder matInput
-            placeholder="Channel, frequency, call-name..."></textarea>
+  <mat-label i18n>Channel</mat-label>
+  <mat-select [compareWith]="compareDetails" [formControl]="radioDetailsControl">
+    <mat-option *ngFor="let details of selectableChannelDetails" [value]="details">{{ details.name }}</mat-option>
+  </mat-select>
 </mat-form-field>

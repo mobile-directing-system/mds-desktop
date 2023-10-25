@@ -20,7 +20,8 @@ function genChannel(): DeliverChannel {
       isActive: true,
       priority: 24,
       details: {
-        info: 'channel 1'
+        name: 'channel 1',
+        info: 'channel 1 info'
       },
       entry: 'servant',
       minImportance: Importance.Regular,

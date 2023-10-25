@@ -43,6 +43,7 @@ describe('ChannelDetailsDialog', () => {
         priority: 40,
         minImportance: Importance.Strike,
         details: {
+          name: 'channel 1',
           info: 'appear',
         },
       },
@@ -270,6 +271,7 @@ describe('ChannelDetailsDialog', () => {
         priority: 65,
         minImportance: Importance.None,
         details: {
+          name: 'channel',
           info: 'fond',
         },
       },

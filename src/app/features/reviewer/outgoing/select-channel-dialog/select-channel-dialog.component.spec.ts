@@ -44,6 +44,7 @@ describe('SelectChannelDialog', () => {
         seconds: 200,
       }),
       details: {
+        name: "channel 1",
         info: "some details",
       },
     },
@@ -59,6 +60,7 @@ describe('SelectChannelDialog', () => {
         seconds: 200,
       }),
       details: {
+        name: "channel 2",
         info: "some other details",
       },
     }
@@ -155,7 +157,7 @@ describe('SelectChannelDialog', () => {
       }))).toBeVisible();
 
       // Channel info visible
-      expect(spectator.query(byText((channel.details as any).info, {
+      expect(spectator.query(byText((channel.details as any).name, {
         exact: true,
         selector: "td"
       }))).toBeVisible();

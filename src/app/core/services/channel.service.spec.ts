@@ -37,6 +37,7 @@ describe('ChannelService', () => {
         min_importance: Importance.Strike,
         timeout: 200 * 1000 * 1000 * 1000, // 200 Seconds.
         details: {
+          name: 'channel 1',
           info: 'saddle',
         },
       };
@@ -52,6 +53,7 @@ describe('ChannelService', () => {
           seconds: 200,
         }),
         details: {
+          name: 'channel 1',
           info: 'saddle',
         },
       };
@@ -157,7 +159,8 @@ describe('ChannelService', () => {
         min_importance: Importance.Strike,
         timeout: 200 * 1000 * 1000, // 200 Milliseconds.
         details: {
-          info: 'channel 0',
+          name: 'channel 0',
+          info: 'channel 0 info',
         },
       },
       {
@@ -170,7 +173,8 @@ describe('ChannelService', () => {
         min_importance: Importance.None,
         timeout: 20 * 60 * 1000 * 1000 * 1000, // 20 Minutes.
         details: {
-          info: 'channel 1'
+          name: 'channel 1',
+          info: 'channel 1 info'
         },
       },
     ];
@@ -187,7 +191,8 @@ describe('ChannelService', () => {
           milliseconds: 200,
         }),
         details: {
-          info: 'channel 0',
+          name: 'channel 0',
+          info: 'channel 0 info',
         },
       },
       {
@@ -202,7 +207,8 @@ describe('ChannelService', () => {
           minutes: 20,
         }),
         details: {
-          info: 'channel 1'
+          name: 'channel 1',
+          info: 'channel 1 info'
         },
       },
     ];
@@ -249,6 +255,7 @@ describe('ChannelService', () => {
           milliseconds: 200,
         }),
         details: {
+          name: 'channel 1',
           info: 'army',
         },
       },
@@ -264,6 +271,7 @@ describe('ChannelService', () => {
           minutes: 20,
         }),
         details: {
+          name: 'channel 2',
           info: 'test'
         },
       },
@@ -279,6 +287,7 @@ describe('ChannelService', () => {
         min_importance: Importance.Strike,
         timeout: 200 * 1000 * 1000, // 200 Milliseconds.
         details: {
+          name: 'channel 1',
           info: 'army',
         },
       },
@@ -292,6 +301,7 @@ describe('ChannelService', () => {
         min_importance: Importance.None,
         timeout: 20 * 60 * 1000 * 1000 * 1000, // 20 Minutes.
         details: {
+          name: 'channel 2',
           info: 'test'
         },
       },

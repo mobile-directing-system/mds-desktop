@@ -152,7 +152,7 @@ describe('LocalStorageMessageService', () => {
   const channelRadio: Channel = {
     type: ChannelType.Radio,
     id: "channelId2",
-    details: { info: "info" },
+    details: { name: "channel 1", info: "channel 1 info" },
     entry: "address-bookId",
     isActive: false,
     label: "label",
