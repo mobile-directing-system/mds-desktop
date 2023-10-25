@@ -10,7 +10,7 @@
 
             <!-- Radio channel -->
             <mat-form-field *ngIf="channelForm.controls.channelType.value === ChannelType.Radio">
-                <mat-label>Channel</mat-label>
+                <mat-label i18n>Channel</mat-label>
                 <mat-select [formControl]="channelForm.controls.radioChannel"
                     [compareWith]="compareRadioChannelDetails">
                     <mat-option *ngFor="let details of selectableRadioChannels" [value]="details">{{ details.name
