@@ -1,7 +1,7 @@
 import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
 import { CustomControlValueAccessor } from '../../../../../core/util/form-fields';
-import { RadioChannelDetails } from '../../../../../core/model/channel';
-import { FormBuilder, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { compareRadioChannelDetails, predefinedRadioChannelDetails, RadioChannelDetails } from '../../../../../core/model/channel';
+import { FormBuilder, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 /**
@@ -20,21 +20,23 @@ import { Subscription } from 'rxjs';
   ],
 })
 export class RadioChannelDetailsComponent extends CustomControlValueAccessor<RadioChannelDetails> implements OnInit, OnDestroy {
-  form = this.fb.group({
-    info: this.fb.nonNullable.control<string>(''),
-  });
+
+  readonly compareDetails = compareRadioChannelDetails;
+  readonly selectableChannelDetails: RadioChannelDetails[] = predefinedRadioChannelDetails();
+
+  radioDetailsControl = this.fb.nonNullable.control<RadioChannelDetails>(predefinedRadioChannelDetails()[0], [Validators.required]);
 
   private s: Subscription[] = [];
 
   constructor(private fb: FormBuilder) {
-    super({ info: '' });
+    super(predefinedRadioChannelDetails()[0]);
   }
 
   ngOnInit(): void {
-    this.s.push(this.form.valueChanges.subscribe(_ => {
+    this.s.push(this.radioDetailsControl.valueChanges.subscribe(_ => {
       this.value = {
-        info: this.form.getRawValue().info,
-      };
+        ...this.radioDetailsControl.value
+      }
       this.notifyOnChange();
     }));
   }
@@ -45,8 +47,8 @@ export class RadioChannelDetailsComponent extends CustomControlValueAccessor<Rad
 
   override writeValue(details: RadioChannelDetails) {
     super.writeValue(details);
-    this.form.patchValue({
-      info: details.info,
-    });
+    this.radioDetailsControl.patchValue({
+      ...details
+    })
   }
 }

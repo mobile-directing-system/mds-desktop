@@ -19,7 +19,8 @@ function genChannel(): Channel {
     entry: 'bleed',
     type: ChannelType.Radio,
     details: {
-      info: 'channel 4'
+      name: "channel 4",
+      info: 'channel 4 details'
     },
     timeout: moment.duration({ seconds: 1 }),
     minImportance: Importance.Regular,

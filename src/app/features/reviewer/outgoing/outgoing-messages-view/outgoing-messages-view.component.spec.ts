@@ -86,6 +86,7 @@ describe('OutgoingMessagesViewComponent', () => {
       seconds: 200,
     }),
     details: {
+      name: "channel 1",
       info: "some details",
     },
   };

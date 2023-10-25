@@ -33,7 +33,8 @@ describe('ChannelsComponent', () => {
       timeout: moment.duration({ minutes: 2 }),
       minImportance: Importance.None,
       details: {
-        info: '069'
+        name: 'channel 1',
+        info: 'channel 1 info'
       },
     },
     {
@@ -164,7 +165,8 @@ describe('ChannelsComponent', () => {
         }),
         minImportance: Importance.Urgent,
         details: {
-          info: 'can',
+          name: 'channel 2',
+          info: 'channel 2 info'
         },
       };
       const expectChannels: Channel[] = [

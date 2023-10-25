@@ -1,14 +1,13 @@
-import { RadioChannelDetailsComponent } from './radio-channel-details.component';
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { RadioChannelDetails } from '../../../../../core/model/channel';
-import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { CoreModule } from '../../../../../core/core.module';
-import { LogisticsModule } from '../../../logistics.module';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { MatFormFieldHarness } from '@angular/material/form-field/testing';
-import { MatInputHarness } from '@angular/material/input/testing';
+import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatSelectHarness } from '@angular/material/select/testing';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { CoreModule } from '../../../../../core/core.module';
+import { RadioChannelDetails } from '../../../../../core/model/channel';
+import { LogisticsModule } from '../../../logistics.module';
+import { RadioChannelDetailsComponent } from './radio-channel-details.component';
 
 
 @Component({
@@ -17,6 +16,7 @@ import { MatInputHarness } from '@angular/material/input/testing';
 })
 class TestHostComponent {
   fc = new FormControl<RadioChannelDetails>({
+    name: '',
     info: '',
   }, { nonNullable: true });
 }
@@ -24,6 +24,8 @@ class TestHostComponent {
 describe('RadioChannelDetailsComponent.integration', () => {
   let spectator: Spectator<TestHostComponent>;
   let host: TestHostComponent;
+  let component: RadioChannelDetailsComponent;
+
   const createComponent = createComponentFactory({
     component: TestHostComponent,
     imports: [CoreModule, LogisticsModule],
@@ -31,52 +33,42 @@ describe('RadioChannelDetailsComponent.integration', () => {
     detectChanges: false,
   });
   const details: RadioChannelDetails = {
+    name: 'channel 1',
     info: 'thunder',
   };
   let hLoader: HarnessLoader;
+  let channelSelect: MatSelectHarness;
 
   beforeEach(async () => {
     spectator = createComponent();
+    component = spectator.query(RadioChannelDetailsComponent)!;
     host = spectator.component;
     host.fc.setValue(details);
     spectator.detectComponentChanges();
     await spectator.fixture.whenStable();
     hLoader = await TestbedHarnessEnvironment.loader(spectator.fixture);
+    channelSelect = await hLoader.getHarness(MatSelectHarness);
   });
 
   it('should create', () => {
     expect(host).toBeTruthy();
   });
 
-  describe('info', () => {
-    const newInfo = 'hope';
-    let infoFF: MatFormFieldHarness;
-    let textarea: MatInputHarness;
+  it('should display select', ()=> {
+    expect(channelSelect).toBeTruthy();
+  });
 
-    beforeEach(async () => {
-      infoFF = await hLoader.getHarness(MatFormFieldHarness.with({
-        floatingLabelText: 'Info',
-      }));
-      textarea = await hLoader.getHarness(MatInputHarness.with({
-        value: host.fc.value.info,
-      }));
+  it('should apply selected option to form control', async ()=> {
+    const selectOption = component.selectableChannelDetails[0];
+
+    await channelSelect.open();
+    const options = await channelSelect.getOptions({text: selectOption.name});
+    await options[0].click();
+    await spectator.fixture.whenStable();
+    expect(host.fc.value).toEqual({
+      name: selectOption.name,
+      info: selectOption.info
     });
 
-    it('should display form field', () => {
-      expect(infoFF).toBeTruthy();
-    });
-
-    it('should display input', () => {
-      expect(textarea).toBeTruthy();
-    });
-
-    it('should apply input changes', async () => {
-      await textarea.setValue(newInfo);
-      await spectator.fixture.whenStable();
-      expect(host.fc.value).toEqual({
-        ...details,
-        info: newInfo,
-      });
-    });
   });
 });

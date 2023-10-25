@@ -36,6 +36,7 @@ interface NetChannelBase {
 interface NetRadioChannel extends NetChannelBase {
   type: 'radio',
   details: {
+    name: string;
     info: string;
   }
 }
@@ -122,7 +123,8 @@ function netRadioChannelFromApp(a: RadioChannel): NetRadioChannel {
     ...netChannelBaseFromApp(a),
     type: 'radio',
     details: {
-      info: a.details.info,
+      name: a.details.name,
+      info: a.details.info
     },
   };
 }
@@ -164,7 +166,8 @@ function appRadioChannelFromNet(n: NetRadioChannel): RadioChannel {
     ...appChannelBaseFromNet(n),
     type: ChannelType.Radio,
     details: {
-      info: n.details.info,
+      name: n.details.name,
+      info: n.details.info
     },
   };
 }

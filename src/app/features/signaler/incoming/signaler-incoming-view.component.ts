@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Observable, debounceTime, forkJoin, map, mergeMap, of, startWith } from 'rxjs';
 import { AddressBookEntry } from 'src/app/core/model/address-book-entry';
-import { ChannelType, localizeChannelType } from 'src/app/core/model/channel';
+import { ChannelType, RadioChannelDetails, compareRadioChannelDetails, localizeChannelType, predefinedRadioChannelDetails } from 'src/app/core/model/channel';
 import { Incident } from 'src/app/core/model/incident';
 import { Message, MessageDirection, Participant } from 'src/app/core/model/message';
 import { Resource, statusCodes, getStatusCodeText } from 'src/app/core/model/resource';
@@ -21,13 +21,20 @@ import { WorkspaceService } from 'src/app/core/services/workspace.service';
 })
 export class SignalerIncomingView implements OnInit {
 
+  readonly channelTypes: ChannelType[] = Object.values(ChannelType);
+  readonly localizeChannel = localizeChannelType
+  readonly ChannelType = ChannelType;
+  readonly selectableRadioChannels = predefinedRadioChannelDetails();
+  readonly compareRadioChannelDetails = compareRadioChannelDetails
+
   channelForm = this.fb.group({
-    channel: this.fb.nonNullable.control<ChannelType>(ChannelType.Email)
+    channelType: this.fb.nonNullable.control<ChannelType>(ChannelType.Email),
+    radioChannel: this.fb.nonNullable.control<RadioChannelDetails>(this.selectableRadioChannels[0])
   });
 
   senderForm = this.fb.group({
     sender: this.fb.control<AddressBookEntry | string>(""),
-    info: this.fb.control<string>(""),
+    info: this.fb.control<string>("", [Validators.required]),
   });
 
   contentForm = this.fb.group({
@@ -52,15 +59,22 @@ export class SignalerIncomingView implements OnInit {
 
   @ViewChild(MatStepper) stepper!: MatStepper
 
-  readonly channelTypes: ChannelType[] = Object.values(ChannelType);
-  readonly localizeChannel = localizeChannelType
-
   constructor(private fb: FormBuilder, private addressBookService: AddressBookService,
     private resourceService: ResourceService, private incidentService: IncidentService,
     private messageService: MessageService, private notificationService: NotificationService,
     private workspaceService: WorkspaceService) { }
 
   ngOnInit() {
+    this.channelForm.controls.channelType.valueChanges.subscribe(channelType => {
+      // Do not require info field when channel type is radio
+      if(channelType === ChannelType.Radio) {
+        this.senderForm.controls.info.clearValidators();
+      }else{
+        this.senderForm.controls.info.setValidators([Validators.required]);
+      }
+      this.senderForm.controls.info.updateValueAndValidity();
+    });
+
     this.filteredSenderOptions = this.senderForm.controls.sender.valueChanges.pipe(
       startWith(""),
       debounceTime(250),
@@ -126,7 +140,7 @@ export class SignalerIncomingView implements OnInit {
     let msg: Message = {
       id: "",
       direction: MessageDirection.Incoming,
-      incomingChannelType: this.channelForm.getRawValue().channel,
+      incomingChannelType: this.channelForm.getRawValue().channelType,
       operationId: this.currentOperationId,
       senderType: this.isResource(this.selectedSender) ? Participant.Resource : Participant.AddressBookEntry,
       senderId: this.selectedSender.id,
@@ -135,6 +149,10 @@ export class SignalerIncomingView implements OnInit {
       createdAt: new Date(),
       needsReview: true,
       recipients: []
+    }
+
+    if(msg.incomingChannelType === ChannelType.Radio)  {
+      msg.info = this.channelForm.getRawValue().radioChannel.name;
     }
 
     // Set resource specific fields

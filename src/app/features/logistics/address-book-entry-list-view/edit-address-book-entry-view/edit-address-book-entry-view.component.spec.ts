@@ -77,6 +77,7 @@ describe('EditAddressBookLogisticsView', () => {
       minImportance: Importance.Regular,
       timeout: moment.duration({ seconds: 45 }),
       details: {
+        name: 'channel 1',
         info: 'critic',
       },
     },

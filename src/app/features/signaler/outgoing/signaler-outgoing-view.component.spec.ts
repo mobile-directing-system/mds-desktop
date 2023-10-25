@@ -90,7 +90,7 @@ describe('SignalerOutgoingView', () => {
   const channels: Channel[] = [
     {
       id: "channelId1",
-      details: {info:"info"},
+      details: {name: "channel 1", info:"channel 2 info"},
       entry: "address-bookId",
       isActive: false,
       label: "label",
@@ -101,7 +101,7 @@ describe('SignalerOutgoingView', () => {
     },
     {
       id: "channelId2",
-      details: {info:"info"},
+      details: {name: "channel 2", info:"channel 2info"},
       entry: "address-bookId",
       isActive: false,
       label: "label",

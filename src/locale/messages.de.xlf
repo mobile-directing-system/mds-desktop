@@ -887,9 +887,9 @@
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:63</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:87</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:101</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:61</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:91</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:111</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:75</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:105</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:125</note>
       </notes>
       <segment state="initial">
         <source>Back</source>
@@ -1206,7 +1206,7 @@
     <unit id="channel-type-radio">
       <notes>
         <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:5</note>
-        <note category="location">src/app/core/model/channel.ts:104</note>
+        <note category="location">src/app/core/model/channel.ts:111</note>
       </notes>
       <segment state="initial">
         <source>Radio</source>
@@ -1216,7 +1216,7 @@
     <unit id="4467323362722952678">
       <notes>
         <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:17</note>
-        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:28</note>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:24</note>
         <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:16</note>
       </notes>
       <segment state="initial">
@@ -1227,7 +1227,7 @@
     <unit id="2085611136494552870">
       <notes>
         <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:21</note>
-        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:32</note>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:28</note>
         <note category="location">src/app/core/components/intel-type-inline/intel-type-inline.component.html:20</note>
       </notes>
       <segment state="initial">
@@ -1256,27 +1256,17 @@
     <unit id="importance-none">
       <notes>
         <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:8</note>
-        <note category="location">src/app/core/model/importance.ts:26</note>
+        <note category="location">src/app/core/model/importance.ts:25</note>
       </notes>
       <segment state="initial">
         <source>None</source>
         <target>Keine</target>
       </segment>
     </unit>
-    <unit id="importance-low">
-      <notes>
-        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:12</note>
-        <note category="location">src/app/core/model/importance.ts:28</note>
-      </notes>
-      <segment state="initial">
-        <source>Low</source>
-        <target>Niedrig</target>
-      </segment>
-    </unit>
     <unit id="importance-regular">
       <notes>
-        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:16</note>
-        <note category="location">src/app/core/model/importance.ts:30</note>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:12</note>
+        <note category="location">src/app/core/model/importance.ts:27</note>
       </notes>
       <segment state="initial">
         <source>Regular</source>
@@ -1285,8 +1275,8 @@
     </unit>
     <unit id="importance-urgent">
       <notes>
-        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:20</note>
-        <note category="location">src/app/core/model/importance.ts:32</note>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:16</note>
+        <note category="location">src/app/core/model/importance.ts:29</note>
       </notes>
       <segment state="initial">
         <source>Urgent</source>
@@ -1295,8 +1285,8 @@
     </unit>
     <unit id="importance-strike">
       <notes>
-        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:24</note>
-        <note category="location">src/app/core/model/importance.ts:34</note>
+        <note category="location">src/app/core/components/importance-inline/importance-inline.component.html:20</note>
+        <note category="location">src/app/core/model/importance.ts:31</note>
       </notes>
       <segment state="initial">
         <source>Strike</source>
@@ -1323,22 +1313,12 @@
     </unit>
     <unit id="314315645942131479">
       <notes>
-        <note category="location">src/app/features/logistics/channels/channel-details-dialog/radio-channel-details/radio-channel-details.component.html:2</note>
         <note category="location">src/app/features/logistics/channels/channels.component.html:30</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:39</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:53</note>
       </notes>
       <segment state="initial">
         <source>Info</source>
         <target>Info</target>
-      </segment>
-    </unit>
-    <unit id="5002013608403252995">
-      <notes>
-        <note category="location">src/app/features/logistics/channels/channel-details-dialog/radio-channel-details/radio-channel-details.component.html:4</note>
-      </notes>
-      <segment state="initial">
-        <source>Channel, frequency, call-name...</source>
-        <target>Kanal, Frequenz, Rufname...</target>
       </segment>
     </unit>
     <unit id="6214603540126415024">
@@ -1772,7 +1752,7 @@
     <unit id="1381592311007231590">
       <notes>
         <note category="location">src/app/features/logistics/intel-delivery/deliver-channel/deliver-channel.component.html:4</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:6</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:7</note>
       </notes>
       <segment state="initial">
         <source>Channel type</source>
@@ -2125,7 +2105,7 @@
         <note category="location">src/app/features/intelligence/intel-in-creation-side-nav/intel-in-creation-side-nav.component.html:28</note>
         <note category="location">src/app/features/logistics/intel-delivery/cancel-intel-delivery-dialog/cancel-intel-delivery-dialog.component.html:26</note>
         <note category="location">src/app/features/operation-table/operation-table-view/operation-table-view.component.ts:134</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:138</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:162</note>
       </notes>
       <segment state="initial">
         <source>Confirm</source>
@@ -2222,10 +2202,10 @@
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:15</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:64</note>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:88</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:45</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:62</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:92</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:112</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:59</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:76</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:106</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:126</note>
       </notes>
       <segment state="initial">
         <source>Next</source>
@@ -2271,7 +2251,9 @@
     <unit id="5462361983940693567">
       <notes>
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:39</note>
+        <note category="location">src/app/features/logistics/channels/channel-details-dialog/radio-channel-details/radio-channel-details.component.html:2</note>
         <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.html:18</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:13</note>
       </notes>
       <segment state="initial">
         <source>Channel</source>
@@ -2293,9 +2275,9 @@
         <note category="location">src/app/features/intelligence/create-intel-stepper/create-intel-stepper.component.html:47</note>
         <note category="location">src/app/features/mailbox/create-message/create-message.component.html:64</note>
         <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.html:26</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:51</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:55</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:125</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:65</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:69</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:147</note>
       </notes>
       <segment state="initial">
         <source>Content</source>
@@ -2946,7 +2928,7 @@
     <unit id="channel-type-email">
       <notes>
         <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:13</note>
-        <note category="location">src/app/core/model/channel.ts:106</note>
+        <note category="location">src/app/core/model/channel.ts:113</note>
       </notes>
       <segment state="initial">
         <source>Email</source>
@@ -2955,9 +2937,9 @@
     </unit>
     <unit id="910656806257300801">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:14</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:18</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:124</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:26</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:30</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:140</note>
       </notes>
       <segment state="initial">
         <source>Sender</source>
@@ -2966,7 +2948,7 @@
     </unit>
     <unit id="8008587693876377253">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:41</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:55</note>
       </notes>
       <segment state="initial">
         <source>E.g. mail address</source>
@@ -2975,7 +2957,7 @@
     </unit>
     <unit id="3174883446698862933">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:57</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:71</note>
       </notes>
       <segment state="initial">
         <source>Content of the message</source>
@@ -2986,9 +2968,9 @@
       <notes>
         <note category="location">src/app/features/mailbox/create-message/create-message.component.html:55</note>
         <note category="location">src/app/features/reviewer/incoming/incoming-messages-view/incoming-messages-view.component.html:32</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:68</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:72</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:127</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:82</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:86</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:149</note>
       </notes>
       <segment state="initial">
         <source>Incident</source>
@@ -2997,8 +2979,8 @@
     </unit>
     <unit id="5611592591303869712">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:98</note>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:102</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:112</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:116</note>
       </notes>
       <segment state="initial">
         <source>Status</source>
@@ -3007,7 +2989,7 @@
     </unit>
     <unit id="65984904390749158">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:118</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:132</note>
       </notes>
       <segment state="initial">
         <source>Finish</source>
@@ -3016,7 +2998,7 @@
     </unit>
     <unit id="7808756054397155068">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:136</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:160</note>
       </notes>
       <segment state="initial">
         <source>Reset</source>
@@ -3026,7 +3008,7 @@
     <unit id="channel-type-phone">
       <notes>
         <note category="location">src/app/core/components/channel-type-inline/channel-type-inline.component.html:9</note>
-        <note category="location">src/app/core/model/channel.ts:108</note>
+        <note category="location">src/app/core/model/channel.ts:115</note>
       </notes>
       <segment state="initial">
         <source>Phone</source>
@@ -3035,7 +3017,7 @@
     </unit>
     <unit id="2791007109724882912">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:20</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:32</note>
       </notes>
       <segment state="initial">
         <source>Select sender</source>
@@ -3044,7 +3026,7 @@
     </unit>
     <unit id="7608330402066932450">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:74</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:88</note>
       </notes>
       <segment state="initial">
         <source>Select incident</source>
@@ -3053,7 +3035,7 @@
     </unit>
     <unit id="2352629566113014741">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:130</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:154</note>
       </notes>
       <segment state="initial">
         <source>Old status</source>
@@ -3062,7 +3044,7 @@
     </unit>
     <unit id="1467059276438662086">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:131</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.html:155</note>
       </notes>
       <segment state="initial">
         <source>New status</source>
@@ -3071,7 +3053,7 @@
     </unit>
     <unit id="signaler-message-submitted">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.ts:147</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.ts:165</note>
       </notes>
       <segment state="initial">
         <source>Message successfully submitted.</source>
@@ -3799,7 +3781,7 @@
     </unit>
     <unit id="1065532133048615634">
       <notes>
-        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.ts:122</note>
+        <note category="location">src/app/features/signaler/incoming/signaler-incoming-view.component.ts:136</note>
       </notes>
       <segment state="initial">
         <source>Cannot submit message. Please select an operation!</source>

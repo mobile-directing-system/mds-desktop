@@ -25,7 +25,8 @@ function genChannel(): Channel {
     entry: 'direct',
     type: ChannelType.Radio,
     details: {
-      info: 'channel 3'
+      name: 'channel 3',
+      info: 'channel 3, info'
     },
     timeout: moment.duration({ seconds: 1 }),
     minImportance: Importance.Regular,
