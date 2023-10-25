@@ -25,7 +25,7 @@ function genChannel(): Channel {
       info: 'channel 2'
     },
     timeout: moment.duration({ seconds: 1 }),
-    minImportance: Importance.Low,
+    minImportance: Importance.Regular,
   };
 }
 

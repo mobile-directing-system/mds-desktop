@@ -36,7 +36,7 @@ describe('IntelCreationService', () => {
   describe('addCreateIntel', () => {
     const sampleCreateIntel: CreateIntel = {
       type: IntelType.PlainTextMessage,
-      importance: Importance.Low,
+      importance: Importance.Regular,
       initialDeliverTo: ['army'],
       operation: 'poor',
       content: {
@@ -66,7 +66,7 @@ describe('IntelCreationService', () => {
   describe('sendIntelInCreation', () => {
     const sampleCreateIntel: CreateIntel[] = [{
       type: IntelType.PlainTextMessage,
-      importance: Importance.Low,
+      importance: Importance.Regular,
       initialDeliverTo: ['army'],
       operation: 'poor',
       content: {
@@ -74,7 +74,7 @@ describe('IntelCreationService', () => {
       },
     }, {
       type: IntelType.AnalogRadioMessage,
-      importance: Importance.Low,
+      importance: Importance.Regular,
       initialDeliverTo: ['army'],
       operation: 'poor',
       content: {

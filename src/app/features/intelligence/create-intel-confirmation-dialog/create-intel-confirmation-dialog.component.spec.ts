@@ -45,7 +45,7 @@ describe('CreateIntelConfirmationDialogComponent', () => {
   describe('fixture', () => {
     const sampleCreateIntel: CreateIntel[] = [{
       type: IntelType.AnalogRadioMessage,
-      importance: Importance.Low,
+      importance: Importance.Regular,
       initialDeliverTo: ['tire', 'gradual', 'move', 'drink'],
       content: {
         callsign: 'caution',
