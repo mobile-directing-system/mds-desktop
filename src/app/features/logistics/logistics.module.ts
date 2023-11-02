@@ -16,7 +16,6 @@ import {
   EditAddressBookEntryView,
 } from './address-book-entry-list-view/edit-address-book-entry-view/edit-address-book-entry-view.component';
 import { AddressBookLayoutComponent } from './address-book-layout/address-book-layout.component';
-import { IntelDeliveryModule } from './intel-delivery/intel-delivery.module';
 import { LogisticsLayoutComponent } from './logistics-layout/logistics-layout.component';
 
 
@@ -40,10 +39,7 @@ import { LogisticsLayoutComponent } from './logistics-layout/logistics-layout.co
     MatNativeDateModule,
     MtxDatetimepickerModule,
     MtxNativeDatetimeModule,
-    CommonModule,
-    CoreModule,
-    AngularMaterialModule,
-    IntelDeliveryModule,
+    AngularMaterialModule
   ],
 })
 export class LogisticsModule {
