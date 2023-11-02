@@ -7,8 +7,8 @@ import { MatInputHarness } from '@angular/material/input/testing';
 import { Spectator, byText, createComponentFactory } from '@ngneat/spectator';
 import { CoreModule } from 'src/app/core/core.module';
 import { MailChannelDetails } from 'src/app/core/model/channel';
-import { LogisticsModule } from '../../../logistics.module';
 import { MailChannelDetailsComponent } from './mail-channel-details.component';
+import { LogisticsModule } from 'src/app/features/logistics/logistics.module';
 
 @Component({
   template: `

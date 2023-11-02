@@ -1,28 +1,28 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import { Channel, ChannelType, defaultChannel, getChannelDetailsText, MailChannelDetails, PhoneChannelDetails, RadioChannelDetails } from '../../../core/model/channel';
-import { MatTableDataSource } from '@angular/material/table';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ChannelDetailsDialog } from './channel-details-dialog/channel-details-dialog.component';
-import { CustomControlValueAccessor } from '../../../core/util/form-fields';
-import { MDSError, MDSErrorCode } from '../../../core/util/errors';
+import { MatTableDataSource } from '@angular/material/table';
+import { Channel, ChannelType, defaultChannel, getChannelDetailsText } from '../../model/channel';
+import { MDSError, MDSErrorCode } from '../../util/errors';
+import { CustomControlValueAccessor } from '../../util/form-fields';
+import { ChannelDetailsDialog } from '../channel-details-dialog/channel-details-dialog.component';
 
 /**
  * Component for editing and displaying channels. Channels are provided and returned by providing a form control.
  */
 @Component({
-  selector: 'app-channels',
-  templateUrl: './channels.component.html',
-  styleUrls: ['./channels.component.scss'],
+  selector: 'app-edit-channels',
+  templateUrl: './edit-channels.component.html',
+  styleUrls: ['./edit-channels.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ChannelsComponent),
+      useExisting: forwardRef(() => EditChannelsComponent),
       multi: true,
     },
   ],
 })
-export class ChannelsComponent extends CustomControlValueAccessor<Channel[]> {
+export class EditChannelsComponent extends CustomControlValueAccessor<Channel[]> {
 
   ChannelType = ChannelType;
   getChannelDetailsText = getChannelDetailsText;

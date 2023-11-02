@@ -1,22 +1,22 @@
 import { MatDialog } from '@angular/material/dialog';
 import { byTextContent, createComponentFactory, Spectator } from '@ngneat/spectator';
 import * as moment from 'moment';
-import { CoreModule } from '../../../core/core.module';
-import { Channel, ChannelType, defaultChannel, getChannelDetailsText, localizeChannelType } from '../../../core/model/channel';
-import { Importance } from '../../../core/model/importance';
-import { newMatDialogRefMock } from '../../../core/testutil/testutil';
+import { CoreModule } from '../../core.module';
+import { Channel, ChannelType, defaultChannel, getChannelDetailsText, localizeChannelType } from '../../model/channel';
+import { Importance } from '../../model/importance';
+import { newMatDialogRefMock } from '../../testutil/testutil';
 import {
   ChannelDetailsDialog,
   ChannelDetailsDialogData,
   ChannelDetailsDialogResult,
-} from './channel-details-dialog/channel-details-dialog.component';
-import { ChannelsComponent } from './channels.component';
+} from '../channel-details-dialog/channel-details-dialog.component';
+import { EditChannelsComponent } from './edit-channels.component';
 
 describe('ChannelsComponent', () => {
-  let spectator: Spectator<ChannelsComponent>;
-  let component: ChannelsComponent;
+  let spectator: Spectator<EditChannelsComponent>;
+  let component: EditChannelsComponent;
   const createComponent = createComponentFactory({
-    component: ChannelsComponent,
+    component: EditChannelsComponent,
     imports: [CoreModule],
     mocks: [MatDialog],
     detectChanges: false,

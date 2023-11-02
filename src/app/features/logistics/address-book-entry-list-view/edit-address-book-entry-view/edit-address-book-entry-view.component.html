@@ -52,11 +52,11 @@
     </app-searchable-entity-input>
 
     <!--Channels.-->
-    <app-channels
+    <app-edit-channels
       *ngIf="entryId !== ''"
       [entryId]="entryId"
       [formControl]="form.controls.channels"
-    ></app-channels>
+    ></app-edit-channels>
 
     <div class="action-bar">
       <button (click)="close()" i18n mat-button type="button">

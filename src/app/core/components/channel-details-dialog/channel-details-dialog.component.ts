@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { Channel, ChannelBase, ChannelType } from '../../../../core/model/channel';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import * as moment from 'moment';
-import { ValidatorDurationMin, ValidatorDurationRequired } from '../../../../core/util/duration';
 import * as uuid from 'uuid';
+import { Channel, ChannelBase, ChannelType } from '../../../core/model/channel';
 
 /**
  * Dialog data for {@link ChannelDetailsDialog}.

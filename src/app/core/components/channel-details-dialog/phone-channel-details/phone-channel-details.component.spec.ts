@@ -7,10 +7,10 @@ import { Spectator, byText, createComponentFactory } from '@ngneat/spectator';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { Component } from '@angular/core';
 import { CoreModule } from 'src/app/core/core.module';
-import { LogisticsModule } from '../../../logistics.module';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatFormFieldHarness } from '@angular/material/form-field/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
+import { LogisticsModule } from 'src/app/features/logistics/logistics.module';
 
 @Component({
   template: `

@@ -7,18 +7,19 @@ import { MatSelectHarness } from '@angular/material/select/testing';
 import { MatSlideToggleHarness } from '@angular/material/slide-toggle/testing';
 import { Spectator, byTextContent, createComponentFactory } from '@ngneat/spectator';
 import * as moment from 'moment';
-import { CoreModule } from '../../../../core/core.module';
-import { ChannelType, localizeChannelType } from '../../../../core/model/channel';
-import { Importance } from '../../../../core/model/importance';
-import { newMatDialogRefMock } from '../../../../core/testutil/testutil';
-import { LogisticsModule } from '../../logistics.module';
+
 import {
   ChannelDetailsDialog,
   ChannelDetailsDialogData,
   ChannelDetailsDialogResult,
 } from './channel-details-dialog.component';
+import { CoreModule } from '../../core.module';
+import { LogisticsModule } from 'src/app/features/logistics/logistics.module';
+import { ChannelType, localizeChannelType } from '../../model/channel';
+import { Importance } from '../../model/importance';
+import { newMatDialogRefMock } from '../../testutil/testutil';
 
-fdescribe('ChannelDetailsDialog', () => {
+describe('ChannelDetailsDialog', () => {
   let spectator: Spectator<ChannelDetailsDialog>;
   let component: ChannelDetailsDialog;
   const createComponent = createComponentFactory({

@@ -4,10 +4,10 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSelectHarness } from '@angular/material/select/testing';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
-import { CoreModule } from '../../../../../core/core.module';
-import { RadioChannelDetails } from '../../../../../core/model/channel';
-import { LogisticsModule } from '../../../logistics.module';
 import { RadioChannelDetailsComponent } from './radio-channel-details.component';
+import { RadioChannelDetails } from 'src/app/core/model/channel';
+import { LogisticsModule } from 'src/app/features/logistics/logistics.module';
+import { CoreModule } from 'src/app/core/core.module';
 
 
 @Component({

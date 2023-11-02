@@ -1,8 +1,8 @@
 import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
-import { CustomControlValueAccessor } from '../../../../../core/util/form-fields';
-import { compareRadioChannelDetails, predefinedRadioChannelDetails, RadioChannelDetails } from '../../../../../core/model/channel';
+import { compareRadioChannelDetails, predefinedRadioChannelDetails, RadioChannelDetails } from '../../../../core/model/channel';
 import { FormBuilder, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { CustomControlValueAccessor } from 'src/app/core/util/form-fields';
 
 /**
  * Component for editing {@link RadioChannelDetails}.
