@@ -6,8 +6,9 @@ import { Importance } from '../model/importance';
 import * as moment from 'moment';
 import { of, throwError } from 'rxjs';
 import { fakeAsync, tick } from '@angular/core/testing';
+import { mockLocalStorage } from '../testutil/testutil';
 
-describe('ChannelService', () => {
+fdescribe('ChannelService', () => {
   let spectator: SpectatorService<ChannelService>;
   let service: ChannelService;
   const createService = createServiceFactory({
@@ -331,6 +332,57 @@ describe('ChannelService', () => {
 
       expect(putSpy).toHaveBeenCalledTimes(1);
       expect(cbSpy).withContext('should call error').toHaveBeenCalledTimes(1);
+    }));
+  });
+
+  describe('resource channels', () => {
+    const resourceId = 'mister';
+    const channels: Channel[] = [
+      {
+        id: 'queen',
+        entry: resourceId,
+        isActive: false,
+        label: 'rejoice',
+        type: ChannelType.Radio,
+        priority: 200,
+        minImportance: Importance.Strike,
+        timeout: moment.duration({
+          milliseconds: 200,
+        }),
+        details: {
+          name: 'channel 1',
+          info: 'channel 1 frequency',
+        },
+      },
+      {
+        id: 'object',
+        entry: resourceId,
+        isActive: true,
+        label: 'every',
+        type: ChannelType.Radio,
+        priority: 50,
+        minImportance: Importance.None,
+        timeout: moment.duration({
+          minutes: 20,
+        }),
+        details: {
+          name: 'channel 2',
+          info: 'channel 2 frequency'
+        },
+      },
+    ];
+
+    beforeEach(() => {
+      mockLocalStorage();
+    });
+
+    it('getChannelsByResource should return correct channels', fakeAsync(()=> {
+      const resultSpy = jasmine.createSpy();
+      service.updateChannelByResource(resourceId, channels).subscribe();
+      tick();
+      service.getChannelsByResource(resourceId).subscribe({ next: resultSpy });
+      tick();
+      expect(resultSpy).toHaveBeenCalledOnceWith(channels);
     }));
   });
 });

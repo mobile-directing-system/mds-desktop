@@ -8,7 +8,7 @@ export class LocalStorageCRUDRepository<T> {
   
     /**
      * Saves an object to {@link localStorage} and
-     * assigns it an incrimental id
+     * assigns it an incrimental id.
      * 
      * @param item to store 
      * @returns created item
@@ -25,6 +25,23 @@ export class LocalStorageCRUDRepository<T> {
       items.push(newItem);
       localStorage.setItem(this.storageKey, JSON.stringify(items));
       return newItem;
+    }
+
+    /**
+     * Inserts an object into the {@link localStorage}.
+     * When an object with the same id already exists,
+     * it will be replaced.
+     * 
+     * @param item to insert 
+     * @returns inserted item
+     */
+    public insert(item: T): T {
+      let items: any[] = this.fetchAll();
+      // Remove existing item
+      items = items.filter(i => i.id !== (item as any).id);
+      items.push(item);
+      localStorage.setItem(this.storageKey, JSON.stringify(items));
+      return item;
     }
   
     /**
