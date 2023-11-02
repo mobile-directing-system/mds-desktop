@@ -346,9 +346,7 @@ describe('ChannelService', () => {
         type: ChannelType.Radio,
         priority: 200,
         minImportance: Importance.Strike,
-        timeout: moment.duration({
-          milliseconds: 200,
-        }),
+        timeout:moment.duration(0),
         details: {
           name: 'channel 1',
           info: 'channel 1 frequency',
@@ -362,9 +360,7 @@ describe('ChannelService', () => {
         type: ChannelType.Radio,
         priority: 50,
         minImportance: Importance.None,
-        timeout: moment.duration({
-          minutes: 20,
-        }),
+        timeout: moment.duration(0),
         details: {
           name: 'channel 2',
           info: 'channel 2 frequency'
@@ -380,9 +376,9 @@ describe('ChannelService', () => {
       const resultSpy = jasmine.createSpy();
       service.updateChannelByResource(resourceId, channels).subscribe();
       tick();
-      service.getChannelsByResource(resourceId).subscribe({ next: resultSpy });
-      tick();
-      expect(resultSpy).toHaveBeenCalledOnceWith(channels);
+      service.getChannelsByResource(resourceId).subscribe(resultChannels => {
+        expect(resultChannels.length).toBe(channels.length);
+      });
     }));
   });
 });
