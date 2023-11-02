@@ -13,6 +13,8 @@ import { UserService } from 'src/app/core/services/user.service';
 import { Loader } from 'src/app/core/util/loader';
 import { SearchResult } from 'src/app/core/util/store';
 import { statusCodes } from 'src/app/core/model/resource';
+import { Channel } from 'src/app/core/model/channel';
+import { ChannelService } from 'src/app/core/services/channel.service';
 
 @Component({
   selector: 'app-edit-resource',
@@ -30,12 +32,14 @@ export class EditResourceComponent implements OnInit, OnDestroy {
     description: this.fb.nonNullable.control<string>(''),
     operation: this.fb.nonNullable.control<string | null>(null),
     user: this.fb.nonNullable.control<string | null>(null),
-    statusCode: this.fb.nonNullable.control<number | null>(null)
+    statusCode: this.fb.nonNullable.control<number | null>(null),
+    channels: this.fb.nonNullable.control<Channel[]>([])
   });
 
   constructor(private operationService: OperationService, private userService: UserService,
     private notificationService: NotificationService, private resourceService: ResourceService,
-    private route: ActivatedRoute, private fb: FormBuilder, private location: Location) { }
+    private route: ActivatedRoute, private fb: FormBuilder, private location: Location,
+    private channelService: ChannelService) { }
 
   ngOnDestroy(): void {
     this.s.forEach(s => s.unsubscribe());
@@ -47,6 +51,7 @@ export class EditResourceComponent implements OnInit, OnDestroy {
         this.entryId = params['id'];
         return forkJoin({
           entry: this.loader.load(this.resourceService.getResourceById(this.entryId)),
+          channels: this.loader.load(this.channelService.getChannelsByResource(this.entryId))
         });
       }),
     ).subscribe(result => {
@@ -55,15 +60,16 @@ export class EditResourceComponent implements OnInit, OnDestroy {
         description: result.entry?.description,
         operation: result.entry?.operation,
         user: result.entry?.user,
-        statusCode: result.entry?.statusCode
+        statusCode: result.entry?.statusCode,
+        channels: result.channels
       });
     }));
   }
 
   updateEntry() {
+    let fd = this.form.getRawValue();
     this.resourceService.getResourceById(this.entryId).pipe(map(resource => {
       if(!resource) return undefined;
-      let fd = this.form.getRawValue();
       let updatedResource: Resource = {
         id: resource.id,
         label: fd.label,
@@ -79,8 +85,12 @@ export class EditResourceComponent implements OnInit, OnDestroy {
         this.notificationService.notifyUninvasiveShort($localize`:@@update-resource-failed:Updating resource failed.`);
         return;
       }
-      this.resourceService.updateResource(updatedResource).subscribe(successful => {
-        if(successful) {
+
+      forkJoin({
+        updateResource: this.resourceService.updateResource(updatedResource),
+        updateChannels: this.channelService.updateChannelByResource(this.entryId, fd.channels),
+      }).subscribe(results => {
+        if(results.updateResource) {
           this.close();
           this.notificationService.notifyUninvasiveShort($localize`:@@update-resource-successful:Resource updated.`);
         }else{

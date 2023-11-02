@@ -11,6 +11,7 @@ import { Operation } from 'src/app/core/model/operation';
 import { SearchResult } from 'src/app/core/util/store';
 import { of } from 'rxjs';
 import { mockLocalStorage } from 'src/app/core/testutil/testutil';
+import { ChannelService } from 'src/app/core/services/channel.service';
 
 function genFactoryOptions(): SpectatorRoutingOptions<EditResourceComponent> {
   return {
@@ -21,7 +22,8 @@ function genFactoryOptions(): SpectatorRoutingOptions<EditResourceComponent> {
     mocks: [
       UserService,
       OperationService,
-      NotificationService
+      NotificationService,
+      ChannelService
     ],
     providers: [
       {
