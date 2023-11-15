@@ -267,12 +267,22 @@ export class SignalerOutgoingView implements OnDestroy {
    * @returns observableChannel
    */
   getChannel(recipient: Recipient | undefined): Observable<Channel | undefined> {
-    if (!recipient || recipient.recipientType !== Participant.AddressBookEntry || !recipient.channelId) return of(undefined);
-    return this.channelService.getChannelsByAddressBookEntry(recipient.recipientId).pipe(
-      map(channels => channels.filter(
-        channel => channel.id === recipient.channelId
-      ).at(0))
-    );
+    if (!recipient || !recipient.channelId) return of(undefined);
+
+    if (recipient.recipientType === Participant.AddressBookEntry) {
+      return this.channelService.getChannelsByAddressBookEntry(recipient.recipientId).pipe(
+        map(channels => channels.filter(
+          channel => channel.id === recipient.channelId
+        ).at(0))
+      );
+    } else if (recipient.recipientType === Participant.Resource) {
+      return this.channelService.getChannelsByResource(recipient.recipientId).pipe(
+        map(channels => channels.filter(
+          channel => channel.id === recipient.channelId
+        ).at(0))
+      );
+    }
+    return of(undefined);
   }
 
   /**
