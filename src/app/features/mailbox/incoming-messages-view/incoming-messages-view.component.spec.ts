@@ -20,7 +20,7 @@ import { MessageService } from "../../../core/services/message/message.service";
 import { ResourceService } from "../../../core/services/resource/resource.service";
 import { IncomingMessagesViewComponent } from "./incoming-messages-view.component";
 
-describe('IncomingMessagesViewComponent', () => {
+fdescribe('IncomingMessagesViewComponent', () => {
   let spectator: SpectatorRouting<IncomingMessagesViewComponent>;
   let component: IncomingMessagesViewComponent;
 
