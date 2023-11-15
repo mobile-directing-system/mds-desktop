@@ -76,8 +76,9 @@ export class LocalStorageMessageService extends MessageService {
 
     for (let message of messages) {
       for (let recipient of message.recipients) {
-        // Exclude recipients that should not receive the message (Message already sent to recipient, Message is processed by another signaler)
-        if (recipient.recipientType != Participant.AddressBookEntry || recipient.send || recipient.signalerId) continue;
+        // Do not pick up messages for roles because they are directly delivered to the inbox without the signaler
+        // Exclude message that are already sent to the recipient and messages thare are currecntly processed by another signaler
+        if (recipient.recipientType == Participant.Role || recipient.send || recipient.signalerId) continue;
 
         // filter for channel type if passed
         if (filterForChannel) {
@@ -89,7 +90,8 @@ export class LocalStorageMessageService extends MessageService {
               return undefined;
             }
           })));
-        } else { // if no filter for channel type passed no further checks needed
+        } else {
+          // if no filter for channel type passed no further checks needed
           possibleMessages.push(of({ message: message, recipient: recipient }));
         }
       }
