@@ -63,6 +63,13 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+
+            <!--Channels.-->
+      <app-edit-channels
+        *ngIf="entryId !== ''"
+        [entryId]="entryId"
+        [formControl]="form.controls.channels">
+      </app-edit-channels>
     
         <div class="action-bar">
           <button (click)="close()" i18n mat-button type="button">

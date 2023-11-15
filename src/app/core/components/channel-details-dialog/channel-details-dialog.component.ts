@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { Channel, ChannelBase, ChannelType } from '../../../../core/model/channel';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import * as moment from 'moment';
-import { ValidatorDurationMin, ValidatorDurationRequired } from '../../../../core/util/duration';
 import * as uuid from 'uuid';
+import { Channel, ChannelBase, ChannelType } from '../../../core/model/channel';
 
 /**
  * Dialog data for {@link ChannelDetailsDialog}.
@@ -41,9 +40,6 @@ export class ChannelDetailsDialog {
     isActive: this.fb.nonNullable.control<boolean>(this.data.channel.isActive),
     label: this.fb.nonNullable.control<string>(this.data.channel.label, Validators.required),
     type: this.fb.nonNullable.control<ChannelType>(this.data.channel.type),
-    priority: this.fb.nonNullable.control<number>(this.data.channel.priority),
-    minImportance: this.fb.nonNullable.control<number>(this.data.channel.minImportance),
-    timeout: this.fb.nonNullable.control<moment.Duration>(this.data.channel.timeout, [ValidatorDurationRequired, ValidatorDurationMin(moment.duration())]),
     details: this.fb.nonNullable.control<object>(this.data.channel.details),
   });
 
@@ -77,9 +73,9 @@ export class ChannelDetailsDialog {
       isActive: v.isActive,
       label: v.label,
       type: v.type,
-      minImportance: v.minImportance,
-      priority: v.priority,
-      timeout: v.timeout,
+      minImportance: 0,
+      priority: 0,
+      timeout: moment.duration(0),
       details: v.details,
     };
     this.close({

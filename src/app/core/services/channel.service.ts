@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { NetService } from './net.service';
-import { Channel, ChannelBase, ChannelType, RadioChannel, MailChannel, PhoneChannel } from '../model/channel';
-import { Observable } from 'rxjs';
-import { MDSError, MDSErrorCode } from '../util/errors';
-import urlJoin from 'url-join';
-import { map } from 'rxjs/operators';
 import * as moment from 'moment';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import urlJoin from 'url-join';
+import { Channel, ChannelBase, ChannelType, MailChannel, PhoneChannel, RadioChannel } from '../model/channel';
+import { MDSError, MDSErrorCode } from '../util/errors';
+import { LocalStorageCRUDRepository } from '../util/local-storage';
+import { NetService } from './net.service';
 
 /**
  * Net representation of {@link Channel}.
@@ -92,7 +93,7 @@ function appChannelTypeFromNet(n: NetChannel): ChannelType {
     case 'phone-call':
       return ChannelType.Phone;
     default:
-      throw new MDSError(MDSErrorCode.AppError, `unsupported channel type while converting to app representation: ${(n as Channel).type }`);
+      throw new MDSError(MDSErrorCode.AppError, `unsupported channel type while converting to app representation: ${(n as Channel).type}`);
   }
 }
 
@@ -213,7 +214,7 @@ export function netChannelFromApp(a: Channel): NetChannel {
     case ChannelType.Phone:
       return netPhoneChannelFromApp(a);
     default:
-      throw new MDSError(MDSErrorCode.AppError, `unsupported channel type while converting to net representation: ${ (a as Channel).type }`);
+      throw new MDSError(MDSErrorCode.AppError, `unsupported channel type while converting to net representation: ${(a as Channel).type}`);
   }
 }
 
@@ -230,8 +231,19 @@ export function appChannelFromNet(n: NetChannel): Channel {
     case 'phone-call':
       return appPhoneChannelFromNet(n);
     default:
-      throw new MDSError(MDSErrorCode.AppError, `unsupported channel type while converting to app representation: ${ (n as NetChannel).type }`);
+      throw new MDSError(MDSErrorCode.AppError, `unsupported channel type while converting to app representation: ${(n as NetChannel).type}`);
   }
+}
+
+interface ResourceChannels {
+  /**
+   * Id of the resource.
+   */
+  id: string;
+  /**
+   * Channels of the resource.
+   */
+  channels: Channel[];
 }
 
 /**
@@ -241,6 +253,8 @@ export function appChannelFromNet(n: NetChannel): Channel {
   providedIn: 'root',
 })
 export class ChannelService {
+
+  private resourceChannelRepository: LocalStorageCRUDRepository<ResourceChannels> = new LocalStorageCRUDRepository<ResourceChannels>("mds-desktop__resource_channels");
 
   constructor(private netService: NetService) {
   }
@@ -268,5 +282,35 @@ export class ChannelService {
   updateChannelsByAddressBookEntry(entryId: string, channels: Channel[]): Observable<void> {
     const body: NetChannel[] = channels.map(netChannelFromApp);
     return this.netService.putJSON(urlJoin('/address-book', 'entries', entryId, 'channels'), body, {});
+  }
+
+  /**
+   * Retrieves channel for a resource.
+   * The channels for the resources are implemented with a local storage.
+   * 
+   * TODO: Manage resources and channels in the backend.
+   * 
+   * @param resourceId The id of the resource to retrieve channels for.
+   */
+  getChannelsByResource(resourceId: string): Observable<Channel[]> {
+    const resourceChannels: ResourceChannels | undefined = this.resourceChannelRepository.findById(resourceId);
+    if (resourceChannels) {
+      return of(resourceChannels.channels);
+    }
+    return of([]);
+  }
+
+  /**
+   * Stores channels for a resource.
+   * 
+   * TODO: Manage resources and channels in the backend.
+   * 
+   * @param resourceId of the resource for the channels
+   * @param channels that were stored
+   * @returns 
+   */
+  updateChannelByResource(resourceId: string, channels: Channel[]): Observable<Channel[]> {
+    const updatedChannels = this.resourceChannelRepository.insert(<ResourceChannels>{ id: resourceId, channels: channels }).channels;
+    return of(updatedChannels);
   }
 }
