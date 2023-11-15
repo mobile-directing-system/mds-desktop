@@ -17,7 +17,7 @@ import { getParticipantLabel } from 'src/app/core/util/service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 
 /**
- * One row of incoming messages in the table
+ * Row in the table that representa an outgoing message
  */
 export interface MessageRow {
   messageId: string;
@@ -84,8 +84,8 @@ export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
         let rows: MessageRow[] = [];
 
         msg.recipients.forEach(recipient => {
-          // Do not display Resources and Roles because they do not have channels assigned
-          if (recipient.recipientType === Participant.Resource || recipient.recipientType === Participant.Role) return;
+          // Do not display Roles because messages to Roles are transfered directly to the inbox
+          if (recipient.recipientType === Participant.Role) return;
 
           // Create new table entry when message has no outgoing channel yet
           if (!recipient.channelId) {
@@ -179,6 +179,7 @@ export class OutgoingMessagesViewComponent implements OnInit, AfterViewInit {
       if (!participant) return of(false);
 
       participant.channelId = channelId;
+      participant.send = false;
       return this.messageService.updateMessage(message!);
     }));
   }

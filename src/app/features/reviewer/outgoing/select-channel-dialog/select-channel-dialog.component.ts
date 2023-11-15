@@ -29,6 +29,10 @@ export class SelectChannelDialog implements OnInit {
       this.channelService.getChannelsByAddressBookEntry(this.data.recipientId).subscribe(channels => {
         this.selectableChannels = channels;
       });
+    }else if(this.data.recipientType === Participant.Resource) {
+      this.channelService.getChannelsByResource(this.data.recipientId).subscribe(channels => {
+        this.selectableChannels = channels;
+      });
     }
   }
 
