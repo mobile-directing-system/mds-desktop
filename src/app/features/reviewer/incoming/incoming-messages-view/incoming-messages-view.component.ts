@@ -45,8 +45,8 @@ export class IncomingMessagesViewComponent implements OnInit, OnDestroy, AfterVi
     this.workspaceService.operationChange().subscribe(operationId => {
       this.currentOperationId = operationId;
       this.refreshDataSource();
-      this.refreshTimer = interval(this.refreshIntervall * 1000).subscribe(() => this.refreshDataSource());
     });
+    this.refreshTimer = interval(this.refreshIntervall * 1000).subscribe(() => this.refreshDataSource());
   }
 
   ngAfterViewInit(): void {

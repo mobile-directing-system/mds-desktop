@@ -1,34 +1,26 @@
 import { fakeAsync, tick } from '@angular/core/testing';
 
+import { MatDialog } from '@angular/material/dialog';
 import { byTextContent, createRoutingFactory, SpectatorRouting } from "@ngneat/spectator";
-import { BehaviorSubject, Subject } from "rxjs";
+import { of } from "rxjs";
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import { CoreModule } from "../../../core/core.module";
 import { AddressBookEntry } from "../../../core/model/address-book-entry";
 import { ChannelType } from "../../../core/model/channel";
 import { Group } from "../../../core/model/group";
 import { Incident } from "../../../core/model/incident";
 import { Message, MessageDirection, Participant } from "../../../core/model/message";
 import { Resource } from "../../../core/model/resource";
-import { AccessControlMockService } from "../../../core/services/access-control-mock.service";
-import { AccessControlService } from "../../../core/services/access-control.service";
 import { AddressBookService } from "../../../core/services/addressbook.service";
-import { AuthService } from "../../../core/services/auth.service";
 import { GroupService } from "../../../core/services/group.service";
 import { IncidentService } from "../../../core/services/incident/incident.service";
 import { MessageService } from "../../../core/services/message/message.service";
 import { ResourceService } from "../../../core/services/resource/resource.service";
+import { MailboxModule } from '../mailbox.module';
 import { IncomingMessagesViewComponent } from "./incoming-messages-view.component";
 
 describe('IncomingMessagesViewComponent', () => {
   let spectator: SpectatorRouting<IncomingMessagesViewComponent>;
   let component: IncomingMessagesViewComponent;
-
-  const messagesSubject: Subject<Message[]> = new Subject();
-  const incidentSubject: Subject<Incident> = new Subject()
-  const resourceSubject: Subject<Resource|undefined> = new Subject();
-  const addressBookSubject: Subject<AddressBookEntry> = new Subject();
-  const groupSubject: Subject<Group> = new Subject();
 
   const selectedOperationId = "123";
 
@@ -137,85 +129,77 @@ describe('IncomingMessagesViewComponent', () => {
     id: "loggedInRoleId",
     title: "S1",
     description: "description",
-    members:["loggedInUserId"]
+    members: ["loggedInUserId"]
   };
 
 
   const createComponent = createRoutingFactory({
     component: IncomingMessagesViewComponent,
     imports: [
-      CoreModule,
-    ],
-    providers: [
-      {
-        provide: AccessControlService,
-        useExisting: AccessControlMockService,
-      },
-      {
-        provide: MessageService,
-        useValue: {
-          getMailboxMessages: ()=> messagesSubject,
-        },
-      },
-      {
-        provide: IncidentService,
-        useValue: {
-          getIncidentById: ()=> incidentSubject,
-        },
-      },
-      {
-        provide: ResourceService,
-        useValue: {
-          getResourceById: ()=> resourceSubject,
-        },
-      },
-      {
-        provide: AddressBookService,
-        useValue: {
-          getAddressBookEntryById: ()=> addressBookSubject,
-        },
-      },
-      {
-        provide: GroupService,
-        useValue: {
-          getGroupById: ()=> groupSubject,
-        },
-      },
-      {
-        provide: WorkspaceService,
-        useValue: jasmine.createSpyObj("WorkspaceService", {
-          operationChange: new BehaviorSubject(selectedOperationId)
-        })
-      }
+      MailboxModule,
     ],
     mocks: [
-      AuthService,
-    ],
-    detectChanges: false,
+      MatDialog
+    ]
   });
 
 
-  beforeEach(fakeAsync(() => {
-    spectator = createComponent();
+  beforeEach(() => {
+    spectator = createComponent({
+      providers: [
+          {
+            provide: MessageService,
+            useValue: jasmine.createSpyObj("MessageService", {
+              getMailboxMessages: of(mailboxMessages)
+            })
+          },
+          {
+            provide: IncidentService,
+            useValue: jasmine.createSpyObj("IncidentService", {
+              getIncidentById: of(incident)
+            })
+          },
+          {
+            provide: ResourceService,
+            useValue: jasmine.createSpyObj("ResourceService", {
+              getResourceById: of(resource)
+            })
+          },
+          {
+            provide: AddressBookService,
+            useValue: jasmine.createSpyObj("AddressBookService", {
+              getAddressBookEntryById: of(addressBookEntry)
+            })
+          },
+          {
+            provide: GroupService,
+            useValue: jasmine.createSpyObj("GroupService", {
+              getGroupById: of(group)
+            })
+          },
+          {
+            provide: WorkspaceService,
+            useValue: jasmine.createSpyObj("WorkspaceService", {
+              operationChange: of(selectedOperationId)
+            })
+          }
+      ],
+      detectChanges: true
+    });
     component = spectator.component;
     component.currentOperationId = selectedOperationId;
     component.loggedInRole = group;
     spectator.router.navigate = jasmine.createSpy().and.callFake(spectator.router.navigate).and.resolveTo();
-    spectator.detectComponentChanges();
-    tick();
-  }));
+    // Do not run refresh timer in tests
+    component.refreshTimer.unsubscribe();
+  });
 
   it('should create', () => {
     expect(spectator.component).toBeTruthy();
   });
 
   it('should load messages successfully', fakeAsync(() => {
-    component.ngOnInit();
-    messagesSubject.next(mailboxMessages);
-    incidentSubject.next(incident);
-    resourceSubject.next(resource);
-    addressBookSubject.next(addressBookEntry);
-    groupSubject.next(group);
+    component.refreshDataSource();
     tick();
     expect(spectator.component.dataSource.data.length).toEqual(mailboxMessages.length);
     spectator.detectComponentChanges();
@@ -226,8 +210,8 @@ describe('IncomingMessagesViewComponent', () => {
   }));
 
   it('should set read filter successfully', fakeAsync(() => {
-   spectator.component.onFilterReadChange("read");
-   expect(spectator.component.filterRead).toEqual(true);
+    spectator.component.onFilterReadChange("read");
+    expect(spectator.component.filterRead).toEqual(true);
   }));
 
   it('should set unread filter successfully', fakeAsync(() => {
